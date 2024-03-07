@@ -6,6 +6,7 @@ book:
   title: "BioStatistics"
   author: "王安林"
   date: "2024/3/7"
+  reader-mode: true
   chapters:
     - index.qmd
     - intro.qmd
@@ -19,8 +20,9 @@ book:
         - classification.qmd
         - ClusterAnalysis.qmd
         - DimensionReduction.qmd
-        - SurvivalAnalysis.qmd
-      
+        
+    - SurvivalAnalysis.qmd
+    
     - summary.qmd
     - references.qmd
     
