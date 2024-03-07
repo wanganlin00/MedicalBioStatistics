@@ -24,6 +24,10 @@ book:
     - summary.qmd
     - references.qmd
     
+    
+  repo-url: https://github.com/Wanganlin00/Biostatistics/
+  repo-actions: [edit,issue]
+    
 
 bibliography: references.bib
 
