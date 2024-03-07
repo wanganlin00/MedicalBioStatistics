@@ -2,15 +2,15 @@
 title: "降维"
 ---
 
-# Dimensionality reduction
+## Dimension Reduction
 
-## 线性降维
+### 线性降维
 
-### Principal component analysis(PCA)
+#### Principal component analysis(PCA)
 
-## 非线性降维
+### 非线性降维
 
-### Uniform Manifold Approximation and Projection(umap)
+#### Uniform Manifold Approximation and Projection(umap)
 
 2018年McInnes提出了算法，UMAP（Uniform Manifold Approximation and Projection for Dimension Reduction，一致的流形逼近和投影以进行降维）。 一致的流形近似和投影（UMAP）是一种降维技术，类似于t-SNE，可用于可视化，但也可用于一般的非线性降维。 该算法基于关于数据的三个假设：
 
@@ -28,7 +28,7 @@ title: "降维"
 
 同时其作者开源实现代码。
 
-### t-Distributed Stochastic Neighbor Embedding (t-SNE)
+#### t-Distributed Stochastic Neighbor Embedding (t-SNE)
 
 t-Distributed Stochastic Neighbor Embedding (t-SNE)是一种降维技术，**用于在二维或三维的低维空间中表示高维数据集，从而使其可视化**。与其他降维算法(如PCA)相比，t-SNE创建了一个缩小的特征空间，相似的样本由附近的点建模，不相似的样本由高概率的远点建模。
 
@@ -46,16 +46,16 @@ t-SNE是目前来说效果最好的数据降维与可视化方法，但是它的
 
 <https://zhuanlan.zhihu.com/p/64664346>
 
-#### **t-SNE优点**
+##### **t-SNE优点**
 
-流形学习中其他方法如Isomap、LLE等，主要用于展开单个连续的低维流形（比如\"瑞士卷\"数据集），而t-SNE主要用于数据的局部结构，并且会倾向于提取出局部的簇，这种能力对于可视化同时包含多个流形的高维数据（比如MNIST数据集）很有效。
+流形学习中其他方法如Isomap、LLE等，主要用于展开单个连续的低维流形（比如"瑞士卷"数据集），而t-SNE主要用于数据的局部结构，并且会倾向于提取出局部的簇，这种能力对于可视化同时包含多个流形的高维数据（比如MNIST数据集）很有效。
 
-#### **t-SNE缺点**
+##### **t-SNE缺点**
 
 ➊时间、空间复杂度为O(n\^2)，计算代价昂贵。百万量级的数据需要几小时，对于PCA可能只需要几分钟。
 
 ➋升级版Barnes-Hut t-SNE可以让复杂度降为O(nlogn)，但只限于获得二维和三维的嵌入。（sklearn中可以直接使用参数method='barnes_hut'）
 
-➌由于代价函数非凸，多次执行算法的结果是随机的（名字中\"Stochatsic\"的由来？），需要多次运行选取最好的结果。
+➌由于代价函数非凸，多次执行算法的结果是随机的（名字中"Stochatsic"的由来？），需要多次运行选取最好的结果。
 
 ➍全局结构不能很清楚的保留。这个问题可以通过先用PCA降维到一个合理的维度（如50）后再用t-SNE来缓解，前置的PCA步骤也可以起到去除噪声等功能。（sklearn中可以直接使用参数init='pca'）
