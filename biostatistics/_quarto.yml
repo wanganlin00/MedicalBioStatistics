@@ -4,9 +4,13 @@ project:
 
 book:
   title: "BioStatistics"
-  author: "王安林"
-  date: "2024/3/7"
+  
   reader-mode: true
+  site-url: https://wanganlin00.github.io/BioStatistics/
+  repo-url: https://github.com/Wanganlin00/BioStatistics/
+  repo-branch: main
+  repo-actions: [edit,issue]
+  
   chapters:
     - index.qmd
     - intro.qmd
@@ -26,10 +30,7 @@ book:
     - summary.qmd
     - references.qmd
     
-    
-  repo-url: https://github.com/Wanganlin00/Biostatistics/
-  repo-actions: [edit,issue]
-    
+
 
 bibliography: references.bib
 
