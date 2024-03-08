@@ -21,7 +21,5 @@
 ## References
 
 -   [Modern Statistics for Modern Biology](https://www.huber.embl.de/msmb/)
--   [Common statistical tests are linear models (or: how to teach stats)](https://lindeloev.github.io/tests-as-linear/)
 -   [ISLR](https://www.statlearning.com/)
 -   [ISLR with tidymodels](https://emilhvitfeldt.github.io/ISLR-tidymodels-labs/)
--   [R语言实战医学统计](https://ayueme.github.io/R_medical_stat/)
