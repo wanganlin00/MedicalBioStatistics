@@ -1,0 +1,71 @@
+```{r}
+install.packages("pwr")
+#样本大小
+#显著性水平α
+#功效 1-β
+#效应值 备择假设下效应的量
+library(pwr)
+############################  用pwr包做功效分析  ###############################
+#t检验    效应值d=(μ1-μ2)/σ
+pwr.t.test(d=0.8,sig.level = .05,power = 0.9,type = "two.sample",alternative = "two.sided")
+pwr.t.test(n=20,d=0.5,sig.level = .01,type = "two.sample",alternative = "two.sided") #平衡
+pwr.t2n.test(n1=10,n2=30,d=0.5,sig.level = .01)#效应值降低
+
+
+#方差检验     效应值f=sqrt((∑pi×(μi-μ)^2)/σ^2)   pi=ni/N
+pwr.anova.test(k=5,f=0.25,sig.level = 0.05,power = 0.8)
+
+#相关性    效应值 r=ρ 线性相关系数
+rn<-pwr.r.test(r=0.25,sig.level = 0.05,power=0.90,alternative = "greater")
+rn$n
+#线性模型
+pwr.f2.test(u=3,f2=0.0769,sig.level = 0.05,power = 0.9) #  N=185+7+1=193
+
+#比例检验
+pwr.2p.test(h=ES.h(.65,.60),sig.level = 0.05,power=.9,alternative = "greater")
+#卡方检验
+p<-matrix(c(.42,.28,.03,.07,.10,.10),byrow = TRUE,nrow = 3)
+ES.w2(p)
+pwr.chisq.test(w=ES.w2(p),df=2,sig.level = 0.05,power = 0.9)
+############  ANOVA检测显著效应所需的样本量曲线
+es<-seq(.1,.5,.01) #seq(from,to,by)
+nes<-length(es)
+samsize<-NULL
+for (i in 1:nes) {
+  result<-pwr.anova.test(k=5,f=es[i],sig.level = 0.05,power = .9)
+  samsize[i]<-ceiling(result$n)  #ceiling(x)  不小于x的最小整数
+}
+plot(samsize,es,type="l",lwd=2,col="red",
+     ylab="Effect Size",
+     xlab="Sample Size",
+     main="one way ANOVA with power=0.9 and α=0.05")
+
+##########################  绘制功效分析图形  ###################################
+##检验各种效应值下的相关性所需的样本量曲线
+library(pwr)
+r<-seq(.1,.5,.01)
+nr<-length(r)
+p<-seq(.4,.9,.1)
+np<-length(p)
+samsize<-array(numeric(nr*np),dim=c(nr,np))
+for(i in 1:np){
+  for(j in 1:nr){
+    result<-pwr.r.test(n=NULL,r=r[j],sig.level=.05,power=p[i],alternative="two.sided")
+    samsize[j,i]<-ceiling(result$n) 
+  }
+}
+xrange<-range(r)
+yrange<-round(range(samsize))
+colors<-rainbow(length(p))
+plot(xrange,yrange,type = "n",
+     xlab = "Correlation Coefficient (r)",
+     ylab = "Sample Size"
+     )
+for (i in 1:np) lines(r,samsize[,i],type = "l",lwd=2,col=colors[i])# 以曲线形式添加功效曲线
+abline(v=0,h=seq(0,yrange[2],50),lty=5,col="grey89")
+abline(h=0,v=seq(0,xrange[2],.02),lty=5,col="grey89")  #添加网格线
+legend("topright",title="Power",as.character(p),fill=colors)
+
+
+```
+

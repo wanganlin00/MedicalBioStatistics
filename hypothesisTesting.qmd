@@ -1,0 +1,180 @@
+---
+title: "假设检验"
+---
+
+# 假设检验
+
+1.  建立假设和确定检验水平
+    -   null hypothesis H~0，~alternative hypothesis H~1，~α-拒绝域的概率值
+2.  选择检验方法和计算检验统计量
+    -   $t$检验，$z$检验，$F$检验，$\chi^2$检验
+3.  根据P值做出统计推断
+    -   p≤α，拒绝H~0~
+    -   p＞α，不拒绝H~0~
+
+## 正态性检验
+
+#### 正态分布
+
+term
+
+:   概率密度函数
+
+    $$
+    f(X)=\frac{1}{\sigma \sqrt {2\pi} }e^{-\frac{1}{2}{(\frac{X-\mu}{\sigma})}^2}
+    $$
+
+    概率分布函数
+
+    $$
+    F(X)=\frac{1}{\sigma \sqrt {2\pi} }\int_{-\infty}^{X} e^{-\frac{1}{2}{(\frac{X-\mu}{\sigma})}^2}
+    $$
+
+```{r}
+df<-tibble(x=c(-10,10))
+ggplot(data=df,aes(x=x))+
+  stat_function(fun = dnorm,args = list(0,1),color="red")+
+  scale_x_continuous(name = "values",breaks = seq(-10,10,1))+
+  ylab("probablity")     #Area Under the Curve (AUC) = 1
+```
+
+### 直方图
+
+```{r}
+
+h<-hist(mtcars$mpg,breaks = 12)
+x<-seq(min(mtcars$mpg),max(mtcars$mpg),by=0.001)
+y<-dnorm(x,mean=mean(mtcars$mpg),sd=sd(mtcars$mpg)) #概率密度曲线  f(X)=(fi/n)/ΔXi
+y<-y*diff(h$mids[1:2])*length(mtcars$mpg)  # f(X)*ΔXi*n  正态分布
+lines(x,y,col="blue")
+```
+
+### Q-Q图
+
+```{r}
+#QQ plot  正态性检验
+library(ggpubr)
+ggqqplot(mtcars$mpg)  #  y=x 直线 
+
+#Z score = (value-mean) / sd
+```
+
+### Shapiro-Wilk检验
+
+测试样本是否服从*正态分布*
+
+```{r}
+set.seed(100)
+normaly_disb <- rnorm(100, mean=5, sd=1) # generate a normal distribution
+shapiro.test(normaly_disb)  
+
+set.seed(100)
+not_normaly_disb <- runif(100)  # uniform distribution.
+shapiro.test(not_normaly_disb)
+```
+
+### Kolmogorov-Smirnov检验
+
+Kolmogorov-Smirnov检验用于检查2个样品是否服从相同的分布。
+
+```{r}
+x <- rnorm(50) 
+y <- runif(50) 
+ks.test(x, y)  # perform ks test
+
+x <- rnorm(50)
+y <- rnorm(50)
+ks.test(x, y) 
+```
+
+### 
+
+Anderson-Darling检验
+
+Lilliefors检验
+
+## $z$检验
+
+## $t$检验
+
+#### **单样本 t 检验**
+
+它是一种参数检验，用于测试正态分布中样本的均值是否可以合理地为特定值。
+
+```{r}
+set.seed(100)
+x <- rnorm(50, mean = 10, sd = 0.5)
+t.test(x, mu=10) 
+```
+
+```{r}
+##两独立样本
+library(MASS)
+t.test(Prob~So,data=UScrime)
+UScrime
+##两非独立样本
+library(MASS)
+sapply(UScrime[c("U1","U2")], function(x)(c(mean=mean(x),sd=sd(x))))
+with(UScrime,t.test(U1,U2,paired=TRUE))  #配对t检验
+```
+
+## $\chi^2$检验
+
+## $F$检验
+
+### Fisher F 检验
+
+Fisher F 检验可用于检查两个样本是否具有相同的方差。或者，fligner.test（） 和 bartlett.test（） 可以用于相同的目的。
+
+```{r}
+
+```
+
+## 非参数检验
+
+#### **Wilcoxon Signed Rank Test**
+
+在不假设正态分布时检验样本的平均值。Wilcoxon 符号秩检验可以替代 t 检验，尤其是当数据样本不假定服从正态分布时。它是一种非参数方法，用于测试估计值是否与其真实值不同。
+
+```{r}
+numeric_vector <- c(20, 29, 24, 19, 20, 22, 28, 23, 19, 19)
+wilcox.test(numeric_vector, mu=20, conf.int = TRUE)
+```
+
+#### 双样本 t 检验和 Wilcoxon rank sum 检验
+
+t.Test 和 Wilcoxon 秩检验都可用于比较 2 个样本的平均值。区别在于 t 检验假设被测试的样本是从正态分布中抽取的，而 Wilcoxon 的秩和检验则不然。
+
+```{r}
+x <- c(0.80, 0.83, 1.89, 1.04, 1.45, 1.38, 1.91, 1.64, 0.73, 1.46)
+y <- c(1.15, 0.88, 0.90, 0.74, 1.21)
+
+t.test(1:10, y = c(7:20)) 
+wilcox.test(x, y, alternative = "g") # g for greater
+
+# Use paired = TRUE for 1-to-1 comparison of observations.
+t.test(x, y, paired = TRUE) # when observations are paired, use 'paired' argument.
+wilcox.test(x, y, paired = TRUE) # both x and y are assumed to have similar shapes
+```
+
+```{r}
+#Wilcoxon秩和检验  两组
+with(UScrime,by(Prob,list(So=UScrime$So),median))
+wilcox.test(Prob~So,data=UScrime)
+#Wilcoxon符号秩和检验：非独立样本t检验的非参数替代方法
+sapply(UScrime[c("U1","U2")], median)
+with(UScrime,wilcox.test(U1,U2,paired=T))
+
+#多组独立样本    kruskal.test(y~A,data)
+
+states<-data.frame(state.region,state.x77)
+kruskal.test(Illiteracy~state.region,data=states)
+#非参数多重成对比较
+ #source("https://rkabacoff.com/RiA/wmc.R")
+source("wmc.R")
+states <- data.frame(state.region, state.x77)
+wmc(Illiteracy ~ state.region, data=states, method="holm") #Nonparametric multiple comparisons
+
+#多组互不独立   # Friedman's rank sum non-parametric test 
+friedman.test(y ~ A | B, data)
+```

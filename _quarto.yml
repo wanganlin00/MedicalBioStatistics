@@ -1,0 +1,74 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "BioStatistics for Graphics"
+  reader-mode: true
+  
+  chapters:
+    - index.qmd
+
+    - part: "数据整理"
+        chapters: 
+          - 00_dataType.qmd
+          - 01_in-out.qmd
+          - 02_data_manage.qmd
+    - part: "统计描述"
+        chapters:
+          - statistical_description.qmd
+          - 03_base_graphics.qmd
+          - 04_ggplot2_graphics.qmd
+
+    - part: "统计推断"
+      chapters:
+        - parameterEstimation.qmd
+        - hypothesisTesting.qmd
+        
+    - part: "统计学习"
+      chapters:   
+        - RegressionAnalysis.qmd
+        - classification.qmd
+        - Cluster.qmd
+        - DimensionReduction.qmd
+
+    - part: "生存分析"
+      chapters:        
+        - SurvivalAnalysis.qmd
+
+
+
+execute:
+  cache: true
+  error: true
+  message: FALSE
+  warning: false
+  
+toc: true
+toc-expand: true
+toc-depth: 4
+toc-location: right
+number-sections: true
+
+knitr:
+  opts_chunk: 
+    comment: "#>" 
+    collapse: TRUE
+    
+crossref: 
+  fig-title: 图
+  fig-prefix: 图
+  
+format: 
+  html: 
+    theme: cosmo
+    df-print: kable
+    code-fold: true
+    code-tools: true
+    code-link: true
+    html-math-method: katex
+
+    
+editor: visual
+
+

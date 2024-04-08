@@ -1,0 +1,166 @@
+---
+title: "方差分析"
+format: html
+editor: visual
+---
+
+# 单因素方差分析
+
+```{r}
+iris
+table(iris$Species)
+```
+
+```{r}
+aov_fit <- aov(Sepal.Length~Species,data=iris)
+summary(aov_fit)
+
+TukeyHSD(aov_fit)  # 成对组间比较均值
+plot(TukeyHSD(aov_fit)) 
+```
+
+#### 独立性检验
+
+#### 正态性检验
+
+```{r}
+car::qqPlot(aov_fit, simulate = TRUE, main="Q-Q Plot",labels=FALSE)
+```
+
+#### 方差齐性检验
+
+```{r}
+bartlett.test(Sepal.Length~Species,data=iris)#各组方差齐性 
+```
+
+#### 异常观测点
+
+```{r}
+car::outlierTest(fit1)        
+```
+
+# 多因素方差分析
+
+```{r}
+attach(ToothGrowth)
+ToothGrowth
+
+table(supp,dose)
+aggregate(len,by=list(supp,dose),mean)
+aggregate(len,by=list(supp,dose),sd)
+str(ToothGrowth)
+dose<-factor(dose)
+str(dose)
+fit3<-aov(len~supp*dose)
+summary(fit3)
+#结果可视化
+interaction.plot(dose,supp,len,typr="b",
+                 col=c("red","blue",pch=c(16,18),
+                 main="Interaction between Dose and Supplement Type"))#第一种 交互效应
+library(gplots)
+plotmeans(len~interaction(supp,dose,sep=" "),
+          connect =list(c(1,3,5),c(2,4,6)),
+          col=c("red","darkgreen"),
+          main="Interaction Plot with 95% CIs",
+          xlab="Treatment Dose"
+          )                                 #第二种 交互效应
+library(HH)
+interaction2wt(len~supp*dose)
+detach(ToothGrowth)
+```
+
+## 重复测量方差分析
+
+（组间因子+组内因子）
+
+```{r}
+CO2$conc<-factor(CO2$conc)
+chil<-subset(CO2,Treatment=="chilled")#寒带植物
+
+fit4<-aov(uptake~conc*Type+Error(Plant/(conc)),data=chil)
+summary(fit4)
+opar<-par(no.readonly = TRUE)
+with(chil,interaction.plot(conc,Type,uptake,type="b",
+     col=c("red","blue"),pch=c(16,18),
+     main="Interaction Plot for Plant Type and Concentration")) #交互效应
+par(las=2)
+par(mar=c(10,4,4,2))
+boxplot(uptake~Type*conc,data=chil,col=c("red","blue"),
+        main="Chilled Quebec and Mississippi Plants",
+        ylab="Carbon dioxide uptake rate (umol/m^2 sec)")
+par(opar)
+```
+
+## 事后检验（post-hoc tests）
+
+##### Tukey's HSD
+
+### 单因素协方差分析ANCOVA
+
+```{r}
+data(litter,package = "multcomp")
+attach(litter)
+litter
+table(dose)
+aggregate(weight,by=list(Group.dose=dose),mean)
+fit2<-aov(weight~gesttime+dose)
+summary(fit2)
+library(effects)
+effect("dose",fit2)     #去除协变量效应后的组均值
+#multcomp包中的glht() TukeyHSD检验
+library(multcomp)
+contrast<-rbind("no drug vs. drug"=c(3,-1,-1,-1))
+contrast
+summary(glht(fit2,linfct = mcp(dose=contrast))) #未用药组与其他三组均值比较
+######################假设检验 
+library(car)
+qqPlot(lm(weight~gesttime+dose,data=litter),
+       simulate = TRUE,
+       main="Q-Q Plot",labels=FALSE)  #因变量正态性
+
+bartlett.test(weight~dose,data=litter)#各组方差齐性 
+library(car)
+outlierTest(fit2)              #离群点
+###
+library(multcomp)
+fit2.1<-aov(weight~gesttime*dose,data=litter)  #交互效应不显著，回归斜率的同质性
+summary(fit2.1)            
+
+##结果可视化
+library(HH)   #install.packages("httpuv")
+ancova(weight~gesttime+dose,data=litter)  #根据协变量gesttime预测出生体重的斜率相同
+ancova(weight~gesttime*dose,data=litter)  #违反回归斜率同质性
+```
+
+### 多元方差分析（多因变量）
+
+```{r}
+#单因素多元方差分析
+library(MASS)
+attach(UScereal)
+shelf<-factor(shelf)
+y<-cbind(calories,fat,sugars)  #矩阵
+aggregate(y,by=list(shelf),mean)
+cov(y)#协方差矩阵阵
+fit5<-manova(y~shelf)
+summary(fit5)
+summary.aov(fit5)#输出单变量结果
+#假设检验
+center<-colMeans(y)
+n<-nrow(y)
+p<-ncol(y)
+cov<-cov(y)
+d<-mahalanobis(y,center,cov)
+coord<-qqplot(qchisq(ppoints(n),df=p),
+              d,main="Q-Q Plot Assessing Multivariate Normality",
+              ylab="Mahalanobis D2"
+             )
+abline(a=0,b=1,lty=2,col="red") #点全部落在y=x以下，表明服从多元正态分布
+identify(coord$x,coord$y,labels = row.names(UScereal))
+
+#BoxM.test<-function() 方差-协方差矩阵同质性检验
+###稳健多元方差分析
+library(rrcov)    #install.packages("rrcov")
+Wilks.test(y,shelf,method="mcd")
+
+```

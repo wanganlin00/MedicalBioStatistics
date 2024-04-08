@@ -1,0 +1,438 @@
+---
+title: "回归分析"
+---
+
+# Regression analysis
+
+## 简单线性回归
+
+```{r}
+fit1<-lm(weight~height,data=women)
+summary(fit1)
+plot(women$weight~women$height)
+abline(fit1)
+
+# 回归检验
+
+plot(fit1)           #回归诊断图
+
+```
+
+## 多项式回归
+
+```{r}
+fit2<-lm(weight~height+I(height^2),data=women)
+summary(fit2)
+plot(women$weight~women$height)
+lines(women$height,fitted(fit2))
+
+library(car)
+scatterplot(weight~height,data=women,
+            spread=FALSE,smoother.args=list(lty=2))
+
+# 回归检验
+plot(fit2)   #回归诊断图
+```
+
+## 多元线性回归
+
+```{r}
+#第一步，检测变量相关关系
+states<-data.frame(state.x77[,c(5,1,3,2,7)])
+states
+cor(states)
+
+scatterplotMatrix(states,spread=FALSE,smooter.args=list(lty=2))  #散点图矩阵?
+
+#第二步，多元线性回归
+fit3<-lm(Murder~Population+Illiteracy+Income+Frost,data = states)
+summary(fit3)
+
+
+#交互项
+summary(lm(Murder~Population+Illiteracy+Income+Frost+Illiteracy:Population,data = states))
+summary(lm(mpg~hp+wt+hp:wt,data=mtcars))
+
+#回归检验
+
+confint(fit3)  # 2.5%~97.5%置信区间
+plot(fit3) #回归诊断图
+```
+
+## 回归诊断
+
+### 回归诊断图
+
+Standardized Residuals 
+
+Cook's distance
+
+Leverage
+
+```{r}
+plot(fit1)  
+```
+
+
+### 改进方法
+
+```{r}
+# 1. 正态性检验
+# Q-Q plot
+qqPlot(fit3,labels=row.names(states),id.method="identity",   
+       simulate=TRUE,main="Q-Q Plot")
+
+# studentized residual Plot
+residplot<-function(fit,nbreaks=10){
+  z<-rstudent(fit)
+  hist(z,breaks=nbreaks,freq=FALSE)     #密度直方图
+  title(xlab="Studentized Residual")
+  rug(z,col="brown")                    #轴须图
+  curve(dnorm(x,mean=mean(z),sd=sd(z)),add=TRUE,col="blue",lwd=2) #正态密度曲线
+  lines(density(z)$x,density(z)$y,col="red",lwd=2)       #样本密度曲线
+  legend("topright",c("Normal Curve","Kernel Density Curve"),#图例
+  lty = c(3,2),pch = c(21,22),col=c("blue","red"),cex=.7)
+}
+residplot(fit3)
+
+# 2. 误差的独立性
+durbinWatsonTest(fit3)      #结果表明rho=0
+# 3.线性
+crPlots(fit3)
+# 4.方差齐性
+ncvTest(fit3)
+spreadLevelPlot(fit3)
+```
+
+### 异常观测点
+
+```{r}
+#######################################################################
+library(car)
+outlierTest(fit3)            #离群点
+#高杠杆值点
+hat.plot<-function(fit){
+  p<-length(coefficients(fit)) #模型估计的参数数目（包含截距项）
+  n<-length(fitted(fit))       #样本量
+  plot(hatvalues(fit),main="Index Plot of Hat Values")#帽子值
+  abline(h=c(2,3)*p/n,col="red",lty=2)  #大于帽子均值p/n的2或3倍被认为是高杠杆值
+  identity(1:n,hatvalues(fit),names(hatvalues(fit)))
+}
+hat.plot(fit3)
+####强影响点
+#Cook's D图形    大于4/(n-k-1)  k为预测变量数目
+cutoff<-4/(nrow(states)-length(fit$coefficients)-2)
+plot(fit3,which=4,cook.levels=cutoff)
+abline(h=cutoff,lty=2,col="red")
+#变量添加图
+avPlots(fit3,ask=FALSE,id.method="identity")
+
+#############
+influencePlot(fit3,id.method="identity",main="Influence Plot")
+
+
+```
+
+
+### 多重共线性
+
+```{r}
+library(gvlma)
+summary(gvlma(fit3))
+#####################多重共线性  
+vif(fit3)
+
+?vif
+sqrt(vif(fit3))>=2       #vif平方根 ≥2 存在
+library(ISLR2)
+attach(Credit)
+fit<-lm(Balance~Age+Limit+Rating,data=ISLR2::Credit)
+vif(fit)
+summary(fit)
+
+#
+######################################变量变换###################################
+library(car)
+states<-data.frame(state.x77[,c(5,1,3,2,7)])
+fit3<-lm(Murder~Population+Illiteracy+Income+Frost,data = states)
+summary(powerTransform(states$Murder))     #违反正态假设，powerTransform() 对Y正态变换 Y^λ
+
+boxTidwell(Murder~Population+Illiteracy,data=states)#违反线性假设，X^λ
+spreadLevelPlot(fit3)  #违法方差齐性，幂次变换，Y^p
+```
+
+### 模型选择和优化
+
+
+```{r}
+          #两模型比较
+states<-data.frame(state.x77[,c(5,1,3,2,7)])
+fit3<-lm(Murder~Population+Illiteracy+Income+Frost,data = states)
+summary(fit3)
+fit4<-lm(Murder~Population+Illiteracy,data = states)
+summary(fit4)
+anova(fit4,fit3) #anova() 嵌套模型
+
+
+##########################################            AIC 
+AIC(fit3,fit4)  # 赤池信息准则  AIC值小的优先选择
+#BIC
+
+          #逐步回归
+library(MASS)
+stepAIC(fit3,direction = "backward")  #向后逐步回归
+          #全子集回归法
+
+library(leaps)
+leaps<-regsubsets(Murder~Population+Illiteracy+Income+Frost,data = states,nbest = 4) #全子集回归
+plot(leaps,scale = "adjr2")  #调整R平方结果展示
+subsTable <- function(obj, scale){
+  x <- summary(leaps)
+  m <- cbind(round(x[[scale]],3), x$which[,-1])
+  colnames(m)[1] <- scale
+  m[order(m[,1]), ]
+}
+
+subsTable(leaps, scale="adjr2")
+
+library(car)
+subsets(leaps,statistic="cp",main="Cp Plot for All Subsets Regression")#Mallows Cp统计量≈参数数目
+abline(a=1,b=1,lty=2,col="red")# 越好的模型约接近y=x+1的直线，y=bx+a
+
+
+########################################交叉验证################################
+install.packages("bootstrap")
+library(bootstrap)
+shrinkage<-function(fit,k=10){         #R平方 k重交叉验证
+  require(bootstrap)
+  theta.fit<-function(x,y) lsfit(x,y)
+  theta.predict<-function(fit,x){cbind(1,x)%*%fit$coef}
+  x<-fit$model[,2:ncol(fit$model)]
+  y<-fit$model[,1]
+  results<-crossval(x,y,theta.fit,theta.predict,ngroup = k)
+  r2<-cor(y,fit$fitted.values)^2
+  r2cv<-cor(y,results$cv.fit)^2
+  cat("Original R-square =",r2,"\n")
+  cat(k,"Fold Cross-Validated R-aquare =",r2cv,"\n")
+  cat("Change =",r2-r2cv,"\n")
+}
+shrinkage(fit3,k=10)
+shrinkage(fit4,k=10)
+
+####################################相对重要性##################################
+zstates<-as.data.frame(scale(states)) #标准化矩阵转换为数据框
+zfit<-lm(Murder~Population+Illiteracy+Income+Frost,data = zstates)
+zfit
+#R平方贡献率  #相对权重 R语言实战第2版 P196
+relweights<-function(fit,...){
+  R<-cor(fit3$model)
+  nvar<-ncol(R)
+  rxx<-R[2:nvar,2:nvar]
+  rxy<-R[2:nvar,1]
+  svd<-eigen(rxx)
+  evec<-svd$vectors
+  ev<-svd$values
+  delta<-diag(sqrt(ev))
+  lambda<-evec %*%delta %*% t(evec)
+  lambdaasq<-lambda^2
+  beta<-solve(lambda) %*% rxy
+  r2<-colSums(beta^2)
+  rawwgt<-lambdaasq%*%beta^2
+  import<-(rawwgt/r2)*100            #计算相对权重
+  import<-data.frame(Weights=import)  #数据框化
+  row.names(import)<-names(fit3$model[2:nvar])
+  import<-import[order(import$Weights),1,drop=FALSE] #升序排序
+  dotchart(import$Weights,labels=row.names(import),   #点图
+           xlab = "% of R-Square",pch=19,
+           main="Relative Importiance of Predictor Variables ",
+           sub=paste("Total R-Square =",round(r2,digits = 3)),
+  ...)
+return(import)
+}
+relweights(fit3,col="blue")
+
+
+```
+
+
+
+
+```{r}
+#| echo: false
+
+source("_comment.R")
+```
+# tidymodels {.unnumbered}
+
+整洁模型规范
+
+[parsnip](https://www.tidymodels.org/start/models/) for model fitting specification
+
+[recipes and workflows](https://www.tidymodels.org/start/recipes/) to perform the transformations
+
+## Libraries
+```{r}
+library(tidymodels) 
+library(ISLR2)
+```
+## Dataset
+```{r}
+#| include=FALSE
+ISLR2::Boston
+Advertising<-read_csv("data/Advertising.csv")
+income1<-read_csv("data/Income1.csv")
+income2<-read_csv("data/Income2.csv")
+ISLR2::Credit
+```
+### Figure 2.1
+```{r}
+Advertising
+p_sales<-function(x){
+  ggplot(Advertising,aes({{x}},sales))+
+           geom_point(shape=21,color="red")+
+           geom_smooth(method = "lm",se=FALSE)
+}
+p_sales(TV)|p_sales(radio)|p_sales(newspaper)
+```
+# Linear Regression 
+```{r}
+#linear regression model specification 线性回归模型规范
+lm_spec <- linear_reg() %>%
+  set_mode("regression") %>%
+  set_engine("lm")  
+     
+lm_spec
+```
+
+## Simple linear regression
+
+```{r}
+#
+lm_fit <- lm_spec %>%   
+  fit(medv ~ lstat, data = Boston)  
+lm_fit
+
+##
+lm_fit %>% 
+  pluck("fit")
+lm_fit %>%    
+  pluck("fit") %>%   
+  summary()
+
+##  "broom" package     
+##extract parameter estimates  
+tidy(lm_fit)
+## extract the model statistics.
+glance(lm_fit) 
+
+##predicte new values
+predict(lm_fit, new_data = Boston)
+predict(lm_fit, new_data = Boston, type = "conf_int")
+
+##compare the observed value and the predicted value
+bind_cols( predict(lm_fit, new_data = Boston),   
+           Boston ) %>% 
+  select(medv, .pred)
+
+augment(lm_fit, new_data = Boston) %>%    
+  select(medv, .pred)
+```
+
+## Multiple linear regression
+
+```{r}
+lm_fit2 <- lm_spec %>%    
+  fit(medv ~ lstat + age, data = Boston)  
+lm_fit2
+
+ tidy(lm_fit2)
+ predict(lm_fit2, new_data = Boston)
+
+ 
+lm_fit3 <- lm_spec %>%    
+  fit(medv ~ ., data = Boston)  
+lm_fit3
+```
+
+## Interaction terms
+
+```{r}
+lm_fit4 <- lm_spec %>%   
+  fit(medv ~ lstat * age, data = Boston)  
+lm_fit4
+```
+
+```{r}
+#pre-processing specification预处理规范 recipes包
+rec_spec_interact <- recipe(medv ~ lstat + age, data = Boston) %>%   
+  step_interact(~ lstat:age) 
+
+#combine the linear regression model specification with the pre-processing specification
+lm_wf_interact <- workflow() %>%   
+  add_model(lm_spec) %>%   
+  add_recipe(rec_spec_interact)  
+lm_wf_interact %>% 
+  fit(Boston)
+```
+
+## Non-linear transformations of the predictors
+
+```{r}
+rec_spec_pow2 <- recipe(medv ~ lstat, data = Boston) %>%   
+  step_mutate(lstat2 = lstat ^ 2)  
+
+lm_wf_pow2 <- workflow() %>%   
+  add_model(lm_spec) %>%   
+  add_recipe(rec_spec_pow2)  
+
+lm_wf_pow2 %>% 
+  fit(Boston)
+```
+
+```{r}
+#对数变换
+rec_spec_log <- recipe(medv ~ lstat, data = Boston) %>%   
+  step_log(lstat)  
+
+lm_wf_log <- workflow() %>%  
+  add_model(lm_spec) %>%   
+  add_recipe(rec_spec_log) 
+
+lm_wf_log %>% 
+  fit(Boston)
+```
+
+## Qualitative predictors
+```{r}
+head(Credit)
+
+#相关关系矩阵
+Credit %>%
+  select(Income:Education,Balance) %>%
+  cor()
+
+pairs(~.,data=Credit)
+pairs(~Balance+Age+Cards+Education+Income+Limit+Rating,data=Credit)
+```
+```{r}
+#generate dummy variables生成虚拟变量编码分类变量
+Carseats %>%   
+  pull(ShelveLoc) %>%   # ShelveLoc 3 levels=Bad,Medium,Good
+  contrasts()
+
+lm_spec %>%    
+  fit(Sales ~ . + Income:Advertising + Price:Age, data = Carseats)
+
+rec_spec <- recipe(Sales ~ ., data = Carseats) %>%   
+  step_dummy(all_nominal_predictors()) %>%   
+  step_interact(~ Income:Advertising + Price:Age)  
+
+lm_wf <- workflow() %>%   
+  add_model(lm_spec) %>%   
+  add_recipe(rec_spec)  
+
+lm_wf %>% 
+  fit(Carseats)
+```
+
+

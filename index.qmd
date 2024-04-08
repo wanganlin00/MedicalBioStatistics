@@ -1,0 +1,18 @@
+# Preface {.unnumbered}
+
+[统计描述](statistical_description.qmd)
+
+[假设检验](hypothesisTesting.qmd)
+
+[回归分析](RegressionAnalysis.qmd)
+
+[分类](classification.qmd)
+
+[聚类](Cluster.qmd)
+
+[降维](DimensionReduction.qmd)
+
+[生存分析](SurvivalAnalysis.qmd)
+
+[]()
+

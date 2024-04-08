@@ -1,0 +1,310 @@
+---
+knitr:
+  opts_chunk:
+    comment: "#>"
+    collapse: true
+---
+
+# basic graphics
+
+## 图形参数
+
+### par()
+
+```{r}
+#| eval: false
+par()     #返回当前设置，一个list
+opar<-par(no.readonly = TRUE)
+par(opar)  #恢复默认设置
+par(pch=22) #空心=0、1、2、5、6,  黑色=15:20,  col边界色  bg= 21-25填充
+par(lty=1)  # 1=实线 2:6=虚线
+par(cex.main=2,font.main=4,col.main="black")#font字体样式  4=粗斜体
+par(cex.sub=1.5,font.sub=3,col.sub="gray")  # 3=斜体
+par(cex.lab=1.25,font.lab=2,col.lab="purple")   # 2=粗体
+par(cex.axis=1,font.axis=1,col.axis="green4") # 1=常规
+par(fg="black")   #边框和刻度颜色
+par(bg="white")  #背景色
+par(pin=c(4,3))        #宽×高 1英寸=1.7
+par(mar=c(5,4,4,2)+0.1)    #默认值，边距
+
+par(opar) 
+```
+
+### 颜色
+
+```{r}
+colors()
+rgb(red = 0,green = 1,blue = 1)
+hsv()
+barplot(1:10,col=c(1:10))
+
+### n种连续的彩虹色  十六进制
+rainbow(10)        
+barplot(rep(1:15),col=rainbow(10))
+
+### n阶灰度色 十六进制
+gray(0:15/15)      
+barplot(rep(1,15),col=gray(0:15/15))
+
+library(RColorBrewer)
+RColorBrewer::display.brewer.all()
+barplot(rep(1,7),col=brewer.pal(7,"Set3"))
+
+```
+
+```{r}
+dose<-c(20,30,40,45,60)
+A<-c(16,20,27,40,60)
+B<-c(15,18,25,31,40)
+plot(dose,A,type="b",           #type="b" 线连接点
+     
+     col="red",lty=1,pch=18,lwd=3,cex=2,    #点和线属性
+     
+     main="Clinical trials for Drug A",     #主标题
+     sub="this is my data",                  #副标题
+     xlab="Dosage",ylab="Drug Response",    #坐标轴标签
+     xlim=c(0,60),ylim = c(0,70)           #坐标轴范围
+)
+```
+
+## 自定义图形标题、坐标轴标签
+
+```{r}
+par(mfrow=c(1,2))  
+hist(A)
+hist(A,ann=FALSE)    #ann=FALSE 移除默认标题
+title(main="main title", col.main="purple",       #主标题
+      sub="subtitle", col.sub="pink",            #副标题
+      xlab="Dosage",ylab="Drug Response",col.lab="red" ,cex.lab=0.75
+      )
+par(opar)
+```
+
+## 自定义坐标轴、图例、文本
+
+```{r}
+x<-c(1:10)
+y<-x
+z<-10/x
+par(mar=c(5,4,4,4))
+par(mfrow=c(1,2))
+plot(x,y)
+plot(x,y,axes=FALSE)#禁用坐标轴框架、刻度
+plot(x,y,axes=FALSE,frame.plot = TRUE)#禁用刻度
+
+plot(x,y,type="b",pch=21,col="red",bg="black",
+     xaxt="n",yaxt="n",lty=1  #xaxt、yaxt 禁用X、Y坐标轴刻度
+     )
+lines(x,z,type="b",pch=22,col="blue",lty=2,bg="green")  #添加新图形
+#绘制自定义坐标轴
+#axis(side,at= ,labels = ,pos = ,las=,tck=,…)
+#side  1=下，2=左，3=上，4=右 
+#at   数值向量，绘制刻度线的位置
+#labels  字符序列，刻度线的文字标签
+#las    0=垂直于坐标轴，2=平行于坐标轴   
+#tck=-0.01    刻度线的长度   1=网格线 0=禁用刻度  负值在图形外侧，正值在图形内侧
+axis(side = 1,at=x,labels = x,las=0,tck=-0.1)
+axis(side=2,at=x,labels=x,col.axis="red",las=2,tck=0.1)
+axis(side=4,at=z,labels=round(z,digits=3),col.axis="blue",las=2,tck=-.05)
+
+#library(Hmisc)
+#minor.tick(nx=2,ny=2,tick.ratio = .5)#添加次要刻度线
+
+## 图例  legend(location, title, legend,...)
+par(lwd=2,cex=1,font.lab=2)
+legend("top",inset=0.05,title="函数",c("Y=X","Y=10/x"),text.col = "green",
+       lty=c(3,2),pch=c(21,22),col=c("red","blue",bg=c("black","green")))
+```
+
+## 添加文本
+
+```{r}
+#mtext("text",side,line=,)
+mtext("Y=10/X",side=4,line=3,cex.lab=1,las=2,col="blue")  #边界文本
+title(main="my graphics",
+      sub="subtitle",
+      xlab="X values",
+      ylab="Y=X")
+abline(h=c(1,2,3,4),lty=2,col="red")  ###添加水平辅助线 
+abline(v=c(8,9,10),lty=4,col="blue")  ###添加垂直辅助线 
+
+
+# text(x,y,"text",pos=)  1=下，2=左，3=上，4=右
+text(5,5,"文本1",pos=4,adj=0,cex=2,col="green")
+text(locator[1],"文本",pos=4,adj=0,cex=2,col="green")######鼠标点击确定位置
+```
+
+```{r}
+#标注点的信息
+A<-c(1:5)
+B<-c(15,23,26,17,21)
+plot(A,B,type="b")
+ABC<-data.frame(A,B,row.names =c("afaf","fa","faae","agg","grgw"))
+attach(ABC)
+text(A,B,row.names(ABC),cex=0.6,pos=4,col="blue")
+detach(ABC)
+par(opar)
+```
+
+## 图形组合
+
+```{r}
+#layout(matrix,widths=,heights=)
+attach(mtcars)
+mat<-matrix(c(1,1,2,3),2, 2, byrow = FALSE)
+layout(mat,widths = c(1,0.5),heights = c(0.5,1))
+hist(wt)
+hist(mpg)
+hist(disp)
+detach(mtcars)
+```
+
+## 图形的精细控制
+
+```{r}
+#参数fig=c(x1,x2,y1,y2)
+attach(mtcars)
+par(fig=c(0,0.8,0,0.8))
+plot(wt,mpg,xlab="Miles per Gallon",ylab="Car Weight")
+par(fig=c(0,0.8,0.55,1),new=TRUE)
+boxplot(wt,horizontal = TRUE,axes=FALSE)
+par(fig=c(0.65,1,0,0.8),new=TRUE)
+boxplot(mpg,axes=FALSE)
+mtext("boxplot of wt",side=3,outer = TRUE,line=-3)
+```
+
+## Geometry
+
+```{r}
+data(mpg,package="ggplot2") 
+```
+
+### 条形图
+
+```{r}
+barplot(table(mpg$drv))
+barplot(table(mpg$drv),horiz = TRUE)
+
+barplot(table(mpg$drv,mpg$class),legend=row.names(table(mpg$drv,mpg$class)))
+barplot(table(mpg$drv,mpg$class),beside = TRUE,
+        legend=row.names(table(mpg$drv,mpg$class)))
+
+spineplot(table(mpg$class,mpg$drv))
+```
+
+### 饼图
+
+```{r}
+x<-c(10,12,4,16,8)
+labs<-c("US","UK","Australia","Germany","France")
+
+pie(x,labels=labs,main="简单饼图")
+pct<-round(x/sum(x)*100)
+labs2<-paste(labs," ",pct,"%",sep="")
+pie(x,labels=labs2,col=rainbow(length(labs2)),main="百分比饼图")
+
+```
+
+### 直方图
+
+```{r}
+hist(mpg$hwy,breaks = 12,col="red")
+
+hist(mpg$hwy,freq = FALSE,breaks = 12, col="lightgreen")
+rug(mpg$hwy,col="brown",lwd=2)
+lines(density(mpg$hwy),col="blue",lwd=2)
+
+h <- hist(mpg$hwy,breaks = 12,col="red")
+x<-seq(min(mpg$hwy),max(mpg$hwy),by=0.01)
+y<-dnorm(x,mean=mean(mpg$hwy),sd=sd(mpg$hwy))   #概率密度曲线  f(X)=(fi/n)/ΔXi
+y<-y*diff(h$mids[1:2])*length(mpg$hwy)  # y*组距*总样本量  正态分布
+lines(x,y,col="blue",lwd=2)
+
+plot(x,y)
+```
+
+### 密度曲线
+
+```{r}
+plot(density(mpg$hwy))
+polygon(density(mpg$hwy),col="lightblue",border = "red") 
+rug(mpg$hwy,col="brown") 
+```
+
+### 箱线图
+
+```{r}
+boxplot.stats(mpg$hwy)
+boxplot(mpg$hwy)
+
+boxplot(hwy~drv,data=mpg,
+        notch=TRUE,
+        varwidth=TRUE)
+
+boxplot(hwy~drv*cyl,data=mpg)
+```
+
+### 克利夫兰点图
+
+```{r}
+dotchart(mtcars[order(mtcars$mpg),]$mpg,labels = row.names(mtcars),groups = mtcars$cyl)
+
+
+#分组、排序、着色后的点图
+x<-mtcars[order(mtcars$mpg),]
+x$cyl<-factor(x$cyl)
+x$color[x$cyl==4]<-"red"
+x$color[x$cyl==6]<-"yellow"
+x$color[x$cyl==8]<-"blue"
+dotchart(x$mpg,
+         labels = row.names(x),cex=.7,
+         groups = x$cyl,         #分组参数 因子
+         gcolor = "black",
+         color = x$color
+         )
+```
+
+### 散点图
+
+```{r}
+car::scatterplot(mpg~wt|am,data=mtcars,
+            id=TRUE,
+            legend =TRUE,#图例
+            grid=TRUE,   #添加网格线
+            boxplots="xy"  #添加边界箱线图
+)
+```
+
+### 散点图矩阵
+
+```{r}
+car::scatterplotMatrix(~mpg+disp+drat+wt,data=mtcars)
+```
+
+### 气泡图
+
+```{r}
+symbols(mtcars$wt,mtcars$mpg,
+        circle=sqrt(mtcars$disp/pi),
+        inches = .30, #比例
+        fg="white",bg="lightblue")
+text(mtcars$wt,mtcars$mpg,row.names(mtcars),cex=.6)
+```
+
+### 折线图
+
+```{r}
+Orange
+t1<-subset(Orange,Tree==1)
+plot(t1$age,t1$circumference,type="p")
+plot(t1$age,t1$circumference,type="b")
+plot(t1$age,t1$circumference,type="c")
+```
+
+### 相关图
+
+`corrgram()`
+
+### 马赛克图
+
+`mosaic()`
