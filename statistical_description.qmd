@@ -4,7 +4,7 @@ format: html
 editor: visual
 ---
 
-# 描述统计分析
+# 统计描述
 
 ```{r}
 mtcars$mpg
