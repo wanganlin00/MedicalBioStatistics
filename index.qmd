@@ -1,18 +1,37 @@
 # 快速开始 {.unnumbered}
 
-[统计描述](statistical_description.qmd)
+1.  [统计描述](statistical_description.qmd)
 
-[假设检验](hypothesisTesting.qmd)
+2.  [假设检验](hypothesisTesting.qmd)
 
-[回归分析](RegressionAnalysis.qmd)
+3.  [回归分析](RegressionAnalysis.qmd)
 
-[分类](classification.qmd)
+4.  [分类](classification.qmd)
 
-[聚类](Cluster.qmd)
+5.  [聚类](Cluster.qmd)
 
-[降维](DimensionReduction.qmd)
+6.  [降维](DimensionReduction.qmd)
 
-[生存分析](SurvivalAnalysis.qmd)
+7.  [生存分析](SurvivalAnalysis.qmd)
 
-[]()
+## 参考资料 {style="color:red"}
 
+-   [ggplot2: Elegant Graphics for Data Analysis（3e）](https://ggplot2-book.org/)
+
+-   <https://exts.ggplot2.tidyverse.org/gallery/>
+
+-   <https://www.datanovia.com/en/blog/tag/ggpubr/>
+
+-   回归分析、主成分分析（Principal component analysis）、聚类：[R in action 3rd](https://livebook.manning.com/book/r-in-action-third-edition)、 [ISLR](https://www.statlearning.com/)
+
+-   生存分析：[医学研究中的生存数据建模（4e）](https://bookdown.org/wangzhen/survival/)
+
+-   t-Distributed Stochastic Neighbor Embedding(t-SNE)：<https://lvdmaaten.github.io/tsne/>、[R-tSNE](https://cran.r-project.org/web/packages/tsne/)
+
+-   Uniform Manifold Approximation and Projection(UMAP)：<https://umap-learn.readthedocs.io/en/latest/>
+
+-   [Modern Statistics for Modern Biology](https://www.huber.embl.de/msmb/)
+
+-   [tidymodels](https://www.tidymodels.org/)
+
+-   [ISLR with tidymodels](https://emilhvitfeldt.github.io/ISLR-tidymodels-labs/)
