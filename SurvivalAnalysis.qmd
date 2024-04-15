@@ -3,3 +3,5 @@ title: "生存分析"
 ---
 
 ## Survival analysis
+
+[医学研究中的生存数据建模](https://bookdown.org/wangzhen/survival/)

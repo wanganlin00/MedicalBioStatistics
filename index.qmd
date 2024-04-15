@@ -1,4 +1,4 @@
-# Preface {.unnumbered}
+# 快速开始 {.unnumbered}
 
 [统计描述](statistical_description.qmd)
 

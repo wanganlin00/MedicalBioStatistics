@@ -183,6 +183,6 @@ ggm包`pcor()` , `pcor.test()`
 
 ## 数据可视化
 
-[基础绘图](03_base_graphics.qmd)
+[base_graphics.qmd](base_graphics.qmd)
 
-[ggplot2绘图](04_ggplot2_graphics.qmd)
+[ggplot2_graphics.qmd](ggplot2_graphics.qmd)
