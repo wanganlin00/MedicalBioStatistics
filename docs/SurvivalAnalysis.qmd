@@ -1,5 +1,0 @@
----
-title: "生存分析"
----
-
-## Survival analysis

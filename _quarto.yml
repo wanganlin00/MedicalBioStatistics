@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 book:
-  title: "BioStatistics & Graphics"
+  title: "应用医学统计学"
   reader-mode: true
   
   chapters:
@@ -14,8 +14,6 @@ book:
     - part: "统计描述"
       chapters:
         - statistical_description.qmd
-        - base_graphics.qmd
-        - ggplot2_graphics.qmd
 
     # - part: "统计推断"
     #   chapters:
