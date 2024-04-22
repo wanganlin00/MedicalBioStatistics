@@ -19,7 +19,7 @@ book:
     #   chapters:
     #     - sampling_bootstrapping.qmd
     #     - parameterEstimation.qmd
-    #     - hypothesisTesting.qmd
+    #     - hypothesis_testing.qmd
     #     - PowerAnalysis.qmd
     #     - Causal_Inference.qmd
     #     
