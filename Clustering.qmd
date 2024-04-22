@@ -78,6 +78,17 @@ rect.hclust(hclust.average,k=15)
 
 ####                             划分K-means聚类
 
+
+```{r}
+library(ggfortify)
+autoplot(
+    kmeans(),
+    data = mpg,
+)
+```
+
+
+
 ```{r}
 data(wine,package = "rattle")
 head(wine,5)
