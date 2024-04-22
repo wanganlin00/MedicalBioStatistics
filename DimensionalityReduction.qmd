@@ -1,21 +1,18 @@
----
-title: "降维"
----
+# 降维
 
-## Dimension Reduction
-
+## 矩阵分解
 ```{r}
 set.seed(55)
 e <- c(
-  data_20=c(runif(20,1,9)),
-  data_30=c(runif(30,40,50)),
-  data_50=c(runif(50,90,100))
+  x=c(runif(20,1,9)),
+  y=c(runif(30,40,50)),
+  z=c(runif(50,90,100))
 )
 e
 mat<-matrix(e,nrow = 10,byrow = TRUE)
 mat
-mat_center <- mat-rowMeans(mat)
 
+mat_center <- mat-rowMeans(mat)
 ### 奇异值分解
 svt1 <- svd(mat_center)
 svt1
@@ -31,11 +28,17 @@ plot(svt1$v[,2],ylab="2nd PC")
 plot(svt1$v[,1],svt1$v[,2],xlab="lst PC",ylab="2nd PC")
 
 ```
+```{r}
+library(ggfortify)
+autoplot(prcomp(mat),
+         data=mat,
+         )
+```
 
 
-### 线性降维
+## 线性降维
 
-#### Principal component analysis(PCA)
+### Principal component analysis(PCA)
 
 ```{r}
 # PC1=a1X1+a2X2+...+akXk
@@ -73,19 +76,53 @@ round(rpc.2$weights,2)  #主成分得分系数(标准化的回归权重)
 
 ```
 
-```{r}
-source("_comment.R")
-```
 
 
+### 因子分析
+
 ```{r}
-#| message: false
-library(tidymodels)
-library(patchwork)
-library(ISLR2)
+# Xi=a1F1+a2F2+...+apFp+Ui        k个可观测变量，p个公共因子
+
+options(digits = 2)
+cor<-cov2cor(ability.cov$cov)  #相关关系矩阵
+cor
+
+
+#Cattell碎石图        图形变化最大处。即拐角处
+#Kaiser-Harris准则    特征值大于0，直线y=0以上
+#平行分析             基于真实数据的特征值大于一组随机数据矩阵相应的特征值（虚线）
+
+fa.parallel(cor,n.obs = 112,fa="both",n.iter = 100)#判断公共因子的个数
+fa(cor,nfactors = 2,rotate = "none",fm="pa")  #提取公共因子
+
+#旋转
+fa.varimax<-fa(cor,nfactors = 2,rotate = "varimax",fm="pa") #正交旋转
+fa.varimax
+install.packages("GPArotation")
+library(GPArotation)
+fa.promax<-fa(cor,nfactors = 2,rotate = "promax",fm="pa") #斜交旋转
+fa.promax
+unclass(fa.promax$loadings) %*% fa.promax$Phi    #  矩阵乘法 A %*% B
+#因子结构矩阵=因子模式矩阵*因子关联矩阵
+
+
+fa.plot(fa.promax,labels = rownames(fa.promax$loadings)) #斜交旋转结果图
+fa.diagram(fa.promax)
+
+#因子得分
+fa.promax<-fa(cor,nfactors = 2,rotate = "promax",fm="pa",scores = TRUE) #斜交旋转
+fa.promax$score
+fa.promax$weights
+
 ```
+
 
 ## tidy PCA
+
+
+```{r include=FALSE}
+library(tidymodels)
+```
 
 `USArrests` data set
 
@@ -198,48 +235,11 @@ recipe(~., data = USArrests) %>%
 
 
 
-#### 因子分析
-
-```{r}
-# Xi=a1F1+a2F2+...+apFp+Ui        k个可观测变量，p个公共因子
-
-options(digits = 2)
-cor<-cov2cor(ability.cov$cov)  #相关关系矩阵
-cor
 
 
-#Cattell碎石图        图形变化最大处。即拐角处
-#Kaiser-Harris准则    特征值大于0，直线y=0以上
-#平行分析             基于真实数据的特征值大于一组随机数据矩阵相应的特征值（虚线）
+## 非线性降维
 
-fa.parallel(cor,n.obs = 112,fa="both",n.iter = 100)#判断公共因子的个数
-fa(cor,nfactors = 2,rotate = "none",fm="pa")  #提取公共因子
-
-#旋转
-fa.varimax<-fa(cor,nfactors = 2,rotate = "varimax",fm="pa") #正交旋转
-fa.varimax
-install.packages("GPArotation")
-library(GPArotation)
-fa.promax<-fa(cor,nfactors = 2,rotate = "promax",fm="pa") #斜交旋转
-fa.promax
-unclass(fa.promax$loadings) %*% fa.promax$Phi    #  矩阵乘法 A %*% B
-#因子结构矩阵=因子模式矩阵*因子关联矩阵
-
-
-fa.plot(fa.promax,labels = rownames(fa.promax$loadings)) #斜交旋转结果图
-fa.diagram(fa.promax)
-
-#因子得分
-fa.promax<-fa(cor,nfactors = 2,rotate = "promax",fm="pa",scores = TRUE) #斜交旋转
-fa.promax$score
-fa.promax$weights
-
-```
-
-
-### 非线性降维
-
-#### Uniform Manifold Approximation and Projection(umap)
+### Uniform Manifold Approximation and Projection(umap)
 
 2018年McInnes提出了算法，UMAP（Uniform Manifold Approximation and Projection for Dimension Reduction，一致的流形逼近和投影以进行降维）。 一致的流形近似和投影（UMAP）是一种降维技术，类似于t-SNE，可用于可视化，但也可用于一般的非线性降维。 该算法基于关于数据的三个假设：
 
@@ -257,7 +257,7 @@ fa.promax$weights
 
 同时其作者开源实现代码。
 
-#### t-Distributed Stochastic Neighbor Embedding (t-SNE)
+### t-Distributed Stochastic Neighbor Embedding (t-SNE)
 
 t-Distributed Stochastic Neighbor Embedding (t-SNE)是一种降维技术，**用于在二维或三维的低维空间中表示高维数据集，从而使其可视化**。与其他降维算法(如PCA)相比，t-SNE创建了一个缩小的特征空间，相似的样本由附近的点建模，不相似的样本由高概率的远点建模。
 
