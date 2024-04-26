@@ -117,5 +117,71 @@
       "生存分析",
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>生存分析</span>"
     ]
+  },
+  {
+    "objectID": "descriptive_statistics.html",
+    "href": "descriptive_statistics.html",
+    "title": "\n1  描述性统计学\n",
+    "section": "",
+    "text": "1.1 数据类型",
+    "crumbs": [
+      "统计描述",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>描述性统计学</span>"
+    ]
+  },
+  {
+    "objectID": "descriptive_statistics.html#数据类型",
+    "href": "descriptive_statistics.html#数据类型",
+    "title": "\n1  描述性统计学\n",
+    "section": "",
+    "text": "定量数据（数字数据）\n\n连续数据\n离散数据\n\n\n\n定性数据（分类数据）\n\n无序分类数据\n有序分类数据",
+    "crumbs": [
+      "统计描述",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>描述性统计学</span>"
+    ]
+  },
+  {
+    "objectID": "descriptive_statistics.html#频数表和频率分布直方图",
+    "href": "descriptive_statistics.html#频数表和频率分布直方图",
+    "title": "\n1  描述性统计学\n",
+    "section": "\n1.2 频数表和频率分布直方图",
+    "text": "1.2 频数表和频率分布直方图\n极差 R=X_{max}-X_{min} ， 组数k（5-15），组别（interval），频数count，频率\\frac{count}{n} \\times 100\\%",
+    "crumbs": [
+      "统计描述",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>描述性统计学</span>"
+    ]
+  },
+  {
+    "objectID": "descriptive_statistics.html#数据特征",
+    "href": "descriptive_statistics.html#数据特征",
+    "title": "\n1  描述性统计学\n",
+    "section": "\n1.3 数据特征",
+    "text": "1.3 数据特征\n\nCodehead(mtcars$mpg)\n#&gt; [1] 21.0 21.0 22.8 21.4 18.7 18.1\n\n\n\n1.3.1 集中趋势\n\nCode# 集中趋势\n\nmean(mtcars$mpg)     #算术平均数\n#&gt; [1] 20.09062\nmedian(mtcars$mpg)   #中位数\n#&gt; [1] 19.2\n\n\n\n1.3.2 离散程度\n\nCode# 离散程度\nrange(mtcars$mpg)  # 值域\n#&gt; [1] 10.4 33.9\ndiff(range(mtcars$mpg) )  # 极差\n#&gt; [1] 23.5\n\nquantile(mtcars$mpg,probs = c(0,0.1,0.25,0.5,0.75,1))     #分位数\n#&gt;     0%    10%    25%    50%    75%   100% \n#&gt; 10.400 14.340 15.425 19.200 22.800 33.900\nIQR(mtcars$mpg)      # 四分位数间距\n#&gt; [1] 7.375\n\nsd(mtcars$mpg)       #标准差\n#&gt; [1] 6.026948\nvar(mtcars$mpg)      #方差\n#&gt; [1] 36.3241\n\nCV &lt;- function(x,na.rm=TRUE){   # 变异系数\n    if(na.rm) x &lt;- x[!is.na(x)]\n    CV=sd(x)/mean(x)*100\n    paste(CV,\"%\",sep = \"\")\n}\nCV(mtcars$mpg)\n#&gt; [1] \"29.9988081609661%\"\n\nmad(mtcars$mpg,constant = 1.4826)      #绝对中位差 median absolute deviation\n#&gt; [1] 5.41149\n# 为了达到渐进正态一致性，`mad()` 的计算乘了一个比例因子`constant=1.4826`。\nmedian(abs(mtcars$mpg-median(mtcars$mpg)))\n#&gt; [1] 3.65\nmedian(abs(mtcars$mpg-median(mtcars$mpg)))*1.4826\n#&gt; [1] 5.41149\n\n\n\n1.3.3 分布形状\n\n偏度（Skewness）\n\n表示随机变量概率分布的不对称性。\nhttps://www.macroption.com/skewness-formula/\n三阶中心矩。方差即二阶中心矩。\n\n    Skew(X) =  \\frac{E(X_i-E(X))^3}{Var(X)^{\\frac{3}{2}}}\\\\ =E  [(\\frac{X_i-\\mu}{\\sigma})^3]\\\\= \\frac{1}{n} \\sum_{i=1}^{n} [ (\\frac{X_i-\\mu}{\\sigma} )^3]\n\n偏度的取值范围： (-\\infty,+\\infty)\n\nSkew＜0，负偏态分布；左长尾\nSkew=0，数据相对均匀的分布在均值两侧；\nSkew＞0，正偏态分布。右长尾\n\n\n\n\nCodex &lt;- c(1,2,3,5)\ns &lt;- psych::describeBy(x=x,group = NULL)\ns$skew\n#&gt; [1] 0.2823139\n\nskewness &lt;- function(x,na.rm=TRUE){\n    if(na.rm) x &lt;- x[!is.na(x)]\n    n=length(x)\n    μ=mean(x)\n    SD=sd(x)\n    sknewness = mean(((x-μ)/SD)^3)\n    return(sknewness=sknewness)\n}\nskewness(x)\n#&gt; [1] 0.2823139\n\n\n\n峰度（Kurtosis）\n\n表示随机变量概率分布的尖峭程度。四阶中心矩与方差平方的比值。\nhttps://www.macroption.com/kurtosis-formula/\n超值峰度 excess kurtosis ：四阶中心矩与方差平方的比值减3。\nhttps://www.macroption.com/excess-kurtosis/\n\nKurt(X) =  \\frac{E(X_i-E(X))^4}{Var(X)^{2}}-3\\\\= E  [(\\frac{X_i-\\mu}{\\sigma})^4] - 3\\\\= \\frac{1}{n} \\sum_{i=1}^{n} [ (\\frac{X_i-\\mu}{\\sigma} )^4]-3\n\n峰度的取值范围：[1,+\\infty)\n超值峰度的取值范围：[-2,+\\infty)\n\n超值峰度＜0，数据分布与正态分布相比较为矮胖；\n超值峰度=0，正态分布；\n超值峰度＞0，数据分布与正态分布相比较为高尖。\n\n\n\n\nCodes$kurtosis\n#&gt; [1] -1.961786\n\nkurtosis&lt;-function(x,na.rm=TRUE){\n    if(na.rm) x&lt;-x[!is.na(x)]\n    n=length(x)\n    μ=mean(x)\n    SD=sd(x)\n    kurtosis= mean(((x-μ)/SD)^4)-3\n    return(kurtosis=kurtosis)\n}\nkurtosis(x)\n#&gt; [1] -1.961786\n\n\n\n1.3.4 统计摘要\n\nCodesummary(mtcars$mpg)\n#&gt;    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n#&gt;   10.40   15.43   19.20   20.09   22.80   33.90\npsych::describeBy(mtcars$mpg,group = mtcars$am)\n#&gt; \n#&gt;  Descriptive statistics by group \n#&gt; group: 0\n#&gt;    vars  n  mean   sd median trimmed  mad  min  max range skew kurtosis   se\n#&gt; X1    1 19 17.15 3.83   17.3   17.12 3.11 10.4 24.4    14 0.01     -0.8 0.88\n#&gt; ------------------------------------------------------------ \n#&gt; group: 1\n#&gt;    vars  n  mean   sd median trimmed  mad min  max range skew kurtosis   se\n#&gt; X1    1 13 24.39 6.17   22.8   24.38 6.67  15 33.9  18.9 0.05    -1.46 1.71",
+    "crumbs": [
+      "统计描述",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>描述性统计学</span>"
+    ]
+  },
+  {
+    "objectID": "descriptive_statistics.html#统计表格",
+    "href": "descriptive_statistics.html#统计表格",
+    "title": "\n1  描述性统计学\n",
+    "section": "\n1.4 统计表格",
+    "text": "1.4 统计表格\n\nCodeoptions(digits = 2)\nhead(mtcars)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nmpg\ncyl\ndisp\nhp\ndrat\nwt\nqsec\nvs\nam\ngear\ncarb\n\n\n\nMazda RX4\n21\n6\n160\n110\n3.9\n2.6\n16\n0\n1\n4\n4\n\n\nMazda RX4 Wag\n21\n6\n160\n110\n3.9\n2.9\n17\n0\n1\n4\n4\n\n\nDatsun 710\n23\n4\n108\n93\n3.8\n2.3\n19\n1\n1\n4\n1\n\n\nHornet 4 Drive\n21\n6\n258\n110\n3.1\n3.2\n19\n1\n0\n3\n1\n\n\nHornet Sportabout\n19\n8\n360\n175\n3.1\n3.4\n17\n0\n0\n3\n2\n\n\nValiant\n18\n6\n225\n105\n2.8\n3.5\n20\n1\n0\n3\n1\n\n\n\n\n\nCode\ntbl1 &lt;- tableone::CreateTableOne(vars = colnames(mtcars),\n                                 data = mtcars,\n                                 factorVars = c(\"cyl\"), # 分类\n                                 strata = c(\"am\"),  #分层\n                                 )\ntbl1\n#&gt;                   Stratified by am\n#&gt;                    0               1              p      test\n#&gt;   n                    19              13                    \n#&gt;   mpg (mean (SD))   17.15 (3.83)    24.39 (6.17)  &lt;0.001     \n#&gt;   cyl (%)                                          0.013     \n#&gt;      4                  3 (15.8)        8 (61.5)             \n#&gt;      6                  4 (21.1)        3 (23.1)             \n#&gt;      8                 12 (63.2)        2 (15.4)             \n#&gt;   disp (mean (SD)) 290.38 (110.17) 143.53 (87.20) &lt;0.001     \n#&gt;   hp (mean (SD))   160.26 (53.91)  126.85 (84.06)  0.180     \n#&gt;   drat (mean (SD))   3.29 (0.39)     4.05 (0.36)  &lt;0.001     \n#&gt;   wt (mean (SD))     3.77 (0.78)     2.41 (0.62)  &lt;0.001     \n#&gt;   qsec (mean (SD))  18.18 (1.75)    17.36 (1.79)   0.206     \n#&gt;   vs (mean (SD))     0.37 (0.50)     0.54 (0.52)   0.357     \n#&gt;   am (mean (SD))     0.00 (0.00)     1.00 (0.00)  &lt;0.001     \n#&gt;   gear (mean (SD))   3.21 (0.42)     4.38 (0.51)  &lt;0.001     \n#&gt;   carb (mean (SD))   2.74 (1.15)     2.92 (2.18)   0.754",
+    "crumbs": [
+      "统计描述",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>描述性统计学</span>"
+    ]
+  },
+  {
+    "objectID": "descriptive_statistics.html#数据可视化",
+    "href": "descriptive_statistics.html#数据可视化",
+    "title": "\n1  描述性统计学\n",
+    "section": "\n1.5 数据可视化",
+    "text": "1.5 数据可视化\nR Notes\n\nbase_graphics\nggplot2_graphics",
+    "crumbs": [
+      "统计描述",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>描述性统计学</span>"
+    ]
   }
 ]

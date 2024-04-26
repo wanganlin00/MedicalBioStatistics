@@ -1,0 +1,167 @@
+# 描述性统计学
+
+## 数据类型
+
+1.  定量数据（数字数据）
+
+    i.  连续数据
+
+    ii. 离散数据
+
+2.  定性数据（分类数据）
+
+    i.  无序分类数据
+
+    ii. 有序分类数据
+
+## 频数表和频率分布直方图
+
+极差 $R=X_{max}-X_{min}$ ， 组数$k$（$5-15$），组别（$interval$），频数$count$，频率$\frac{count}{n} \times 100\%$
+
+## 数据特征
+
+```{r}
+head(mtcars$mpg)
+```
+
+### 集中趋势
+
+```{r}
+# 集中趋势
+
+mean(mtcars$mpg)     #算术平均数
+median(mtcars$mpg)   #中位数
+
+```
+
+### 离散程度
+
+```{r}
+# 离散程度
+range(mtcars$mpg)  # 值域
+diff(range(mtcars$mpg) )  # 极差
+
+quantile(mtcars$mpg,probs = c(0,0.1,0.25,0.5,0.75,1))     #分位数
+IQR(mtcars$mpg)      # 四分位数间距
+
+sd(mtcars$mpg)       #标准差
+var(mtcars$mpg)      #方差
+
+CV <- function(x,na.rm=TRUE){   # 变异系数
+    if(na.rm) x <- x[!is.na(x)]
+    CV=sd(x)/mean(x)*100
+    paste(CV,"%",sep = "")
+}
+CV(mtcars$mpg)
+
+mad(mtcars$mpg,constant = 1.4826)      #绝对中位差 median absolute deviation
+# 为了达到渐进正态一致性，`mad()` 的计算乘了一个比例因子`constant=1.4826`。
+median(abs(mtcars$mpg-median(mtcars$mpg)))
+median(abs(mtcars$mpg-median(mtcars$mpg)))*1.4826
+```
+
+### 分布形状
+
+偏度（Skewness）
+
+:   表示随机变量概率分布的不对称性。
+
+    <https://www.macroption.com/skewness-formula/>
+
+    三阶中心矩。方差即二阶中心矩。
+
+    $$ 
+        Skew(X) =  \frac{E(X_i-E(X))^3}{Var(X)^{\frac{3}{2}}}\\ =E  [(\frac{X_i-\mu}{\sigma})^3]\\= \frac{1}{n} \sum_{i=1}^{n} [ (\frac{X_i-\mu}{\sigma} )^3]
+    $$
+
+    偏度的取值范围： $(-\infty,+\infty)$
+
+    1.  Skew＜0，负偏态分布；左长尾
+
+    2.  Skew=0，数据相对均匀的分布在均值两侧；
+
+    3.  Skew＞0，正偏态分布。右长尾
+
+```{r}
+x <- c(1,2,3,5)
+s <- psych::describeBy(x=x,group = NULL)
+s$skew
+
+skewness <- function(x,na.rm=TRUE){
+    if(na.rm) x <- x[!is.na(x)]
+    n=length(x)
+    μ=mean(x)
+    SD=sd(x)
+    sknewness = mean(((x-μ)/SD)^3)
+    return(sknewness=sknewness)
+}
+skewness(x)
+```
+
+峰度（Kurtosis）
+
+:   表示随机变量概率分布的尖峭程度。四阶中心矩与方差平方的比值。
+
+    <https://www.macroption.com/kurtosis-formula/>
+
+    超值峰度 excess kurtosis ：四阶中心矩与方差平方的比值减3。
+
+    <https://www.macroption.com/excess-kurtosis/>
+
+    $$
+    Kurt(X) =  \frac{E(X_i-E(X))^4}{Var(X)^{2}}-3\\= E  [(\frac{X_i-\mu}{\sigma})^4] - 3\\= \frac{1}{n} \sum_{i=1}^{n} [ (\frac{X_i-\mu}{\sigma} )^4]-3
+    $$
+
+    峰度的取值范围：$[1,+\infty)$
+
+    超值峰度的取值范围：$[-2,+\infty)$
+
+    1.  超值峰度＜0，数据分布与正态分布相比较为矮胖；
+
+    2.  超值峰度=0，正态分布；
+
+    3.  超值峰度＞0，数据分布与正态分布相比较为高尖。
+
+```{r}
+s$kurtosis
+
+kurtosis<-function(x,na.rm=TRUE){
+    if(na.rm) x<-x[!is.na(x)]
+    n=length(x)
+    μ=mean(x)
+    SD=sd(x)
+    kurtosis= mean(((x-μ)/SD)^4)-3
+    return(kurtosis=kurtosis)
+}
+kurtosis(x)
+```
+
+### 统计摘要
+
+```{r}
+summary(mtcars$mpg)
+psych::describeBy(mtcars$mpg,group = mtcars$am)
+```
+
+## 统计表格
+
+```{r}
+options(digits = 2)
+head(mtcars)
+
+tbl1 <- tableone::CreateTableOne(vars = colnames(mtcars),
+                                 data = mtcars,
+                                 factorVars = c("cyl"), # 分类
+                                 strata = c("am"),  #分层
+                                 )
+tbl1
+
+
+```
+
+## 数据可视化
+
+[R Notes](https://wanganlin00.github.io/R/)
+
+-   base_graphics
+-   ggplot2_graphics

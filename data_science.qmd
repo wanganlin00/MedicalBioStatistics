@@ -4,8 +4,8 @@ format: html
 editor: visual
 ---
 
-## 
+## 推荐
 
-[R Data Science Notes](https://wanganlin00.github.io/RDataScience/)
+[R Notes](https://wanganlin00.github.io/R/)
 
 [Python Data Science Notes](https://wanganlin00.github.io/PythonDataScience/)

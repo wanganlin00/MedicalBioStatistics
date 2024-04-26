@@ -1,0 +1,101 @@
+# 概率论
+
+## 基础概念
+
+样本点（sample point）是每一次随机试验的结果，用 $\omega$ 表示。
+
+样本空间（sample space）是所有样本点的集合，用$\Omega=\{\omega_{i};i=0,1,2,... \}$表示。
+
+随机事件（random event）是一组样本点（$\Omega$的子集）的集合，用大写字母 $A,B,C,...$表示。
+
+一个样本点的集合称为简单事件（simple event），用 $\Omega=\{\omega\}$ 表示。
+
+若干个简单事件的集合称为混合事件（composite event）。全集 $\Omega$ 称为必然事件（deterministic event），空集（null set） $\emptyset$ 称为不可能事件（impossible event）。
+
+1.  包含关系（containment） ：Venn diagram
+
+    i.  $A\subseteq B$
+
+    ii. $A\supseteq B$
+
+2.  并集（$A\cup B$）
+
+3.  交集（$A\cap B$）
+
+4.  补集（$\bar A$）
+
+5.  互斥事件 $A\cap B=\emptyset$
+
+6.  互补事件 $A\cap B=\emptyset$ 且 $A\cup B=\Omega$
+
+加法
+
+$$
+P(A\cup B)=P(A)+P(B)-P(A\cap B)
+$$
+
+条件概率
+
+$$
+P(B|A)=\frac{P(A\cap B)}{P(A)}
+$$
+
+乘法
+
+$$
+P(A\cap B)=P(A)\times P(B|A)
+$$
+
+全概率公式（给定A~i~发生，B的加权平均条件概率）
+
+$$P(B)=\sum_{i=1}^{n}P(A_i)P(B|A_i)$$
+
+贝叶斯法则/逆概率公式（后验概率）
+
+$$P(A_k |B)=\frac{P(A_k)P(B|A_k)}{\sum_{i=1}^{n}P(A_i)P(B|A_i)}$$
+
+## 抽样分布和统计量
+
+假设
+
+:   $X_1,X_2,...,X_n$是来自均值为**μ**，有限方差为**σ^2^** 的总体 **X** 的大小为n的随机样本。
+
+样本均值 $\bar X=\frac{\sum_{i=1}^{n}{X_i}}{n}$ 和样本方差 $S^2=\frac{\sum_{i=1}^{n} (X_i-\bar X)^2}{n-1}$ 是统计量（statistics）。
+
+### 均值（mean）的抽样分布
+
+#### σ^2^ 已知的正态分布
+
+$$
+\bar X \sim N(μ,\frac{σ^2}{n})
+$$
+
+标准化$\bar X$
+
+$$
+Z=\frac{\bar X-\mu}{\sigma_{\bar X}}=\frac{\bar X-\mu}{\sigma /\sqrt n} \sim N(0,1)
+$$
+
+均值的标准误 $\sigma _{\bar X} =\frac {\sigma}{\sqrt n}$ 用 $S _{\bar X} =\frac {S}{\sqrt n}$ 估计。
+
+#### 大样本量的非正态分布
+
+中心极限定理（central limit theorem）
+
+:   当样本量n足够大时，$\bar X$ 的抽样分布会近似正态分布。
+
+    $$
+    \bar X \eqsim  N(μ,\frac{σ^2}{n})
+    $$
+
+#### σ^2^ 未知的正态分布
+
+$$
+t=\frac{\bar X-\mu}{S_{\bar X}}=\frac{\bar X-\mu}{S /\sqrt n} \sim t(\nu)
+$$
+
+其中 $\nu=n-1$ 。当 $\nu \to +\infty 时,t\sim N(0,1)$ 。
+
+### 方差（variance）的抽样分布
+
+#### $\chi^2$分布

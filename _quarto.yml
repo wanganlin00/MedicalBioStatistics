@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 book:
-  title: "应用医学统计学"
+  title: "医学与生物统计学"
   reader-mode: true
   
   chapters:
@@ -13,8 +13,13 @@ book:
 
     - part: "统计描述"
       chapters:
-        - statistical_description.qmd
+        - descriptive_statistics.qmd
 
+    - part: "概率论"
+      chapters:
+        - probability_fundamentals.qmd
+
+    #    - sampling_bootstrapping.qmd
     # - part: "统计推断"
     #   chapters:
     #     - sampling_bootstrapping.qmd
@@ -23,7 +28,7 @@ book:
     #     - PowerAnalysis.qmd
     #     - Causal_Inference.qmd
     #     
-    # - part: "统计学习和建模"
+    # - part: "统计建模"
     #   chapters:   
     #     - Regression.qmd
     #     - Classification.qmd
@@ -47,6 +52,7 @@ toc-expand: true
 toc-depth: 4
 toc-location: right
 number-sections: true
+number-depth: 4
 
 knitr:
   opts_chunk: 
