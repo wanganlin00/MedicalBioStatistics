@@ -46,6 +46,10 @@ $$
 P(A\cap B)=P(A)\times P(B|A)
 $$
 
+独立事件（交集的概率等于各自概率的乘积）
+
+$$ P(B|A)=P(B) \ 或者\  P(A)=0 $$
+
 全概率公式（给定A~i~发生，B的加权平均条件概率）
 
 $$P(B)=\sum_{i=1}^{n}P(A_i)P(B|A_i)$$
@@ -54,48 +58,138 @@ $$P(B)=\sum_{i=1}^{n}P(A_i)P(B|A_i)$$
 
 $$P(A_k |B)=\frac{P(A_k)P(B|A_k)}{\sum_{i=1}^{n}P(A_i)P(B|A_i)}$$
 
-## 抽样分布和统计量
+## 离散型随机变量
 
-假设
+概率分布列： $P(X=x_k)=p_k (k=1,2,…)$
 
-:   $X_1,X_2,...,X_n$是来自均值为**μ**，有限方差为**σ^2^** 的总体 **X** 的大小为n的随机样本。
+累计分布函数：$F(x) =P(X≤x)= \sum_{x_k≤x}p_k$
 
-样本均值 $\bar X=\frac{\sum_{i=1}^{n}{X_i}}{n}$ 和样本方差 $S^2=\frac{\sum_{i=1}^{n} (X_i-\bar X)^2}{n-1}$ 是统计量（statistics）。
+期望：$E(X)=\sum_{k}x_k p_k(k=1,2,...)$
 
-### 均值（mean）的抽样分布
+方差：$Var(X)=\sum_{k}x_k^2 p_k-\mu^2$
 
-#### σ^2^ 已知的正态分布
+### 二项分布
 
-$$
-\bar X \sim N(μ,\frac{σ^2}{n})
-$$
+组合（combination）：$C_n^k =\frac {n!}{k!(n-k)!}$
 
-标准化$\bar X$
+概率质量函数（pmf）：$P(X=k)=p_k=C_n^k\pi^k(1-\pi)^{n-k} \ (k=0,1,...,n)$
 
 $$
-Z=\frac{\bar X-\mu}{\sigma_{\bar X}}=\frac{\bar X-\mu}{\sigma /\sqrt n} \sim N(0,1)
+X\sim B(n,\pi)
 $$
 
-均值的标准误 $\sigma _{\bar X} =\frac {\sigma}{\sqrt n}$ 用 $S _{\bar X} =\frac {S}{\sqrt n}$ 估计。
+其中n表示独立试验的次数，$\pi$ 表示成功概率。
 
-#### 大样本量的非正态分布
+累计概率：至多k~0~次成功的概率------$P(X≤k_0)=\sum_{k=0}^{k_0} p_k$
 
-中心极限定理（central limit theorem）
+至少k~0~次成功的概率------$P(X≥k_0)=\sum_{k=k_0}^{n} p_k$
 
-:   当样本量n足够大时，$\bar X$ 的抽样分布会近似正态分布。
+期望：$E(X)=n\pi$
 
-    $$
-    \bar X \eqsim  N(μ,\frac{σ^2}{n})
-    $$
+方差：$Var(X)=n\pi(1-\pi)$
 
-#### σ^2^ 未知的正态分布
+### 多项式分布
+
+概率：$P(X_1=n_1,...,X_i=n_i,...,X_k=n_k)=\frac {n!}{n_1!...n_i!...n_k!}\pi_1^{n_1}...\pi_i^{n_i}...\pi_k^{n_k}$
 
 $$
-t=\frac{\bar X-\mu}{S_{\bar X}}=\frac{\bar X-\mu}{S /\sqrt n} \sim t(\nu)
+X \sim M(n,\pi_1,\pi_2,...,\pi_k)
 $$
 
-其中 $\nu=n-1$ 。当 $\nu \to +\infty 时,t\sim N(0,1)$ 。
+其中$n=n_1+n_2+...+n_k$ 表示独立试验的次数，$\pi_k$ 表示$k$ 个互斥结果的成功概率。
 
-### 方差（variance）的抽样分布
+期望($A_i 与 -A_i$)：$\mu_{A_i}=n\pi_{A_i}$
 
-#### $\chi^2$分布
+方差($A_i 与 -A_i$)：$\sigma_{A_i}^2=n\pi_{A_i}(1-\pi_{A_i})$
+
+### 泊松分布
+
+概率： $P(X=k)=p_k=\frac {\lambda ^k}{k!}e^{-\lambda} (\lambda > 0;k=0,1,…)$
+
+$$
+X\sim P(\lambda)
+$$
+
+其中$\lambda$ 表示单位时间/空间罕见事件发生的期望值。
+
+期望：$\mu=\lambda$
+
+方差：$\sigma^2=\lambda$
+
+#### 二项分布近似泊松分布
+
+当$n(n≥100)$足够大，$\pi(\pi ≤0.01)$ 足够小，二项分布的均值 $n\pi$ 与方差$n\pi(1-\pi)\approx n\pi$ 近似相等，此时的二项分布近似$\lambda=n\pi$ 的泊松分布。
+
+$$
+P(X=k)=C_n^k \pi^k(1-\pi)^{n-k} \approx \frac{\lambda ^k}{k!}e^{-\lambda}
+$$
+
+## 连续型随机变量
+
+概率：$P(a≤X≤b)=\int_{a}^{b}f(x)dx$
+
+概率密度函数（pdf）：$f(x)$
+
+累计分布函数（cdf）：$F(x)=P(X≤x)=\int_{-\infty}^{x}f(t)dt$
+
+期望：$E(X)\equiv\mu =\int_{-\infty}^{+\infty}xf(x)dx$
+
+方差：$\sigma^2\equiv E(X^2)-\mu^2=\int_{-\infty}^{+\infty}x^2f(x)dx-[\int_{-\infty}^{+\infty}xf(x)dx]^2$
+
+### 正态分布
+
+概率密度函数（pdf）：$f(x)=\frac {1}{\sqrt{2\pi}\sigma}e^{-\frac{(x-\mu)^2}{2\sigma^2}}（-\infty ＜x ＜+\infty）$
+
+$$
+X \sim N(\mu,\sigma^2)
+$$
+
+累计分布函数（cdf）:$F(x)=P(X≤x)=\int_{-\infty}^{x}f(t)dt=\frac{1}{\sqrt{2\pi}\sigma}\int_{-\infty}^{x}e^{-\frac{(t-\mu)^2}{2\sigma^2}}dt\ (-\infty＜x＜+\infty)$
+
+### 标准正态分布
+
+$$
+Z=\frac {X-\mu}{\sigma} \sim \ N(0,1)
+$$
+
+pdf：$\varphi (z)=\frac{1}{\sqrt{2\pi}}e^{-\frac{z^2}{2}} (-\infty＜z＜+\infty)$
+
+cdf：$\Phi(z)=P(Z≤z)=\int_{-\infty}^{z}\varphi (\nu )d\nu =\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{z}e^{-\frac{\nu^2}{2}}dt\ (-\infty＜z＜+\infty)$
+
+### 正态性的描述
+
+#### 直方图/茎叶图
+
+直方图：钟形分布（bell-shaped distribution）
+
+茎叶图（Stem-and-Leaf Plot）
+
+#### P-P图/Q-Q图
+
+P-P图是累计相对频率的观测值（x轴）与理论值（y轴）的散点图；
+
+Q-Q图是分位数的观测值（x轴）与理论值（y轴）的散点图。
+
+#### 矩量法（Moment Method）
+
+偏度=0 且 超值峰度=0
+
+### 二项分布近似正态分布
+
+当$n\pi(1-\pi)≥5 且X\sim B(n,\pi)$时，$P(a≤X≤b)近似等于X\sim N(n\pi,n\pi(1-\pi))在区间(a-0.5,b+0.5)上的曲线下面积$。
+
+$$
+Z=\frac{x-\mu}{\sigma}=\frac{x-n\pi}{\sqrt{n\pi(1-\pi)}}
+$$
+
+### 泊松分布近似正态分布
+
+当$\lambda≥10 且X\sim P(\lambda)$时，$P(a≤X≤b)近似等于X\sim N(\lambda,\lambda)在区间(a-0.5,b+0.5)上的曲线下面积$。
+
+$$
+Z=\frac{x-\mu}{\sigma}=\frac{x-\lambda}{\sqrt{\lambda}}
+$$
+
+### 医学参考区间
+
+### 

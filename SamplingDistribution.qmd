@@ -1,0 +1,63 @@
+## 抽样分布
+
+统计量（statistic）
+
+:   假设$\hat\theta=\hat\theta(X_1,X_2,...,X_n)$ 是关于随机样本$X_1,X_2,...,X_n$ 的函数，且不依赖任何未知的总体参数$\theta$ ，则$\hat\theta$ 称为统计量（statistic）。
+
+样本均值 $\hat \theta_1=\bar X=\frac{\sum_{i=1}^{n}{X_i}}{n}$ 和样本方差 $\hat \theta_2=S^2=\frac{\sum_{i=1}^{n} (X_i-\bar X)^2}{n-1}$ 是统计量（statistics）。
+
+### 均值（mean）的抽样分布
+
+假设 $X_1,X_2,...,X_n$是来自均值为$μ$，有限方差为$σ^2$的总体为 $X$的一组样本量为n的随机样本。$\bar X$ 的抽样分布是指从总体 $X$中选择的样本量为$n$的所有可能样本的 $\bar x$值（$\bar x=\sum_{i}x_i/n$）的分布。
+
+#### σ^2^ 已知的正态分布
+
+$$
+\bar X \sim N(μ,\frac{σ^2}{n})
+$$
+
+标准化$\bar X$
+
+$$
+Z=\frac{\bar X-\mu}{\sigma_{\bar X}}=\frac{\bar X-\mu}{\sigma /\sqrt n} \sim N(0,1)
+$$
+
+均值的标准误 $\sigma _{\bar X} =\frac {\sigma}{\sqrt n}$ 可以用 $S _{\bar X} =\frac {S}{\sqrt n}$ 估计。
+
+#### σ^2^ 未知的正态分布
+
+$$
+t=\frac{\bar X-\mu}{S_{\bar X}}=\frac{\bar X-\mu}{S /\sqrt n} \sim t(\nu)
+$$
+
+其中自由度（degrees of freedom）$\nu=n-1$ 。当 $\nu \to +\infty 时,t\sim N(0,1)$ 。
+
+#### 大样本量的非正态分布
+
+中心极限定理（central limit theorem）
+
+:   当样本量n足够大时，即使随机样本并非来自正态分布总体，$\bar X$ 的抽样分布也会近似正态分布。
+
+    $$ \bar X \dot{\sim}  N(μ,\frac{σ^2}{n}) $$
+
+### 方差（variance）的抽样分布
+
+假设 $X_1,X_2,...,X_n$是来自均值为$μ$，有限方差为$σ^2$的总体为 $X$的一组样本量为n的随机样本。列出样本量为$n$的所有可能随机样本。
+
+#### $\chi^2$分布
+
+$$
+\frac {(n-1)S^2}{\sigma^2}\sim \chi^2(\nu)
+$$
+
+其中自由度（degrees of freedom）$\nu=n-1$ 。
+
+### 率（rate）抽样分布——分类数据
+
+假设 $X\sim B(n,\pi)$ ，一组样本量为n的随机样本。列出样本量为$n$的所有可能随机样本。
+
+样本率$p=X/n$ ，则$E(p)=E(X/n)=\pi,Var(p)=Var(X/n)=\pi(1-\pi)/n$
+
+率的标准误 $\sigma_p =\sqrt{\frac{\pi(1-\pi)}{n}}$ 可以用 $S _p =\sqrt{\frac{p(1-p)}{n}}$ 估计。
+
+当$n\pi(1-\pi)≥5 且X\sim B(n,\pi)$时，率的抽样分布 $p\dot\sim N(\pi,\frac{\pi(1-\pi)}{n})$

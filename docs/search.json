@@ -2,11 +2,11 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "应用医学统计学",
+    "title": "医学与生物统计学",
     "section": "",
-    "text": "1 参考资料\n\n回归、主成分分析（Principal component analysis）、聚类：R in action 3rd、 ISLR\n医学研究中的生存数据建模（4e）\nt-Distributed Stochastic Neighbor Embedding (t-SNE)、R-tSNE\nUniform Manifold Approximation and Projection (UMAP)\nModern Statistics for Modern Biology\ntidymodels\nISLR with tidymodels",
+    "text": "参考资料\n\n回归、主成分分析（Principal component analysis）、聚类：R in action 3rd、 ISLR\n医学研究中的生存数据建模（4e）\nt-Distributed Stochastic Neighbor Embedding (t-SNE)、R-tSNE\nUniform Manifold Approximation and Projection (UMAP)\nModern Statistics for Modern Biology\ntidymodels\nISLR with tidymodels",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>参考资料</span>"
+      "参考资料"
     ]
   },
   {
@@ -14,108 +14,9 @@
     "href": "data_science.html",
     "title": "数据科学",
     "section": "",
-    "text": "R Data Science Notes\nPython Data Science Notes",
+    "text": "推荐\nR Notes\nPython Data Science Notes",
     "crumbs": [
       "数据科学"
-    ]
-  },
-  {
-    "objectID": "statistical_description.html",
-    "href": "statistical_description.html",
-    "title": "\n2  统计描述\n",
-    "section": "",
-    "text": "3 统计描述\nCodemtcars$mpg\n#&gt;  [1] 21.0 21.0 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 17.8 16.4 17.3 15.2 10.4\n#&gt; [16] 10.4 14.7 32.4 30.4 33.9 21.5 15.5 15.2 13.3 19.2 27.3 26.0 30.4 15.8 19.7\n#&gt; [31] 15.0 21.4",
-    "crumbs": [
-      "统计描述",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>统计描述</span>"
-    ]
-  },
-  {
-    "objectID": "statistical_description.html#集中趋势和离散程度",
-    "href": "statistical_description.html#集中趋势和离散程度",
-    "title": "\n2  统计描述\n",
-    "section": "\n3.1 集中趋势和离散程度",
-    "text": "3.1 集中趋势和离散程度\n\nCodemean(mtcars$mpg)     #算术均数\n#&gt; [1] 20.09062\n# 几何均数 G=^n^√X1X2...Xn\nmedian(mtcars$mpg)   #中位数\n#&gt; [1] 19.2\nquantile(mtcars$mpg,probs = c(0,0.1,0.25,0.5,0.75,1))     #分位数\n#&gt;     0%    10%    25%    50%    75%   100% \n#&gt; 10.400 14.340 15.425 19.200 22.800 33.900\n\n\n\nrange(mtcars$mpg)  # 值域\n#&gt; [1] 10.4 33.9\ndiff(range(mtcars$mpg) )  # 极差\n#&gt; [1] 23.5\nIQR(mtcars$mpg)      # 四分位数间距\n#&gt; [1] 7.375\nsd(mtcars$mpg)       #标准差\n#&gt; [1] 6.026948\nvar(mtcars$mpg)      #方差\n#&gt; [1] 36.3241\nCV=sd(mtcars$mpg)/mean(mtcars$mpg)*100  # 变异系数\npaste(CV,\"%\")\n#&gt; [1] \"29.9988081609661 %\"\n\n\n\nmad(mtcars$mpg,constant = 1.4826)      #绝对中位差 median absolute deviation\n#&gt; [1] 5.41149\n\nmedian(abs(mtcars$mpg-median(mtcars$mpg)))\n#&gt; [1] 3.65\nmedian(abs(mtcars$mpg-median(mtcars$mpg)))*1.4826\n#&gt; [1] 5.41149\n\n\n为了达到渐进正态一致性，mad() 的计算乘了一个比例因子constant=1.4826。",
-    "crumbs": [
-      "统计描述",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>统计描述</span>"
-    ]
-  },
-  {
-    "objectID": "statistical_description.html#偏度和峰度",
-    "href": "statistical_description.html#偏度和峰度",
-    "title": "\n2  统计描述\n",
-    "section": "\n3.2 偏度和峰度",
-    "text": "3.2 偏度和峰度\n\nterm\n\n1偏度（Skewness）的计算公式：\n\nS = \\frac{n}{(n-1)(n-2)} \\sum_{i=1}^{n} \\left( \\frac{X_i-\\overline{X}}{SD} \\right)^3 ]\n2 峰度（Kurtosis）的计算公式：\n\nK = \\frac{n(n+1)}{(n-1)(n-2)(n-3)}  \\sum_{i=1}^{n} \\left( \\frac{X_i - \\overline{X}}{SD} \\right)^4  - \\frac{3(n-1)^2}{(n-2)(n-3)}\n\n\n\n\nCodeskewness &lt;- function(x,na.rm=TRUE){\n    if(na.rm) x &lt;- x[!is.na(x)]\n    n=length(x)\n    μ=mean(x)\n    SD=sd(x)\n    sknewness = sum((x-μ)^3/SD^3)*n/((n-1)*(n-2))\n    return(sknewness=sknewness)\n}\nskewness(c(21.4,5.4,23.5,21.4,44.3,14.9))\n#&gt; [1] 0.9345253\n\nkurtosis&lt;-function(x,na.rm=TRUE){\n    if(na.rm) x&lt;-x[!is.na(x)]\n    n=length(x)\n    μ=mean(x)\n    SD=sd(x)\n    kurtosis=sum((x-μ)^4/SD^4)*n*(n+1)/((n-1)*(n-2)*(n-3))-(3*(n-1)^2)/((n-2)*(n-3))\n    return(kurtosis=kurtosis)\n}\n\nkurtosis(c(21.4,5.4,23.5,21.4,44.3,14.9))\n#&gt; [1] 2.225567",
-    "crumbs": [
-      "统计描述",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>统计描述</span>"
-    ]
-  },
-  {
-    "objectID": "statistical_description.html#频数表和列联表",
-    "href": "statistical_description.html#频数表和列联表",
-    "title": "\n2  统计描述\n",
-    "section": "\n3.3 频数表和列联表",
-    "text": "3.3 频数表和列联表\n\nCodedata(gss_cat)  #因子数据集\nhead(gss_cat)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nyear\nmarital\nage\nrace\nrincome\npartyid\nrelig\ndenom\ntvhours\n\n\n\n2000\nNever married\n26\nWhite\n$8000 to 9999\nInd,near rep\nProtestant\nSouthern baptist\n12\n\n\n2000\nDivorced\n48\nWhite\n$8000 to 9999\nNot str republican\nProtestant\nBaptist-dk which\nNA\n\n\n2000\nWidowed\n67\nWhite\nNot applicable\nIndependent\nProtestant\nNo denomination\n2\n\n\n2000\nNever married\n39\nWhite\nNot applicable\nInd,near rep\nOrthodox-christian\nNot applicable\n4\n\n\n2000\nDivorced\n25\nWhite\nNot applicable\nNot str democrat\nNone\nNot applicable\n1\n\n\n2000\nMarried\n25\nWhite\n$20000 - 24999\nStrong democrat\nProtestant\nSouthern baptist\nNA\n\n\n\n\n\n\n\nCodetable(gss_cat$marital,gss_cat$race)\n#&gt;                \n#&gt;                 Other Black White Not applicable\n#&gt;   No answer         2     2    13              0\n#&gt;   Never married   633  1305  3478              0\n#&gt;   Separated       110   196   437              0\n#&gt;   Divorced        212   495  2676              0\n#&gt;   Widowed          70   262  1475              0\n#&gt;   Married         932   869  8316              0\ntbl &lt;- xtabs(~marital+race,data = gss_cat)\ntbl\n#&gt;                race\n#&gt; marital         Other Black White Not applicable\n#&gt;   No answer         2     2    13              0\n#&gt;   Never married   633  1305  3478              0\n#&gt;   Separated       110   196   437              0\n#&gt;   Divorced        212   495  2676              0\n#&gt;   Widowed          70   262  1475              0\n#&gt;   Married         932   869  8316              0\n\n\n\nCodeprop.table(tbl)          #各单元格比例\n#&gt;                race\n#&gt; marital                Other        Black        White Not applicable\n#&gt;   No answer     9.309687e-05 9.309687e-05 6.051296e-04   0.000000e+00\n#&gt;   Never married 2.946516e-02 6.074571e-02 1.618955e-01   0.000000e+00\n#&gt;   Separated     5.120328e-03 9.123493e-03 2.034167e-02   0.000000e+00\n#&gt;   Divorced      9.868268e-03 2.304147e-02 1.245636e-01   0.000000e+00\n#&gt;   Widowed       3.258390e-03 1.219569e-02 6.865894e-02   0.000000e+00\n#&gt;   Married       4.338314e-02 4.045059e-02 3.870968e-01   0.000000e+00\nprop.table(tbl,margin = 1)        #行比例 \n#&gt;                race\n#&gt; marital              Other      Black      White Not applicable\n#&gt;   No answer     0.11764706 0.11764706 0.76470588     0.00000000\n#&gt;   Never married 0.11687592 0.24095273 0.64217134     0.00000000\n#&gt;   Separated     0.14804845 0.26379542 0.58815612     0.00000000\n#&gt;   Divorced      0.06266627 0.14631983 0.79101389     0.00000000\n#&gt;   Widowed       0.03873824 0.14499170 0.81627006     0.00000000\n#&gt;   Married       0.09212217 0.08589503 0.82198280     0.00000000\nmargin.table(x=tbl,margin = 2)      #列和\n#&gt; race\n#&gt;          Other          Black          White Not applicable \n#&gt;           1959           3129          16395              0\n\n \naddmargins(tbl)          #添加行和、列和\n#&gt;                race\n#&gt; marital         Other Black White Not applicable   Sum\n#&gt;   No answer         2     2    13              0    17\n#&gt;   Never married   633  1305  3478              0  5416\n#&gt;   Separated       110   196   437              0   743\n#&gt;   Divorced        212   495  2676              0  3383\n#&gt;   Widowed          70   262  1475              0  1807\n#&gt;   Married         932   869  8316              0 10117\n#&gt;   Sum            1959  3129 16395              0 21483\naddmargins(tbl,1)        #添加列和\n#&gt;                race\n#&gt; marital         Other Black White Not applicable\n#&gt;   No answer         2     2    13              0\n#&gt;   Never married   633  1305  3478              0\n#&gt;   Separated       110   196   437              0\n#&gt;   Divorced        212   495  2676              0\n#&gt;   Widowed          70   262  1475              0\n#&gt;   Married         932   869  8316              0\n#&gt;   Sum            1959  3129 16395              0\naddmargins(tbl,2)        #添加行和\n#&gt;                race\n#&gt; marital         Other Black White Not applicable   Sum\n#&gt;   No answer         2     2    13              0    17\n#&gt;   Never married   633  1305  3478              0  5416\n#&gt;   Separated       110   196   437              0   743\n#&gt;   Divorced        212   495  2676              0  3383\n#&gt;   Widowed          70   262  1475              0  1807\n#&gt;   Married         932   869  8316              0 10117\naddmargins(prop.table(tbl,1))\n#&gt;                race\n#&gt; marital              Other      Black      White Not applicable        Sum\n#&gt;   No answer     0.11764706 0.11764706 0.76470588     0.00000000 1.00000000\n#&gt;   Never married 0.11687592 0.24095273 0.64217134     0.00000000 1.00000000\n#&gt;   Separated     0.14804845 0.26379542 0.58815612     0.00000000 1.00000000\n#&gt;   Divorced      0.06266627 0.14631983 0.79101389     0.00000000 1.00000000\n#&gt;   Widowed       0.03873824 0.14499170 0.81627006     0.00000000 1.00000000\n#&gt;   Married       0.09212217 0.08589503 0.82198280     0.00000000 1.00000000\n#&gt;   Sum           0.57609812 0.99960178 4.42430011     0.00000000 6.00000000\n\nftable(tbl)   # \"平铺式\"列联表\n#&gt;               race Other Black White Not applicable\n#&gt; marital                                            \n#&gt; No answer              2     2    13              0\n#&gt; Never married        633  1305  3478              0\n#&gt; Separated            110   196   437              0\n#&gt; Divorced             212   495  2676              0\n#&gt; Widowed               70   262  1475              0\n#&gt; Married              932   869  8316              0",
-    "crumbs": [
-      "统计描述",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>统计描述</span>"
-    ]
-  },
-  {
-    "objectID": "statistical_description.html#独立性检验分类变量",
-    "href": "statistical_description.html#独立性检验分类变量",
-    "title": "\n2  统计描述\n",
-    "section": "\n3.4 独立性检验（分类变量）",
-    "text": "3.4 独立性检验（分类变量）\n独立性：无关联或非线性关联\n\nCodeM &lt;- as.table(rbind(c(762, 327, 468), c(484, 239, 477)))\ndimnames(M) &lt;- list(gender = c(\"F\", \"M\"),\n                    party = c(\"Democrat\",\"Independent\", \"Republican\"))\nM\n#&gt;       party\n#&gt; gender Democrat Independent Republican\n#&gt;      F      762         327        468\n#&gt;      M      484         239        477\n#   1. 卡方检验\nchisq &lt;- chisq.test(M)\nchisq$parameter # degrees of freedom\n#&gt; df \n#&gt;  2\n\n#   2. Fisher精确检验   Fisher's exact test to test independence of rows and columns in contingency table\nfisher.test(M)\n#&gt; \n#&gt;  Fisher's Exact Test for Count Data\n#&gt; \n#&gt; data:  M\n#&gt; p-value = 3.027e-07\n#&gt; alternative hypothesis: two.sided\n\n\nRabbits &lt;-\narray(c(0, 0, 6, 5,\n        3, 0, 3, 6,\n        6, 2, 0, 4,\n        5, 6, 1, 0,\n        2, 5, 0, 0),\n      dim = c(2, 2, 5),\n      dimnames = list(\n          Delay = c(\"None\", \"1.5h\"),\n          Response = c(\"Cured\", \"Died\"),\n          Penicillin.Level = c(\"1/8\", \"1/4\", \"1/2\", \"1\", \"4\")))\nRabbits\n#&gt; , , Penicillin.Level = 1/8\n#&gt; \n#&gt;       Response\n#&gt; Delay  Cured Died\n#&gt;   None     0    6\n#&gt;   1.5h     0    5\n#&gt; \n#&gt; , , Penicillin.Level = 1/4\n#&gt; \n#&gt;       Response\n#&gt; Delay  Cured Died\n#&gt;   None     3    3\n#&gt;   1.5h     0    6\n#&gt; \n#&gt; , , Penicillin.Level = 1/2\n#&gt; \n#&gt;       Response\n#&gt; Delay  Cured Died\n#&gt;   None     6    0\n#&gt;   1.5h     2    4\n#&gt; \n#&gt; , , Penicillin.Level = 1\n#&gt; \n#&gt;       Response\n#&gt; Delay  Cured Died\n#&gt;   None     5    1\n#&gt;   1.5h     6    0\n#&gt; \n#&gt; , , Penicillin.Level = 4\n#&gt; \n#&gt;       Response\n#&gt; Delay  Cured Died\n#&gt;   None     2    0\n#&gt;   1.5h     5    0\n#   3. Cochran-Mantel-Haenszel 卡方检验  两个变量在第三个变量的每一水平下是否独立\nmantelhaen.test(Rabbits)\n#&gt; \n#&gt;  Mantel-Haenszel chi-squared test with continuity correction\n#&gt; \n#&gt; data:  Rabbits\n#&gt; Mantel-Haenszel X-squared = 3.9286, df = 1, p-value = 0.04747\n#&gt; alternative hypothesis: true common odds ratio is not equal to 1\n#&gt; 95 percent confidence interval:\n#&gt;   1.026713 47.725133\n#&gt; sample estimates:\n#&gt; common odds ratio \n#&gt;                 7",
-    "crumbs": [
-      "统计描述",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>统计描述</span>"
-    ]
-  },
-  {
-    "objectID": "statistical_description.html#相关性检验定量变量",
-    "href": "statistical_description.html#相关性检验定量变量",
-    "title": "\n2  统计描述\n",
-    "section": "\n3.5 相关性检验（定量变量）",
-    "text": "3.5 相关性检验（定量变量）\n相关性：线性关联\n\nCodestates &lt;- state.x77[,1:6]\ncov(states)    # 协方差矩阵\n#&gt;               Population      Income   Illiteracy     Life Exp      Murder\n#&gt; Population 19931683.7588 571229.7796  292.8679592 -407.8424612 5663.523714\n#&gt; Income       571229.7796 377573.3061 -163.7020408  280.6631837 -521.894286\n#&gt; Illiteracy      292.8680   -163.7020    0.3715306   -0.4815122    1.581776\n#&gt; Life Exp       -407.8425    280.6632   -0.4815122    1.8020204   -3.869480\n#&gt; Murder         5663.5237   -521.8943    1.5817755   -3.8694804   13.627465\n#&gt; HS Grad       -3551.5096   3076.7690   -3.2354694    6.3126849  -14.549616\n#&gt;                 HS Grad\n#&gt; Population -3551.509551\n#&gt; Income      3076.768980\n#&gt; Illiteracy    -3.235469\n#&gt; Life Exp       6.312685\n#&gt; Murder       -14.549616\n#&gt; HS Grad       65.237894\n\n\n\n3.5.0.1 相关系数\n\nCode# Pearson's 积差相关系数\ncor(states,use = \"everything\",method=\"pearson\") # default\n#&gt;             Population     Income Illiteracy    Life Exp     Murder     HS Grad\n#&gt; Population  1.00000000  0.2082276  0.1076224 -0.06805195  0.3436428 -0.09848975\n#&gt; Income      0.20822756  1.0000000 -0.4370752  0.34025534 -0.2300776  0.61993232\n#&gt; Illiteracy  0.10762237 -0.4370752  1.0000000 -0.58847793  0.7029752 -0.65718861\n#&gt; Life Exp   -0.06805195  0.3402553 -0.5884779  1.00000000 -0.7808458  0.58221620\n#&gt; Murder      0.34364275 -0.2300776  0.7029752 -0.78084575  1.0000000 -0.48797102\n#&gt; HS Grad    -0.09848975  0.6199323 -0.6571886  0.58221620 -0.4879710  1.00000000\n\n# Spearman's rank相关系数\ncor(states,method = \"spearman\")\n#&gt;            Population     Income Illiteracy   Life Exp     Murder    HS Grad\n#&gt; Population  1.0000000  0.1246098  0.3130496 -0.1040171  0.3457401 -0.3833649\n#&gt; Income      0.1246098  1.0000000 -0.3145948  0.3241050 -0.2174623  0.5104809\n#&gt; Illiteracy  0.3130496 -0.3145948  1.0000000 -0.5553735  0.6723592 -0.6545396\n#&gt; Life Exp   -0.1040171  0.3241050 -0.5553735  1.0000000 -0.7802406  0.5239410\n#&gt; Murder      0.3457401 -0.2174623  0.6723592 -0.7802406  1.0000000 -0.4367330\n#&gt; HS Grad    -0.3833649  0.5104809 -0.6545396  0.5239410 -0.4367330  1.0000000\n\n# Kendall's tau相关系数\ncor(states,method = \"kendall\")\n#&gt;             Population      Income Illiteracy    Life Exp     Murder    HS Grad\n#&gt; Population  1.00000000  0.08408163  0.2123063 -0.06865555  0.2364983 -0.2353905\n#&gt; Income      0.08408163  1.00000000 -0.1970811  0.21904389 -0.1448450  0.3579896\n#&gt; Illiteracy  0.21230629 -0.19708113  1.0000000 -0.42852098  0.5155359 -0.5047401\n#&gt; Life Exp   -0.06865555  0.21904389 -0.4285210  1.00000000 -0.5997547  0.3952537\n#&gt; Murder      0.23649826 -0.14484495  0.5155359 -0.59975465  1.0000000 -0.2884066\n#&gt; HS Grad    -0.23539045  0.35798964 -0.5047401  0.39525368 -0.2884066  1.0000000\n\n\n\n3.5.0.2 相关图（correlogram）\n?sec-correlogram\n\n3.5.0.3 显著性检验\n\nCodecor.test(state.x77[,\"Income\"],state.x77[,\"Illiteracy\"])\n#&gt; \n#&gt;  Pearson's product-moment correlation\n#&gt; \n#&gt; data:  state.x77[, \"Income\"] and state.x77[, \"Illiteracy\"]\n#&gt; t = -3.3668, df = 48, p-value = 0.001505\n#&gt; alternative hypothesis: true correlation is not equal to 0\n#&gt; 95 percent confidence interval:\n#&gt;  -0.6378257 -0.1807128\n#&gt; sample estimates:\n#&gt;        cor \n#&gt; -0.4370752\n\n\npsych包corr.test() 计算相关矩阵和显著性水平\n多分格（polychoric）相关系数、多系列（polyserial）相关系数\n\n3.5.0.4 偏相关系数\n在控制其他变量的条件下，分析两个定量变量之间的相关关系\nggm包pcor() , pcor.test()",
-    "crumbs": [
-      "统计描述",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>统计描述</span>"
-    ]
-  },
-  {
-    "objectID": "statistical_description.html#数据可视化",
-    "href": "statistical_description.html#数据可视化",
-    "title": "\n2  统计描述\n",
-    "section": "\n3.6 数据可视化",
-    "text": "3.6 数据可视化\nbase_graphics.qmd\nggplot2_graphics.qmd",
-    "crumbs": [
-      "统计描述",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>统计描述</span>"
-    ]
-  },
-  {
-    "objectID": "statistical_description.html#footnotes",
-    "href": "statistical_description.html#footnotes",
-    "title": "\n2  统计描述\n",
-    "section": "",
-    "text": "WPS Excel↩︎\nWPS Excel↩︎",
-    "crumbs": [
-      "统计描述",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>统计描述</span>"
-    ]
-  },
-  {
-    "objectID": "SurvivalAnalysis.html",
-    "href": "SurvivalAnalysis.html",
-    "title": "3  生存分析",
-    "section": "",
-    "text": "3.1 Survival analysis\n医学研究中的生存数据建模",
-    "crumbs": [
-      "生存分析",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>生存分析</span>"
     ]
   },
   {
@@ -145,7 +46,7 @@
     "href": "descriptive_statistics.html#频数表和频率分布直方图",
     "title": "\n1  描述性统计学\n",
     "section": "\n1.2 频数表和频率分布直方图",
-    "text": "1.2 频数表和频率分布直方图\n极差 R=X_{max}-X_{min} ， 组数k（5-15），组别（interval），频数count，频率\\frac{count}{n} \\times 100\\%",
+    "text": "1.2 频数表和频率分布直方图\n极差 \\(R=X_{max}-X_{min}\\) ， 组数\\(k\\)（\\(5-15\\)），组别（\\(interval\\)），频数\\(count\\)，频率\\(\\frac{count}{n} \\times 100\\%\\)",
     "crumbs": [
       "统计描述",
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>描述性统计学</span>"
@@ -156,7 +57,7 @@
     "href": "descriptive_statistics.html#数据特征",
     "title": "\n1  描述性统计学\n",
     "section": "\n1.3 数据特征",
-    "text": "1.3 数据特征\n\nCodehead(mtcars$mpg)\n#&gt; [1] 21.0 21.0 22.8 21.4 18.7 18.1\n\n\n\n1.3.1 集中趋势\n\nCode# 集中趋势\n\nmean(mtcars$mpg)     #算术平均数\n#&gt; [1] 20.09062\nmedian(mtcars$mpg)   #中位数\n#&gt; [1] 19.2\n\n\n\n1.3.2 离散程度\n\nCode# 离散程度\nrange(mtcars$mpg)  # 值域\n#&gt; [1] 10.4 33.9\ndiff(range(mtcars$mpg) )  # 极差\n#&gt; [1] 23.5\n\nquantile(mtcars$mpg,probs = c(0,0.1,0.25,0.5,0.75,1))     #分位数\n#&gt;     0%    10%    25%    50%    75%   100% \n#&gt; 10.400 14.340 15.425 19.200 22.800 33.900\nIQR(mtcars$mpg)      # 四分位数间距\n#&gt; [1] 7.375\n\nsd(mtcars$mpg)       #标准差\n#&gt; [1] 6.026948\nvar(mtcars$mpg)      #方差\n#&gt; [1] 36.3241\n\nCV &lt;- function(x,na.rm=TRUE){   # 变异系数\n    if(na.rm) x &lt;- x[!is.na(x)]\n    CV=sd(x)/mean(x)*100\n    paste(CV,\"%\",sep = \"\")\n}\nCV(mtcars$mpg)\n#&gt; [1] \"29.9988081609661%\"\n\nmad(mtcars$mpg,constant = 1.4826)      #绝对中位差 median absolute deviation\n#&gt; [1] 5.41149\n# 为了达到渐进正态一致性，`mad()` 的计算乘了一个比例因子`constant=1.4826`。\nmedian(abs(mtcars$mpg-median(mtcars$mpg)))\n#&gt; [1] 3.65\nmedian(abs(mtcars$mpg-median(mtcars$mpg)))*1.4826\n#&gt; [1] 5.41149\n\n\n\n1.3.3 分布形状\n\n偏度（Skewness）\n\n表示随机变量概率分布的不对称性。\nhttps://www.macroption.com/skewness-formula/\n三阶中心矩。方差即二阶中心矩。\n\n    Skew(X) =  \\frac{E(X_i-E(X))^3}{Var(X)^{\\frac{3}{2}}}\\\\ =E  [(\\frac{X_i-\\mu}{\\sigma})^3]\\\\= \\frac{1}{n} \\sum_{i=1}^{n} [ (\\frac{X_i-\\mu}{\\sigma} )^3]\n\n偏度的取值范围： (-\\infty,+\\infty)\n\nSkew＜0，负偏态分布；左长尾\nSkew=0，数据相对均匀的分布在均值两侧；\nSkew＞0，正偏态分布。右长尾\n\n\n\n\nCodex &lt;- c(1,2,3,5)\ns &lt;- psych::describeBy(x=x,group = NULL)\ns$skew\n#&gt; [1] 0.2823139\n\nskewness &lt;- function(x,na.rm=TRUE){\n    if(na.rm) x &lt;- x[!is.na(x)]\n    n=length(x)\n    μ=mean(x)\n    SD=sd(x)\n    sknewness = mean(((x-μ)/SD)^3)\n    return(sknewness=sknewness)\n}\nskewness(x)\n#&gt; [1] 0.2823139\n\n\n\n峰度（Kurtosis）\n\n表示随机变量概率分布的尖峭程度。四阶中心矩与方差平方的比值。\nhttps://www.macroption.com/kurtosis-formula/\n超值峰度 excess kurtosis ：四阶中心矩与方差平方的比值减3。\nhttps://www.macroption.com/excess-kurtosis/\n\nKurt(X) =  \\frac{E(X_i-E(X))^4}{Var(X)^{2}}-3\\\\= E  [(\\frac{X_i-\\mu}{\\sigma})^4] - 3\\\\= \\frac{1}{n} \\sum_{i=1}^{n} [ (\\frac{X_i-\\mu}{\\sigma} )^4]-3\n\n峰度的取值范围：[1,+\\infty)\n超值峰度的取值范围：[-2,+\\infty)\n\n超值峰度＜0，数据分布与正态分布相比较为矮胖；\n超值峰度=0，正态分布；\n超值峰度＞0，数据分布与正态分布相比较为高尖。\n\n\n\n\nCodes$kurtosis\n#&gt; [1] -1.961786\n\nkurtosis&lt;-function(x,na.rm=TRUE){\n    if(na.rm) x&lt;-x[!is.na(x)]\n    n=length(x)\n    μ=mean(x)\n    SD=sd(x)\n    kurtosis= mean(((x-μ)/SD)^4)-3\n    return(kurtosis=kurtosis)\n}\nkurtosis(x)\n#&gt; [1] -1.961786\n\n\n\n1.3.4 统计摘要\n\nCodesummary(mtcars$mpg)\n#&gt;    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n#&gt;   10.40   15.43   19.20   20.09   22.80   33.90\npsych::describeBy(mtcars$mpg,group = mtcars$am)\n#&gt; \n#&gt;  Descriptive statistics by group \n#&gt; group: 0\n#&gt;    vars  n  mean   sd median trimmed  mad  min  max range skew kurtosis   se\n#&gt; X1    1 19 17.15 3.83   17.3   17.12 3.11 10.4 24.4    14 0.01     -0.8 0.88\n#&gt; ------------------------------------------------------------ \n#&gt; group: 1\n#&gt;    vars  n  mean   sd median trimmed  mad min  max range skew kurtosis   se\n#&gt; X1    1 13 24.39 6.17   22.8   24.38 6.67  15 33.9  18.9 0.05    -1.46 1.71",
+    "text": "1.3 数据特征\n\nCodehead(mtcars$mpg)\n#&gt; [1] 21.0 21.0 22.8 21.4 18.7 18.1\n\n\n\n1.3.1 集中趋势\n\nCode# 集中趋势\n\nmean(mtcars$mpg)     #算术平均数\n#&gt; [1] 20.09062\nmedian(mtcars$mpg)   #中位数\n#&gt; [1] 19.2\n\n\n\n1.3.2 离散程度\n\nCode# 离散程度\nrange(mtcars$mpg)  # 值域\n#&gt; [1] 10.4 33.9\ndiff(range(mtcars$mpg) )  # 极差\n#&gt; [1] 23.5\n\nquantile(mtcars$mpg,probs = c(0,0.1,0.25,0.5,0.75,1))     #分位数\n#&gt;     0%    10%    25%    50%    75%   100% \n#&gt; 10.400 14.340 15.425 19.200 22.800 33.900\nIQR(mtcars$mpg)      # 四分位数间距\n#&gt; [1] 7.375\n\nsd(mtcars$mpg)       #标准差\n#&gt; [1] 6.026948\nvar(mtcars$mpg)      #方差\n#&gt; [1] 36.3241\n\nCV &lt;- function(x,na.rm=TRUE){   # 变异系数\n    if(na.rm) x &lt;- x[!is.na(x)]\n    CV=sd(x)/mean(x)*100\n    paste(CV,\"%\",sep = \"\")\n}\nCV(mtcars$mpg)\n#&gt; [1] \"29.9988081609661%\"\n\nmad(mtcars$mpg,constant = 1.4826)      #绝对中位差 median absolute deviation\n#&gt; [1] 5.41149\n# 为了达到渐进正态一致性，`mad()` 的计算乘了一个比例因子`constant=1.4826`。\nmedian(abs(mtcars$mpg-median(mtcars$mpg)))\n#&gt; [1] 3.65\nmedian(abs(mtcars$mpg-median(mtcars$mpg)))*1.4826\n#&gt; [1] 5.41149\n\n\n\n1.3.3 分布形状\n\n偏度（Skewness）\n\n表示随机变量概率分布的不对称性。\nhttps://www.macroption.com/skewness-formula/\n三阶中心矩。方差即二阶中心矩。\n\\[\n    Skew(X) =  \\frac{E(X_i-E(X))^3}{Var(X)^{\\frac{3}{2}}}\\\\ =E  [(\\frac{X_i-\\mu}{\\sigma})^3]\\\\= \\frac{1}{n} \\sum_{i=1}^{n} [ (\\frac{X_i-\\mu}{\\sigma} )^3]\n\\]\n偏度的取值范围： \\((-\\infty,+\\infty)\\)\n\nSkew＜0，负偏态分布；左长尾\nSkew=0，数据相对均匀的分布在均值两侧；\nSkew＞0，正偏态分布。右长尾\n\n\n\n\nCodex &lt;- c(1,2,3,5)\ns &lt;- psych::describeBy(x=x,group = NULL)\ns$skew\n#&gt; [1] 0.2823139\n\nskewness &lt;- function(x,na.rm=TRUE){\n    if(na.rm) x &lt;- x[!is.na(x)]\n    n=length(x)\n    μ=mean(x)\n    SD=sd(x)\n    sknewness = mean(((x-μ)/SD)^3)\n    return(sknewness=sknewness)\n}\nskewness(x)\n#&gt; [1] 0.2823139\n\n\n\n峰度（Kurtosis）\n\n表示随机变量概率分布的尖峭程度。四阶中心矩与方差平方的比值。\nhttps://www.macroption.com/kurtosis-formula/\n超值峰度 excess kurtosis ：四阶中心矩与方差平方的比值减3。\nhttps://www.macroption.com/excess-kurtosis/\n\\[\nKurt(X) =  \\frac{E(X_i-E(X))^4}{Var(X)^{2}}-3\\\\= E  [(\\frac{X_i-\\mu}{\\sigma})^4] - 3\\\\= \\frac{1}{n} \\sum_{i=1}^{n} [ (\\frac{X_i-\\mu}{\\sigma} )^4]-3\n\\]\n峰度的取值范围：\\([1,+\\infty)\\)\n超值峰度的取值范围：\\([-2,+\\infty)\\)\n\n超值峰度＜0，数据分布与正态分布相比较为平坦；\n超值峰度=0，正态分布；\n超值峰度＞0，数据分布与正态分布相比较为陡峭。\n\n\n\n\nCodes$kurtosis\n#&gt; [1] -1.961786\n\nkurtosis&lt;-function(x,na.rm=TRUE){\n    if(na.rm) x&lt;-x[!is.na(x)]\n    n=length(x)\n    μ=mean(x)\n    SD=sd(x)\n    kurtosis= mean(((x-μ)/SD)^4)-3\n    return(kurtosis=kurtosis)\n}\nkurtosis(x)\n#&gt; [1] -1.961786\n\n\n\n1.3.4 统计摘要\n\nCodesummary(mtcars$mpg)\n#&gt;    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n#&gt;   10.40   15.43   19.20   20.09   22.80   33.90\npsych::describeBy(mtcars$mpg,group = mtcars$am)\n#&gt; \n#&gt;  Descriptive statistics by group \n#&gt; group: 0\n#&gt;    vars  n  mean   sd median trimmed  mad  min  max range skew kurtosis   se\n#&gt; X1    1 19 17.15 3.83   17.3   17.12 3.11 10.4 24.4    14 0.01     -0.8 0.88\n#&gt; ------------------------------------------------------------ \n#&gt; group: 1\n#&gt;    vars  n  mean   sd median trimmed  mad min  max range skew kurtosis   se\n#&gt; X1    1 13 24.39 6.17   22.8   24.38 6.67  15 33.9  18.9 0.05    -1.46 1.71",
     "crumbs": [
       "统计描述",
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>描述性统计学</span>"
@@ -182,6 +83,116 @@
     "crumbs": [
       "统计描述",
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>描述性统计学</span>"
+    ]
+  },
+  {
+    "objectID": "probability_fundamentals.html",
+    "href": "probability_fundamentals.html",
+    "title": "2  概率论",
+    "section": "",
+    "text": "2.1 基础概念\n样本点（sample point）是每一次随机试验的结果，用 \\(\\omega\\) 表示。\n样本空间（sample space）是所有样本点的集合，用\\(\\Omega=\\{\\omega_{i};i=0,1,2,... \\}\\)表示。\n随机事件（random event）是一组样本点（\\(\\Omega\\)的子集）的集合，用大写字母 \\(A,B,C,...\\)表示。\n一个样本点的集合称为简单事件（simple event），用 \\(\\Omega=\\{\\omega\\}\\) 表示。\n若干个简单事件的集合称为混合事件（composite event）。全集 \\(\\Omega\\) 称为必然事件（deterministic event），空集（null set） \\(\\emptyset\\) 称为不可能事件（impossible event）。\n加法\n\\[\nP(A\\cup B)=P(A)+P(B)-P(A\\cap B)\n\\]\n条件概率\n\\[\nP(B|A)=\\frac{P(A\\cap B)}{P(A)}\n\\]\n乘法\n\\[\nP(A\\cap B)=P(A)\\times P(B|A)\n\\]\n独立事件（交集的概率等于各自概率的乘积）\n\\[ P(B|A)=P(B) \\ 或者\\  P(A)=0 \\]\n全概率公式（给定Ai发生，B的加权平均条件概率）\n\\[P(B)=\\sum_{i=1}^{n}P(A_i)P(B|A_i)\\]\n贝叶斯法则/逆概率公式（后验概率）\n\\[P(A_k |B)=\\frac{P(A_k)P(B|A_k)}{\\sum_{i=1}^{n}P(A_i)P(B|A_i)}\\]",
+    "crumbs": [
+      "概率论",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>概率论</span>"
+    ]
+  },
+  {
+    "objectID": "probability_fundamentals.html#基础概念",
+    "href": "probability_fundamentals.html#基础概念",
+    "title": "2  概率论",
+    "section": "",
+    "text": "包含关系（containment） ：Venn diagram\n\n\\(A\\subseteq B\\)\n\\(A\\supseteq B\\)\n\n并集（\\(A\\cup B\\)）\n交集（\\(A\\cap B\\)）\n补集（\\(\\bar A\\)）\n互斥事件 \\(A\\cap B=\\emptyset\\)\n互补事件 \\(A\\cap B=\\emptyset\\) 且 \\(A\\cup B=\\Omega\\)",
+    "crumbs": [
+      "概率论",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>概率论</span>"
+    ]
+  },
+  {
+    "objectID": "probability_fundamentals.html#离散型随机变量",
+    "href": "probability_fundamentals.html#离散型随机变量",
+    "title": "2  概率论",
+    "section": "2.2 离散型随机变量",
+    "text": "2.2 离散型随机变量\n概率分布列： \\(P(X=x_k)=p_k (k=1,2,…)\\)\n累计分布函数：\\(F(x) =P(X≤x)= \\sum_{x_k≤x}p_k\\)\n期望：\\(E(X)=\\sum_{k}x_k p_k(k=1,2,...)\\)\n方差：\\(Var(X)=\\sum_{k}x_k^2 p_k-\\mu^2\\)\n\n2.2.1 二项分布\n组合（combination）：\\(C_n^k =\\frac {n!}{k!(n-k)!}\\)\n概率质量函数（pmf）：\\(P(X=k)=p_k=C_n^k\\pi^k(1-\\pi)^{n-k} \\ (k=0,1,...,n)\\)\n\\[\nX\\sim B(n,\\pi)\n\\]\n其中n表示独立试验的次数，\\(\\pi\\) 表示成功概率。\n累计概率：至多k0次成功的概率——\\(P(X≤k_0)=\\sum_{k=0}^{k_0} p_k\\)\n至少k0次成功的概率——\\(P(X≥k_0)=\\sum_{k=k_0}^{n} p_k\\)\n期望：\\(E(X)=n\\pi\\)\n方差：\\(Var(X)=n\\pi(1-\\pi)\\)\n\n\n2.2.2 多项式分布\n概率：\\(P(X_1=n_1,...,X_i=n_i,...,X_k=n_k)=\\frac {n!}{n_1!...n_i!...n_k!}\\pi_1^{n_1}...\\pi_i^{n_i}...\\pi_k^{n_k}\\)\n\\[\nX \\sim M(n,\\pi_1,\\pi_2,...,\\pi_k)\n\\]\n其中\\(n=n_1+n_2+...+n_k\\) 表示独立试验的次数，\\(\\pi_k\\) 表示\\(k\\) 个互斥结果的成功概率。\n期望(\\(A_i 与 -A_i\\))：\\(\\mu_{A_i}=n\\pi_{A_i}\\)\n方差(\\(A_i 与 -A_i\\))：\\(\\sigma_{A_i}^2=n\\pi_{A_i}(1-\\pi_{A_i})\\)\n\n\n2.2.3 泊松分布\n概率： \\(P(X=k)=p_k=\\frac {\\lambda ^k}{k!}e^{-\\lambda} (\\lambda &gt; 0;k=0,1,…)\\)\n\\[\nX\\sim P(\\lambda)\n\\]\n其中\\(\\lambda\\) 表示单位时间/空间罕见事件发生的期望值。\n期望：\\(\\mu=\\lambda\\)\n方差：\\(\\sigma^2=\\lambda\\)\n\n2.2.3.1 二项分布近似泊松分布\n当\\(n(n≥100)\\)足够大，\\(\\pi(\\pi ≤0.01)\\) 足够小，二项分布的均值 \\(n\\pi\\) 与方差\\(n\\pi(1-\\pi)\\approx n\\pi\\) 近似相等，此时的二项分布近似\\(\\lambda=n\\pi\\) 的泊松分布。\n\\[\nP(X=k)=C_n^k \\pi^k(1-\\pi)^{n-k} \\approx \\frac{\\lambda ^k}{k!}e^{-\\lambda}\n\\]",
+    "crumbs": [
+      "概率论",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>概率论</span>"
+    ]
+  },
+  {
+    "objectID": "probability_fundamentals.html#连续型随机变量",
+    "href": "probability_fundamentals.html#连续型随机变量",
+    "title": "2  概率论",
+    "section": "2.3 连续型随机变量",
+    "text": "2.3 连续型随机变量\n概率：\\(P(a≤X≤b)=\\int_{a}^{b}f(x)dx\\)\n概率密度函数（pdf）：\\(f(x)\\)\n累计分布函数（cdf）：\\(F(x)=P(X≤x)=\\int_{-\\infty}^{x}f(t)dt\\)\n期望：\\(E(X)\\equiv\\mu =\\int_{-\\infty}^{+\\infty}xf(x)dx\\)\n方差：\\(\\sigma^2\\equiv E(X^2)-\\mu^2=\\int_{-\\infty}^{+\\infty}x^2f(x)dx-[\\int_{-\\infty}^{+\\infty}xf(x)dx]^2\\)\n\n2.3.1 正态分布\n概率密度函数（pdf）：\\(f(x)=\\frac {1}{\\sqrt{2\\pi}\\sigma}e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}（-\\infty ＜x ＜+\\infty）\\)\n\\[\nX \\sim N(\\mu,\\sigma^2)\n\\]\n累计分布函数（cdf）:\\(F(x)=P(X≤x)=\\int_{-\\infty}^{x}f(t)dt=\\frac{1}{\\sqrt{2\\pi}\\sigma}\\int_{-\\infty}^{x}e^{-\\frac{(t-\\mu)^2}{2\\sigma^2}}dt\\ (-\\infty＜x＜+\\infty)\\)\n\n\n2.3.2 标准正态分布\n\\[\nZ=\\frac {X-\\mu}{\\sigma} \\sim \\ N(0,1)\n\\]\npdf：\\(\\varphi (z)=\\frac{1}{\\sqrt{2\\pi}}e^{-\\frac{z^2}{2}} (-\\infty＜z＜+\\infty)\\)\ncdf：\\(\\Phi(z)=P(Z≤z)=\\int_{-\\infty}^{z}\\varphi (\\nu )d\\nu =\\frac{1}{\\sqrt{2\\pi}}\\int_{-\\infty}^{z}e^{-\\frac{\\nu^2}{2}}dt\\ (-\\infty＜z＜+\\infty)\\)\n\n\n2.3.3 正态性的描述\n\n2.3.3.1 直方图/茎叶图\n直方图：钟形分布（bell-shaped distribution）\n茎叶图（Stem-and-Leaf Plot）\n\n\n2.3.3.2 P-P图/Q-Q图\nP-P图是累计相对频率的观测值（x轴）与理论值（y轴）的散点图；\nQ-Q图是分位数的观测值（x轴）与理论值（y轴）的散点图。\n\n\n2.3.3.3 矩量法（Moment Method）\n偏度=0 且 超值峰度=0\n\n\n\n2.3.4 二项分布近似正态分布\n当\\(n\\pi(1-\\pi)≥5 且X\\sim B(n,\\pi)\\)时，\\(P(a≤X≤b)近似等于X\\sim N(n\\pi,n\\pi(1-\\pi))在区间(a-0.5,b+0.5)上的曲线下面积\\)。\n\\[\nZ=\\frac{x-\\mu}{\\sigma}=\\frac{x-n\\pi}{\\sqrt{n\\pi(1-\\pi)}}\n\\]\n\n\n2.3.5 泊松分布近似正态分布\n当\\(\\lambda≥10 且X\\sim P(\\lambda)\\)时，\\(P(a≤X≤b)近似等于X\\sim N(\\lambda,\\lambda)在区间(a-0.5,b+0.5)上的曲线下面积\\)。\n\\[\nZ=\\frac{x-\\mu}{\\sigma}=\\frac{x-\\lambda}{\\sqrt{\\lambda}}\n\\]\n\n\n2.3.6 医学参考区间\n\n\n2.3.7",
+    "crumbs": [
+      "概率论",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>概率论</span>"
+    ]
+  },
+  {
+    "objectID": "SamplingDistribution.html",
+    "href": "SamplingDistribution.html",
+    "title": "3  抽样分布",
+    "section": "",
+    "text": "统计量（statistic）\n\n假设\\(\\hat\\theta=\\hat\\theta(X_1,X_2,...,X_n)\\) 是关于随机样本\\(X_1,X_2,...,X_n\\) 的函数，且不依赖任何未知的总体参数\\(\\theta\\) ，则\\(\\hat\\theta\\) 称为统计量（statistic）。\n\n\n样本均值 \\(\\hat \\theta_1=\\bar X=\\frac{\\sum_{i=1}^{n}{X_i}}{n}\\) 和样本方差 \\(\\hat \\theta_2=S^2=\\frac{\\sum_{i=1}^{n} (X_i-\\bar X)^2}{n-1}\\) 是统计量（statistics）。\n\n3.0.1 均值（mean）的抽样分布\n假设 \\(X_1,X_2,...,X_n\\)是来自均值为\\(μ\\)，有限方差为\\(σ^2\\)的总体为 \\(X\\)的一组样本量为n的随机样本。\\(\\bar X\\) 的抽样分布是指从总体 \\(X\\)中选择的样本量为\\(n\\)的所有可能样本的 \\(\\bar x\\)值（\\(\\bar x=\\sum_{i}x_i/n\\)）的分布。\n\n3.0.1.1 σ2 已知的正态分布\n\\[\n\\bar X \\sim N(μ,\\frac{σ^2}{n})\n\\]\n标准化\\(\\bar X\\)\n\\[\nZ=\\frac{\\bar X-\\mu}{\\sigma_{\\bar X}}=\\frac{\\bar X-\\mu}{\\sigma /\\sqrt n} \\sim N(0,1)\n\\]\n均值的标准误 \\(\\sigma _{\\bar X} =\\frac {\\sigma}{\\sqrt n}\\) 可以用 \\(S _{\\bar X} =\\frac {S}{\\sqrt n}\\) 估计。\n\n\n3.0.1.2 σ2 未知的正态分布\n\\[\nt=\\frac{\\bar X-\\mu}{S_{\\bar X}}=\\frac{\\bar X-\\mu}{S /\\sqrt n} \\sim t(\\nu)\n\\]\n其中自由度（degrees of freedom）\\(\\nu=n-1\\) 。当 \\(\\nu \\to +\\infty 时,t\\sim N(0,1)\\) 。\n\n\n3.0.1.3 大样本量的非正态分布\n\n中心极限定理（central limit theorem）\n\n当样本量n足够大时，即使随机样本并非来自正态分布总体，\\(\\bar X\\) 的抽样分布也会近似正态分布。\n\\[ \\bar X \\dot{\\sim}  N(μ,\\frac{σ^2}{n}) \\]\n\n\n\n\n\n3.0.2 方差（variance）的抽样分布\n假设 \\(X_1,X_2,...,X_n\\)是来自均值为\\(μ\\)，有限方差为\\(σ^2\\)的总体为 \\(X\\)的一组样本量为n的随机样本。列出样本量为\\(n\\)的所有可能随机样本。\n\n3.0.2.1 \\(\\chi^2\\)分布\n\\[\n\\frac {(n-1)S^2}{\\sigma^2}\\sim \\chi^2(\\nu)\n\\]\n其中自由度（degrees of freedom）\\(\\nu=n-1\\) 。\n\n\n\n3.0.3 率（rate）抽样分布——分类数据\n假设 \\(X\\sim B(n,\\pi)\\) ，一组样本量为n的随机样本。列出样本量为\\(n\\)的所有可能随机样本。\n样本率\\(p=X/n\\) ，则\\(E(p)=E(X/n)=\\pi,Var(p)=Var(X/n)=\\pi(1-\\pi)/n\\)\n率的标准误 \\(\\sigma_p =\\sqrt{\\frac{\\pi(1-\\pi)}{n}}\\) 可以用 \\(S _p =\\sqrt{\\frac{p(1-p)}{n}}\\) 估计。\n当\\(n\\pi(1-\\pi)≥5 且X\\sim B(n,\\pi)\\)时，率的抽样分布 \\(p\\dot\\sim N(\\pi,\\frac{\\pi(1-\\pi)}{n})\\)",
+    "crumbs": [
+      "概率论",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>抽样分布</span>"
+    ]
+  },
+  {
+    "objectID": "ParameterEstimation.html",
+    "href": "ParameterEstimation.html",
+    "title": "4  参数估计",
+    "section": "",
+    "text": "4.1 点估计",
+    "crumbs": [
+      "概率论",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>参数估计</span>"
+    ]
+  },
+  {
+    "objectID": "ParameterEstimation.html#区间估计",
+    "href": "ParameterEstimation.html#区间估计",
+    "title": "4  参数估计",
+    "section": "4.2 区间估计",
+    "text": "4.2 区间估计",
+    "crumbs": [
+      "概率论",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>参数估计</span>"
+    ]
+  },
+  {
+    "objectID": "ParameterEstimation.html#section",
+    "href": "ParameterEstimation.html#section",
+    "title": "4  参数估计",
+    "section": "4.3 ",
+    "text": "4.3",
+    "crumbs": [
+      "概率论",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>参数估计</span>"
+    ]
+  },
+  {
+    "objectID": "resampling_bootstrapping.html",
+    "href": "resampling_bootstrapping.html",
+    "title": "5  重抽样和自举",
+    "section": "",
+    "text": "5.1",
+    "crumbs": [
+      "概率论",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>重抽样和自举</span>"
+    ]
+  },
+  {
+    "objectID": "SurvivalAnalysis.html",
+    "href": "SurvivalAnalysis.html",
+    "title": "6  生存分析",
+    "section": "",
+    "text": "6.1 Survival analysis\n医学研究中的生存数据建模",
+    "crumbs": [
+      "生存分析",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>生存分析</span>"
     ]
   }
 ]

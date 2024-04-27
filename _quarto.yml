@@ -18,12 +18,13 @@ book:
     - part: "概率论"
       chapters:
         - probability_fundamentals.qmd
+        - SamplingDistribution.qmd
+        - ParameterEstimation.qmd
+        - resampling_bootstrapping.qmd
 
-    #    - sampling_bootstrapping.qmd
+
     # - part: "统计推断"
     #   chapters:
-    #     - sampling_bootstrapping.qmd
-    #     - parameterEstimation.qmd
     #     - hypothesis_testing.qmd
     #     - PowerAnalysis.qmd
     #     - Causal_Inference.qmd
@@ -66,11 +67,12 @@ crossref:
 format: 
   html: 
     theme: cosmo
+    css: styles.css
     df-print: kable
     code-fold: true
     code-tools: true
     code-link: true
-    html-math-method: katex
+    html-math-method: mathjax
 
     
 editor: visual
