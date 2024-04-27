@@ -1,7 +1,164 @@
 # 参数估计
 
-## 点估计
+总体参数$\theta$：均值$\mu$ ，方差$\sigma^2$
 
-## 区间估计
+样本统计量$\hat\theta$：均值$\bar X$，方差$S^2$
 
-## 
+## 一个总体的参数估计
+
+#### 点估计
+
+假设 $\theta$是总体$X$的一个参数，$\hat\theta=\hat\theta(X_1,X_2,...,X_n)$是代表$\theta$的数值估计的一个统计量。任何可能的$\hat\theta$称为$\theta$的点估计。
+
+##### 无偏性（unbiasedness）
+
+如果$E(\hat\theta)=\theta$,就说参数$\theta$的一个估计$\hat\theta$是无偏的。
+
+$$
+\bar X=\sum_{i=1}^{n}X_i/n
+$$
+
+$$
+E(\bar X)=\frac{1}{n}E(\sum_{i=1}^{n}X_i)=\frac{n\mu}{\mu}=\mu
+$$
+
+所以样本均值$\bar X$是总体均值$\mu$的一个无偏估计。
+
+$$
+S^2=\frac{1}{n-1}\sum_{i=1}^{n}(X_i-\bar X)^2
+$$
+
+$$
+E(S^2)=E(\frac{n}{n-1}S_n^2)=\frac{n}{n-1}E(S_n^2)=\frac{n}{n-1}E(\frac {1}{n}\sum_{i=1}^{n}(X_i-\bar X)^2\\=\frac{n}{n-1}\times\frac{n-1}{n}\sigma^2=\sigma^2
+$$ 所以样本方差$S^2$是总体方差$\sigma^2$的一个无偏估计。
+
+##### 最小方差无偏估计（MVUE）
+
+$\hat\theta$无偏且最小方差
+
+##### 一致性（consistency）
+
+对于任意一个$\epsilon＞0$ ，如果 $$\lim_{n\to \infty}P(|\hat\theta_n-\theta|＜\epsilon)=1$$ 那么$\hat\theta_n$是总体参数$\theta$的一个一致估计。
+
+### 区间估计
+
+#### 均值的区间估计
+
+##### $\sigma^2$已知的正态分布
+
+$X_1,X_2,...,X_n$是来自$N(\mu,\sigma^2)$的随机样本,则$\bar X\sim N(\mu,\frac{\sigma^2}{n})$,变换$Z=\frac{\bar X-\mu}{\sigma/\sqrt n}\sim N(0,1)$。
+
+对于给定的$\alpha$，称$z_{\alpha/2}$和$z_{1-\alpha/2}$为临界值（critical value）。当$Z$分布是对称的，$z_{\alpha/2}=-z_{1-\alpha/2}$。
+
+区间估计的置信水平（confidence level）：$1-\alpha$
+
+总体均值的置信区间（confidence interval）：$\bar X \pm z_{1-\alpha/2}\frac{\sigma}{\sqrt n}$
+
+##### 大样本量的非正态分布
+
+$X_1,X_2,...,X_n$是来自非正态分布的随机样本,当样本量足够大时，$\bar X \dot{\sim} N(μ,\frac{σ^2}{n})$, 变换$Z=\frac{\bar X-\mu}{S/\sqrt n}\dot\sim N(0,1)$。
+
+总体均值的置信区间（confidence interval）：$\bar X \pm z_{1-\alpha/2}\frac{S}{\sqrt n}$
+
+##### $\sigma^2$未知的正态分布
+
+$X_1,X_2,...,X_n$是来自$N(\mu,\sigma^2)$的随机样本,则$t=\frac{\bar X-\mu}{S /\sqrt n} \sim t(\nu),\nu=n-1$。
+
+对于给定的$\alpha$，称$t_{\nu,\alpha/2}$和$t_{\nu,1-\alpha/2}$为临界值（critical value）。$t_{\alpha/2}=-t_{1-\alpha/2}$。
+
+总体均值的置信区间（confidence interval）：$[\bar X- t_{\nu,1-\alpha/2}\frac{S}{\sqrt n},\bar X+ t_{\nu,1-\alpha/2}\frac{S}{\sqrt n}]$
+
+#### 方差的区间估计
+
+$X_1,X_2,...,X_n$是来自$N(\mu,\sigma^2)$的随机样本,则$\frac {(n-1)S^2}{\sigma^2}\sim \chi^2(\nu),\nu=n-1$
+
+对于给定的$\alpha$，称$\chi^2_{\nu,\alpha/2}$和$\chi^2_{\nu,1-\alpha/2}$为临界值（critical value）。
+
+区间估计的置信水平（confidence level）：$1-\alpha$
+
+总体方差的置信区间（confidence interval）：$[\frac {(n-1)S^2}{\chi^2_{\nu,1-\alpha/2}},\frac {(n-1)S^2}{\chi^2_{\nu,\alpha/2}}]$
+
+#### 率的区间估计
+
+$X_1,X_2,...,X_n$是来自$B(n,\pi)$的随机样本, 当$n\pi(1-\pi)≥5$时，率的抽样分布 $p\dot\sim N(\pi,\frac{\pi(1-\pi)}{n})$，则变换$Z=\frac{p-\pi}{\sqrt{p(1-p)/n}}\dot\sim N(0,1)$。
+
+总体率的置信区间（confidence interval）：$\bar X \pm z_{1-\alpha/2}\sqrt{\frac{p(1-p)}{n}}$
+
+## 两个总体的参数估计
+
+### 均值差异的估计
+
+#### 点估计
+
+$E(\bar X_1-\bar X_2)=\mu_1-\mu_2$,$Var(\bar X_1-\bar X_2)=\frac{\sigma^2_1}{n_1}+\frac{\sigma^2_2}{n_2}$
+
+统计量$\bar X_1-\bar X_2$是$\mu_1-\mu_2$的MVUE。
+
+#### 区间估计
+
+
+
+##### 正态分布或大样本量非正态分布
+
+当$n_1＞30\ \&\ n_2＞30$时，
+
+$$
+(\bar X_1-\bar X_2) \dot\sim N(\mu_1-\mu_2,\frac{\sigma^2_1}{n_1}+\frac{\sigma^2_2}{n_2})
+$$ 标准化变换 $$
+Z=\frac{(\bar X_1-\bar X_2)-(\mu_1-\mu_2)}{\sqrt{\frac{\sigma^2_1}{n_1}+\frac{\sigma^2_2}{n_2}}}\dot\sim N(0,1)
+$$ 用样本方差代替总体方差，总体均值的置信区间（confidence interval）：$\bar X_1-\bar X_2 \pm z_{1-\alpha/2}\sqrt{\frac{S^2_1}{n_1}+\frac{S^2_2}{n_2}}$
+
+##### 方差相等的未知正态分布
+
+$$
+t(\nu),v=n_1+n_2-2
+$$
+
+##### 方差不等的未知正态分布
+
+$$
+t(\nu '),v'=\frac{(\frac{S_1^2}{n_1}+\frac{S_2^2}{n_2})^2}{\frac{(\frac{S_1^2}{n_1})^2}{n_1-1}+\frac{(\frac{S_2^2}{n_2})^2}{n_2-1}}(舍入到最近整数)
+$$
+
+### 方差之比的估计
+
+#### 点估计
+
+$X_1\sim N(\mu_1,\sigma_1^2)$
+
+$X_2\sim N(\mu_2,\sigma_2^2)$
+
+统计量$S_1^2/S_2^2$是$\sigma_1^2/\sigma_2^2$的MVUE。
+
+#### 区间估计
+
+$$
+F=\frac{\frac {(n_1-1)S_1^2}{\sigma_1^2}/(n_1-1)}{\frac {(n_2-1)S_2^2}{\sigma_2^2}/(n_2-1)}=(\frac{S_1^2}{S_2^2})(\frac{\sigma_2^2}{\sigma_1^2})\sim F(\nu_1,\nu_2),\nu_1=n_1-1,\nu_2=n_2-1
+$$ 对于给定的$\alpha$，称$F_{(\nu_1,\nu_2),\alpha/2}$和$F_{(\nu_1,\nu_2),1-\alpha/2}$为临界值（critical value）。$F_{(\nu_1,\nu_2),\alpha/2}=\frac{1}{F_{(\nu_1,\nu_2),1-\alpha/2}}$
+
+总体方差的置信区间（confidence interval）：$[\frac{S_1^2}{S_2^2}\times \frac{1}{F_{(\nu_1,\nu_2),1-\alpha/2}},\frac{S_1^2}{S_2^2}\times \frac{1}{F_{(\nu_1,\nu_2),\alpha/2}}]$
+
+### 率差异的估计
+
+#### 点估计
+
+当$n_ip_i(1-p_i)≥5,(i=1,2)$时，$p_i\dot\sim N(\pi_i,\frac{\pi_i(1-\pi_i)}{n_i})$
+
+$E(p_1-p_2)=\pi_1-\pi_2$
+
+$Var(p_1-p_2)=\frac{\pi_1(1-\pi_1)}{n_1}+\frac{\pi_2(1-\pi_2)}{n_2}$
+
+统计量$p_1-p_2$是$\pi_1-\pi_2$的MVUE。
+
+#### 区间估计
+
+$$
+(p_1-p_2)\dot\sim N(\pi_1-\pi_2,\frac{\pi_1(1-\pi_1)}{n_1}+\frac{\pi_2(1-\pi_2)}{n_2})
+$$
+标准化变换
+$$
+Z=\frac{(p_1-p_2)-(\pi_1-\pi_2)}{S_{p_1-p_2}}\dot\sim N(0,1)
+$$
+其中$S_{p_1-p_2}=\sqrt{\frac{p_1(1-p_1)}{n_1}+\frac{p_2(1-p_2)}{n_2}}$
+
+

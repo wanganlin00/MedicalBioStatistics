@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>医学与生物统计学 - 2&nbsp; 概率论</title>
+<title>医学与生物统计学 - 3&nbsp; 概率论</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./SamplingDistribution.html" rel="next">
-<link href="./descriptive_statistics.html" rel="prev">
+<link href="./normality_independence_correlation.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -145,7 +145,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./probability_fundamentals.html">概率论</a></li><li class="breadcrumb-item"><a href="./probability_fundamentals.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">概率论</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./probability_fundamentals.html">概率论</a></li><li class="breadcrumb-item"><a href="./probability_fundamentals.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">概率论</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -202,6 +202,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">描述性统计学</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./normality_independence_correlation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">正态性检验</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -216,25 +222,19 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./probability_fundamentals.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">概率论</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">概率论</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./SamplingDistribution.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">抽样分布</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">抽样分布</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ParameterEstimation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">参数估计</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./resampling_bootstrapping.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">重抽样和自举</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">参数估计</span></span></a>
   </div>
 </li>
       </ul>
@@ -242,7 +242,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
- <span class="menu-text">生存分析</span></a>
+ <span class="menu-text">统计推断</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -250,8 +250,25 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./hypothesis_testing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">假设检验</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">生存分析</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./SurvivalAnalysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">生存分析</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">生存分析</span></span></a>
   </div>
 </li>
       </ul>
@@ -266,30 +283,30 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#基础概念" id="toc-基础概念" class="nav-link active" data-scroll-target="#基础概念"><span class="header-section-number">2.1</span> 基础概念</a></li>
-  <li><a href="#离散型随机变量" id="toc-离散型随机变量" class="nav-link" data-scroll-target="#离散型随机变量"><span class="header-section-number">2.2</span> 离散型随机变量</a>
+  <li><a href="#基础概念" id="toc-基础概念" class="nav-link active" data-scroll-target="#基础概念"><span class="header-section-number">3.1</span> 基础概念</a></li>
+  <li><a href="#离散型随机变量" id="toc-离散型随机变量" class="nav-link" data-scroll-target="#离散型随机变量"><span class="header-section-number">3.2</span> 离散型随机变量</a>
   <ul>
-  <li><a href="#二项分布" id="toc-二项分布" class="nav-link" data-scroll-target="#二项分布"><span class="header-section-number">2.2.1</span> 二项分布</a></li>
-  <li><a href="#多项式分布" id="toc-多项式分布" class="nav-link" data-scroll-target="#多项式分布"><span class="header-section-number">2.2.2</span> 多项式分布</a></li>
-  <li><a href="#泊松分布" id="toc-泊松分布" class="nav-link" data-scroll-target="#泊松分布"><span class="header-section-number">2.2.3</span> 泊松分布</a>
+  <li><a href="#二项分布" id="toc-二项分布" class="nav-link" data-scroll-target="#二项分布"><span class="header-section-number">3.2.1</span> 二项分布</a></li>
+  <li><a href="#多项式分布" id="toc-多项式分布" class="nav-link" data-scroll-target="#多项式分布"><span class="header-section-number">3.2.2</span> 多项式分布</a></li>
+  <li><a href="#泊松分布" id="toc-泊松分布" class="nav-link" data-scroll-target="#泊松分布"><span class="header-section-number">3.2.3</span> 泊松分布</a>
   <ul class="collapse">
-  <li><a href="#二项分布近似泊松分布" id="toc-二项分布近似泊松分布" class="nav-link" data-scroll-target="#二项分布近似泊松分布"><span class="header-section-number">2.2.3.1</span> 二项分布近似泊松分布</a></li>
+  <li><a href="#二项分布近似泊松分布" id="toc-二项分布近似泊松分布" class="nav-link" data-scroll-target="#二项分布近似泊松分布"><span class="header-section-number">3.2.3.1</span> 二项分布近似泊松分布</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#连续型随机变量" id="toc-连续型随机变量" class="nav-link" data-scroll-target="#连续型随机变量"><span class="header-section-number">2.3</span> 连续型随机变量</a>
+  <li><a href="#连续型随机变量" id="toc-连续型随机变量" class="nav-link" data-scroll-target="#连续型随机变量"><span class="header-section-number">3.3</span> 连续型随机变量</a>
   <ul>
-  <li><a href="#正态分布" id="toc-正态分布" class="nav-link" data-scroll-target="#正态分布"><span class="header-section-number">2.3.1</span> 正态分布</a></li>
-  <li><a href="#标准正态分布" id="toc-标准正态分布" class="nav-link" data-scroll-target="#标准正态分布"><span class="header-section-number">2.3.2</span> 标准正态分布</a></li>
-  <li><a href="#正态性的描述" id="toc-正态性的描述" class="nav-link" data-scroll-target="#正态性的描述"><span class="header-section-number">2.3.3</span> 正态性的描述</a>
+  <li><a href="#正态分布" id="toc-正态分布" class="nav-link" data-scroll-target="#正态分布"><span class="header-section-number">3.3.1</span> 正态分布</a></li>
+  <li><a href="#标准正态分布" id="toc-标准正态分布" class="nav-link" data-scroll-target="#标准正态分布"><span class="header-section-number">3.3.2</span> 标准正态分布</a></li>
+  <li><a href="#正态性的描述" id="toc-正态性的描述" class="nav-link" data-scroll-target="#正态性的描述"><span class="header-section-number">3.3.3</span> 正态性的描述</a>
   <ul class="collapse">
-  <li><a href="#直方图茎叶图" id="toc-直方图茎叶图" class="nav-link" data-scroll-target="#直方图茎叶图"><span class="header-section-number">2.3.3.1</span> 直方图/茎叶图</a></li>
-  <li><a href="#p-p图q-q图" id="toc-p-p图q-q图" class="nav-link" data-scroll-target="#p-p图q-q图"><span class="header-section-number">2.3.3.2</span> P-P图/Q-Q图</a></li>
-  <li><a href="#矩量法moment-method" id="toc-矩量法moment-method" class="nav-link" data-scroll-target="#矩量法moment-method"><span class="header-section-number">2.3.3.3</span> 矩量法（Moment Method）</a></li>
+  <li><a href="#直方图茎叶图" id="toc-直方图茎叶图" class="nav-link" data-scroll-target="#直方图茎叶图"><span class="header-section-number">3.3.3.1</span> 直方图/茎叶图</a></li>
+  <li><a href="#p-p图q-q图" id="toc-p-p图q-q图" class="nav-link" data-scroll-target="#p-p图q-q图"><span class="header-section-number">3.3.3.2</span> P-P图/Q-Q图</a></li>
+  <li><a href="#矩量法moment-method" id="toc-矩量法moment-method" class="nav-link" data-scroll-target="#矩量法moment-method"><span class="header-section-number">3.3.3.3</span> 矩量法（Moment Method）</a></li>
   </ul></li>
-  <li><a href="#二项分布近似正态分布" id="toc-二项分布近似正态分布" class="nav-link" data-scroll-target="#二项分布近似正态分布"><span class="header-section-number">2.3.4</span> 二项分布近似正态分布</a></li>
-  <li><a href="#泊松分布近似正态分布" id="toc-泊松分布近似正态分布" class="nav-link" data-scroll-target="#泊松分布近似正态分布"><span class="header-section-number">2.3.5</span> 泊松分布近似正态分布</a></li>
-  <li><a href="#医学参考区间" id="toc-医学参考区间" class="nav-link" data-scroll-target="#医学参考区间"><span class="header-section-number">2.3.6</span> 医学参考区间</a></li>
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"><span class="header-section-number">2.3.7</span> </a></li>
+  <li><a href="#二项分布近似正态分布" id="toc-二项分布近似正态分布" class="nav-link" data-scroll-target="#二项分布近似正态分布"><span class="header-section-number">3.3.4</span> 二项分布近似正态分布</a></li>
+  <li><a href="#泊松分布近似正态分布" id="toc-泊松分布近似正态分布" class="nav-link" data-scroll-target="#泊松分布近似正态分布"><span class="header-section-number">3.3.5</span> 泊松分布近似正态分布</a></li>
+  <li><a href="#医学参考区间" id="toc-医学参考区间" class="nav-link" data-scroll-target="#医学参考区间"><span class="header-section-number">3.3.6</span> 医学参考区间</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"><span class="header-section-number">3.3.7</span> </a></li>
   </ul></li>
   </ul>
 </nav>
@@ -297,9 +314,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./probability_fundamentals.html">概率论</a></li><li class="breadcrumb-item"><a href="./probability_fundamentals.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">概率论</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./probability_fundamentals.html">概率论</a></li><li class="breadcrumb-item"><a href="./probability_fundamentals.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">概率论</span></a></li></ol></nav>
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">概率论</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">概率论</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -316,8 +333,8 @@ window.Quarto = {
 </header>
 
 
-<section id="基础概念" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="基础概念"><span class="header-section-number">2.1</span> 基础概念</h2>
+<section id="基础概念" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="基础概念"><span class="header-section-number">3.1</span> 基础概念</h2>
 <p>样本点（sample point）是每一次随机试验的结果，用 <span class="math inline">\(\omega\)</span> 表示。</p>
 <p>样本空间（sample space）是所有样本点的集合，用<span class="math inline">\(\Omega=\{\omega_{i};i=0,1,2,... \}\)</span>表示。</p>
 <p>随机事件（random event）是一组样本点（<span class="math inline">\(\Omega\)</span>的子集）的集合，用大写字母 <span class="math inline">\(A,B,C,...\)</span>表示。</p>
@@ -354,14 +371,14 @@ P(A\cap B)=P(A)\times P(B|A)
 <p>贝叶斯法则/逆概率公式（后验概率）</p>
 <p><span class="math display">\[P(A_k |B)=\frac{P(A_k)P(B|A_k)}{\sum_{i=1}^{n}P(A_i)P(B|A_i)}\]</span></p>
 </section>
-<section id="离散型随机变量" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="离散型随机变量"><span class="header-section-number">2.2</span> 离散型随机变量</h2>
+<section id="离散型随机变量" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="离散型随机变量"><span class="header-section-number">3.2</span> 离散型随机变量</h2>
 <p>概率分布列： <span class="math inline">\(P(X=x_k)=p_k (k=1,2,…)\)</span></p>
 <p>累计分布函数：<span class="math inline">\(F(x) =P(X≤x)= \sum_{x_k≤x}p_k\)</span></p>
 <p>期望：<span class="math inline">\(E(X)=\sum_{k}x_k p_k(k=1,2,...)\)</span></p>
 <p>方差：<span class="math inline">\(Var(X)=\sum_{k}x_k^2 p_k-\mu^2\)</span></p>
-<section id="二项分布" class="level3" data-number="2.2.1">
-<h3 data-number="2.2.1" class="anchored" data-anchor-id="二项分布"><span class="header-section-number">2.2.1</span> 二项分布</h3>
+<section id="二项分布" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="二项分布"><span class="header-section-number">3.2.1</span> 二项分布</h3>
 <p>组合（combination）：<span class="math inline">\(C_n^k =\frac {n!}{k!(n-k)!}\)</span></p>
 <p>概率质量函数（pmf）：<span class="math inline">\(P(X=k)=p_k=C_n^k\pi^k(1-\pi)^{n-k} \ (k=0,1,...,n)\)</span></p>
 <p><span class="math display">\[
@@ -373,8 +390,8 @@ X\sim B(n,\pi)
 <p>期望：<span class="math inline">\(E(X)=n\pi\)</span></p>
 <p>方差：<span class="math inline">\(Var(X)=n\pi(1-\pi)\)</span></p>
 </section>
-<section id="多项式分布" class="level3" data-number="2.2.2">
-<h3 data-number="2.2.2" class="anchored" data-anchor-id="多项式分布"><span class="header-section-number">2.2.2</span> 多项式分布</h3>
+<section id="多项式分布" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="多项式分布"><span class="header-section-number">3.2.2</span> 多项式分布</h3>
 <p>概率：<span class="math inline">\(P(X_1=n_1,...,X_i=n_i,...,X_k=n_k)=\frac {n!}{n_1!...n_i!...n_k!}\pi_1^{n_1}...\pi_i^{n_i}...\pi_k^{n_k}\)</span></p>
 <p><span class="math display">\[
 X \sim M(n,\pi_1,\pi_2,...,\pi_k)
@@ -383,8 +400,8 @@ X \sim M(n,\pi_1,\pi_2,...,\pi_k)
 <p>期望(<span class="math inline">\(A_i 与 -A_i\)</span>)：<span class="math inline">\(\mu_{A_i}=n\pi_{A_i}\)</span></p>
 <p>方差(<span class="math inline">\(A_i 与 -A_i\)</span>)：<span class="math inline">\(\sigma_{A_i}^2=n\pi_{A_i}(1-\pi_{A_i})\)</span></p>
 </section>
-<section id="泊松分布" class="level3" data-number="2.2.3">
-<h3 data-number="2.2.3" class="anchored" data-anchor-id="泊松分布"><span class="header-section-number">2.2.3</span> 泊松分布</h3>
+<section id="泊松分布" class="level3" data-number="3.2.3">
+<h3 data-number="3.2.3" class="anchored" data-anchor-id="泊松分布"><span class="header-section-number">3.2.3</span> 泊松分布</h3>
 <p>概率： <span class="math inline">\(P(X=k)=p_k=\frac {\lambda ^k}{k!}e^{-\lambda} (\lambda &gt; 0;k=0,1,…)\)</span></p>
 <p><span class="math display">\[
 X\sim P(\lambda)
@@ -392,8 +409,8 @@ X\sim P(\lambda)
 <p>其中<span class="math inline">\(\lambda\)</span> 表示单位时间/空间罕见事件发生的期望值。</p>
 <p>期望：<span class="math inline">\(\mu=\lambda\)</span></p>
 <p>方差：<span class="math inline">\(\sigma^2=\lambda\)</span></p>
-<section id="二项分布近似泊松分布" class="level4" data-number="2.2.3.1">
-<h4 data-number="2.2.3.1" class="anchored" data-anchor-id="二项分布近似泊松分布"><span class="header-section-number">2.2.3.1</span> 二项分布近似泊松分布</h4>
+<section id="二项分布近似泊松分布" class="level4" data-number="3.2.3.1">
+<h4 data-number="3.2.3.1" class="anchored" data-anchor-id="二项分布近似泊松分布"><span class="header-section-number">3.2.3.1</span> 二项分布近似泊松分布</h4>
 <p>当<span class="math inline">\(n(n≥100)\)</span>足够大，<span class="math inline">\(\pi(\pi ≤0.01)\)</span> 足够小，二项分布的均值 <span class="math inline">\(n\pi\)</span> 与方差<span class="math inline">\(n\pi(1-\pi)\approx n\pi\)</span> 近似相等，此时的二项分布近似<span class="math inline">\(\lambda=n\pi\)</span> 的泊松分布。</p>
 <p><span class="math display">\[
 P(X=k)=C_n^k \pi^k(1-\pi)^{n-k} \approx \frac{\lambda ^k}{k!}e^{-\lambda}
@@ -401,65 +418,65 @@ P(X=k)=C_n^k \pi^k(1-\pi)^{n-k} \approx \frac{\lambda ^k}{k!}e^{-\lambda}
 </section>
 </section>
 </section>
-<section id="连续型随机变量" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="连续型随机变量"><span class="header-section-number">2.3</span> 连续型随机变量</h2>
+<section id="连续型随机变量" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="连续型随机变量"><span class="header-section-number">3.3</span> 连续型随机变量</h2>
 <p>概率：<span class="math inline">\(P(a≤X≤b)=\int_{a}^{b}f(x)dx\)</span></p>
 <p>概率密度函数（pdf）：<span class="math inline">\(f(x)\)</span></p>
 <p>累计分布函数（cdf）：<span class="math inline">\(F(x)=P(X≤x)=\int_{-\infty}^{x}f(t)dt\)</span></p>
 <p>期望：<span class="math inline">\(E(X)\equiv\mu =\int_{-\infty}^{+\infty}xf(x)dx\)</span></p>
 <p>方差：<span class="math inline">\(\sigma^2\equiv E(X^2)-\mu^2=\int_{-\infty}^{+\infty}x^2f(x)dx-[\int_{-\infty}^{+\infty}xf(x)dx]^2\)</span></p>
-<section id="正态分布" class="level3" data-number="2.3.1">
-<h3 data-number="2.3.1" class="anchored" data-anchor-id="正态分布"><span class="header-section-number">2.3.1</span> 正态分布</h3>
+<section id="正态分布" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="正态分布"><span class="header-section-number">3.3.1</span> 正态分布</h3>
 <p>概率密度函数（pdf）：<span class="math inline">\(f(x)=\frac {1}{\sqrt{2\pi}\sigma}e^{-\frac{(x-\mu)^2}{2\sigma^2}}（-\infty ＜x ＜+\infty）\)</span></p>
 <p><span class="math display">\[
 X \sim N(\mu,\sigma^2)
 \]</span></p>
 <p>累计分布函数（cdf）:<span class="math inline">\(F(x)=P(X≤x)=\int_{-\infty}^{x}f(t)dt=\frac{1}{\sqrt{2\pi}\sigma}\int_{-\infty}^{x}e^{-\frac{(t-\mu)^2}{2\sigma^2}}dt\ (-\infty＜x＜+\infty)\)</span></p>
 </section>
-<section id="标准正态分布" class="level3" data-number="2.3.2">
-<h3 data-number="2.3.2" class="anchored" data-anchor-id="标准正态分布"><span class="header-section-number">2.3.2</span> 标准正态分布</h3>
+<section id="标准正态分布" class="level3" data-number="3.3.2">
+<h3 data-number="3.3.2" class="anchored" data-anchor-id="标准正态分布"><span class="header-section-number">3.3.2</span> 标准正态分布</h3>
 <p><span class="math display">\[
 Z=\frac {X-\mu}{\sigma} \sim \ N(0,1)
 \]</span></p>
 <p>pdf：<span class="math inline">\(\varphi (z)=\frac{1}{\sqrt{2\pi}}e^{-\frac{z^2}{2}} (-\infty＜z＜+\infty)\)</span></p>
 <p>cdf：<span class="math inline">\(\Phi(z)=P(Z≤z)=\int_{-\infty}^{z}\varphi (\nu )d\nu =\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{z}e^{-\frac{\nu^2}{2}}dt\ (-\infty＜z＜+\infty)\)</span></p>
 </section>
-<section id="正态性的描述" class="level3" data-number="2.3.3">
-<h3 data-number="2.3.3" class="anchored" data-anchor-id="正态性的描述"><span class="header-section-number">2.3.3</span> 正态性的描述</h3>
-<section id="直方图茎叶图" class="level4" data-number="2.3.3.1">
-<h4 data-number="2.3.3.1" class="anchored" data-anchor-id="直方图茎叶图"><span class="header-section-number">2.3.3.1</span> 直方图/茎叶图</h4>
+<section id="正态性的描述" class="level3" data-number="3.3.3">
+<h3 data-number="3.3.3" class="anchored" data-anchor-id="正态性的描述"><span class="header-section-number">3.3.3</span> 正态性的描述</h3>
+<section id="直方图茎叶图" class="level4" data-number="3.3.3.1">
+<h4 data-number="3.3.3.1" class="anchored" data-anchor-id="直方图茎叶图"><span class="header-section-number">3.3.3.1</span> 直方图/茎叶图</h4>
 <p>直方图：钟形分布（bell-shaped distribution）</p>
 <p>茎叶图（Stem-and-Leaf Plot）</p>
 </section>
-<section id="p-p图q-q图" class="level4" data-number="2.3.3.2">
-<h4 data-number="2.3.3.2" class="anchored" data-anchor-id="p-p图q-q图"><span class="header-section-number">2.3.3.2</span> P-P图/Q-Q图</h4>
+<section id="p-p图q-q图" class="level4" data-number="3.3.3.2">
+<h4 data-number="3.3.3.2" class="anchored" data-anchor-id="p-p图q-q图"><span class="header-section-number">3.3.3.2</span> P-P图/Q-Q图</h4>
 <p>P-P图是累计相对频率的观测值（x轴）与理论值（y轴）的散点图；</p>
 <p>Q-Q图是分位数的观测值（x轴）与理论值（y轴）的散点图。</p>
 </section>
-<section id="矩量法moment-method" class="level4" data-number="2.3.3.3">
-<h4 data-number="2.3.3.3" class="anchored" data-anchor-id="矩量法moment-method"><span class="header-section-number">2.3.3.3</span> 矩量法（Moment Method）</h4>
+<section id="矩量法moment-method" class="level4" data-number="3.3.3.3">
+<h4 data-number="3.3.3.3" class="anchored" data-anchor-id="矩量法moment-method"><span class="header-section-number">3.3.3.3</span> 矩量法（Moment Method）</h4>
 <p>偏度=0 且 超值峰度=0</p>
 </section>
 </section>
-<section id="二项分布近似正态分布" class="level3" data-number="2.3.4">
-<h3 data-number="2.3.4" class="anchored" data-anchor-id="二项分布近似正态分布"><span class="header-section-number">2.3.4</span> 二项分布近似正态分布</h3>
+<section id="二项分布近似正态分布" class="level3" data-number="3.3.4">
+<h3 data-number="3.3.4" class="anchored" data-anchor-id="二项分布近似正态分布"><span class="header-section-number">3.3.4</span> 二项分布近似正态分布</h3>
 <p>当<span class="math inline">\(n\pi(1-\pi)≥5 且X\sim B(n,\pi)\)</span>时，<span class="math inline">\(P(a≤X≤b)近似等于X\sim N(n\pi,n\pi(1-\pi))在区间(a-0.5,b+0.5)上的曲线下面积\)</span>。</p>
 <p><span class="math display">\[
 Z=\frac{x-\mu}{\sigma}=\frac{x-n\pi}{\sqrt{n\pi(1-\pi)}}
 \]</span></p>
 </section>
-<section id="泊松分布近似正态分布" class="level3" data-number="2.3.5">
-<h3 data-number="2.3.5" class="anchored" data-anchor-id="泊松分布近似正态分布"><span class="header-section-number">2.3.5</span> 泊松分布近似正态分布</h3>
+<section id="泊松分布近似正态分布" class="level3" data-number="3.3.5">
+<h3 data-number="3.3.5" class="anchored" data-anchor-id="泊松分布近似正态分布"><span class="header-section-number">3.3.5</span> 泊松分布近似正态分布</h3>
 <p>当<span class="math inline">\(\lambda≥10 且X\sim P(\lambda)\)</span>时，<span class="math inline">\(P(a≤X≤b)近似等于X\sim N(\lambda,\lambda)在区间(a-0.5,b+0.5)上的曲线下面积\)</span>。</p>
 <p><span class="math display">\[
 Z=\frac{x-\mu}{\sigma}=\frac{x-\lambda}{\sqrt{\lambda}}
 \]</span></p>
 </section>
-<section id="医学参考区间" class="level3" data-number="2.3.6">
-<h3 data-number="2.3.6" class="anchored" data-anchor-id="医学参考区间"><span class="header-section-number">2.3.6</span> 医学参考区间</h3>
+<section id="医学参考区间" class="level3" data-number="3.3.6">
+<h3 data-number="3.3.6" class="anchored" data-anchor-id="医学参考区间"><span class="header-section-number">3.3.6</span> 医学参考区间</h3>
 </section>
-<section id="section" class="level3" data-number="2.3.7">
-<h3 data-number="2.3.7" class="anchored" data-anchor-id="section"><span class="header-section-number">2.3.7</span> </h3>
+<section id="section" class="level3" data-number="3.3.7">
+<h3 data-number="3.3.7" class="anchored" data-anchor-id="section"><span class="header-section-number">3.3.7</span> </h3>
 
 
 <!-- -->
@@ -930,13 +947,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./descriptive_statistics.html" class="pagination-link" aria-label="描述性统计学">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">描述性统计学</span></span>
+      <a href="./normality_independence_correlation.html" class="pagination-link" aria-label="正态性检验">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">正态性检验</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./SamplingDistribution.html" class="pagination-link" aria-label="抽样分布">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">抽样分布</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">抽样分布</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">

@@ -1,5 +1,7 @@
 # 参考资料 {.unnumbered style="color:red"}
 
+-   Applied Medical Statistics
+
 -   回归、主成分分析（Principal component analysis）、聚类：[R in action 3rd](https://livebook.manning.com/book/r-in-action-third-edition)、 [ISLR](https://www.statlearning.com/)
 
 -   [医学研究中的生存数据建模（4e）](https://bookdown.org/wangzhen/survival/)

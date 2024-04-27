@@ -24,14 +24,6 @@ $$
 
 均值的标准误 $\sigma _{\bar X} =\frac {\sigma}{\sqrt n}$ 可以用 $S _{\bar X} =\frac {S}{\sqrt n}$ 估计。
 
-#### σ^2^ 未知的正态分布
-
-$$
-t=\frac{\bar X-\mu}{S_{\bar X}}=\frac{\bar X-\mu}{S /\sqrt n} \sim t(\nu)
-$$
-
-其中自由度（degrees of freedom）$\nu=n-1$ 。当 $\nu \to +\infty 时,t\sim N(0,1)$ 。
-
 #### 大样本量的非正态分布
 
 中心极限定理（central limit theorem）
@@ -39,6 +31,12 @@ $$
 :   当样本量n足够大时，即使随机样本并非来自正态分布总体，$\bar X$ 的抽样分布也会近似正态分布。
 
     $$ \bar X \dot{\sim}  N(μ,\frac{σ^2}{n}) $$
+
+#### σ^2^ 未知的正态分布
+
+$$ t=\frac{\bar X-\mu}{S_{\bar X}}=\frac{\bar X-\mu}{S /\sqrt n} \sim t(\nu) $$
+
+其中自由度（degrees of freedom）$\nu=n-1$ 。当 $\nu \to +\infty 时,t\sim N(0,1)$ 。
 
 ### 方差（variance）的抽样分布
 
@@ -52,7 +50,7 @@ $$
 
 其中自由度（degrees of freedom）$\nu=n-1$ 。
 
-### 率（rate）抽样分布——分类数据
+### 率（rate）抽样分布------分类数据
 
 假设 $X\sim B(n,\pi)$ ，一组样本量为n的随机样本。列出样本量为$n$的所有可能随机样本。
 
