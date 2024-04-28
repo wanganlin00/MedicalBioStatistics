@@ -35,13 +35,13 @@ book:
     #     - Regression.qmd
     #     - Classification.qmd
     #     - Clustering.qmd
-    #     - DimensionalityReduction.qmd
 
     - part: "生存分析"
       chapters:
         - SurvivalAnalysis.qmd
-
-
+    - part: "高维统计"
+      # chapters:
+      #   - DimensionalityReduction.qmd
 
 execute:
   cache: true
