@@ -20,7 +20,7 @@
 
 3.  功效 $power=1-β=P(reject\  H0|H1 \ is\  True)$
 
-4.  效应值 effect size
+4.  效应值 effect size 备择假设下的效应值
 
 5.  样本量 sample size
 
@@ -32,13 +32,13 @@
 
 p value 和 CI 对于统计推断同等重要，尤其是大样本量。
 
-## 一个总体参数的假设检验
+## 一个总体的假设检验
 
 ### 均值------单样本$t$检验
 
 $$t=\frac{\bar x-\mu_0}{S /\sqrt n} \sim t(\nu) $$
 
-它是一种参数检验，用于检验小样本的均值是否可以合理地为特定值。
+它是一种参数检验，用于检验小样本（n＜30）的均值是否可以合理地为特定值。
 
 ```{r}
 set.seed(100)
@@ -49,7 +49,7 @@ t.test(x, mu=11)
 
 **单样本**$Z$**检验功效分析**
 
-1.  双尾假设
+1.  双侧假设
 
     功效(power) $1-β\approx\Phi(z_{\alpha/2}+ES\sqrt n)$
 
@@ -57,7 +57,7 @@ t.test(x, mu=11)
 
     样本量 $n=\frac{(z_{1-\alpha/2}+z_{1-\beta})^2}{ES^2}$
 
-2.  单尾假设
+2.  单侧假设
 
     功效(power) $1-β=\Phi(z_{\alpha}+ES\sqrt n)$
 
@@ -73,80 +73,183 @@ $$ 连续校正 $$
 Z_{corr}=\frac{|p-\pi_0|-1/(2n)}{\sqrt{\pi_0(1-\pi_0)/n}}\sim N(0,1)
 $$ **功效分析**
 
-功效(power) $1-β\approx\Phi(\sqrt{\frac{\pi_0(1-\pi_0)}{\pi_1(1-\pi_1)}}(z_{\alpha/2}+\frac{|\pi_1-\pi_0|\sqrt n}{\sqrt{\pi_0(1-\pi_0)}}))$
+功效 $1-β\approx\Phi(\sqrt{\frac{\pi_0(1-\pi_0)}{\pi_1(1-\pi_1)}}(z_{\alpha/2}+\frac{|\pi_1-\pi_0|\sqrt n}{\sqrt{\pi_0(1-\pi_0)}}))$
 
 样本量 $n=\frac{\pi_0(1-\pi_0))}{(\pi_1-\pi_0)^2}(z_{1-\alpha/2}+z_{1-\beta}\sqrt{\frac{\pi_0(1-\pi_0)}{\pi_1(1-\pi_1)}})$
 
-## 两个总体参数的假设检验
+## 两个总体的假设检验
+
+### 配对样本的均值差异------t检验
+
+$$
+H_0:\mu_{\bar d}=0
+$$ $$
+t=\frac{\bar d- \mu_{\bar d}}{S_d /\sqrt n} \sim t(\nu) 
+$$ 其中$d= X_2-X_1,\mu_{\bar d}=0$。
 
 ```{r}
-##两独立样本
-library(MASS)
-t.test(Prob~So,data=UScrime)
-UScrime
-##两非独立样本
-library(MASS)
-sapply(UScrime[c("U1","U2")], function(x)(c(mean=mean(x),sd=sd(x))))
-with(UScrime,t.test(U1,U2,paired=TRUE))  #配对t检验
+df <- tribble(
+    ~id,~baseline,~ten_days_later,~d,
+    1,58.27,120.61,62.34,
+    2,59.51,126.33,66.82,
+    3,53.84,108.35,54.51,
+    4,54.70,139.99,85.29,
+    5,54.03,115.29,61.26,
+    6,61.29,146.96,85.67,
+    7,54.72,115.64,60.92,
+    8,70.43,124.62,54.19,
+    9,66.45,121.40,54.95,
+    10,59.31,134.81,75.50,
+    11,63.48,130.73,67.25,
+    12,67.19,118.37,51.18,
+    13,52.92,129.28,76.36,
+    14,71.99,117.40,45.41
+)
+d_mean <- mean(df$d)
+d_sd <- sd(df$d)
+d_se <- d_sd/sqrt(length(df$d))
+t_statistic <- d_mean/d_se
+
+
+t.test(df$ten_days_later,df$baseline,paired = TRUE)
+t.test(Pair(df$ten_days_later,df$baseline)~1,data=df)
 ```
 
-## $\chi^2$检验
+### 两独立样本的均值差异
 
-## $F$检验
+#### 方差相等------t检验
 
-### Fisher F 检验
+$$H_0:\mu_1-\mu_2=0$$
 
-Fisher F 检验可用于检查两个样本是否具有相同的方差。或者，fligner.test（） 和 bartlett.test（） 可以用于相同的目的。
+$$
+t=\frac{(\bar X_1-\bar X_2)-(\mu_1-\mu_2)}{S_{\bar X_1-\bar X_2}}=\frac{\bar X_1-\bar X_2}{\sqrt{S_C^2(\frac{1}{n_1}+\frac{1}{n_2})}}
+$$
 
 ```{r}
+df2 <- tibble(
+    experimental=c(120.61 ,126.33 ,108.35 ,139.99 ,115.29 ,146.96 ,115.64,
+                   124.62 ,121.40 ,134.81 ,130.73 ,118.37 ,129.28 ,117.45),
+    control=c(58.23 ,54.50 ,59.47 ,59.64 ,53.77 ,43.48 ,
+              54.63 ,71.91 ,53.97 ,49.72 ,61.26 ,78.17,NA,NA)
+)
+
+e_mean <- mean(df2$experimental)
+e_sd <- sd(df2$experimental)
+n1 <- length(df2$experimental)
+
+ctrl_mean <- mean(df2$control,na.rm = TRUE)
+ctrl_sd <- sd(df2$control,na.rm = TRUE)
+n2 <- length(df2$control)-sum(is.na(df2$control))
+
+Sc_2 <- ((n1-1)*e_sd^2+(n2-1)*ctrl_sd^2)/(n1+n2-2)
+
+t2 <- (e_mean-ctrl_mean)/sqrt(Sc_2*(1/14+1/12))
+
+t.test(df2$experimental,df2$control,var.equal = TRUE)
 
 ```
 
-## 非参数检验
+#### 方差是否相等------F检验
 
-#### **Wilcoxon Signed Rank Test**
+$$H_0:\frac{\sigma_1^2}{\sigma_2^2}=1$$
 
-在不假设正态分布时检验样本的平均值。Wilcoxon 符号秩检验可以替代 t 检验，尤其是当数据样本不假定服从正态分布时。它是一种非参数方法，用于测试估计值是否与其真实值不同。
+$$
+F=\frac{\frac {(n_1-1)S_1^2}{\sigma_1^2}/(n_1-1)}{\frac {(n_2-1)S_2^2}{\sigma_2^2}/(n_2-1)}=(\frac{S_1^2}{S_2^2})(\frac{\sigma_2^2}{\sigma_1^2})=\frac{S_1^2}{S_2^2}\sim F(\nu_1,\nu_2),\nu_1=n_1-1,\nu_2=n_2-1
+$$
 
 ```{r}
-numeric_vector <- c(20, 29, 24, 19, 20, 22, 28, 23, 19, 19)
-wilcox.test(numeric_vector, mu=20, conf.int = TRUE)
+F_stats <- (e_sd^2)/(ctrl_sd^2)
+
+# 检验两个样本的方差是否相等
+var.test(df2$experimental,df2$control)
+
 ```
 
-#### 双样本 t 检验和 Wilcoxon rank sum 检验
+#### 方差不等------ Approximation t 检验
 
-t.Test 和 Wilcoxon 秩检验都可用于比较 2 个样本的平均值。区别在于 t 检验假设被测试的样本是从正态分布中抽取的，而 Wilcoxon 的秩和检验则不然。
+$$H_0:\mu_1-\mu_2=0$$
 
-```{r}
-x <- c(0.80, 0.83, 1.89, 1.04, 1.45, 1.38, 1.91, 1.64, 0.73, 1.46)
-y <- c(1.15, 0.88, 0.90, 0.74, 1.21)
+$$
+t'=\frac{(\bar X_1-\bar X_2)-(\mu_1-\mu_2)}{\sqrt{\frac{S_1^2}{n_1}+\frac{S_2^2}{n_2}}}=\frac{\bar X_1-\bar X_2}{\sqrt{\frac{S_1^2}{n_1}+\frac{S_2^2}{n_2}}}\sim t(\nu ')
+$$
 
-t.test(1:10, y = c(7:20)) 
-wilcox.test(x, y, alternative = "g") # g for greater
+##### Cochran & Cox Approximation t-test
 
-# Use paired = TRUE for 1-to-1 comparison of observations.
-t.test(x, y, paired = TRUE) # when observations are paired, use 'paired' argument.
-wilcox.test(x, y, paired = TRUE) # both x and y are assumed to have similar shapes
-```
+强调方差的变异
 
-```{r}
-#Wilcoxon秩和检验  两组
-with(UScrime,by(Prob,list(So=UScrime$So),median))
-wilcox.test(Prob~So,data=UScrime)
-#Wilcoxon符号秩和检验：非独立样本t检验的非参数替代方法
-sapply(UScrime[c("U1","U2")], median)
-with(UScrime,wilcox.test(U1,U2,paired=T))
+因为$t'$既不遵循t分布，也不遵循正态分布，因此t'的临界值需要特定的计算方法。
 
-#多组独立样本    kruskal.test(y~A,data)
+$$
+t'_{\alpha/2}=\frac{S^2_{\bar X_1}t_{\nu_1,\alpha/2}+S^2_{\bar X_2}t_{\nu_2,\alpha/2}}{S^2_{\bar X_1}+S^2_{\bar X_2}}
+$$
 
-states<-data.frame(state.region,state.x77)
-kruskal.test(Illiteracy~state.region,data=states)
-#非参数多重成对比较
- #source("https://rkabacoff.com/RiA/wmc.R")
-source("wmc.R")
-states <- data.frame(state.region, state.x77)
-wmc(Illiteracy ~ state.region, data=states, method="holm") #Nonparametric multiple comparisons
+$$
+t'_{1-\alpha/2}=\frac{S^2_{\bar X_1}t_{\nu_1,1-\alpha/2}+S^2_{\bar X_2}t_{\nu_2,1-\alpha/2}}{S^2_{\bar X_1}+S^2_{\bar X_2}}
+$$ 其中$\nu_1=n_1-1,\nu_2=n_2-1,t_{\nu_1,1-\alpha/2}和t_{\nu_2,1-\alpha/2}$分别是$t_{\nu_1}和t_{\nu_2}$的临界值。
 
-#多组互不独立   # Friedman's rank sum non-parametric test 
-friedman.test(y ~ A | B, data)
-```
+因为t分布是对称的，$t_{\nu,\alpha/2}=-t_{\nu,1-\alpha/2}$，所以$t'_{\alpha/2}=t'_{1-\alpha/2}$。
+
+##### Satterthwaite Approximation t-test
+
+强调自由度
+
+$$
+v'=\frac{(\frac{S_1^2}{n_1}+\frac{S_2^2}{n_2})^2}{\frac{(\frac{S_1^2}{n_1})^2}{n_1-1}+\frac{(\frac{S_2^2}{n_2})^2}{n_2-1}}(舍入到最近整数)
+$$
+
+#### 大样本量------ Z检验
+
+当$n_1＞30\ \&\ n_2＞30$时，
+
+$$
+\bar X_1\dot\sim N(\mu_1,\frac{\sigma^2_1}{n_1})
+$$
+
+$$
+\bar X_2\dot\sim N(\mu_2,\frac{\sigma^2_2}{n_2})
+$$
+
+$$H_0:\mu_1-\mu_2=0$$
+
+$$
+Z=\frac{(\bar X_1-\bar X_2)-(\mu_1-\mu_2)}{\sqrt{\frac{\sigma^2_1}{n_1}+\frac{\sigma^2_2}{n_2}}}=\frac{\bar X_1-\bar X_2}{\sqrt{\frac{\sigma^2_1}{n_1}+\frac{\sigma^2_2}{n_2}}}\dot\sim N(0,1)
+$$
+
+#### 功效分析
+
+功效(power) $1-β\approx\Phi(-z_{1-\alpha/2}+\frac{|\mu_1-\mu_2|}{\sqrt {\sigma_1^2/n_1+\sigma_2^2/n_2}})$
+
+样本量
+
+1.  两组样本量相等 $$
+    n=\frac{(\sigma_1^2+\sigma_1^2)(z_{1-\alpha/2}+z_{1-\beta})^2}{(\mu_1-\mu_2)^2}
+    $$
+
+2.  两组样本量不等（$n_2=kn_1$） $$
+    n_1=\frac{(\sigma_1^2+\sigma_1^2/k)(z_{1-\alpha/2}+z_{1-\beta})^2}{(\mu_1-\mu_2)^2}
+    $$
+
+    $$
+    n_2=\frac{(k\sigma_1^2+\sigma_1^2)(z_{1-\alpha/2}+z_{1-\beta})^2}{(\mu_1-\mu_2)^2}
+    $$
+
+### 两总体率的差异------z检验
+
+当$n_ip_i(1-p_i)≥5,(i=1,2)$时，$p_i\dot\sim N(\pi_i,\frac{\pi_i(1-\pi_i)}{n_i})$
+
+$$
+(p_1-p_2)\dot\sim N(\pi_1-\pi_2,\frac{\pi_1(1-\pi_1)}{n_1}+\frac{\pi_2(1-\pi_2)}{n_2})
+$$
+
+$H_0:\pi_1=\pi_2$
+
+$$
+Z=\frac{(p_1-p_2)-(\pi_1-\pi_2)}{S_{p_1-p_2}}=\frac{p_1-p_2}{\sqrt{p_C(1-p_C)(\frac{1}{n_1}+\frac{1}{n_2})}}\dot\sim N(0,1)
+$$
+
+其中$p_C=\frac{n_1p_1+n_2p_2}{n_1+n_2}$
+
+功效分析
+
+1.  $1-\beta$
+2.  $n1,n_2=kn_1$

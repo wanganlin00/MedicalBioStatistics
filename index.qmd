@@ -12,6 +12,4 @@
 
 -   [Modern Statistics for Modern Biology](https://www.huber.embl.de/msmb/)
 
--   [tidymodels](https://www.tidymodels.org/)
-
--   [ISLR with tidymodels](https://emilhvitfeldt.github.io/ISLR-tidymodels-labs/)
+-   <https://www.tidymodels.org/>

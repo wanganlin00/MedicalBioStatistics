@@ -1,6 +1,6 @@
-# 概率论
+# 概率论基础
 
-## 基础概念
+## 概念
 
 样本点（sample point）是每一次随机试验的结果，用 $\omega$ 表示。
 
@@ -138,13 +138,13 @@ $$
 
 ### 正态分布
 
-概率密度函数（pdf）：$f(x)=\frac {1}{\sqrt{2\pi}\sigma}e^{-\frac{(x-\mu)^2}{2\sigma^2}}（-\infty ＜x ＜+\infty）$
+概率密度函数（pdf）：$f(x)=\frac {1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}（-\infty ＜x ＜+\infty）$
+
+累计分布函数（cdf）:$F(x)=P(X≤x)=\int_{-\infty}^{x}f(t)dt=\frac{1}{\sqrt{2\pi}\sigma}\int_{-\infty}^{x}e^{-\frac{(t-\mu)^2}{2\sigma^2}}dt\ (-\infty＜x＜+\infty)$
 
 $$
 X \sim N(\mu,\sigma^2)
 $$
-
-累计分布函数（cdf）:$F(x)=P(X≤x)=\int_{-\infty}^{x}f(t)dt=\frac{1}{\sqrt{2\pi}\sigma}\int_{-\infty}^{x}e^{-\frac{(t-\mu)^2}{2\sigma^2}}dt\ (-\infty＜x＜+\infty)$
 
 ### 标准正态分布
 
@@ -156,11 +156,31 @@ pdf：$\varphi (z)=\frac{1}{\sqrt{2\pi}}e^{-\frac{z^2}{2}} (-\infty＜z＜+\inft
 
 cdf：$\Phi(z)=P(Z≤z)=\int_{-\infty}^{z}\varphi (\nu )d\nu =\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{z}e^{-\frac{\nu^2}{2}}dt\ (-\infty＜z＜+\infty)$
 
-### 正态性的描述
+```{r}
+# 标准正态分布
+norm <- function(xlim = c(-Inf,+Inf)){
+  ggplot() + xlim(xlim) +
+    geom_function(fun = dnorm, args = list(mean = 0, sd = 1), color="red")+
+        scale_y_continuous(limits = c(0,1))+
+    geom_function(fun = pnorm,color="blue")
+}
+norm(c(-10,10))         # Area Under the Curve (AUC) = 1
+```
+
+### 正态性的检验
 
 #### 直方图/茎叶图
 
 直方图：钟形分布（bell-shaped distribution）
+
+```{r}
+
+h<-hist(mtcars$mpg,breaks = 12)
+x<-seq(min(mtcars$mpg),max(mtcars$mpg),by=0.001)
+y<-dnorm(x,mean=mean(mtcars$mpg),sd=sd(mtcars$mpg)) #密度曲线  f(x)=(F(i)/n)/ΔXi
+y<-y*diff(h$mids[1:2])*length(mtcars$mpg)  # f(x)*ΔXi*n  正态分布
+lines(x,y,col="blue")
+```
 
 茎叶图（Stem-and-Leaf Plot）
 
@@ -169,6 +189,11 @@ cdf：$\Phi(z)=P(Z≤z)=\int_{-\infty}^{z}\varphi (\nu )d\nu =\frac{1}{\sqrt{2\p
 P-P图是累计相对频率的观测值（x轴）与理论值（y轴）的散点图；
 
 Q-Q图是分位数的观测值（x轴）与理论值（y轴）的散点图。
+
+```{r}
+library(ggpubr)
+ggqqplot(mtcars$mpg)  #  直线 
+```
 
 #### 矩量法（Moment Method）
 

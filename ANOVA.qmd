@@ -1,166 +1,533 @@
----
-title: "方差分析"
-format: html
-editor: visual
----
+# 方差分析
 
-# 单因素方差分析
+## 单因素组间方差分析
+
+### 多样本均值差异------F检验
+
+![](images/one-way_ANOVA.png){fig-align="center" width="80%"}
+
+因子A有$A_1,A_2,...,A_k$共k个水平
+
+total sum of squares
+
+$$
+SS_T=\sum_{j=1}^{k}\sum_{i=1}^{n_j}X_{ij}^2-\frac{(\sum_{j=1}^{k}\sum_{i=1}^{n_j}X_{ij})^2}{n}=SS_{组间}+SS_{组内}
+$$
+
+between groups sum of squares $$
+SS_{组间}=\sum_{j=1}^{k}\frac{(\sum_{i=1}^{n_j}X_{ij})^2}{n_j}-\frac{(\sum_{j=1}^{k}\sum_{i=1}^{n_j}X_{ij})^2}{n}
+$$
+
+自由度$\nu=n-1,\nu_{组间}=k-1,\nu_{组内}=\sum_{j=1}^{k}(n_j-1)=n-k$
+
+Between groups mean square $MS_{组间}=\frac{SS_{组间}}{k-1}$
+
+Within groups mean square $MS_{组内}=\frac{SS_{组内}}{n-k}$
+
+$$H_0:\mu_1=\mu_2=...=\mu_k$$
+
+$$
+\frac{SS_T}{\sigma^2}\sim \chi^2(\nu),\nu=n-1
+$$ $$
+\frac{SS_{组内}}{\sigma^2}\sim \chi^2(\nu),\nu=n-k
+$$ 因此，
+
+$$
+\frac{SS_{组间}}{\sigma^2}=\frac{SS_T}{\sigma^2}-\frac{SS_{组内}}{\sigma^2}\ \ \ \sim \chi^2(\nu),\nu=k-1
+$$
+
+检验统计量
+
+$$
+F=\frac{\frac{SS_{组间}}{(k-1)\sigma^2}}{\frac{SS_{组内}}{(n-k)\sigma^2}}=\frac{\frac{SS_{组间}}{k-1}}{\frac{SS_{组内}}{n-k}}=\frac{MS_{组间}}{MS_{组内}}\ \ \ \sim \chi^2(\nu),\nu=k-1
+$$
+
+![](images/ANOVA_example.png){fig-align="center" width="60%"}
 
 ```{r}
-iris
-table(iris$Species)
+df <- tibble(
+    low=c(53.5,43.7,46.5,50.3,56.1),
+    medium=c(33.2,30.6,23.9,26.4,35.9),
+    high=c(11.5,21.9,18.6,13.6,9.5)
+)
+k <- 3
+df_sum <- sum(df)
+df_sum_square <- sum(df^2)
+n <- 15
+C <- df_sum^2/n
+
+SS_T <- df_sum_square-C
+SS_between <- apply(df, 2, function(x) sum(sum(x)^2/length(x))) |> sum()-C
+
+SS_within <- SS_T-SS_between
+
+MS_between <- SS_between/(k-1)
+MS_within <- SS_within/(n-k)
+F_stat <-MS_between/MS_within 
 ```
 
 ```{r}
-aov_fit <- aov(Sepal.Length~Species,data=iris)
+df_long <- df |> pivot_longer(cols = everything(),
+                              names_to = "level",
+                              values_to = "value")
+df_long$level <- factor(df_long$level)
+df_aov <- aov(value~level,data = df_long)
+
+summary(df_aov)
+
+
+# 异常观测点
+
+car::outlierTest(df_aov) 
+```
+
+### 均值的多重比较
+
+成对比较的数量 $N=\frac{k!}{2!(k-2)!},k≥3$，导致犯第Ⅰ类错误的概率迅速增加，$[1-(1-\alpha)^N]$。
+
+#### Tukey's test
+
+Tukey's test 也被称为Tukey's honestly significant difference (Tukey's HSD) test。
+
+1.  k个均值从大到小排列；
+2.  均值最大的组依次与均值最小，第二小，......，第二大比较；
+3.  均值第二大的组以同样的方式比较；
+4.  以此类推
+5.  在各组样本量相等的情况下，如果在两个均值之间未发现显著差异，则推断这两个均值所包含的任何均值之间不存在显著差异，并且不再检验所包含均值之间的差异。
+
+studentized range statistic $q=\frac{\bar X_{max}-\bar X_{min}}{S_{\bar X_{max}-\bar X_{min}}}$，其中$S_{\bar X_{max}-\bar X_{min}}=\sqrt{\frac{MS_{组内}}{n}}$，$n$是每一个治疗组的样本量。
+
+如果各组样本量不等,则$S_{\bar X_{max}-\bar X_{min}}=\sqrt{\frac{MS_{组内}}{2}(\frac{1}{n_i}+\frac{1}{n_j})}$
+
+检验统计量
+
+$$
+HSD=q_{(k,\nu_{组内}),1-\alpha} \times S_{\bar X_{max}-\bar X_{min}},\nu_{组内}=k(n_j-1)
+$$
+
+对于任意i,j且$\bar X_i＞\bar X_j$，如果$\bar X_i-\bar X_j＞HSD$，那么拒绝$H_0$，说明这两组存在显著差异。
+
+$$
+H_0:\mu_i=\mu_j(i≠j)
+$$
+
+```{r}
+k_means <- apply(df,2,mean) |> sort(,decreasing = TRUE)
+k_means
+
+# 附录q  q(3,12),1-0.05  3(5-1)=12
+q_critical_value <- 3.77
+nj <- 5
+HSD <- q_critical_value*sqrt(MS_within/nj)
+
+k_means
+diff_means <- c()
+names_diff_means <- c()
+
+for(i in 1:(length(k_means)-1)){
+    for(j in length(k_means):(i+1)){
+        diff_value <- k_means[i] - k_means[j]
+        diff_means <- c(diff_means, diff_value)
+        names_diff_means <- c(names_diff_means, paste(names(k_means)[i], "vs.", names(k_means)[j],sep = "_"))
+    }
+}
+names(diff_means) <- names_diff_means
+diff_means
+#全为真，3组成对比较都存在显著差异
+diff_means > HSD 
+
+```
+
+```{r}
+pairwise <- TukeyHSD(df_aov)
+pairwise
+
+```
+
+#### Dunnett's test
+
+*Dunnett's test*也称为*q'*-test,是两独立样本t-test的一种修正。Dunnett's test 假设数据符合正态分布，并且各组的方差相等。 控制对照组（C）与其他每个实验组（T）比较。
+
+$H_0:\mu_C=\mu_T$
+
+$$
+q'=\frac{\bar X_T-\bar X_C}{\sqrt{MS_{组内}(\frac{1}{n_T}+\frac{1}{n_C})}} \sim q'(\nu,a) \ \ \nu=\nu_{组内},a=k
+$$
+
+临界值 $q'_{(a,\nu_E),1-\alpha/2}$
+
+```{r}
+nT <- nC <- 5 
+
+SE_mean_diff <- sqrt(MS_within*(1/nT+1/nC))
+
+k_means
+diff_means <- c()
+names_diff_means <- c()
+
+# 以 low 作控制组
+for(i in 2:length(k_means)){
+        diff_value <- k_means[i] - k_means[1]
+        diff_means <- c(diff_means, diff_value)
+        names_diff_means <- c(names_diff_means, paste(names(k_means)[1], "vs.", names(k_means)[i],sep = "_"))
+}
+names(diff_means) <- names_diff_means
+diff_means
+
+q撇_stat <- diff_means/SE_mean_diff
+
+# 附录q'  q'(3,12),1-0.05/2  
+abs(q撇_stat)>2.50  
+#全为真，各实验组与控制组均存在显著差异
+```
+
+```{r}
+library(multcomp)
+dunnett_result <- glht(df_aov, linfct =mcp(level =c("medium - low = 0", "high - low = 0")))
+
+# 查看 Dunnett's test 结果
+summary(dunnett_result)
+
+```
+
+#### LSD-t test
+
+least significant difference t-test
+
+挑选任意感兴趣的两组进行比较
+
+$$
+H_0:\mu_i=\mu_j(i≠j)
+$$
+
+$$
+LSD-t=\frac{\bar X_i-\bar X_j}{\sqrt{MS_{组内}(\frac{1}{n_i}+\frac{1}{n_j})}} \sim t(\nu) \ ,\ \nu=\nu_{组内}=n-k,a=k
+$$
+
+```{r}
+# medium high
+LSD <- (k_means[2]-k_means[3])/sqrt(MS_within*(1/5+1/5))
+
+# 附录 t(12,1-0.05/2)=2.719
+```
+
+### 方差分析的假设是否成立
+
+#### 独立性
+
+#### 正态性
+
+##### 直方图/茎叶图
+
+##### P-P图/Q-Q图
+
+##### 偏度和峰度
+
+$$
+H_0:总体偏度系数\gamma_1=0 或者总体峰度系数\gamma_2=0
+$$
+
+$$
+z_i=\frac{g_i-0}{\sigma_{g_i}}  \ \ \ \ 临界值z_{1-\alpha/2}
+$$
+
+##### Shapiro-Wilk检验（小样本）
+
+```{r}
+shapiro.test(df$low)  
+shapiro.test(df$medium)  
+shapiro.test(df$high)  
+
+# 因为观测太少，也可以同时检验
+shapiro.test(c(df$low,df$medium,df$high))  
+```
+
+##### Kolmogorov-Smirnov检验（Lilliefors correction 大样本）
+
+```{r}
+ks.test(c(df$low,df$medium,df$high),"pnorm")
+ks.test(rnorm(1000),"pnorm")
+```
+
+```{r}
+x <- rnorm(50) 
+y <- runif(50) 
+ks.test(x, y)  # perform ks test
+
+x <- rnorm(50)
+y <- rnorm(50)
+ks.test(x, y) 
+```
+
+#### 方差齐性
+
+##### Bartlett's test
+
+数据满足正态性
+
+比较每一组方差的加权算术均值和几何均值。
+
+$$
+H_0:\sigma_1^2=\sigma_2^2=...=\sigma_k^2
+$$ 当样本量$n_j$≥5时，检验统计量(各组样本量相等)
+
+$$
+B=\frac{(n-1)[kln\bar S^2-\sum_{j=1}^{k}lnS_j^2]}{1+\frac{k+1}{3k(n-1)}} \sim\ \chi^2(\nu)\ ,\nu=k-1
+$$ 其中n是每一组的样本量，$S_j^2$是某一组的样本方差，$\bar S^2$是所有k个组样本方差的平均值。
+
+当各组样本量不等时，
+
+$$
+B=\frac{\sum_{j=1}^{k}(n_j-1)ln\frac{\bar S^2}{S_j^2}}{1+\frac{1}{3(k-1)}(\sum_{j=1}^{k}\frac {1}{n_j-1}-\frac{1}{\sum_{j=1}^{k}(n_j-1)})} \sim\ \chi^2(\nu)\ ,\nu=k-1
+$$ 其中$h_j$是某一组的样本量，$\bar S^2=(\sum_{j=1}^{k}(n_j-1)S_j^2)/(\sum_{j=1}^{k}(n_j-1))$是所有k个组样本方差的加权平均值。
+
+```{r}
+n1=n2=n3=5
+k=3
+S2 <- apply(df,2,var)
+S2
+
+lnS2 <- log(S2)
+lnS2
+
+S2_mean <- (5-1)*(sum(S2))/(3*(5-1))
+S2_mean
+
+
+
+B <- ((5-1)*(3*log(S2_mean)-sum(lnS2)))/(1+(3+1)/(3*3*(5-1)))
+B
+```
+
+```{r}
+bartlett.test(df)
+```
+
+##### Levene's test
+
+数据不满足正态性
+
+1.  k个随机样本是独立的
+2.  随机变量X是连续的
+
+Levene 变换：
+
+$$
+Z_{ij}=|X_{ij}-\bar X_{.\ j}|(i=1,2...,n_j;\ j=1,2,...,k)
+$$
+
+```{r}
+options(digits = 2)
+z_df <- bind_cols(
+    low=df[1]-k_means[1],
+    medium=df[2]-k_means[2],
+    high=df[3]-k_means[3]
+) |> abs()
+    
+
+z_df
+```
+
+检验统计量（基于变换后的F检验）
+
+$$
+W=\frac{MS_{组间}}{MS_{组内}}=\frac{\sum_jn_j(\bar Z_{.j}-\bar Z_{..})^2/(k-1)}{\sum_j\sum_i(Z_{ij}-\bar Z_{.j})^2/(n-k)}  \sim F(\nu_1,\nu_2)   \ \ \ \ \nu_1=k-1,\nu_2=n-k
+$$
+
+```{r}
+v1=3-1
+v2=15-3
+
+
+z.j_mean <- apply(z_df, 2, mean)
+z.j_mean
+
+z_mean <- mean(z.j_mean)
+z_mean 
+
+options(digits = 4)
+W <- 12*sum(5*(z.j_mean-z_mean)^2)/(2*(sum((z_df$low-z.j_mean[1])^2)+sum((z_df$medium-z.j_mean[2])^2)+sum((z_df$high-z.j_mean[3])^2)))
+
+W
+```
+
+#### 数据变换
+
+当方差分析的正态性假设或方差齐性假设不为真时，通常使用(1)数据变换方法；(2)非参数检验方法 比较均值差异
+
+##### 平方根变换
+
+当每个水平组的方差与均值成比例，尤其是样本来自泊松分布
+
+$$
+Y=\sqrt{X}
+$$
+
+当数据中有零或非常小的值时，
+
+$$
+Y=\sqrt{X+a} \ \ \ \ a=0.5或0.1 
+$$
+
+##### 对数变换
+
+当数据方差不齐且每个水平组标准差与均值成比例时
+
+$$
+Y=\log{X} \ \ \ \ base=e或10 
+$$
+
+当数据中有零或负值时，
+
+$$
+Y=\log{(X+a)} \ \ \ \ a为实数，使得X+a>0
+$$
+
+###### 反正弦平方根变换
+
+率，服从二项分布$B(n,\pi)$
+
+$$
+Y=\arcsin {\sqrt{\pi}} \ \ \ \
+$$
+
+## 重复测量方差分析（单因素组内方差分析）
+
+假设
+
+1.  正态性
+2.  方差齐性
+3.  协方差矩阵的球形检验（W=1）
+
+$$
+SS_T=\sum_{j=1}^{t}\sum_{i=1}^{n}X_{ij}^2-\frac{(\sum_{j=1}^{t}\sum_{i=1}^{n}X_{ij})^2}{nt}=SS_{受试者间}+SS_{不同时间点}+SS_{E\ \ 随机误差}，\nu_T=nt-1
+$$
+
+$$
+SS_{受试者间}=\frac{\sum_{i}(\sum_{j}X_{ij})^2}{t}-C，\nu_{受试者}=n-1
+$$反映了在受试者间的变异。
+
+$$
+SS_{不同时间点}=\frac{\sum_{j}(\sum_{i}X_{ij})^2}{n}-C ，\nu_{时间点}=t-1
+$$反映了在每个受试者内不同时间点的重复测量变异。
+
+$$
+SS_E=SS_T-SS_{受试者间}-SS_{不同时间点}，\nu_E=(n-1)(t-1)
+$$
+
+$H_0:\mu_1=\mu_2=...=\mu_t$，检验统计量
+
+$$
+F=\frac{MS_{不同时间点}}{MS_E}=\frac{SS_{不同时间点}/(t-1)}{SS_E/((n-1)(t-1))}
+$$
+
+```{r}
+df <- tribble(
+    ~id,~zero,~ten,~twenty,~thirty,
+    1,186,122,134,110,
+    2,345,312,268,176,
+    3,98,84,52,61,
+    4,288,98,91,85,
+    5,176,86,130,99,
+    6,210,188,143,120,
+    7,271,322,86,65,
+    8,415,332,265,186,
+    9,171,126,130,135,
+    10,243,330,95,64,
+)
+df_long <-
+    df |> pivot_longer(cols = -1,
+                       names_to = "week",
+                       values_to = "ALT") |> mutate(week = factor(week))
+
+
+# 假设检验
+shapiro.test(df$zero)
+shapiro.test(df$ten)
+shapiro.test(df$twenty)
+shapiro.test(df$thirty)
+bartlett.test(df[-1])
+
+
+    
+# 总变异
+xij_sum <- sum(df_long$ALT)
+xij_square_sum <- sum(df_long$ALT^2)
+C <- xij_sum^2/40
+SS_T <- xij_square_sum-C
+
+# 受试者间  
+xi._sum <- rowSums(df[,-1])
+xi._sum
+SS_B <- sum(xi._sum^2)/4-C #行和平方和
+MS_B <- SS_B/9
+
+# 不同时间点
+x.j_sum <- colSums(df[,-1])
+x.j_sum
+SS_W <- sum(x.j_sum^2)/10-C #列和平方和
+MS_W <- SS_W/3
+
+
+
+SS_E <- SS_T-SS_B-SS_W
+MS_E <- SS_E/(9*3)
+
+F_stat <- MS_W/MS_E
+
+```
+
+```{r}
+library(nlme)
+model <- lme(fixed=ALT ~ week, random = ~1| id/week, data = df_long)
+summary(model)
+anova_results <- anova(model)
+anova_results
+
+
+library(multcomp)
+glht_result <-glht(model, linfct = mcp(week =c("ten - zero = 0 ",
+                                               "twenty - zero == 0",
+                                               "thirty - zero = 0 ")))
+summary(glht_result)
+```
+
+## 含组间因子和组内因子的重复测量方差分析
+
+```{r}
+df <- read_rds("data/repeated_measures_design_ANOVA.rds")
+
+# 第一种
+aov_fit <- aov(volume ~ method*Days+Error(id/Days),data = df)
 summary(aov_fit)
-
-TukeyHSD(aov_fit)  # 成对组间比较均值
-plot(TukeyHSD(aov_fit)) 
 ```
 
-#### 独立性检验
-
-#### 正态性检验
-
 ```{r}
-car::qqPlot(aov_fit, simulate = TRUE, main="Q-Q Plot",labels=FALSE)
+# 第二种
+library(nlme)
+model <- lme(volume ~ method*Days, random = ~1|id/Days, data = df)
+summary(model)
+df_aov <- anova(model)
+df_aov
+
+    #成对比较
+method_means <- emmeans(model, ~method)  
+print(method_means)  
+method_comparisons <- pairs(method_means)  
+print(method_comparisons)
 ```
 
-#### 方差齐性检验
-
 ```{r}
-bartlett.test(Sepal.Length~Species,data=iris)#各组方差齐性 
-```
+# 第三种
+library(ez)  
+rm_anova <- ezANOVA(  
+  data = df,   
+  dv = .(volume), # 依赖变量（因变量）  
+  wid = .(id), # 被试标识符（组内ID）  
+  within = .(Days), # 组内因子  
+  between = .(method), # 组间因子  
+  type = 3 # 使用类型III的求和平方和  
+)  
 
-#### 异常观测点
-
-```{r}
-car::outlierTest(fit1)        
-```
-
-# 多因素方差分析
-
-```{r}
-attach(ToothGrowth)
-ToothGrowth
-
-table(supp,dose)
-aggregate(len,by=list(supp,dose),mean)
-aggregate(len,by=list(supp,dose),sd)
-str(ToothGrowth)
-dose<-factor(dose)
-str(dose)
-fit3<-aov(len~supp*dose)
-summary(fit3)
-#结果可视化
-interaction.plot(dose,supp,len,typr="b",
-                 col=c("red","blue",pch=c(16,18),
-                 main="Interaction between Dose and Supplement Type"))#第一种 交互效应
-library(gplots)
-plotmeans(len~interaction(supp,dose,sep=" "),
-          connect =list(c(1,3,5),c(2,4,6)),
-          col=c("red","darkgreen"),
-          main="Interaction Plot with 95% CIs",
-          xlab="Treatment Dose"
-          )                                 #第二种 交互效应
-library(HH)
-interaction2wt(len~supp*dose)
-detach(ToothGrowth)
-```
-
-## 重复测量方差分析
-
-（组间因子+组内因子）
-
-```{r}
-CO2$conc<-factor(CO2$conc)
-chil<-subset(CO2,Treatment=="chilled")#寒带植物
-
-fit4<-aov(uptake~conc*Type+Error(Plant/(conc)),data=chil)
-summary(fit4)
-opar<-par(no.readonly = TRUE)
-with(chil,interaction.plot(conc,Type,uptake,type="b",
-     col=c("red","blue"),pch=c(16,18),
-     main="Interaction Plot for Plant Type and Concentration")) #交互效应
-par(las=2)
-par(mar=c(10,4,4,2))
-boxplot(uptake~Type*conc,data=chil,col=c("red","blue"),
-        main="Chilled Quebec and Mississippi Plants",
-        ylab="Carbon dioxide uptake rate (umol/m^2 sec)")
-par(opar)
-```
-
-## 事后检验（post-hoc tests）
-
-##### Tukey's HSD
-
-### 单因素协方差分析ANCOVA
-
-```{r}
-data(litter,package = "multcomp")
-attach(litter)
-litter
-table(dose)
-aggregate(weight,by=list(Group.dose=dose),mean)
-fit2<-aov(weight~gesttime+dose)
-summary(fit2)
-library(effects)
-effect("dose",fit2)     #去除协变量效应后的组均值
-#multcomp包中的glht() TukeyHSD检验
-library(multcomp)
-contrast<-rbind("no drug vs. drug"=c(3,-1,-1,-1))
-contrast
-summary(glht(fit2,linfct = mcp(dose=contrast))) #未用药组与其他三组均值比较
-######################假设检验 
-library(car)
-qqPlot(lm(weight~gesttime+dose,data=litter),
-       simulate = TRUE,
-       main="Q-Q Plot",labels=FALSE)  #因变量正态性
-
-bartlett.test(weight~dose,data=litter)#各组方差齐性 
-library(car)
-outlierTest(fit2)              #离群点
-###
-library(multcomp)
-fit2.1<-aov(weight~gesttime*dose,data=litter)  #交互效应不显著，回归斜率的同质性
-summary(fit2.1)            
-
-##结果可视化
-library(HH)   #install.packages("httpuv")
-ancova(weight~gesttime+dose,data=litter)  #根据协变量gesttime预测出生体重的斜率相同
-ancova(weight~gesttime*dose,data=litter)  #违反回归斜率同质性
-```
-
-### 多元方差分析（多因变量）
-
-```{r}
-#单因素多元方差分析
-library(MASS)
-attach(UScereal)
-shelf<-factor(shelf)
-y<-cbind(calories,fat,sugars)  #矩阵
-aggregate(y,by=list(shelf),mean)
-cov(y)#协方差矩阵阵
-fit5<-manova(y~shelf)
-summary(fit5)
-summary.aov(fit5)#输出单变量结果
-#假设检验
-center<-colMeans(y)
-n<-nrow(y)
-p<-ncol(y)
-cov<-cov(y)
-d<-mahalanobis(y,center,cov)
-coord<-qqplot(qchisq(ppoints(n),df=p),
-              d,main="Q-Q Plot Assessing Multivariate Normality",
-              ylab="Mahalanobis D2"
-             )
-abline(a=0,b=1,lty=2,col="red") #点全部落在y=x以下，表明服从多元正态分布
-identify(coord$x,coord$y,labels = row.names(UScereal))
-
-#BoxM.test<-function() 方差-协方差矩阵同质性检验
-###稳健多元方差分析
-library(rrcov)    #install.packages("rrcov")
-Wilks.test(y,shelf,method="mcd")
-
+print(rm_anova)
 ```

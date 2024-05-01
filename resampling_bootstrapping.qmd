@@ -1,7 +1,0 @@
----
-title: "重抽样和自举"
-format: html
-editor: visual
----
-
-## 

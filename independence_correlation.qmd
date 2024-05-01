@@ -1,84 +1,4 @@
-## 正态性检验
-
-#### 正态分布
-
-概率密度函数
-
-:   $$
-    f(x)=\frac{1}{\sigma \sqrt {2\pi} }e^{-\frac{1}{2}{(\frac{x-\mu}{\sigma})}^2}
-    $$
-
-累计分布函数
-
-:   $$
-    F(x)=\frac{1}{\sigma \sqrt {2\pi} }\int_{-\infty}^{x}               e^{-\frac{1}{2}{(\frac{t-\mu}{\sigma})}^2}dt
-    $$
-
-```{r}
-norm <- function(xlim = c(-Inf,+Inf)){
-  ggplot() + xlim(xlim) +
-    geom_function(fun = dnorm, args = list(mean = 0, sd = 1), color="red")+
-        scale_y_continuous(limits = c(0,1))+
-    geom_function(fun = pnorm,color="blue")
-}
-norm(c(-10,10))         # Area Under the Curve (AUC) = 1
-```
-
-### 直方图
-
-```{r}
-
-
-h<-hist(mtcars$mpg,breaks = 12)
-x<-seq(min(mtcars$mpg),max(mtcars$mpg),by=0.001)
-y<-dnorm(x,mean=mean(mtcars$mpg),sd=sd(mtcars$mpg)) #密度曲线  f(X)=(F(i)/n)/ΔXi
-y<-y*diff(h$mids[1:2])*length(mtcars$mpg)  # f(X)*ΔXi*n  正态分布
-lines(x,y,col="blue")
-```
-
-### Q-Q图
-
-```{r}
-#QQ plot  正态性检验
-library(ggpubr)
-ggqqplot(mtcars$mpg)  #  y=x 直线 
-
-#Z score = (value-mean) / sd
-```
-
-### Shapiro-Wilk检验
-
-测试样本是否服从*正态分布*
-
-```{r}
-set.seed(100)
-normaly_disb <- rnorm(100, mean=5, sd=1) # generate a normal distribution
-shapiro.test(normaly_disb)  
-
-set.seed(100)
-not_normaly_disb <- runif(100)  # uniform distribution.
-shapiro.test(not_normaly_disb)
-```
-
-### Kolmogorov-Smirnov检验
-
-Kolmogorov-Smirnov检验用于检查2个样品是否服从相同的分布。
-
-```{r}
-x <- rnorm(50) 
-y <- runif(50) 
-ks.test(x, y)  # perform ks test
-
-x <- rnorm(50)
-y <- rnorm(50)
-ks.test(x, y) 
-```
-
-### 
-
-Anderson-Darling检验
-
-Lilliefors检验
+# 独立性和相关性
 
 ## 分类变量的列联表和独立性检验
 
@@ -88,23 +8,59 @@ Lilliefors检验
 data(gss_cat)  #因子数据集
 head(gss_cat)
 table(gss_cat$marital,gss_cat$race)
-tbl <- xtabs(formula = ~marital+race,data = gss_cat,subset =NULL)
-tbl
+xtabs(formula = ~marital+race,data = gss_cat,subset =NULL)
 ```
 
 ```{r}
-prop.table(tbl)          #各单元格比例
-prop.table(tbl,margin = 1)        #行比例 
+eg <- matrix(c(156,9421,1531,14797),nrow=2,byrow=TRUE)
+colnames(eg) <- c("Disease","Control")
+rownames(eg) <- c("Exposed","Unexposed")
+print(eg)
+prop.table(eg)          #各单元格比例
+prop.table(eg,margin = 1)        #行比例 
 
 # 边际
-margin.table(x=tbl,margin = 2)      #列和
-addmargins(tbl)          #添加行和、列和
-addmargins(tbl,1)        #添加列和
-addmargins(tbl,2)        #添加行和
-addmargins(prop.table(tbl,1))
+margin.table(x=eg,margin = 2)      #列和
+addmargins(eg)          #添加行和、列和
+addmargins(eg,1)        #添加列和
+addmargins(eg,2)        #添加行和
+addmargins(prop.table(eg,1))
 
-ftable(tbl)   # "平铺式"列联表
+ftable(eg)   # "平铺式"列联表
 ```
+
+### 相对危险度与优势比
+
+
+　　相对危险度 （Relative Risk，RR），是指暴露组人群的发病率与非暴露组人群的发病率之比。RR 用于反映暴露因素与结局事件的关联程度， 其 取值范围为 0 到无穷大。数值为 1 时，表明暴露因素与结局事件无关联；小于 1 时，表 明暴露因素导致结局事件的发生率降低；大于 1 时，表明暴露因素导致结局事件的发生率增加。相对风险适用于队列研究。
+
+　　优势比（Odds Ratio，OR），是指暴露组中病例与非病例人数的比值除以非暴露组中病例与非病例人数的比值。　　OR 的取值范围也为 0 到无穷大。如果 OR 值大于 1 ，说明该暴露因素更 容易导致结果事件发生，或者说该因素是一个危险因素；小于 1 ，则说明该暴露因素更不 容易导致结果事件发生，或者说该因素是一个保护因素。比值比适用于队列研究和病例对照研究。
+
+[Using R for Biomedical Statistics](https://a-little-book-of-r-for-biomedical-statistics.readthedocs.io/en/latest/src/biomedicalstats.html)
+
+
+```{r}
+# RR
+156/(156+9421)*(1531+14797)/1531
+source("function/calcRelativeRisk.R")
+calcRelativeRisk(eg,alpha=0.05)
+
+# OR
+156/9421/(1531/14797)
+source("function/calcOddsRatio.R")
+calcOddsRatio(eg,alpha = 0.05)
+```
+
+```{r}
+mymatrix <- matrix(c(30,24,76,241,82,509),nrow=3,byrow=TRUE)
+colnames(mymatrix) <- c("Disease","Control")
+rownames(mymatrix) <- c("Exposure1","Exposure2","Unexposed")
+print(mymatrix)
+calcOddsRatio(mymatrix, referencerow=3)
+calcRelativeRisk(mymatrix, referencerow=3)
+```
+
+
 
 ### 独立性检验
 
@@ -140,11 +96,7 @@ fisher.test(M)
 
 ```
 
-#### 相对危险度与优势比
 
-　　相对危险度 （Relative Risk，RR），是指暴露组人群 的发病率与非暴露组人群的发病率之比。RR 用于反映暴露因素与结局事件的关联程度， 其 取值范围为 0 到无穷大。数值为 1 时，表明暴露因素与结局事件无关联；小于 1 时，表 明暴露因素导致结局事件的发生率降低；大于 1 时，表明暴露因素导致结局事件的发生 率增加。
-
-　　优势比（Odds Ratio，OR），是指暴露组中病例与非病例人数的比值除以非暴露组中病例与非病例人数的比值。　　OR 的取值范围也为 0 到无穷大。如果 OR 值大于 1 ，说明该暴露因素更 容易导致结果事件发生，或者说该因素是一个危险因素；小于 1 ，则说明该暴露因素更不 容易导致结果事件发生，或者说该因素是一个保护因素。
 
 #### Cochran-Mantel-Haenszel $\chi^2$ 检验
 

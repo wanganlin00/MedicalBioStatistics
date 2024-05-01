@@ -54,8 +54,14 @@ $$
 
 假设 $X\sim B(n,\pi)$ ，一组样本量为n的随机样本。列出样本量为$n$的所有可能随机样本。
 
-样本率$p=X/n$ ，则$E(p)=E(X/n)=\pi,Var(p)=Var(X/n)=\pi(1-\pi)/n$
+样本率$p=X/n$ ，则 $$
+E(p)=E(X/n)=\frac{1}{n}E(X)=\pi
+$$ $$
+Var(p)=Var(X/n)=\frac{1}{n^2}Var(X)=\frac{\pi(1-\pi)}{n}
+$$
 
 率的标准误 $\sigma_p =\sqrt{\frac{\pi(1-\pi)}{n}}$ 可以用 $S _p =\sqrt{\frac{p(1-p)}{n}}$ 估计。
 
-当$n\pi(1-\pi)≥5 且X\sim B(n,\pi)$时，率的抽样分布 $p\dot\sim N(\pi,\frac{\pi(1-\pi)}{n})$
+当$n\pi(1-\pi)≥5 且X\sim B(n,\pi)$时，率的抽样分布 $$
+p\dot\sim N(\pi,\frac{\pi(1-\pi)}{n})
+$$

@@ -31,7 +31,7 @@ head(mtcars$mpg)
 
 mean(mtcars$mpg)     #算术平均数
 median(mtcars$mpg)   #中位数
-
+#众数 mode
 ```
 
 ### 离散程度
@@ -71,16 +71,16 @@ median(abs(mtcars$mpg-median(mtcars$mpg)))*1.4826
     三阶中心矩。方差即二阶中心矩。
 
     $$ 
-        Skew(X) =  \frac{E(X_i-E(X))^3}{Var(X)^{\frac{3}{2}}}\\ =E  [(\frac{X_i-\mu}{\sigma})^3]\\= \frac{1}{n} \sum_{i=1}^{n} [ (\frac{X_i-\mu}{\sigma} )^3]
+        Skew(X) =  \frac{E(X_i-E(X))^3}{Var(X)^{\frac{3}{2}}}\\ =E  [(\frac{X_i-\mu}{\sigma})^3]\\= \frac{1}{n} \sum_{i=1}^{n}  (\frac{X_i-\mu}{\sigma} )^3
     $$
 
     偏度的取值范围： $(-\infty,+\infty)$
 
-    1.  Skew＜0，负偏态分布；左长尾
+    1.  Skew＜0，负偏态分布，左偏 = 尾部向左；
 
     2.  Skew=0，数据相对均匀的分布在均值两侧；
 
-    3.  Skew＞0，正偏态分布。右长尾
+    3.  Skew＞0，正偏态分布，右偏 = 尾部向右。
 
 ```{r}
 x <- c(1,2,3,5)
@@ -109,18 +109,18 @@ skewness(x)
     <https://www.macroption.com/excess-kurtosis/>
 
     $$
-    Kurt(X) =  \frac{E(X_i-E(X))^4}{Var(X)^{2}}-3\\= E  [(\frac{X_i-\mu}{\sigma})^4] - 3\\= \frac{1}{n} \sum_{i=1}^{n} [ (\frac{X_i-\mu}{\sigma} )^4]-3
+    Kurt(X) =  \frac{E(X_i-E(X))^4}{Var(X)^{2}}-3\\= E  [(\frac{X_i-\mu}{\sigma})^4] - 3\\= \frac{1}{n} \sum_{i=1}^{n}  (\frac{X_i-\mu}{\sigma} )^4-3
     $$
 
     峰度的取值范围：$[1,+\infty)$
 
     超值峰度的取值范围：$[-2,+\infty)$
 
-    1.  超值峰度＜0，数据分布与正态分布相比较为平坦；
+    1.  超值峰度＜0，数据分布与正态分布相比较为扁平；
 
     2.  超值峰度=0，正态分布；
 
-    3.  超值峰度＞0，数据分布与正态分布相比较为陡峭。
+    3.  超值峰度＞0，数据分布与正态分布相比较为高尖。
 
 ```{r}
 s$kurtosis
@@ -157,6 +157,152 @@ tbl1 <- tableone::CreateTableOne(vars = colnames(mtcars),
 tbl1
 
 
+```
+
+复现 @fig-三线表
+
+![](images/statistical-table.png){#fig-三线表 fig-align="center" width="80%"}
+
+```{r}
+data <- readRDS("data/brfss_tg_2014_raw.rds")
+data <- data |> 
+    tidyr::drop_na() |>
+    dplyr::filter(TRNSGNDR <= 3) |> 
+    dplyr::filter(`_AGEG5YR` >= 5 & `_AGEG5YR` <= 11) |> 
+    dplyr::select(- c(HADMAM, `_AGE80`))
+
+data_recoded <- data |> 
+    dplyr::mutate(TRNSGNDR = forcats::as_factor(TRNSGNDR)) |> 
+    dplyr::mutate(TRNSGNDR = 
+          forcats::fct_recode(TRNSGNDR, "Male to female" = "1")) |> 
+    dplyr::mutate(TRNSGNDR = 
+          forcats::fct_recode(TRNSGNDR, "Female to male" = "2")) |> 
+    dplyr::mutate(TRNSGNDR = 
+            forcats::fct_recode(TRNSGNDR, "Gender non-conforming" = "3")) |> 
+    
+    dplyr::mutate(`_AGEG5YR` = forcats::as_factor(`_AGEG5YR`)) |> 
+    dplyr::mutate(`_AGEG5YR` = 
+          forcats::fct_recode(`_AGEG5YR`, "40-44" = "5")) |> 
+    dplyr::mutate(`_AGEG5YR` = 
+          forcats::fct_recode(`_AGEG5YR`, "45-49" = "6")) |> 
+    dplyr::mutate(`_AGEG5YR` = 
+          forcats::fct_recode(`_AGEG5YR`, "50-54" = "7")) |> 
+    dplyr::mutate(`_AGEG5YR` = 
+          forcats::fct_recode(`_AGEG5YR`, "55-59" = "8")) |> 
+    dplyr::mutate(`_AGEG5YR` = 
+          forcats::fct_recode(`_AGEG5YR`, "60-64" = "9")) |> 
+    dplyr::mutate(`_AGEG5YR` = 
+          forcats::fct_recode(`_AGEG5YR`, "65-69" = "10")) |> 
+        dplyr::mutate(`_AGEG5YR` = 
+          forcats::fct_recode(`_AGEG5YR`, "70-74" = "11")) |> 
+    
+    dplyr::mutate(`_RACE` = forcats::as_factor(`_RACE`)) |> 
+    dplyr::mutate(`_RACE` = 
+          forcats::fct_recode(`_RACE`, "White" = "1")) |> 
+    dplyr::mutate(`_RACE` = 
+          forcats::fct_recode(`_RACE`, "Black" = "2")) |> 
+    dplyr::mutate(`_RACE` = 
+          forcats::fct_recode(`_RACE`, "Native American" = "3")) |> 
+    dplyr::mutate(`_RACE` = 
+          forcats::fct_recode(`_RACE`, "Asian/Pacific Islander" = "4")) |> 
+    dplyr::mutate(`_RACE` = 
+          forcats::fct_collapse(`_RACE`, "Other" = 
+                c("5", "7", "8", "9"))) |> 
+    
+    dplyr::mutate(`_INCOMG` = forcats::as_factor(`_INCOMG`)) |> 
+    dplyr::mutate(`_INCOMG` = 
+          forcats::fct_recode(`_INCOMG`, "Less than $15,000" = "1")) |> 
+    dplyr::mutate(`_INCOMG` = 
+          forcats::fct_recode(`_INCOMG`, "$15,000 to less than $25,000" = "2")) |> 
+    dplyr::mutate(`_INCOMG` = 
+          forcats::fct_recode(`_INCOMG`, "$25,000 to less than $35,000" = "3")) |> 
+    dplyr::mutate(`_INCOMG` = 
+          forcats::fct_recode(`_INCOMG`, "$35,000 to less than $50,000" = "4")) |> 
+    dplyr::mutate(`_INCOMG` = 
+          forcats::fct_recode(`_INCOMG`, "$50,000 or more" = "5")) |> 
+    dplyr::mutate(`_INCOMG` = 
+          forcats::fct_recode(`_INCOMG`, "Don't know/not sure/missing" = "9")) |>  
+
+    dplyr::mutate(`_EDUCAG` = forcats::as_factor(`_EDUCAG`)) |> 
+    dplyr::mutate(`_EDUCAG` = 
+          forcats::fct_recode(`_EDUCAG`, "Did not graduate highschool" = "1")) |> 
+    dplyr::mutate(`_EDUCAG` = 
+          forcats::fct_recode(`_EDUCAG`, "Graduated highschool" = "2")) |> 
+    dplyr::mutate(`_EDUCAG` = 
+          forcats::fct_recode(`_EDUCAG`, "Attended college/technical school" = "3")) |> 
+    dplyr::mutate(`_EDUCAG` = 
+          forcats::fct_recode(`_EDUCAG`, "Graduated from college/technical school" = "4")) |> 
+    
+    dplyr::mutate(HLTHPLN1 = forcats::as_factor(HLTHPLN1)) |> 
+    dplyr::mutate(HLTHPLN1 = 
+          forcats::fct_recode(HLTHPLN1, "Yes" = "1")) |> 
+    dplyr::mutate(HLTHPLN1 = 
+          forcats::fct_recode(HLTHPLN1, "No" = "2")) |> 
+    
+    dplyr::mutate(PHYSHLTH = dplyr::case_match(PHYSHLTH, 
+                 77 ~ NA,
+                 99 ~ NA,
+                 88 ~ 0,
+                 .default = PHYSHLTH)) |> 
+
+    labelled::set_variable_labels(
+        TRNSGNDR = "Transition status",
+        `_AGEG5YR` = "Age category",
+        `_RACE` = "Race/ethnicity",
+        `_INCOMG` = "Income category",
+        `_EDUCAG` = "Education category",
+        HLTHPLN1 = "Health insurance?",
+        PHYSHLTH = "Days poor physical health per month"
+    )
+
+
+tbl1_gtsummary <- data_recoded |> 
+    gtsummary::tbl_summary(
+        statistic = list(
+            gtsummary::all_continuous() ~ "{median}",
+            gtsummary::all_categorical() ~ "{n}"
+            ), 
+         label = PHYSHLTH ~ "Days poor physical health per month (median, IQR)"
+    )
+
+tbl2_gtsummary <- data_recoded |> 
+    gtsummary::tbl_summary(
+        statistic = list(
+            gtsummary::all_continuous() ~ "({p25}, {p75})",
+            gtsummary::all_categorical() ~ "{p}%"
+            ),
+        digits = list(gtsummary::all_categorical() ~ 1),
+        label = PHYSHLTH ~ "Days poor physical health per month (median, IQR)"
+    )
+
+tbl_merge_gtsummary <- gtsummary::tbl_merge(
+    list(tbl1_gtsummary, tbl2_gtsummary)
+) |> 
+    gtsummary::bold_labels() |> 
+    gtsummary::modify_header(
+        list(
+            label ~ "**Survey participants demographics (N = {n})**",
+            stat_0_1 ~ "**Frequency**", 
+            stat_0_2 ~ "**Percent**"
+        )
+    ) |> 
+    gtsummary::modify_spanning_header(gtsummary::everything() ~ NA) |> 
+    gtsummary::modify_footnote(gtsummary::everything() ~ NA) 
+
+tbl_merge_gtsummary
+```
+
+```{r}
+tbl_merge_gtsummary_small <- tbl_merge_gtsummary |> 
+    gtsummary::as_gt() |> 
+    gt::tab_options(table.font.size = "14px")
+
+tbl_merge_gtsummary_small
+```
+
+```{r}
+gtsummary::theme_gtsummary_compact() 
+tbl_merge_gtsummary
 ```
 
 ## 数据可视化

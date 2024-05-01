@@ -68,4 +68,3 @@ legend("topright",title="Power",as.character(p),fill=colors)
 
 
 ```
-

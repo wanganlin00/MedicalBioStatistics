@@ -35,7 +35,7 @@ logit.pred
 t1<-table(df.validate$Diagnosis,logit.pred,dnn = c("actual","predicted")) #混淆矩阵
 ```
 
-#          决策树
+# 决策树
 
 ```{r}
 library(rpart)
@@ -54,7 +54,61 @@ dtree.pred<-predict(dtree.pruned,df.validate,type = "class")
 t2<-table(df.validate$Diagnosis,dtree.pred,dnn = c("actual","predicted")) 
 ```
 
-#         随机森林####
+###   Logistic 回归（因变量为类别型）
+
+```{r}
+library(AER)  #install.packages("AER")
+data("Affairs",package = "AER")
+summary(Affairs)
+table(Affairs$affairs)
+
+Affairs$yn[Affairs$affairs>0]<-1
+Affairs$yn[Affairs$affairs==0]<-0
+Affairs$yn<-factor(Affairs$yn,levels = c(0,1),labels = c("No","Yes"))
+
+table(Affairs$yn)
+
+fit1<-glm(yn~gender+age+yearsmarried+children+
+          religiousness+education+occupation+rating,
+          data=Affairs,family = binomial(link = logit)
+          )
+summary(fit1)
+
+fit2<-glm(yn~age+yearsmarried+religiousness+rating,
+         data=Affairs,family = binomial(link = logit)
+)
+summary(fit2)
+
+anova(fit2,fit1,test = "Chisq") #两模型嵌套（fit2是fit1的子集） 
+#卡方值不显著，两模型拟合效果无显著差异
+
+
+log<-coef(fit2)  #回归系数  对数优势 log（odds）
+exp(log)        #指数化   odds
+
+#评价预测变量对结果概率的影响
+testdata<-data.frame(rating=c(1,2,3,4,5),age=mean(Affairs$age),
+                     yearsmarried=mean(Affairs$yearsmarried),
+                     religiousness=mean(Affairs$religiousness))
+testdata
+testdata$prob<-predict(fit2,newdata = testdata,type = "response")
+testdata
+
+#过度离势   Φ=deviance()/df.residual()
+deviance(fit2)/df.residual(fit2)  #接近1，表明不存在过度离势
+fit.od<-glm(yn~age+yearsmarried+religiousness+rating,
+            data=Affairs,family =quasibinomial(link = logit))
+#过度离势的检验 H0：Φ=1
+pchisq(summary(fit.od)$dispersion*fit2$df.residual,
+       fit2$df.residual,lower=F)                     #P>0.05
+
+
+
+
+```
+
+
+# 随机森林
 
 ```{r}
 library(randomForest) 
@@ -66,7 +120,8 @@ importance(fit.forest, type=2)
 forest.pred <- predict(fit.forest, df.validate) 
 t3<-table(df.validate$Diagnosis, forest.pred, dnn=c("Actual", "Predicted")) 
 ```
-#        支持向量机####
+
+# 支持向量机
 
 ```{r}
 library(e1071)
@@ -77,8 +132,8 @@ svm.pred <- predict(fit.svm, na.omit(df.validate))
 t4<-table(na.omit(df.validate)$Diagnosis,svm.pred, dnn=c("Actual", "Predicted")) 
 ```
 
-
 #评估二分类变量准确性
+
 ```{r}
 performance <- function(table, n=3){  
   if(!all(dim(table) == c(2,2))) stop("Must be a 2 x 2 table")  
@@ -104,8 +159,6 @@ performance(t3)
 performance(t4)
 
 ```
-
-
 
 ```{r}
 #| echo: false
