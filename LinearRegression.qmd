@@ -37,7 +37,6 @@ p_sales<-function(x){
 p_sales(TV)|p_sales(radio)|p_sales(newspaper)
 ```
 
-
 ```{r}
 lm_sales_tv <- lm_spec |>  fit(sales ~ TV, data = advertising)
 
@@ -102,7 +101,6 @@ confint(lm_sales_3$fit)  # 95%置信区间
 plot(lm_sales_3$fit) #回归诊断图
 ```
 
-
 ## 交互项
 
 ```{r}
@@ -130,6 +128,7 @@ lm <- lm_sales_tv_radio_interact |> fit(advertising)
 tidy(lm)
 glance(lm)
 ```
+
 ## 变换
 
 ### 非线性变换
@@ -148,6 +147,7 @@ lm_wf_square |>
   fit(advertising)
 
 ```
+
 ### 对数变换
 
 ```{r}
@@ -162,10 +162,6 @@ lm_wf_log <- workflow() |>
 lm_wf_log |>
   fit(advertising)
 ```
-
-
-
-
 
 ## 回归诊断
 
@@ -182,8 +178,6 @@ plot(lm_sales_3$fit,1)
 crPlots(lm_sales_3$fit)
 ```
 
-
-
 #### 正态性假设Q-Q图
 
 Standardized Residuals
@@ -193,23 +187,18 @@ plot(lm_sales_3$fit,2)
 summary(powerTransform(lm_sales_3$fit))  
 ```
 
-
-
-
-
-
 ```{r}
 plot(lm_sales_tv$fit,3)
 ```
 
-
-
 #### 误差相关性
+
 ```{r}
 durbinWatsonTest(lm_sales_3$fit)      #结果表明rho=0
 ```
 
-####  误差项的方差齐性
+#### 误差项的方差齐性
+
 ```{r}
 ncvTest(lm_sales_3$fit)
 spreadLevelPlot(lm_sales_3$fit)
@@ -232,8 +221,7 @@ residplot<-function(fit,nbreaks=10){
 residplot(lm_sales_tv$fit)
 ```
 
-
-```{r eval=FALSE} 
+```{r eval=FALSE}
 #######################################################################
 library(car)
 outlierTest(lm_sales_tv$fit)            #离群点
@@ -274,8 +262,6 @@ plot(lm_sales_tv$fit,5)
 plot(lm_sales_tv$fit,6)
 ```
 
-
-
 #### 多重共线性
 
 ```{r}
@@ -285,7 +271,7 @@ sqrt(vif(lm_sales_3$fit))>=2       #vif平方根 ≥2 存在
 summary(lm_sales_3$fit)
 ```
 
-### 模型选择和优化
+## 模型选择和优化
 
 ```{r}
 ########################两模型比较
@@ -330,9 +316,4 @@ relweights<-function(fit,...){
 return(import)
 }
 relweights(lm1$fit,col="blue")
-
-
 ```
-
-
-

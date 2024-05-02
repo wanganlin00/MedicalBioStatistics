@@ -511,6 +511,7 @@ df_aov <- anova(model)
 df_aov
 
     #成对比较
+library(emmeans)
 method_means <- emmeans(model, ~method)  
 print(method_means)  
 method_comparisons <- pairs(method_means)  

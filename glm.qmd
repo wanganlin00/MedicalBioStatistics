@@ -1,0 +1,249 @@
+# 广义线性模型
+## 逻辑回归
+
+```{r}
+library(tidymodels)
+
+logit_spec <- logistic_reg() |>
+  set_mode("classification") |>
+  set_engine("glm") 
+
+logit_spec<-logistic_reg(mode = "classification",
+                         engine = "glm")
+```
+
+逻辑回归( logistic regression )的一般数学方程：
+
+$$
+\pi(Y=k|X=(X_1,X_2,...,X_p)=\frac{e^{\beta_{k0}+\beta_{k1}X_1+\beta_{k2}X_2+...+\beta_{kp}X_p}}{1+\sum_{l=1}^{K-1} e^{\beta_{l0}+\beta_{l1}X_1+\beta_{l2}X_2+...+\beta_{lp}X_p}}
+$$ 其中$\pi$ 是成功概率，$k=1,2,...,K-1$是因变量的分类数，$p$ 是自变量个数。
+
+1.  当$K=2$时，$k=l=p=1$即简单逻辑回归。
+
+    极大似然法（maximum likelihood），*likelihood function*：
+
+    $$
+    \ell (\beta_0,\beta_1)=\prod_{i:y_i=1}\pi(x_i)\prod_{i':y_{i'}=0}(1-\pi(x_{i'}))
+    $$
+
+2.  当$K=2$时，$k=l=1,p>1$即多元逻辑回归（multiple logistic regression）。
+
+    优势（odds）
+
+    $$
+    Odds=\frac{\pi(X)}{1-\pi(X)}=e^{\beta_0+\beta_1X_1+\beta_2X_2+...+\beta_pX_p}
+    $$
+
+    log odds (logit)
+
+    $$
+    logit(\pi(X))=\ln (\frac{\pi(X)}{1-\pi(X)})=\beta_0+\beta_1X_1+\beta_2X_2+...+\beta_pX_p
+    $$
+
+3.  当$K>2$时，$k,l,p>1$即多项逻辑回归（multinomial logistic regression）。
+
+    $$
+    \log (\frac{P(Y=k|X=x)}{P(Y=K|X=x)})=\beta_{k0}+\beta_{k1}X_1+\beta_{k2}X_2+...+\beta_{kp}X_p
+    $$
+
+```{r}
+df <- read_csv("data/Default.csv")
+df$default <- factor(df$default,levels = c("No","Yes"),labels = c(0,1))
+df$student<- factor(df$student,levels = c("No","Yes"),labels = c(0,1))
+# 违约 学生 余额 收入
+head(df)
+table(df$default,df$student)
+```
+
+```{r}
+ggplot(df,aes(balance,income))+
+  geom_point(aes(shape=default,color=default),show.legend = F)|
+ggplot(df,aes(default,balance,fill=default),)+
+  geom_boxplot(show.legend = F)+
+ggplot(df,aes(default,income,fill=default))+
+  geom_boxplot()
+```
+
+### K=2 p=1 logistic regression
+
+#### 线性回归
+
+```{r}
+lm_spec<-linear_reg(mode ="regression",engine = "lm" )
+
+lm_default_balance<-lm_spec |> 
+  fit(as.numeric(default)-1~balance,data=df)
+lm_default_balance$fit
+
+ggplot(df,aes(balance,as.numeric(default)-1))+
+  geom_point(color="orange",size=1.25)+
+  geom_smooth(formula = "y~x",method = "lm",se=FALSE)+
+  geom_hline(yintercept = c(0,1),linetype=2)+
+  ggtitle("linear regression")
+
+```
+
+#### 逻辑回归
+
+```{r}
+logit_default_balance<-logit_spec |> fit(default~balance,data=df)
+
+summary(logit_default_balance$fit)
+
+tidy(logit_default_balance) #prob(Y=1|x)=exp(β0+β1X)/(1+exp(β0+β1X))  
+
+
+df |> 
+  mutate(
+    prob=1/(1+exp(-(logit_default_balance$fit$coefficients[1]+logit_default_balance$fit$coefficients[2]*balance))),
+    logit=log(prob/(1-prob))
+  ) |> 
+  ggplot()+
+    geom_point(aes(balance,as.numeric(default)-1),color="orange")+
+    geom_line(aes(balance,prob),color="blue")+  
+    geom_hline(yintercept = c(0,1),linetype=2)+
+    ggtitle("logistic regression")
+
+```
+
+#### 自变量是分类变量
+
+```{r}
+logit_default_student <- logit_spec |>fit(default ~ student, data = df)
+
+tidy(logit_default_student)
+
+df |> 
+  mutate(
+    prob=1/(1+exp(-(logit_default_student$fit$coefficients[1]+logit_default_student$fit$coefficients[2]*(as.numeric(student)-1)))),
+    logit=log(prob/(1-prob))
+  ) |> select(student,prob)
+```
+
+### K=2,p>1 多元逻辑回归
+
+```{r}
+logit_multiple<-logit_spec |> fit(default~balance+income+student,data=df)
+
+tidy(logit_multiple)
+
+# confusion matrix 混淆矩阵
+augment(logit_multiple, new_data = df) |>
+  conf_mat(truth = default, estimate = .pred_class) |> 
+    autoplot(type = "heatmap")
+
+#准确性 
+(9627+105)/(9627+105+40+228)
+augment(logit_multiple, new_data = df) |>
+  accuracy(truth = default, estimate = .pred_class)
+```
+
+减少弱相关或无关变量
+
+```{r}
+logit_multiple_2<-logit_spec |> fit(default~balance+student,data=df)
+
+augment(logit_multiple_2, new_data =df) |>
+  conf_mat(truth = default, estimate = .pred_class) 
+```
+
+预测特定值
+
+```{r}
+df_new <- tibble(
+  balance = c(1000, 2000), 
+  student = factor(c(1, 0)),
+)
+predict(logit_multiple_2, new_data = df_new,type="class")
+predict(logit_multiple_2, new_data = df_new, type = "prob")
+```
+
+### K>2,p>1 multinomial logistic regression
+
+```{r}
+
+```
+
+## 泊松回归
+
+因变量是计数变量（非负整数）
+
+```{r}
+library(poissonreg)
+df2 <- read_csv("data/Bikeshare.csv")
+```
+
+
+```{r}
+pois_spec <- poisson_reg() |> 
+  set_mode("regression") |> 
+  set_engine("glm")
+
+pois_rec_spec <- recipe(bikers ~ mnth + hr + workingday + temp + weathersit, data = df2) |> 
+    step_dummy(all_nominal_predictors()) # 虚拟变量
+
+pois_wf <- workflow() |> 
+  add_recipe(pois_rec_spec) |> 
+  add_model(pois_spec)
+
+pois_fit <- pois_wf |> fit(data = df2)
+
+
+tidy(pois_fit)
+
+augment(pois_fit, new_data = df2,type="response") |> 
+  ggplot(aes(bikers, .pred)) +
+  geom_point(alpha = 0.1) +
+  geom_abline(slope = 1, linewidth = 1, color = "grey40") +
+  labs(title = "Predicting the number of bikers per hour using Poission Regression",
+       x = "Actual", y = "Predicted")
+```
+
+```{r}
+pois_fit_coef_mnths <- 
+  tidy(pois_fit) |> 
+  dplyr::filter(grepl("^mnth", term)) |> 
+  mutate(
+    term = stringr::str_replace(term, "mnth_", ""),
+    term = forcats::fct_inorder(term)
+  ) 
+
+pois_fit_coef_mnths |> 
+  ggplot(aes(term, estimate)) +
+  geom_line(group = 1,na.rm = TRUE) +
+  geom_point(shape = 21, size = 3, stroke = 1.5, 
+             fill = "black", color = "white",na.rm = TRUE) +
+  labs(title = "Coefficient value from Poission Regression",
+       x = "Month", y = "Coefficient")
+```
+
+
+## K-Nearest Neighbors
+
+```{r}
+df3 <- read_csv("data/Smarket.csv") 
+head(df3)
+df3$Direction <- factor(df3$Direction)
+```
+
+
+```{r}
+knn_spec <- nearest_neighbor(neighbors = 3) |> 
+  set_mode("classification") |> 
+  set_engine("kknn")
+
+knn_fit <- knn_spec |>
+  fit(Direction ~ Lag1 + Lag2, data = df3)
+
+knn_fit
+
+```
+```{r}
+augment(knn_fit, new_data = df3) |> 
+  conf_mat(truth = Direction, estimate = .pred_class) 
+```
+```{r}
+augment(knn_fit, new_data = df3) |>
+  accuracy(truth = Direction, estimate = .pred_class) 
+```
+

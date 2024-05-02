@@ -17,7 +17,7 @@ book:
         - independence_correlation.qmd
 
 
-    - part: "统计推断"
+    - part: "概率论与统计推断"
       chapters:
         - probability_fundamentals.qmd
         - SamplingDistribution.qmd
@@ -26,22 +26,22 @@ book:
         - ANOVA.qmd
     #     - PowerAnalysis.qmd
     #     - Causal_Inference.qmd
-    #     
     - part: "统计建模"
       chapters:
         - LinearRegression.qmd
-    #     - Classification.qmd
-    #     - Clustering.qmd
+        - glm.qmd
+        - Clustering.qmd
+        
 
+    - PCA.qmd
+    - t-SNE.qmd
+    - UMAP.qmd
+   
     - part: "生存分析"
       chapters:
         - SurvivalAnalysis.qmd
-    - part: "高维统计"
-      # chapters:
-      #    - PCA.qmd
-      #    - t-SNE.qmd
-      #    - UMAP.qmd
-      #    - DimensionalityReduction.qmd
+
+
 
 execute:
   cache: true

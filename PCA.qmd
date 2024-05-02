@@ -1,0 +1,144 @@
+
+# 主成分分析
+
+Principal component analysis(PCA) 是一种线性降维方法。
+
+
+
+## Linear Algebra 基础
+
+### 矩阵分解
+
+```{r}
+set.seed(55)
+e <- c(
+  x=c(runif(20,1,9)),
+  y=c(runif(30,40,50)),
+  z=c(runif(50,90,100))
+)
+e
+mat<-matrix(e,nrow = 10,byrow = TRUE)
+mat
+
+mat_center <- mat-rowMeans(mat)
+# 奇异值分解
+svt1 <- svd(mat_center)
+svt1
+
+plot(svt1$d)
+plot(svt1$d^2/sum(svt1$d^2))
+par(mfrow=c(1,2))
+
+svt1$v
+plot(svt1$v[,1],ylab = "1st PC")
+plot(svt1$v[,2],ylab="2nd PC")
+
+plot(svt1$v[,1],svt1$v[,2],xlab="lst PC",ylab="2nd PC")
+library(ggfortify)
+autoplot(prcomp(mat),
+         data=mat,
+         )
+```
+
+
+
+
+## PCA 
+
+
+判断主成分的个数 
+
+1.  Cattell碎石图        图形变化最大处，即拐角处 
+2.  Kaiser-Harris准则    特征值大于1，直线y=1以上
+3.  平行分析             基于真实数据的特征值大于一组随机数据矩阵相应的特征值（虚线）`psych::fa.parallel(mat)`
+
+```{r}
+library(tidymodels)
+```
+
+`USArrests` data set
+
+```{r}
+USArrests <- as_tibble(USArrests, rownames = "state")
+USArrests
+
+
+USArrests %>%
+  select(-state) %>%
+  map_dfr(mean)  #apply(.,2,mean)
+```
+
+
+
+```{r}
+USArrests_pca <- USArrests %>%
+  select(-state) %>%
+  stats::prcomp(scale = TRUE)
+
+
+USArrests_pca
+
+broom::tidy(USArrests_pca)
+tidy(USArrests_pca, matrix = "scores") #by default  USArrests_pca$x 变长表
+tidy(USArrests_pca, matrix = "loadings") # USArrests_pca$Rotation 变长表
+```
+
+```{r}
+tidy(USArrests_pca, matrix = "loadings") %>%
+  ggplot(aes(value, column)) +
+  facet_wrap(~ PC) +
+  geom_col() +
+  scale_x_continuous(labels = scales::percent)
+```
+
+```{r}
+#standard deviation, percent explanation and cumulative explanation
+tidy(USArrests_pca, matrix = "eigenvalues") 
+```
+
+```{r}
+tidy(USArrests_pca, matrix = "eigenvalues") %>%
+  ggplot(aes(PC, percent)) +
+  geom_col()
+```
+
+```{r}
+augment(USArrests_pca)
+
+augment(USArrests_pca, new_data = USArrests[1:5,])
+```
+
+```{r}
+pca_rec <- recipe(~., data = USArrests[3:6]) %>%
+  step_normalize(all_numeric()) %>%
+  step_pca(all_numeric(), id = "pca") %>%
+  prep()
+
+pca_rec %>%
+  bake(new_data = NULL)
+
+pca_rec %>%
+  bake(new_data = USArrests[40:45, ])
+```
+
+```{r}
+tidy(pca_rec, id = "pca", type = "coef")
+tidy(pca_rec, id = "pca", type = "variance")
+```
+
+```{r}
+recipe(~., data = USArrests[3:6]) %>%
+  step_normalize(all_numeric()) %>%
+  step_pca(all_numeric(), num_comp = 3) %>%
+  prep() %>%
+  bake(new_data = NULL)
+```
+
+```{r}
+recipe(~., data = USArrests[3:6]) %>%
+  step_normalize(all_numeric()) %>%
+  step_pca(all_numeric(), threshold = 0.7) %>%
+  prep() %>%
+  bake(new_data = NULL)
+```
+
