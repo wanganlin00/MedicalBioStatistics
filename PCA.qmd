@@ -1,9 +1,6 @@
-
 # 主成分分析
 
 Principal component analysis(PCA) 是一种线性降维方法。
-
-
 
 ## Linear Algebra 基础
 
@@ -40,17 +37,13 @@ autoplot(prcomp(mat),
          )
 ```
 
+## PCA
 
+判断主成分的个数
 
-
-## PCA 
-
-
-判断主成分的个数 
-
-1.  Cattell碎石图        图形变化最大处，即拐角处 
-2.  Kaiser-Harris准则    特征值大于1，直线y=1以上
-3.  平行分析             基于真实数据的特征值大于一组随机数据矩阵相应的特征值（虚线）`psych::fa.parallel(mat)`
+1.  Cattell碎石图 图形变化最大处，即拐角处
+2.  Kaiser-Harris准则 特征值大于1，直线y=1以上
+3.  平行分析 基于真实数据的特征值大于一组随机数据矩阵相应的特征值（虚线）`psych::fa.parallel(mat)`
 
 ```{r}
 library(tidymodels)
@@ -67,8 +60,6 @@ USArrests %>%
   select(-state) %>%
   map_dfr(mean)  #apply(.,2,mean)
 ```
-
-
 
 ```{r}
 USArrests_pca <- USArrests %>%
@@ -109,7 +100,7 @@ augment(USArrests_pca, new_data = USArrests[1:5,])
 ```
 
 ```{r}
-pca_rec <- recipe(~., data = USArrests[3:6]) %>%
+pca_rec <- recipe(~., data = USArrests[2:5]) %>%
   step_normalize(all_numeric()) %>%
   step_pca(all_numeric(), id = "pca") %>%
   prep()
@@ -127,7 +118,7 @@ tidy(pca_rec, id = "pca", type = "variance")
 ```
 
 ```{r}
-recipe(~., data = USArrests[3:6]) %>%
+recipe(~., data = USArrests[2:5]) %>%
   step_normalize(all_numeric()) %>%
   step_pca(all_numeric(), num_comp = 3) %>%
   prep() %>%
@@ -135,10 +126,9 @@ recipe(~., data = USArrests[3:6]) %>%
 ```
 
 ```{r}
-recipe(~., data = USArrests[3:6]) %>%
+recipe(~., data = USArrests[2:5]) %>%
   step_normalize(all_numeric()) %>%
   step_pca(all_numeric(), threshold = 0.7) %>%
   prep() %>%
   bake(new_data = NULL)
 ```
-
