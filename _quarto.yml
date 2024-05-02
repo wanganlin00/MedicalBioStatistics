@@ -30,9 +30,8 @@ book:
       chapters:
         - LinearRegression.qmd
         - glm.qmd
-        - Clustering.qmd
         
-
+    - Clustering.qmd
     - PCA.qmd
     - t-SNE.qmd
     - UMAP.qmd
