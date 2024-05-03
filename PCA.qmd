@@ -1,115 +1,510 @@
 # 主成分分析
 
-Principal component analysis(PCA) 是一种线性降维方法。
+主成分分析(Principal component analysis，PCA) 是一种线性降维方法。
 
-## Linear Algebra 基础
+对于一组变量$X_1,X_2,...,X_p$,存在它们的线性组合$PC$，令$var(PC)$最大，得到$PC_1$,再找$PC_2$，$PC_2$与$PC_1$正交，以此类推，找到一组$PC_1,PC_2,...,PC_m$无关主成分。
 
-### 矩阵分解
+## 线性代数
+
+### 列向量
+
+$$
+\vec v=
+\begin{bmatrix}
+    v_1 \\
+    v_2 \\
+\end{bmatrix}
+$$
+
+$$
+\vec v=
+\begin{bmatrix}
+    v_1 \\
+    v_2 \\
+\end{bmatrix}
+$$
+
+为了方便起见，如不作特殊说明，以下行向量均为列向量。
+
+向量加法：$\vec v+\vec w=(v_1+w_1,v_2+w_2 )$
+
+数乘：$k \vec v=(k v_1,k v_2)$
+
+线性组合$c\vec v+d\vec w$
+
+向量点积或内积：$\vec v·\vec w=v_1w_1+v_2w_2$ ，点积为零，向量垂直。
+
+长度：$||\vec v||=\sqrt{\vec v·\vec v}$
+
+单位向量：$\vec u=\frac{\vec v}{||\vec v||}$
+
+正交：$\vec v^T\vec w=0$
+
+### 矩阵运算规则
+
+矩阵A，B，C 满足加法交换律，分配律和结合律，乘法结合律和分配律，指数运算法则（$A^0=I$）
+
+通常不满足乘法交换律
+
+$$
+AB\ne BA
+$$
+
+例外：$AI=IA$
 
 ```{r}
-set.seed(55)
-e <- c(
-  x=c(runif(20,1,9)),
-  y=c(runif(30,40,50)),
-  z=c(runif(50,90,100))
-)
-e
-mat<-matrix(e,nrow = 10,byrow = TRUE)
-mat
+I <- matrix(data = c(1,0,0,0,1,0,0,0,1),nrow = 3)
+I
+x <- c(6,4,2)
 
-mat_center <- mat-rowMeans(mat)
-# 奇异值分解
-svt1 <- svd(mat_center)
-svt1
+# 矩阵乘法
+I %*% x
 
-plot(svt1$d)
-plot(svt1$d^2/sum(svt1$d^2))
-par(mfrow=c(1,2))
+# 转置
+t(I)
+```
 
-svt1$v
-plot(svt1$v[,1],ylab = "1st PC")
-plot(svt1$v[,2],ylab="2nd PC")
+### 单位矩阵
 
-plot(svt1$v[,1],svt1$v[,2],xlab="lst PC",ylab="2nd PC")
+主对角线都是1，其余都是0。
+
+$$ I= \begin{bmatrix}  1 & 0 & ... & 0 & 0 \\ 0 & 1 & ... & 0 & 0 \\ \vdots & \vdots & &\vdots & \vdots & \\ 0 & 0 & ... & 1 & 0 \\ 0 & 0 & ... & 0 & 1 \\ \end{bmatrix} $$
+
+对于单位矩阵 $I\vec x=\vec x$ 恒成立。
+
+### 线性方程组
+
+矩阵A，：$A\vec x=\vec b$
+
+```{r}
+solve(I,x)
+```
+
+线性组合$x_1\vec u+x_2\vec v+x_3\vec w$改写成矩阵乘向量，矩阵$A$的**列的线性组合**
+
+$$
+A=
+\begin{bmatrix}
+ \vec u&\vec v&\vec w
+\end{bmatrix}
+=
+\begin{bmatrix}
+ u_1 & v_1 & w_1 \\
+ u_2 & v_2 & w_2 \\
+ u_3 & v_3 & w_3 \\
+\end{bmatrix}
+$$
+
+$$
+\vec x=
+\begin{bmatrix}
+    x_1\\
+    x_2\\
+    x_3\\
+\end{bmatrix}
+$$
+
+矩阵的列的线性组合：
+
+$$
+{\begin{bmatrix}
+\vec u&\vec v&\vec w
+\end{bmatrix}}
+\begin{bmatrix}
+    x_1\\
+    x_2\\
+    x_3\\
+\end{bmatrix}=x_1\vec u+x_2\vec v+x_3\vec w
+$$
+
+$$
+\vec b=
+\begin{bmatrix}
+    b_1\\
+    b_2\\
+    b_3\\
+\end{bmatrix}=
+\begin{bmatrix}
+    x_1u_1+x_2v_1+x_3w_1 \\
+    x_1u_2+x_2v_2+x_3w_2  \\
+    x_1u_3+x_2v_3+x_3w_3 \\
+\end{bmatrix}
+$$
+
+也可以用行的方法，矩阵$A$的每一行乘向量$\vec x$，即计算每一**行与**$\vec x$**的点积**。
+
+$$
+\begin{bmatrix}
+(u_1,v_1,w_1)·(x_1,x_2,x_3) \\
+(u_2,v_2,w_2)·(x_1,x_2,x_3) \\
+(u_3,v_3,w_3)·(x_1,x_2,x_3) \\
+\end{bmatrix}
+$$
+
+### 消元法（elimination）
+
+消元法求解线性方程组$A\vec x=\vec b$：
+
+1.  利用第一式使得第一主元以下都变成0：$a_{11}$ 是第一个主元，$a_{i1}/a_{11}$ 是乘数，消去其余所有方程的$x_1$ ，使得（i，1）单元为0，i≥2
+
+2.  利用新的第二式使得第二主元以下都变成0：第二个主元是变换后的$a_{22}'$，使得（i，2）单元为0，i≥3。
+
+3.  列3到n：以此类推，使得下三角单元为0，找到n个主元，得到一个上三角系统$U$ ，系统由底部向上求解，反向代入法$U\vec x=\vec c$ 。
+
+主元不可为零，否则无解或无限多解。若主元位置是0，交换非零单元行。
+
+消元矩阵$E_{ij}$ 是从单位矩阵$I$ 开始，把位置$i,j$ 的0 换成了非零乘数$-l_{ij}$，从行i减去行j的 $l$ 倍。
+
+$$
+l_{ij}=\frac{第i行要消去的单元}{主元(pivot)：执行消元的第j行的第一个非零系数}
+$$
+
+消元矩阵乘A**x**=**b**的顺序$E_{21},E_{31},...,E_{n1}$，然后$E_{32},E_{42},...,E_{n1}$，以此类推。
+
+行交换矩阵$P_{ij}$：将$I$ 的第i行与第j行交换。左乘$P_{ij}$ ，交换行i与行j
+
+### 逆矩阵
+
+当$A$ 是可逆矩阵，$A\vec x=\vec b$ 的解是$\vec x=A^{-1}\vec b$。
+
+若矩阵A有逆矩阵，则$A^{-1}A=I 且AA^{-1}=I$。
+
+```{r}
+A <- matrix(c(1, 2, 3, 4), nrow = 2)
+
+A_inverse <- solve(A)
+A_inverse
+A%*%A_inverse
+A_inverse%*%A
+
+A_det <- det(A)
+A_det == 0
+
+
+solve(A,c(0,0))
+```
+
+可逆性：
+
+1.  消元法：A必须有n个非零主元(允许交换行)。
+
+2.  代数法：$det(A)\ne 0$。
+
+3.  线性方程：$A\vec x=\vec 0$ 必须是唯一解$\vec x=\vec 0$。
+
+矩阵A，B可逆，则$(AB)^{-1}=B^{-1}A^{-1}$
+
+Gauss-Jordan Elimination :
+
+$$ A^{-1}[A\ \ \ I]=[I\ \ \ A^{-1}] $$
+
+### 消元=分解
+
+$A=LU$，下三角$L$的对角线都是1，乘数$l_{ij}$ 在对角线下方。
+
+$$
+\begin{aligned}
+L\vec c =&\vec b\\
+U\vec x=&\vec c\\
+L(U\vec x)=&L\vec c\\
+A\vec x=&\vec b
+\end{aligned}
+$$
+
+### 特征值与特征向量（eigen）
+
+$$
+A\vec x=\lambda \vec x
+$$
+
+其中$\vec x$ 是特征向量，数$\lambda$ 是矩阵的一个特征值。
+
+特征值方程式：
+
+$$
+det(A-\lambda I)=0
+$$
+
+特征向量：对于每个特征值λ求解$(A-λI)\vec x=\vec 0$，得到一个特征向量。维持相同的方向。
+
+行列式为零，奇异矩阵（$A-\lambda I$）
+
+::: callout-note
+n个特征值的乘积等于行列式。
+
+n个特征值的和等于矩阵的迹（主对角线单元的和）
+:::
+
+```{r}
+y <- eigen(A)
+y$values
+y$vectors
+```
+
+### 奇异值分解（singular value decomposition, SVD）
+
+$$
+\begin{aligned}
+\\A=&U\Sigma V^T \\
+=&
+\begin{bmatrix}
+u_1 & u_2 & \dots & u_r
+\end{bmatrix}
+\begin{bmatrix}    
+\sigma_1 &  &  \\    
+& \ddots &  \\    
+ &  & \sigma_r \\
+\end{bmatrix} 
+\begin{bmatrix}
+v_1^T\\
+v_2^T\\
+\vdots\\
+v_r^T\\
+\end{bmatrix}\\
+=&\sum\sigma_iu_iv_i^T
+\end{aligned}
+$$
+
+$u$是左奇异向量（$AA^T$的单位特征向量），$v$是右奇异向量（$A^TA$的单位特征向量），$\sigma$ 是$r$个奇异值（$AA^T与A^TA的相同特征值\lambda=\sigma^2的平方根$）。
+
+::: callout-note
+$AA^T\mu_i=\sigma_i^2\mu_i$，
+
+$A^TA\nu_i=\sigma_i^2\nu_i$,
+
+$A\nu_i=\sigma_i\mu_i$
+:::
+
+## PCA by SVD
+
+### 数据矩阵
+
+R中数据框 n个观测，p个变量
+
+$$
+\begin{bmatrix}
+  x_{11}& x_{12} & ... & x_{1p}\\
+ x_{21} & x_{22} & ... & x_{2p}\\
+ \vdots  &  \vdots &   & \vdots \\
+  x_{n1}& x_{n2} & ... & x_{np}
+\end{bmatrix}
+=(X_1,X_2,...X_p)
+$$
+
+转化成矩阵
+
+$$
+\begin{bmatrix}
+  x_{11}& x_{21} & ... & x_{n1}\\
+ x_{12} & x_{22} & ... & x_{n2}\\
+ \vdots  &  \vdots &   & \vdots \\
+  x_{1p}& x_{2p} & ... & x_{np}
+\end{bmatrix}
+=[X_1,X_2,...X_p]^T
+$$
+
+数据矩阵中心化(变量值减去均值)，使得变量均值近似零。
+
+```{r}
+df <- as_tibble(USArrests, rownames = "state") |> column_to_rownames("state")
+head(df)
+
+df_center <- df |> mutate_all(~ .x - mean(.x, na.rm = TRUE))
+colMeans(df_center)
+```
+
+### 协方差矩阵
+
+当$\Sigma$ 未知时，其用其估计值样本协方差矩阵（p×p） $A_{p×n}$ 代替
+
+$$
+S=\frac{AA^T}{n-1}
+$$
+
+-   A显示来自每个变量值与变量平均值的距离$X_i-\bar X$；
+-   \$(AA\^T)\_{ii} \$显示距离平方的总和(样本方差 $s_i^2$);
+-   $(AA^T)_{ij}，i\ne j$ 显示样本协方差 $s_{ij} = (A 的行 i) · (A 的行 j)$。
+
+```{r}
+# 内置协方差矩阵函数
+cov(df_center)
+
+
+
+# 协方差矩阵公式
+A <- as.matrix(t((df_center)))
+AA_T <-A%*%t(A)
+S <- AA_T/(50-1)
+S
+```
+
+相关系数矩阵R=（r~ij~）
+
+$$
+r_{ij}=\frac {S_{ij}}{\sqrt{S_{ii}×S_{jj}}}
+$$
+
+```{r}
+cor(df_center)
+r_ij <- S[1,2]/sqrt(S[1,1]*S[2,2])
+```
+
+总方差T=所有特征值的总和=样本方差的总和=迹(对角线的总和)
+
+`sum(eigen(AA_T)$values)`=`sum(diag(AA_T))`= `sum(svd$d^2)`
+
+```{r}
+# AA^T的特征值
+y <- eigen(AA_T)
+y$values
+y$vectors
+sum(y$values)
+
+# 迹
+sum(diag(AA_T))
+```
+
+### 奇异值分解
+
+```{r}
+svd <- svd(df_center)
+svd$d
+svd$u
+svd$v
+# 奇异值的平方和
+sum(svd$d^2)
+
+# 主成分荷载
+svd$v
+
+# fc贡献百分比
+pct <- svd$d^2/sum(svd$d^2)
+pct
+```
+
+内置PCA
+
+```{r}
+pca <- prcomp(df_center)
+pca
+
+summary(pca)
 library(ggfortify)
-autoplot(prcomp(mat),
-         data=mat,
+autoplot(prcomp(df_center),
+         data=df_center,
          )
 ```
 
-## PCA
+主成分的推导??????????????
 
-判断主成分的个数
+$$ PC= \begin{bmatrix} v_1&v_2&\dots&v_p \end{bmatrix} \begin{bmatrix} X_1\\ X_2\\ \vdots\\ X_p \end{bmatrix}=VX=U \Sigma  $$
 
-1.  Cattell碎石图 图形变化最大处，即拐角处
-2.  Kaiser-Harris准则 特征值大于1，直线y=1以上
-3.  平行分析 基于真实数据的特征值大于一组随机数据矩阵相应的特征值（虚线）`psych::fa.parallel(mat)`
+寻找主成分就是使X的线性组合$VX$ 的方差尽可能大，即???????????
+
+$$ \begin{aligned} Var(VX) =&E(VX-E(VX))(VX-E(VX))'\\ =&VE(X-E(X))(X-E(X))'V' \\ =&V\Sigma V' \end{aligned} $$
+
+可视化主成分
+
+碎石图
+
+```{r}
+plot(svd$d,type="b")
+plot(svd$d^2/sum(svd$d^2),type="b")
+```
+
+```{r}
+
+svd$v
+plot(svd$v[,1],ylab = "1st PC")
+plot(svd$v[,2],ylab="2nd PC")
+plot(svd$v[,3],ylab="3rd PC")
+plot(svd$v[,4],ylab="4th PC")
+
+
+plot(svd$v[,1],svd$v[,2],xlab="lst PC",ylab="2nd PC")
+
+```
+
+## 主成分分析
 
 ```{r}
 library(tidymodels)
 ```
 
-`USArrests` data set
-
 ```{r}
-USArrests <- as_tibble(USArrests, rownames = "state")
-USArrests
+df <- as_tibble(USArrests, rownames = "state")
+head(df)
 
-
-USArrests %>%
-  select(-state) %>%
+df |>
+  select(-state) |>
   map_dfr(mean)  #apply(.,2,mean)
 ```
 
 ```{r}
-USArrests_pca <- USArrests %>%
-  select(-state) %>%
+df_pca <- df |>
+  select(-state) |>
   stats::prcomp(scale = TRUE)
 
-
-USArrests_pca
-
-broom::tidy(USArrests_pca)
-tidy(USArrests_pca, matrix = "scores") #by default  USArrests_pca$x 变长表
-tidy(USArrests_pca, matrix = "loadings") # USArrests_pca$Rotation 变长表
+options(digits = 3)
+df_pca
+broom::tidy(df_pca, matrix = "scores")[1:6,] #by default    df_pca$x 长表
 ```
 
+主成分荷载（loading）：表示主成分与原有变量的相关系数
+
 ```{r}
-tidy(USArrests_pca, matrix = "loadings") %>%
+tidy(df_pca, matrix = "loadings")[1:6,]# df_pca$Rotation 长表
+df_pca$rotation
+```
+
+例如：
+
+$$
+PC_1=-0.531Murrder-0.583Assault-0.278UrbanPop-0.543Rape
+$$
+
+```{r}
+
+tidy(df_pca, matrix = "loadings") |>
   ggplot(aes(value, column)) +
   facet_wrap(~ PC) +
   geom_col() +
   scale_x_continuous(labels = scales::percent)
 ```
 
+特征值 eigenvalues，高维椭球的主轴长度，相关矩阵的特征值。表示方差百分比贡献。
+
 ```{r}
-#standard deviation, percent explanation and cumulative explanation
-tidy(USArrests_pca, matrix = "eigenvalues") 
+tidy(df_pca, matrix = "eigenvalues") 
+psych::fa.parallel(df[-1])
 ```
 
 ```{r}
-tidy(USArrests_pca, matrix = "eigenvalues") %>%
-  ggplot(aes(PC, percent)) +
-  geom_col()
+# screen plot
+tidy(df_pca, matrix = "eigenvalues") |>
+    ggplot(aes(PC, percent)) +
+    geom_point(color = "red") +
+    geom_line()+
+    scale_y_continuous(labels = scales::percent)
 ```
 
 ```{r}
-augment(USArrests_pca)
+augment(df_pca)
 
-augment(USArrests_pca, new_data = USArrests[1:5,])
+augment(df_pca, new_data = df[1:5,])
 ```
 
 ```{r}
-pca_rec <- recipe(~., data = USArrests[2:5]) %>%
-  step_normalize(all_numeric()) %>%
-  step_pca(all_numeric(), id = "pca") %>%
+pca_rec <- recipe(~., data = df[2:5]) |>
+  step_normalize(all_numeric()) |>
+  step_pca(all_numeric(), id = "pca") |>
   prep()
 
-pca_rec %>%
+pca_rec |>
   bake(new_data = NULL)
 
-pca_rec %>%
-  bake(new_data = USArrests[40:45, ])
+pca_rec |>
+  bake(new_data = df[40:45, ])
 ```
 
 ```{r}
@@ -118,17 +513,23 @@ tidy(pca_rec, id = "pca", type = "variance")
 ```
 
 ```{r}
-recipe(~., data = USArrests[2:5]) %>%
-  step_normalize(all_numeric()) %>%
-  step_pca(all_numeric(), num_comp = 3) %>%
-  prep() %>%
+recipe(~., data = df[2:5]) |> 
+  step_normalize(all_numeric()) |>
+  step_pca(all_numeric(), num_comp = 3) |>
+  prep() |>
   bake(new_data = NULL)
 ```
 
 ```{r}
-recipe(~., data = USArrests[2:5]) %>%
-  step_normalize(all_numeric()) %>%
-  step_pca(all_numeric(), threshold = 0.7) %>%
-  prep() %>%
+recipe(~., data = df[2:5]) |>
+  step_normalize(all_numeric()) |>
+  step_pca(all_numeric(), threshold = 0.7) |>
+  prep() |>
   bake(new_data = NULL)
 ```
+
+### 判断主成分的个数`psych::fa.parallel(mat)`
+
+1.  Cattell碎石图 图形变化最大处，即拐角处
+2.  Kaiser-Harris准则 特征值大于1，直线y=1以上
+3.  平行分析 基于真实数据的特征值大于一组随机数据矩阵相应的特征值（虚线）
