@@ -1,7 +1,239 @@
----
-title: "生存分析"
----
-
-## Survival analysis
+# 生存分析
 
 [医学研究中的生存数据建模](https://bookdown.org/wangzhen/survival/)
+
+生存函数
+
+$$
+S(t)=P(T>t)=1-F(t)=\int_{t}^{+\infty}f(x)dx
+$$
+
+其中S(t)是累计生存概率或生存率，量化了生存时间大于t的概率。f(x)是密度函数，呈右偏态分布，反映了任意时间点 t 终点事件的瞬时发生率。F(t)=P(T\<t)是f(t)在区间\[0,t\]的累计形式，也称为分布函数或累积函数。
+
+风险函数
+
+$$
+\begin{aligned}
+h(t)=&\lim_{\Delta t\to 0}\frac{P(t\le T<t+\Delta t|T\ge t)}{\Delta t}\\
+=&\lim_{\Delta t\to 0}\frac{P(t\le T<t+\Delta t\ \&\ T\ge t)}{\Delta t·P(T\ge t) }\\
+=&\lim_{\Delta t\to 0}\frac{S(t)- S(t+\Delta t)}{\Delta t·S(t)}\\
+=&-\frac{d(\ln S(t))}{dt}
+\end{aligned}
+$$
+
+\$ S(t)=e\^{-\int\_0\^t h(u)du} \$
+
+$$
+\begin{aligned}
+h(t)\Delta t=&P(t\le T<t+\Delta t|T\ge t)
+=\frac{P(t\le T<t+\Delta t\ \&\ T\ge t)}{P(T\ge t) }\\
+=&\frac{P(t\le T<t+\Delta t)}{P(T\ge t) }\\
+=&\frac{f(t)\Delta t}{S(t)}
+\end{aligned}
+$$
+
+$f(t)=h(t)S(t)$
+
+## 乘积极限法
+
+product limit method 也称为Kaplan-Meier 法。
+
+$t_1<t_2<t_3<...<t_n$，样本量大小n，t~i~ 代表个体i发生终点事件或右删失的时间。由于一些个体有相同的生存时间，它们被称为 tied 观测时间，生存时间的个数小于样本量n。
+
+### 点估计S(t)
+
+$n_1>n_2>n_3>...>n_n$ ,n~i~ d代表在时间点t~i~ 暴露于特定事件风险的幸存者数量。
+
+$d_i$ 代表在时间点t~i~ 发生终点事件的数量。（如果没有 tie，d~i~=1或0）
+
+生存率的KM估计计算公式：
+
+$$
+\hat S(t)=\prod_{t_i\le t}\frac{n_i-d_i}{n_i}
+$$ {#eq-KM}
+
+@eq-KM 包括了删失情况，如果从t~i-1~ 到t~i~ 发生了删失，但没有终点事件，d~i~ =0，条件概率等于1。
+
+### 区间估计S(t)
+
+(1-α)×100% CI $[\hat S(t)-z_{1-\alpha/2}\sqrt{Var\left [\hat S(t)  \right]},\hat S(t)+z_{1-\alpha/2}\sqrt{Var\left [\hat S(t)  \right]}]$
+
+其中$Var\left [\hat S(t)  \right]=\hat S(t)^2\sum_{t_i\le t}\frac{d_i}{n_i(n_i-d_i)}$ (Greenwood method )
+
+```{r}
+df_raw <- tibble(
+    id=1:5,
+    sex=factor(c("Male","Male","Female","Male","Female")),
+    age_years=c(53,62,75,73,61),
+    outcome=c("Loss to follow-up","Death","Death","Relapse","Survival"),
+    time=c("37.5+",44.3,25.3,18.1,"56.7+")
+)
+df <- df_raw |> arrange(time) |> select(id,outcome,time) |> 
+    mutate(
+        d_i=if_else(outcome=="Relapse"|outcome=="Death",1,0),
+        time=parse_number(time),
+    )
+df
+
+library(survminer)
+library(survival)
+
+km_fit<-survfit(Surv(time,d_i)~1,data=df)
+# t_i
+km_fit$time
+# d_i
+km_fit$n.event
+# cnesored
+km_fit$n.censor
+# n_i
+km_fit$n.risk
+
+# 生存率
+km_fit$surv
+
+summary(km_fit,data=d)
+```
+
+## 单因素分组生存曲线的比较
+
+| 检验方法         | 权重          |
+|------------------|---------------|
+| log-rank test    | 1             |
+| Wilcoxon test    | n~j~          |
+| Tarone-Ware test | $\sqrt{n_j}$  |
+| Peto test        | $\hat S(t_j)$ |
+
+$$
+\chi^2=\frac{\left(\sum_jw(t_j)(m_{ij}-e_{ij})\right)^2}{\hat {Var}\left(\sum_jw(t_j)(m_{ij}-e_{ij})\right)}
+$$
+
+### log-rank test
+
+1.  H~0~ :两总体的生存曲线是相同的。
+
+2.  计算当第j次发生终点事件各组终点事件的期望值（e~1j~ ,e~2j~ ）
+
+    $e_{1j}=\left ( \frac{n_{1j}}{n_{1j}+n_{2j}}\right)\times (m_{1j}+m_{2j})$
+
+    $e_{2j}=\left ( \frac{n_{2j}}{n_{1j}+n_{2j}}\right)\times (m_{1j}+m_{2j})$
+
+    其中m~ij~ 表示在第 j 个时间点第 i 组终点事件的数量，n~ij~ 表示在第 j 个时间点第 i 组初始观测的数量
+
+3.  对所有时间点对终点事件的观测值和期望值的差异求和
+
+    $O_i-Ei=\sum_j(m_{ij}-e_{ij})\ \ \ (i=1,2)$
+
+    计算其方差估计值
+
+    $\hat{Var}=\sum_j\frac{n_{1j}n_{2j}(m_{1j}+m_{2j})(n_{1j}+n_{2j}-m_{1j}-m_{2j})}{(n_{1j}+n_{2j})^2(n_{1j}+n_{2j}-1)}\ \ \ (i=1,2)$
+
+4.  计算log-rank test 的检验统计量
+
+    $$
+    \chi^2=\frac{(O_1-E_1)^2}{\hat{Var}(O_1-E_1)} \ 或者 \ \chi^2=\frac{(O_2-E_2)^2}{\hat{Var}(O_2-E_2)} 
+    $$
+
+    也可以近似估计为
+
+    $$
+    \chi^2=\sum_{i=1}^2\frac{(O_i-E_i)^2}{E_i} \sim \chi^2(\nu=1)
+    $$
+
+```{r}
+df <- read_csv("data/log-rank-survival.csv")
+
+# 使用 Kaplan-Meier 方法创建一个Surv对象
+surv_formula <- Surv(Days,status)~treatment
+
+km<-survfit(surv_formula,data=df)
+summary(km,data=df)
+
+# 执行Log-rank检验
+logrank_test <- survdiff(surv_formula,data = df,subset = T,na.action = "na.omit")
+logrank_test$chisq
+logrank_test$pvalue
+```
+
+## Cox比例风险模型
+
+对于有风险因子$x_1,x_2,...,x_k$ 的个体在时间 t 的风险率$h(t|x_1,x_2,...,x_k)$
+
+$$
+h(t|x_1,x_2,...,x_k)=h_0(t)g(x_1,x_2,...,x_k)=h_0(t)exp(\sum_{j=1}^k\beta_jx_j)
+$$
+
+其中
+
+1.  h~0~ (t) 是给定所有风险因子（协变量）为零的随时间变化的基线风险函数。
+
+2.  g(X) 是k个独立风险因子的集合函数，代表变量的风险效应。
+
+3.  β~j~ 是部分回归系数，表示风险比的比例变化。
+
+Cox比例风险模型是一种半参数方法
+
+比例风险假设（proportional hazards assumption）
+
+$$
+\frac{h(t)}{h_0(t)}=exp(\sum_{j=1}^k\beta_jx_j)
+$$
+
+风险比（hazard ratio）
+
+假设有两个个体，分别具有独立变量，两个个体的风险函数之比称为风险比
+
+$$
+HR=\frac{h(t|x_1,x_2,...,x_k)}{h(t|x_1^*,x_2^*,...,x_k^*)}=exp(\sum_{j=1}^k\beta_j(x_j-x_j^*))
+$$
+
+```{r}
+# 拟合Cox比例风险模型
+cox_model <- coxph(surv_formula, data = df)
+
+# 查看模型结果
+summary(cox_model)
+
+# 检查比例风险假设
+cox.zph(cox_model)
+```
+
+### 模型系数的估计
+
+条件死亡概率和局部似然函数方法
+
+$$
+\ln L_p(\beta)=\sum_{i=1}^{d}\left[ \sum_{j=1}^k\beta_jx_{ij}-\ln\sum_{m\in R_i}exp( \sum_{j=1}^k\beta_jx_{mj})         \right]
+$$
+
+Newton-Raphson iterative method
+
+$$
+ \begin{cases} 
+\frac{\partial \ln L_p(\beta)}{\partial \beta_1}=0\\
+\frac{\partial \ln L_p(\beta)}{\partial \beta_2}=0\\
+\vdots\\
+\frac{\partial \ln L_p(\beta)}{\partial \beta_k}=0\\
+\end{cases}
+$$
+
+### 模型系数的假设检验
+
+1.  Wald‘s test
+
+    检验是否有独立变量需要被消除，统计量$Z=b_j/S_{b_j}$
+
+    当样本量足够大时，Z服从标准正态分布，Z^2^ 服从自由度为1 的$\chi^2$ 分布
+
+    $$
+    \chi^2_W=(b_j/S_{b_j})^2\sim \chi^2(1)
+    $$
+
+2.  Partial likelihood Ratio test
+
+    主要用于非显著性变量的消除，新变量的引入和模型的比较。
+
+    $$
+    \chi^2_{LR}=2\left[ \ln L_p(\beta_k)-\ln L_p(\beta_{k-1}) \right]\sim\chi^2(1)
+    $$
+
+    其中分别是包含 k 个和 k-1 个（不包含要检验的第 j 个变量）独立变量的对数局部似然函数
