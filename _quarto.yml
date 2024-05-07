@@ -36,16 +36,14 @@ book:
       chapters:
         - SurvivalAnalysis.qmd
         
-    - diagnostic_tests.qmd
-    - observational_study_design.qmd
 
     - Clustering.qmd
     - PCA.qmd
     - t-SNE.qmd
     - UMAP.qmd
-   
 
-
+    - diagnostic_tests.qmd
+    - observational_study_design.qmd
 
 
 execute:
