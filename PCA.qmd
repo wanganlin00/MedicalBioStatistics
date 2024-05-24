@@ -2,7 +2,11 @@
 
 主成分分析(Principal component analysis，PCA) 是一种线性降维方法。
 
-对于一组变量$X_1,X_2,...,X_p$,存在它们的线性组合$PC$，令$var(PC)$最大，得到$PC_1$,再找$PC_2$，$PC_2$与$PC_1$正交，以此类推，找到一组$PC_1,PC_2,...,PC_m$无关主成分。
+```{r}
+browseVignettes("LearnPCA")
+```
+
+对于一组变量$X_1,X_2,...,X_p$,存在它们的线性组合$PC_1$，令$Var(PC_1)$最大，得到$PC_1$，再找$PC_2$，$PC_2$与$PC_1$正交，以此类推，找到一组$PC_1,PC_2,...,PC_m$无关主成分。
 
 ## 线性代数
 
@@ -17,10 +21,10 @@ $$
 $$
 
 $$
-\vec v=
+\vec w=
 \begin{bmatrix}
-    v_1 \\
-    v_2 \\
+    w_1 \\
+    w_2 \\
 \end{bmatrix}
 $$
 
@@ -32,13 +36,13 @@ $$
 
 线性组合$c\vec v+d\vec w$
 
-向量点积或内积：$\vec v·\vec w=v_1w_1+v_2w_2$ ，点积为零，向量垂直。
+向量点积或内积：$\vec v·\vec w=v_1w_1+v_2w_2$ ，点积为零，向量正交（垂直）。
 
 长度：$||\vec v||=\sqrt{\vec v·\vec v}$
 
 单位向量：$\vec u=\frac{\vec v}{||\vec v||}$
 
-正交：$\vec v^T\vec w=0$
+正交：$\vec v^T·\vec w=0$
 
 ### 矩阵运算规则
 

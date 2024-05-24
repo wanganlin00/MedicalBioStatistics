@@ -1,5 +1,8 @@
 # 广义线性模型
+
 ## 逻辑回归
+
+逻辑回归一般需要引入虚拟变量（哑变量，dummy variable），通常取值伪0或1。
 
 ```{r}
 library(tidymodels)
@@ -120,7 +123,7 @@ df |>
   ) |> select(student,prob)
 ```
 
-### K=2,p>1 多元逻辑回归
+### K=2,p\>1 多元逻辑回归
 
 ```{r}
 logit_multiple<-logit_spec |> fit(default~balance+income+student,data=df)
@@ -158,7 +161,7 @@ predict(logit_multiple_2, new_data = df_new,type="class")
 predict(logit_multiple_2, new_data = df_new, type = "prob")
 ```
 
-### K>2,p>1 multinomial logistic regression
+### K\>2,p\>1 multinomial logistic regression
 
 ```{r}
 
@@ -172,7 +175,6 @@ predict(logit_multiple_2, new_data = df_new, type = "prob")
 library(poissonreg)
 df2 <- read_csv("data/Bikeshare.csv")
 ```
-
 
 ```{r}
 pois_spec <- poisson_reg() |> 
@@ -217,7 +219,6 @@ pois_fit_coef_mnths |>
        x = "Month", y = "Coefficient")
 ```
 
-
 ## K-Nearest Neighbors
 
 ```{r}
@@ -225,7 +226,6 @@ df3 <- read_csv("data/Smarket.csv")
 head(df3)
 df3$Direction <- factor(df3$Direction)
 ```
-
 
 ```{r}
 knn_spec <- nearest_neighbor(neighbors = 3) |> 
@@ -238,12 +238,13 @@ knn_fit <- knn_spec |>
 knn_fit
 
 ```
+
 ```{r}
 augment(knn_fit, new_data = df3) |> 
   conf_mat(truth = Direction, estimate = .pred_class) 
 ```
+
 ```{r}
 augment(knn_fit, new_data = df3) |>
   accuracy(truth = Direction, estimate = .pred_class) 
 ```
-

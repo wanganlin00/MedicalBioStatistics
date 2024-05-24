@@ -199,6 +199,42 @@ ggqqplot(mtcars$mpg)  #  直线
 
 偏度=0 且 超值峰度=0
 
+$$
+H_0:总体偏度系数\gamma_1=0 或者总体峰度系数\gamma_2=0
+$$
+
+$$
+z_i=\frac{g_i-0}{\sigma_{g_i}}  \ \ \ \ 临界值z_{1-\alpha/2}
+$$
+
+#### Shapiro-Wilk检验（小样本）
+
+```{r}
+shapiro.test(df$low)  
+shapiro.test(df$medium)  
+shapiro.test(df$high)  
+
+# 因为观测太少，也可以同时检验
+shapiro.test(c(df$low,df$medium,df$high))  
+```
+
+#### Kolmogorov-Smirnov检验（Lilliefors correction 大样本）
+
+```{r}
+ks.test(c(df$low,df$medium,df$high),"pnorm")
+ks.test(rnorm(1000),"pnorm")
+```
+
+```{r}
+x <- rnorm(50) 
+y <- runif(50) 
+ks.test(x, y)  # perform ks test
+
+x <- rnorm(50)
+y <- rnorm(50)
+ks.test(x, y) 
+```
+
 ### 二项分布近似正态分布
 
 当$n\pi(1-\pi)≥5 且X\sim B(n,\pi)$时，$P(a≤X≤b)近似等于X\sim N(n\pi,n\pi(1-\pi))在区间(a-0.5,b+0.5)上的曲线下面积$。
