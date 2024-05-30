@@ -18,7 +18,11 @@ rownames(eg) <- c("Exposed","Unexposed")
 print(eg)
 prop.table(eg)          #各单元格比例
 prop.table(eg,margin = 1)        #行比例 
+```
 
+### 边际列联表
+
+```{r}
 # 边际
 margin.table(x=eg,margin = 2)      #列和
 addmargins(eg)          #添加行和、列和
@@ -31,13 +35,11 @@ ftable(eg)   # "平铺式"列联表
 
 ### 相对危险度与优势比
 
-
 　　相对危险度 （Relative Risk，RR），是指暴露组人群的发病率与非暴露组人群的发病率之比。RR 用于反映暴露因素与结局事件的关联程度， 其 取值范围为 0 到无穷大。数值为 1 时，表明暴露因素与结局事件无关联；小于 1 时，表 明暴露因素导致结局事件的发生率降低；大于 1 时，表明暴露因素导致结局事件的发生率增加。相对风险适用于队列研究。
 
 　　优势比（Odds Ratio，OR），是指暴露组中病例与非病例人数的比值除以非暴露组中病例与非病例人数的比值。　　OR 的取值范围也为 0 到无穷大。如果 OR 值大于 1 ，说明该暴露因素更 容易导致结果事件发生，或者说该因素是一个危险因素；小于 1 ，则说明该暴露因素更不 容易导致结果事件发生，或者说该因素是一个保护因素。比值比适用于队列研究和病例对照研究。
 
 [Using R for Biomedical Statistics](https://a-little-book-of-r-for-biomedical-statistics.readthedocs.io/en/latest/src/biomedicalstats.html)
-
 
 ```{r}
 # RR
@@ -59,8 +61,6 @@ print(mymatrix)
 calcOddsRatio(mymatrix, referencerow=3)
 calcRelativeRisk(mymatrix, referencerow=3)
 ```
-
-
 
 ### 独立性检验
 
@@ -95,8 +95,6 @@ fisher.test(M)
 
 
 ```
-
-
 
 #### Cochran-Mantel-Haenszel $\chi^2$ 检验
 
@@ -182,6 +180,10 @@ cov(df)    # 协方差矩阵
 
 相关系数的取值范围： $[-1,1]$
 
+$$
+r(X,Y)=\frac {\sum_{i=1}^n (x_i-\bar x)(y_i-\bar y)}{\sqrt{\sum_{i=1}^n (x_i-\bar x)^2 \sum_{i=1}^n (y_i-\bar y)^2}}
+$$
+
 ```{r}
 # Pearson's 积差相关系数 　　一般要求两个连续变量都服从正态分布
 cor(df,use = "everything",method="pearson") # default
@@ -208,6 +210,12 @@ ggcorrplot::ggcorrplot(
 #### 相关系数的假设检验
 
 　　零假设为变量之间不相关（即两个总体的相关系数为 0 ） 。函数 cor.test( ) 可用于对相关系数进行显著性检 验。
+
+统计量
+
+$$
+t=\frac{r\sqrt{n-2}}{\sqrt{1-r^2}}
+$$
 
 ```{r}
 cor.test(df$displ,df$hwy)

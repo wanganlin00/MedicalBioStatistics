@@ -6,9 +6,17 @@
 browseVignettes("LearnPCA")
 ```
 
-对于一组变量$X_1,X_2,...,X_p$,存在它们的线性组合$PC_1$，令$Var(PC_1)$最大，得到$PC_1$，再找$PC_2$，$PC_2$与$PC_1$正交，以此类推，找到一组$PC_1,PC_2,...,PC_m$无关主成分。
+对于一组变量$X_1,X_2,...,X_p$,存在它们的线性组合 **Y**，令$Var(y_1)$最大，得到$y_1$，再找$y_2$，$y_2$与$y_1$正交，以此类推，找到一组无关主成分 **Y**。
 
-## 线性代数
+$$
+y_i=a_{i1}x_1+a_{i2}x_2+...+a_{ip}x_p\\
+Cov(y_i,y_j)=
+\begin{cases}  &\lambda_i,\ i=j \\  
+& 0,\ i\ne j
+\end{cases}
+$$
+
+## 线性代数基础
 
 ### 列向量
 
@@ -279,13 +287,14 @@ $A^TA\nu_i=\sigma_i^2\nu_i$,
 $A\nu_i=\sigma_i\mu_i$
 :::
 
-## PCA by SVD
+## PCA步骤
 
-### 数据矩阵
+### 数据标准化
 
 R中数据框 n个观测，p个变量
 
 $$
+X=
 \begin{bmatrix}
   x_{11}& x_{12} & ... & x_{1p}\\
  x_{21} & x_{22} & ... & x_{2p}\\
@@ -307,17 +316,18 @@ $$
 =[X_1,X_2,...X_p]^T
 $$
 
-数据矩阵中心化(变量值减去均值)，使得变量均值近似零。
+对原始数据矩阵标准化，消除量纲和数量级的影响。
 
 ```{r}
 df <- as_tibble(USArrests, rownames = "state") |> column_to_rownames("state")
 head(df)
 
-df_center <- df |> mutate_all(~ .x - mean(.x, na.rm = TRUE))
+df_center <- df |> mutate_all(~ (.x - mean(.x, na.rm = TRUE))/sd(.x,na.rm=TRUE))
 colMeans(df_center)
+
 ```
 
-### 协方差矩阵
+### 计算协方差矩阵
 
 当$\Sigma$ 未知时，其用其估计值样本协方差矩阵（p×p） $A_{p×n}$ 代替
 

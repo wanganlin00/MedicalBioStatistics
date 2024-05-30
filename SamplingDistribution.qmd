@@ -1,16 +1,58 @@
-## 抽样分布
+# 抽样分布
 
-统计量（statistic）
+统计量（statistic）与抽样分布
 
 :   假设$\hat\theta=\hat\theta(X_1,X_2,...,X_n)$ 是关于随机样本$X_1,X_2,...,X_n$ 的函数，且不依赖任何未知的总体参数$\theta$ ，则$\hat\theta$ 称为统计量（statistic）。
 
-样本均值 $\hat \theta_1=\bar X=\frac{\sum_{i=1}^{n}{X_i}}{n}$ 和样本方差 $\hat \theta_2=S^2=\frac{\sum_{i=1}^{n} (X_i-\bar X)^2}{n-1}$ 是统计量（statistics）。
+    样本均值 $$\bar X=\frac{1}{n} \sum_{i=1}^{n}{X_i}$$
 
-### 均值（mean）的抽样分布
+    样本方差 $$S^2=\frac{1}{n-1}\sum_{i=1}^{n} (X_i-\bar X)^2$$
 
-假设 $X_1,X_2,...,X_n$是来自均值为$μ$，有限方差为$σ^2$的总体为 $X$的一组样本量为n的随机样本。$\bar X$ 的抽样分布是指从总体 $X$中选择的样本量为$n$的所有可能样本的 $\bar x$值（$\bar x=\sum_{i}x_i/n$）的分布。
+    样本比率
 
-#### σ^2^ 已知的正态分布
+    $$ \hat p=\frac{m}{n} \\
+    E(\hat p)=p\\
+    Var(\hat p)=\frac{p(1-p)}{n}
+    $$
+
+    因样本的随机性，统计量也是随机变量。
+
+    统计量的概率分布称为抽样分布。
+
+## 均值（mean）的抽样分布
+
+假设 $X_1,X_2,...,X_n$是来自均值为$μ$，有限方差为$σ^2$的总体为 $X$的一组样本量为n的随机样本。
+
+$\bar X$ 的抽样分布是指从总体 $X$中选择的样本量为$n$的所有可能样本的 $\bar x$值（$\bar x=\frac{1}{n}\sum_{i}x_i$）的分布。
+
+```{r}
+# 标准正态分布
+norm <- function(mu = 0, sigma = 1, ...) {
+    ggplot() +
+        geom_function(
+            aes(color = "pdf"),
+            fun = dnorm,
+            args = list(mean = mu, sd = sigma),
+            linewidth = 1
+        ) +
+        geom_function(
+            aes(color = "cdf"),
+            fun = pnorm,
+            linewidth = 1,
+            linetype = "dashed"
+        ) +
+        scale_color_manual(values = c("pdf" = "red", "cdf" = "blue")) +
+        scale_x_continuous(name = "x",
+                           limits = c(mu - 4 * sigma, mu + 4 * sigma)) +
+        scale_y_continuous(name = "Density/Probability", limits = c(0, 1)) +
+        labs(title = paste("normal distribution N( ", mu, ", ", sigma, ")", sep = "")) +
+        theme(plot.title = element_text(hjust = 0.5)) +
+        guides(color = guide_legend(title = "Type"))
+}
+norm()
+```
+
+### $N( 0, 1)$——σ^2^ 已知的正态总体
 
 $$
 \bar X \sim N(μ,\frac{σ^2}{n})
@@ -22,27 +64,80 @@ $$
 Z=\frac{\bar X-\mu}{\sigma_{\bar X}}=\frac{\bar X-\mu}{\sigma /\sqrt n} \sim N(0,1)
 $$
 
-均值的标准误 $\sigma _{\bar X} =\frac {\sigma}{\sqrt n}$ 可以用 $S _{\bar X} =\frac {S}{\sqrt n}$ 估计。
+均值的标准差即标准误 $\sigma _{\bar X} =\frac {\sigma}{\sqrt n}$ 可以用 $S _{\bar X} =\frac {S}{\sqrt n}$ 估计。
 
-#### 大样本量的非正态分布
+### $N(μ,\frac{σ^2}{n})$——大样本量的非正态总体
 
 中心极限定理（central limit theorem）
 
-:   当样本量n足够大时，即使随机样本并非来自正态分布总体，$\bar X$ 的抽样分布也会近似正态分布。
+:   当样本量n足够大（n≥30）时，即使随机样本并非来自正态分布总体，样本均值$\bar X$ 的抽样分布也会近似服从均值为$\mu$ ，方差为$\sigma^2/n$ 的正态分布，即
 
     $$ \bar X \dot{\sim}  N(μ,\frac{σ^2}{n}) $$
 
-#### σ^2^ 未知的正态分布
+### t分布——σ^2^ 未知的正态分布
+
+$Z\sim N(0,1)$，$X\sim \chi^2(n)$ 且X与Z相互独立，则称
+
+$$ T=\frac{Z}{\sqrt{X/n}} $$
+
+为自由度为n$t$分布，记为$T\sim t(n)$
+
+如果$Z\sim N(\delta,1)$ ，则称T为非中心化的t分布。记为$T\sim t(n,\delta)$ ，称δ为非中心化参数。
+
+t分布的数学期望和方差：
+
+$$\begin{aligned} E(X)=&0,\ \ \ n\ge2 \\ Var(X)=&\frac{n}{n-2},\ \ \ n\ge3 \end{aligned} $$
+
+统计量的分布：
 
 $$ t=\frac{\bar X-\mu}{S_{\bar X}}=\frac{\bar X-\mu}{S /\sqrt n} \sim t(\nu) $$
 
 其中自由度（degrees of freedom）$\nu=n-1$ 。当 $\nu \to +\infty 时,t\sim N(0,1)$ 。
 
-### 方差（variance）的抽样分布
+```{r}
+t_distribution <- function(df = 1, ...) {
+  # Generate sequence of x values
+  x <- seq(-10, 10, length.out = 1000)
+  
+  # Calculate the probability density function (PDF) and cumulative distribution function (CDF)  values
+  pdf_values <- dt(x, df) 
+  cdf_values <- pt(x, df)
+  
+  # Create the ggplot
+  ggplot(data.frame(x, pdf_values, cdf_values), aes(x = x)) +
+    geom_line(aes(y = pdf_values, color = "PDF"), linewidth = 1) +
+    geom_line(aes(y = cdf_values, color = "CDF"), linewidth = 1, linetype = "dashed") +
+    scale_color_manual(values = c("PDF" = "red", "CDF" = "blue")) +
+    scale_y_continuous(name = "Density/Probability") +
+    scale_x_continuous(name = "x") +
+    labs(title = paste("Student's t-distribution (df =", df, ")", sep = "")) +
+    guides(color = guide_legend(title = "Type"))
+}
 
-假设 $X_1,X_2,...,X_n$是来自均值为$μ$，有限方差为$σ^2$的总体为 $X$的一组样本量为n的随机样本。列出样本量为$n$的所有可能随机样本。
+t_distribution(df=1000)|norm()
+```
 
-#### $\chi^2$分布
+## $\chi^2$分布——方差（variance）的抽样分布
+
+$Z_i\sim N(0,1)$,且$Z_i$相互独立，则称
+
+$$
+X=Z_1^2+Z_2^2+...+Z_n^2
+$$
+
+为自由度为n的$\chi^2$分布，记为$X\sim \chi^2(n)$
+
+如果$Z_i\sim N(\delta,1)$ ，则称X为非中心化的卡方分布。记为$X\sim \chi^2(n,\delta)$ ，称δ为非中心化参数。
+
+卡方分布的数学期望和方差：
+
+$$\begin{aligned}
+E(X)=&n\\
+Var(X)=&2n
+\end{aligned}
+$$
+
+假设 $X_1,X_2,...,X_n$是独立同分布于均值为$μ$，有限方差为$σ^2$的一组样本量为n的随机样本。统计量的分布：
 
 $$
 \frac {(n-1)S^2}{\sigma^2}\sim \chi^2(\nu)
@@ -50,17 +145,77 @@ $$
 
 其中自由度（degrees of freedom）$\nu=n-1$ 。
 
-### 率（rate）抽样分布------分类数据
+```{r}
+chisq_distribution <- function(df = 1, ...) {
+  # Generate sequence of x values
+  x <- seq(0, 20, length.out = 1000)
+  
+  # Calculate the probability density function (PDF) and cumulative distribution function (CDF)  values
+  pdf_values <- dchisq(x, df) 
+  cdf_values <- pchisq(x, df)
+  
+  # Create the ggplot
+  ggplot(data.frame(x, pdf_values, cdf_values), aes(x = x)) +
+    geom_line(aes(y = pdf_values, color = "PDF"), size = 1) +
+    geom_line(aes(y = cdf_values, color = "CDF"), size = 1, linetype = "dashed") +
+    scale_color_manual(values = c("PDF" = "red", "CDF" = "blue")) +
+    scale_y_continuous(name = "Density/Probability") +
+    scale_x_continuous(name = "x") +
+    labs(title = paste("Chi square distribution (df =", df, ")", sep = "")) +
+    guides(color = guide_legend(title = "Type"))
+}
+(chisq_distribution(df=1)+chisq_distribution(df=2))/
+(chisq_distribution(df=4)+chisq_distribution(df=10))+plot_layout(guides = "collect")
+```
+
+## F分布
+
+$X\sim \chi^2(n_1)$ ，$Y\sim \chi^2(n_2)$且相互独立，则称
+
+$$ F=\frac{X/n1}{Y/n2}$$
+
+为第一个自由度为n1和第二个自由度为n2的$F$分布，记为$F\sim F(n_1,n_2)$
+
+如果$X\sim \chi^2(n_1,\delta)$ ，则称F为非中心化的F分布。记为$F\sim F(n_1,n_2;\delta)$ ，称δ为非中心化参数。
+
+卡方分布的数学期望和方差：
+
+$$\begin{aligned} E(X)=&n\\ Var(X)=&2n \end{aligned} $$
+
+```{r}
+F_distribution <- function(df1 = 1,df2 = 1, ...) {
+  # Generate sequence of x values
+  x <- seq(0, 10, length.out = 1000)
+  
+  # Calculate the probability density function (PDF) and cumulative distribution function (CDF)  values
+  pdf_values <- df(x, df1,df2) 
+  cdf_values <- pchisq(x, df1,df2)
+  
+  # Create the ggplot
+  ggplot(data.frame(x, pdf_values, cdf_values), aes(x = x)) +
+    geom_line(aes(y = pdf_values, color = "PDF"), size = 1) +
+    geom_line(aes(y = cdf_values, color = "CDF"), size = 1, linetype = "dashed") +
+    scale_color_manual(values = c("PDF" = "red", "CDF" = "blue")) +
+    scale_y_continuous(name = "Density/Probability") +
+    scale_x_continuous(name = "x") +
+    labs(title = paste("F distribution (df1 =", df1,", ","df2 = ",df2, ")", sep = "")) +
+    guides(color = guide_legend(title = "Type"))
+}
+(F_distribution(1,1)+F_distribution(3,1))/
+    (F_distribution(3,15)+F_distribution(7,15))+plot_layout(guides = "collect")
+```
+
+### 比率（rate）抽样分布------分类数据
 
 假设 $X\sim B(n,\pi)$ ，一组样本量为n的随机样本。列出样本量为$n$的所有可能随机样本。
 
-样本率$p=X/n$ ，则 $$
+样本比率$p=X/n$ ，则 $$
 E(p)=E(X/n)=\frac{1}{n}E(X)=\pi
 $$ $$
 Var(p)=Var(X/n)=\frac{1}{n^2}Var(X)=\frac{\pi(1-\pi)}{n}
 $$
 
-率的标准误 $\sigma_p =\sqrt{\frac{\pi(1-\pi)}{n}}$ 可以用 $S _p =\sqrt{\frac{p(1-p)}{n}}$ 估计。
+比率的标准误 $\sigma_p =\sqrt{\frac{\pi(1-\pi)}{n}}$ 可以用 $S _p =\sqrt{\frac{p(1-p)}{n}}$ 估计。
 
 当$n\pi(1-\pi)≥5 且X\sim B(n,\pi)$时，率的抽样分布 $$
 p\dot\sim N(\pi,\frac{\pi(1-\pi)}{n})

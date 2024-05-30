@@ -1,8 +1,29 @@
 # 参数估计 {#sec-parameter_estimation}
 
+根据样本推断总体的分布和分布的数字特征称为统计推断。本章讨论统计推断的一个基本问题——参数估计。
+
+-   其一是点估计，以某个统计量的样本观察值作为未知参数的估计值，点估计的方法包括**矩估计法**、**极大似然估计法**和**最小二乘方法**等 ；
+
+$$
+\hat\theta=\hat \theta(X_1,X_2,...X_n)
+$$
+
+-   其二是区间估计，用两个统计量所构成的区间来估计未知参数，
+
+$$
+P(\hat \theta_1 \le \theta \hat \le \theta_2)=1-\alpha
+$$
+
 总体参数$\theta$：均值$\mu$ ，方差$\sigma^2$
 
 样本统计量$\hat\theta$：均值$\bar X$，方差$S^2$
+
+置信区间的估计的一般公式为：
+
+$$
+点估计\pm 关键值 \times 样本均值的标准误差\\
+\bar X \pm critical\_value \times \frac{S}{\sqrt n}
+$$
 
 ## 一个总体的参数估计
 
@@ -52,7 +73,7 @@ $X_1,X_2,...,X_n$是来自$N(\mu,\sigma^2)$的随机样本,则$\bar X\sim N(\mu,
 
 区间估计的置信水平（confidence level）：$1-\alpha$
 
-总体均值的置信区间（confidence interval）：$\bar X \pm z_{1-\alpha/2}\frac{\sigma}{\sqrt n}$
+**总体均值的置信区间（confidence interval）：**$\bar X \pm z_{1-\alpha/2}\frac{\sigma}{\sqrt n}$
 
 ##### 大样本量的非正态分布
 
@@ -78,11 +99,11 @@ $X_1,X_2,...,X_n$是来自$N(\mu,\sigma^2)$的随机样本,则$\frac {(n-1)S^2}{
 
 总体方差的置信区间（confidence interval）：$[\frac {(n-1)S^2}{\chi^2_{\nu,1-\alpha/2}},\frac {(n-1)S^2}{\chi^2_{\nu,\alpha/2}}]$
 
-#### 率的区间估计
+#### 比率的区间估计
 
-$X_1,X_2,...,X_n$是来自$B(n,\pi)$的随机样本, 当$n\pi(1-\pi)≥5$时，率的抽样分布 $p\dot\sim N(\pi,\frac{\pi(1-\pi)}{n})$，则变换$Z=\frac{p-\pi}{\sqrt{p(1-p)/n}}\dot\sim N(0,1)$。
+$X_1,X_2,...,X_n$是来自$B(n,\pi)$的随机样本, 当$n\pi(1-\pi)≥5$时，比率的抽样分布 $p\dot\sim N(\pi,\frac{\pi(1-\pi)}{n})$，则变换$Z=\frac{p-\pi}{\sqrt{p(1-p)/n}}\dot\sim N(0,1)$。
 
-总体率的置信区间（confidence interval）：$\bar X \pm z_{1-\alpha/2}\sqrt{\frac{p(1-p)}{n}}$
+总体率的置信区间（confidence interval）：$\bar p \pm z_{1-\alpha/2}\sqrt{\frac{p(1-p)}{n}}$
 
 ## 两个总体的参数估计
 
@@ -134,7 +155,7 @@ $$
 
 总体均值的置信区间（confidence interval）：$\bar X_1-\bar X_2 \pm t_{\nu ',1-\alpha/2} \sqrt{\frac{S_1^2}{n_1}+\frac{S_2^2}{n_2}}$
 
-### 方差之比的估计
+### 方差比的估计
 
 #### 点估计
 
@@ -152,7 +173,7 @@ $$ 对于给定的$\alpha$，称$F_{(\nu_1,\nu_2),\alpha/2}$和$F_{(\nu_1,\nu_2)
 
 总体方差的置信区间（confidence interval）：$[\frac{S_1^2}{S_2^2}\times \frac{1}{F_{(\nu_1,\nu_2),1-\alpha/2}},\frac{S_1^2}{S_2^2}\times \frac{1}{F_{(\nu_1,\nu_2),\alpha/2}}]$
 
-### 率差异的估计
+### 比率差异的估计
 
 #### 点估计
 
