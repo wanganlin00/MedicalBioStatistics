@@ -492,51 +492,56 @@ summary(model)
 anova_results <- anova(model)
 anova_results
 
-
 library(multcomp)
 glht_result <-glht(model, linfct = mcp(week =c("ten - zero = 0 ",
                                                "twenty - zero == 0",
                                                "thirty - zero = 0 ")))
 summary(glht_result)
+glht_result
 ```
 
 ## 含组间因子和组内因子的重复测量方差分析
 
 ```{r}
 df <- read_rds("data/repeated_measures_design_ANOVA.rds")
+```
 
+```{r}
 # 第一种
 aov_fit <- aov(volume ~ method*Days+Error(id/Days),data = df)
 summary(aov_fit)
 ```
 
 ```{r}
-# 第二种
+library(rstatix)
+df |> select(-id) |> 
+    group_by(method,Days) |> 
+    get_summary_stats(type="mean_sd")
+
+
+model <- anova_test(data = df,dv=volume,wid = id,
+                      between = method,within = Days ,type = 2)
+get_anova_table(model)
+
+df |>
+    pairwise_t_test(
+    volume ~ method, paired = TRUE,
+    p.adjust.method = "bonferroni"
+    )
+```
+
+```{r}
+# 第三种
 library(nlme)
 model <- lme(volume ~ method*Days, random = ~1|id/Days, data = df)
 summary(model)
 df_aov <- anova(model)
 df_aov
 
-    #成对比较
+#成对比较
 library(emmeans)
 method_means <- emmeans(model, ~method)  
 print(method_means)  
 method_comparisons <- pairs(method_means)  
 print(method_comparisons)
-```
-
-```{r}
-# 第三种
-library(ez)  
-rm_anova <- ezANOVA(  
-  data = df,   
-  dv = .(volume), # 依赖变量（因变量）  
-  wid = .(id), # 被试标识符（组内ID）  
-  within = .(Days), # 组内因子  
-  between = .(method), # 组间因子  
-  type = 3 # 使用类型III的求和平方和  
-)  
-
-print(rm_anova)
 ```
