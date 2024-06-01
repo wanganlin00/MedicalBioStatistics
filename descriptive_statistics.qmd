@@ -31,7 +31,9 @@ head(mtcars$mpg)
 
 mean(mtcars$mpg)     #算术平均数
 median(mtcars$mpg)   #中位数
+
 #众数 mode
+rstatix::get_mode(mtcars$mpg)
 ```
 
 ### 离散程度
@@ -140,6 +142,7 @@ kurtosis(x)
 
 ```{r}
 summary(mtcars$mpg)
+rstatix::get_summary_stats(mtcars,mpg,type = "full")
 psych::describeBy(mtcars$mpg,group = mtcars$am)
 ```
 
