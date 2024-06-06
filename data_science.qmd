@@ -1,11 +1,14 @@
 ---
 title: "数据科学"
-format: html
-editor: visual
 ---
 
 ## 推荐
 
-[R Notes](https://wanganlin00.github.io/R/)
+-   [R for data science](https://r4ds.hadley.nz/)
 
-[Python Data Science Notes](https://wanganlin00.github.io/PythonDataScience/)
+-   [tidyverse.org](https://www.tidyverse.org/)
+
+```{=html}
+<!-- -->
+```
+-   [ggplot2: Elegant Graphics for Data Analysis (3e)](https://ggplot2-book.org/)

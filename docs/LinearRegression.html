@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.4.553">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>医学与生物统计学 - 8&nbsp; 线性回归</title>
+<title>医学与生物统计学 - 9&nbsp; 线性回归</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -61,7 +61,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./glm.html" rel="next">
-<link href="./ANOVA.html" rel="prev">
+<link href="./nonparametric_test.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -130,7 +130,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./LinearRegression.html">统计建模</a></li><li class="breadcrumb-item"><a href="./LinearRegression.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">线性回归</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./LinearRegression.html">统计建模</a></li><li class="breadcrumb-item"><a href="./LinearRegression.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">线性回归</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -183,12 +183,6 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">描述性统计学</span></span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./independence_correlation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">独立性和相关性</span></span></a>
-  </div>
-</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -203,31 +197,43 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./probability_random_variables_distribution.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">概率与随机变量及其分布</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">概率论基础与随机变量分布</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./SamplingDistribution.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">抽样分布</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">抽样分布</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ParameterEstimation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">参数估计</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">参数估计</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./hypothesis_testing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">假设检验</span></span></a>
+  <a href="./hypothesis_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">假设检验</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ANOVA.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">方差分析</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">方差分析</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./independence_correlation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">独立性和相关性</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./nonparametric_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">非参数检验</span></span></a>
   </div>
 </li>
       </ul>
@@ -244,13 +250,13 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./LinearRegression.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">线性回归</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">线性回归</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">广义线性模型</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">广义线性模型</span></span></a>
   </div>
 </li>
       </ul>
@@ -267,7 +273,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./SurvivalAnalysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">生存分析</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">生存分析</span></span></a>
   </div>
 </li>
       </ul>
@@ -275,13 +281,13 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Clustering.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">聚类</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">聚类</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./PCA.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">主成分分析</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">主成分分析</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -296,13 +302,13 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./t-SNE.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">t-SNE</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">t-SNE</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./UMAP.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">UMAP</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">UMAP</span></span></a>
   </div>
 </li>
       </ul>
@@ -310,13 +316,13 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./diagnostic_tests.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">诊断价值评估</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">诊断价值评估</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./observational_study_design.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">观察性研究设计</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">观察性研究设计</span></span></a>
   </div>
 </li>
     </ul>
@@ -327,34 +333,34 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#%E7%AE%80%E5%8D%95%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92" id="toc-简单线性回归" class="nav-link active" data-scroll-target="#%E7%AE%80%E5%8D%95%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92"><span class="header-section-number">8.1</span> 简单线性回归</a></li>
-  <li><a href="#%E5%A4%9A%E5%85%83%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92" id="toc-多元线性回归" class="nav-link" data-scroll-target="#%E5%A4%9A%E5%85%83%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92"><span class="header-section-number">8.2</span> 多元线性回归</a></li>
-  <li><a href="#%E4%BA%A4%E4%BA%92%E9%A1%B9" id="toc-交互项" class="nav-link" data-scroll-target="#%E4%BA%A4%E4%BA%92%E9%A1%B9"><span class="header-section-number">8.3</span> 交互项</a></li>
+<li><a href="#%E7%AE%80%E5%8D%95%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92" id="toc-简单线性回归" class="nav-link active" data-scroll-target="#%E7%AE%80%E5%8D%95%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92"><span class="header-section-number">9.1</span> 简单线性回归</a></li>
+  <li><a href="#%E5%A4%9A%E5%85%83%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92" id="toc-多元线性回归" class="nav-link" data-scroll-target="#%E5%A4%9A%E5%85%83%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92"><span class="header-section-number">9.2</span> 多元线性回归</a></li>
+  <li><a href="#%E4%BA%A4%E4%BA%92%E9%A1%B9" id="toc-交互项" class="nav-link" data-scroll-target="#%E4%BA%A4%E4%BA%92%E9%A1%B9"><span class="header-section-number">9.3</span> 交互项</a></li>
   <li>
-<a href="#%E5%8F%98%E6%8D%A2" id="toc-变换" class="nav-link" data-scroll-target="#%E5%8F%98%E6%8D%A2"><span class="header-section-number">8.4</span> 变换</a>
+<a href="#%E5%8F%98%E6%8D%A2" id="toc-变换" class="nav-link" data-scroll-target="#%E5%8F%98%E6%8D%A2"><span class="header-section-number">9.4</span> 变换</a>
   <ul>
-<li><a href="#%E9%9D%9E%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A2" id="toc-非线性变换" class="nav-link" data-scroll-target="#%E9%9D%9E%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A2"><span class="header-section-number">8.4.1</span> 非线性变换</a></li>
-  <li><a href="#%E5%AF%B9%E6%95%B0%E5%8F%98%E6%8D%A2" id="toc-对数变换" class="nav-link" data-scroll-target="#%E5%AF%B9%E6%95%B0%E5%8F%98%E6%8D%A2"><span class="header-section-number">8.4.2</span> 对数变换</a></li>
+<li><a href="#%E9%9D%9E%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A2" id="toc-非线性变换" class="nav-link" data-scroll-target="#%E9%9D%9E%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A2"><span class="header-section-number">9.4.1</span> 非线性变换</a></li>
+  <li><a href="#%E5%AF%B9%E6%95%B0%E5%8F%98%E6%8D%A2" id="toc-对数变换" class="nav-link" data-scroll-target="#%E5%AF%B9%E6%95%B0%E5%8F%98%E6%8D%A2"><span class="header-section-number">9.4.2</span> 对数变换</a></li>
   </ul>
 </li>
   <li>
-<a href="#%E5%9B%9E%E5%BD%92%E8%AF%8A%E6%96%AD" id="toc-回归诊断" class="nav-link" data-scroll-target="#%E5%9B%9E%E5%BD%92%E8%AF%8A%E6%96%AD"><span class="header-section-number">8.5</span> 回归诊断</a>
+<a href="#%E5%9B%9E%E5%BD%92%E8%AF%8A%E6%96%AD" id="toc-回归诊断" class="nav-link" data-scroll-target="#%E5%9B%9E%E5%BD%92%E8%AF%8A%E6%96%AD"><span class="header-section-number">9.5</span> 回归诊断</a>
   <ul>
-<li><a href="#%E7%BA%BF%E6%80%A7%E5%81%87%E8%AE%BE" id="toc-线性假设" class="nav-link" data-scroll-target="#%E7%BA%BF%E6%80%A7%E5%81%87%E8%AE%BE"><span class="header-section-number">8.5.0.1</span> 线性假设</a></li>
-  <li><a href="#%E6%AD%A3%E6%80%81%E6%80%A7%E5%81%87%E8%AE%BEq-q%E5%9B%BE" id="toc-正态性假设q-q图" class="nav-link" data-scroll-target="#%E6%AD%A3%E6%80%81%E6%80%A7%E5%81%87%E8%AE%BEq-q%E5%9B%BE"><span class="header-section-number">8.5.0.2</span> 正态性假设Q-Q图</a></li>
-  <li><a href="#%E8%AF%AF%E5%B7%AE%E7%9B%B8%E5%85%B3%E6%80%A7" id="toc-误差相关性" class="nav-link" data-scroll-target="#%E8%AF%AF%E5%B7%AE%E7%9B%B8%E5%85%B3%E6%80%A7"><span class="header-section-number">8.5.0.3</span> 误差相关性</a></li>
-  <li><a href="#%E8%AF%AF%E5%B7%AE%E9%A1%B9%E7%9A%84%E6%96%B9%E5%B7%AE%E9%BD%90%E6%80%A7" id="toc-误差项的方差齐性" class="nav-link" data-scroll-target="#%E8%AF%AF%E5%B7%AE%E9%A1%B9%E7%9A%84%E6%96%B9%E5%B7%AE%E9%BD%90%E6%80%A7"><span class="header-section-number">8.5.0.4</span> 误差项的方差齐性</a></li>
-  <li><a href="#%E5%BC%82%E5%B8%B8%E8%A7%82%E6%B5%8B%E7%82%B9" id="toc-异常观测点" class="nav-link" data-scroll-target="#%E5%BC%82%E5%B8%B8%E8%A7%82%E6%B5%8B%E7%82%B9"><span class="header-section-number">8.5.0.5</span> 异常观测点</a></li>
-  <li><a href="#%E5%A4%9A%E9%87%8D%E5%85%B1%E7%BA%BF%E6%80%A7" id="toc-多重共线性" class="nav-link" data-scroll-target="#%E5%A4%9A%E9%87%8D%E5%85%B1%E7%BA%BF%E6%80%A7"><span class="header-section-number">8.5.0.6</span> 多重共线性</a></li>
+<li><a href="#%E7%BA%BF%E6%80%A7%E5%81%87%E8%AE%BE" id="toc-线性假设" class="nav-link" data-scroll-target="#%E7%BA%BF%E6%80%A7%E5%81%87%E8%AE%BE"><span class="header-section-number">9.5.0.1</span> 线性假设</a></li>
+  <li><a href="#%E6%AD%A3%E6%80%81%E6%80%A7%E5%81%87%E8%AE%BEq-q%E5%9B%BE" id="toc-正态性假设q-q图" class="nav-link" data-scroll-target="#%E6%AD%A3%E6%80%81%E6%80%A7%E5%81%87%E8%AE%BEq-q%E5%9B%BE"><span class="header-section-number">9.5.0.2</span> 正态性假设Q-Q图</a></li>
+  <li><a href="#%E8%AF%AF%E5%B7%AE%E7%9B%B8%E5%85%B3%E6%80%A7" id="toc-误差相关性" class="nav-link" data-scroll-target="#%E8%AF%AF%E5%B7%AE%E7%9B%B8%E5%85%B3%E6%80%A7"><span class="header-section-number">9.5.0.3</span> 误差相关性</a></li>
+  <li><a href="#%E8%AF%AF%E5%B7%AE%E9%A1%B9%E7%9A%84%E6%96%B9%E5%B7%AE%E9%BD%90%E6%80%A7" id="toc-误差项的方差齐性" class="nav-link" data-scroll-target="#%E8%AF%AF%E5%B7%AE%E9%A1%B9%E7%9A%84%E6%96%B9%E5%B7%AE%E9%BD%90%E6%80%A7"><span class="header-section-number">9.5.0.4</span> 误差项的方差齐性</a></li>
+  <li><a href="#%E5%BC%82%E5%B8%B8%E8%A7%82%E6%B5%8B%E7%82%B9" id="toc-异常观测点" class="nav-link" data-scroll-target="#%E5%BC%82%E5%B8%B8%E8%A7%82%E6%B5%8B%E7%82%B9"><span class="header-section-number">9.5.0.5</span> 异常观测点</a></li>
+  <li><a href="#%E5%A4%9A%E9%87%8D%E5%85%B1%E7%BA%BF%E6%80%A7" id="toc-多重共线性" class="nav-link" data-scroll-target="#%E5%A4%9A%E9%87%8D%E5%85%B1%E7%BA%BF%E6%80%A7"><span class="header-section-number">9.5.0.6</span> 多重共线性</a></li>
   </ul>
 </li>
-  <li><a href="#%E6%A8%A1%E5%9E%8B%E9%80%89%E6%8B%A9%E5%92%8C%E4%BC%98%E5%8C%96" id="toc-模型选择和优化" class="nav-link" data-scroll-target="#%E6%A8%A1%E5%9E%8B%E9%80%89%E6%8B%A9%E5%92%8C%E4%BC%98%E5%8C%96"><span class="header-section-number">8.6</span> 模型选择和优化</a></li>
+  <li><a href="#%E6%A8%A1%E5%9E%8B%E9%80%89%E6%8B%A9%E5%92%8C%E4%BC%98%E5%8C%96" id="toc-模型选择和优化" class="nav-link" data-scroll-target="#%E6%A8%A1%E5%9E%8B%E9%80%89%E6%8B%A9%E5%92%8C%E4%BC%98%E5%8C%96"><span class="header-section-number">9.6</span> 模型选择和优化</a></li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./LinearRegression.html">统计建模</a></li><li class="breadcrumb-item"><a href="./LinearRegression.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">线性回归</span></a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./LinearRegression.html">统计建模</a></li><li class="breadcrumb-item"><a href="./LinearRegression.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">线性回归</span></a></li></ol></nav><div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">
-<span class="chapter-number">8</span>&nbsp; <span class="chapter-title">线性回归</span>
+<span class="chapter-number">9</span>&nbsp; <span class="chapter-title">线性回归</span>
 </h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 </div>
 
@@ -394,8 +400,8 @@ window.Quarto = {
 <span><span class="va">income2</span><span class="op">&lt;-</span><span class="fu">read_csv</span><span class="op">(</span><span class="st">"data/Income2.csv"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<section id="简单线性回归" class="level2" data-number="8.1"><h2 data-number="8.1" class="anchored" data-anchor-id="简单线性回归">
-<span class="header-section-number">8.1</span> 简单线性回归</h2>
+<section id="简单线性回归" class="level2" data-number="9.1"><h2 data-number="9.1" class="anchored" data-anchor-id="简单线性回归">
+<span class="header-section-number">9.1</span> 简单线性回归</h2>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">p_sales</span><span class="op">&lt;-</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span></span>
 <span>  <span class="fu">ggplot</span><span class="op">(</span><span class="va">advertising</span>,<span class="fu">aes</span><span class="op">(</span><span class="op">{</span><span class="op">{</span><span class="va">x</span><span class="op">}</span><span class="op">}</span>,<span class="va">sales</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
@@ -3659,8 +3665,8 @@ window.Quarto = {
 </div>
 </div>
 </div>
-</section><section id="多元线性回归" class="level2" data-number="8.2"><h2 data-number="8.2" class="anchored" data-anchor-id="多元线性回归">
-<span class="header-section-number">8.2</span> 多元线性回归</h2>
+</section><section id="多元线性回归" class="level2" data-number="9.2"><h2 data-number="9.2" class="anchored" data-anchor-id="多元线性回归">
+<span class="header-section-number">9.2</span> 多元线性回归</h2>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#第一步，检测变量相关关系</span></span>
 <span><span class="va">ad</span> <span class="op">&lt;-</span> <span class="va">advertising</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span></span>
@@ -3738,8 +3744,8 @@ window.Quarto = {
 </div>
 </div>
 </div>
-</section><section id="交互项" class="level2" data-number="8.3"><h2 data-number="8.3" class="anchored" data-anchor-id="交互项">
-<span class="header-section-number">8.3</span> 交互项</h2>
+</section><section id="交互项" class="level2" data-number="9.3"><h2 data-number="9.3" class="anchored" data-anchor-id="交互项">
+<span class="header-section-number">9.3</span> 交互项</h2>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">lm_sales_tv_radio</span> <span class="op">&lt;-</span> <span class="va">lm_spec</span> <span class="op">|&gt;</span>  <span class="fu">fit</span><span class="op">(</span><span class="va">sales</span> <span class="op">~</span> <span class="va">TV</span><span class="op">+</span><span class="va">radio</span><span class="op">+</span><span class="va">TV</span><span class="op">:</span><span class="va">radio</span>, data <span class="op">=</span> <span class="va">advertising</span><span class="op">)</span></span>
 <span></span>
@@ -3878,10 +3884,10 @@ window.Quarto = {
 </div>
 </div>
 </div>
-</section><section id="变换" class="level2" data-number="8.4"><h2 data-number="8.4" class="anchored" data-anchor-id="变换">
-<span class="header-section-number">8.4</span> 变换</h2>
-<section id="非线性变换" class="level3" data-number="8.4.1"><h3 data-number="8.4.1" class="anchored" data-anchor-id="非线性变换">
-<span class="header-section-number">8.4.1</span> 非线性变换</h3>
+</section><section id="变换" class="level2" data-number="9.4"><h2 data-number="9.4" class="anchored" data-anchor-id="变换">
+<span class="header-section-number">9.4</span> 变换</h2>
+<section id="非线性变换" class="level3" data-number="9.4.1"><h3 data-number="9.4.1" class="anchored" data-anchor-id="非线性变换">
+<span class="header-section-number">9.4.1</span> 非线性变换</h3>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="va">rec_spec_square</span> <span class="op">&lt;-</span> <span class="fu">recipe</span><span class="op">(</span><span class="va">sales</span> <span class="op">~</span> <span class="va">TV</span>, data <span class="op">=</span> <span class="va">advertising</span><span class="op">)</span> <span class="op">|&gt;</span>  </span>
@@ -3913,8 +3919,8 @@ window.Quarto = {
 <span><span class="co">#&gt;   6.114e+00    6.727e-02   -6.847e-05</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="对数变换" class="level3" data-number="8.4.2"><h3 data-number="8.4.2" class="anchored" data-anchor-id="对数变换">
-<span class="header-section-number">8.4.2</span> 对数变换</h3>
+</section><section id="对数变换" class="level3" data-number="9.4.2"><h3 data-number="9.4.2" class="anchored" data-anchor-id="对数变换">
+<span class="header-section-number">9.4.2</span> 对数变换</h3>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="va">rec_spec_log</span> <span class="op">&lt;-</span> <span class="fu">recipe</span><span class="op">(</span><span class="va">sales</span> <span class="op">~</span> <span class="va">TV</span>, data <span class="op">=</span> <span class="va">advertising</span><span class="op">)</span> <span class="op">|&gt;</span>  </span>
@@ -3945,14 +3951,15 @@ window.Quarto = {
 <span><span class="co">#&gt;      -4.203        3.901</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section></section><section id="回归诊断" class="level2" data-number="8.5"><h2 data-number="8.5" class="anchored" data-anchor-id="回归诊断">
-<span class="header-section-number">8.5</span> 回归诊断</h2>
+</section></section><section id="回归诊断" class="level2" data-number="9.5"><h2 data-number="9.5" class="anchored" data-anchor-id="回归诊断">
+<span class="header-section-number">9.5</span> 回归诊断</h2>
+<p><a href="https://www.statmethods.net/stats/rdiagnostics.html" class="uri">https://www.statmethods.net/stats/rdiagnostics.html</a></p>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-forge.r-project.org/projects/car/">car</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<section id="线性假设" class="level4" data-number="8.5.0.1"><h4 data-number="8.5.0.1" class="anchored" data-anchor-id="线性假设">
-<span class="header-section-number">8.5.0.1</span> 线性假设</h4>
+<section id="线性假设" class="level4" data-number="9.5.0.1"><h4 data-number="9.5.0.1" class="anchored" data-anchor-id="线性假设">
+<span class="header-section-number">9.5.0.1</span> 线性假设</h4>
 <p>残差图</p>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">lm_sales_3</span><span class="op">$</span><span class="va">fit</span>,<span class="fl">1</span><span class="op">)</span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -3970,8 +3977,8 @@ window.Quarto = {
 </div>
 </div>
 </div>
-</section><section id="正态性假设q-q图" class="level4" data-number="8.5.0.2"><h4 data-number="8.5.0.2" class="anchored" data-anchor-id="正态性假设q-q图">
-<span class="header-section-number">8.5.0.2</span> 正态性假设Q-Q图</h4>
+</section><section id="正态性假设q-q图" class="level4" data-number="9.5.0.2"><h4 data-number="9.5.0.2" class="anchored" data-anchor-id="正态性假设q-q图">
+<span class="header-section-number">9.5.0.2</span> 正态性假设Q-Q图</h4>
 <p>Standardized Residuals</p>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">lm_sales_3</span><span class="op">$</span><span class="va">fit</span>,<span class="fl">2</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -4005,8 +4012,8 @@ window.Quarto = {
 </div>
 </div>
 </div>
-</section><section id="误差相关性" class="level4" data-number="8.5.0.3"><h4 data-number="8.5.0.3" class="anchored" data-anchor-id="误差相关性">
-<span class="header-section-number">8.5.0.3</span> 误差相关性</h4>
+</section><section id="误差相关性" class="level4" data-number="9.5.0.3"><h4 data-number="9.5.0.3" class="anchored" data-anchor-id="误差相关性">
+<span class="header-section-number">9.5.0.3</span> 误差相关性</h4>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/durbinWatsonTest.html">durbinWatsonTest</a></span><span class="op">(</span><span class="va">lm_sales_3</span><span class="op">$</span><span class="va">fit</span><span class="op">)</span>      <span class="co">#结果表明rho=0</span></span>
 <span><span class="co">#&gt;  lag Autocorrelation D-W Statistic p-value</span></span>
@@ -4014,8 +4021,8 @@ window.Quarto = {
 <span><span class="co">#&gt;  Alternative hypothesis: rho != 0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="误差项的方差齐性" class="level4" data-number="8.5.0.4"><h4 data-number="8.5.0.4" class="anchored" data-anchor-id="误差项的方差齐性">
-<span class="header-section-number">8.5.0.4</span> 误差项的方差齐性</h4>
+</section><section id="误差项的方差齐性" class="level4" data-number="9.5.0.4"><h4 data-number="9.5.0.4" class="anchored" data-anchor-id="误差项的方差齐性">
+<span class="header-section-number">9.5.0.4</span> 误差项的方差齐性</h4>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/ncvTest.html">ncvTest</a></span><span class="op">(</span><span class="va">lm_sales_3</span><span class="op">$</span><span class="va">fit</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Non-constant Variance Score Test </span></span>
@@ -4031,8 +4038,8 @@ window.Quarto = {
 <pre><code>#&gt; 
 #&gt; Suggested power transformation:  1.499852</code></pre>
 </div>
-</section><section id="异常观测点" class="level4" data-number="8.5.0.5"><h4 data-number="8.5.0.5" class="anchored" data-anchor-id="异常观测点">
-<span class="header-section-number">8.5.0.5</span> 异常观测点</h4>
+</section><section id="异常观测点" class="level4" data-number="9.5.0.5"><h4 data-number="9.5.0.5" class="anchored" data-anchor-id="异常观测点">
+<span class="header-section-number">9.5.0.5</span> 异常观测点</h4>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># studentized residual Plot</span></span>
 <span><span class="va">residplot</span><span class="op">&lt;-</span><span class="kw">function</span><span class="op">(</span><span class="va">fit</span>,<span class="va">nbreaks</span><span class="op">=</span><span class="fl">10</span><span class="op">)</span><span class="op">{</span></span>
@@ -4107,8 +4114,8 @@ window.Quarto = {
 </div>
 </div>
 </div>
-</section></section><section id="多重共线性" class="level4" data-number="8.5.0.6"><h4 data-number="8.5.0.6" class="anchored" data-anchor-id="多重共线性">
-<span class="header-section-number">8.5.0.6</span> 多重共线性</h4>
+</section></section><section id="多重共线性" class="level4" data-number="9.5.0.6"><h4 data-number="9.5.0.6" class="anchored" data-anchor-id="多重共线性">
+<span class="header-section-number">9.5.0.6</span> 多重共线性</h4>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/vif.html">vif</a></span><span class="op">(</span><span class="va">lm_sales_3</span><span class="op">$</span><span class="va">fit</span><span class="op">)</span></span>
 <span><span class="co">#&gt;        TV     radio newspaper </span></span>
@@ -4140,8 +4147,8 @@ window.Quarto = {
 <span><span class="co">#&gt; F-statistic: 570.3 on 3 and 196 DF,  p-value: &lt; 2.2e-16</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section></section><section id="模型选择和优化" class="level2" data-number="8.6"><h2 data-number="8.6" class="anchored" data-anchor-id="模型选择和优化">
-<span class="header-section-number">8.6</span> 模型选择和优化</h2>
+</section></section><section id="模型选择和优化" class="level2" data-number="9.6"><h2 data-number="9.6" class="anchored" data-anchor-id="模型选择和优化">
+<span class="header-section-number">9.6</span> 模型选择和优化</h2>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">########################两模型比较</span></span>
 <span><span class="va">lm1</span> <span class="op">&lt;-</span> <span class="va">lm_spec</span> <span class="op">|&gt;</span> <span class="fu">fit</span><span class="op">(</span><span class="va">sales</span><span class="op">~</span><span class="va">TV</span><span class="op">+</span><span class="va">radio</span><span class="op">+</span><span class="va">newspaper</span>,data <span class="op">=</span> <span class="va">advertising</span><span class="op">)</span></span>
@@ -4936,13 +4943,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./ANOVA.html" class="pagination-link" aria-label="方差分析">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">方差分析</span></span>
+      <a href="./nonparametric_test.html" class="pagination-link" aria-label="非参数检验">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">非参数检验</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./glm.html" class="pagination-link" aria-label="广义线性模型">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">广义线性模型</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">广义线性模型</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
@@ -5111,158 +5118,160 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb38-183"><a href="#cb38-183" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb38-184"><a href="#cb38-184" aria-hidden="true" tabindex="-1"></a><span class="fu">## 回归诊断</span></span>
 <span id="cb38-185"><a href="#cb38-185" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-188"><a href="#cb38-188" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb38-189"><a href="#cb38-189" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
-<span id="cb38-190"><a href="#cb38-190" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb38-191"><a href="#cb38-191" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-192"><a href="#cb38-192" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 线性假设</span></span>
+<span id="cb38-186"><a href="#cb38-186" aria-hidden="true" tabindex="-1"></a><span class="ot">&lt;https://www.statmethods.net/stats/rdiagnostics.html&gt;</span></span>
+<span id="cb38-187"><a href="#cb38-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-190"><a href="#cb38-190" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb38-191"><a href="#cb38-191" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
+<span id="cb38-192"><a href="#cb38-192" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb38-193"><a href="#cb38-193" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-194"><a href="#cb38-194" aria-hidden="true" tabindex="-1"></a>残差图</span>
+<span id="cb38-194"><a href="#cb38-194" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 线性假设</span></span>
 <span id="cb38-195"><a href="#cb38-195" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-198"><a href="#cb38-198" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb38-199"><a href="#cb38-199" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lm_sales_3<span class="sc">$</span>fit,<span class="dv">1</span>)  </span>
-<span id="cb38-200"><a href="#cb38-200" aria-hidden="true" tabindex="-1"></a><span class="fu">crPlots</span>(lm_sales_3<span class="sc">$</span>fit)</span>
-<span id="cb38-201"><a href="#cb38-201" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb38-202"><a href="#cb38-202" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-203"><a href="#cb38-203" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 正态性假设Q-Q图</span></span>
+<span id="cb38-196"><a href="#cb38-196" aria-hidden="true" tabindex="-1"></a>残差图</span>
+<span id="cb38-197"><a href="#cb38-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-200"><a href="#cb38-200" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb38-201"><a href="#cb38-201" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lm_sales_3<span class="sc">$</span>fit,<span class="dv">1</span>)  </span>
+<span id="cb38-202"><a href="#cb38-202" aria-hidden="true" tabindex="-1"></a><span class="fu">crPlots</span>(lm_sales_3<span class="sc">$</span>fit)</span>
+<span id="cb38-203"><a href="#cb38-203" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb38-204"><a href="#cb38-204" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-205"><a href="#cb38-205" aria-hidden="true" tabindex="-1"></a>Standardized Residuals</span>
+<span id="cb38-205"><a href="#cb38-205" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 正态性假设Q-Q图</span></span>
 <span id="cb38-206"><a href="#cb38-206" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-209"><a href="#cb38-209" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb38-210"><a href="#cb38-210" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lm_sales_3<span class="sc">$</span>fit,<span class="dv">2</span>) </span>
-<span id="cb38-211"><a href="#cb38-211" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">powerTransform</span>(lm_sales_3<span class="sc">$</span>fit))  </span>
-<span id="cb38-212"><a href="#cb38-212" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb38-213"><a href="#cb38-213" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-216"><a href="#cb38-216" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb38-217"><a href="#cb38-217" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lm_sales_tv<span class="sc">$</span>fit,<span class="dv">3</span>)</span>
-<span id="cb38-218"><a href="#cb38-218" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb38-219"><a href="#cb38-219" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-220"><a href="#cb38-220" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 误差相关性</span></span>
+<span id="cb38-207"><a href="#cb38-207" aria-hidden="true" tabindex="-1"></a>Standardized Residuals</span>
+<span id="cb38-208"><a href="#cb38-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-211"><a href="#cb38-211" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb38-212"><a href="#cb38-212" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lm_sales_3<span class="sc">$</span>fit,<span class="dv">2</span>) </span>
+<span id="cb38-213"><a href="#cb38-213" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">powerTransform</span>(lm_sales_3<span class="sc">$</span>fit))  </span>
+<span id="cb38-214"><a href="#cb38-214" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-215"><a href="#cb38-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-218"><a href="#cb38-218" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb38-219"><a href="#cb38-219" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lm_sales_tv<span class="sc">$</span>fit,<span class="dv">3</span>)</span>
+<span id="cb38-220"><a href="#cb38-220" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb38-221"><a href="#cb38-221" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-224"><a href="#cb38-224" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb38-225"><a href="#cb38-225" aria-hidden="true" tabindex="-1"></a><span class="fu">durbinWatsonTest</span>(lm_sales_3<span class="sc">$</span>fit)      <span class="co">#结果表明rho=0</span></span>
-<span id="cb38-226"><a href="#cb38-226" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb38-227"><a href="#cb38-227" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-228"><a href="#cb38-228" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 误差项的方差齐性</span></span>
+<span id="cb38-222"><a href="#cb38-222" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 误差相关性</span></span>
+<span id="cb38-223"><a href="#cb38-223" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-226"><a href="#cb38-226" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb38-227"><a href="#cb38-227" aria-hidden="true" tabindex="-1"></a><span class="fu">durbinWatsonTest</span>(lm_sales_3<span class="sc">$</span>fit)      <span class="co">#结果表明rho=0</span></span>
+<span id="cb38-228"><a href="#cb38-228" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb38-229"><a href="#cb38-229" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-232"><a href="#cb38-232" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb38-233"><a href="#cb38-233" aria-hidden="true" tabindex="-1"></a><span class="fu">ncvTest</span>(lm_sales_3<span class="sc">$</span>fit)</span>
-<span id="cb38-234"><a href="#cb38-234" aria-hidden="true" tabindex="-1"></a><span class="fu">spreadLevelPlot</span>(lm_sales_3<span class="sc">$</span>fit)</span>
-<span id="cb38-235"><a href="#cb38-235" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb38-236"><a href="#cb38-236" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-237"><a href="#cb38-237" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 异常观测点</span></span>
+<span id="cb38-230"><a href="#cb38-230" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 误差项的方差齐性</span></span>
+<span id="cb38-231"><a href="#cb38-231" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-234"><a href="#cb38-234" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb38-235"><a href="#cb38-235" aria-hidden="true" tabindex="-1"></a><span class="fu">ncvTest</span>(lm_sales_3<span class="sc">$</span>fit)</span>
+<span id="cb38-236"><a href="#cb38-236" aria-hidden="true" tabindex="-1"></a><span class="fu">spreadLevelPlot</span>(lm_sales_3<span class="sc">$</span>fit)</span>
+<span id="cb38-237"><a href="#cb38-237" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb38-238"><a href="#cb38-238" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-241"><a href="#cb38-241" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb38-242"><a href="#cb38-242" aria-hidden="true" tabindex="-1"></a><span class="co"># studentized residual Plot</span></span>
-<span id="cb38-243"><a href="#cb38-243" aria-hidden="true" tabindex="-1"></a>residplot<span class="ot">&lt;-</span><span class="cf">function</span>(fit,<span class="at">nbreaks=</span><span class="dv">10</span>){</span>
-<span id="cb38-244"><a href="#cb38-244" aria-hidden="true" tabindex="-1"></a>  z<span class="ot">&lt;-</span><span class="fu">rstudent</span>(fit)</span>
-<span id="cb38-245"><a href="#cb38-245" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hist</span>(z,<span class="at">breaks=</span>nbreaks,<span class="at">freq=</span><span class="cn">FALSE</span>)     <span class="co">#密度直方图</span></span>
-<span id="cb38-246"><a href="#cb38-246" aria-hidden="true" tabindex="-1"></a>  <span class="fu">title</span>(<span class="at">xlab=</span><span class="st">"Studentized Residual"</span>)</span>
-<span id="cb38-247"><a href="#cb38-247" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rug</span>(z,<span class="at">col=</span><span class="st">"brown"</span>)                    <span class="co">#轴须图</span></span>
-<span id="cb38-248"><a href="#cb38-248" aria-hidden="true" tabindex="-1"></a>  <span class="fu">curve</span>(<span class="fu">dnorm</span>(x,<span class="at">mean=</span><span class="fu">mean</span>(z),<span class="at">sd=</span><span class="fu">sd</span>(z)),<span class="at">add=</span><span class="cn">TRUE</span>,<span class="at">col=</span><span class="st">"blue"</span>,<span class="at">lwd=</span><span class="dv">2</span>) <span class="co">#正态密度曲线</span></span>
-<span id="cb38-249"><a href="#cb38-249" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(<span class="fu">density</span>(z)<span class="sc">$</span>x,<span class="fu">density</span>(z)<span class="sc">$</span>y,<span class="at">col=</span><span class="st">"red"</span>,<span class="at">lwd=</span><span class="dv">2</span>)       <span class="co">#样本密度曲线</span></span>
-<span id="cb38-250"><a href="#cb38-250" aria-hidden="true" tabindex="-1"></a>  <span class="fu">legend</span>(<span class="st">"topright"</span>,<span class="fu">c</span>(<span class="st">"Normal Curve"</span>,<span class="st">"Kernel Density Curve"</span>),<span class="co">#图例</span></span>
-<span id="cb38-251"><a href="#cb38-251" aria-hidden="true" tabindex="-1"></a>  <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">2</span>),<span class="at">pch =</span> <span class="fu">c</span>(<span class="dv">21</span>,<span class="dv">22</span>),<span class="at">col=</span><span class="fu">c</span>(<span class="st">"blue"</span>,<span class="st">"red"</span>),<span class="at">cex=</span>.<span class="dv">7</span>)</span>
-<span id="cb38-252"><a href="#cb38-252" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb38-253"><a href="#cb38-253" aria-hidden="true" tabindex="-1"></a><span class="fu">residplot</span>(lm_sales_tv<span class="sc">$</span>fit)</span>
-<span id="cb38-254"><a href="#cb38-254" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb38-255"><a href="#cb38-255" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-256"><a href="#cb38-256" aria-hidden="true" tabindex="-1"></a><span class="in">```{r eval=FALSE}</span></span>
-<span id="cb38-257"><a href="#cb38-257" aria-hidden="true" tabindex="-1"></a><span class="in">#######################################################################</span></span>
-<span id="cb38-258"><a href="#cb38-258" aria-hidden="true" tabindex="-1"></a><span class="in">library(car)</span></span>
-<span id="cb38-259"><a href="#cb38-259" aria-hidden="true" tabindex="-1"></a><span class="in">outlierTest(lm_sales_tv$fit)            #离群点</span></span>
-<span id="cb38-260"><a href="#cb38-260" aria-hidden="true" tabindex="-1"></a><span class="in">#高杠杆值点</span></span>
-<span id="cb38-261"><a href="#cb38-261" aria-hidden="true" tabindex="-1"></a><span class="in">hat.plot&lt;-function(fit){</span></span>
-<span id="cb38-262"><a href="#cb38-262" aria-hidden="true" tabindex="-1"></a><span class="in">  p&lt;-length(coefficients(fit)) #模型估计的参数数目（包含截距项）</span></span>
-<span id="cb38-263"><a href="#cb38-263" aria-hidden="true" tabindex="-1"></a><span class="in">  n&lt;-length(fitted(fit))       #样本量</span></span>
-<span id="cb38-264"><a href="#cb38-264" aria-hidden="true" tabindex="-1"></a><span class="in">  plot(hatvalues(fit),main="Index Plot of Hat Values")#帽子值</span></span>
-<span id="cb38-265"><a href="#cb38-265" aria-hidden="true" tabindex="-1"></a><span class="in">  abline(h=c(2,3)*p/n,col="red",lty=2)  #大于帽子均值p/n的2或3倍被认为是高杠杆值</span></span>
-<span id="cb38-266"><a href="#cb38-266" aria-hidden="true" tabindex="-1"></a><span class="in">  identity(1:n,hatvalues(fit),names(hatvalues(fit)))</span></span>
-<span id="cb38-267"><a href="#cb38-267" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb38-268"><a href="#cb38-268" aria-hidden="true" tabindex="-1"></a><span class="in">hat.plot(lm_sales_tv$fit)</span></span>
-<span id="cb38-269"><a href="#cb38-269" aria-hidden="true" tabindex="-1"></a><span class="in">####强影响点</span></span>
-<span id="cb38-270"><a href="#cb38-270" aria-hidden="true" tabindex="-1"></a><span class="in">#Cook's D图形    大于4/(n-k-1)  k为预测变量数目</span></span>
-<span id="cb38-271"><a href="#cb38-271" aria-hidden="true" tabindex="-1"></a><span class="in">cutoff&lt;-4/(nrow(states)-length(fit$coefficients)-2)</span></span>
-<span id="cb38-272"><a href="#cb38-272" aria-hidden="true" tabindex="-1"></a><span class="in">plot(fit3,which=4,cook.levels=cutoff)</span></span>
-<span id="cb38-273"><a href="#cb38-273" aria-hidden="true" tabindex="-1"></a><span class="in">abline(h=cutoff,lty=2,col="red")</span></span>
-<span id="cb38-274"><a href="#cb38-274" aria-hidden="true" tabindex="-1"></a><span class="in">#变量添加图</span></span>
-<span id="cb38-275"><a href="#cb38-275" aria-hidden="true" tabindex="-1"></a><span class="in">avPlots(fit3,ask=FALSE,id.method="identity")</span></span>
-<span id="cb38-276"><a href="#cb38-276" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-277"><a href="#cb38-277" aria-hidden="true" tabindex="-1"></a><span class="in">###</span></span>
-<span id="cb38-278"><a href="#cb38-278" aria-hidden="true" tabindex="-1"></a><span class="in">influencePlot(fit3,id.method="identity",main="Influence Plot")</span></span>
-<span id="cb38-279"><a href="#cb38-279" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb38-280"><a href="#cb38-280" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-281"><a href="#cb38-281" aria-hidden="true" tabindex="-1"></a><span class="fu">##### Cook's distance</span></span>
+<span id="cb38-239"><a href="#cb38-239" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 异常观测点</span></span>
+<span id="cb38-240"><a href="#cb38-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-243"><a href="#cb38-243" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb38-244"><a href="#cb38-244" aria-hidden="true" tabindex="-1"></a><span class="co"># studentized residual Plot</span></span>
+<span id="cb38-245"><a href="#cb38-245" aria-hidden="true" tabindex="-1"></a>residplot<span class="ot">&lt;-</span><span class="cf">function</span>(fit,<span class="at">nbreaks=</span><span class="dv">10</span>){</span>
+<span id="cb38-246"><a href="#cb38-246" aria-hidden="true" tabindex="-1"></a>  z<span class="ot">&lt;-</span><span class="fu">rstudent</span>(fit)</span>
+<span id="cb38-247"><a href="#cb38-247" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hist</span>(z,<span class="at">breaks=</span>nbreaks,<span class="at">freq=</span><span class="cn">FALSE</span>)     <span class="co">#密度直方图</span></span>
+<span id="cb38-248"><a href="#cb38-248" aria-hidden="true" tabindex="-1"></a>  <span class="fu">title</span>(<span class="at">xlab=</span><span class="st">"Studentized Residual"</span>)</span>
+<span id="cb38-249"><a href="#cb38-249" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rug</span>(z,<span class="at">col=</span><span class="st">"brown"</span>)                    <span class="co">#轴须图</span></span>
+<span id="cb38-250"><a href="#cb38-250" aria-hidden="true" tabindex="-1"></a>  <span class="fu">curve</span>(<span class="fu">dnorm</span>(x,<span class="at">mean=</span><span class="fu">mean</span>(z),<span class="at">sd=</span><span class="fu">sd</span>(z)),<span class="at">add=</span><span class="cn">TRUE</span>,<span class="at">col=</span><span class="st">"blue"</span>,<span class="at">lwd=</span><span class="dv">2</span>) <span class="co">#正态密度曲线</span></span>
+<span id="cb38-251"><a href="#cb38-251" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(<span class="fu">density</span>(z)<span class="sc">$</span>x,<span class="fu">density</span>(z)<span class="sc">$</span>y,<span class="at">col=</span><span class="st">"red"</span>,<span class="at">lwd=</span><span class="dv">2</span>)       <span class="co">#样本密度曲线</span></span>
+<span id="cb38-252"><a href="#cb38-252" aria-hidden="true" tabindex="-1"></a>  <span class="fu">legend</span>(<span class="st">"topright"</span>,<span class="fu">c</span>(<span class="st">"Normal Curve"</span>,<span class="st">"Kernel Density Curve"</span>),<span class="co">#图例</span></span>
+<span id="cb38-253"><a href="#cb38-253" aria-hidden="true" tabindex="-1"></a>  <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">2</span>),<span class="at">pch =</span> <span class="fu">c</span>(<span class="dv">21</span>,<span class="dv">22</span>),<span class="at">col=</span><span class="fu">c</span>(<span class="st">"blue"</span>,<span class="st">"red"</span>),<span class="at">cex=</span>.<span class="dv">7</span>)</span>
+<span id="cb38-254"><a href="#cb38-254" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb38-255"><a href="#cb38-255" aria-hidden="true" tabindex="-1"></a><span class="fu">residplot</span>(lm_sales_tv<span class="sc">$</span>fit)</span>
+<span id="cb38-256"><a href="#cb38-256" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-257"><a href="#cb38-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-258"><a href="#cb38-258" aria-hidden="true" tabindex="-1"></a><span class="in">```{r eval=FALSE}</span></span>
+<span id="cb38-259"><a href="#cb38-259" aria-hidden="true" tabindex="-1"></a><span class="in">#######################################################################</span></span>
+<span id="cb38-260"><a href="#cb38-260" aria-hidden="true" tabindex="-1"></a><span class="in">library(car)</span></span>
+<span id="cb38-261"><a href="#cb38-261" aria-hidden="true" tabindex="-1"></a><span class="in">outlierTest(lm_sales_tv$fit)            #离群点</span></span>
+<span id="cb38-262"><a href="#cb38-262" aria-hidden="true" tabindex="-1"></a><span class="in">#高杠杆值点</span></span>
+<span id="cb38-263"><a href="#cb38-263" aria-hidden="true" tabindex="-1"></a><span class="in">hat.plot&lt;-function(fit){</span></span>
+<span id="cb38-264"><a href="#cb38-264" aria-hidden="true" tabindex="-1"></a><span class="in">  p&lt;-length(coefficients(fit)) #模型估计的参数数目（包含截距项）</span></span>
+<span id="cb38-265"><a href="#cb38-265" aria-hidden="true" tabindex="-1"></a><span class="in">  n&lt;-length(fitted(fit))       #样本量</span></span>
+<span id="cb38-266"><a href="#cb38-266" aria-hidden="true" tabindex="-1"></a><span class="in">  plot(hatvalues(fit),main="Index Plot of Hat Values")#帽子值</span></span>
+<span id="cb38-267"><a href="#cb38-267" aria-hidden="true" tabindex="-1"></a><span class="in">  abline(h=c(2,3)*p/n,col="red",lty=2)  #大于帽子均值p/n的2或3倍被认为是高杠杆值</span></span>
+<span id="cb38-268"><a href="#cb38-268" aria-hidden="true" tabindex="-1"></a><span class="in">  identity(1:n,hatvalues(fit),names(hatvalues(fit)))</span></span>
+<span id="cb38-269"><a href="#cb38-269" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb38-270"><a href="#cb38-270" aria-hidden="true" tabindex="-1"></a><span class="in">hat.plot(lm_sales_tv$fit)</span></span>
+<span id="cb38-271"><a href="#cb38-271" aria-hidden="true" tabindex="-1"></a><span class="in">####强影响点</span></span>
+<span id="cb38-272"><a href="#cb38-272" aria-hidden="true" tabindex="-1"></a><span class="in">#Cook's D图形    大于4/(n-k-1)  k为预测变量数目</span></span>
+<span id="cb38-273"><a href="#cb38-273" aria-hidden="true" tabindex="-1"></a><span class="in">cutoff&lt;-4/(nrow(states)-length(fit$coefficients)-2)</span></span>
+<span id="cb38-274"><a href="#cb38-274" aria-hidden="true" tabindex="-1"></a><span class="in">plot(fit3,which=4,cook.levels=cutoff)</span></span>
+<span id="cb38-275"><a href="#cb38-275" aria-hidden="true" tabindex="-1"></a><span class="in">abline(h=cutoff,lty=2,col="red")</span></span>
+<span id="cb38-276"><a href="#cb38-276" aria-hidden="true" tabindex="-1"></a><span class="in">#变量添加图</span></span>
+<span id="cb38-277"><a href="#cb38-277" aria-hidden="true" tabindex="-1"></a><span class="in">avPlots(fit3,ask=FALSE,id.method="identity")</span></span>
+<span id="cb38-278"><a href="#cb38-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-279"><a href="#cb38-279" aria-hidden="true" tabindex="-1"></a><span class="in">###</span></span>
+<span id="cb38-280"><a href="#cb38-280" aria-hidden="true" tabindex="-1"></a><span class="in">influencePlot(fit3,id.method="identity",main="Influence Plot")</span></span>
+<span id="cb38-281"><a href="#cb38-281" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb38-282"><a href="#cb38-282" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-285"><a href="#cb38-285" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb38-286"><a href="#cb38-286" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lm_sales_tv<span class="sc">$</span>fit,<span class="dv">4</span>)</span>
-<span id="cb38-287"><a href="#cb38-287" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb38-288"><a href="#cb38-288" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-289"><a href="#cb38-289" aria-hidden="true" tabindex="-1"></a><span class="fu">##### Leverage</span></span>
+<span id="cb38-283"><a href="#cb38-283" aria-hidden="true" tabindex="-1"></a><span class="fu">##### Cook's distance</span></span>
+<span id="cb38-284"><a href="#cb38-284" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-287"><a href="#cb38-287" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb38-288"><a href="#cb38-288" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lm_sales_tv<span class="sc">$</span>fit,<span class="dv">4</span>)</span>
+<span id="cb38-289"><a href="#cb38-289" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb38-290"><a href="#cb38-290" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-293"><a href="#cb38-293" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb38-294"><a href="#cb38-294" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lm_sales_tv<span class="sc">$</span>fit,<span class="dv">5</span>)</span>
-<span id="cb38-295"><a href="#cb38-295" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb38-296"><a href="#cb38-296" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-299"><a href="#cb38-299" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb38-300"><a href="#cb38-300" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lm_sales_tv<span class="sc">$</span>fit,<span class="dv">6</span>)</span>
-<span id="cb38-301"><a href="#cb38-301" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb38-302"><a href="#cb38-302" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-303"><a href="#cb38-303" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 多重共线性</span></span>
+<span id="cb38-291"><a href="#cb38-291" aria-hidden="true" tabindex="-1"></a><span class="fu">##### Leverage</span></span>
+<span id="cb38-292"><a href="#cb38-292" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-295"><a href="#cb38-295" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb38-296"><a href="#cb38-296" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lm_sales_tv<span class="sc">$</span>fit,<span class="dv">5</span>)</span>
+<span id="cb38-297"><a href="#cb38-297" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-298"><a href="#cb38-298" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-301"><a href="#cb38-301" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb38-302"><a href="#cb38-302" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lm_sales_tv<span class="sc">$</span>fit,<span class="dv">6</span>)</span>
+<span id="cb38-303"><a href="#cb38-303" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb38-304"><a href="#cb38-304" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-307"><a href="#cb38-307" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb38-308"><a href="#cb38-308" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(lm_sales_3<span class="sc">$</span>fit)</span>
-<span id="cb38-309"><a href="#cb38-309" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-310"><a href="#cb38-310" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">vif</span>(lm_sales_3<span class="sc">$</span>fit))<span class="sc">&gt;=</span><span class="dv">2</span>       <span class="co">#vif平方根 ≥2 存在</span></span>
-<span id="cb38-311"><a href="#cb38-311" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_sales_3<span class="sc">$</span>fit)</span>
-<span id="cb38-312"><a href="#cb38-312" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb38-313"><a href="#cb38-313" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-314"><a href="#cb38-314" aria-hidden="true" tabindex="-1"></a><span class="fu">## 模型选择和优化</span></span>
+<span id="cb38-305"><a href="#cb38-305" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 多重共线性</span></span>
+<span id="cb38-306"><a href="#cb38-306" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-309"><a href="#cb38-309" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb38-310"><a href="#cb38-310" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(lm_sales_3<span class="sc">$</span>fit)</span>
+<span id="cb38-311"><a href="#cb38-311" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-312"><a href="#cb38-312" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">vif</span>(lm_sales_3<span class="sc">$</span>fit))<span class="sc">&gt;=</span><span class="dv">2</span>       <span class="co">#vif平方根 ≥2 存在</span></span>
+<span id="cb38-313"><a href="#cb38-313" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_sales_3<span class="sc">$</span>fit)</span>
+<span id="cb38-314"><a href="#cb38-314" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb38-315"><a href="#cb38-315" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-318"><a href="#cb38-318" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb38-319"><a href="#cb38-319" aria-hidden="true" tabindex="-1"></a><span class="do">########################两模型比较</span></span>
-<span id="cb38-320"><a href="#cb38-320" aria-hidden="true" tabindex="-1"></a>lm1 <span class="ot">&lt;-</span> lm_spec <span class="sc">|&gt;</span> <span class="fu">fit</span>(sales<span class="sc">~</span>TV<span class="sc">+</span>radio<span class="sc">+</span>newspaper,<span class="at">data =</span> advertising)</span>
-<span id="cb38-321"><a href="#cb38-321" aria-hidden="true" tabindex="-1"></a>lm2 <span class="ot">&lt;-</span> lm_spec <span class="sc">|&gt;</span> <span class="fu">fit</span>(sales<span class="sc">~</span>TV<span class="sc">*</span>radio<span class="sc">*</span>newspaper,<span class="at">data =</span> advertising[<span class="sc">-</span><span class="dv">1</span>])</span>
-<span id="cb38-322"><a href="#cb38-322" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-323"><a href="#cb38-323" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lm2<span class="sc">$</span>fit,lm1<span class="sc">$</span>fit) <span class="co">#anova() 嵌套模型</span></span>
+<span id="cb38-316"><a href="#cb38-316" aria-hidden="true" tabindex="-1"></a><span class="fu">## 模型选择和优化</span></span>
+<span id="cb38-317"><a href="#cb38-317" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-320"><a href="#cb38-320" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb38-321"><a href="#cb38-321" aria-hidden="true" tabindex="-1"></a><span class="do">########################两模型比较</span></span>
+<span id="cb38-322"><a href="#cb38-322" aria-hidden="true" tabindex="-1"></a>lm1 <span class="ot">&lt;-</span> lm_spec <span class="sc">|&gt;</span> <span class="fu">fit</span>(sales<span class="sc">~</span>TV<span class="sc">+</span>radio<span class="sc">+</span>newspaper,<span class="at">data =</span> advertising)</span>
+<span id="cb38-323"><a href="#cb38-323" aria-hidden="true" tabindex="-1"></a>lm2 <span class="ot">&lt;-</span> lm_spec <span class="sc">|&gt;</span> <span class="fu">fit</span>(sales<span class="sc">~</span>TV<span class="sc">*</span>radio<span class="sc">*</span>newspaper,<span class="at">data =</span> advertising[<span class="sc">-</span><span class="dv">1</span>])</span>
 <span id="cb38-324"><a href="#cb38-324" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-325"><a href="#cb38-325" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-326"><a href="#cb38-326" aria-hidden="true" tabindex="-1"></a><span class="do">##########################################            AIC </span></span>
-<span id="cb38-327"><a href="#cb38-327" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(lm2<span class="sc">$</span>fit,lm1<span class="sc">$</span>fit)  <span class="co"># 赤池信息准则  AIC值小的优先选择</span></span>
-<span id="cb38-328"><a href="#cb38-328" aria-hidden="true" tabindex="-1"></a><span class="co">#BIC</span></span>
-<span id="cb38-329"><a href="#cb38-329" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-330"><a href="#cb38-330" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-331"><a href="#cb38-331" aria-hidden="true" tabindex="-1"></a><span class="do">####################################相对重要性##################################</span></span>
-<span id="cb38-332"><a href="#cb38-332" aria-hidden="true" tabindex="-1"></a>ad <span class="ot">&lt;-</span> <span class="fu">scale</span>(advertising[<span class="sc">-</span><span class="dv">1</span>])</span>
-<span id="cb38-333"><a href="#cb38-333" aria-hidden="true" tabindex="-1"></a>ad</span>
-<span id="cb38-334"><a href="#cb38-334" aria-hidden="true" tabindex="-1"></a><span class="co">#R平方贡献率  #相对权重 </span></span>
-<span id="cb38-335"><a href="#cb38-335" aria-hidden="true" tabindex="-1"></a>relweights<span class="ot">&lt;-</span><span class="cf">function</span>(fit,...){</span>
-<span id="cb38-336"><a href="#cb38-336" aria-hidden="true" tabindex="-1"></a>  R<span class="ot">&lt;-</span><span class="fu">cor</span>(fit<span class="sc">$</span>model)</span>
-<span id="cb38-337"><a href="#cb38-337" aria-hidden="true" tabindex="-1"></a>  nvar<span class="ot">&lt;-</span><span class="fu">ncol</span>(R)</span>
-<span id="cb38-338"><a href="#cb38-338" aria-hidden="true" tabindex="-1"></a>  rxx<span class="ot">&lt;-</span>R[<span class="dv">2</span><span class="sc">:</span>nvar,<span class="dv">2</span><span class="sc">:</span>nvar]</span>
-<span id="cb38-339"><a href="#cb38-339" aria-hidden="true" tabindex="-1"></a>  rxy<span class="ot">&lt;-</span>R[<span class="dv">2</span><span class="sc">:</span>nvar,<span class="dv">1</span>]</span>
-<span id="cb38-340"><a href="#cb38-340" aria-hidden="true" tabindex="-1"></a>  svd<span class="ot">&lt;-</span><span class="fu">eigen</span>(rxx)</span>
-<span id="cb38-341"><a href="#cb38-341" aria-hidden="true" tabindex="-1"></a>  evec<span class="ot">&lt;-</span>svd<span class="sc">$</span>vectors</span>
-<span id="cb38-342"><a href="#cb38-342" aria-hidden="true" tabindex="-1"></a>  ev<span class="ot">&lt;-</span>svd<span class="sc">$</span>values</span>
-<span id="cb38-343"><a href="#cb38-343" aria-hidden="true" tabindex="-1"></a>  delta<span class="ot">&lt;-</span><span class="fu">diag</span>(<span class="fu">sqrt</span>(ev))</span>
-<span id="cb38-344"><a href="#cb38-344" aria-hidden="true" tabindex="-1"></a>  lambda<span class="ot">&lt;-</span>evec <span class="sc">%*%</span>delta <span class="sc">%*%</span> <span class="fu">t</span>(evec)</span>
-<span id="cb38-345"><a href="#cb38-345" aria-hidden="true" tabindex="-1"></a>  lambdaasq<span class="ot">&lt;-</span>lambda<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb38-346"><a href="#cb38-346" aria-hidden="true" tabindex="-1"></a>  beta<span class="ot">&lt;-</span><span class="fu">solve</span>(lambda) <span class="sc">%*%</span> rxy</span>
-<span id="cb38-347"><a href="#cb38-347" aria-hidden="true" tabindex="-1"></a>  r2<span class="ot">&lt;-</span><span class="fu">colSums</span>(beta<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb38-348"><a href="#cb38-348" aria-hidden="true" tabindex="-1"></a>  rawwgt<span class="ot">&lt;-</span>lambdaasq<span class="sc">%*%</span>beta<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb38-349"><a href="#cb38-349" aria-hidden="true" tabindex="-1"></a>  import<span class="ot">&lt;-</span>(rawwgt<span class="sc">/</span>r2)<span class="sc">*</span><span class="dv">100</span>            <span class="co">#计算相对权重</span></span>
-<span id="cb38-350"><a href="#cb38-350" aria-hidden="true" tabindex="-1"></a>  import<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">Weights=</span>import)  <span class="co">#数据框化</span></span>
-<span id="cb38-351"><a href="#cb38-351" aria-hidden="true" tabindex="-1"></a>  <span class="fu">row.names</span>(import)<span class="ot">&lt;-</span><span class="fu">names</span>(fit<span class="sc">$</span>model[<span class="dv">2</span><span class="sc">:</span>nvar])</span>
-<span id="cb38-352"><a href="#cb38-352" aria-hidden="true" tabindex="-1"></a>  import<span class="ot">&lt;-</span>import[<span class="fu">order</span>(import<span class="sc">$</span>Weights),<span class="dv">1</span>,drop<span class="ot">=</span><span class="cn">FALSE</span>] <span class="co">#升序排序</span></span>
-<span id="cb38-353"><a href="#cb38-353" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dotchart</span>(import<span class="sc">$</span>Weights,<span class="at">labels=</span><span class="fu">row.names</span>(import),   <span class="co">#点图</span></span>
-<span id="cb38-354"><a href="#cb38-354" aria-hidden="true" tabindex="-1"></a>           <span class="at">xlab =</span> <span class="st">"% of R-Square"</span>,<span class="at">pch=</span><span class="dv">19</span>,</span>
-<span id="cb38-355"><a href="#cb38-355" aria-hidden="true" tabindex="-1"></a>           <span class="at">main=</span><span class="st">"Relative Importiance of Predictor Variables "</span>,</span>
-<span id="cb38-356"><a href="#cb38-356" aria-hidden="true" tabindex="-1"></a>           <span class="at">sub=</span><span class="fu">paste</span>(<span class="st">"Total R-Square ="</span>,<span class="fu">round</span>(r2,<span class="at">digits =</span> <span class="dv">3</span>)),</span>
-<span id="cb38-357"><a href="#cb38-357" aria-hidden="true" tabindex="-1"></a>  ...)</span>
-<span id="cb38-358"><a href="#cb38-358" aria-hidden="true" tabindex="-1"></a><span class="fu">return</span>(import)</span>
-<span id="cb38-359"><a href="#cb38-359" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb38-360"><a href="#cb38-360" aria-hidden="true" tabindex="-1"></a><span class="fu">relweights</span>(lm1<span class="sc">$</span>fit,<span class="at">col=</span><span class="st">"blue"</span>)</span>
-<span id="cb38-361"><a href="#cb38-361" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-325"><a href="#cb38-325" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lm2<span class="sc">$</span>fit,lm1<span class="sc">$</span>fit) <span class="co">#anova() 嵌套模型</span></span>
+<span id="cb38-326"><a href="#cb38-326" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-327"><a href="#cb38-327" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-328"><a href="#cb38-328" aria-hidden="true" tabindex="-1"></a><span class="do">##########################################            AIC </span></span>
+<span id="cb38-329"><a href="#cb38-329" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(lm2<span class="sc">$</span>fit,lm1<span class="sc">$</span>fit)  <span class="co"># 赤池信息准则  AIC值小的优先选择</span></span>
+<span id="cb38-330"><a href="#cb38-330" aria-hidden="true" tabindex="-1"></a><span class="co">#BIC</span></span>
+<span id="cb38-331"><a href="#cb38-331" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-332"><a href="#cb38-332" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-333"><a href="#cb38-333" aria-hidden="true" tabindex="-1"></a><span class="do">####################################相对重要性##################################</span></span>
+<span id="cb38-334"><a href="#cb38-334" aria-hidden="true" tabindex="-1"></a>ad <span class="ot">&lt;-</span> <span class="fu">scale</span>(advertising[<span class="sc">-</span><span class="dv">1</span>])</span>
+<span id="cb38-335"><a href="#cb38-335" aria-hidden="true" tabindex="-1"></a>ad</span>
+<span id="cb38-336"><a href="#cb38-336" aria-hidden="true" tabindex="-1"></a><span class="co">#R平方贡献率  #相对权重 </span></span>
+<span id="cb38-337"><a href="#cb38-337" aria-hidden="true" tabindex="-1"></a>relweights<span class="ot">&lt;-</span><span class="cf">function</span>(fit,...){</span>
+<span id="cb38-338"><a href="#cb38-338" aria-hidden="true" tabindex="-1"></a>  R<span class="ot">&lt;-</span><span class="fu">cor</span>(fit<span class="sc">$</span>model)</span>
+<span id="cb38-339"><a href="#cb38-339" aria-hidden="true" tabindex="-1"></a>  nvar<span class="ot">&lt;-</span><span class="fu">ncol</span>(R)</span>
+<span id="cb38-340"><a href="#cb38-340" aria-hidden="true" tabindex="-1"></a>  rxx<span class="ot">&lt;-</span>R[<span class="dv">2</span><span class="sc">:</span>nvar,<span class="dv">2</span><span class="sc">:</span>nvar]</span>
+<span id="cb38-341"><a href="#cb38-341" aria-hidden="true" tabindex="-1"></a>  rxy<span class="ot">&lt;-</span>R[<span class="dv">2</span><span class="sc">:</span>nvar,<span class="dv">1</span>]</span>
+<span id="cb38-342"><a href="#cb38-342" aria-hidden="true" tabindex="-1"></a>  svd<span class="ot">&lt;-</span><span class="fu">eigen</span>(rxx)</span>
+<span id="cb38-343"><a href="#cb38-343" aria-hidden="true" tabindex="-1"></a>  evec<span class="ot">&lt;-</span>svd<span class="sc">$</span>vectors</span>
+<span id="cb38-344"><a href="#cb38-344" aria-hidden="true" tabindex="-1"></a>  ev<span class="ot">&lt;-</span>svd<span class="sc">$</span>values</span>
+<span id="cb38-345"><a href="#cb38-345" aria-hidden="true" tabindex="-1"></a>  delta<span class="ot">&lt;-</span><span class="fu">diag</span>(<span class="fu">sqrt</span>(ev))</span>
+<span id="cb38-346"><a href="#cb38-346" aria-hidden="true" tabindex="-1"></a>  lambda<span class="ot">&lt;-</span>evec <span class="sc">%*%</span>delta <span class="sc">%*%</span> <span class="fu">t</span>(evec)</span>
+<span id="cb38-347"><a href="#cb38-347" aria-hidden="true" tabindex="-1"></a>  lambdaasq<span class="ot">&lt;-</span>lambda<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb38-348"><a href="#cb38-348" aria-hidden="true" tabindex="-1"></a>  beta<span class="ot">&lt;-</span><span class="fu">solve</span>(lambda) <span class="sc">%*%</span> rxy</span>
+<span id="cb38-349"><a href="#cb38-349" aria-hidden="true" tabindex="-1"></a>  r2<span class="ot">&lt;-</span><span class="fu">colSums</span>(beta<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb38-350"><a href="#cb38-350" aria-hidden="true" tabindex="-1"></a>  rawwgt<span class="ot">&lt;-</span>lambdaasq<span class="sc">%*%</span>beta<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb38-351"><a href="#cb38-351" aria-hidden="true" tabindex="-1"></a>  import<span class="ot">&lt;-</span>(rawwgt<span class="sc">/</span>r2)<span class="sc">*</span><span class="dv">100</span>            <span class="co">#计算相对权重</span></span>
+<span id="cb38-352"><a href="#cb38-352" aria-hidden="true" tabindex="-1"></a>  import<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">Weights=</span>import)  <span class="co">#数据框化</span></span>
+<span id="cb38-353"><a href="#cb38-353" aria-hidden="true" tabindex="-1"></a>  <span class="fu">row.names</span>(import)<span class="ot">&lt;-</span><span class="fu">names</span>(fit<span class="sc">$</span>model[<span class="dv">2</span><span class="sc">:</span>nvar])</span>
+<span id="cb38-354"><a href="#cb38-354" aria-hidden="true" tabindex="-1"></a>  import<span class="ot">&lt;-</span>import[<span class="fu">order</span>(import<span class="sc">$</span>Weights),<span class="dv">1</span>,drop<span class="ot">=</span><span class="cn">FALSE</span>] <span class="co">#升序排序</span></span>
+<span id="cb38-355"><a href="#cb38-355" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dotchart</span>(import<span class="sc">$</span>Weights,<span class="at">labels=</span><span class="fu">row.names</span>(import),   <span class="co">#点图</span></span>
+<span id="cb38-356"><a href="#cb38-356" aria-hidden="true" tabindex="-1"></a>           <span class="at">xlab =</span> <span class="st">"% of R-Square"</span>,<span class="at">pch=</span><span class="dv">19</span>,</span>
+<span id="cb38-357"><a href="#cb38-357" aria-hidden="true" tabindex="-1"></a>           <span class="at">main=</span><span class="st">"Relative Importiance of Predictor Variables "</span>,</span>
+<span id="cb38-358"><a href="#cb38-358" aria-hidden="true" tabindex="-1"></a>           <span class="at">sub=</span><span class="fu">paste</span>(<span class="st">"Total R-Square ="</span>,<span class="fu">round</span>(r2,<span class="at">digits =</span> <span class="dv">3</span>)),</span>
+<span id="cb38-359"><a href="#cb38-359" aria-hidden="true" tabindex="-1"></a>  ...)</span>
+<span id="cb38-360"><a href="#cb38-360" aria-hidden="true" tabindex="-1"></a><span class="fu">return</span>(import)</span>
+<span id="cb38-361"><a href="#cb38-361" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb38-362"><a href="#cb38-362" aria-hidden="true" tabindex="-1"></a><span class="fu">relweights</span>(lm1<span class="sc">$</span>fit,<span class="at">col=</span><span class="st">"blue"</span>)</span>
+<span id="cb38-363"><a href="#cb38-363" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

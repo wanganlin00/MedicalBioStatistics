@@ -93,6 +93,12 @@ car::outlierTest(df_aov)
 
 成对比较的数量 $N=\frac{k!}{2!(k-2)!},k≥3$，导致犯第Ⅰ类错误的概率迅速增加，$[1-(1-\alpha)^N]$。
 
+#### pairwise t test
+
+```{r}
+pairwise.t.test(df_long$value,df_long$level,p.adjust.method = "fdr")
+```
+
 #### Tukey's test
 
 Tukey's test 也被称为Tukey's honestly significant difference (Tukey's HSD) test。
@@ -518,12 +524,12 @@ glht_result
 df <- read_rds("data/repeated_measures_design_ANOVA.rds")
 ```
 
-```         
+```{r}
 # 2x2 mixed: 独立变量（被试间） : age
 # 独立变量（被试内） : time 依赖变量: value
-aov_age_time <- aov(value ~ age * time + Error(subject/time),
-  data = data_long)
-summary(aov_age_time)
+# aov_age_time <- aov(value ~ age * time + Error(subject/time),
+#   data = data_long)
+# summary(aov_age_time)
 ```
 
 ```{r}
@@ -534,7 +540,7 @@ summary(aov_fit)
 
 ```{r}
 library(rstatix)
-df |> select(-id) |> 
+df |> dplyr::select(-id) |> 
     group_by(method,Days) |> 
     get_summary_stats(type="mean_sd")
 

@@ -91,9 +91,6 @@ chisq2
 ```{r}
 # Fisher's exact test to test independence of rows and columns in contingency table
 fisher.test(M)
-
-
-
 ```
 
 #### Cochran-Mantel-Haenszel $\chi^2$ 检验
@@ -169,6 +166,8 @@ mosaic(~ Sex + Treatment + Improved, data = Arthritis)
 
 相关性：判断两个变量之间的线性关系强度和方向，无论是否独立。
 
+如果两个连续变量不相互独立时，使用协方差（covariance）来描述两个变量的关系。
+
 协方差（或相关系数）为零，不相关，不存在线性关系，但可能存在非线性关系。
 
 ```{r}
@@ -207,7 +206,7 @@ ggcorrplot::ggcorrplot(
 )
 ```
 
-#### 相关系数的假设检验
+#### 相关系数的显著性检验
 
 　　零假设为变量之间不相关（即两个总体的相关系数为 0 ） 。函数 cor.test( ) 可用于对相关系数进行显著性检 验。
 

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.4.553">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>医学与生物统计学 - 10&nbsp; 生存分析</title>
+<title>医学与生物统计学 - 11&nbsp; 生存分析</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -130,7 +130,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./SurvivalAnalysis.html">生存分析</a></li><li class="breadcrumb-item"><a href="./SurvivalAnalysis.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">生存分析</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./SurvivalAnalysis.html">生存分析</a></li><li class="breadcrumb-item"><a href="./SurvivalAnalysis.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">生存分析</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -183,12 +183,6 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">描述性统计学</span></span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./independence_correlation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">独立性和相关性</span></span></a>
-  </div>
-</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -203,31 +197,43 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./probability_random_variables_distribution.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">概率与随机变量及其分布</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">概率论基础与随机变量分布</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./SamplingDistribution.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">抽样分布</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">抽样分布</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ParameterEstimation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">参数估计</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">参数估计</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./hypothesis_testing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">假设检验</span></span></a>
+  <a href="./hypothesis_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">假设检验</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ANOVA.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">方差分析</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">方差分析</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./independence_correlation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">独立性和相关性</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./nonparametric_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">非参数检验</span></span></a>
   </div>
 </li>
       </ul>
@@ -244,13 +250,13 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./LinearRegression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">线性回归</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">线性回归</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">广义线性模型</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">广义线性模型</span></span></a>
   </div>
 </li>
       </ul>
@@ -267,7 +273,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./SurvivalAnalysis.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">生存分析</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">生存分析</span></span></a>
   </div>
 </li>
       </ul>
@@ -275,13 +281,13 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Clustering.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">聚类</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">聚类</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./PCA.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">主成分分析</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">主成分分析</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -296,13 +302,13 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./t-SNE.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">t-SNE</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">t-SNE</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./UMAP.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">UMAP</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">UMAP</span></span></a>
   </div>
 </li>
       </ul>
@@ -310,13 +316,13 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./diagnostic_tests.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">诊断价值评估</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">诊断价值评估</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./observational_study_design.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">观察性研究设计</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">观察性研究设计</span></span></a>
   </div>
 </li>
     </ul>
@@ -328,31 +334,31 @@ window.Quarto = {
    
   <ul>
 <li>
-<a href="#%E4%B9%98%E7%A7%AF%E6%9E%81%E9%99%90%E6%B3%95" id="toc-乘积极限法" class="nav-link active" data-scroll-target="#%E4%B9%98%E7%A7%AF%E6%9E%81%E9%99%90%E6%B3%95"><span class="header-section-number">10.1</span> 乘积极限法</a>
+<a href="#%E4%B9%98%E7%A7%AF%E6%9E%81%E9%99%90%E6%B3%95" id="toc-乘积极限法" class="nav-link active" data-scroll-target="#%E4%B9%98%E7%A7%AF%E6%9E%81%E9%99%90%E6%B3%95"><span class="header-section-number">11.1</span> 乘积极限法</a>
   <ul>
-<li><a href="#%E7%82%B9%E4%BC%B0%E8%AE%A1st" id="toc-点估计st" class="nav-link" data-scroll-target="#%E7%82%B9%E4%BC%B0%E8%AE%A1st"><span class="header-section-number">10.1.1</span> 点估计S(t)</a></li>
-  <li><a href="#%E5%8C%BA%E9%97%B4%E4%BC%B0%E8%AE%A1st" id="toc-区间估计st" class="nav-link" data-scroll-target="#%E5%8C%BA%E9%97%B4%E4%BC%B0%E8%AE%A1st"><span class="header-section-number">10.1.2</span> 区间估计S(t)</a></li>
+<li><a href="#%E7%82%B9%E4%BC%B0%E8%AE%A1st" id="toc-点估计st" class="nav-link" data-scroll-target="#%E7%82%B9%E4%BC%B0%E8%AE%A1st"><span class="header-section-number">11.1.1</span> 点估计S(t)</a></li>
+  <li><a href="#%E5%8C%BA%E9%97%B4%E4%BC%B0%E8%AE%A1st" id="toc-区间估计st" class="nav-link" data-scroll-target="#%E5%8C%BA%E9%97%B4%E4%BC%B0%E8%AE%A1st"><span class="header-section-number">11.1.2</span> 区间估计S(t)</a></li>
   </ul>
 </li>
   <li>
-<a href="#%E5%8D%95%E5%9B%A0%E7%B4%A0%E5%88%86%E7%BB%84%E7%94%9F%E5%AD%98%E6%9B%B2%E7%BA%BF%E7%9A%84%E6%AF%94%E8%BE%83" id="toc-单因素分组生存曲线的比较" class="nav-link" data-scroll-target="#%E5%8D%95%E5%9B%A0%E7%B4%A0%E5%88%86%E7%BB%84%E7%94%9F%E5%AD%98%E6%9B%B2%E7%BA%BF%E7%9A%84%E6%AF%94%E8%BE%83"><span class="header-section-number">10.2</span> 单因素分组生存曲线的比较</a>
+<a href="#%E5%8D%95%E5%9B%A0%E7%B4%A0%E5%88%86%E7%BB%84%E7%94%9F%E5%AD%98%E6%9B%B2%E7%BA%BF%E7%9A%84%E6%AF%94%E8%BE%83" id="toc-单因素分组生存曲线的比较" class="nav-link" data-scroll-target="#%E5%8D%95%E5%9B%A0%E7%B4%A0%E5%88%86%E7%BB%84%E7%94%9F%E5%AD%98%E6%9B%B2%E7%BA%BF%E7%9A%84%E6%AF%94%E8%BE%83"><span class="header-section-number">11.2</span> 单因素分组生存曲线的比较</a>
   <ul>
-<li><a href="#log-rank-test" id="toc-log-rank-test" class="nav-link" data-scroll-target="#log-rank-test"><span class="header-section-number">10.2.1</span> log-rank test</a></li>
+<li><a href="#log-rank-test" id="toc-log-rank-test" class="nav-link" data-scroll-target="#log-rank-test"><span class="header-section-number">11.2.1</span> log-rank test</a></li>
   </ul>
 </li>
   <li>
-<a href="#cox%E6%AF%94%E4%BE%8B%E9%A3%8E%E9%99%A9%E6%A8%A1%E5%9E%8B" id="toc-cox比例风险模型" class="nav-link" data-scroll-target="#cox%E6%AF%94%E4%BE%8B%E9%A3%8E%E9%99%A9%E6%A8%A1%E5%9E%8B"><span class="header-section-number">10.3</span> Cox比例风险模型</a>
+<a href="#cox%E6%AF%94%E4%BE%8B%E9%A3%8E%E9%99%A9%E6%A8%A1%E5%9E%8B" id="toc-cox比例风险模型" class="nav-link" data-scroll-target="#cox%E6%AF%94%E4%BE%8B%E9%A3%8E%E9%99%A9%E6%A8%A1%E5%9E%8B"><span class="header-section-number">11.3</span> Cox比例风险模型</a>
   <ul>
-<li><a href="#%E6%A8%A1%E5%9E%8B%E7%B3%BB%E6%95%B0%E7%9A%84%E4%BC%B0%E8%AE%A1" id="toc-模型系数的估计" class="nav-link" data-scroll-target="#%E6%A8%A1%E5%9E%8B%E7%B3%BB%E6%95%B0%E7%9A%84%E4%BC%B0%E8%AE%A1"><span class="header-section-number">10.3.1</span> 模型系数的估计</a></li>
-  <li><a href="#%E6%A8%A1%E5%9E%8B%E7%B3%BB%E6%95%B0%E7%9A%84%E5%81%87%E8%AE%BE%E6%A3%80%E9%AA%8C" id="toc-模型系数的假设检验" class="nav-link" data-scroll-target="#%E6%A8%A1%E5%9E%8B%E7%B3%BB%E6%95%B0%E7%9A%84%E5%81%87%E8%AE%BE%E6%A3%80%E9%AA%8C"><span class="header-section-number">10.3.2</span> 模型系数的假设检验</a></li>
+<li><a href="#%E6%A8%A1%E5%9E%8B%E7%B3%BB%E6%95%B0%E7%9A%84%E4%BC%B0%E8%AE%A1" id="toc-模型系数的估计" class="nav-link" data-scroll-target="#%E6%A8%A1%E5%9E%8B%E7%B3%BB%E6%95%B0%E7%9A%84%E4%BC%B0%E8%AE%A1"><span class="header-section-number">11.3.1</span> 模型系数的估计</a></li>
+  <li><a href="#%E6%A8%A1%E5%9E%8B%E7%B3%BB%E6%95%B0%E7%9A%84%E5%81%87%E8%AE%BE%E6%A3%80%E9%AA%8C" id="toc-模型系数的假设检验" class="nav-link" data-scroll-target="#%E6%A8%A1%E5%9E%8B%E7%B3%BB%E6%95%B0%E7%9A%84%E5%81%87%E8%AE%BE%E6%A3%80%E9%AA%8C"><span class="header-section-number">11.3.2</span> 模型系数的假设检验</a></li>
   </ul>
 </li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./SurvivalAnalysis.html">生存分析</a></li><li class="breadcrumb-item"><a href="./SurvivalAnalysis.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">生存分析</span></a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./SurvivalAnalysis.html">生存分析</a></li><li class="breadcrumb-item"><a href="./SurvivalAnalysis.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">生存分析</span></a></li></ol></nav><div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">
-<span class="chapter-number">10</span>&nbsp; <span class="chapter-title">生存分析</span>
+<span class="chapter-number">11</span>&nbsp; <span class="chapter-title">生存分析</span>
 </h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 </div>
 
@@ -392,21 +398,21 @@ h(t)\Delta t=&amp;P(t\le T&lt;t+\Delta t|T\ge t)
 \end{aligned}
 \]</span></p>
 <p><span class="math inline">\(f(t)=h(t)S(t)\)</span></p>
-<section id="乘积极限法" class="level2" data-number="10.1"><h2 data-number="10.1" class="anchored" data-anchor-id="乘积极限法">
-<span class="header-section-number">10.1</span> 乘积极限法</h2>
+<section id="乘积极限法" class="level2" data-number="11.1"><h2 data-number="11.1" class="anchored" data-anchor-id="乘积极限法">
+<span class="header-section-number">11.1</span> 乘积极限法</h2>
 <p>product limit method 也称为Kaplan-Meier 法。</p>
 <p><span class="math inline">\(t_1&lt;t_2&lt;t_3&lt;...&lt;t_n\)</span>，样本量大小n，t<sub>i</sub> 代表个体i发生终点事件或右删失的时间。由于一些个体有相同的生存时间，它们被称为 tied 观测时间，生存时间的个数小于样本量n。</p>
-<section id="点估计st" class="level3" data-number="10.1.1"><h3 data-number="10.1.1" class="anchored" data-anchor-id="点估计st">
-<span class="header-section-number">10.1.1</span> 点估计S(t)</h3>
+<section id="点估计st" class="level3" data-number="11.1.1"><h3 data-number="11.1.1" class="anchored" data-anchor-id="点估计st">
+<span class="header-section-number">11.1.1</span> 点估计S(t)</h3>
 <p><span class="math inline">\(n_1&gt;n_2&gt;n_3&gt;...&gt;n_n\)</span> ,n<sub>i</sub> d代表在时间点t<sub>i</sub> 暴露于特定事件风险的幸存者数量。</p>
 <p><span class="math inline">\(d_i\)</span> 代表在时间点t<sub>i</sub> 发生终点事件的数量。（如果没有 tie，d<sub>i</sub>=1或0）</p>
 <p>生存率的KM估计计算公式：</p>
 <p><span id="eq-KM"><span class="math display">\[
 \hat S(t)=\prod_{t_i\le t}\frac{n_i-d_i}{n_i}
-\tag{10.1}\]</span></span></p>
-<p><a href="#eq-KM" class="quarto-xref">Equation&nbsp;<span>10.1</span></a> 包括了删失情况，如果从t<sub>i-1</sub> 到t<sub>i</sub> 发生了删失，但没有终点事件，d<sub>i</sub> =0，条件概率等于1。</p>
-</section><section id="区间估计st" class="level3" data-number="10.1.2"><h3 data-number="10.1.2" class="anchored" data-anchor-id="区间估计st">
-<span class="header-section-number">10.1.2</span> 区间估计S(t)</h3>
+\tag{11.1}\]</span></span></p>
+<p><a href="#eq-KM" class="quarto-xref">Equation&nbsp;<span>11.1</span></a> 包括了删失情况，如果从t<sub>i-1</sub> 到t<sub>i</sub> 发生了删失，但没有终点事件，d<sub>i</sub> =0，条件概率等于1。</p>
+</section><section id="区间估计st" class="level3" data-number="11.1.2"><h3 data-number="11.1.2" class="anchored" data-anchor-id="区间估计st">
+<span class="header-section-number">11.1.2</span> 区间估计S(t)</h3>
 <p>(1-α)×100% CI <span class="math inline">\([\hat S(t)-z_{1-\alpha/2}\sqrt{Var\left [\hat S(t)  \right]},\hat S(t)+z_{1-\alpha/2}\sqrt{Var\left [\hat S(t)  \right]}]\)</span></p>
 <p>其中<span class="math inline">\(Var\left [\hat S(t)  \right]=\hat S(t)^2\sum_{t_i\le t}\frac{d_i}{n_i(n_i-d_i)}\)</span> (Greenwood method )</p>
 <div class="cell">
@@ -498,8 +504,8 @@ h(t)\Delta t=&amp;P(t\le T&lt;t+\Delta t|T\ge t)
 <span><span class="co">#&gt;  44.3      2       1      0.3   0.239       0.0631            1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section></section><section id="单因素分组生存曲线的比较" class="level2" data-number="10.2"><h2 data-number="10.2" class="anchored" data-anchor-id="单因素分组生存曲线的比较">
-<span class="header-section-number">10.2</span> 单因素分组生存曲线的比较</h2>
+</section></section><section id="单因素分组生存曲线的比较" class="level2" data-number="11.2"><h2 data-number="11.2" class="anchored" data-anchor-id="单因素分组生存曲线的比较">
+<span class="header-section-number">11.2</span> 单因素分组生存曲线的比较</h2>
 <table class="table">
 <thead><tr class="header">
 <th>检验方法</th>
@@ -528,8 +534,8 @@ h(t)\Delta t=&amp;P(t\le T&lt;t+\Delta t|T\ge t)
 <p><span class="math display">\[
 \chi^2=\frac{\left(\sum_jw(t_j)(m_{ij}-e_{ij})\right)^2}{\hat {Var}\left(\sum_jw(t_j)(m_{ij}-e_{ij})\right)}
 \]</span></p>
-<section id="log-rank-test" class="level3" data-number="10.2.1"><h3 data-number="10.2.1" class="anchored" data-anchor-id="log-rank-test">
-<span class="header-section-number">10.2.1</span> log-rank test</h3>
+<section id="log-rank-test" class="level3" data-number="11.2.1"><h3 data-number="11.2.1" class="anchored" data-anchor-id="log-rank-test">
+<span class="header-section-number">11.2.1</span> log-rank test</h3>
 <ol type="1">
 <li><p>H<sub>0</sub> :两总体的生存曲线是相同的。</p></li>
 <li>
@@ -615,8 +621,8 @@ h(t)\Delta t=&amp;P(t\le T&lt;t+\Delta t|T\ge t)
 <span><span class="co">#&gt; [1] 1.268397e-12</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section></section><section id="cox比例风险模型" class="level2" data-number="10.3"><h2 data-number="10.3" class="anchored" data-anchor-id="cox比例风险模型">
-<span class="header-section-number">10.3</span> Cox比例风险模型</h2>
+</section></section><section id="cox比例风险模型" class="level2" data-number="11.3"><h2 data-number="11.3" class="anchored" data-anchor-id="cox比例风险模型">
+<span class="header-section-number">11.3</span> Cox比例风险模型</h2>
 <p>对于有风险因子<span class="math inline">\(x_1,x_2,...,x_k\)</span> 的个体在时间 t 的风险率<span class="math inline">\(h(t|x_1,x_2,...,x_k)\)</span></p>
 <p><span class="math display">\[
 h(t|x_1,x_2,...,x_k)=h_0(t)g(x_1,x_2,...,x_k)=h_0(t)exp(\sum_{j=1}^k\beta_jx_j)
@@ -672,8 +678,8 @@ HR=\frac{h(t|x_1,x_2,...,x_k)}{h(t|x_1^*,x_2^*,...,x_k^*)}=exp(\sum_{j=1}^k\beta
 <span><span class="co">#&gt; GLOBAL    0.833  3 0.84</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<section id="模型系数的估计" class="level3" data-number="10.3.1"><h3 data-number="10.3.1" class="anchored" data-anchor-id="模型系数的估计">
-<span class="header-section-number">10.3.1</span> 模型系数的估计</h3>
+<section id="模型系数的估计" class="level3" data-number="11.3.1"><h3 data-number="11.3.1" class="anchored" data-anchor-id="模型系数的估计">
+<span class="header-section-number">11.3.1</span> 模型系数的估计</h3>
 <p>条件死亡概率和局部似然函数方法</p>
 <p><span class="math display">\[
 \ln L_p(\beta)=\sum_{i=1}^{d}\left[ \sum_{j=1}^k\beta_jx_{ij}-\ln\sum_{m\in R_i}exp( \sum_{j=1}^k\beta_jx_{mj})         \right]
@@ -687,8 +693,8 @@ HR=\frac{h(t|x_1,x_2,...,x_k)}{h(t|x_1^*,x_2^*,...,x_k^*)}=exp(\sum_{j=1}^k\beta
 \frac{\partial \ln L_p(\beta)}{\partial \beta_k}=0\\
 \end{cases}
 \]</span></p>
-</section><section id="模型系数的假设检验" class="level3" data-number="10.3.2"><h3 data-number="10.3.2" class="anchored" data-anchor-id="模型系数的假设检验">
-<span class="header-section-number">10.3.2</span> 模型系数的假设检验</h3>
+</section><section id="模型系数的假设检验" class="level3" data-number="11.3.2"><h3 data-number="11.3.2" class="anchored" data-anchor-id="模型系数的假设检验">
+<span class="header-section-number">11.3.2</span> 模型系数的假设检验</h3>
 <ol type="1">
 <li>
 <p>Wald‘s test</p>
@@ -1172,12 +1178,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./glm.html" class="pagination-link" aria-label="广义线性模型">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">广义线性模型</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">广义线性模型</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./Clustering.html" class="pagination-link" aria-label="聚类">
-        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">聚类</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">聚类</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">

@@ -1,6 +1,6 @@
-# 概率与随机变量及其分布
+# 概率论基础与随机变量分布
 
-## 概念
+## 概率论基础
 
 样本点（sample point）是每一次随机试验的结果，用 $\omega$ 表示。
 
@@ -27,6 +27,8 @@ space
 
 空集（null set） $\emptyset$ 称为不可能事件（impossible event）。
 
+### 事件的运算
+
 1.  包含关系（containment） ：Venn diagram
 
     i.  $A\subseteq B$
@@ -35,59 +37,67 @@ space
 
 2.  并集（$A\cup B$）
 
-3.  交集（$A\cap B$）
+3.  交集（$A\cap B$，AB）
 
 4.  补集（$\bar A$）
 
 5.  互斥事件 $A\cap B=\emptyset$
 
-6.  互补事件 $A\cap B=\emptyset$ 且 $A\cup B=\Omega$
+6.  对立（互补）事件 $A\cap B=\emptyset$ 且 $A\cup B=\Omega$
 
-加法
+组合（combination）：$C_n^k =\binom{n}{k} =\frac {n!}{k!(n-k)!}$
+
+```{r} choose(5,3)}
+```
+
+排列（permutation）：$P_n^k =k!\binom{n}{k} =\frac {n!}{(n-k)!}$
+
+加法定理
 
 $$
 P(A\cup B)=P(A)+P(B)-P(A\cap B)
 $$
 
-条件概率
+条件概率 conditional probability
 
 $$
-P(B|A)=\frac{P(A\cap B)}{P(A)}
+P(B|A)=\frac{P(AB)}{P(A)}
 $$
 
-乘法
+推出乘法定理 $P(A B)=P(A)\times P(B|A)$
+
+独立性（积的概率等于各自概率的积）
 
 $$
-P(A\cap B)=P(A)\times P(B|A)
+P(B|A)=P(B) \ 或者\  P(A)=0\\
+P(AB)=P(A) \times P(B)
 $$
 
-独立事件（交集的概率等于各自概率的乘积）
+### 全概率公式
 
-$$ P(B|A)=P(B) \ 或者\  P(A)=0 $$
-
-全概率公式（给定A~i~发生，B的加权平均条件概率）
+（给定A~i~发生，B的加权平均条件概率）
 
 $$P(B)=\sum_{i=1}^{n}P(A_i)P(B|A_i)$$
 
-贝叶斯法则/逆概率公式（后验概率）
+### 贝叶斯公式
+
+条件概率定义与全概率公式的推论
+
+逆概率公式（后验概率）
 
 $$P(A_k |B)=\frac{P(A_k)P(B|A_k)}{\sum_{i=1}^{n}P(A_i)P(B|A_i)}$$
 
-组合（combination）：$C_n^k =\binom{n}{k} =\frac {n!}{k!(n-k)!}$
+### 混淆矩阵
 
-```{r}
-choose(5,3)
-```
+![](images/confusing_matrix.png){fig-align="center"}
 
-排列（permutation）：$P_n^k =k!\binom{n}{k} =\frac {n!}{(n-k)!}$
+### ROC
 
-## 随机变量
-
-**随机变量**可以简单地认为是随机试验结果的数值描述。
-
-离散型随机变量的全部可能取值只有有限多个或可列无穷多个。
+### AUC
 
 ## 离散型随机变量
+
+离散型随机变量的全部可能取值只有有限多个或可列无穷多个。
 
 离散型随机变量的概率分布列：
 

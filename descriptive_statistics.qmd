@@ -2,7 +2,7 @@
 
 ## 数据类型
 
-1.  定量数据（数字数据）
+1.  定量数据（数值数据）
 
     i.  连续数据
 
@@ -16,21 +16,30 @@
 
 ## 频数表和频率分布直方图
 
-极差 $R=X_{max}-X_{min}$ ， 组数$k$（$5-15$），组别（$interval$），频数$count$，频率$\frac{count}{n} \times 100\%$
+-   极差 $R=X_{max}-X_{min}$
+
+-   组数$k$（$5-15$）
+
+-   组别（$interval$）
+
+-   频数$count$
+
+-   频率$\frac{count}{n} \times 100\%$
 
 ## 数据特征
 
 ```{r}
-head(mtcars$mpg)
+as_tibble(mtcars$mpg)
 ```
 
 ### 集中趋势
 
 ```{r}
-# 集中趋势
+#算术平均数
+mean(mtcars$mpg)     
 
-mean(mtcars$mpg)     #算术平均数
-median(mtcars$mpg)   #中位数
+#中位数
+median(mtcars$mpg)   
 
 #众数 mode
 rstatix::get_mode(mtcars$mpg)
@@ -39,25 +48,36 @@ rstatix::get_mode(mtcars$mpg)
 ### 离散程度
 
 ```{r}
-# 离散程度
-range(mtcars$mpg)  # 值域
-diff(range(mtcars$mpg) )  # 极差
+# 值域
+range(mtcars$mpg)  
+# 极差 / 全距
+diff(range(mtcars$mpg) )  
 
-quantile(mtcars$mpg,probs = c(0,0.1,0.25,0.5,0.75,1))     #分位数
-IQR(mtcars$mpg)      # 四分位数间距
+# 分位数
+quantile(mtcars$mpg,probs = c(0,0.1,0.25,0.5,0.75,1))    
+# 四分位数间距
+IQR(mtcars$mpg)      
 
-sd(mtcars$mpg)       #标准差
-var(mtcars$mpg)      #方差
+# 标准差 standard deviation
+sd(mtcars$mpg)       
+# 方差 variance
+var(mtcars$mpg)       
 
-CV <- function(x,na.rm=TRUE){   # 变异系数
+
+# 变异系数 Coefficient of Variation
+CV <- function(x,na.rm=TRUE){  
     if(na.rm) x <- x[!is.na(x)]
     CV=sd(x)/mean(x)*100
-    paste(CV,"%",sep = "")
+    sprintf("%.2f%%",CV)
 }
 CV(mtcars$mpg)
 
-mad(mtcars$mpg,constant = 1.4826)      #绝对中位差 median absolute deviation
-# 为了达到渐进正态一致性，`mad()` 的计算乘了一个比例因子`constant=1.4826`。
+
+# 绝对中位差 median absolute deviation
+mad(mtcars$mpg,constant = 1.4826)
+
+# 为了达到渐进正态一致性，`mad()` 的计算乘了一个比例因子`constant=1.4826`
+
 median(abs(mtcars$mpg-median(mtcars$mpg)))
 median(abs(mtcars$mpg-median(mtcars$mpg)))*1.4826
 ```

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.4.553">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>医学与生物统计学 - 12&nbsp; 主成分分析</title>
+<title>医学与生物统计学 - 13&nbsp; 主成分分析</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -130,7 +130,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./PCA.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">主成分分析</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./PCA.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">主成分分析</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -183,12 +183,6 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">描述性统计学</span></span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./independence_correlation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">独立性和相关性</span></span></a>
-  </div>
-</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -203,31 +197,43 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./probability_random_variables_distribution.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">概率与随机变量及其分布</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">概率论基础与随机变量分布</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./SamplingDistribution.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">抽样分布</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">抽样分布</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ParameterEstimation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">参数估计</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">参数估计</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./hypothesis_testing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">假设检验</span></span></a>
+  <a href="./hypothesis_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">假设检验</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ANOVA.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">方差分析</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">方差分析</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./independence_correlation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">独立性和相关性</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./nonparametric_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">非参数检验</span></span></a>
   </div>
 </li>
       </ul>
@@ -244,13 +250,13 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./LinearRegression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">线性回归</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">线性回归</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">广义线性模型</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">广义线性模型</span></span></a>
   </div>
 </li>
       </ul>
@@ -267,7 +273,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./SurvivalAnalysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">生存分析</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">生存分析</span></span></a>
   </div>
 </li>
       </ul>
@@ -275,13 +281,13 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Clustering.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">聚类</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">聚类</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./PCA.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">主成分分析</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">主成分分析</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -296,13 +302,13 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./t-SNE.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">t-SNE</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">t-SNE</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./UMAP.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">UMAP</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">UMAP</span></span></a>
   </div>
 </li>
       </ul>
@@ -310,13 +316,13 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./diagnostic_tests.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">诊断价值评估</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">诊断价值评估</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./observational_study_design.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">观察性研究设计</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">观察性研究设计</span></span></a>
   </div>
 </li>
     </ul>
@@ -328,31 +334,31 @@ window.Quarto = {
    
   <ul>
 <li>
-<a href="#%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%9F%BA%E7%A1%80" id="toc-线性代数基础" class="nav-link active" data-scroll-target="#%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%9F%BA%E7%A1%80"><span class="header-section-number">12.1</span> 线性代数基础</a>
+<a href="#%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%9F%BA%E7%A1%80" id="toc-线性代数基础" class="nav-link active" data-scroll-target="#%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%9F%BA%E7%A1%80"><span class="header-section-number">13.1</span> 线性代数基础</a>
   <ul>
-<li><a href="#%E5%88%97%E5%90%91%E9%87%8F" id="toc-列向量" class="nav-link" data-scroll-target="#%E5%88%97%E5%90%91%E9%87%8F"><span class="header-section-number">12.1.1</span> 列向量</a></li>
-  <li><a href="#%E7%9F%A9%E9%98%B5%E8%BF%90%E7%AE%97%E8%A7%84%E5%88%99" id="toc-矩阵运算规则" class="nav-link" data-scroll-target="#%E7%9F%A9%E9%98%B5%E8%BF%90%E7%AE%97%E8%A7%84%E5%88%99"><span class="header-section-number">12.1.2</span> 矩阵运算规则</a></li>
-  <li><a href="#%E5%8D%95%E4%BD%8D%E7%9F%A9%E9%98%B5" id="toc-单位矩阵" class="nav-link" data-scroll-target="#%E5%8D%95%E4%BD%8D%E7%9F%A9%E9%98%B5"><span class="header-section-number">12.1.3</span> 单位矩阵</a></li>
-  <li><a href="#%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84" id="toc-线性方程组" class="nav-link" data-scroll-target="#%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84"><span class="header-section-number">12.1.4</span> 线性方程组</a></li>
-  <li><a href="#%E6%B6%88%E5%85%83%E6%B3%95elimination" id="toc-消元法elimination" class="nav-link" data-scroll-target="#%E6%B6%88%E5%85%83%E6%B3%95elimination"><span class="header-section-number">12.1.5</span> 消元法（elimination）</a></li>
-  <li><a href="#%E9%80%86%E7%9F%A9%E9%98%B5" id="toc-逆矩阵" class="nav-link" data-scroll-target="#%E9%80%86%E7%9F%A9%E9%98%B5"><span class="header-section-number">12.1.6</span> 逆矩阵</a></li>
-  <li><a href="#%E6%B6%88%E5%85%83%E5%88%86%E8%A7%A3" id="toc-消元分解" class="nav-link" data-scroll-target="#%E6%B6%88%E5%85%83%E5%88%86%E8%A7%A3"><span class="header-section-number">12.1.7</span> 消元=分解</a></li>
-  <li><a href="#%E7%89%B9%E5%BE%81%E5%80%BC%E4%B8%8E%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8Feigen" id="toc-特征值与特征向量eigen" class="nav-link" data-scroll-target="#%E7%89%B9%E5%BE%81%E5%80%BC%E4%B8%8E%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8Feigen"><span class="header-section-number">12.1.8</span> 特征值与特征向量（eigen）</a></li>
-  <li><a href="#%E5%A5%87%E5%BC%82%E5%80%BC%E5%88%86%E8%A7%A3singular-value-decomposition-svd" id="toc-奇异值分解singular-value-decomposition-svd" class="nav-link" data-scroll-target="#%E5%A5%87%E5%BC%82%E5%80%BC%E5%88%86%E8%A7%A3singular-value-decomposition-svd"><span class="header-section-number">12.1.9</span> 奇异值分解（singular value decomposition, SVD）</a></li>
+<li><a href="#%E5%88%97%E5%90%91%E9%87%8F" id="toc-列向量" class="nav-link" data-scroll-target="#%E5%88%97%E5%90%91%E9%87%8F"><span class="header-section-number">13.1.1</span> 列向量</a></li>
+  <li><a href="#%E7%9F%A9%E9%98%B5%E8%BF%90%E7%AE%97%E8%A7%84%E5%88%99" id="toc-矩阵运算规则" class="nav-link" data-scroll-target="#%E7%9F%A9%E9%98%B5%E8%BF%90%E7%AE%97%E8%A7%84%E5%88%99"><span class="header-section-number">13.1.2</span> 矩阵运算规则</a></li>
+  <li><a href="#%E5%8D%95%E4%BD%8D%E7%9F%A9%E9%98%B5" id="toc-单位矩阵" class="nav-link" data-scroll-target="#%E5%8D%95%E4%BD%8D%E7%9F%A9%E9%98%B5"><span class="header-section-number">13.1.3</span> 单位矩阵</a></li>
+  <li><a href="#%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84" id="toc-线性方程组" class="nav-link" data-scroll-target="#%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84"><span class="header-section-number">13.1.4</span> 线性方程组</a></li>
+  <li><a href="#%E6%B6%88%E5%85%83%E6%B3%95elimination" id="toc-消元法elimination" class="nav-link" data-scroll-target="#%E6%B6%88%E5%85%83%E6%B3%95elimination"><span class="header-section-number">13.1.5</span> 消元法（elimination）</a></li>
+  <li><a href="#%E9%80%86%E7%9F%A9%E9%98%B5" id="toc-逆矩阵" class="nav-link" data-scroll-target="#%E9%80%86%E7%9F%A9%E9%98%B5"><span class="header-section-number">13.1.6</span> 逆矩阵</a></li>
+  <li><a href="#%E6%B6%88%E5%85%83%E5%88%86%E8%A7%A3" id="toc-消元分解" class="nav-link" data-scroll-target="#%E6%B6%88%E5%85%83%E5%88%86%E8%A7%A3"><span class="header-section-number">13.1.7</span> 消元=分解</a></li>
+  <li><a href="#%E7%89%B9%E5%BE%81%E5%80%BC%E4%B8%8E%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8Feigen" id="toc-特征值与特征向量eigen" class="nav-link" data-scroll-target="#%E7%89%B9%E5%BE%81%E5%80%BC%E4%B8%8E%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8Feigen"><span class="header-section-number">13.1.8</span> 特征值与特征向量（eigen）</a></li>
+  <li><a href="#%E5%A5%87%E5%BC%82%E5%80%BC%E5%88%86%E8%A7%A3singular-value-decomposition-svd" id="toc-奇异值分解singular-value-decomposition-svd" class="nav-link" data-scroll-target="#%E5%A5%87%E5%BC%82%E5%80%BC%E5%88%86%E8%A7%A3singular-value-decomposition-svd"><span class="header-section-number">13.1.9</span> 奇异值分解（singular value decomposition, SVD）</a></li>
   </ul>
 </li>
   <li>
-<a href="#pca%E6%AD%A5%E9%AA%A4" id="toc-pca步骤" class="nav-link" data-scroll-target="#pca%E6%AD%A5%E9%AA%A4"><span class="header-section-number">12.2</span> PCA步骤</a>
+<a href="#pca%E6%AD%A5%E9%AA%A4" id="toc-pca步骤" class="nav-link" data-scroll-target="#pca%E6%AD%A5%E9%AA%A4"><span class="header-section-number">13.2</span> PCA步骤</a>
   <ul>
-<li><a href="#%E6%95%B0%E6%8D%AE%E6%A0%87%E5%87%86%E5%8C%96" id="toc-数据标准化" class="nav-link" data-scroll-target="#%E6%95%B0%E6%8D%AE%E6%A0%87%E5%87%86%E5%8C%96"><span class="header-section-number">12.2.1</span> 数据标准化</a></li>
-  <li><a href="#%E8%AE%A1%E7%AE%97%E5%8D%8F%E6%96%B9%E5%B7%AE%E7%9F%A9%E9%98%B5" id="toc-计算协方差矩阵" class="nav-link" data-scroll-target="#%E8%AE%A1%E7%AE%97%E5%8D%8F%E6%96%B9%E5%B7%AE%E7%9F%A9%E9%98%B5"><span class="header-section-number">12.2.2</span> 计算协方差矩阵</a></li>
-  <li><a href="#%E5%A5%87%E5%BC%82%E5%80%BC%E5%88%86%E8%A7%A3" id="toc-奇异值分解" class="nav-link" data-scroll-target="#%E5%A5%87%E5%BC%82%E5%80%BC%E5%88%86%E8%A7%A3"><span class="header-section-number">12.2.3</span> 奇异值分解</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E6%A0%87%E5%87%86%E5%8C%96" id="toc-数据标准化" class="nav-link" data-scroll-target="#%E6%95%B0%E6%8D%AE%E6%A0%87%E5%87%86%E5%8C%96"><span class="header-section-number">13.2.1</span> 数据标准化</a></li>
+  <li><a href="#%E8%AE%A1%E7%AE%97%E5%8D%8F%E6%96%B9%E5%B7%AE%E7%9F%A9%E9%98%B5" id="toc-计算协方差矩阵" class="nav-link" data-scroll-target="#%E8%AE%A1%E7%AE%97%E5%8D%8F%E6%96%B9%E5%B7%AE%E7%9F%A9%E9%98%B5"><span class="header-section-number">13.2.2</span> 计算协方差矩阵</a></li>
+  <li><a href="#%E5%A5%87%E5%BC%82%E5%80%BC%E5%88%86%E8%A7%A3" id="toc-奇异值分解" class="nav-link" data-scroll-target="#%E5%A5%87%E5%BC%82%E5%80%BC%E5%88%86%E8%A7%A3"><span class="header-section-number">13.2.3</span> 奇异值分解</a></li>
   </ul>
 </li>
   <li>
-<a href="#%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90" id="toc-主成分分析" class="nav-link" data-scroll-target="#%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90"><span class="header-section-number">12.3</span> 主成分分析</a>
+<a href="#%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90" id="toc-主成分分析" class="nav-link" data-scroll-target="#%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90"><span class="header-section-number">13.3</span> 主成分分析</a>
   <ul>
-<li><a href="#%E5%88%A4%E6%96%AD%E4%B8%BB%E6%88%90%E5%88%86%E7%9A%84%E4%B8%AA%E6%95%B0psychfa.parallelmat" id="toc-判断主成分的个数psychfa.parallelmat" class="nav-link" data-scroll-target="#%E5%88%A4%E6%96%AD%E4%B8%BB%E6%88%90%E5%88%86%E7%9A%84%E4%B8%AA%E6%95%B0psychfa.parallelmat"><span class="header-section-number">12.3.1</span> 判断主成分的个数<code>psych::fa.parallel(mat)</code></a></li>
+<li><a href="#%E5%88%A4%E6%96%AD%E4%B8%BB%E6%88%90%E5%88%86%E7%9A%84%E4%B8%AA%E6%95%B0psychfa.parallelmat" id="toc-判断主成分的个数psychfa.parallelmat" class="nav-link" data-scroll-target="#%E5%88%A4%E6%96%AD%E4%B8%BB%E6%88%90%E5%88%86%E7%9A%84%E4%B8%AA%E6%95%B0psychfa.parallelmat"><span class="header-section-number">13.3.1</span> 判断主成分的个数<code>psych::fa.parallel(mat)</code></a></li>
   </ul>
 </li>
   </ul></nav>
@@ -360,7 +366,7 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">
-<span class="chapter-number">12</span>&nbsp; <span class="chapter-title">主成分分析</span>
+<span class="chapter-number">13</span>&nbsp; <span class="chapter-title">主成分分析</span>
 </h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 </div>
 
@@ -388,10 +394,10 @@ Cov(y_i,y_j)=
 &amp; 0,\ i\ne j
 \end{cases}
 \]</span></p>
-<section id="线性代数基础" class="level2" data-number="12.1"><h2 data-number="12.1" class="anchored" data-anchor-id="线性代数基础">
-<span class="header-section-number">12.1</span> 线性代数基础</h2>
-<section id="列向量" class="level3" data-number="12.1.1"><h3 data-number="12.1.1" class="anchored" data-anchor-id="列向量">
-<span class="header-section-number">12.1.1</span> 列向量</h3>
+<section id="线性代数基础" class="level2" data-number="13.1"><h2 data-number="13.1" class="anchored" data-anchor-id="线性代数基础">
+<span class="header-section-number">13.1</span> 线性代数基础</h2>
+<section id="列向量" class="level3" data-number="13.1.1"><h3 data-number="13.1.1" class="anchored" data-anchor-id="列向量">
+<span class="header-section-number">13.1.1</span> 列向量</h3>
 <p><span class="math display">\[
 \vec v=
 \begin{bmatrix}
@@ -414,8 +420,8 @@ Cov(y_i,y_j)=
 <p>长度：<span class="math inline">\(||\vec v||=\sqrt{\vec v·\vec v}\)</span></p>
 <p>单位向量：<span class="math inline">\(\vec u=\frac{\vec v}{||\vec v||}\)</span></p>
 <p>正交：<span class="math inline">\(\vec v^T·\vec w=0\)</span></p>
-</section><section id="矩阵运算规则" class="level3" data-number="12.1.2"><h3 data-number="12.1.2" class="anchored" data-anchor-id="矩阵运算规则">
-<span class="header-section-number">12.1.2</span> 矩阵运算规则</h3>
+</section><section id="矩阵运算规则" class="level3" data-number="13.1.2"><h3 data-number="13.1.2" class="anchored" data-anchor-id="矩阵运算规则">
+<span class="header-section-number">13.1.2</span> 矩阵运算规则</h3>
 <p>矩阵A，B，C 满足加法交换律，分配律和结合律，乘法结合律和分配律，指数运算法则（<span class="math inline">\(A^0=I\)</span>）</p>
 <p>通常不满足乘法交换律</p>
 <p><span class="math display">\[
@@ -446,13 +452,13 @@ AB\ne BA
 <span><span class="co">#&gt; [3,]    0    0    1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="单位矩阵" class="level3" data-number="12.1.3"><h3 data-number="12.1.3" class="anchored" data-anchor-id="单位矩阵">
-<span class="header-section-number">12.1.3</span> 单位矩阵</h3>
+</section><section id="单位矩阵" class="level3" data-number="13.1.3"><h3 data-number="13.1.3" class="anchored" data-anchor-id="单位矩阵">
+<span class="header-section-number">13.1.3</span> 单位矩阵</h3>
 <p>主对角线都是1，其余都是0。</p>
 <p><span class="math display">\[ I= \begin{bmatrix}  1 &amp; 0 &amp; ... &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; ... &amp; 0 &amp; 0 \\ \vdots &amp; \vdots &amp; &amp;\vdots &amp; \vdots &amp; \\ 0 &amp; 0 &amp; ... &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; ... &amp; 0 &amp; 1 \\ \end{bmatrix} \]</span></p>
 <p>对于单位矩阵 <span class="math inline">\(I\vec x=\vec x\)</span> 恒成立。</p>
-</section><section id="线性方程组" class="level3" data-number="12.1.4"><h3 data-number="12.1.4" class="anchored" data-anchor-id="线性方程组">
-<span class="header-section-number">12.1.4</span> 线性方程组</h3>
+</section><section id="线性方程组" class="level3" data-number="13.1.4"><h3 data-number="13.1.4" class="anchored" data-anchor-id="线性方程组">
+<span class="header-section-number">13.1.4</span> 线性方程组</h3>
 <p>矩阵A，：<span class="math inline">\(A\vec x=\vec b\)</span></p>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/solve.html">solve</a></span><span class="op">(</span><span class="va">I</span>,<span class="va">x</span><span class="op">)</span></span>
@@ -512,8 +518,8 @@ u_3 &amp; v_3 &amp; w_3 \\
 (u_3,v_3,w_3)·(x_1,x_2,x_3) \\
 \end{bmatrix}
 \]</span></p>
-</section><section id="消元法elimination" class="level3" data-number="12.1.5"><h3 data-number="12.1.5" class="anchored" data-anchor-id="消元法elimination">
-<span class="header-section-number">12.1.5</span> 消元法（elimination）</h3>
+</section><section id="消元法elimination" class="level3" data-number="13.1.5"><h3 data-number="13.1.5" class="anchored" data-anchor-id="消元法elimination">
+<span class="header-section-number">13.1.5</span> 消元法（elimination）</h3>
 <p>消元法求解线性方程组<span class="math inline">\(A\vec x=\vec b\)</span>：</p>
 <ol type="1">
 <li><p>利用第一式使得第一主元以下都变成0：<span class="math inline">\(a_{11}\)</span> 是第一个主元，<span class="math inline">\(a_{i1}/a_{11}\)</span> 是乘数，消去其余所有方程的<span class="math inline">\(x_1\)</span> ，使得（i，1）单元为0，i≥2</p></li>
@@ -527,8 +533,8 @@ l_{ij}=\frac{第i行要消去的单元}{主元(pivot)：执行消元的第j行�
 \]</span></p>
 <p>消元矩阵乘A<strong>x</strong>=<strong>b</strong>的顺序<span class="math inline">\(E_{21},E_{31},...,E_{n1}\)</span>，然后<span class="math inline">\(E_{32},E_{42},...,E_{n1}\)</span>，以此类推。</p>
 <p>行交换矩阵<span class="math inline">\(P_{ij}\)</span>：将<span class="math inline">\(I\)</span> 的第i行与第j行交换。左乘<span class="math inline">\(P_{ij}\)</span> ，交换行i与行j</p>
-</section><section id="逆矩阵" class="level3" data-number="12.1.6"><h3 data-number="12.1.6" class="anchored" data-anchor-id="逆矩阵">
-<span class="header-section-number">12.1.6</span> 逆矩阵</h3>
+</section><section id="逆矩阵" class="level3" data-number="13.1.6"><h3 data-number="13.1.6" class="anchored" data-anchor-id="逆矩阵">
+<span class="header-section-number">13.1.6</span> 逆矩阵</h3>
 <p>当<span class="math inline">\(A\)</span> 是可逆矩阵，<span class="math inline">\(A\vec x=\vec b\)</span> 的解是<span class="math inline">\(\vec x=A^{-1}\vec b\)</span>。</p>
 <p>若矩阵A有逆矩阵，则<span class="math inline">\(A^{-1}A=I 且AA^{-1}=I\)</span>。</p>
 <div class="cell">
@@ -566,8 +572,8 @@ l_{ij}=\frac{第i行要消去的单元}{主元(pivot)：执行消元的第j行�
 <p>矩阵A，B可逆，则<span class="math inline">\((AB)^{-1}=B^{-1}A^{-1}\)</span></p>
 <p>Gauss-Jordan Elimination :</p>
 <p><span class="math display">\[ A^{-1}[A\ \ \ I]=[I\ \ \ A^{-1}] \]</span></p>
-</section><section id="消元分解" class="level3" data-number="12.1.7"><h3 data-number="12.1.7" class="anchored" data-anchor-id="消元分解">
-<span class="header-section-number">12.1.7</span> 消元=分解</h3>
+</section><section id="消元分解" class="level3" data-number="13.1.7"><h3 data-number="13.1.7" class="anchored" data-anchor-id="消元分解">
+<span class="header-section-number">13.1.7</span> 消元=分解</h3>
 <p><span class="math inline">\(A=LU\)</span>，下三角<span class="math inline">\(L\)</span>的对角线都是1，乘数<span class="math inline">\(l_{ij}\)</span> 在对角线下方。</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -577,8 +583,8 @@ L(U\vec x)=&amp;L\vec c\\
 A\vec x=&amp;\vec b
 \end{aligned}
 \]</span></p>
-</section><section id="特征值与特征向量eigen" class="level3" data-number="12.1.8"><h3 data-number="12.1.8" class="anchored" data-anchor-id="特征值与特征向量eigen">
-<span class="header-section-number">12.1.8</span> 特征值与特征向量（eigen）</h3>
+</section><section id="特征值与特征向量eigen" class="level3" data-number="13.1.8"><h3 data-number="13.1.8" class="anchored" data-anchor-id="特征值与特征向量eigen">
+<span class="header-section-number">13.1.8</span> 特征值与特征向量（eigen）</h3>
 <p><span class="math display">\[
 A\vec x=\lambda \vec x
 \]</span></p>
@@ -613,8 +619,8 @@ Note
 <span><span class="co">#&gt; [2,] -0.8245648  0.4159736</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="奇异值分解singular-value-decomposition-svd" class="level3" data-number="12.1.9"><h3 data-number="12.1.9" class="anchored" data-anchor-id="奇异值分解singular-value-decomposition-svd">
-<span class="header-section-number">12.1.9</span> 奇异值分解（singular value decomposition, SVD）</h3>
+</section><section id="奇异值分解singular-value-decomposition-svd" class="level3" data-number="13.1.9"><h3 data-number="13.1.9" class="anchored" data-anchor-id="奇异值分解singular-value-decomposition-svd">
+<span class="header-section-number">13.1.9</span> 奇异值分解（singular value decomposition, SVD）</h3>
 <p><span class="math display">\[
 \begin{aligned}
 \\A=&amp;U\Sigma V^T \\
@@ -652,10 +658,10 @@ Note
 <p><span class="math inline">\(A\nu_i=\sigma_i\mu_i\)</span></p>
 </div>
 </div>
-</section></section><section id="pca步骤" class="level2" data-number="12.2"><h2 data-number="12.2" class="anchored" data-anchor-id="pca步骤">
-<span class="header-section-number">12.2</span> PCA步骤</h2>
-<section id="数据标准化" class="level3" data-number="12.2.1"><h3 data-number="12.2.1" class="anchored" data-anchor-id="数据标准化">
-<span class="header-section-number">12.2.1</span> 数据标准化</h3>
+</section></section><section id="pca步骤" class="level2" data-number="13.2"><h2 data-number="13.2" class="anchored" data-anchor-id="pca步骤">
+<span class="header-section-number">13.2</span> PCA步骤</h2>
+<section id="数据标准化" class="level3" data-number="13.2.1"><h3 data-number="13.2.1" class="anchored" data-anchor-id="数据标准化">
+<span class="header-section-number">13.2.1</span> 数据标准化</h3>
 <p>R中数据框 n个观测，p个变量</p>
 <p><span class="math display">\[
 X=
@@ -745,8 +751,8 @@ x_{12} &amp; x_{22} &amp; ... &amp; x_{n2}\\
 <span><span class="co">#&gt; -7.667478e-17  1.111611e-16 -4.332645e-16  8.938163e-17</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="计算协方差矩阵" class="level3" data-number="12.2.2"><h3 data-number="12.2.2" class="anchored" data-anchor-id="计算协方差矩阵">
-<span class="header-section-number">12.2.2</span> 计算协方差矩阵</h3>
+</section><section id="计算协方差矩阵" class="level3" data-number="13.2.2"><h3 data-number="13.2.2" class="anchored" data-anchor-id="计算协方差矩阵">
+<span class="header-section-number">13.2.2</span> 计算协方差矩阵</h3>
 <p>当<span class="math inline">\(\Sigma\)</span> 未知时，其用其估计值样本协方差矩阵（p×p） <span class="math inline">\(A_{p×n}\)</span> 代替</p>
 <p><span class="math display">\[
 S=\frac{AA^T}{n-1}
@@ -815,8 +821,8 @@ r_{ij}=\frac {S_{ij}}{\sqrt{S_{ii}×S_{jj}}}
 <span><span class="co">#&gt; [1] 196</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="奇异值分解" class="level3" data-number="12.2.3"><h3 data-number="12.2.3" class="anchored" data-anchor-id="奇异值分解">
-<span class="header-section-number">12.2.3</span> 奇异值分解</h3>
+</section><section id="奇异值分解" class="level3" data-number="13.2.3"><h3 data-number="13.2.3" class="anchored" data-anchor-id="奇异值分解">
+<span class="header-section-number">13.2.3</span> 奇异值分解</h3>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">svd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/svd.html">svd</a></span><span class="op">(</span><span class="va">df_center</span><span class="op">)</span></span>
 <span><span class="va">svd</span><span class="op">$</span><span class="va">d</span></span>
@@ -996,8 +1002,8 @@ r_{ij}=\frac {S_{ij}}{\sqrt{S_{ii}×S_{jj}}}
 </div>
 </div>
 </div>
-</section></section><section id="主成分分析" class="level2" data-number="12.3"><h2 data-number="12.3" class="anchored" data-anchor-id="主成分分析">
-<span class="header-section-number">12.3</span> 主成分分析</h2>
+</section></section><section id="主成分分析" class="level2" data-number="13.3"><h2 data-number="13.3" class="anchored" data-anchor-id="主成分分析">
+<span class="header-section-number">13.3</span> 主成分分析</h2>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidymodels.tidymodels.org">tidymodels</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
@@ -3106,8 +3112,8 @@ PC_1=-0.531Murrder-0.583Assault-0.278UrbanPop-0.543Rape
 </div>
 </div>
 </div>
-<section id="判断主成分的个数psychfa.parallelmat" class="level3" data-number="12.3.1"><h3 data-number="12.3.1" class="anchored" data-anchor-id="判断主成分的个数psychfa.parallelmat">
-<span class="header-section-number">12.3.1</span> 判断主成分的个数<code>psych::fa.parallel(mat)</code>
+<section id="判断主成分的个数psychfa.parallelmat" class="level3" data-number="13.3.1"><h3 data-number="13.3.1" class="anchored" data-anchor-id="判断主成分的个数psychfa.parallelmat">
+<span class="header-section-number">13.3.1</span> 判断主成分的个数<code>psych::fa.parallel(mat)</code>
 </h3>
 <ol type="1">
 <li>Cattell碎石图 图形变化最大处，即拐角处</li>
@@ -3579,12 +3585,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./Clustering.html" class="pagination-link" aria-label="聚类">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">聚类</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">聚类</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./t-SNE.html" class="pagination-link" aria-label="t-SNE">
-        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">t-SNE</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">t-SNE</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">

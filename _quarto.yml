@@ -14,16 +14,16 @@ book:
     - part: "统计描述"
       chapters:
         - descriptive_statistics.qmd
-        - independence_correlation.qmd
-
 
     - part: "统计推断"
       chapters:
         - probability_random_variables_distribution.qmd
         - SamplingDistribution.qmd
         - ParameterEstimation.qmd
-        - hypothesis_testing.qmd
+        - hypothesis_test.qmd
         - ANOVA.qmd
+        - independence_correlation.qmd
+        - nonparametric_test.qmd
 
     #     - PowerAnalysis.qmd
     #     - Causal_Inference.qmd
@@ -35,13 +35,12 @@ book:
     - part: "生存分析"
       chapters:
         - SurvivalAnalysis.qmd
-        
 
-    - Clustering.qmd
-    - PCA.qmd
-    
+
     - part: "机器学习"
       chapters:
+        - Clustering.qmd
+        - PCA.qmd
         - t-SNE.qmd
         - UMAP.qmd
 

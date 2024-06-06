@@ -1,0 +1,43 @@
+# 非参数检验
+
+## 单样本Wilcoxon Signed-Rank 检验
+
+如果样本数据没有通过正态分布检验就要采用单样本wilcoxon符号秩检验进行计算。使用该检验需要满足的条件是样本值均匀地分布在均值两侧。
+
+```{r}
+x<- dplyr::filter(PlantGrowth,group=="ctrl")
+shapiro.test(x$weight)
+summary(x$weight)
+wilcox.test(x$weight, mu=7) 
+```
+
+## 独立双样本Wilcoxon Rank-Sum 检验
+
+当两个样本不满足正态分布时，使用Wilcoxon秩和检验进行非参数检验
+
+```{r}
+
+x <- dplyr::filter(PlantGrowth,group=="ctrl"|group=="trt1")
+
+wilcox.test(weight~group,data = x,exact=F)
+wilcox.test(PlantGrowth$weight[PlantGrowth$group=="ctrl"],PlantGrowth$weight[PlantGrowth$group=="trt1"],exact=F)
+```
+
+## 非独立双样本Wilcoxon Rank-Sum 检验
+
+```{r}
+wilcox.test(PlantGrowth$weight[PlantGrowth$group=="ctrl"],PlantGrowth$weight[PlantGrowth$group=="trt1"],exact=F,paired=TRUE)
+
+```
+
+## 独立多样本Kruskal-Wallis 检验
+
+```{r}
+kruskal.test(weight~group,data = PlantGrowth)
+```
+
+### 多重比较
+
+```{r}
+pairwise.wilcox.test(PlantGrowth$weight,PlantGrowth$group,p.adjust.method = "fdr",exact=F)
+```
