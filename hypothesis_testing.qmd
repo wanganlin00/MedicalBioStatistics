@@ -14,6 +14,8 @@
 
 ## 功效分析
 
+<https://www.statmethods.net/stats/power.html>
+
 1.  第$Ⅰ$类错误：拒绝真$H_0$，犯第Ⅰ类错误的概率$\alpha=P(reject\  H_0|H_0\ is\ True)$
 
 2.  第$Ⅱ$类错误：不拒绝假$H_0$，犯第Ⅱ类错误的概率$\beta=(not\ reject\  H_0|H_1\ is\ True)$

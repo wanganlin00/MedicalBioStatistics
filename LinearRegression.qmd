@@ -165,6 +165,8 @@ lm_wf_log |>
 
 ## 回归诊断
 
+<https://www.statmethods.net/stats/rdiagnostics.html>
+
 ```{r}
 library(car)
 ```
