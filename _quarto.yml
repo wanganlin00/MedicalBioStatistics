@@ -17,9 +17,6 @@ book:
 
     - part: "统计推断"
       chapters:
-        - probability_random_variables_distribution.qmd
-        - SamplingDistribution.qmd
-        - ParameterEstimation.qmd
         - hypothesis_test.qmd
         - ANOVA.qmd
         - independence_correlation.qmd
@@ -47,9 +44,11 @@ book:
     - diagnostic_tests.qmd
     - observational_study_design.qmd
 
-    - part: "附录"
+    - part: "附录1：理论基础"
       chapters:
         - 概率论基础.qmd
+        - SamplingDistribution.qmd
+        - ParameterEstimation.qmd
         - 线性代数基础.qmd
 
 execute:

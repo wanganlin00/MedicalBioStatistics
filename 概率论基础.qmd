@@ -1,6 +1,6 @@
-# 概率论基础与随机变量分布
+# 概率论基础
 
-## 概率论基础
+## 古典概率
 
 样本点（sample point）是每一次随机试验的结果，用 $\omega$ 表示。
 
@@ -90,10 +90,6 @@ $$P(A_k |B)=\frac{P(A_k)P(B|A_k)}{\sum_{i=1}^{n}P(A_i)P(B|A_i)}$$
 ### 混淆矩阵
 
 ![](images/confusing_matrix.png){fig-align="center"}
-
-### ROC
-
-### AUC
 
 ## 离散型随机变量
 
@@ -340,4 +336,5 @@ $$
 
 ### 医学参考区间
 
-### 
+
+

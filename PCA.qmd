@@ -92,6 +92,16 @@ sum(diag(AA_T))
 
 ### 奇异值分解
 
+SVD公式：
+
+$$
+A_{p×n}=U\Sigma V^T 
+$$
+
+主成分推导：
+
+$$ PC=VX=U \Sigma  $$
+
 ```{r}
 svd <- svd(df_center)
 svd$d
@@ -103,9 +113,11 @@ sum(svd$d^2)
 # 主成分荷载
 svd$v
 
-# fc贡献百分比
+# 方差贡献百分比
 pct <- svd$d^2/sum(svd$d^2)
 pct
+
+
 ```
 
 内置PCA
@@ -120,16 +132,6 @@ autoplot(prcomp(df_center),
          data=df_center,
          )
 ```
-
-主成分的推导??????????????
-
-$$ PC= \begin{bmatrix} v_1&v_2&\dots&v_p \end{bmatrix} \begin{bmatrix} X_1\\ X_2\\ \vdots\\ X_p \end{bmatrix}=VX=U \Sigma  $$
-
-寻找主成分就是使X的线性组合$VX$ 的方差尽可能大，即???????????
-
-$$ \begin{aligned} Var(VX) =&E(VX-E(VX))(VX-E(VX))'\\ =&VE(X-E(X))(X-E(X))'V' \\ =&V\Sigma V' \end{aligned} $$
-
-可视化主成分
 
 碎石图
 
