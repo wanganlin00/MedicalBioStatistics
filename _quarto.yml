@@ -9,8 +9,6 @@ book:
   chapters:
     - index.qmd
 
-    - part: data_science.qmd
-
     - part: "统计描述"
       chapters:
         - descriptive_statistics.qmd
@@ -41,8 +39,11 @@ book:
         - t-SNE.qmd
         - UMAP.qmd
 
-    - diagnostic_tests.qmd
-    - observational_study_design.qmd
+    - part: "临床统计"
+      chapters: 
+        - diagnostic_tests.qmd
+        - observational_study_design.qmd
+
 
     - part: "附录1：理论基础"
       chapters:
