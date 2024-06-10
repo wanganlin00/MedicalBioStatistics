@@ -47,6 +47,10 @@ book:
     - diagnostic_tests.qmd
     - observational_study_design.qmd
 
+    - part: "附录"
+      chapters:
+        - 概率论基础.qmd
+        - 线性代数基础.qmd
 
 execute:
   cache: true
