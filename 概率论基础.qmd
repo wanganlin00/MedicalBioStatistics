@@ -45,9 +45,13 @@ space
 
 6.  对立（互补）事件 $A\cap B=\emptyset$ 且 $A\cup B=\Omega$
 
+### 排列组合
+
 组合（combination）：$C_n^k =\binom{n}{k} =\frac {n!}{k!(n-k)!}$
 
-`{r} choose(5,3)}`
+```{r}
+choose(5,3)
+```
 
 排列（permutation）：$P_n^k =k!\binom{n}{k} =\frac {n!}{(n-k)!}$
 
