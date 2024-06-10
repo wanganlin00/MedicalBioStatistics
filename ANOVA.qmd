@@ -534,20 +534,17 @@ df <- read_rds("data/repeated_measures_design_ANOVA.rds")
 
 ```{r}
 # 第一种
-aov_fit <- aov(volume ~ method*Days+Error(id/Days),data = df)
+aov_fit <- aov(volume ~ method*Days+Error(id/(Days)),data = df)
 summary(aov_fit)
 ```
 
 ```{r}
 library(rstatix)
-df |> dplyr::select(-id) |> 
-    group_by(method,Days) |> 
+df |> group_by(method,Days) |> 
     get_summary_stats(type="mean_sd")
 
-
-model <- anova_test(data = df,dv=volume,wid = id,
-                      between = method,within = Days ,type = 2)
-get_anova_table(model)
+# model <-df |> rstatix::anova_test(dv=volume,wid=id,within = Days,between = method)
+# get_anova_table(model)
 
 df |>
     pairwise_t_test(

@@ -4,6 +4,7 @@
 
 ```{r}
 library(tidymodels)
+library(patchwork)
 ```
 
 [parsnip](https://www.tidymodels.org/start/models/) for model fitting specification
@@ -18,7 +19,7 @@ lm_spec
 
 [recipes and workflows](https://www.tidymodels.org/start/recipes/) to perform the pre-processing specification and transformations
 
-[数据下载](https://www.statlearning.com/resources-second-edition)
+[数据下载网站](https://www.statlearning.com/resources-second-edition)
 
 ```{r}
 advertising<-read_csv("data/Advertising.csv")

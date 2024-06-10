@@ -21,7 +21,7 @@ h(t)=&\lim_{\Delta t\to 0}\frac{P(t\le T<t+\Delta t|T\ge t)}{\Delta t}\\
 \end{aligned}
 $$
 
-\$ S(t)=e\^{-\int\_0\^t h(u)du} \$
+\$S(t)=e\^{-\int\_0\^t h(u)du} \$
 
 $$
 \begin{aligned}
@@ -91,7 +91,7 @@ km_fit$n.risk
 # 生存率
 km_fit$surv
 
-summary(km_fit,data=d)
+summary(km_fit)
 ```
 
 ## 单因素分组生存曲线的比较
@@ -146,7 +146,7 @@ df <- read_csv("data/log-rank-survival.csv")
 surv_formula <- Surv(Days,status)~treatment
 
 km<-survfit(surv_formula,data=df)
-summary(km,data=df)
+summary(km)
 
 # 执行Log-rank检验
 logrank_test <- survdiff(surv_formula,data = df,subset = T,na.action = "na.omit")

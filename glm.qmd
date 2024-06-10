@@ -2,10 +2,13 @@
 
 ## 逻辑回归
 
+[数据下载网站](https://www.statlearning.com/resources-second-edition)
+
 逻辑回归一般需要引入虚拟变量（哑变量，dummy variable），通常取值伪0或1。
 
 ```{r}
 library(tidymodels)
+library(patchwork)
 
 logit_spec <- logistic_reg() |>
   set_mode("classification") |>
