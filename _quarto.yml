@@ -39,7 +39,7 @@ book:
         - t-SNE.qmd
         - UMAP.qmd
 
-    - part: "临床统计"
+    - part: "临床设计"
       chapters: 
         - diagnostic_tests.qmd
         - observational_study_design.qmd

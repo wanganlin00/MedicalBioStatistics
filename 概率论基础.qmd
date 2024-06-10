@@ -37,7 +37,7 @@ space
 
 2.  并集（$A\cup B$）
 
-3.  交集（$A\cap B$，AB）
+3.  交集（$A\cap B$，$AB$ ）
 
 4.  补集（$\bar A$）
 
@@ -47,10 +47,11 @@ space
 
 组合（combination）：$C_n^k =\binom{n}{k} =\frac {n!}{k!(n-k)!}$
 
-```{r} choose(5,3)}
-```
+`{r} choose(5,3)}`
 
 排列（permutation）：$P_n^k =k!\binom{n}{k} =\frac {n!}{(n-k)!}$
+
+### 概率的运算法则
 
 加法定理
 
@@ -335,6 +336,3 @@ Z=\frac{x-\mu}{\sigma}=\frac{x-\lambda}{\sqrt{\lambda}}
 $$
 
 ### 医学参考区间
-
-
-

@@ -1,41 +1,67 @@
 # 描述性统计学
 
+## 基本概念
+
+同质homogeneity
+
+变异variation
+
+总体population，描述总体特征的统计学指标称为参数parameter
+
+样本sample，由样本计算出的特征指标称为统计量statistic
+
+## 变量
+
+variable是随机变量下简称。
+
+变量的观测值称为数据data。
+
 ## 数据类型
 
-1.  定量数据（数值数据）
+1.  定量数据（quantitative data）
 
-    i.  连续数据
+    i.  连续型
 
-    ii. 离散数据
+    ii. 离散型
 
-2.  定性数据（分类数据）
+2.  定性数据（qualitative data）
 
     i.  无序分类数据
 
     ii. 有序分类数据
 
-## 频数表和频率分布直方图
+## 定量数据的统计描述
+
+### 频数分布
 
 -   极差 $R=X_{max}-X_{min}$
 
--   组数$k$（$5-15$）
+-   组数$k$（$8-15$）
 
--   组别（$interval$）
+-   组距（$interval=R/k$）
 
 -   频数$count$
 
 -   频率$\frac{count}{n} \times 100\%$
 
-## 数据特征
+```{r}
+ggplot(data = mtcars,aes(x=mpg))+
+    geom_histogram(color="black",bins = 10)
+
+ggplot(data = mtcars,aes(x=mpg))+
+    geom_histogram(color="black",binwidth =diff(range(mtcars$mpg))/9 )
+```
+
+### 数据特征
 
 ```{r}
 as_tibble(mtcars$mpg)
 ```
 
-### 集中趋势
+#### 集中趋势
 
 ```{r}
-#算术平均数
+#算术均数
 mean(mtcars$mpg)     
 
 #中位数
@@ -45,30 +71,31 @@ median(mtcars$mpg)
 rstatix::get_mode(mtcars$mpg)
 ```
 
-### 离散程度
+#### 离散程度
 
 ```{r}
 # 值域
 range(mtcars$mpg)  
-# 极差 / 全距
+# 极差 or 全距
 diff(range(mtcars$mpg) )  
 
 # 分位数
 quantile(mtcars$mpg,probs = c(0,0.1,0.25,0.5,0.75,1))    
 # 四分位数间距
-IQR(mtcars$mpg)      
+IQR(mtcars$mpg)     
+
+# 方差 variance
+var(mtcars$mpg)       
 
 # 标准差 standard deviation
 sd(mtcars$mpg)       
-# 方差 variance
-var(mtcars$mpg)       
 
 
 # 变异系数 Coefficient of Variation
 CV <- function(x,na.rm=TRUE){  
     if(na.rm) x <- x[!is.na(x)]
     CV=sd(x)/mean(x)*100
-    sprintf("%.2f%%",CV)
+    sprintf("%.6f%%",CV)
 }
 CV(mtcars$mpg)
 
@@ -82,7 +109,7 @@ median(abs(mtcars$mpg-median(mtcars$mpg)))
 median(abs(mtcars$mpg-median(mtcars$mpg)))*1.4826
 ```
 
-### 分布形状
+#### 分布形状
 
 偏度（Skewness）
 
@@ -158,7 +185,7 @@ kurtosis<-function(x,na.rm=TRUE){
 kurtosis(x)
 ```
 
-### 统计摘要
+#### 统计摘要
 
 ```{r}
 summary(mtcars$mpg)
@@ -166,171 +193,54 @@ rstatix::get_summary_stats(mtcars,mpg,type = "full")
 psych::describeBy(mtcars$mpg,group = mtcars$am)
 ```
 
-## 统计表格
+## 定性数据的统计描述
+
+### 率
+
+率（rate）表示在一定空间或时间范围内某现象的发生数与可能发生的总数之比，说明某现象出现的频率。
+
+### 构成比
+
+构成比（proportion）
+
+
+### 相对比
+
+relative ratio是A和B两个有关联指标值之比。
+
+### 相对危险度与优势比
+
+　　相对危险度 （Relative Risk，RR），是指暴露组人群的发病率与非暴露组人群的发病率之比。RR 用于反映暴露因素与结局事件的关联程度， 其 取值范围为 0 到无穷大。数值为 1 时，表明暴露因素与结局事件无关联；小于 1 时，表 明暴露因素导致结局事件的发生率降低；大于 1 时，表明暴露因素导致结局事件的发生率增加。相对风险适用于队列研究。
+
+　　优势比（Odds Ratio，OR），是指暴露组中病例与非病例人数的比值除以非暴露组中病例与非病例人数的比值。　　OR 的取值范围也为 0 到无穷大。如果 OR 值大于 1 ，说明该暴露因素更 容易导致结果事件发生，或者说该因素是一个危险因素；小于 1 ，则说明该暴露因素更不 容易导致结果事件发生，或者说该因素是一个保护因素。比值比适用于队列研究和病例对照研究。
+
+[Using R for Biomedical Statistics](https://a-little-book-of-r-for-biomedical-statistics.readthedocs.io/en/latest/src/biomedicalstats.html)
 
 ```{r}
-options(digits = 2)
-head(mtcars)
+eg <- matrix(c(156,9421,1531,14797),nrow=2,byrow=TRUE)
+colnames(eg) <- c("Disease","Control")
+rownames(eg) <- c("Exposed","Unexposed")
+# RR
+156/(156+9421)*(1531+14797)/1531
+source("function/calcRelativeRisk.R")
+calcRelativeRisk(eg,alpha=0.05)
 
-tbl1 <- tableone::CreateTableOne(vars = colnames(mtcars),
-                                 data = mtcars,
-                                 factorVars = c("cyl"), # 分类
-                                 strata = c("am"),  #分层
-                                 )
-tbl1
-
-
-```
-
-复现 @fig-三线表
-
-![](images/statistical-table.png){#fig-三线表 fig-align="center" width="80%"}
-
-```{r}
-data <- readRDS("data/brfss_tg_2014_raw.rds")
-data <- data |> 
-    tidyr::drop_na() |>
-    dplyr::filter(TRNSGNDR <= 3) |> 
-    dplyr::filter(`_AGEG5YR` >= 5 & `_AGEG5YR` <= 11) |> 
-    dplyr::select(- c(HADMAM, `_AGE80`))
-
-data_recoded <- data |> 
-    dplyr::mutate(TRNSGNDR = forcats::as_factor(TRNSGNDR)) |> 
-    dplyr::mutate(TRNSGNDR = 
-          forcats::fct_recode(TRNSGNDR, "Male to female" = "1")) |> 
-    dplyr::mutate(TRNSGNDR = 
-          forcats::fct_recode(TRNSGNDR, "Female to male" = "2")) |> 
-    dplyr::mutate(TRNSGNDR = 
-            forcats::fct_recode(TRNSGNDR, "Gender non-conforming" = "3")) |> 
-    
-    dplyr::mutate(`_AGEG5YR` = forcats::as_factor(`_AGEG5YR`)) |> 
-    dplyr::mutate(`_AGEG5YR` = 
-          forcats::fct_recode(`_AGEG5YR`, "40-44" = "5")) |> 
-    dplyr::mutate(`_AGEG5YR` = 
-          forcats::fct_recode(`_AGEG5YR`, "45-49" = "6")) |> 
-    dplyr::mutate(`_AGEG5YR` = 
-          forcats::fct_recode(`_AGEG5YR`, "50-54" = "7")) |> 
-    dplyr::mutate(`_AGEG5YR` = 
-          forcats::fct_recode(`_AGEG5YR`, "55-59" = "8")) |> 
-    dplyr::mutate(`_AGEG5YR` = 
-          forcats::fct_recode(`_AGEG5YR`, "60-64" = "9")) |> 
-    dplyr::mutate(`_AGEG5YR` = 
-          forcats::fct_recode(`_AGEG5YR`, "65-69" = "10")) |> 
-        dplyr::mutate(`_AGEG5YR` = 
-          forcats::fct_recode(`_AGEG5YR`, "70-74" = "11")) |> 
-    
-    dplyr::mutate(`_RACE` = forcats::as_factor(`_RACE`)) |> 
-    dplyr::mutate(`_RACE` = 
-          forcats::fct_recode(`_RACE`, "White" = "1")) |> 
-    dplyr::mutate(`_RACE` = 
-          forcats::fct_recode(`_RACE`, "Black" = "2")) |> 
-    dplyr::mutate(`_RACE` = 
-          forcats::fct_recode(`_RACE`, "Native American" = "3")) |> 
-    dplyr::mutate(`_RACE` = 
-          forcats::fct_recode(`_RACE`, "Asian/Pacific Islander" = "4")) |> 
-    dplyr::mutate(`_RACE` = 
-          forcats::fct_collapse(`_RACE`, "Other" = 
-                c("5", "7", "8", "9"))) |> 
-    
-    dplyr::mutate(`_INCOMG` = forcats::as_factor(`_INCOMG`)) |> 
-    dplyr::mutate(`_INCOMG` = 
-          forcats::fct_recode(`_INCOMG`, "Less than $15,000" = "1")) |> 
-    dplyr::mutate(`_INCOMG` = 
-          forcats::fct_recode(`_INCOMG`, "$15,000 to less than $25,000" = "2")) |> 
-    dplyr::mutate(`_INCOMG` = 
-          forcats::fct_recode(`_INCOMG`, "$25,000 to less than $35,000" = "3")) |> 
-    dplyr::mutate(`_INCOMG` = 
-          forcats::fct_recode(`_INCOMG`, "$35,000 to less than $50,000" = "4")) |> 
-    dplyr::mutate(`_INCOMG` = 
-          forcats::fct_recode(`_INCOMG`, "$50,000 or more" = "5")) |> 
-    dplyr::mutate(`_INCOMG` = 
-          forcats::fct_recode(`_INCOMG`, "Don't know/not sure/missing" = "9")) |>  
-
-    dplyr::mutate(`_EDUCAG` = forcats::as_factor(`_EDUCAG`)) |> 
-    dplyr::mutate(`_EDUCAG` = 
-          forcats::fct_recode(`_EDUCAG`, "Did not graduate highschool" = "1")) |> 
-    dplyr::mutate(`_EDUCAG` = 
-          forcats::fct_recode(`_EDUCAG`, "Graduated highschool" = "2")) |> 
-    dplyr::mutate(`_EDUCAG` = 
-          forcats::fct_recode(`_EDUCAG`, "Attended college/technical school" = "3")) |> 
-    dplyr::mutate(`_EDUCAG` = 
-          forcats::fct_recode(`_EDUCAG`, "Graduated from college/technical school" = "4")) |> 
-    
-    dplyr::mutate(HLTHPLN1 = forcats::as_factor(HLTHPLN1)) |> 
-    dplyr::mutate(HLTHPLN1 = 
-          forcats::fct_recode(HLTHPLN1, "Yes" = "1")) |> 
-    dplyr::mutate(HLTHPLN1 = 
-          forcats::fct_recode(HLTHPLN1, "No" = "2")) |> 
-    
-    dplyr::mutate(PHYSHLTH = dplyr::case_match(PHYSHLTH, 
-                 77 ~ NA,
-                 99 ~ NA,
-                 88 ~ 0,
-                 .default = PHYSHLTH)) |> 
-
-    labelled::set_variable_labels(
-        TRNSGNDR = "Transition status",
-        `_AGEG5YR` = "Age category",
-        `_RACE` = "Race/ethnicity",
-        `_INCOMG` = "Income category",
-        `_EDUCAG` = "Education category",
-        HLTHPLN1 = "Health insurance?",
-        PHYSHLTH = "Days poor physical health per month"
-    )
-
-
-tbl1_gtsummary <- data_recoded |> 
-    gtsummary::tbl_summary(
-        statistic = list(
-            gtsummary::all_continuous() ~ "{median}",
-            gtsummary::all_categorical() ~ "{n}"
-            ), 
-         label = PHYSHLTH ~ "Days poor physical health per month (median, IQR)"
-    )
-
-tbl2_gtsummary <- data_recoded |> 
-    gtsummary::tbl_summary(
-        statistic = list(
-            gtsummary::all_continuous() ~ "({p25}, {p75})",
-            gtsummary::all_categorical() ~ "{p}%"
-            ),
-        digits = list(gtsummary::all_categorical() ~ 1),
-        label = PHYSHLTH ~ "Days poor physical health per month (median, IQR)"
-    )
-
-tbl_merge_gtsummary <- gtsummary::tbl_merge(
-    list(tbl1_gtsummary, tbl2_gtsummary)
-) |> 
-    gtsummary::bold_labels() |> 
-    gtsummary::modify_header(
-        list(
-            label ~ "**Survey participants demographics (N = {n})**",
-            stat_0_1 ~ "**Frequency**", 
-            stat_0_2 ~ "**Percent**"
-        )
-    ) |> 
-    gtsummary::modify_spanning_header(gtsummary::everything() ~ NA) |> 
-    gtsummary::modify_footnote(gtsummary::everything() ~ NA) 
-
-tbl_merge_gtsummary
+# OR
+156/9421/(1531/14797)
+source("function/calcOddsRatio.R")
+calcOddsRatio(eg,alpha = 0.05)
 ```
 
 ```{r}
-tbl_merge_gtsummary_small <- tbl_merge_gtsummary |> 
-    gtsummary::as_gt() |> 
-    gt::tab_options(table.font.size = "14px")
-
-tbl_merge_gtsummary_small
+mymatrix <- matrix(c(30,24,76,241,82,509),nrow=3,byrow=TRUE)
+colnames(mymatrix) <- c("Disease","Control")
+rownames(mymatrix) <- c("Exposure1","Exposure2","Unexposed")
+print(mymatrix)
+calcOddsRatio(mymatrix, referencerow=3)
+calcRelativeRisk(mymatrix, referencerow=3)
 ```
 
-```{r}
-gtsummary::theme_gtsummary_compact() 
-tbl_merge_gtsummary
-```
+
 
 ## 数据可视化
 
-[R Notes](https://wanganlin00.github.io/R/)
-
--   base_graphics
--   ggplot2_graphics
