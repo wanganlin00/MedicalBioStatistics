@@ -113,7 +113,7 @@ t_distribution <- function(df = 1, ...) {
     labs(title = paste("Student's t-distribution (df =", df, ")", sep = "")) +
     guides(color = guide_legend(title = "Type"))
 }
-
+library(patchwork)
 t_distribution(df=1000)|norm()
 ```
 

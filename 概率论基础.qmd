@@ -328,6 +328,7 @@ Z=\frac{x-\mu}{\sigma}=\frac{x-n\pi}{\sqrt{n\pi(1-\pi)}}
 $$
 
 ```{r}
+library(patchwork)
 binom(30,0.5)|norm(mu=15,sigma = 7.5)
 ```
 
