@@ -37,9 +37,7 @@ $$
 df <- as_tibble(USArrests, rownames = "state") |> column_to_rownames("state")
 head(df)
 
-df_center <- df |> mutate_all(~ (.x - mean(.x, na.rm = TRUE))/sd(.x,na.rm=TRUE))
-colMeans(df_center)
-
+df_center <- scale(df,center = T,scale = T)
 ```
 
 ### 计算协方差矩阵
@@ -64,15 +62,32 @@ S
 cov(df_center)
 ```
 
-相关系数矩阵R=（r~ij~）
+### 计算相关系数矩阵
+
+R=（r~ij~）
 
 $$
 r_{ij}=\frac {S_{ij}}{\sqrt{S_{ii}×S_{jj}}}
 $$
 
 ```{r}
+
+r <- function(df){
+    df <- as.data.frame(df)
+    n=length(df)
+    names <- colnames(df)
+    df <- scale(df)
+    S <- cov(df)
+    r <- matrix(data = NA,n,n,dimnames = list(names,names))
+    for(i in 1:n){
+        for(j in 1:n){
+            r[i,j]=S[i,j]/sqrt(S[i,i]*S[j,j])
+        }
+    }
+    return(r)
+}
+r(df)
 cor(df_center)
-r_ij <- S[1,2]/sqrt(S[1,1]*S[2,2])
 ```
 
 总方差T=所有特征值的总和=样本方差的总和=迹(对角线的总和)
@@ -84,6 +99,8 @@ r_ij <- S[1,2]/sqrt(S[1,1]*S[2,2])
 y <- eigen(AA_T)
 y$values
 y$vectors
+
+# 特征值的和
 sum(y$values)
 
 # 迹
@@ -113,11 +130,25 @@ sum(svd$d^2)
 # 主成分荷载
 svd$v
 
+
+
 # 方差贡献百分比
 pct <- svd$d^2/sum(svd$d^2)
 pct
 
 
+
+D <- diag(svd$d)
+
+#  df_center  X = U D V'
+X <- svd$u %*% D %*% t(svd$v) 
+
+#  D = U' X V
+t(svd$u) %*% X %*% svd$v
+
+
+# 得分
+svd$u %*% D
 ```
 
 内置PCA
