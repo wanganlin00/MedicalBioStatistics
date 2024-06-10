@@ -169,8 +169,6 @@ cor(df,method = "kendall")
 
 #### 相关图（correlogram）
 
-@sec-correlogram
-
 ```{r}
 ggcorrplot::ggcorrplot(
     corr = cor(df,use = "everything",method="pearson") ,
