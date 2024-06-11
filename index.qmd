@@ -6,7 +6,9 @@
 
 -   [医学研究中的生存数据建模（4e）](https://bookdown.org/wangzhen/survival/)
 
--   [t-Distributed Stochastic Neighbor Embedding (t-SNE)](https://lvdmaaten.github.io/tsne/)、[R-tSNE](https://cran.r-project.org/web/packages/tsne/)
+-   [t-Distributed Stochastic Neighbor Embedding (t-SNE)](https://lvdmaaten.github.io/tsne/)
+
+-   [R-tSNE](https://cran.r-project.org/web/packages/tsne/)
 
 -   [Uniform Manifold Approximation and Projection (UMAP)](https://umap-learn.readthedocs.io/en/latest/){.uri}
 

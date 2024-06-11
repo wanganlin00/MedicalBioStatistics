@@ -7,3 +7,42 @@ Fisher线性判别分析（Linear Discriminant Analysis, LDA）
 Fisher判别法试图最大化类间差异（不同类别的数据点彼此远离）并最小化类内差异（同一类别的数据点尽可能聚集。
 
 它侧重于最大化类间差异（between-class variance）与类内差异（within-class variance）的比率
+
+```{r}
+# 加载MASS包，它包含了lda函数
+library(MASS)
+
+# 加载内置的鸢尾花数据集
+data(iris)
+
+# 查看数据集结构
+str(iris)
+
+# 应用Fisher线性判别分析
+# 使用鸢尾花数据集的前四列作为特征，Species作为类别
+lda_model <- lda(Species ~ ., data=iris)
+
+# 查看判别模型的摘要
+summary(lda_model)
+lda_model
+# 打印判别函数的系数
+print(lda_model$coefficients)
+
+# 使用判别模型对数据进行分类
+predicted_species <- predict(lda_model, iris)
+
+# 计算准确率
+accuracy <- sum(predicted_species$class == iris$Species) / nrow(iris)
+print(paste("分类准确率:", accuracy))
+
+# 可视化判别结果
+plot(lda_model)
+```
+
+ss
+
+```{r}
+lda_pred <- predict(lda_model,iris)
+lda_pred$x
+
+```
