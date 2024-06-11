@@ -145,9 +145,7 @@ print(paste("AUC:", auc_value))
 
 ### AUC
 
-$
-A=P(X>Y)
-$
+\$ A=P(X\>Y) \$
 
 $$
 S(X,Y)=
@@ -158,9 +156,7 @@ S(X,Y)=
 \end{cases}
 $$
 
-$
-\hat A=\frac{1}{n_0n_1}\sum_1^{n_1}\sum_1^{n_0}S(X,Y)
-$
+\$ \hat A=\frac{1}{n_0n_1}\sum\_1\^{n_1}\sum\_1\^{n_0}S(X,Y) \$
 
 ### 分组AUC的比较
 

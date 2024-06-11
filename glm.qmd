@@ -222,32 +222,3 @@ pois_fit_coef_mnths |>
        x = "Month", y = "Coefficient")
 ```
 
-## K-Nearest Neighbors
-
-```{r}
-df3 <- read_csv("data/Smarket.csv") 
-head(df3)
-df3$Direction <- factor(df3$Direction)
-```
-
-```{r}
-knn_spec <- nearest_neighbor(neighbors = 3) |> 
-  set_mode("classification") |> 
-  set_engine("kknn")
-
-knn_fit <- knn_spec |>
-  fit(Direction ~ Lag1 + Lag2, data = df3)
-
-knn_fit
-
-```
-
-```{r}
-augment(knn_fit, new_data = df3) |> 
-  conf_mat(truth = Direction, estimate = .pred_class) 
-```
-
-```{r}
-augment(knn_fit, new_data = df3) |>
-  accuracy(truth = Direction, estimate = .pred_class) 
-```

@@ -8,6 +8,8 @@ Fisher判别法试图最大化类间差异（不同类别的数据点彼此远�
 
 它侧重于最大化类间差异（between-class variance）与类内差异（within-class variance）的比率
 
+### MASS
+
 ```{r}
 # 加载MASS包，它包含了lda函数
 library(MASS)
@@ -39,10 +41,97 @@ print(paste("分类准确率:", accuracy))
 plot(lda_model)
 ```
 
-ss
+### tidymodels
 
 ```{r}
-lda_pred <- predict(lda_model,iris)
-lda_pred$x
+library(tidymodels)
+library(discrim)
+```
 
+```{r}
+Smarket <- read_csv("data/Smarket.csv")
+Smarket$Direction <- factor(Smarket$Direction)
+head(Smarket)
+```
+
+```{r}
+lda_spec <- discrim_linear() %>%
+  set_mode("classification") %>%
+  set_engine("MASS")
+lda_fit <- lda_spec %>%
+  fit(Direction ~ Lag1 + Lag2, data = Smarket)
+
+lda_fit
+```
+
+```{r}
+predict(lda_fit, new_data = Smarket)
+predict(lda_fit, new_data = Smarket, type = "prob")
+augment(lda_fit, new_data = Smarket) %>%
+  conf_mat(truth = Direction, estimate = .pred_class) 
+
+augment(lda_fit, new_data = Smarket) %>%
+  accuracy(truth = Direction, estimate = .pred_class) 
+```
+
+## K-Nearest Neighbors
+
+```{r}
+df3 <- read_csv("data/Smarket.csv") 
+head(df3)
+df3$Direction <- factor(df3$Direction)
+```
+
+```{r}
+knn_spec <- nearest_neighbor(neighbors = 3) |> 
+  set_mode("classification") |> 
+  set_engine("kknn")
+
+knn_fit <- knn_spec |>
+  fit(Direction ~ Lag1 + Lag2, data = df3)
+
+knn_fit
+
+```
+
+```{r}
+augment(knn_fit, new_data = df3) |> 
+  conf_mat(truth = Direction, estimate = .pred_class) 
+```
+
+```{r}
+augment(knn_fit, new_data = df3) |>
+  accuracy(truth = Direction, estimate = .pred_class) 
+```
+
+## 模型比较
+
+```{r}
+models <- list("LDA" = lda_fit,
+               "KNN" = knn_fit)
+preds <- imap_dfr(models, augment, 
+                  new_data = Smarket, .id = "model")
+
+preds %>%
+  dplyr::select(model, Direction, .pred_class, .pred_Down, .pred_Up)
+```
+
+### 灵敏度和特异性
+
+```{r}
+multi_metric <- metric_set( sensitivity, specificity)  # accuracy
+
+
+preds %>%
+  group_by(model) %>%
+  multi_metric(truth = Direction, estimate = .pred_class)
+```
+
+### ROC 曲线
+
+```{r}
+preds %>%
+  group_by(model) %>%
+  roc_curve(Direction, .pred_Down) %>%
+  autoplot()
 ```
