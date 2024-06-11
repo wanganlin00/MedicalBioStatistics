@@ -579,3 +579,124 @@ print(method_comparisons)
 # 两个被试间变量，一个被试内变量
 # aov.bww <- aov(y ~ b1*b2*w1 + Error(subject/(w1)) + b1*b2, data=data_long)
 ```
+
+```{r}
+# 医学统计学 人卫版 第7版 Page 86-87
+df <- read_tsv("data/麻醉诱导时相.txt")
+df
+```
+
+$$
+\begin{aligned}
+SS_总&= SS_{受试对象间}+SS_{受试对象内}  \\
+&=（SS_{处理方法}+SS_{个体差异}）+（SS_{时间}+SS_{处理与时间交互}+SS_{个体差异}）
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\nu_总&= \nu_{受试对象间}+\nu_{受试对象内}  \\
+&=（\nu_{处理方法}+\nu_{个体差异}）+（\nu_{时间}+\nu_{处理与时间交互}+\nu_{个体差异}）
+\end{aligned}
+$$
+
+|            | 变异           | SS           | v         | MS     | F      | CP       |
+|-----------|-----------|-----------|-----------|-----------|-----------|-----------|
+| 受试对象间 | 处理           | **912.24**   | 2         | 456.12 | 5.78   | 0.0174   |
+|            | 个体差异       | 946.48       | 12        | 78.87  |        |          |
+|            |                | **1858.72**  |           |        |        |          |
+| 受试对象内 | 时间           | 2336.45      | 4         | 584.11 | 106.56 | \<0.0001 |
+|            | 处理与时间交互 | 837.63       | 8         | 104.70 | 19.10  | \<0.0001 |
+|            | 个体差异       | 263.12       | 48        | 5.48   |        |          |
+| 总         |                | **52295.92** | 3×15-1=74 |        |        |          |
+
+### SS~总~
+
+$$
+SS_总=\sum_i^n{（X_i-\bar X）^2}
+$$
+
+其中，n是观测值的总数，Xi 为每个观测值，$\bar X$ 是所有观测值的均值。
+
+```{r}
+BP <- c(df$t0,df$t1,df$t2,df$t3,df$t4)
+BP_mean <- mean(BP) 
+SS_total <- sum((BP-BP_mean)^2)
+
+SS_total    
+```
+
+### SS~受试对象间~
+
+$$
+SS_{受试对象间}=\sum_{j=1}^m n_{.j}(\bar X_{.j}-\bar X)^2
+$$
+
+其中，m是受试者数量（15），n~.j~ 是第j 个受试对象的观测值数量，\\bar X~.j~ 是第j 个受试对象的观测值的均值，\\bar X 是所有观测值的均值。
+
+```{r}
+id_mean <- df |> select(c(-1,-2)) |> rowMeans()
+
+SS_between <- 0
+for (i in 1:nrow(df)) {
+    SS_between <- SS_between + 5*(id_mean[i]-BP_mean)^2
+}
+SS_between
+```
+
+```{r}
+df_long <- df |> pivot_longer(cols = starts_with("t"),
+                              names_to = "time",
+                              values_to = "BP")
+Grouped_mean <- df_long |> group_by(诱导方法) |> 
+    summarise(n=n(),mean=mean(BP),sum=sum(BP))
+Grouped_mean 
+
+
+```
+
+$$
+SS_{处理}= \sum_i^k n_k (\bar X_k - \bar X)^2
+$$
+
+其中，k为不同处理组的组数，n~k~ 为第 k 处理组观测值的总数，$\bar  X_k$ 为第k 处理组观测值的均数，$\bar X$ 是所有观测值的均值。
+
+```{r}
+SS_处理 <- 25*( (Grouped_mean$mean[1] - BP_mean )^2 + 
+                       (Grouped_mean$mean[2] - BP_mean )^2 +
+                       (Grouped_mean$mean[3] - BP_mean )^2) 
+SS_处理
+```
+
+```{r}
+SS_between_error <- SS_between-SS_处理
+
+SS_between_error
+```
+
+### SS~受试对象内~
+
+$$
+SS_{受试对象内}=SS_总-SS_{受试对象间}
+$$
+
+```{r}
+SS_within <- SS_total-SS_between
+SS_within
+
+```
+
+![](images/clipboard-710716399.png)
+
+$$
+SS_{时间}=\sum _{t=1}^T n_t （\bar X_{.t}-\bar X）^2
+$$
+
+其中，T是时间点的数量，n~t~ 是在时间点t的观测值数量，\\bar X~.t~ 是在时间点 t 的均值。
+
+```{r}
+
+
+```
+
+![](images/clipboard-1173484901.png)
