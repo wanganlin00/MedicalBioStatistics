@@ -1,0 +1,9 @@
+# 分类
+
+## LDA
+
+Fisher线性判别分析（Linear Discriminant Analysis, LDA）
+
+Fisher判别法试图最大化类间差异（不同类别的数据点彼此远离）并最小化类内差异（同一类别的数据点尽可能聚集。
+
+它侧重于最大化类间差异（between-class variance）与类内差异（within-class variance）的比率

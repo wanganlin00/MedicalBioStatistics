@@ -34,6 +34,7 @@ book:
 
     - part: "机器学习"
       chapters:
+        - Classification.qmd
         - Clustering.qmd
         - PCA.qmd
         - t-SNE.qmd
