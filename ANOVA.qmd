@@ -712,7 +712,7 @@ $$
 其中，T是时间点的数量，n~t~ 是在时间点t的观测值数量，\\bar X~.t~ 是在时间点 t 的均值。
 
 ```{r}
-t_mean <- df |> ddplyr::select(c(-1,-2)) |> colMeans()
+t_mean <- df |> dplyr::select(c(-1,-2)) |> colMeans()
 
 SS_time <- 0
 for (i in seq_along(t_mean)) {
