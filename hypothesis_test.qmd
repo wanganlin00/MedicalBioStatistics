@@ -40,8 +40,7 @@ t 检验（Student‘s t test），主要用于小样本（n\<30），标准差�
 
 ```{r}
 ggplot() + xlim(-10,10) +
-    geom_function(fun = dnorm, args = list(mean = 0, sd = 1), color="red")+
-    geom_vline(xintercept = c(0,0+1,0+2,0+3),linetype=2)
+    geom_function(fun = dnorm, args = list(mean = 0, sd = 1), color="red")
 
 ```
 
@@ -49,54 +48,69 @@ ggplot() + xlim(-10,10) +
 
 在数据符合正态分布的前提下使用单样本t-test来比较一组样本的均值和已知(理论/总体)均值，所谓的已知均值能来自于之前的实验数据或者理论值。根据研究问题(原假设)的不同又分为双尾(不等)和单尾检验(大于或者小于)
 
-$$t=\frac{\bar X-\mu_0}{S /\sqrt n} \sim t(\nu) $$
+$$t=\frac{\bar X-\mu_0}{S /\sqrt n} \sim t(\nu=n-1) $$
 
-它是一种参数检验，用于检验小样本（n＜30）的均值是否可以合理地为特定值。
+它是一种参数检验，用于检验小样本（n＜1000）的均值是否可以合理地为特定值。
 
 ```{r}
 x<- dplyr::filter(PlantGrowth,group=="ctrl")
-shapiro.test(x$weight)
 summary(x$weight)
+
+shapiro.test(x$weight)
 t.test(x$weight, mu=5) 
 ```
 
-**单样本**$Z$**检验功效分析**
+```{r}
+X_ <- mean(x$weight)
+S <- sd(x$weight)
+n <- nrow(x)
 
-1.  双侧假设
+se <- S/sqrt(n)
 
-    功效(power) $1-β\approx\Phi(z_{\alpha/2}+ES\sqrt n)$
+# 统计量
+t_statistic <- (X_-5)/se
 
-    效应值(effect size) $ES=\frac{|\mu_1-\mu_2|}{\sigma}$
+# p值
+p_value <- 2 * (1 - pt(abs(t_statistic),df = n-1 ))
 
-    样本量 $n=\frac{(z_{1-\alpha/2}+z_{1-\beta})^2}{ES^2}$
+# 查找95%置信水平下的t分布的临界值
+t_critical <- qt(0.975, df=n-1)
 
-2.  单侧假设
+# 计算95%置信区间
+CI_lower <- X_ - t_critical * se
+CI_upper <- X_ + t_critical * se
 
-    功效(power) $1-β=\Phi(z_{\alpha}+ES\sqrt n)$
-
-    效应值(effect size) $ES=\frac{|\mu_1-\mu_2|}{\sigma}$
-
-    样本量 $n=\frac{(z_{1-\alpha}+z_{1-\beta})^2}{ES^2}$
+# 输出结果
+cat("95% Confidence Interval:", CI_lower, "to", CI_upper)
+```
 
 ### 比率------ Z 检验
 
-如果样本比较小，则使用二项分布进行统计. 在R中，对于小样本，采用 `binom.test()`，对于大样本使用正态分布近似二项分布，利用 `prop.test()`进行分析。 在单样本比例检验中，我们关心的是具有同种特性的两个群体，在该特性总体中所占有的比例情况。例如，小鼠中公鼠母鼠各有一半，有100只患有某种疾病，其中有公鼠60只，母鼠40只。想知道是否公鼠患病率比母鼠高。在该问题中成功次数为公鼠患病数60，总次数为100，预期比例为50%(公母鼠数量相等)
+如果样本比较小，则使用二项分布进行统计. 在R中，对于小样本，采用 `binom.test()`，对于大样本使用正态分布近似二项分布，利用 `prop.test()`进行分析。 在单样本比例检验中，我们关心的是具有同种特性的两个群体，在该特性总体中所占有的比例情况。
 
 $$
 Z=\frac{p-\pi_0}{\sqrt{\pi_0(1-\pi_0)/n}}\sim N(0,1)
-$$ 连续校正 $$
+$$
+
+CI：$\bar p \pm z_{1-\alpha/2}\sqrt{\frac{p(1-p)}{n}}$
+
+连续校正 $$
 Z_{corr}=\frac{|p-\pi_0|-1/(2n)}{\sqrt{\pi_0(1-\pi_0)/n}}\sim N(0,1)
 $$
 
+例如，小鼠中公鼠母鼠各有一半，有100只患有某种疾病，其中有公鼠60只，母鼠40只。想知道是否公鼠患病率比母鼠高。在该问题中成功次数为公鼠患病数60，总次数为100，预期比例为50% ( 公母鼠数量相等)
+
 ```{r}
-prop.test(x=60,n=100,p=0.5,alternative = "greater")
+prop.test(x=60,n=100,p=0.5,alternative = "greater",correct = T)
 ```
 
-**功效分析**
-
-功效 $1-β\approx\Phi(\sqrt{\frac{\pi_0(1-\pi_0)}{\pi_1(1-\pi_1)}}(z_{\alpha/2}+\frac{|\pi_1-\pi_0|\sqrt n}{\sqrt{\pi_0(1-\pi_0)}}))$
-
-样本量 $n=\frac{\pi_0(1-\pi_0))}{(\pi_1-\pi_0)^2}(z_{1-\alpha/2}+z_{1-\beta}\sqrt{\frac{\pi_0(1-\pi_0)}{\pi_1(1-\pi_1)}})$
+```{r}
+p <- 0.6
+pi_0 <- 0.5
+n <- 100
+Z <- (p-pi_0)/sqrt(pi_0*(1-pi_0)/n)
+Z_corr <- (p-pi_0-1/(2*n))/sqrt(pi_0*(1-pi_0)/n)
+```
 
 ## 两个总体的假设检验
 
@@ -130,10 +144,25 @@ d_mean <- mean(df$d)
 d_sd <- sd(df$d)
 d_se <- d_sd/sqrt(length(df$d))
 t_statistic <- d_mean/d_se
+n <- 14
 
+# p值
+p_value <- 2 * (1 - pt(abs(t_statistic),df = n-1 ))
 
+# 查找95%置信水平下的t分布的临界值
+t_critical <- qt(0.975, df=n-1)
+
+# 计算95%置信区间
+CI_lower <- d_mean - t_critical * d_se
+CI_upper <- d_mean + t_critical * d_se
+
+# 输出结果
+cat("95% Confidence Interval:", CI_lower, "to", CI_upper)
+```
+
+```{r}
 t.test(df$ten_days_later,df$baseline,paired = TRUE)
-t.test(Pair(df$ten_days_later,df$baseline)~1,data=df)
+#t.test(Pair(df$ten_days_later,df$baseline)~1,data=df)
 ```
 
 ### 两独立样本的均值差异
@@ -181,11 +210,33 @@ F=\frac{\frac {(n_1-1)S_1^2}{\sigma_1^2}/(n_1-1)}{\frac {(n_2-1)S_2^2}{\sigma_2^
 $$
 
 ```{r}
-F_stats <- (e_sd^2)/(ctrl_sd^2)
-
 # 检验两个样本的方差是否相等
 var.test(df2$experimental,df2$control)
+```
 
+```{r}
+F_stats <- (e_sd^2)/(ctrl_sd^2)
+F_stats
+
+# 计算p值
+p_value <- 1 - pf(F_stats, df1=13, df2=11, lower.tail =F)
+# p_value <- pf(F_stats, df1=13, df2=11)
+
+
+
+alpha <- 0.05
+confidence_level <- 1 - alpha
+
+# 计算F分布的临界值
+f_critical_lower <- qf((1 - confidence_level) / 2, df1 = 13, df2 = 11)
+f_critical_upper <- qf(confidence_level, df1 = 13, df2 = 11)
+
+# 计算方差比率的置信区间
+ci_lower <- sqrt(f_critical_lower * (ctrl_sd^2 / e_sd^2))
+ci_upper <- sqrt(f_critical_upper * (ctrl_sd^2 / e_sd^2))
+
+# 输出结果
+cat("95% CI for variances ratio:", ci_lower, "to", ci_upper)
 ```
 
 #### 方差不等------ Approximation t 检验
