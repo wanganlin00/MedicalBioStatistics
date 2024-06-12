@@ -495,12 +495,6 @@ F_stat <- MS_W/MS_E
 
 ```
 
-```         
-# 独立变量 (被试内): time 依赖变量: value
-aov_time <- aov(value ~ time + Error(subject/time), data = data_long)
-summary(aov_time)
-```
-
 ```{r}
 library(nlme)
 model <- lme(fixed=ALT ~ week, random = ~1| id/week, data = df_long)
@@ -520,6 +514,8 @@ glht_result
 
 <https://personality-project.org/r/r.guide/r.anova.html#oneway>
 
+### 第一个案例
+
 ```{r}
 df <- read_rds("data/repeated_measures_design_ANOVA.rds")
 ```
@@ -533,24 +529,26 @@ df <- read_rds("data/repeated_measures_design_ANOVA.rds")
 ```
 
 ```{r}
-# 第一种
+# 第一种 不对
 aov_fit <- aov(volume ~ method*Days+Error(id/(Days)),data = df)
 summary(aov_fit)
 ```
 
 ```{r}
-library(rstatix)
-df |> group_by(method,Days) |> 
-    get_summary_stats(type="mean_sd")
-
+#第二种 无法运行
+# library(rstatix)
+# df |> group_by(method,Days) |> 
+#     get_summary_stats(type="mean_sd")
+# 
 # model <-df |> rstatix::anova_test(dv=volume,wid=id,within = Days,between = method)
 # get_anova_table(model)
-
-df |>
-    pairwise_t_test(
-    volume ~ method, paired = TRUE,
-    p.adjust.method = "bonferroni"
-    )
+# 
+# 
+# df |>
+#     pairwise_t_test(
+#     volume ~ method, paired = TRUE,
+#     p.adjust.method = "bonferroni"
+#     )
 ```
 
 ```{r}
