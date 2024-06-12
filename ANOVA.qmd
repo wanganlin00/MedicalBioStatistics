@@ -554,7 +554,7 @@ df |>
 ```
 
 ```{r}
-# 第三种
+# 第三种 最好
 library(nlme)
 model <- lme(volume ~ method*Days, random = ~1|id/Days, data = df)
 summary(model)
@@ -580,16 +580,37 @@ print(method_comparisons)
 # aov.bww <- aov(y ~ b1*b2*w1 + Error(subject/(w1)) + b1*b2, data=data_long)
 ```
 
+### 第二个案例
+
 ```{r}
-# 医学统计学 人卫版 第7版 Page 86-87
-df <- read_tsv("data/麻醉诱导时相.txt")
+# 医学统计学 人卫版 第7版
+df <- read_delim("data/麻醉诱导时相.txt")
 df
+df_long <- df |> pivot_longer(cols = starts_with("t"),
+                              names_to = "time",
+                              values_to = "BP")
+df_long
+```
+
+```{r}
+library(nlme)
+model <- lme(BP ~ induced_method*time, random = ~1|id/time, data = df_long)
+summary(model)
+df_aov <- anova(model)
+df_aov
+
+#成对比较
+library(emmeans)
+method_means <- emmeans(model, ~induced_method)  
+print(method_means)  
+method_comparisons <- pairs(method_means)  
+print(method_comparisons)
 ```
 
 $$
 \begin{aligned}
 SS_总&= SS_{受试对象间}+SS_{受试对象内}  \\
-&=（SS_{处理方法}+SS_{个体差异}）+（SS_{时间}+SS_{处理与时间交互}+SS_{个体差异}）
+&=（SS_{处理方法}+SS_{个体间差异}）+（SS_{时间}+SS_{处理与时间交互}+SS_{个体内差异}）
 \end{aligned}
 $$
 
@@ -600,17 +621,18 @@ $$
 \end{aligned}
 $$
 
-|            | 变异           | SS           | v         | MS     | F      | CP       |
-|-----------|-----------|-----------|-----------|-----------|-----------|-----------|
-| 受试对象间 | 处理           | **912.24**   | 2         | 456.12 | 5.78   | 0.0174   |
-|            | 个体差异       | 946.48       | 12        | 78.87  |        |          |
-|            |                | **1858.72**  |           |        |        |          |
-| 受试对象内 | 时间           | 2336.45      | 4         | 584.11 | 106.56 | \<0.0001 |
-|            | 处理与时间交互 | 837.63       | 8         | 104.70 | 19.10  | \<0.0001 |
-|            | 个体差异       | 263.12       | 48        | 5.48   |        |          |
-| 总         |                | **52295.92** | 3×15-1=74 |        |        |          |
+| Page 86-87 | 变异           | SS          | v         | MS     | F      | CP       |
+|------------|----------------|-------------|-----------|--------|--------|----------|
+| 受试对象间 | 处理           | **912.24**  | 2         | 456.12 | 5.78   | 0.0174   |
+|            | 个体差异       | 946.48      | 12        | 78.87  |        |          |
+|            |                | **1858.72** |           |        |        |          |
+| 受试对象内 | 时间           | **2336.45** | 4         | 584.11 | 106.56 | \<0.0001 |
+|            | 处理与时间交互 | **837.63**  | 8         | 104.70 | 19.10  | \<0.0001 |
+|            | 个体差异       | 263.12      | 48        | 5.48   |        |          |
+|            |                | **3437.2**  |           |        |        |          |
+| 总         |                | **5295.92** | 3×15-1=74 |        |        |          |
 
-### SS~总~
+#### SS~总~
 
 $$
 SS_总=\sum_i^n{（X_i-\bar X）^2}
@@ -626,7 +648,7 @@ SS_total <- sum((BP-BP_mean)^2)
 SS_total    
 ```
 
-### SS~受试对象间~
+#### SS~受试对象间~
 
 $$
 SS_{受试对象间}=\sum_{j=1}^m n_{.j}(\bar X_{.j}-\bar X)^2
@@ -645,12 +667,9 @@ SS_between
 ```
 
 ```{r}
-df_long <- df |> pivot_longer(cols = starts_with("t"),
-                              names_to = "time",
-                              values_to = "BP")
-Grouped_mean <- df_long |> group_by(诱导方法) |> 
+induced_method__summary <- df_long |> group_by(induced_method) |> 
     summarise(n=n(),mean=mean(BP),sum=sum(BP))
-Grouped_mean 
+induced_method__summary 
 
 
 ```
@@ -662,9 +681,9 @@ $$
 其中，k为不同处理组的组数，n~k~ 为第 k 处理组观测值的总数，$\bar  X_k$ 为第k 处理组观测值的均数，$\bar X$ 是所有观测值的均值。
 
 ```{r}
-SS_处理 <- 25*( (Grouped_mean$mean[1] - BP_mean )^2 + 
-                       (Grouped_mean$mean[2] - BP_mean )^2 +
-                       (Grouped_mean$mean[3] - BP_mean )^2) 
+SS_处理 <- 25*( (induced_method__summary$mean[1] - BP_mean )^2 + 
+                       (induced_method__summary$mean[2] - BP_mean )^2 +
+                       (induced_method__summary$mean[3] - BP_mean )^2) 
 SS_处理
 ```
 
@@ -674,7 +693,7 @@ SS_between_error <- SS_between-SS_处理
 SS_between_error
 ```
 
-### SS~受试对象内~
+#### SS~受试对象内~
 
 $$
 SS_{受试对象内}=SS_总-SS_{受试对象间}
@@ -695,8 +714,64 @@ $$
 其中，T是时间点的数量，n~t~ 是在时间点t的观测值数量，\\bar X~.t~ 是在时间点 t 的均值。
 
 ```{r}
+t_mean <- df |> select(c(-1,-2)) |> colMeans()
 
-
+SS_time <- 0
+for (i in seq_along(t_mean)) {
+    
+    SS_time <- SS_time + 15*(t_mean[i]-BP_mean)^2
+    
+}
+names(SS_time) <- "SS_time"
+SS_time
 ```
 
-![](images/clipboard-1173484901.png)
+$$
+SS_{处理与时间交互}=\sum_{i=1}^{k}\sum_{j=1}^{T}n_{ij}\left (\bar X_{ij.} -\bar X_{i..}-\bar X_{.j.} + \bar X_{...} \right )^2
+$$
+
+其中，
+
+-   k 是处理方法的数量，3
+
+-   T 是时间点的数量，5
+
+-   n~ij~ 是第 i 个处理方法和第 j 个时间点的观测次数，25/5=5
+
+-   \bar Xij ~.~ 是第 i 个处理方法、第 j 个时间点的观测值的平均值
+
+-   \bar X~i\ .\ .~ 是第 i 个处理方法观测值的平均值，不考虑时间点
+
+-   \bar X~.\ j\ .~ 是第 j 个时间点观测值的平均值，不考虑处理方法
+
+-   \bar X~.\ .\ .~ 是所有观测值的平均值，不考虑处理方法和时间点
+
+```{r}
+interaction_effect_summary <- df_long |>
+    summarise(
+        #n = n(),
+        mean = mean(BP),
+       # sum = sum(BP),
+        .by = c(induced_method , time)
+    )
+interaction_effect_mean <- interaction_effect_summary |> pivot_wider(names_from = c("time"),values_from = "mean")
+
+
+
+SS_interaction_effect <- 0
+for (i in 1:3) {
+    for (j in 1:5) {
+        SS_interaction_effect <- SS_interaction_effect + 5 * (interaction_effect_mean[i, j + 1] -induced_method__summary$mean[i] - t_mean[j] + BP_mean) ^ 2
+    }
+    
+}
+names(SS_interaction_effect) <- "SS_interaction_effect"
+SS_interaction_effect
+```
+
+```{r}
+SS_within_error <- SS_within-SS_time-SS_interaction_effect
+
+names(SS_within_error) <- "SS_within_error"
+SS_within_error 
+```
