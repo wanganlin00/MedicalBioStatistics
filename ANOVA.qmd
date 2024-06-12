@@ -655,7 +655,7 @@ $$
 其中，m是受试者数量（15），n~.j~ 是第j 个受试对象的观测值数量，\\bar X~.j~ 是第j 个受试对象的观测值的均值，\\bar X 是所有观测值的均值。
 
 ```{r}
-id_mean <- df |> select(c(-1,-2)) |> rowMeans()
+id_mean <- df |> dplyr::select(c(-1,-2)) |> rowMeans()
 
 SS_between <- 0
 for (i in 1:nrow(df)) {
@@ -712,7 +712,7 @@ $$
 其中，T是时间点的数量，n~t~ 是在时间点t的观测值数量，\\bar X~.t~ 是在时间点 t 的均值。
 
 ```{r}
-t_mean <- df |> select(c(-1,-2)) |> colMeans()
+t_mean <- df |> ddplyr::select(c(-1,-2)) |> colMeans()
 
 SS_time <- 0
 for (i in seq_along(t_mean)) {
@@ -738,11 +738,11 @@ $$
 
 -   \bar Xij ~.~ 是第 i 个处理方法、第 j 个时间点的观测值的平均值
 
--   \bar X~i\ .\ .~ 是第 i 个处理方法观测值的平均值，不考虑时间点
+-   \bar X~i . .~ 是第 i 个处理方法观测值的平均值，不考虑时间点
 
--   \bar X~.\ j\ .~ 是第 j 个时间点观测值的平均值，不考虑处理方法
+-   \bar X~. j .~ 是第 j 个时间点观测值的平均值，不考虑处理方法
 
--   \bar X~.\ .\ .~ 是所有观测值的平均值，不考虑处理方法和时间点
+-   \bar X~. . .~ 是所有观测值的平均值，不考虑处理方法和时间点
 
 ```{r}
 interaction_effect_summary <- df_long |>
