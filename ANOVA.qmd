@@ -518,6 +518,10 @@ glht_result
 
 ```{r}
 df <- read_rds("data/repeated_measures_design_ANOVA.rds")
+df$id <- factor(df$id)
+df$Days <- factor(df$Days,labels = c("t1","t2","t3"))
+df$method <- factor(df$method,labels = c("PBS","SLAMF6+","SLAMF6-"))
+df
 ```
 
 ```{r}
@@ -529,30 +533,13 @@ df <- read_rds("data/repeated_measures_design_ANOVA.rds")
 ```
 
 ```{r}
-# 第一种 不对
-aov_fit <- aov(volume ~ method*Days+Error(id/(Days)),data = df)
-summary(aov_fit)
+# 第一种  有混合效应无法事后检验
+aov_1 <- aov(volume ~ method*Days+Error(id/Days),data = df)
+summary(aov_1)
 ```
 
 ```{r}
-#第二种 无法运行
-# library(rstatix)
-# df |> group_by(method,Days) |> 
-#     get_summary_stats(type="mean_sd")
-# 
-# model <-df |> rstatix::anova_test(dv=volume,wid=id,within = Days,between = method)
-# get_anova_table(model)
-# 
-# 
-# df |>
-#     pairwise_t_test(
-#     volume ~ method, paired = TRUE,
-#     p.adjust.method = "bonferroni"
-#     )
-```
-
-```{r}
-# 第三种 最好
+# 第二种 最好
 library(nlme)
 model <- lme(volume ~ method*Days, random = ~1|id/Days, data = df)
 summary(model)
@@ -565,6 +552,28 @@ method_means <- emmeans(model, ~method)
 print(method_means)  
 method_comparisons <- pairs(method_means)  
 print(method_comparisons)
+```
+
+```{r}
+library("afex")     # needed for ANOVA functions.
+library("emmeans")  # emmeans must now be loaded explicitly for follow-up tests.
+library("multcomp") # for advanced control for multiple testing/Type 1 errors.
+library("ggplot2")  # for customizing plots.
+
+
+
+a1 <- aov_ez(id = "id",dv = "volume", df, between ="method" , within = c("Days"))
+a1
+
+aov_car(volume ~ method + Error(id/Days), data = df)
+aov_4(BP ~ induced_method + (time|id), data = df)
+
+
+
+# 事后检验
+m1 <- emmeans(a1, ~ induced_method)
+m1
+pairs(m1)
 ```
 
 ```{r}
@@ -586,11 +595,17 @@ df <- read_delim("data/麻醉诱导时相.txt")
 df
 df_long <- df |> pivot_longer(cols = starts_with("t"),
                               names_to = "time",
-                              values_to = "BP")
+                              values_to = "BP") |> 
+    mutate(
+        id=factor(id),
+        induced_method=factor(induced_method),
+        time=factor(time)
+    )
 df_long
 ```
 
 ```{r}
+# 第一种方法
 library(nlme)
 model <- lme(BP ~ induced_method*time, random = ~1|id/time, data = df_long)
 summary(model)
@@ -603,6 +618,39 @@ method_means <- emmeans(model, ~induced_method)
 print(method_means)  
 method_comparisons <- pairs(method_means)  
 print(method_comparisons)
+```
+
+<https://cran.r-project.org/web/packages/afex/vignettes/afex_anova_example.html>
+
+```{r}
+library("afex")     # needed for ANOVA functions.
+library("emmeans")  # emmeans must now be loaded explicitly for follow-up tests.
+library("multcomp") # for advanced control for multiple testing/Type 1 errors.
+library("ggplot2")  # for customizing plots.
+
+
+
+a1 <- aov_ez("id", "BP", df_long, between ="induced_method" , 
+       within = c("time"))
+a1
+
+aov_car(BP ~ induced_method + Error(id/time), data = df_long)
+aov_4(BP ~ induced_method + (time|id), data = df_long)
+
+print(xtable::xtable(anova(a1), digits = c(rep(2, 5), 3, 4)), type = "html")
+
+
+# 事后检验
+m1 <- emmeans(a1, ~ induced_method)
+m1
+pairs(m1)
+# summary(as.glht(pairs(m1)), test=adjusted("fdr"))
+# p1 <- afex_plot(a1, x = "time", #trace = "BP", 
+#                 panel = "induced_method", error = "none", 
+#                 mapping = c("color", "fill"), 
+#                 data_geom = geom_boxplot, data_arg = list(width = 0.4), 
+#                 point_arg = list(size = 1.5), line_arg = list(size = 1))
+# p1
 ```
 
 $$
