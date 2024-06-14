@@ -518,9 +518,7 @@ glht_result
 
 ```{r}
 df <- read_rds("data/repeated_measures_design_ANOVA.rds")
-df$id <- factor(df$id)
-df$Days <- factor(df$Days,labels = c("t1","t2","t3"))
-df$method <- factor(df$method,labels = c("PBS","SLAMF6+","SLAMF6-"))
+
 df
 ```
 
@@ -530,6 +528,15 @@ df
 # aov_age_time <- aov(value ~ age * time + Error(subject/time),
 #   data = data_long)
 # summary(aov_age_time)
+
+# 两个被试内变量 
+#aov.ww <- aov(y ~ w1*w2 +Error(subject/(w1*w2)), data=data_long) 
+
+# 1个被试间变量，两个被试内变量 
+#aov.bww <- aov(y ~b1*w1*w2 + Error(subject/(w1*w2)) + b1,data=data_long) 
+
+# 两个被试间变量，一个被试内变量
+# aov.bww <- aov(y ~ b1*b2*w1 + Error(subject/(w1)) + b1*b2, data=data_long)
 ```
 
 ```{r}
@@ -561,30 +568,18 @@ library("multcomp") # for advanced control for multiple testing/Type 1 errors.
 library("ggplot2")  # for customizing plots.
 
 
-
 a1 <- aov_ez(id = "id",dv = "volume", df, between ="method" , within = c("Days"))
 a1
 
 aov_car(volume ~ method + Error(id/Days), data = df)
-aov_4(BP ~ induced_method + (time|id), data = df)
+aov_4(volume ~ method + (Days|id), data = df)
 
 
 
 # 事后检验
-m1 <- emmeans(a1, ~ induced_method)
+m1 <- emmeans(a1, ~ method)
 m1
 pairs(m1)
-```
-
-```{r}
-# 两个被试内变量 
-#aov.ww <- aov(y ~ w1*w2 +Error(subject/(w1*w2)), data=data_long) 
-
-# 1个被试间变量，两个被试内变量 
-#aov.bww <- aov(y ~b1*w1*w2 + Error(subject/(w1*w2)) + b1,data=data_long) 
-
-# 两个被试间变量，一个被试内变量
-# aov.bww <- aov(y ~ b1*b2*w1 + Error(subject/(w1)) + b1*b2, data=data_long)
 ```
 
 ### 第二个案例
