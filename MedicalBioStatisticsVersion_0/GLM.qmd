@@ -221,4 +221,3 @@ pois_fit_coef_mnths |>
   labs(title = "Coefficient value from Poission Regression",
        x = "Month", y = "Coefficient")
 ```
-
