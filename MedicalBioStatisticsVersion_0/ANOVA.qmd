@@ -614,6 +614,21 @@ print(method_means)
 method_comparisons <- pairs(method_means)  
 print(method_comparisons)
 ```
+```{r}
+library(rstatix)
+a2 <- anova_test(data = df_long,
+           dv = BP,
+           wid = id,
+           within = time,
+           between = induced_method
+           )
+
+a2
+
+```
+
+
+
 
 <https://cran.r-project.org/web/packages/afex/vignettes/afex_anova_example.html>
 
