@@ -94,7 +94,8 @@ $$
 
 CI：$\bar p \pm z_{1-\alpha/2}\sqrt{\frac{p(1-p)}{n}}$
 
-连续校正 $$
+连续校正 
+$$
 Z_{corr}=\frac{|p-\pi_0|-1/(2n)}{\sqrt{\pi_0(1-\pi_0)/n}}\sim N(0,1)
 $$
 
@@ -103,6 +104,7 @@ $$
 ```{r}
 prop.test(x=60,n=100,p=0.5,alternative = "greater",correct = T)
 ```
+
 
 ```{r}
 p <- 0.6
@@ -113,6 +115,7 @@ Z_corr <- (p-pi_0-1/(2*n))/sqrt(pi_0*(1-pi_0)/n)
 ```
 
 ## 两个总体的假设检验
+
 
 ### 配对样本的均值差异------t检验
 
@@ -161,6 +164,10 @@ cat("95% Confidence Interval:", CI_lower, "to", CI_upper)
 ```
 
 ```{r}
+
+shapiro.test(df$baseline)
+shapiro.test(df$ten_days_later)
+shapiro.test(df$d)
 t.test(df$ten_days_later,df$baseline,paired = TRUE)
 #t.test(Pair(df$ten_days_later,df$baseline)~1,data=df)
 ```
