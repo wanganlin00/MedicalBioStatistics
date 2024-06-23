@@ -12,9 +12,9 @@
 
 ## 变量
 
-variable是随机变量下简称。
+变量（variable）是随机变量的简称。
 
-变量的观测值称为数据data。
+变量的观测值称为数据（data）。
 
 ## 数据类型
 
@@ -117,7 +117,7 @@ median(abs(mtcars$mpg-median(mtcars$mpg)))*1.4826
 
     <https://www.macroption.com/skewness-formula/>
 
-    三阶中心矩。方差即二阶中心矩。
+    三阶中心矩。二阶中心矩即方差。
 
     $$ 
         Skew(X) =  \frac{E(X_i-E(X))^3}{Var(X)^{\frac{3}{2}}}\\ =E  [(\frac{X_i-\mu}{\sigma})^3]\\= \frac{1}{n} \sum_{i=1}^{n}  (\frac{X_i-\mu}{\sigma} )^3
@@ -216,27 +216,28 @@ psych::describeBy(mtcars$mpg,group = mtcars$am)
 [Using R for Biomedical Statistics](https://a-little-book-of-r-for-biomedical-statistics.readthedocs.io/en/latest/src/biomedicalstats.html)
 
 ```{r}
-eg <- matrix(c(156,9421,1531,14797),nrow=2,byrow=TRUE)
-colnames(eg) <- c("Disease","Control")
-rownames(eg) <- c("Exposed","Unexposed")
+x <- matrix(c(156,9421,1531,14797),nrow=2,byrow=TRUE,
+             dimnames = list(c("Exposed","Unexposed"),c("Disease","Control")))
+
+x
 # RR
 156/(156+9421)*(1531+14797)/1531
 source("function/calcRelativeRisk.R")
-calcRelativeRisk(eg,alpha=0.05)
+calcRelativeRisk(x,alpha=0.05)
 
 # OR
 156/9421/(1531/14797)
 source("function/calcOddsRatio.R")
-calcOddsRatio(eg,alpha = 0.05)
+calcOddsRatio(x,alpha = 0.05)
 ```
 
 ```{r}
-mymatrix <- matrix(c(30,24,76,241,82,509),nrow=3,byrow=TRUE)
-colnames(mymatrix) <- c("Disease","Control")
-rownames(mymatrix) <- c("Exposure1","Exposure2","Unexposed")
-print(mymatrix)
-calcOddsRatio(mymatrix, referencerow=3)
-calcRelativeRisk(mymatrix, referencerow=3)
+y <- matrix(c(30,24,76,241,82,509),nrow=3,byrow=TRUE,
+            dimnames = list(c("Exposure1","Exposure2","Unexposed"),
+                            c("Disease","Control")))
+y
+calcOddsRatio(y, referencerow=3)
+calcRelativeRisk(y, referencerow=3)
 ```
 
 ## 数据可视化

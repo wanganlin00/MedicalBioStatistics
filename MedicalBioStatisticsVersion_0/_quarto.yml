@@ -13,9 +13,10 @@ book:
       chapters:
         - descriptive_statistics.qmd
 
-    - part: "统计推断"
+    - part: hypothesis_test.qmd
       chapters:
-        - hypothesis_test.qmd
+        - t_test.qmd
+        - rate_proportion_test.qmd
         - ANOVA.qmd
         - independence_correlation.qmd
         - nonparametric_test.qmd

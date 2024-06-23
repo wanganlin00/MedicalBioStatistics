@@ -114,10 +114,12 @@ t_distribution <- function(df = 1, ...) {
     guides(color = guide_legend(title = "Type"))
 }
 library(patchwork)
-t_distribution(df=1000)|norm()
+t_distribution(df=10)|norm()
 ```
 
-## $\chi^2$分布——方差（variance）的抽样分布
+## 方差（variance）的抽样分布
+
+### $\chi^2$分布
 
 $Z_i\sim N(0,1)$,且$Z_i$相互独立，则称
 
@@ -131,7 +133,8 @@ $$
 
 卡方分布的数学期望和方差：
 
-$$\begin{aligned}
+$$
+\begin{aligned}
 E(X)=&n\\
 Var(X)=&2n
 \end{aligned}
@@ -144,6 +147,7 @@ $$
 $$
 
 其中自由度（degrees of freedom）$\nu=n-1$ 。
+
 
 ```{r}
 chisq_distribution <- function(df = 1, ...) {
@@ -168,7 +172,7 @@ chisq_distribution <- function(df = 1, ...) {
 (chisq_distribution(df=4)+chisq_distribution(df=10))+plot_layout(guides = "collect")
 ```
 
-## F分布
+### F分布
 
 $X\sim \chi^2(n_1)$ ，$Y\sim \chi^2(n_2)$且相互独立，则称
 
@@ -209,14 +213,19 @@ F_distribution <- function(df1 = 1,df2 = 1, ...) {
 
 假设 $X\sim B(n,\pi)$ ，一组样本量为n的随机样本。列出样本量为$n$的所有可能随机样本。
 
-样本比率$p=X/n$ ，则 $$
+样本比率$p=X/n$ ，则 
+$$
 E(p)=E(X/n)=\frac{1}{n}E(X)=\pi
-$$ $$
+$$ 
+
+$$
 Var(p)=Var(X/n)=\frac{1}{n^2}Var(X)=\frac{\pi(1-\pi)}{n}
 $$
 
 比率的标准误 $\sigma_p =\sqrt{\frac{\pi(1-\pi)}{n}}$ 可以用 $S _p =\sqrt{\frac{p(1-p)}{n}}$ 估计。
 
-当$n\pi(1-\pi)≥5 且X\sim B(n,\pi)$时，率的抽样分布 $$
+当$n\pi(1-\pi)≥5 且X\sim B(n,\pi)$时，率的抽样分布
+
+$$
 p\dot\sim N(\pi,\frac{\pi(1-\pi)}{n})
 $$
