@@ -9,12 +9,17 @@ book:
   chapters:
     - index.qmd
 
-    - part: "统计描述"
+    - part: descriptive_statistics.qmd
       chapters:
-        - descriptive_statistics.qmd
+        - quantitative_data.qmd
+        - qualitative_data.qmd
 
-    - part: hypothesis_test.qmd
+    - part: "概率论与数理统计"
       chapters:
+        - probability_theory.qmd
+        - SamplingDistribution.qmd
+        - ParameterEstimation.qmd
+        - hypothesis_test.qmd
         - t_test.qmd
         - rate_proportion_test.qmd
         - ANOVA.qmd
@@ -23,7 +28,7 @@ book:
 
     #     - PowerAnalysis.qmd
     #     - Causal_Inference.qmd
-    - part: "统计建模"
+    - part: "线性模型"
       chapters:
         - LinearRegression.qmd
         - GLM.qmd
@@ -37,22 +42,17 @@ book:
       chapters:
         - Classification.qmd
         - Clustering.qmd
+        - linear_algebra.qmd
         - PCA.qmd
         - t-SNE.qmd
         - UMAP.qmd
 
-    - part: "临床设计"
+    - part: "随机对照试验"
       chapters: 
         - diagnostic_tests.qmd
         - observational_study_design.qmd
 
-
-    - part: "附录1：理论基础"
-      chapters:
-        - 概率论基础.qmd
-        - SamplingDistribution.qmd
-        - ParameterEstimation.qmd
-        - 线性代数基础.qmd
+        
 
 execute:
   cache: true

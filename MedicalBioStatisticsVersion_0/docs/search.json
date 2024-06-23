@@ -1,0 +1,42 @@
+[
+  {
+    "objectID": "descriptive_statistics.html",
+    "href": "descriptive_statistics.html",
+    "title": "描述性统计学",
+    "section": "",
+    "text": "基本概念\n同质homogeneity\n变异variation\n总体population，描述总体特征的统计学指标称为参数parameter\n样本sample，由样本计算出的特征指标称为统计量statistic",
+    "crumbs": [
+      "描述性统计学"
+    ]
+  },
+  {
+    "objectID": "descriptive_statistics.html#变量",
+    "href": "descriptive_statistics.html#变量",
+    "title": "描述性统计学",
+    "section": "变量",
+    "text": "变量\n变量（variable）是随机变量的简称。\n变量的观测值称为数据（data）。",
+    "crumbs": [
+      "描述性统计学"
+    ]
+  },
+  {
+    "objectID": "descriptive_statistics.html#数据类型",
+    "href": "descriptive_statistics.html#数据类型",
+    "title": "描述性统计学",
+    "section": "数据类型",
+    "text": "数据类型\n\n\n定量数据（quantitative data）\n\n\n连续型\n\n\n正态分布：t 检验，方差分析，相关性检验\n\nCodelibrary(ggplot2)\n\n# 正态分布\nnormal_data &lt;- tibble(x = seq(-5, 5, length.out = 500),\n                      y = dnorm(x, mean = 0, sd = 1))\n\nggplot(normal_data, aes(x = x, y = y)) +\n    geom_line() +\n    ggtitle(\"Normal Distribution\")\n\n\n\n\n\n\n\n\n对数正态分布：非参数检验\n\n指数分布：对数秩（log-rank ）检验\n\nCode# 指数分布\nexponential_data &lt;- tibble(x = seq(0, 3, length.out = 100),\n                           y = dexp(x, rate = 1))\n\n\nggplot(exponential_data, aes(x = x, y = y)) +\n    geom_line() +\n    ggtitle(\"Exponential Distribution\")\n\n\n\n\n\n\n\n\n均匀分布\n\n\n\n离散型\n\n\n二项分布\n\nCode# 二项分布\nbinomial_data &lt;- tibble(x = 0:100,\n                        y = dbinom(x, size = 100, prob = 0.5))\n\nggplot(binomial_data, aes(x = x, y = y)) +\n    geom_bar(stat = \"identity\") +\n    ggtitle(\"Binomial Distribution\")\n\n\n\n\n\n\n\n\n\n负二项分布：DESeq2 差异分析\n\nCode\n# 负二项分布\nnegative_binomial_data &lt;- tibble(x = 0:20,\n                                 y =  dnbinom(x, size = 1, prob = 0.5))\n\nggplot(negative_binomial_data, aes(x = x, y = y)) +\n    geom_bar(stat = \"identity\") +\n    ggtitle(\"Negative Binomial Distribution\")\n\n\n\n\n\n\n\n\n超几何分布\n\n泊松分布\n\nCode# 泊松分布\npoisson_data &lt;- tibble(x = 0:20,\n                       y = dpois(x, lambda = 5))\n\nggplot(poisson_data, aes(x = x, y = y)) +\n    geom_bar(stat = \"identity\") +\n    ggtitle(\"Poisson Distribution\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n定性数据（qualitative data）\n\n无序分类数据\n有序分类数据",
+    "crumbs": [
+      "描述性统计学"
+    ]
+  },
+  {
+    "objectID": "descriptive_statistics.html#数据可视化",
+    "href": "descriptive_statistics.html#数据可视化",
+    "title": "描述性统计学",
+    "section": "数据可视化",
+    "text": "数据可视化",
+    "crumbs": [
+      "描述性统计学"
+    ]
+  }
+]

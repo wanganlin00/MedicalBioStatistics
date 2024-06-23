@@ -1,4 +1,4 @@
-# 描述性统计学
+# 描述性统计学 {.unnumbered}
 
 ## 基本概念
 
@@ -22,222 +22,85 @@
 
     i.  连续型
 
+        a.  正态分布：t 检验，方差分析，相关性检验
+
+            ```{r}
+            library(ggplot2)
+
+            # 正态分布
+            normal_data <- tibble(x = seq(-5, 5, length.out = 500),
+                                  y = dnorm(x, mean = 0, sd = 1))
+
+            ggplot(normal_data, aes(x = x, y = y)) +
+                geom_line() +
+                ggtitle("Normal Distribution")
+            ```
+
+        b.  对数正态分布：非参数检验
+
+        c.  指数分布：对数秩（log-rank ）检验
+
+            ```{r}
+            # 指数分布
+            exponential_data <- tibble(x = seq(0, 3, length.out = 100),
+                                       y = dexp(x, rate = 1))
+
+
+            ggplot(exponential_data, aes(x = x, y = y)) +
+                geom_line() +
+                ggtitle("Exponential Distribution")
+            ```
+
+        d.  均匀分布
+
     ii. 离散型
 
+        a.  二项分布
+
+            ```{r}
+            # 二项分布
+            binomial_data <- tibble(x = 0:100,
+                                    y = dbinom(x, size = 100, prob = 0.5))
+
+            ggplot(binomial_data, aes(x = x, y = y)) +
+                geom_bar(stat = "identity") +
+                ggtitle("Binomial Distribution")
+            ```
+
+        b.  负二项分布：`DESeq2` 差异分析
+
+            ```{r}
+
+            # 负二项分布
+            negative_binomial_data <- tibble(x = 0:20,
+                                             y =  dnbinom(x, size = 1, prob = 0.5))
+
+            ggplot(negative_binomial_data, aes(x = x, y = y)) +
+                geom_bar(stat = "identity") +
+                ggtitle("Negative Binomial Distribution")
+            ```
+
+        c.  超几何分布
+
+        d.  泊松分布
+
+            ```{r}
+            # 泊松分布
+            poisson_data <- tibble(x = 0:20,
+                                   y = dpois(x, lambda = 5))
+
+            ggplot(poisson_data, aes(x = x, y = y)) +
+                geom_bar(stat = "identity") +
+                ggtitle("Poisson Distribution")
+            ```
+
+```{=html}
+<!-- -->
+```
 2.  定性数据（qualitative data）
 
     i.  无序分类数据
 
     ii. 有序分类数据
-
-## 定量数据的统计描述
-
-### 频数分布
-
--   极差 $R=X_{max}-X_{min}$
-
--   组数$k$（$8-15$）
-
--   组距（$interval=R/k$）
-
--   频数$count$
-
--   频率$\frac{count}{n} \times 100\%$
-
-```{r}
-ggplot(data = mtcars,aes(x=mpg))+
-    geom_histogram(color="black",bins = 10)
-
-ggplot(data = mtcars,aes(x=mpg))+
-    geom_histogram(color="black",binwidth =diff(range(mtcars$mpg))/9 )
-```
-
-### 数据特征
-
-```{r}
-as_tibble(mtcars$mpg)
-```
-
-#### 集中趋势
-
-```{r}
-#算术均数
-mean(mtcars$mpg)     
-
-#中位数
-median(mtcars$mpg)   
-
-#众数 mode
-rstatix::get_mode(mtcars$mpg)
-```
-
-#### 离散程度
-
-```{r}
-# 值域
-range(mtcars$mpg)  
-# 极差 or 全距
-diff(range(mtcars$mpg) )  
-
-# 分位数
-quantile(mtcars$mpg,probs = c(0,0.1,0.25,0.5,0.75,1))    
-# 四分位数间距
-IQR(mtcars$mpg)     
-
-# 方差 variance
-var(mtcars$mpg)       
-
-# 标准差 standard deviation
-sd(mtcars$mpg)       
-
-
-# 变异系数 Coefficient of Variation
-CV <- function(x,na.rm=TRUE){  
-    if(na.rm) x <- x[!is.na(x)]
-    CV=sd(x)/mean(x)*100
-    sprintf("%.6f%%",CV)
-}
-CV(mtcars$mpg)
-
-
-# 绝对中位差 median absolute deviation
-mad(mtcars$mpg,constant = 1.4826)
-
-# 为了达到渐进正态一致性，`mad()` 的计算乘了一个比例因子`constant=1.4826`
-
-median(abs(mtcars$mpg-median(mtcars$mpg)))
-median(abs(mtcars$mpg-median(mtcars$mpg)))*1.4826
-```
-
-#### 分布形状
-
-偏度（Skewness）
-
-:   表示随机变量概率分布的不对称性。
-
-    <https://www.macroption.com/skewness-formula/>
-
-    三阶中心矩。二阶中心矩即方差。
-
-    $$ 
-        Skew(X) =  \frac{E(X_i-E(X))^3}{Var(X)^{\frac{3}{2}}}\\ =E  [(\frac{X_i-\mu}{\sigma})^3]\\= \frac{1}{n} \sum_{i=1}^{n}  (\frac{X_i-\mu}{\sigma} )^3
-    $$
-
-    偏度的取值范围： $(-\infty,+\infty)$
-
-    1.  Skew＜0，负偏态分布，左偏 = 尾部向左；
-
-    2.  Skew=0，数据相对均匀的分布在均值两侧；
-
-    3.  Skew＞0，正偏态分布，右偏 = 尾部向右。
-
-```{r}
-x <- c(1,2,3,5)
-s <- psych::describeBy(x=x,group = NULL)
-s$skew
-
-skewness <- function(x,na.rm=TRUE){
-    if(na.rm) x <- x[!is.na(x)]
-    n=length(x)
-    μ=mean(x)
-    SD=sd(x)
-    sknewness = mean(((x-μ)/SD)^3)
-    return(sknewness=sknewness)
-}
-skewness(x)
-```
-
-峰度（Kurtosis）
-
-:   表示随机变量概率分布的尖峭程度。四阶中心矩与方差平方的比值。
-
-    <https://www.macroption.com/kurtosis-formula/>
-
-    超值峰度 excess kurtosis ：四阶中心矩与方差平方的比值减3。
-
-    <https://www.macroption.com/excess-kurtosis/>
-
-    $$
-    Kurt(X) =  \frac{E(X_i-E(X))^4}{Var(X)^{2}}-3\\= E  [(\frac{X_i-\mu}{\sigma})^4] - 3\\= \frac{1}{n} \sum_{i=1}^{n}  (\frac{X_i-\mu}{\sigma} )^4-3
-    $$
-
-    峰度的取值范围：$[1,+\infty)$
-
-    超值峰度的取值范围：$[-2,+\infty)$
-
-    1.  超值峰度＜0，数据分布与正态分布相比较为扁平；
-
-    2.  超值峰度=0，正态分布；
-
-    3.  超值峰度＞0，数据分布与正态分布相比较为高尖。
-
-```{r}
-s$kurtosis
-
-kurtosis<-function(x,na.rm=TRUE){
-    if(na.rm) x<-x[!is.na(x)]
-    n=length(x)
-    μ=mean(x)
-    SD=sd(x)
-    kurtosis= mean(((x-μ)/SD)^4)-3
-    return(kurtosis=kurtosis)
-}
-kurtosis(x)
-```
-
-#### 统计摘要
-
-```{r}
-summary(mtcars$mpg)
-rstatix::get_summary_stats(mtcars,mpg,type = "full")
-psych::describeBy(mtcars$mpg,group = mtcars$am)
-```
-
-## 定性数据的统计描述
-
-### 率
-
-率（rate）表示在一定空间或时间范围内某现象的发生数与可能发生的总数之比，说明某现象出现的频率。
-
-标准化率（standardized rate）
-
-### 构成比
-
-构成比（proportion）
-
-### 相对比
-
-相对比（relative ratio）是A和B两个有关联指标值之比。
-
--   相对危险度 （Relative Risk，RR），是指暴露组人群的发病率与非暴露组人群的发病率之比。RR 用于反映暴露因素与结局事件的关联程度， 其 取值范围为 0 到无穷大。数值为 1 时，表明暴露因素与结局事件无关联；小于 1 时，表 明暴露因素导致结局事件的发生率降低；大于 1 时，表明暴露因素导致结局事件的发生率增加。相对风险适用于前瞻性队列研究。
-
--   优势比（Odds Ratio，OR），是指暴露组中病例与非病例人数的比值除以非暴露组中病例与非病例人数的比值。　　OR 的取值范围也为 0 到无穷大。如果 OR 值大于 1 ，说明该暴露因素更 容易导致结果事件发生，或者说该因素是一个危险因素；小于 1 ，则说明该暴露因素更不 容易导致结果事件发生，或者说该因素是一个保护因素。比值比适用于队列研究和病例对照研究。
-
-[Using R for Biomedical Statistics](https://a-little-book-of-r-for-biomedical-statistics.readthedocs.io/en/latest/src/biomedicalstats.html)
-
-```{r}
-x <- matrix(c(156,9421,1531,14797),nrow=2,byrow=TRUE,
-             dimnames = list(c("Exposed","Unexposed"),c("Disease","Control")))
-
-x
-# RR
-156/(156+9421)*(1531+14797)/1531
-source("function/calcRelativeRisk.R")
-calcRelativeRisk(x,alpha=0.05)
-
-# OR
-156/9421/(1531/14797)
-source("function/calcOddsRatio.R")
-calcOddsRatio(x,alpha = 0.05)
-```
-
-```{r}
-y <- matrix(c(30,24,76,241,82,509),nrow=3,byrow=TRUE,
-            dimnames = list(c("Exposure1","Exposure2","Unexposed"),
-                            c("Disease","Control")))
-y
-calcOddsRatio(y, referencerow=3)
-calcRelativeRisk(y, referencerow=3)
-```
 
 ## 数据可视化
