@@ -1,5 +1,11 @@
 # 线性回归
 
+一般线性模型中，其自变量全部为固定效应自变量，3点假设：
+
+1.  正态性，因变量y服从正态分布。
+2.  独立性，各例观测值Y~i~ 之间相互独立。
+3.  方差齐性，Y方差相等或 残差e 服从N（0，σ^2^）
+
 [tidymodels](https://www.tidymodels.org/) specification
 
 ```{r}
@@ -38,74 +44,214 @@ p_sales<-function(x){
 p_sales(TV)|p_sales(radio)|p_sales(newspaper)
 ```
 
+### 摘要
+
 ```{r}
 lm_sales_tv <- lm_spec |>  fit(sales ~ TV, data = advertising)
 
-lm_sales_tv
 
-#回归诊断图
-plot(lm_sales_tv$fit)     
+
 
 # 模型摘要
-summary(lm_sales_tv$fit)
-
-lm_sales_tv |>
-  pluck("fit")
-
-lm_sales_tv |>   
-  pluck("fit") |>  
-  summary()
+lm_sales_tv  # lm_sales_tv |>  pluck("fit")
+summary(lm_sales_tv$fit)  # lm_sales_tv |>pluck("fit") |>summary()
 
 
-# 参数估计值     
+# 参数估计值、标准误、统计量、p值
 broom::tidy(lm_sales_tv)
 # 模型统计信息
 broom::glance(lm_sales_tv) 
+```
 
+### 预测
+
+```{r}
 # 预测
 stats::predict(lm_sales_tv, new_data = advertising)
 predict(lm_sales_tv, new_data = advertising, type = "conf_int")
 
+
+
 # 比较观测值与预测值
+bind_cols( predict(lm_sales_tv, new_data = advertising), advertising) |> 
+    
 bind_cols( predict(lm_sales_tv, new_data = advertising), advertising) |> 
   select(sales, .pred)
 
 augment(lm_sales_tv, new_data = advertising) |>   
   select(sales, .pred)
+```
 
+### 最小二乘法
+
+保证各实测点到回归直线的纵向距离的平方和最小，即使得残差平方和
+
+$$
+Q=\sum (Y-\hat Y)^2
+$$
+
+最小。
+
+```{r}
 # 可视化
-bind_cols( predict(lm_sales_tv, new_data = advertising), advertising) |> 
-  ggplot(aes(x = TV)) +
-  geom_linerange(aes(ymin = sales, ymax = .pred)) +
-  geom_point(aes(y = sales), color = "red") +
-  geom_abline(intercept = coef(lm_sales_tv$fit)[1], slope = coef(lm_sales_tv$fit)[2],
-              color = "blue", size = 1)
+bind_cols(predict(lm_sales_tv, new_data = advertising), advertising) |>
+    ggplot(aes(x = TV)) +
+    geom_linerange(aes(ymin = sales, ymax = .pred)) +
+    geom_point(aes(y = sales), color = "red") +
+    geom_abline(
+        intercept = coef(lm_sales_tv$fit)[1],
+        slope = coef(lm_sales_tv$fit)[2],
+        color = "blue",
+        size = 1
+    )
+```
+
+### 回归诊断
+
+#### 残差图
+
+```{r}
+plot(lm_sales_tv$fit,1)  
+```
+
+```{r}
+# 检查线性回归模型的残差是否与拟合值无关，即残差的分布是否随机。
+# 残差应该随机分布在0附近
+tibble(
+    `Fitted values`=lm_sales_tv$fit$fitted.values,
+    Residuals = lm_sales_tv$fit$residuals
+) |> ggplot(aes(x = `Fitted values` , y = Residuals)) +
+  geom_point(pch=21) +
+    geom_smooth(formula = "y~x",color="red",lwd=0.5)+
+  geom_hline(yintercept = 0,lty=2) +
+  labs(x = "Fitted Values", y = "Residuals")
+```
+
+```{r}
+# 检查线性回归模型的残差是否与观测值无关，即残差的分布是否随机。
+tibble(Sales = lm_sales_tv$fit$model$sales,
+       Residuals = lm_sales_tv$fit$residuals,) |> 
+    ggplot(aes(x = Sales , y = Residuals)) +
+    geom_point(pch=21) +
+    geom_smooth(,color="red",lwd=0.5) +
+    labs(x = "Observed Values", y = "Residuals")
+```
+
+```{r}
+plot(lm_sales_tv$fit,3)  
+```
+
+```{r}
+tibble(
+    fitted_values=lm_sales_tv$fit$fitted.values,
+    StandardizedResiduals = rstudent(lm_sales_tv$fit) ,
+) |>
+    ggplot(aes(x = fitted_values, y = sqrt(abs(StandardizedResiduals)))) +
+    geom_point(pch=21) +
+    geom_smooth(color="red",lwd=0.5)+
+    labs(x = "Fitted Values", y = "√|Standardized residuals|")
+```
+
+#### Q-Q图
+
+```{r}
+plot(lm_sales_tv$fit,2)  
+```
+
+```{r}
+tibble(
+       StandardizedResiduals =rstandard(lm_sales_tv$fit) ) |> 
+    ggplot(aes(sample=StandardizedResiduals)) +
+    stat_qq(pch=21)+
+    stat_qq_line(color="red",lty=2)+
+    labs(x = "Theoretical Quantiles", y = "Standardized residuals")
+
+```
+
+#### Cook's距离
+
+```{r}
+plot(lm_sales_tv$fit,4)  
+```
+
+```{r}
+threshold <- 4 / (nrow(lm_sales_tv$fit$model) - length(coef(lm_sales_tv$fit)) - 2)
+
+tibble(x = 1:nrow(advertising),
+       CooksD = cooks.distance(lm_sales_tv$fit),
+       Threshold = CooksD > threshold)|>
+    ggplot() +
+    geom_segment(aes(x=x,xend=x,y=0,yend=CooksD,color=Threshold)) +
+    geom_text(aes(x=x,y=CooksD,label=if_else(Threshold,x,NA)),vjust=-0.2)+
+    labs(x = "Observation Index", y = "Cook's Distance")
+```
+
+#### 杠杆值图
+
+```{r}
+plot(lm_sales_tv$fit,5)  
+```
+
+```{r}
+tibble(
+    leverage = hatvalues(lm_sales_tv$fit),
+    StandardizedResiduals = rstandard(lm_sales_tv$fit) ,
+) |>
+    ggplot(aes(x = leverage, y = StandardizedResiduals)) +
+    geom_point(pch=21) +
+    geom_smooth(color="red",lwd=0.5)+
+    scale_x_continuous(limits = c(0, NA)) +
+    geom_vline(xintercept = 0, lty = 2) +
+    geom_hline(yintercept = 0, lty = 2) +
+    labs(x = "Leverage Values", y = "Standardized residuals")
+```
+
+```{r}
+plot(lm_sales_tv$fit,6)  
+```
+
+```{r}
+
+
+threshold <- 4 / (nrow(lm_sales_tv$fit$model) - length(coef(lm_sales_tv$fit)) - 2)
+
+df <- tibble(
+    x = 1:nrow(advertising),
+    leverage = hatvalues(lm_sales_tv$fit),
+    CooksD = cooks.distance(lm_sales_tv$fit),
+    Threshold = CooksD > threshold,
+) 
+
+    ggplot(df,aes(leverage, CooksD)) +
+    geom_point(pch=21) +
+    xlim(c(0,NA))+
+    geom_text(aes(label=if_else(Threshold,as.character(x),NA)),vjust=-0.5)+
+    geom_abline(intercept = 0, slope = seq(0,6,by=1), 
+                linetype = "dotted", color = "black")+
+    geom_abline(intercept = 0, slope = 0.5, 
+                linetype = 1, color = "red")+
+    labs(x = "Leverage", y = "Cook's Distance")
 ```
 
 ## 多元线性回归
 
 ```{r}
 #第一步，检测变量相关关系
-ad <- advertising[-1]
+ad <- advertising |> select(-1)
 cor(ad)
-car::scatterplotMatrix(ad)  # 多重共线性
 
 #第二步，多元线性回归
-lm_sales_3 <- lm_spec |> fit(sales~TV+radio+newspaper,data = advertising)
-summary(lm_sales_3$fit)
+lm_sales_multi<- lm_spec |> fit(sales~TV+radio+newspaper,data = advertising)
+summary(lm_sales_multi$fit)
 
-
-
-#回归检验
-
-confint(lm_sales_3$fit)  # 95%置信区间
-plot(lm_sales_3$fit) #回归诊断图
+tidy(lm_sales_multi)
+glance(lm_sales_multi)
 ```
 
 ## 交互项
 
 ```{r}
-lm_sales_tv_radio <- lm_spec |>  fit(sales ~ TV+radio+TV:radio, data = advertising)
+lm_sales_tv_radio <- lm_spec |>  fit(sales ~ TV*radio, data = advertising)
 
 lm_sales_tv_radio
 ```
@@ -137,7 +283,7 @@ glance(lm)
 ```{r}
 
 rec_spec_square <- recipe(sales ~ TV, data = advertising) |>  
-  step_mutate(TV2 = TV^2)  
+  step_mutate(`TV^2` = TV^2)  
 rec_spec_square
 
 lm_wf_square <- workflow() |>  
@@ -152,7 +298,6 @@ lm_wf_square |>
 ### 对数变换
 
 ```{r}
-
 rec_spec_log <- recipe(sales ~ TV, data = advertising) |>  
   step_log(TV)  
 
@@ -170,6 +315,10 @@ lm_wf_log |>
 
 ```{r}
 library(car)
+#回归检验
+car::scatterplotMatrix(ad)  # 多重共线性
+confint(lm_sales_multi$fit)  # 95%置信区间
+plot(lm_sales_multi$fit) #回归诊断图
 ```
 
 #### 线性假设
@@ -177,8 +326,8 @@ library(car)
 残差图
 
 ```{r}
-plot(lm_sales_3$fit,1)  
-crPlots(lm_sales_3$fit)
+plot(lm_sales_multi$fit,1)  
+crPlots(lm_sales_multi$fit)
 ```
 
 #### 正态性假设Q-Q图
@@ -186,8 +335,8 @@ crPlots(lm_sales_3$fit)
 Standardized Residuals
 
 ```{r}
-plot(lm_sales_3$fit,2) 
-summary(powerTransform(lm_sales_3$fit))  
+plot(lm_sales_multi$fit,2) 
+summary(powerTransform(lm_sales_multi$fit))  
 ```
 
 ```{r}
@@ -197,14 +346,23 @@ plot(lm_sales_tv$fit,3)
 #### 误差相关性
 
 ```{r}
-durbinWatsonTest(lm_sales_3$fit)      #结果表明rho=0
+durbinWatsonTest(lm_sales_multi$fit)      #结果表明rho=0
 ```
 
 #### 误差项的方差齐性
 
 ```{r}
-ncvTest(lm_sales_3$fit)
-spreadLevelPlot(lm_sales_3$fit)
+ncvTest(lm_sales_multi$fit)
+spreadLevelPlot(lm_sales_multi$fit)
+```
+
+```{r}
+tibble(
+    abs_studentized_residuals=abs(rstudent(lm_sales_multi$fit)),
+    fitted_values=lm_sales_multi$fit$model$sales
+) |> ggplot(aes(fitted_values,abs_studentized_residuals))+
+    geom_point(pch=21)+
+    geom_smooth()
 ```
 
 #### 异常观测点
@@ -239,14 +397,14 @@ hat.plot<-function(fit){
 hat.plot(lm_sales_tv$fit)
 ####强影响点
 #Cook's D图形    大于4/(n-k-1)  k为预测变量数目
-cutoff<-4/(nrow(states)-length(fit$coefficients)-2)
-plot(fit3,which=4,cook.levels=cutoff)
-abline(h=cutoff,lty=2,col="red")
+cutoff<-4/(nrow(advertising)-length(lm_sales_tv$fit$coefficients)-2)
+{plot(lm_sales_tv$fit,which=4,cook.levels=cutoff)
+abline(h=cutoff,lty=2,col="red")}
 #变量添加图
-avPlots(fit3,ask=FALSE,id.method="identity")
+avPlots(lm_sales_tv$fit,ask=FALSE,id.method="identity")
 
 ###
-influencePlot(fit3,id.method="identity",main="Influence Plot")
+influencePlot(lm_sales_tv$fit,id.method="identity",main="Influence Plot")
 ```
 
 ##### Cook's distance
@@ -268,10 +426,9 @@ plot(lm_sales_tv$fit,6)
 #### 多重共线性
 
 ```{r}
-vif(lm_sales_3$fit)
+vif(lm_sales_multi$fit)
 
-sqrt(vif(lm_sales_3$fit))>=2       #vif平方根 ≥2 存在
-summary(lm_sales_3$fit)
+sqrt(vif(lm_sales_multi$fit))>=2       #vif平方根 ≥2 存在
 ```
 
 ## 模型选择和优化

@@ -80,7 +80,7 @@ $Z\sim N(0,1)$，$X\sim \chi^2(n)$ 且X与Z相互独立，则称
 
 $$ T=\frac{Z}{\sqrt{X/n}} $$
 
-为自由度为n$t$分布，记为$T\sim t(n)$
+为自由度为n 的$t$分布，记为$T\sim t(n)$
 
 如果$Z\sim N(\delta,1)$ ，则称T为非中心化的t分布。记为$T\sim t(n,\delta)$ ，称δ为非中心化参数。
 
@@ -148,7 +148,6 @@ $$
 
 其中自由度（degrees of freedom）$\nu=n-1$ 。
 
-
 ```{r}
 chisq_distribution <- function(df = 1, ...) {
   # Generate sequence of x values
@@ -213,10 +212,9 @@ F_distribution <- function(df1 = 1,df2 = 1, ...) {
 
 假设 $X\sim B(n,\pi)$ ，一组样本量为n的随机样本。列出样本量为$n$的所有可能随机样本。
 
-样本比率$p=X/n$ ，则 
-$$
+样本比率$p=X/n$ ，则 $$
 E(p)=E(X/n)=\frac{1}{n}E(X)=\pi
-$$ 
+$$
 
 $$
 Var(p)=Var(X/n)=\frac{1}{n^2}Var(X)=\frac{\pi(1-\pi)}{n}

@@ -1,0 +1,128 @@
+# 线性混合效应模型
+
+限制最大似然法，REML
+
+赤池信息准则AIC
+
+贝叶斯信息准则BIC
+
+线性混合模型，LME的表达式如下：
+
+$$
+fit=lmer (data,formual= DV ~ Fixed\_Factor + (Random\_intercept + Random\_slope | Random\_Factor))
+$$
+
+截距中，1表示随机截距，0表示固定截距，默认截距为1。
+
+| LME               | 表达式             | 简写             |
+|-------------------|--------------------|------------------|
+| 随机截距+随机斜率 | y\~x+( 1+x \| id ) | y\~x+( x \| id ) |
+| 随机截距+固定斜率 | y\~x+( 1+1 \| id ) | y\~x+( 1 \| id ) |
+| 固定截距+随机斜率 | y\~x+( 0+x \| id ) | NA               |
+| 固定截距+固定斜率 | y\~x               | NA               |
+
+```{r eval=FALSE}
+df <- read_delim("data/麻醉诱导时相.txt")
+df_long <- df |> pivot_longer(
+    cols = starts_with("t"),
+    names_to = "time",
+    values_to = "SBP"
+)
+
+```
+
+```{r}
+
+df_long <- ChickWeight |> filter(Chick %in% c(1:3,21:23))
+
+str(df_long)
+```
+
+## 随机截距+随机斜率
+
+```{r}
+library(lme4)
+m1 <- lmer(weight ~ Time+ (Time|Chick) ,data = df_long)
+summary(m1)
+
+
+m1_1 <- nlme::lme(SBP~induced_method+time,random = (~1|id) ,data = df_long)
+summary(m1_1)
+
+anova(m1_1)
+```
+
+```{r}
+# 标准化模型残差分布
+quantile(residuals(m1,type="pearson",scaled=T))
+
+# 随机因子随机效应和显著性检验
+ranef(m1)
+lmerTest::ranova(m1)
+
+# 查看固定效应和显著性检验
+coef(m1)
+anova(m1)
+
+#  查看 类和方法
+class(m1)
+methods(class = "lmerMod")
+
+# confint(m1,level = 0.95)
+```
+
+## 随机截距+固定斜率
+
+```{r}
+library(lme4)
+m2 <- lmer(weight ~ Time+ (1|Chick) ,data = df_long)
+m2
+```
+
+## 固定截距+随机斜率
+
+```{r}
+library(lme4)
+m3 <- lmer(weight ~ Time+ (0 + Time|Chick) ,data = df_long)
+m3
+```
+
+## 固定截距+ 固定斜率
+
+```{r}
+m4 <- lm(weight ~ Time ,data = df_long)
+m4
+```
+
+## 模型选择
+
+```{r}
+
+plot_lme <- function(model, label) {
+    ggplot(df_long, aes(Time, weight, group = Chick, color = Chick)) +
+        geom_point() +
+        geom_line(
+            bind_cols(df_long, .pred = predict(model, df_long)),
+            mapping = aes(y = .pred),
+            size = 1
+        ) +
+        labs(title = label)+
+    ggsci::scale_color_jco() +
+        ggpubr::theme_pubr() +
+        theme(legend.position = "right",
+              plot.title = element_text(hjust = .5))
+}
+
+
+lme_plot <- map2(list(m1,m2,m3,m4),list("随机截距+随机斜率","随机截距+固定斜率","固定截距+随机斜率","固定截距+固定斜率"),plot_lme)
+
+
+lme_plot
+```
+
+```{r}
+anova(m1,m2,m3)
+anova(m1,m2,m3,m4)
+
+# p小于0.05,说明全模型与简化后模型存在差异，最终采用m1,AIC最小
+```

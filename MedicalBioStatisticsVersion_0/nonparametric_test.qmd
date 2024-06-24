@@ -1,4 +1,25 @@
-# 非参数检验
+# 非参数秩检验
+
+排序
+
+$$
+F(Median)=P(X\le Median)=0.5
+$$
+
+二项分布B（n，0.5）
+
+```{r}
+ggplot() + xlim(-10,10) +
+    geom_function(mapping = aes(color="normal Distribution"),
+                  fun = dnorm, args = list(mean = 5, sd = 1),
+                   )+
+    geom_function(mapping = aes(color="chi-square Distribution"),
+                  fun = dbinom, args = list(size=10 ,prob=0.5), 
+                 )+
+    scale_color_manual(values = c("normal Distribution" = "red",
+                                  "chi-square Distribution" = "blue"))+
+    labs(color = "Distribution")
+```
 
 ## 单样本Wilcoxon Signed-Rank 检验
 
@@ -11,7 +32,36 @@ summary(x$weight)
 wilcox.test(x$weight, mu=7) 
 ```
 
-## 独立双样本Wilcoxon Rank-Sum 检验
+
+
+## 配对 Wilcoxon's  signed-rank 检验
+
+$$
+T_++T_-=\frac{n(n+1)}{2},n为非零配对差值的数量
+$$
+
+$$
+T=min{(T_+,T_-)}
+$$
+
+5 ≤ n ≤30，附表T~0~
+
+n＞16，正态近似法
+
+```{r}
+
+df <- tibble(
+    low=c(958.5,838.4,612.2,812.9,739.0,899.4,758.5,695.0,749.7,815.5),
+    high=c(958.5,866.5,788.9,815.2,783.2,910.9,760.8,870.8,862.3,799.9),
+)
+
+shapiro.test(df$high-df$low)
+
+# 忽略 差值为0
+wilcox.test(df$low[-1],df$high[-1],exact = T,paired = T)
+```
+
+## 独立双样本Wilcoxon's Rank-Sum 检验
 
 当两个样本不满足正态分布时，使用Wilcoxon秩和检验进行非参数检验
 
@@ -23,12 +73,6 @@ wilcox.test(weight~group,data = x,exact=F)
 wilcox.test(PlantGrowth$weight[PlantGrowth$group=="ctrl"],PlantGrowth$weight[PlantGrowth$group=="trt1"],exact=F)
 ```
 
-## 非独立双样本Wilcoxon Rank-Sum 检验
-
-```{r}
-wilcox.test(PlantGrowth$weight[PlantGrowth$group=="ctrl"],PlantGrowth$weight[PlantGrowth$group=="trt1"],exact=F,paired=TRUE)
-
-```
 
 ## 独立多样本Kruskal-Wallis 检验
 

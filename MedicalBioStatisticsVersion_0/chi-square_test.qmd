@@ -1,0 +1,150 @@
+# $\chi^2$ 检验
+
+Pearson’s $\chi^2$ 检验 用于检验涉及双向无序多分类变量的概率或比例。
+
+```{r}
+ggplot() + xlim(-10,10) +
+    geom_function(mapping = aes(color="normal Distribution"),
+                  fun = dnorm, args = list(mean = 0, sd = 1),
+                   )+
+    geom_function(mapping = aes(color="chi-square Distribution"),
+                  fun = dchisq, args = list(df = 1 ,ncp=0), 
+                 )+
+    scale_color_manual(values = c("normal Distribution" = "red",
+                                  "chi-square Distribution" = "blue"))+
+    labs(color = "Distribution")
+```
+
+## 独立2×2列联表
+
+```{r}
+x <- matrix(c(97,73,7,30),2,dimnames = list(c("experiment","control"),c("+","-")))
+x
+
+(k1 <- chisq.test(x,correct = F))
+
+# 期望频数列联表
+k1$expected
+
+```
+
+### Yate’s 校正
+
+```{r}
+(k2 <- chisq.test(x,correct = T))
+```
+
+### Fisher's Exact 检验
+
+T \< 5 且 n \< 40
+
+超几何分布
+
+```{r}
+ggplot() + xlim(-10,10) +
+    geom_function(mapping = aes(color="normal Distribution"),
+                  fun = dnorm, args = list(mean = 0, sd = 1),
+                   )+
+    geom_function(mapping = aes(color="hypergeometric Distribution"),
+                  fun = dhyper, args = list(m = 5,n=10,k=2 ), 
+                 )+
+    scale_color_manual(values = c("normal Distribution" = "red",
+                                  "hypergeometric Distribution" = "blue"))+
+    labs(color = "Distribution")
+```
+
+```{r}
+x <- matrix(c(7,2,7,17),2,dimnames = list(c("A","B"),c("Yes","No")))
+x
+
+(k5 <- fisher.test(x))
+ chisq.test(x)
+
+E <- chisq.test(x)$expected
+
+chisq <- sum((x-E)^2/E)
+chisq 
+
+p_value_asymptotic <- 1 - pchisq(chisq, df = 1)
+```
+
+## 配对四格表
+
+二项分布
+
+```{r}
+ggplot() + xlim(-10,10) +
+    geom_function(mapping = aes(color="normal Distribution"),
+                  fun = dnorm, args = list(mean = 5, sd = 1),
+                   )+
+    geom_function(mapping = aes(color="chi-square Distribution"),
+                  fun = dbinom, args = list(size=10 ,prob=0.5), 
+                 )+
+    scale_color_manual(values = c("normal Distribution" = "red",
+                                  "chi-square Distribution" = "blue"))+
+    labs(color = "Distribution")
+```
+
+### McNemar's 检验
+
+**b+c =5 + 34 \> 20**
+
+```{r}
+x <- matrix(c(36,34,5,135),2,dimnames = list(c("A+","A-"),c("B+","B-")))
+x
+
+(k3 <- mcnemar.test(x,correct = F))
+
+
+# 校正
+(k4 <- mcnemar.test(x,correct = T))
+```
+
+### 精确 McNemar's 检验
+
+b+c = 7 + 1 \<20
+
+二项分布B（b+c，0.5），k=min（b，c）
+
+$$
+P=\sum_{i≤k} p_i 
+$$
+
+```{r}
+x <- matrix(c(3,1,7,9),2,dimnames = list(c("A+","A-"),c("B+","B-")))
+x
+
+
+
+P_two_sided <- 2*sum(dbinom(x=0:1,size = 8,prob = 0.5))
+P_two_sided
+
+```
+
+## R×C列联表
+
+```{r}
+x <- matrix(c(150,184,198,50,16,2),3,dimnames = list(c("A","B","C"),c("Yes","No")))
+x
+
+(k <- chisq.test(x,correct = F))
+```
+
+-   T \< 5 的格子不超过1/5
+
+-   没有 T \<1 的格子
+
+```{r}
+(k <- chisq.test(x,correct = T))
+k$expected
+```
+
+### 多重比较
+
+$$
+\alpha'=\frac {\alpha}{比较的次数=\frac{k(k-1)}{2}}
+$$
+
+## 拟合优度检验
+
+Pearson’s $\chi^2$ goodness-of-fit test

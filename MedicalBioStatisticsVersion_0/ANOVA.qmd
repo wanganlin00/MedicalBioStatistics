@@ -602,7 +602,7 @@ df_long
 ```{r}
 # 第一种方法
 library(nlme)
-model <- lme(BP ~ induced_method*time, random = ~1|id/time, data = df_long)
+model <- lme(BP ~ induced_method*time, random = ~1 |id/time, data = df_long)
 summary(model)
 df_aov <- anova(model)
 df_aov
@@ -614,6 +614,7 @@ print(method_means)
 method_comparisons <- pairs(method_means)  
 print(method_comparisons)
 ```
+
 ```{r}
 library(rstatix)
 a2 <- anova_test(data = df_long,
@@ -626,9 +627,6 @@ a2 <- anova_test(data = df_long,
 a2
 
 ```
-
-
-
 
 <https://cran.r-project.org/web/packages/afex/vignettes/afex_anova_example.html>
 
@@ -697,6 +695,7 @@ $$
 其中，n是观测值的总数，Xi 为每个观测值，$\bar X$ 是所有观测值的均值。
 
 ```{r}
+options(digits = 4)
 BP <- c(df$t0,df$t1,df$t2,df$t3,df$t4)
 BP_mean <- mean(BP) 
 SS_total <- sum((BP-BP_mean)^2)

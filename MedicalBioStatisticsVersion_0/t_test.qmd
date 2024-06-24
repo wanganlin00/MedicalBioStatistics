@@ -1,60 +1,85 @@
 # t 检验
 
-## 单总体
+## 假设
 
-t 检验（Student‘s t test），主要用于小样本（n\<30），标准差未知的正态分布总体。在进行t检验之前，可以先通过正态性检验 `shapiro.test()`
+1.  **正态性假设** (Normality): 两组数据都应来自正态分布的总体。**对于大样本（通常 n \> 30），由于中心极限定理，即使原始数据不完全符合正态分布，t检验也可能是稳健的**。
+
+2.  **方差齐性假设** (Homoscedasticity): 两组数据的方差应该相等。如果方差不相等，可能需要使用 Welch's t-test，它不假设方差齐性。
+
+3.  **独立性假设** (Independence): 样本中的观测应该是相互独立的。这意味着一个观测的值不应该影响另一个观测的值。
+
+## t检验类型
+
+-   **单样本t检验** (One-sample t-test): 用于比较单个样本的均值与已知的总体均值之间的差异。
+
+-   **独立样本t检验** (Independent samples t-test): 用于比较两个独立样本的均值差异。
+
+-   **配对样本t检验** (Paired samples t-test): 用于比较同一组受试者在两个不同条件下的均值差异。
 
 ```{r}
 ggplot() + xlim(-10,10) +
-    geom_function(fun = dnorm, args = list(mean = 0, sd = 1), color="red")
-
+    geom_function(mapping = aes(color="normal Distribution"),
+                  fun = dnorm, args = list(mean = 0, sd = 1),
+                   )+
+    geom_function(mapping = aes(color="t Distribution"),
+                  fun = dt, args = list(df = 1 ,ncp=0), 
+                 )+
+    scale_color_manual(values = c("normal Distribution" = "red",
+                                  "t Distribution" = "blue"))+
+    labs(color = "Distribution")
 ```
 
-### 均值------单样本 t 检验
+t 检验（Student‘s t test），主要用于小样本（n\<30），标准差未知的正态分布总体。在进行t检验之前，可以先通过正态性检验 `shapiro.test()`
+
+## 单样本 t 检验
 
 在数据符合正态分布的前提下使用单样本t-test来比较一组样本的均值和已知(理论/总体)均值，所谓的已知均值能来自于之前的实验数据或者理论值。根据研究问题(原假设)的不同又分为双尾(不等)和单尾检验(大于或者小于)
 
 $$t=\frac{\bar X-\mu_0}{S /\sqrt n} \sim t(\nu=n-1) $$
 
-它是一种参数检验，用于检验小样本（n＜1000）的均值是否可以合理地为特定值。
+它是一种参数检验，用于检验样本均值是否可以合理地为总体均值或特定值。
 
 ```{r}
 x<- dplyr::filter(PlantGrowth,group=="ctrl")
 summary(x$weight)
 
 shapiro.test(x$weight)
-t.test(x$weight, mu=5) 
+t.test(x$weight, mu=5)
 ```
 
 ```{r}
-X_ <- mean(x$weight)
-S <- sd(x$weight)
-n <- nrow(x)
+t_test_two_sided <- function(data,mu,level=0.95,...){
+    
+    bar_X <- mean(data,na.rm = T)
+    sd <- sd(data, na.rm = T)
+    n=length(data)
+    se=sd/sqrt(n)
+    t_statistic <- (bar_X-mu)/se
+    p_value <- 2*(1-pt(abs(t_statistic),df=n-1))
+    t_critical <- qt((1-(1-level)/2),df = n-1)
+    CI_lower <- bar_X - t_critical * se
+    CI_upper <- bar_X+ t_critical * se
+    CI <- paste0(level*100,"%置信区间: ","[",CI_lower,",",CI_upper,"]",sep = "")
+    
+    output <- list(
+        均值=bar_X,
+        标准差=sd,
+        标准误=se,
+        t=t_statistic,
+        df=n-1,
+        p_value=p_value,
+        CI=CI
 
-se <- S/sqrt(n)
+    )
+    return(output)
+    
+}
 
-# 统计量
-t_statistic <- (X_-5)/se
 
-# p值
-p_value <- 2 * (1 - pt(abs(t_statistic),df = n-1 ))
-
-# 查找95%置信水平下的t分布的临界值
-t_critical <- qt(0.975, df=n-1)
-
-# 计算95%置信区间
-CI_lower <- X_ - t_critical * se
-CI_upper <- X_ + t_critical * se
-
-# 输出结果
-cat("95% Confidence Interval:", CI_lower, "to", CI_upper)
+t_test_two_sided(x$weight,mu = 5)
 ```
 
-
-
-## 两个总体的假设检验
-
-### 配对样本的均值差异------t检验
+## 配对样本t检验
 
 $$
 H_0:\mu_{\bar d}=0
@@ -109,9 +134,9 @@ t.test(df$ten_days_later,df$baseline,paired = TRUE)
 #t.test(Pair(df$ten_days_later,df$baseline)~1,data=df)
 ```
 
-### 两独立样本的均值差异
+## 两独立样本的均值差异
 
-#### 方差相等------t检验
+### 方差相等------t检验
 
 $$H_0:\mu_1-\mu_2=0$$
 
@@ -145,7 +170,7 @@ t.test(df2$experimental,df2$control,var.equal = TRUE)
 
 ```
 
-#### 方差是否相等------F检验
+### 方差是否相等------F检验
 
 $$H_0:\frac{\sigma_1^2}{\sigma_2^2}=1$$
 
@@ -183,7 +208,7 @@ ci_upper <- sqrt(f_critical_upper * (ctrl_sd^2 / e_sd^2))
 cat("95% CI for variances ratio:", ci_lower, "to", ci_upper)
 ```
 
-#### 方差不等------ Approximation t 检验
+### 方差不等------ Approximation t 检验
 
 $$H_0:\mu_1-\mu_2=0$$
 
@@ -191,7 +216,7 @@ $$
 t'=\frac{(\bar X_1-\bar X_2)-(\mu_1-\mu_2)}{\sqrt{\frac{S_1^2}{n_1}+\frac{S_2^2}{n_2}}}=\frac{\bar X_1-\bar X_2}{\sqrt{\frac{S_1^2}{n_1}+\frac{S_2^2}{n_2}}}\sim t(\nu ')
 $$
 
-##### Cochran & Cox Approximation t-test
+#### Cochran & Cox Approximation t-test
 
 强调方差的变异
 
@@ -207,7 +232,7 @@ $$ 其中$\nu_1=n_1-1,\nu_2=n_2-1,t_{\nu_1,1-\alpha/2}和t_{\nu_2,1-\alpha/2}$�
 
 因为t分布是对称的，$t_{\nu,\alpha/2}=-t_{\nu,1-\alpha/2}$，所以$t'_{\alpha/2}=t'_{1-\alpha/2}$。
 
-##### Satterthwaite Approximation t-test
+#### Satterthwaite Approximation t-test
 
 强调自由度
 
@@ -215,7 +240,7 @@ $$
 v'=\frac{(\frac{S_1^2}{n_1}+\frac{S_2^2}{n_2})^2}{\frac{(\frac{S_1^2}{n_1})^2}{n_1-1}+\frac{(\frac{S_2^2}{n_2})^2}{n_2-1}}(舍入到最近整数)
 $$
 
-#### 大样本量------ Z检验
+### 中心极限定理 大样本量------ Z检验
 
 当$n_1＞30\ \&\ n_2＞30$时，
 
@@ -233,7 +258,9 @@ $$
 Z=\frac{(\bar X_1-\bar X_2)-(\mu_1-\mu_2)}{\sqrt{\frac{\sigma^2_1}{n_1}+\frac{\sigma^2_2}{n_2}}}=\frac{\bar X_1-\bar X_2}{\sqrt{\frac{\sigma^2_1}{n_1}+\frac{\sigma^2_2}{n_2}}}\dot\sim N(0,1)
 $$
 
-#### 功效分析
+实际应用中，总体方差未知，使用t 检验，提供了对总体方差不确定性的自然估计。
+
+## 功效分析
 
 功效(power) $1-β\approx\Phi(-z_{1-\alpha/2}+\frac{|\mu_1-\mu_2|}{\sqrt {\sigma_1^2/n_1+\sigma_2^2/n_2}})$
 
@@ -250,4 +277,3 @@ $$
     $$
     n_2=\frac{(k\sigma_1^2+\sigma_1^2)(z_{1-\alpha/2}+z_{1-\beta})^2}{(\mu_1-\mu_2)^2}
     $$
-

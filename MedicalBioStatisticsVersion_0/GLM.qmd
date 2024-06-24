@@ -15,14 +15,29 @@ logit_spec <- logistic_reg() |>
   set_engine("glm") 
 
 logit_spec<-logistic_reg(mode = "classification",
-                         engine = "glm")
+                         engine = "glm")  # 默认
+```
+
+Sigmoid 激活函数：
+
+$$
+f(x)=\frac{1}{1+e^{-x}}=\frac{e^x}{1+e^x}
+$$
+
+```{r}
+sigmoid <- tibble(
+    x=seq(-6,6,length.out=1000),
+    y=1/(1+exp(-x)),
+)
+ggplot(sigmoid,aes(x,y))+
+    geom_line()
 ```
 
 逻辑回归( logistic regression )的一般数学方程：
 
 $$
 \pi(Y=k|X=(X_1,X_2,...,X_p)=\frac{e^{\beta_{k0}+\beta_{k1}X_1+\beta_{k2}X_2+...+\beta_{kp}X_p}}{1+\sum_{l=1}^{K-1} e^{\beta_{l0}+\beta_{l1}X_1+\beta_{l2}X_2+...+\beta_{lp}X_p}}
-$$ 其中$\pi$ 是成功概率，$k=1,2,...,K-1$是因变量的分类数，$p$ 是自变量个数。
+$$ 其中$\pi$ 是成功概率，$k=1,2,...,K-1$是因变量的水平数，$p$ 是自变量个数。
 
 1.  当$K=2$时，$k=l=p=1$即简单逻辑回归。
 

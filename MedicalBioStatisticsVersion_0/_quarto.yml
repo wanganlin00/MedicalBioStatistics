@@ -23,31 +23,25 @@ book:
         - t_test.qmd
         - rate_proportion_test.qmd
         - ANOVA.qmd
-        - independence_correlation.qmd
+        - chi-square_test.qmd
         - nonparametric_test.qmd
 
     #     - PowerAnalysis.qmd
     #     - Causal_Inference.qmd
     - part: "线性模型"
       chapters:
+        - independence_correlation.qmd
         - LinearRegression.qmd
         - GLM.qmd
+        - GEE.qmd
+        - LME.qmd
 
     - part: "生存分析"
       chapters:
         - SurvivalAnalysis.qmd
 
 
-    - part: "机器学习"
-      chapters:
-        - Classification.qmd
-        - Clustering.qmd
-        - linear_algebra.qmd
-        - PCA.qmd
-        - t-SNE.qmd
-        - UMAP.qmd
-
-    - part: "随机对照试验"
+    - part: "研究设计"
       chapters: 
         - diagnostic_tests.qmd
         - observational_study_design.qmd

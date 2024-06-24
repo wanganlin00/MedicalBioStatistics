@@ -1,4 +1,4 @@
-# 描述性统计学 {.unnumbered}
+# 描述性统计 {.unnumbered}
 
 ## 基本概念
 
@@ -94,9 +94,8 @@
                 ggtitle("Poisson Distribution")
             ```
 
-```{=html}
 <!-- -->
-```
+
 2.  定性数据（qualitative data）
 
     i.  无序分类数据
