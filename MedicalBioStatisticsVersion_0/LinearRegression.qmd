@@ -73,7 +73,7 @@ predict(lm_sales_tv, new_data = advertising, type = "conf_int")
 
 
 # 比较观测值与预测值
-bind_cols( predict(lm_sales_tv, new_data = advertising), advertising) |> 
+bind_cols( predict(lm_sales_tv, new_data = advertising), advertising)
     
 bind_cols( predict(lm_sales_tv, new_data = advertising), advertising) |> 
   select(sales, .pred)

@@ -13,11 +13,11 @@ ggplot() + xlim(-10,10) +
     geom_function(mapping = aes(color="normal Distribution"),
                   fun = dnorm, args = list(mean = 5, sd = 1),
                    )+
-    geom_function(mapping = aes(color="chi-square Distribution"),
+    geom_function(mapping = aes(color="binomial Distribution"),
                   fun = dbinom, args = list(size=10 ,prob=0.5), 
                  )+
     scale_color_manual(values = c("normal Distribution" = "red",
-                                  "chi-square Distribution" = "blue"))+
+                                  "binomial Distribution" = "blue"))+
     labs(color = "Distribution")
 ```
 
@@ -32,9 +32,7 @@ summary(x$weight)
 wilcox.test(x$weight, mu=7) 
 ```
 
-
-
-## 配对 Wilcoxon's  signed-rank 检验
+## 配对 Wilcoxon's signed-rank 检验
 
 $$
 T_++T_-=\frac{n(n+1)}{2},n为非零配对差值的数量
@@ -65,16 +63,63 @@ wilcox.test(df$low[-1],df$high[-1],exact = T,paired = T)
 
 当两个样本不满足正态分布时，使用Wilcoxon秩和检验进行非参数检验
 
+$$
+T=T_{min(n1,n2)}=T_1
+$$
+
 ```{r}
+MVR = c(38, 29, 35, 33, 38, 41, 31)
+MVP = c(32, 43, 44, 81, 35, 46, 37, 45, 44)
+shapiro.test(c(MVR,MVP))
 
-x <- dplyr::filter(PlantGrowth,group=="ctrl"|group=="trt1")
+combined_data <- c(MVR, MVP)
+ranked_data <- rank(combined_data)
+ranked_data 
 
-wilcox.test(weight~group,data = x,exact=F)
-wilcox.test(PlantGrowth$weight[PlantGrowth$group=="ctrl"],PlantGrowth$weight[PlantGrowth$group=="trt1"],exact=F)
+MVR_ranks <- ranked_data[1:length(MVR)]
+MVP_ranks <- ranked_data[(length(MVR)+1):length(combined_data)]
+
+T1 <- sum(MVR_ranks)
+T2 <- sum(MVP_ranks)
+
+W <- T1-length(MVR)*(length(MVR)+1)/2
 ```
 
+$$
+W=T_1-\frac{n_1(n_1+1)}{2}
+$$
+
+n1\<10,n2-n1\<10，附录
+
+n1\>10,n2\>10，正态近似法
+
+```{r}
+wilcox.test(MVR,MVP,exact = F,correct = F)
+```
+
+```{r}
+
+
+ggplot() + xlim(0,50) +
+    geom_function(mapping = aes(color="Wilcox Distribution"),
+                  fun = dwilcox, args = list(m=7 ,n=9), 
+                 )+
+    scale_color_manual(values = c("Wilcox Distribution" = "blue"))+
+    labs(color = "Distribution")
+
+
+
+```
 
 ## 独立多样本Kruskal-Wallis 检验
+
+假设：
+
+1.  随机，独立
+
+2.  每个样本至少5个观测
+
+3.  能够计算秩次
 
 ```{r}
 kruskal.test(weight~group,data = PlantGrowth)
@@ -84,4 +129,10 @@ kruskal.test(weight~group,data = PlantGrowth)
 
 ```{r}
 pairwise.wilcox.test(PlantGrowth$weight,PlantGrowth$group,p.adjust.method = "fdr",exact=F)
+```
+
+## 随机区组设计方差分析
+
+```{r eval=FALSE}
+friedman.test()
 ```

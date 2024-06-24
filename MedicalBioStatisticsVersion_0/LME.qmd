@@ -21,7 +21,7 @@ $$
 | 固定截距+随机斜率 | y\~x+( 0+x \| id ) | NA               |
 | 固定截距+固定斜率 | y\~x               | NA               |
 
-```{r eval=FALSE}
+```{r}
 df <- read_delim("data/麻醉诱导时相.txt")
 df_long <- df |> pivot_longer(
     cols = starts_with("t"),
@@ -29,10 +29,14 @@ df_long <- df |> pivot_longer(
     values_to = "SBP"
 )
 
+m1_1 <- nlme::lme(SBP~induced_method+time,random = (~1|id) ,data = df_long)
+summary(m1_1)
+
+anova(m1_1)
 ```
 
 ```{r}
-
+library(lme4)
 df_long <- ChickWeight |> filter(Chick %in% c(1:3,21:23))
 
 str(df_long)
@@ -41,15 +45,8 @@ str(df_long)
 ## 随机截距+随机斜率
 
 ```{r}
-library(lme4)
 m1 <- lmer(weight ~ Time+ (Time|Chick) ,data = df_long)
 summary(m1)
-
-
-m1_1 <- nlme::lme(SBP~induced_method+time,random = (~1|id) ,data = df_long)
-summary(m1_1)
-
-anova(m1_1)
 ```
 
 ```{r}
@@ -74,7 +71,6 @@ methods(class = "lmerMod")
 ## 随机截距+固定斜率
 
 ```{r}
-library(lme4)
 m2 <- lmer(weight ~ Time+ (1|Chick) ,data = df_long)
 m2
 ```
@@ -82,7 +78,6 @@ m2
 ## 固定截距+随机斜率
 
 ```{r}
-library(lme4)
 m3 <- lmer(weight ~ Time+ (0 + Time|Chick) ,data = df_long)
 m3
 ```
