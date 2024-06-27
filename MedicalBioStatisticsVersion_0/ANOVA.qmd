@@ -93,12 +93,6 @@ car::outlierTest(df_aov)
 
 成对比较的数量 $N=\frac{k!}{2!(k-2)!},k≥3$，导致犯第Ⅰ类错误的概率迅速增加，$[1-(1-\alpha)^N]$。
 
-#### pairwise t test
-
-```{r}
-pairwise.t.test(df_long$value,df_long$level,p.adjust.method = "fdr")
-```
-
 #### Tukey's test
 
 Tukey's test 也被称为Tukey's honestly significant difference (Tukey's HSD) test。
@@ -369,6 +363,10 @@ W <- 12*sum(5*(z.j_mean-z_mean)^2)/(2*(sum((z_df$low-z.j_mean[1])^2)+sum((z_df$m
 W
 ```
 
+## Welch’s ANOVA Test
+
+![](images/clipboard-1694958347.png)
+
 #### 数据变换
 
 当方差分析的正态性假设或方差齐性假设不为真时，通常使用(1)数据变换方法；(2)非参数检验方法 比较均值差异
@@ -593,7 +591,7 @@ df_long <- df |> pivot_longer(cols = starts_with("t"),
                               values_to = "BP") |> 
     mutate(
         id=factor(id),
-        induced_method=factor(induced_method),
+        group=factor(group),
         time=factor(time)
     )
 df_long
@@ -602,14 +600,14 @@ df_long
 ```{r}
 # 第一种方法
 library(nlme)
-model <- lme(BP ~ induced_method*time, random = ~1 |id/time, data = df_long)
+model <- lme(BP ~ group*time, random = ~1 |id/time, data = df_long)
 summary(model)
 df_aov <- anova(model)
 df_aov
 
 #成对比较
 library(emmeans)
-method_means <- emmeans(model, ~induced_method)  
+method_means <- emmeans(model, ~group)  
 print(method_means)  
 method_comparisons <- pairs(method_means)  
 print(method_comparisons)
@@ -621,7 +619,7 @@ a2 <- anova_test(data = df_long,
            dv = BP,
            wid = id,
            within = time,
-           between = induced_method
+           between = group
            )
 
 a2
@@ -638,23 +636,23 @@ library("ggplot2")  # for customizing plots.
 
 
 
-a1 <- aov_ez("id", "BP", df_long, between ="induced_method" , 
+a1 <- aov_ez("id", "BP", df_long, between ="group" , 
        within = c("time"))
 a1
 
-aov_car(BP ~ induced_method + Error(id/time), data = df_long)
-aov_4(BP ~ induced_method + (time|id), data = df_long)
+aov_car(BP ~ group + Error(id/time), data = df_long)
+aov_4(BP ~ group + (time|id), data = df_long)
 
 print(xtable::xtable(anova(a1), digits = c(rep(2, 5), 3, 4)), type = "html")
 
 
 # 事后检验
-m1 <- emmeans(a1, ~ induced_method)
+m1 <- emmeans(a1, ~ group)
 m1
 pairs(m1)
 # summary(as.glht(pairs(m1)), test=adjusted("fdr"))
 # p1 <- afex_plot(a1, x = "time", #trace = "BP", 
-#                 panel = "induced_method", error = "none", 
+#                 panel = "group", error = "none", 
 #                 mapping = c("color", "fill"), 
 #                 data_geom = geom_boxplot, data_arg = list(width = 0.4), 
 #                 point_arg = list(size = 1.5), line_arg = list(size = 1))
@@ -722,9 +720,9 @@ SS_between
 ```
 
 ```{r}
-induced_method__summary <- df_long |> group_by(induced_method) |> 
+group__summary <- df_long |> group_by(group) |> 
     summarise(n=n(),mean=mean(BP),sum=sum(BP))
-induced_method__summary 
+group__summary 
 
 
 ```
@@ -736,9 +734,9 @@ $$
 其中，k为不同处理组的组数，n~k~ 为第 k 处理组观测值的总数，$\bar  X_k$ 为第k 处理组观测值的均数，$\bar X$ 是所有观测值的均值。
 
 ```{r}
-SS_处理 <- 25*( (induced_method__summary$mean[1] - BP_mean )^2 + 
-                       (induced_method__summary$mean[2] - BP_mean )^2 +
-                       (induced_method__summary$mean[3] - BP_mean )^2) 
+SS_处理 <- 25*( (group__summary$mean[1] - BP_mean )^2 + 
+                       (group__summary$mean[2] - BP_mean )^2 +
+                       (group__summary$mean[3] - BP_mean )^2) 
 SS_处理
 ```
 
@@ -807,7 +805,7 @@ interaction_effect_summary <- df_long |>
         #n = n(),
         mean = mean(BP),
        # sum = sum(BP),
-        .by = c(induced_method , time)
+        .by = c(group , time)
     )
 interaction_effect_mean <- interaction_effect_summary |> pivot_wider(names_from = c("time"),values_from = "mean")
 
@@ -816,7 +814,7 @@ interaction_effect_mean <- interaction_effect_summary |> pivot_wider(names_from 
 SS_interaction_effect <- 0
 for (i in 1:3) {
     for (j in 1:5) {
-        SS_interaction_effect <- SS_interaction_effect + 5 * (interaction_effect_mean[i, j + 1] -induced_method__summary$mean[i] - t_mean[j] + BP_mean) ^ 2
+        SS_interaction_effect <- SS_interaction_effect + 5 * (interaction_effect_mean[i, j + 1] -group__summary$mean[i] - t_mean[j] + BP_mean) ^ 2
     }
     
 }
@@ -829,4 +827,161 @@ SS_within_error <- SS_within-SS_time-SS_interaction_effect
 
 names(SS_within_error) <- "SS_within_error"
 SS_within_error 
+```
+
+## 球形度检验 sphericity
+
+*重复测量方差*分析假设相关条件（或组水平）的所有组合之间的差异方差相等。这被称为**球形度假设**。
+
+[R中球形度检验](https://www.datanovia.com/en/lessons/mauchlys-test-of-sphericity-in-r/)
+
+球度仅针对具有两个以上水平的变量进行评估，因为球形度必然适用于只有两个水平的条件。
+
+违反球形度假设可能会扭曲方差计算，从而导致更宽松的重复测量方差分析检验（即 I 类错误率增加）。在这种情况下，必须根据违反球形度的程度适当校正重复测量方差分析。文献中使用了两种常见的校正：**Greenhouse-Geisser epsilon** （GGe） 和 **Huynh-Feldt epsilon** （HFe）。
+
+球**形度的 Mauchly 检验**用于评估是否满足球形度的假设。使用`rstatix::anova_test()` 时，会自动报告此问题。尽管该方法受到严厉批评，通常无法检测到小样本中的球形偏离，而在大样本中则过度检测到它们，但它仍然是一种常用的方法。
+
+```{r}
+library(tidyverse)
+library(ggpubr)
+library(rstatix)
+```
+
+```{r}
+df <- read_delim("data/麻醉诱导时相.txt")
+df
+df_long <- df |> pivot_longer(cols = starts_with("t"),
+                              names_to = "time",
+                              values_to = "BP") |> 
+    mutate(
+        id=factor(id),
+        group=factor(group),
+        time=factor(time)
+    )
+df_long
+```
+
+### 计算 sphericity 和 Mauchly 检验
+
+具体操作步骤如下：
+
+1.  计算相关组的每个组合之间的差异
+
+2.  计算每个组差的方差
+
+![](images/clipboard-2447647328.png)
+
+```{r}
+d <- df |> mutate(
+    `t0-t1`=t0-t1,
+    `t0-t2`=t0-t2,
+    `t0-t3`=t0-t3,
+    `t0-t4`=t0-t4,
+    `t1-t2`=t1-t2,
+    `t1-t3`=t1-t3,
+    `t1-t4`=t1-t4,
+    `t2-t3`=t2-t3,
+    `t2-t4`=t2-t4,
+    `t3-t4`=t3-t4,
+) |> select(8:17)
+d
+
+d|> map(var)
+ 
+### 单因素
+t <- df |> select(3:7) |> as.matrix()
+t
+
+mauchly.test(lm(t~1),X = ~1)
+
+
+### 双因素
+
+df_split <- df |> group_split(group)
+
+df[1:5,3:7]
+
+df2 <- as.matrix(cbind(df_split[[1]][3:7],df_split[[2]][3:7],df_split[[3]][3:7]))
+times <- ordered(rep(1:5,3))
+group <- factor(rep(c("A","B","C"),each=5))
+
+
+
+
+
+mauchly.test(lm(df2~1),M=~group+times,X=~ times)
+
+```
+
+### 方差分析 
+
+```{r}
+
+
+
+a2 <- anova_test(data = df_long,
+           dv = BP,
+           wid = id,
+           within = time,
+           between = group
+           )
+
+a2
+```
+
+输出是一个包含三个表的列表：
+
+1.  方差分析结果显示标有（generalized eta squared，ges）的列上的 p 值和效应大小;效应大小本质上是由于受试者内因素而忽略受试者效应而导致的变异量。
+
+2.  Mauchly Sphericity检验。仅报告具有 \>2 水平的变量或效应，因为球形度必然适用于只有 2 个水平的效应。原假设是组差的方差相等。因此，显著的 p 值 （p \<= 0.05） 表示组差的方差不相等。
+
+3.  球度校正结果，以防我们无法维持球形度假设。提供了文献中使用的两种常见校正：Greenhouse-Geisser epsilon （GGe） 和 Huynh-Feldt epsilon （HFe） 及其相应的 p 值
+
+### **当满足球形度假设时**
+
+球形度的 Mauchly 检验不显著 （p \> 0.05）;这表明，受试者内因素水平之间的差异方差是相等的。因此，我们可以假设协方差矩阵的球形度，并解释方差分析表中可用的标准输出。
+
+```{r}
+# Display ANOVA table
+a2$ANOVA
+```
+
+-   `F`表示我们正在与 F 分布（F 检验）进行比较; 分别表示 time 和 Error（time） 的自由度; 表示得到的 F 统计量值`(2, 18)81.8`
+
+-   `p`指定 p 值
+
+-   `ges`（广义 eta 平方，eta2\[g\]）是效应大小（由于受试者内因素引起的变异量）
+
+### **当违反球形度假设时**
+
+如果数据违反了球形度假设（即 Mauchly 检验，p \<= 0.05），则应解释表`sphericity corrections`中的结果，其中对自由度进行了调整，这会影响检验的统计显著性（即 p 值）。校正通过乘法和校正估计值（Greenhouse-Geisser （GG） 和 Huynh-Feldt （HF） ε 值）来应用。
+
+::: callout-note
+epsilon 提供了球形度被侵犯的程度的度量。值为 1 表示不偏离球形度（组差的所有方差均相等）。违反球形度会导致 epsilon 值低于 1。epsilon 离 1 越远，违规越严重。
+:::
+
+```{r}
+a2$`Sphericity Corrections`
+```
+
+可以看出，即使在球形度校正（p\[GG\] \< 0.001，p\[HF\] \< 0.001）之后，平均自尊得分在不同时间点仍存在统计学差异。
+
+在两种球形度校正方法中，Huynh-Feldt 校正被认为是最不保守的（高估了 epsilon），而 Greenhouse-Geisser 被认为是更保守的（当 epsilon 接近 1 时低估了 epsilon）。
+
+一般建议使用 Greenhouse-Geisser 校正，特别是当 epsilon \< 0.75 时。在 epsilon 大于 0.75 的情况下，一些统计学家建议使用 Huynh-Feldt 校正 （Girden 1992）。
+
+```{r}
+# correction = "auto"
+get_anova_table(a2)
+```
+
+```{r}
+# correction = "GG"
+get_anova_table(a2, correction = "GG")
+```
+
+### post-hoc test
+
+```{r}
+df_long |> pairwise_t_test(BP~time,paired = T,p.adjust.method = "bonferroni")
 ```

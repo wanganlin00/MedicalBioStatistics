@@ -20,13 +20,11 @@ ggplot(data = mtcars,aes(x=mpg))+
     geom_histogram(color="black",binwidth =diff(range(mtcars$mpg))/9 )
 ```
 
-## 数据特征
-
 ```{r}
 as_tibble(mtcars$mpg)
 ```
 
-### 集中趋势
+## 集中趋势
 
 ```{r}
 #算术均数
@@ -39,7 +37,7 @@ median(mtcars$mpg)
 rstatix::get_mode(mtcars$mpg)
 ```
 
-### 离散程度
+## 离散程度
 
 ```{r}
 # 值域
@@ -77,27 +75,29 @@ median(abs(mtcars$mpg-median(mtcars$mpg)))
 median(abs(mtcars$mpg-median(mtcars$mpg)))*1.4826
 ```
 
-### 分布形状
+## 分布形状
 
-偏度（Skewness）
+### 偏度
 
-:   表示随机变量概率分布的不对称性。
+#### 总体偏度（Population Skewness）
 
-    <https://www.macroption.com/skewness-formula/>
+表示随机变量概率分布的不对称性。
 
-    三阶中心矩。二阶中心矩即方差。
+<https://www.macroption.com/skewness-formula/>
 
-    $$ 
-        Skew(X) =  \frac{E(X_i-E(X))^3}{Var(X)^{\frac{3}{2}}}\\ =E  [(\frac{X_i-\mu}{\sigma})^3]\\= \frac{1}{n} \sum_{i=1}^{n}  (\frac{X_i-\mu}{\sigma} )^3
-    $$
+三阶中心矩。二阶中心矩即方差。
 
-    偏度的取值范围： $(-\infty,+\infty)$
+$$ 
+Population\ Skewness (X) =  \frac{E(X_i-E(X))^3}{Var(X)^{\frac{3}{2}}} =E  [(\frac{X_i-\mu}{\sigma})^3]= \frac{1}{n} \sum_{i=1}^{n}  (\frac{X_i-\mu}{\sigma} )^3
+$$
 
-    1.  Skew＜0，负偏态分布，左偏 = 尾部向左；
+偏度的取值范围： $(-\infty,+\infty)$
 
-    2.  Skew=0，数据相对均匀的分布在均值两侧；
+1.  Skew＞0，正偏态分布，右偏 = 尾部向右延伸。Mode < Median < Mean；
 
-    3.  Skew＞0，正偏态分布，右偏 = 尾部向右。
+2.  Skew=0，数据相对均匀的分布在均值两侧；
+
+3.  Skew＜0，负偏态分布，左偏 = 尾部向左延伸；Mode > Median > Mean。
 
 ```{r}
 x <- c(1,2,3,5)
@@ -113,31 +113,41 @@ skewness <- function(x,na.rm=TRUE){
     return(sknewness=sknewness)
 }
 skewness(x)
+
+e1071::skewness(x)
 ```
 
-峰度（Kurtosis）
+#### 样本偏度（Sample Skewness）
 
-:   表示随机变量概率分布的尖峭程度。四阶中心矩与方差平方的比值。
+$$ 
+Sample\ Skewness(X) =  \frac{n}{(n-1)(n-2)} \sum_{i=1}^{n}  \left [\frac{X_i-\bar X}{S} \right ]^3
+$$
 
-    <https://www.macroption.com/kurtosis-formula/>
+![](images/sample_skewness_SE.png)
 
-    超值峰度 excess kurtosis ：四阶中心矩与方差平方的比值减3。
+### 峰度
 
-    <https://www.macroption.com/excess-kurtosis/>
+#### 总体峰度（Population Kurtosis）
 
-    $$
-    Kurt(X) =  \frac{E(X_i-E(X))^4}{Var(X)^{2}}-3\\= E  [(\frac{X_i-\mu}{\sigma})^4] - 3\\= \frac{1}{n} \sum_{i=1}^{n}  (\frac{X_i-\mu}{\sigma} )^4-3
-    $$
+表示随机变量概率分布的尖峭程度。四阶中心矩与方差平方的比值。
 
-    峰度的取值范围：$[1,+\infty)$
+<https://www.macroption.com/kurtosis-formula/>
 
-    超值峰度的取值范围：$[-2,+\infty)$
+超额峰度 excess kurtosis ：四阶中心矩与方差平方的比值减3。
 
-    1.  超值峰度＜0，数据分布与正态分布相比较为扁平；
+<https://www.macroption.com/excess-kurtosis/>
 
-    2.  超值峰度=0，正态分布；
+$$
+Population\ Kurtosis(X) =  \frac{E(X_i-E(X))^4}{Var(X)^{2}}-3= E  [(\frac{X_i-\mu}{\sigma})^4] - 3= \frac{1}{n} \sum_{i=1}^{n}  (\frac{X_i-\mu}{\sigma} )^4-3
+$$
 
-    3.  超值峰度＞0，数据分布与正态分布相比较为高尖。
+超额峰度的取值范围：$[-2,+\infty)$
+
+1.  超额峰度＜0，数据分布与正态分布相比较为扁平；
+
+2.  超额峰度=0，正态分布；
+
+3.  超额峰度＞0，数据分布与正态分布相比较为高尖。
 
 ```{r}
 s$kurtosis
@@ -151,12 +161,23 @@ kurtosis<-function(x,na.rm=TRUE){
     return(kurtosis=kurtosis)
 }
 kurtosis(x)
+e1071::kurtosis(x)
 ```
+
+#### 样本峰度（Sample Kurtosis）
+
+$$
+Sample \ Kurtosis(X) =   \frac{n(n+1)}{(n-1)(n-2)(n-3)} \sum_{i=1}^{n} \left [\frac{X_i-\bar X}{S} \right]^4-\frac{3(n-1)^2}{(n-2)(n-3)}
+$$
+
+![](images/sample_kurtosis_SE.png)
 
 ## 统计摘要
 
 ```{r}
 summary(mtcars$mpg)
 rstatix::get_summary_stats(mtcars,mpg,type = "full")
-psych::describeBy(mtcars$mpg,group = mtcars$am)
+
+
+psych::describeBy(mtcars$mpg,group =NULL)
 ```

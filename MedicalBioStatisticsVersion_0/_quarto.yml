@@ -20,6 +20,8 @@ book:
         - SamplingDistribution.qmd
         - ParameterEstimation.qmd
         - hypothesis_test.qmd
+        - normality_test.qmd
+        - variance_homogeneity_test.qmd
         - t_test.qmd
         - rate_proportion_test.qmd
         - ANOVA.qmd

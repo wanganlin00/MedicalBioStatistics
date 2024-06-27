@@ -1,4 +1,4 @@
-id	induced_method	t0	t1	t2	t3	t4
+id	group	t0	t1	t2	t3	t4
 1	A	120	108	112	120	117
 2	A	118	109	115	126	123
 3	A	119	112	119	124	118

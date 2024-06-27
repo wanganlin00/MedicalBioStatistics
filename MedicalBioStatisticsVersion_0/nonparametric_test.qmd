@@ -85,8 +85,10 @@ T2 <- sum(MVP_ranks)
 W <- T1-length(MVR)*(length(MVR)+1)/2
 ```
 
+曼-惠特尼 U 统计量
+
 $$
-W=T_1-\frac{n_1(n_1+1)}{2}
+曼-惠特尼U统计量\ \ W= 威尔科克森W秩和\  \ \  T_1-\frac{n_1(n_1+1)}{2}
 $$
 
 n1\<10,n2-n1\<10，附录
@@ -131,7 +133,7 @@ kruskal.test(weight~group,data = PlantGrowth)
 pairwise.wilcox.test(PlantGrowth$weight,PlantGrowth$group,p.adjust.method = "fdr",exact=F)
 ```
 
-## 随机区组设计方差分析
+## 单因素重复测量方差分析的非参数替代
 
 ```{r eval=FALSE}
 friedman.test()

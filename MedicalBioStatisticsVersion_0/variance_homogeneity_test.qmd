@@ -1,0 +1,87 @@
+# 方差齐性检验
+
+## 两组
+
+### F 检验
+
+F 检验：比较两组的方差。数据必须呈正态分布。
+
+F 检验用于评估两个总体（A 和 B）的方差是否相等。在使用 F 检验之前，您需要检查数据是否呈正态分布。
+
+```{r}
+df <- tibble(
+    ctrl=c(2,6,13,5,8,9,12,11,8,10,12,14,13,6,7,4),
+    trt=c(8,6,8,9,12,12,14,15,16,17,14,12,11,8,10,10)
+)
+df
+var.test(df$ctrl,df$trt)
+
+res <- var.test(len ~ supp, data = ToothGrowth)
+res
+```
+
+p 值为 p = 0.2，大于显著性水平 0.05，可以认为两个方差之间没有显著差异。
+
+## 多组
+
+### Bartlett 检验
+
+Bartlett 检验：比较两组或多组的方差。数据必须呈正态分布。
+
+具有一个自变量的 Bartlett 检验
+
+```{r}
+res <- bartlett.test(weight ~ group, data = PlantGrowth)
+res
+```
+
+具有多个自变量的 Bartlett 检验：必须使用`interaction（）` 函数将多个因子折叠成一个包含因子所有组合的变量
+
+```{r}
+
+with(ToothGrowth,interaction(supp,dose)) |> levels()
+
+
+
+bartlett.test(len ~ interaction(supp,dose), data=ToothGrowth)
+```
+
+### Levene's 检验
+
+Levene's 检验：Bartlett 检验的可靠替代方案，对偏离正态不太敏感。
+
+-   Levene 检验有三个版本：
+
+    -   使用**平均值（原始）**
+
+    -   使用**中位数（**Brown-Forsythe扩展**）**
+
+    -   **10% trimmed mean（**Brown-Forsythe扩展**）**
+
+::: callout-note
+Levene 检验是文献中最常用的检验。
+:::
+
+```{r}
+library(car)
+# Levene's test with one independent variable
+leveneTest(weight ~ group, data = PlantGrowth,center=mean)
+leveneTest(weight ~ group, data = PlantGrowth,center=mean,trim=0.1)
+leveneTest(weight ~ group, data = PlantGrowth,center=median)
+
+rstatix::levene_test(PlantGrowth,weight ~ group,center = mean)
+```
+
+```{r}
+# Levene's test with multiple independent variables
+ToothGrowth$dose <- factor(ToothGrowth$dose)
+leveneTest(len ~ supp*dose, data = ToothGrowth)
+```
+
+### Fligner-Killeen 检验
+
+Fligner-Killeen 检验：一种非参数检验，对偏离正态非常稳健。
+
+```{r}
+fligner.test(weight ~ group, data = PlantGrowth)
+```
