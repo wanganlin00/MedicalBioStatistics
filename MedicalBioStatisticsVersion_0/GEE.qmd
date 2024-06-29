@@ -8,7 +8,7 @@ $$
 g(\mu_{ij})=\beta_0+\beta_1x_{ij_1}+\beta_2x_{ij_2}+...+\beta_px_{ij_p}
 $$
 
-其中，`g()` 是一个连接函数，用于将自变量的线性组合与因变量的均值联系起来。常见的连接函数包括恒等连接函数（identity）、对数连接函数（logit）、逆正弦连接函数（inverse sine）函数等。`i` 表示观测对象的索引，`j` 表示时间点或相关性结构的索引，`uij` 表示因变量的均值，`β` 表示待估计的系数，`Xij` 表示自变量。
+其中，`g()` 是一个连接函数，用于将自变量的线性组合与因变量的均值联系起来。常见的连接函数包括恒等连接函数（identity）、logistic连接函数（logit）、逆正弦连接函数（inverse sine）函数等。`i` 表示观测对象的索引，`j` 表示时间点或相关性结构的索引，`uij` 表示因变量的均值，`β` 表示待估计的系数，`Xij` 表示自变量。
 
 GEE的形式如下：
 
@@ -16,11 +16,12 @@ $$
 U(\beta)=X^TAW(\mu)(Y-\mu)=0
 $$
 
-其中U(β) 是一个包含待估计参数的函数，X是设计矩阵，A是相关性结构矩阵，W(μ) 是权重矩阵，Y 是观测数据，μ 是模型的均值预测值。采用迭代重复加权最小二乘法，求解方程。
+其中U(β) 是一个包含待估计参数的函数，X是设计矩阵，A是相关性结构矩阵，W(μ) 是权重矩阵，Y 是观测数据，μ 是模型的均值预测值。采用迭代重复加权最小二乘法（iteratively reweighted least squares (IWLS)），求解方程。
 
 ```{r}
 library(nlme)
 
+data(epil,package = "MASS")
 Oxboys |> head(n=18)
 
 
@@ -29,12 +30,18 @@ df_long <- Oxboys
 
 ## `gee`
 
+<https://www.statsmodels.org/stable//gee.html>
+
 ```{r}
 library(gee)
 
 g1 <- gee(height~age,data = df_long ,id = Subject,corstr = "AR-M",Mv = 1)
 g1
 summary(g1)
+
+
+gee1 <- gee(y ~ age + trt + base,id=subject,data = epil,family = poisson,corstr ="exchangeable" )
+summary(gee1)
 ```
 
 ## `geepack`
@@ -45,6 +52,11 @@ g2 <- geeglm(height~age,data = df_long ,id = Subject,corstr = "ar1")
 g2
 
 summary(g2)
+
+gee2 <- geeglm(y ~ age + trt + base,id=subject,data = epil,
+               family = poisson(link = "log"),
+               corstr ="exchangeable",std.err = "san.se" )
+summary(gee2)
 ```
 
 作业相关矩阵 `corstr` ，比较QIC，一般越小越好。
@@ -73,7 +85,7 @@ df_long <- df |> pivot_longer(
 ```
 
 ```{r}
-g3 <- geeglm(SBP~ induced_method * time,data = df_long ,id = id,corstr = "ar1")
+g3 <- geeglm(SBP~ group * time,data = df_long ,id = id,corstr = "ar1")
 
 g3
 summary(g3)

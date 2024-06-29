@@ -25,12 +25,13 @@ book:
         - t_test.qmd
         - rate_proportion_test.qmd
         - ANOVA.qmd
+        - repeated_measures_ANOVA.qmd
         - chi-square_test.qmd
         - nonparametric_test.qmd
 
     #     - PowerAnalysis.qmd
     #     - Causal_Inference.qmd
-    - part: "线性模型"
+    - part: "统计模型"
       chapters:
         - independence_correlation.qmd
         - LinearRegression.qmd

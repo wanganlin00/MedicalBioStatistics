@@ -1,19 +1,19 @@
 # 推荐阅读 {.unnumbered style="color:red"}
 
--   Applied Medical Statistics
+-   [R语言教程 Ⅶ 统计模型 ——李东风](https://www.math.pku.edu.cn/teachers/lidf/docs/Rbook/html/_Rbook/)
 
--   回归、主成分分析（Principal component analysis）、聚类：[R in action 3rd](https://livebook.manning.com/book/r-in-action-third-edition)、 [ISLR](https://www.statlearning.com/)
+-   [统计学习 ISLR](https://www.statlearning.com/)
+
+-   [R语言实战医学统计](https://ayueme.github.io/R_medical_stat/)
+
+-   <https://www.tidymodels.org/>
 
 -   [医学研究中的生存数据建模（4e）](https://bookdown.org/wangzhen/survival/)
+
+-   [Modern Statistics for Modern Biology](https://www.huber.embl.de/msmb/)
 
 -   [t-Distributed Stochastic Neighbor Embedding (t-SNE)](https://lvdmaaten.github.io/tsne/)
 
 -   [R-tSNE](https://cran.r-project.org/web/packages/tsne/)
 
 -   [Uniform Manifold Approximation and Projection (UMAP)](https://umap-learn.readthedocs.io/en/latest/){.uri}
-
--   [Modern Statistics for Modern Biology](https://www.huber.embl.de/msmb/)
-
--   <https://www.tidymodels.org/>
-
--   <https://www.yuque.com/biotrainee/biostat>

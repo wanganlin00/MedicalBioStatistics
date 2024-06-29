@@ -1,8 +1,8 @@
-# 诊断价值评估
+# 诊断性测试
 
 ```{r}
 m<- matrix(c("TP","FN","FP","TN"),nrow = 2,
-           dimnames = list(test=c("+","-"),
+           dimnames = list(predict=c("+","-"),
                            truth=c("+","-")))
 print(m)
 ```

@@ -16,6 +16,7 @@ logit_spec <- logistic_reg() |>
 
 logit_spec<-logistic_reg(mode = "classification",
                          engine = "glm")  # 默认
+logistic_reg
 ```
 
 Sigmoid 激活函数：
@@ -179,10 +180,30 @@ predict(logit_multiple_2, new_data = df_new,type="class")
 predict(logit_multiple_2, new_data = df_new, type = "prob")
 ```
 
-### K\>2,p\>1 multinomial logistic regression
+### K\>2,p\>1 multinomialregression
 
 ```{r}
+library(nnet) # 多项逻辑回归
+iris_multinom <- multinom(Species ~ ., data = iris, trace = FALSE)
+summary(iris_multinom)
+table(predict(iris_multinom, iris[, -5], type = "class"), iris[, 5])
+```
 
+```{r}
+library(glmnet) # 多项回归
+iris_glmnet <- glmnet(x = iris[, -5], y = iris[, 5], family = "multinomial")
+plot(iris_glmnet)
+plot(iris_glmnet$lambda,
+  ylab = expression(lambda), xlab = "迭代次数", main = "惩罚系数的迭代路径"
+)
+
+# 选择一个迭代趋于稳定时的 lambda，比如 iris_glmnet$lambda[80]
+coef(iris_glmnet, s = 0.0002796185)
+
+iris_pred_glmnet <- predict(
+  object = iris_glmnet, newx = as.matrix(iris[, -5]),
+  s = 0.0002796185, type = "class"
+)
 ```
 
 ## 泊松回归
@@ -235,4 +256,67 @@ pois_fit_coef_mnths |>
              fill = "black", color = "white",na.rm = TRUE) +
   labs(title = "Coefficient value from Poission Regression",
        x = "Month", y = "Coefficient")
+```
+
+## glm
+
+```{r}
+swiss
+```
+
+### gaussian
+
+identity link function
+
+t-statistic
+
+```{r}
+glm1 <- linear_reg() |> 
+    set_engine("glm",family=stats::gaussian(link = "identity"))|> 
+    fit(Fertility~ Agriculture + Education + Catholic + Infant.Mortality,
+        data = swiss)
+
+tidy(glm1)
+glance(glm1) |> select(AIC,deviance)
+```
+
+### binomial
+
+logit link function
+
+z-statistic
+
+```{r eval=FALSE}
+hosp <-read.csv("d:/newbook/HospFoll7_Final.csv")
+head(hosp)
+hmod <-glm( r1cesd * r1agey_b + ragender + mstat + raedyrs + rawhca
++rablafa + r1conde, data=hosp, family=binomial)
+exp(coef(hmod))
+exp(confint.default(hmod))
+```
+
+### poisson/negative binomial
+
+log link function
+
+z-statistic
+
+```{r eval=FALSE}
+cmod = glm(r10conde * ragender + r10agey_e + rahispan + ravetrn,
+data=cond10, family=poisson)
+summary(cmod)
+```
+
+overdispersion
+
+```{r eval=FALSE}
+library(MASS)
+summary(glnbmod <-glm.nb(r10conde * ragender + r10agey_e + rahispan + ravetrn, data=cond10))
+```
+
+### quasipoisson
+
+```{r eval=FALSE}
+summary(qp1 <-glm( r10conde * ragender + r10agey_e + rahispan + ravetrn,
+data = cond10, family = quasipoisson(link = "log")))
 ```

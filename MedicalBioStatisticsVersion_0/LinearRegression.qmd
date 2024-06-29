@@ -233,6 +233,24 @@ df <- tibble(
     labs(x = "Leverage", y = "Cook's Distance")
 ```
 
+## 逐步回归
+
+逐步回归是筛选变量，有向前、向后和两个方向同时进行三个方法。
+
+-   `direction = "both"`双向
+
+-   `direction = "backward"`向后
+
+-   `direction = "forward"`向前
+
+```{r}
+
+fit_lm <- lm(sales~.,data = advertising[-1])
+
+fit_step <- stats::step(fit_lm, direction = "both")
+summary(fit_step)
+```
+
 ## 多元线性回归
 
 ```{r}
