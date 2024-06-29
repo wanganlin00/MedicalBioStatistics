@@ -9,31 +9,21 @@
 线性混合模型，LME的表达式如下：
 
 $$
+Y_i=X_i\times \beta +Z_i\times b_i+\epsilon_i,\\其中，b_i\sim N(0,D),\epsilon_i \sim N(0,\Sigma_i),b_1,...,b_N,\epsilon_1,...,\epsilon_N 相互独立
+$$
+
+$$
 fit=lmer (data,formual= DV ~ Fixed\_Factor + (Random\_intercept + Random\_slope | Random\_Factor))
 $$
 
 截距中，1表示随机截距，0表示固定截距，默认截距为1。
 
-| LME               | 表达式             | 简写             |
-|-------------------|--------------------|------------------|
-| 随机截距+随机斜率 | y\~x+( 1+x \| id ) | y\~x+( x \| id ) |
-| 随机截距+固定斜率 | y\~x+( 1+1 \| id ) | y\~x+( 1 \| id ) |
-| 固定截距+随机斜率 | y\~x+( 0+x \| id ) | NA               |
-| 固定截距+固定斜率 | y\~x               | NA               |
-
-```{r}
-df <- read_delim("data/麻醉诱导时相.txt")
-df_long <- df |> pivot_longer(
-    cols = starts_with("t"),
-    names_to = "time",
-    values_to = "SBP"
-)
-
-m1_1 <- nlme::lme(SBP~induced_method+time,random = (~1|id) ,data = df_long)
-summary(m1_1)
-
-anova(m1_1)
-```
+| LME                         | 表达式             | 简写             |
+|-----------------------------|--------------------|------------------|
+| 随机截距+随机斜率           | y\~x+( 1+x \| id ) | y\~x+( x \| id ) |
+| 随机截距+固定斜率           | y\~x+( 1+1 \| id ) | y\~x+( 1 \| id ) |
+| 固定截距+随机斜率           | y\~x+( 0+x \| id ) | NA               |
+| 线性模型：固定截距+固定斜率 | y\~x               | NA               |
 
 ```{r}
 library(lme4)
@@ -43,6 +33,10 @@ str(df_long)
 ```
 
 ## 随机截距+随机斜率
+
+$$
+Y_i=X_i\times \beta +Z_i\times b_i+\epsilon_i,\\其中，b_i\sim N(0,D),\epsilon_i \sim N(0,\Sigma_i),b_1,...,b_N,\epsilon_1,...,\epsilon_N 相互独立
+$$
 
 ```{r}
 m1 <- lmer(weight ~ Time+ (Time|Chick) ,data = df_long)
@@ -82,7 +76,7 @@ m3 <- lmer(weight ~ Time+ (0 + Time|Chick) ,data = df_long)
 m3
 ```
 
-## 固定截距+ 固定斜率
+## 线性模型：固定截距+ 固定斜率
 
 ```{r}
 m4 <- lm(weight ~ Time ,data = df_long)
@@ -120,4 +114,18 @@ anova(m1,m2,m3)
 anova(m1,m2,m3,m4)
 
 # p小于0.05,说明全模型与简化后模型存在差异，最终采用m1,AIC最小
+```
+
+```{r}
+df <- read_delim("data/麻醉诱导时相.txt")
+df_long <- df |> pivot_longer(
+    cols = starts_with("t"),
+    names_to = "time",
+    values_to = "SBP"
+)
+
+m1_1 <- nlme::lme(SBP~induced_method+time,random = (~1|id) ,data = df_long)
+summary(m1_1)
+
+anova(m1_1)
 ```
