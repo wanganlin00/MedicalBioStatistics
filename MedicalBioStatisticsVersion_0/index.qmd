@@ -10,6 +10,8 @@
 
 -   [医学研究中的生存数据建模（4e）](https://bookdown.org/wangzhen/survival/)
 
+-   [Applied Propensity Score Analysis with R](https://psa.bryer.org/index.html)
+
 -   [Modern Statistics for Modern Biology](https://www.huber.embl.de/msmb/)
 
 -   [t-Distributed Stochastic Neighbor Embedding (t-SNE)](https://lvdmaaten.github.io/tsne/)

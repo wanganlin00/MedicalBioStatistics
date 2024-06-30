@@ -35,6 +35,8 @@ median(mtcars$mpg)
 
 #众数 mode
 rstatix::get_mode(mtcars$mpg)
+
+fivenum(mtcars$mpg)
 ```
 
 ## 离散程度
@@ -93,11 +95,11 @@ $$
 
 偏度的取值范围： $(-\infty,+\infty)$
 
-1.  Skew＞0，正偏态分布，右偏 = 尾部向右延伸。Mode < Median < Mean；
+1.  Skew＞0，正偏态分布，右偏 = 尾部向右延伸。Mode \< Median \< Mean；
 
 2.  Skew=0，数据相对均匀的分布在均值两侧；
 
-3.  Skew＜0，负偏态分布，左偏 = 尾部向左延伸；Mode > Median > Mean。
+3.  Skew＜0，负偏态分布，左偏 = 尾部向左延伸；Mode \> Median \> Mean。
 
 ```{r}
 x <- c(1,2,3,5)

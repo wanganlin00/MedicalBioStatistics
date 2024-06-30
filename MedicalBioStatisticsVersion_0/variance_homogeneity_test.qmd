@@ -78,6 +78,13 @@ ToothGrowth$dose <- factor(ToothGrowth$dose)
 leveneTest(len ~ supp*dose, data = ToothGrowth)
 ```
 
+-   Brown-Forsythe 检验
+
+```{r}
+leveneTest(weight ~ group, data = PlantGrowth,center=median)
+HH::hov(weight ~ group, data = PlantGrowth)
+```
+
 ### Fligner-Killeen 检验
 
 Fligner-Killeen 检验：一种非参数检验，对偏离正态非常稳健。

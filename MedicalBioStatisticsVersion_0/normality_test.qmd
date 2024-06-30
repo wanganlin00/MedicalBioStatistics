@@ -38,7 +38,7 @@ Q-Q图（或分位数-分位数图）绘制给定样本与正态分布之间的�
 ggqqplot(df$ctrl)
 ```
 
-##  **D’Agostino-Pearson Omnibus Test**
+## **D’Agostino-Pearson Omnibus Test**
 
 [D'Agostino-Pearson test](https://real-statistics.com/tests-normality-and-symmetry/statistical-tests-normality-symmetry/dagostino-pearson-test/)
 
@@ -181,4 +181,13 @@ ggdensity(df, x = "PHYS", fill = "lightgray", title = "PHYS") +
 ```{r}
 skewness(df$CONT, na.rm = TRUE)
 skewness(df$PHYS, na.rm = TRUE)
+```
+
+### Box-Cox 幂次变换
+
+```{r}
+bc <- car::powerTransform(df)
+
+bc
+summary(bc)
 ```

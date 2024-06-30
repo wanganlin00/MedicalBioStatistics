@@ -1,0 +1,349 @@
+# 倾向性评分
+
+倾向性评分最大的优势是将多个混杂因素的影响用一个综合的值来表示，即**倾向性评分值（Propensity Score, PS）**，从而降低协变量的维度，因此该方法尤其适用于协变量较多的情况。
+
+[Applied Propensity Score Analysis with R](https://psa.bryer.org/index.html)
+
+```{r eval=FALSE}
+remotes::install_github('jbryer/psa', dependencies = 'Enhances')
+```
+
+<https://ehsanx.github.io/EpiMethods/propensityscore.html>
+
+倾向性评分的一般步骤为：
+
+1.  选择偏差模型
+
+    A. 估计倾向分数\
+    B. 检查平衡\
+    C. 重复 A 和 B，直到优化足够的平衡
+
+2.  估计因果关系。
+
+3.  检查对未观察到的混杂因素的敏感性。
+
+![](images/PSA_Flow.png){fig-align="center"}
+
+PS 值的估计是**以处理因素作为因变量，其他混杂因素作为自变量**，通过建立一个模型来估计每个研究对象接受处理因素的可能性。目前用于估计 PS 值的方法有 logistic 回归，Probit 回归、Bootstrapping、随机森林等。其中 logistic 回归是目前最常用的方法。
+
+倾向性评分只是一个分数（P值），自己并没有均衡协变量（混杂因素）的能力，利用 PS 值均衡组间协变量分布的方法有**匹配（matching）**、**分层（stratification）**、**协变量调整（covariate adjustment）**和**加权（weighting）**等。其中协变量调整又可以称为倾向性评分回归、倾向性评分矫正等。
+
+用于倾向性评分的数据要进行一些预处理，比如**缺失值处理**，比如直接删除，用常数值代替，用均值/中位数等代替，算法插补（KNN、随机森林等）
+
+```{r}
+library(tidyverse)
+library(MatchIt)
+library(Matching)
+library(PSAgraphics)
+require(tableone)
+data(lalonde, package='Matching')
+glimpse(lalonde)
+```
+
+## 分层（Stratification）
+
+### 估计倾向得分（逻辑回归）
+
+```{r}
+data(lalonde, package = 'Matching')
+
+
+lalonde_formu <- treat ~ age + I(age^2) + educ + I(educ^2) + black +
+    hisp + married + nodegr + re74  + I(re74^2) + re75 + I(re75^2) + u74 + u75
+lr_out <- glm(formula = lalonde_formu,
+              data = lalonde,
+              family = binomial(link = 'logit'))
+
+summary(lr_out)
+
+```
+
+倾向性得分就是模型的拟合值，查看得分的分布
+
+```{r}
+lalonde$lr_ps <- fitted(lr_out)
+
+ggplot(lalonde, aes(x = lr_ps, color = as.logical(treat))) + 
+    geom_density() +
+    xlab('Propensity Score')
+```
+
+#### 分层
+
+使用五分位数进行分层
+
+```{r}
+breaks5 <- psa::get_strata_breaks(lalonde$lr_ps)
+breaks5
+
+lalonde$lr_strata5 <- cut(x = lalonde$lr_ps, 
+                          breaks = breaks5$breaks, 
+                          include.lowest = TRUE, 
+                          labels = breaks5$labels$strata)
+table(lalonde$treat, lalonde$lr_strata5)
+```
+
+```{r}
+ggplot(lalonde, aes(x = lr_ps, color = as.logical(treat))) + 
+	geom_density(aes(fill = as.logical(treat)), alpha = 0.2) +
+	geom_vline(xintercept = breaks5$breaks, alpha = 0.5) +
+	geom_text(data = breaks5$labels, 
+			  aes(x = xmid, y = 0, label = strata),
+			  color = 'black', vjust = 1) +
+	xlab('Propensity Score') + ylab('Density') +
+	xlim(c(0, 1))
+```
+
+```{r}
+ggplot() +
+	geom_vline(xintercept = breaks5$breaks) +
+	geom_point(data = lalonde, aes(x = lr_ps, y = log(re78 + 1), color = as.logical(treat)), alpha = 0.5) +
+	geom_text(data = breaks5$labels, aes(x = xmid, y = 0, label = strata), color = 'black', vjust = 1) +
+	xlab('Propensity Score')
+```
+
+#### 查看平衡混杂效应
+
+```{r}
+covars <- all.vars(lalonde_formu)
+covars <- lalonde[,covars[-1]]
+PSAgraphics::cv.bal.psa(covariates = covars, 
+                        treatment = lalonde$treat,
+                        propensity = lalonde$lr_ps,
+                        strata = lalonde$lr_strata)
+
+```
+
+数值变量的协变量平衡图
+
+```{r}
+PSAgraphics::box.psa(continuous = lalonde$age, 
+                     treatment = lalonde$treat, 
+                     strata = lalonde$lr_strata,
+                     xlab = "Strata", 
+                     balance = FALSE,
+                     main = 'Covariate: age')
+```
+
+分类变量的协变量平衡图
+
+```{r}
+PSAgraphics::cat.psa(categorical = lalonde$nodegr, 
+                     treatment = lalonde$treat, 
+                     strata = lalonde$lr_strata, 
+                     xlab = 'Strata',
+                     balance = FALSE,
+                     main = 'Covariate: nodegr')
+```
+
+### 估计效应
+
+```{r}
+PSAgraphics::loess.psa(response = log(lalonde$re78 + 1),
+                       treatment = lalonde$treat,
+                       propensity = lalonde$lr_ps)
+
+psa::loess_plot(ps = lalonde$lr_ps,
+                outcome = log(lalonde$re78 + 1),
+                treatment = lalonde$treat == 1,
+                responseTitle = 'log(re78)',
+                
+                plot.strata = 5,
+                points.treat.alpha = 0.5,
+                points.control.alpha = 0.5,
+                percentPoints.treat = 1,
+                percentPoints.control = 1,
+                se = FALSE, 
+                method = 'loess')
+```
+
+```{r}
+PSAgraphics::circ.psa(response = log(lalonde$re78 + 1), 
+                      treatment = lalonde$treat == 1, 
+                      strata = lalonde$lr_strata5)
+```
+
+### 敏感性分析
+
+#### 估计倾向得分（分类树）
+
+```{r}
+library(tree)
+tree_out <- tree::tree(lalonde_formu,
+                       data = lalonde)
+plot(tree_out); text(tree_out)
+lalonde$tree_ps <- predict(tree_out)
+table(lalonde$tree_ps, lalonde$treat, useNA = 'ifany')
+lalonde$tree_strata <- predict(tree_out, type = 'where')
+table(lalonde$tree_strata, lalonde$treat, useNA = 'ifany')
+```
+
+## 匹配（Matching）
+
+**倾向评分匹配**根据他们的*倾向评分*将治疗组中的每个人与对照组中的个体相匹配。对于每个人来说，*倾向得分*可以直观地视为从一系列协变量（和潜在混杂因素）计算出来的最近治疗的概率。两个人，一个来自治疗组，一个来自对照组，如果他们的倾向评分之间的差异很小，则被认为是匹配的。不匹配的参与者将被丢弃。
+
+```{r}
+lalonde_match <- Match(
+    Y = lalonde$re78,
+    Tr = lalonde$treat,
+    X = lalonde$lr_ps,
+    M = 1,
+    caliper = 0.1,
+    replace = TRUE,
+    estimand = 'ATE'
+)
+
+summary(lalonde_match)
+
+lalonde_match_df <- data.frame(
+    treated.ps = lalonde[lalonde_match$index.treated, ]$lr_ps,
+    control.ps = lalonde[lalonde_match$index.control, ]$lr_ps,
+    treated.y = 1,
+    control.y = 0
+)
+lalonde_match_df <- lalonde_match_df[order(lalonde_match_df$control.ps), ]
+
+
+rows <- (1:nrow(lalonde_match_df) - 1) %% floor(nrow(lalonde_match_df) / 5) == 0
+
+ggplot(lalonde, aes(x = lr_ps, y = treat)) +
+    geom_point(alpha = 0.5) +
+    geom_smooth(
+        method = glm,
+        formula = y ~ x,
+        method.args = list(family = binomial(link = 'logit')),
+        se = FALSE
+    ) +
+    xlim(c(0, 1)) +
+    xlab('Propensity Score') + ylab('Treatment') +
+    geom_segment(
+        data = lalonde_match_df,
+        aes(
+            x = treated.ps,
+            xend = control.ps,
+            y = treated.y,
+            yend = control.y
+        ),
+        color = 'purple',
+        alpha = 0.1
+    )
+```
+
+匹配后，治疗组和对照组应具有非常相似的特征。可以使用简单的回归模型来估计治疗对结果的影响。
+
+### 一对一匹配ATT
+
+```{r}
+rr_att <- Match(Y = lalonde$re78, 
+                Tr = lalonde$treat, 
+                X = lalonde$lr_ps,
+                M = 1,
+                estimand='ATT')
+summary(rr_att) # The default estimate is ATT here
+
+rr_att_mb <- psa::MatchBalance(
+    df = lalonde,
+    formu = lalonde_formu,
+    formu.Y = update.formula(lalonde_formu, re78 ~ .),
+    index.treated = rr_att$index.treated,
+    index.control = rr_att$index.control,
+    tolerance = 0.25,
+    M = 1,
+    estimand = 'ATT')
+plot(rr_att_mb)
+summary(rr_att_mb)
+```
+
+### 一对一匹配ATE
+
+```{r}
+rr.ate <- Match(Y = lalonde$re78, 
+                Tr = lalonde$treat, 
+                X = lalonde$lr_ps,
+                M = 1,
+                estimand = 'ATE')
+summary(rr.ate)
+```
+
+### 一对多匹配 （ATT）
+
+```{r}
+rr2 <- Match(Y = lalonde$re78,      
+             Tr = lalonde$treat, 
+             X = lalonde$lr_ps,
+             M = 1, 
+             ties = TRUE, 
+             replace = TRUE,
+             estimand = 'ATT')
+summary(rr2) # The default estimate is ATT here
+```
+
+### MachIt
+
+```{r}
+matchit.out <- MatchIt::matchit(lalonde_formu, data = lalonde)
+summary(matchit.out)
+```
+
+```{r}
+# Same as above but calculate average treatment effect
+rr.ate <- Match(Y = lalonde$re78, 
+                Tr = lalonde$treat, 
+                X = lalonde$lr_ps,
+                M = 1,
+                ties = FALSE, 
+                replace = FALSE, 
+                estimand='ATE')
+summary(rr.ate) # Here the estimate is ATE
+```
+
+```{r}
+## Genetic Matching
+rr.gen <- GenMatch(Tr = lalonde$treat, 
+                   X = lalonde$lr_ps, 
+                   BalanceMatrix = lalonde[,all.vars(lalonde_formu)[-1]],
+                   estimand = 'ATE', 
+                   M = 1, 
+                   pop.size = 16,
+                   print.level = 0)
+rr.gen.mout <- Match(Y = lalonde$re78, 
+                     Tr = lalonde$treat, 
+                     X = lalonde$lr_ps,
+                     estimand = 'ATE',
+                     Weight.matrix = rr.gen)
+summary(rr.gen.mout)
+```
+
+```{r}
+## Partial exact matching
+rr2 <- Matchby(Y = lalonde$re78, 
+               Tr = lalonde$treat, 
+               X = lalonde$lr_ps, 
+               by = factor(lalonde$nodegr),
+               print.level = 0)
+summary(rr2)
+```
+
+```{r}
+## Partial exact matching on two covariates
+rr3 <- Matchby(Y = lalonde$re78, 
+               Tr = lalonde$treat, 
+               X = lalonde$lr_ps, 
+               by = lalonde[,c('nodegr','married')],
+               print.level = 0)
+summary(rr3)
+```
+
+## 加权（Weighting）
+
+......
+
+## 回归
+
+......
+
+## psa::psa_shiny()
+
+```{r eval=FALSE}
+psa::psa_shiny()
+```

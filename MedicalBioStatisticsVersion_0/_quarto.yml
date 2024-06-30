@@ -44,6 +44,11 @@ book:
       chapters:
         - SurvivalAnalysis.qmd
 
+    - part: "倾向性评分"
+      chapters:
+        - PropensityScore.qmd
+   
+
 
     - part: "研究设计"
       chapters: 

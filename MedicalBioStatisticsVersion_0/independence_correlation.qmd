@@ -116,6 +116,7 @@ assocstats(mytable)
 
 ```{r}
 my.matrix <- matrix(c(11, 2, 12, 33), nrow = 2)
+vcd::Kappa(my.matrix)
 epiDisplay::kap(my.matrix)
 ```
 
