@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.4.553">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>医学与生物统计学 - 10&nbsp; \(\chi^2\) 检验</title>
+<title>医学与生物统计学 - 13&nbsp; \(\chi^2\) 检验</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -61,7 +61,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./nonparametric_test.html" rel="next">
-<link href="./ANOVA.html" rel="prev">
+<link href="./repeated_measures_ANOVA.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -130,7 +130,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./probability_theory.html">概率论与数理统计</a></li><li class="breadcrumb-item"><a href="./chi-square_test.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title"><span class="math inline">\(\chi^2\)</span> 检验</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./probability_theory.html">概率论与数理统计</a></li><li class="breadcrumb-item"><a href="./chi-square_test.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title"><span class="math inline">\(\chi^2\)</span> 检验</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -222,32 +222,50 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./normality_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">正态性检验</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./variance_homogeneity_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">方差齐性检验</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./t_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">t 检验</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">t 检验</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./rate_proportion_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">比例检验</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">比例检验</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ANOVA.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">方差分析</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">方差分析</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./repeated_measures_ANOVA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">重复测量方差分析</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chi-square_test.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title"><span class="math inline">\(\chi^2\)</span> 检验</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title"><span class="math inline">\(\chi^2\)</span> 检验</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./nonparametric_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">非参数秩检验</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">非参数秩检验</span></span></a>
   </div>
 </li>
       </ul>
@@ -255,7 +273,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
- <span class="menu-text">线性模型</span></a>
+ <span class="menu-text">统计模型</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -264,31 +282,31 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./independence_correlation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">独立性与相关性</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">独立性与相关性</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./LinearRegression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">线性回归</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">线性回归</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./GLM.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">广义线性模型</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">广义线性模型</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./LME.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">线性混合效应模型</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">线性混合效应模型</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./GEE.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">广义估计方程</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">广义估计方程</span></span></a>
   </div>
 </li>
       </ul>
@@ -305,7 +323,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./SurvivalAnalysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">生存分析</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">生存分析</span></span></a>
   </div>
 </li>
       </ul>
@@ -313,7 +331,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
- <span class="menu-text">研究设计</span></a>
+ <span class="menu-text">倾向性评分</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -321,14 +339,31 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./diagnostic_tests.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">诊断价值评估</span></span></a>
+  <a href="./PropensityScore.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">倾向性评分</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text">研究设计</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./diagnostic_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">诊断性测试</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./observational_study_design.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">观察性研究设计</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">观察性研究设计</span></span></a>
   </div>
 </li>
       </ul>
@@ -342,32 +377,32 @@ window.Quarto = {
    
   <ul>
 <li>
-<a href="#%E7%8B%AC%E7%AB%8B22%E5%88%97%E8%81%94%E8%A1%A8" id="toc-独立22列联表" class="nav-link active" data-scroll-target="#%E7%8B%AC%E7%AB%8B22%E5%88%97%E8%81%94%E8%A1%A8"><span class="header-section-number">10.1</span> 独立2×2列联表</a>
+<a href="#%E7%8B%AC%E7%AB%8B22%E5%88%97%E8%81%94%E8%A1%A8" id="toc-独立22列联表" class="nav-link active" data-scroll-target="#%E7%8B%AC%E7%AB%8B22%E5%88%97%E8%81%94%E8%A1%A8"><span class="header-section-number">13.1</span> 独立2×2列联表</a>
   <ul>
-<li><a href="#yates-%E6%A0%A1%E6%AD%A3" id="toc-yates-校正" class="nav-link" data-scroll-target="#yates-%E6%A0%A1%E6%AD%A3"><span class="header-section-number">10.1.1</span> Yate’s 校正</a></li>
-  <li><a href="#fishers-exact-%E6%A3%80%E9%AA%8C" id="toc-fishers-exact-检验" class="nav-link" data-scroll-target="#fishers-exact-%E6%A3%80%E9%AA%8C"><span class="header-section-number">10.1.2</span> Fisher’s Exact 检验</a></li>
+<li><a href="#yates-%E6%A0%A1%E6%AD%A3" id="toc-yates-校正" class="nav-link" data-scroll-target="#yates-%E6%A0%A1%E6%AD%A3"><span class="header-section-number">13.1.1</span> Yate’s 校正</a></li>
+  <li><a href="#fishers-exact-%E6%A3%80%E9%AA%8C" id="toc-fishers-exact-检验" class="nav-link" data-scroll-target="#fishers-exact-%E6%A3%80%E9%AA%8C"><span class="header-section-number">13.1.2</span> Fisher’s Exact 检验</a></li>
   </ul>
 </li>
   <li>
-<a href="#%E9%85%8D%E5%AF%B9%E5%9B%9B%E6%A0%BC%E8%A1%A8" id="toc-配对四格表" class="nav-link" data-scroll-target="#%E9%85%8D%E5%AF%B9%E5%9B%9B%E6%A0%BC%E8%A1%A8"><span class="header-section-number">10.2</span> 配对四格表</a>
+<a href="#%E9%85%8D%E5%AF%B9%E5%9B%9B%E6%A0%BC%E8%A1%A8" id="toc-配对四格表" class="nav-link" data-scroll-target="#%E9%85%8D%E5%AF%B9%E5%9B%9B%E6%A0%BC%E8%A1%A8"><span class="header-section-number">13.2</span> 配对四格表</a>
   <ul>
-<li><a href="#mcnemars-%E6%A3%80%E9%AA%8C" id="toc-mcnemars-检验" class="nav-link" data-scroll-target="#mcnemars-%E6%A3%80%E9%AA%8C"><span class="header-section-number">10.2.1</span> McNemar’s 检验</a></li>
-  <li><a href="#%E7%B2%BE%E7%A1%AE-mcnemars-%E6%A3%80%E9%AA%8C" id="toc-精确-mcnemars-检验" class="nav-link" data-scroll-target="#%E7%B2%BE%E7%A1%AE-mcnemars-%E6%A3%80%E9%AA%8C"><span class="header-section-number">10.2.2</span> 精确 McNemar’s 检验</a></li>
+<li><a href="#mcnemars-%E6%A3%80%E9%AA%8C" id="toc-mcnemars-检验" class="nav-link" data-scroll-target="#mcnemars-%E6%A3%80%E9%AA%8C"><span class="header-section-number">13.2.1</span> McNemar’s 检验</a></li>
+  <li><a href="#%E7%B2%BE%E7%A1%AE-mcnemars-%E6%A3%80%E9%AA%8C" id="toc-精确-mcnemars-检验" class="nav-link" data-scroll-target="#%E7%B2%BE%E7%A1%AE-mcnemars-%E6%A3%80%E9%AA%8C"><span class="header-section-number">13.2.2</span> 精确 McNemar’s 检验</a></li>
   </ul>
 </li>
   <li>
-<a href="#rc%E5%88%97%E8%81%94%E8%A1%A8" id="toc-rc列联表" class="nav-link" data-scroll-target="#rc%E5%88%97%E8%81%94%E8%A1%A8"><span class="header-section-number">10.3</span> R×C列联表</a>
+<a href="#rc%E5%88%97%E8%81%94%E8%A1%A8" id="toc-rc列联表" class="nav-link" data-scroll-target="#rc%E5%88%97%E8%81%94%E8%A1%A8"><span class="header-section-number">13.3</span> R×C列联表</a>
   <ul>
-<li><a href="#%E5%A4%9A%E9%87%8D%E6%AF%94%E8%BE%83" id="toc-多重比较" class="nav-link" data-scroll-target="#%E5%A4%9A%E9%87%8D%E6%AF%94%E8%BE%83"><span class="header-section-number">10.3.1</span> 多重比较</a></li>
+<li><a href="#%E5%A4%9A%E9%87%8D%E6%AF%94%E8%BE%83" id="toc-多重比较" class="nav-link" data-scroll-target="#%E5%A4%9A%E9%87%8D%E6%AF%94%E8%BE%83"><span class="header-section-number">13.3.1</span> 多重比较</a></li>
   </ul>
 </li>
-  <li><a href="#%E6%8B%9F%E5%90%88%E4%BC%98%E5%BA%A6%E6%A3%80%E9%AA%8C" id="toc-拟合优度检验" class="nav-link" data-scroll-target="#%E6%8B%9F%E5%90%88%E4%BC%98%E5%BA%A6%E6%A3%80%E9%AA%8C"><span class="header-section-number">10.4</span> 拟合优度检验</a></li>
+  <li><a href="#%E6%8B%9F%E5%90%88%E4%BC%98%E5%BA%A6%E6%A3%80%E9%AA%8C" id="toc-拟合优度检验" class="nav-link" data-scroll-target="#%E6%8B%9F%E5%90%88%E4%BC%98%E5%BA%A6%E6%A3%80%E9%AA%8C"><span class="header-section-number">13.4</span> 拟合优度检验</a></li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./probability_theory.html">概率论与数理统计</a></li><li class="breadcrumb-item"><a href="./chi-square_test.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title"><span class="math inline">\(\chi^2\)</span> 检验</span></a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./probability_theory.html">概率论与数理统计</a></li><li class="breadcrumb-item"><a href="./chi-square_test.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title"><span class="math inline">\(\chi^2\)</span> 检验</span></a></li></ol></nav><div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">
-<span class="chapter-number">10</span>&nbsp; <span class="chapter-title"><span class="math inline">\(\chi^2\)</span> 检验</span>
+<span class="chapter-number">13</span>&nbsp; <span class="chapter-title"><span class="math inline">\(\chi^2\)</span> 检验</span>
 </h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 </div>
 
@@ -401,8 +436,8 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<section id="独立22列联表" class="level2" data-number="10.1"><h2 data-number="10.1" class="anchored" data-anchor-id="独立22列联表">
-<span class="header-section-number">10.1</span> 独立2×2列联表</h2>
+<section id="独立22列联表" class="level2" data-number="13.1"><h2 data-number="13.1" class="anchored" data-anchor-id="独立22列联表">
+<span class="header-section-number">13.1</span> 独立2×2列联表</h2>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">97</span>,<span class="fl">73</span>,<span class="fl">7</span>,<span class="fl">30</span><span class="op">)</span>,<span class="fl">2</span>,dimnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"experiment"</span>,<span class="st">"control"</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"+"</span>,<span class="st">"-"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">x</span></span>
@@ -424,8 +459,8 @@ window.Quarto = {
 <span><span class="co">#&gt; control    84.58937 18.41063</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<section id="yates-校正" class="level3" data-number="10.1.1"><h3 data-number="10.1.1" class="anchored" data-anchor-id="yates-校正">
-<span class="header-section-number">10.1.1</span> Yate’s 校正</h3>
+<section id="yates-校正" class="level3" data-number="13.1.1"><h3 data-number="13.1.1" class="anchored" data-anchor-id="yates-校正">
+<span class="header-section-number">13.1.1</span> Yate’s 校正</h3>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">(</span><span class="va">k2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/chisq.test.html">chisq.test</a></span><span class="op">(</span><span class="va">x</span>,correct <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -435,8 +470,8 @@ window.Quarto = {
 <span><span class="co">#&gt; X-squared = 16.188, df = 1, p-value = 5.734e-05</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="fishers-exact-检验" class="level3" data-number="10.1.2"><h3 data-number="10.1.2" class="anchored" data-anchor-id="fishers-exact-检验">
-<span class="header-section-number">10.1.2</span> Fisher’s Exact 检验</h3>
+</section><section id="fishers-exact-检验" class="level3" data-number="13.1.2"><h3 data-number="13.1.2" class="anchored" data-anchor-id="fishers-exact-检验">
+<span class="header-section-number">13.1.2</span> Fisher’s Exact 检验</h3>
 <p>T &lt; 5 且 n &lt; 40</p>
 <p>超几何分布</p>
 <div class="cell">
@@ -492,8 +527,8 @@ window.Quarto = {
 <span><span class="va">p_value_asymptotic</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Chisquare.html">pchisq</a></span><span class="op">(</span><span class="va">chisq</span>, df <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section></section><section id="配对四格表" class="level2" data-number="10.2"><h2 data-number="10.2" class="anchored" data-anchor-id="配对四格表">
-<span class="header-section-number">10.2</span> 配对四格表</h2>
+</section></section><section id="配对四格表" class="level2" data-number="13.2"><h2 data-number="13.2" class="anchored" data-anchor-id="配对四格表">
+<span class="header-section-number">13.2</span> 配对四格表</h2>
 <p>二项分布</p>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu">xlim</span><span class="op">(</span><span class="op">-</span><span class="fl">10</span>,<span class="fl">10</span><span class="op">)</span> <span class="op">+</span></span>
@@ -513,8 +548,8 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<section id="mcnemars-检验" class="level3" data-number="10.2.1"><h3 data-number="10.2.1" class="anchored" data-anchor-id="mcnemars-检验">
-<span class="header-section-number">10.2.1</span> McNemar’s 检验</h3>
+<section id="mcnemars-检验" class="level3" data-number="13.2.1"><h3 data-number="13.2.1" class="anchored" data-anchor-id="mcnemars-检验">
+<span class="header-section-number">13.2.1</span> McNemar’s 检验</h3>
 <p><strong>b+c =5 + 34 &gt; 20</strong></p>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">36</span>,<span class="fl">34</span>,<span class="fl">5</span>,<span class="fl">135</span><span class="op">)</span>,<span class="fl">2</span>,dimnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A+"</span>,<span class="st">"A-"</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"B+"</span>,<span class="st">"B-"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
@@ -540,8 +575,8 @@ window.Quarto = {
 <span><span class="co">#&gt; McNemar's chi-squared = 20.103, df = 1, p-value = 7.34e-06</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="精确-mcnemars-检验" class="level3" data-number="10.2.2"><h3 data-number="10.2.2" class="anchored" data-anchor-id="精确-mcnemars-检验">
-<span class="header-section-number">10.2.2</span> 精确 McNemar’s 检验</h3>
+</section><section id="精确-mcnemars-检验" class="level3" data-number="13.2.2"><h3 data-number="13.2.2" class="anchored" data-anchor-id="精确-mcnemars-检验">
+<span class="header-section-number">13.2.2</span> 精确 McNemar’s 检验</h3>
 <p>b+c = 7 + 1 &lt;20</p>
 <p>二项分布B（b+c，0.5），k=min（b，c）</p>
 <p><span class="math display">\[
@@ -561,8 +596,8 @@ P=\sum_{i≤k} p_i
 <span><span class="co">#&gt; [1] 0.0703125</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section></section><section id="rc列联表" class="level2" data-number="10.3"><h2 data-number="10.3" class="anchored" data-anchor-id="rc列联表">
-<span class="header-section-number">10.3</span> R×C列联表</h2>
+</section></section><section id="rc列联表" class="level2" data-number="13.3"><h2 data-number="13.3" class="anchored" data-anchor-id="rc列联表">
+<span class="header-section-number">13.3</span> R×C列联表</h2>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">150</span>,<span class="fl">184</span>,<span class="fl">198</span>,<span class="fl">50</span>,<span class="fl">16</span>,<span class="fl">2</span><span class="op">)</span>,<span class="fl">3</span>,dimnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>,<span class="st">"B"</span>,<span class="st">"C"</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Yes"</span>,<span class="st">"No"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">x</span></span>
@@ -597,13 +632,13 @@ P=\sum_{i≤k} p_i
 <span><span class="co">#&gt; C 177.3333 22.66667</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<section id="多重比较" class="level3" data-number="10.3.1"><h3 data-number="10.3.1" class="anchored" data-anchor-id="多重比较">
-<span class="header-section-number">10.3.1</span> 多重比较</h3>
+<section id="多重比较" class="level3" data-number="13.3.1"><h3 data-number="13.3.1" class="anchored" data-anchor-id="多重比较">
+<span class="header-section-number">13.3.1</span> 多重比较</h3>
 <p><span class="math display">\[
 \alpha'=\frac {\alpha}{比较的次数=\frac{k(k-1)}{2}}
 \]</span></p>
-</section></section><section id="拟合优度检验" class="level2" data-number="10.4"><h2 data-number="10.4" class="anchored" data-anchor-id="拟合优度检验">
-<span class="header-section-number">10.4</span> 拟合优度检验</h2>
+</section></section><section id="拟合优度检验" class="level2" data-number="13.4"><h2 data-number="13.4" class="anchored" data-anchor-id="拟合优度检验">
+<span class="header-section-number">13.4</span> 拟合优度检验</h2>
 <p>Pearson’s <span class="math inline">\(\chi^2\)</span> goodness-of-fit test</p>
 
 
@@ -1069,13 +1104,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./ANOVA.html" class="pagination-link" aria-label="方差分析">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">方差分析</span></span>
+      <a href="./repeated_measures_ANOVA.html" class="pagination-link" aria-label="重复测量方差分析">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">重复测量方差分析</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./nonparametric_test.html" class="pagination-link" aria-label="非参数秩检验">
-        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">非参数秩检验</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">非参数秩检验</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">

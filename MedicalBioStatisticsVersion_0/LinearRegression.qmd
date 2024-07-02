@@ -11,14 +11,6 @@ library(tidymodels)
 library(patchwork)
 ```
 
-```{r}
-#linear model specification 线性模型规范
-lm_spec <-linear_reg() |>
-  set_mode("regression") |>
-  set_engine("lm")  
-lm_spec
-```
-
 [数据下载网站](https://www.statlearning.com/resources-second-edition)
 
 ```{r}
@@ -27,9 +19,19 @@ income1<-read_csv("data/Income1.csv")
 income2<-read_csv("data/Income2.csv")
 ```
 
-## 简单线性回归
+## 一元线性回归
 
-bivariate linear regression model
+### lm
+
+```{r}
+#linear model specification 线性模型规范
+lm_spec <-linear_reg() |>
+  set_mode("regression") |>
+  set_engine("lm")  
+lm_spec
+```
+
+linear regression model：
 
 $$
 Y_i=\beta_0+ \beta_1 X_i+\epsilon_i,其中\epsilon_i\sim N(0,\sigma^2)
@@ -44,14 +46,8 @@ p_sales<-function(x){
 p_sales(TV)|p_sales(radio)|p_sales(newspaper)
 ```
 
-### 摘要
-
 ```{r}
 lm_sales_tv <- lm_spec |>  fit(sales ~ TV, data = advertising)
-
-
-
-
 # 模型摘要
 lm_sales_tv  # lm_sales_tv |>  pluck("fit")
 summary(lm_sales_tv$fit)  # lm_sales_tv |>pluck("fit") |>summary()
@@ -256,6 +252,45 @@ summary(fit_step)
 $$
 Y_i=\beta_0+\sum_{i=1}^p \beta_p X_{pi}+\epsilon_i,其中\epsilon_i\sim N(0,\sigma^2)
 $$
+
+### `rms::ols()`
+
+```{r}
+acl <- read_rds("data/icpsr/advanced_acl_data.rds")
+ols_mlm <- rms::ols(SWL_W1 ~ Sex + AGE_W1 + SESCategory ,data = acl)
+
+texreg::texreg(ols_mlm)
+
+car::vif(ols_mlm)
+anova(ols_mlm)
+```
+
+### `lm()`
+
+```{r}
+lm_mlm <- lm_spec |> 
+    fit(SWL_W1 ~ Sex + AGE_W1 + SESCategory ,data = acl)
+
+lm_mlm |> glance()
+lm_mlm |> tidy()
+
+
+logLik(lm_mlm$fit)
+car::vif(lm_mlm$fit)
+```
+
+### `glm()`
+
+```{r}
+glm_mlm <- linear_reg() %>%
+    set_engine('glm',family=gaussian(link = "identity")) |> 
+    fit(SWL_W1 ~ Sex + AGE_W1 + SESCategory ,data = acl)
+
+glm_mlm |> glance()
+glm_mlm |> tidy()
+
+summary(glm_mlm$fit)
+```
 
 ```{r}
 #第一步，检测变量相关关系
@@ -500,7 +535,7 @@ return(import)
 relweights(lm1$fit,col="blue")
 ```
 
-## 线性相加模型
+## 线性可加模型
 
 additive model
 
@@ -508,12 +543,9 @@ $$
 Y_i=\beta_0+ \beta_1 X_i+  \beta_2 X_i^2+\epsilon_i
 $$
 
-
 $$
 Y_i=\beta_0+ \beta_1\times \log(X_i)+\epsilon_i
 $$
-
-
 
 $$
 Y_i=\beta_0+ \beta_1 (X_i\times W_i)+\epsilon_i
@@ -522,8 +554,6 @@ $$
 $$
 Y_i=\beta_0+ \beta_1\times \exp(X_i)+\epsilon_i
 $$
-
-
 
 $$
 Y_i=\beta_0+ \beta_1\times \sin(X_i)+\epsilon_i

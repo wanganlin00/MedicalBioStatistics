@@ -148,3 +148,96 @@ $$
 ## 拟合优度检验
 
 Pearson’s $\chi^2$ goodness-of-fit test
+
+## 独立性检验
+
+### 列联表
+
+```{r}
+eg <- matrix(c(156,9421,1531,14797),nrow=2,byrow=TRUE)
+colnames(eg) <- c("Disease","Control")
+rownames(eg) <- c("Exposed","Unexposed")
+print(eg)
+prop.table(eg)          #各单元格比例
+prop.table(eg,margin = 1)        #行比例 
+```
+
+### 边际列联表
+
+```{r}
+# 边际
+margin.table(x=eg,margin = 2)      #列和
+addmargins(eg)          #添加行和、列和
+addmargins(eg,1)        #添加列和
+addmargins(eg,2)        #添加行和
+addmargins(prop.table(eg,1))
+
+ftable(eg)   # "平铺式"列联表
+```
+
+### 独立性检验
+
+独立性：判断两个或多个分类变量之间是否存在关联或取值互不影响，分析联合概率分布是否可以分解为各自概率分布的乘积。
+
+#### $\chi^2$ 独立性检验
+
+```{r}
+M <- as.table(rbind(c(86, 29), c(44, 30)))
+dimnames(M) <- list(gender = c("F", "M"),
+                    smoking = c("Yes","No"))
+M
+
+chisq <- chisq.test(M)
+chisq
+chisq$expected  # 期望频数
+chisq$parameter # degrees of freedom
+
+#对于频数表中每个单元格的期望频数都比较大（大于 5）的大样本，correct设为 FALSE,不进行连续校正
+chisq2 <- chisq.test(M,correct = FALSE) 
+chisq2
+```
+
+#### Fisher精确检验
+
+　　如果观察总记录数 n 小于 40，或者频数表里的某个期望频数很小（小于 1） ，则需要使 用 Fisher 精确概率检验。
+
+```{r}
+# Fisher's exact test to test independence of rows and columns in contingency table
+fisher.test(M)
+```
+
+#### Cochran-Mantel-Haenszel $\chi^2$ 检验
+
+又叫行均分检验，常用于按照某个变量进行分层后的检验，这个方法课本上说**用于检验两个有序分类变量是否存在线性相关**，但实际上用途很广泛，比如因变量是有序变量的单向有序列联表，也可以用。　　
+
+两个变量的关联有可能受到第三个变量的影响，因此我们有必要检验两个分类变量在 调整（控制）第三个变量的情况下是否独立。 Cochran-Mantel-Haenszel χ 2 检验常用于探索 变量间的混杂因素。其零假设是：两个分类变量在第三个变量的每一层都是条件独立的。函数 mantelhaen.test( ) 可以用来进行该检验。
+
+```{r}
+Rabbits <-
+array(c(0, 0, 6, 5,
+        3, 0, 3, 6,
+        6, 2, 0, 4,
+        5, 6, 1, 0,
+        2, 5, 0, 0),
+      dim = c(2, 2, 5),
+      dimnames = list(
+          Delay = c("None", "1.5h"),
+          Response = c("Cured", "Died"),
+          Penicillin.Level = c("1/8", "1/4", "1/2", "1", "4")))
+Rabbits
+
+mantelhaen.test(Rabbits)
+```
+
+#### 配对列联表的 χ 2 检验
+
+　　医学科研实践中经常遇到配对设计的计数资料，例如两种检验方法、诊断方法结果的 比较。其特点是对每个研究对象分别用两种方法处理，然后观察两种处理方法的某两分类 变量的计数结果。对于这种数据，我们也可以整理成列联表的形式，但是不能用前述的 χ 2独立性检验，需进行 Mcnemar 检验。
+
+```{r}
+#　　某实验室分别用免疫荧光法和乳胶凝集法对 58 名疑似系统性红斑狼疮患者血清中抗 核抗体进行测定
+result<- matrix(c(11, 2, 12, 33), nrow = 2,dimnames = list(c("+","-"),c("+","-")))
+result
+
+#　　对于配对四格表，如果样本量较小（不一致的结果的总数小于 40 ） ，则需要进行连续性校正。
+mcnemar.test(result,correct = TRUE)
+```

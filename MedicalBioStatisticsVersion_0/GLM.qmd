@@ -2,22 +2,7 @@
 
 ## 逻辑回归
 
-[数据下载网站](https://www.statlearning.com/resources-second-edition)
-
 逻辑回归一般需要引入虚拟变量（哑变量，dummy variable），通常取值伪0或1。
-
-```{r}
-library(tidymodels)
-library(patchwork)
-
-logit_spec <- logistic_reg() |>
-  set_mode("classification") |>
-  set_engine("glm") 
-
-logit_spec<-logistic_reg(mode = "classification",
-                         engine = "glm")  # 默认
-logistic_reg
-```
 
 Sigmoid 激活函数：
 
@@ -69,13 +54,15 @@ $$ 其中$\pi$ 是成功概率，$k=1,2,...,K-1$是因变量的水平数，$p$ �
     $$
 
 ```{r}
-df <- read_csv("data/Default.csv")
+df <- read_csv("data/ISLR/Default.csv")
 df$default <- factor(df$default,levels = c("No","Yes"),labels = c(0,1))
 df$student<- factor(df$student,levels = c("No","Yes"),labels = c(0,1))
 # 违约 学生 余额 收入
 head(df)
 table(df$default,df$student)
 ```
+
+[数据下载网站](https://www.statlearning.com/resources-second-edition)
 
 ```{r}
 ggplot(df,aes(balance,income))+
@@ -86,9 +73,14 @@ ggplot(df,aes(default,income,fill=default))+
   geom_boxplot()
 ```
 
-### K=2 p=1 logistic regression
+```{r}
+library(tidymodels)
+library(patchwork)
+```
 
-#### 线性回归
+### Binary logistic regression
+
+#### 为什么不用线性回归
 
 ```{r}
 lm_spec<-linear_reg(mode ="regression",engine = "lm" )
@@ -99,7 +91,7 @@ lm_default_balance$fit
 
 ggplot(df,aes(balance,as.numeric(default)-1))+
   geom_point(color="orange",size=1.25)+
-  geom_smooth(formula = "y~x",method = "lm",se=FALSE)+
+  geom_smooth(method = "lm",se=FALSE)+
   geom_hline(yintercept = c(0,1),linetype=2)+
   ggtitle("linear regression")
 
@@ -108,23 +100,23 @@ ggplot(df,aes(balance,as.numeric(default)-1))+
 #### 逻辑回归
 
 ```{r}
-logit_default_balance<-logit_spec |> fit(default~balance,data=df)
-
-summary(logit_default_balance$fit)
-
-tidy(logit_default_balance) #prob(Y=1|x)=exp(β0+β1X)/(1+exp(β0+β1X))  
+logit_spec <- logistic_reg() |>
+  set_engine("glm",family= binomial(link = "logit")) 
 
 
-df |> 
-  mutate(
-    prob=1/(1+exp(-(logit_default_balance$fit$coefficients[1]+logit_default_balance$fit$coefficients[2]*balance))),
-    logit=log(prob/(1-prob))
-  ) |> 
-  ggplot()+
-    geom_point(aes(balance,as.numeric(default)-1),color="orange")+
-    geom_line(aes(balance,prob),color="blue")+  
-    geom_hline(yintercept = c(0,1),linetype=2)+
-    ggtitle("logistic regression")
+logit_default_balance <- logit_spec |> fit(default~balance,data=df)
+
+logit_default_balance |> glance()
+
+tidy(logit_default_balance)
+
+
+ggplot(df,aes(balance,as.numeric(default)-1))+
+  geom_point(color="orange",size=1.25)+
+  geom_smooth(method = "glm",
+              method.args=list(family=binomial(link = "logit")),se=FALSE)+
+  geom_hline(yintercept = c(0,1),linetype=2)+
+  ggtitle("logistic regression")
 
 ```
 
@@ -142,7 +134,7 @@ df |>
   ) |> select(student,prob)
 ```
 
-### K=2,p\>1 多元逻辑回归
+### K=2,p>1 multiple 多元逻辑回归
 
 ```{r}
 logit_multiple<-logit_spec |> fit(default~balance+income+student,data=df)
@@ -180,18 +172,51 @@ predict(logit_multiple_2, new_data = df_new,type="class")
 predict(logit_multiple_2, new_data = df_new, type = "prob")
 ```
 
-### K\>2,p\>1 multinomialregression
+### 有序逻辑回归
+
+$$
+    \log \left(\frac{P(Y\le k|X=x)}{1-P(Y\le k|X=x)}\right)
+$$
 
 ```{r}
-library(nnet) # 多项逻辑回归
-iris_multinom <- multinom(Species ~ ., data = iris, trace = FALSE)
-summary(iris_multinom)
-table(predict(iris_multinom, iris[, -5], type = "class"), iris[, 5])
+acl <- read_rds("data/icpsr/advanced_acl_data.rds")
+acl$PhysActCat_W1 <- factor(acl$PhysActCat_W1,ordered = T)
+levels(acl$PhysActCat_W1)
+
+ordered_logit <- MASS::polr(PhysActCat_W1 ~ SelfEfficacy_W1, data = acl,
+                            method = "logistic")
+ordered_logit |> summary()
+
+
+predict(ordered_logit ,acl ,type = "p") |> as_tibble()
 ```
+
+### K>2,p>1 multinomial logistic regression
+
+
+#### `nnet::multinom()`
+
+```{r}
+mn_spec <- multinom_reg(mode = "classification", engine = "nnet")
+
+iris_mnlogit <- mn_spec |> 
+    fit(Species ~ ., data = iris)
+
+iris_mnlogit |> glance()
+iris_mnlogit |> tidy()
+
+
+augment(iris_mnlogit,new_data = iris) |> 
+    conf_mat(truth=Species,estimate=.pred_class)
+```
+
+#### `glmnet::glmnet()`
 
 ```{r}
 library(glmnet) # 多项回归
 iris_glmnet <- glmnet(x = iris[, -5], y = iris[, 5], family = "multinomial")
+iris_glmnet
+summary(iris_glmnet )
 plot(iris_glmnet)
 plot(iris_glmnet$lambda,
   ylab = expression(lambda), xlab = "迭代次数", main = "惩罚系数的迭代路径"
@@ -204,21 +229,52 @@ iris_pred_glmnet <- predict(
   object = iris_glmnet, newx = as.matrix(iris[, -5]),
   s = 0.0002796185, type = "class"
 )
+
 ```
+
+```{r}
+mn_spec <- multinom_reg(mode = "classification", engine = "glmnet" ,penalty = tune())
+
+iris_mnlogit <- mn_spec |> 
+    fit(Species ~ ., data = iris)
+iris_mnlogit |> glance()
+iris_mnlogit$fit
+```
+
+
 
 ## 泊松回归
 
 因变量是计数变量（非负整数）
 
+$$
+P(X=x;\lambda)=\frac{e^{-\lambda}\lambda ^x}{x!}
+$$
+
+```{r}
+
+ggplot(tibble(x=0:20,
+              y1=dpois(x,lambda = 2),
+              y2=dpois(x,lambda = 6),
+              ),
+       aes(x)
+       )+
+    geom_col(aes(y=y1),fill = "lightblue")+
+    geom_col(aes(y=y2),fill = "yellow",alpha=.3)+
+    ylab("Poisson Density")
+
+
+```
+
 ```{r}
 library(poissonreg)
-df2 <- read_csv("data/Bikeshare.csv")
+df2 <- read_csv("data/ISLR/Bikeshare.csv")
 ```
 
 ```{r}
 pois_spec <- poisson_reg() |> 
   set_mode("regression") |> 
-  set_engine("glm")
+  set_engine("glm",family=poisson(link = "log"))
 
 pois_rec_spec <- recipe(bikers ~ mnth + hr + workingday + temp + weathersit, data = df2) |> 
     step_dummy(all_nominal_predictors()) # 虚拟变量
@@ -256,6 +312,50 @@ pois_fit_coef_mnths |>
              fill = "black", color = "white",na.rm = TRUE) +
   labs(title = "Coefficient value from Poission Regression",
        x = "Month", y = "Coefficient")
+```
+
+
+
+```{r}
+pois_acl <- pois_spec |> 
+    fit(NChronic12_W1 ~ SelfEfficacy_W1,data = acl)
+
+pois_acl |> glance()
+
+pois_acl |> tidy()
+
+AIC(pois_acl$fit)
+BIC(pois_acl$fit)
+```
+
+
+## 负二项回归
+
+因变量是计数变量（非负整数）
+
+probability mass function ：
+
+$$
+P(X=x;\lambda,\nu)=\binom{x+\nu - 1}{ x} \left ( \frac{\lambda}{\lambda +\nu} \right)^x \left ( \frac{\nu}{\nu + \lambda} \right)^{\nu}
+$$
+
+负二项分布的均值是 $\lambda$ ，
+
+方差是 $\lambda + \frac{\lambda ^2}{\nu}$ 。
+
+```{r}
+
+nb_spec <- linear_reg() |> 
+    set_engine("glm",family=negative.binomial(theta= 1,link = "log"))
+
+nb_acl <- nb_spec |> 
+    fit(NChronic12_W1 ~ SelfEfficacy_W1,data = acl)
+nb_acl |> glance()
+
+nb_acl |> tidy()
+
+AIC(nb_acl$fit)
+BIC(nb_acl$fit)
 ```
 
 ## glm

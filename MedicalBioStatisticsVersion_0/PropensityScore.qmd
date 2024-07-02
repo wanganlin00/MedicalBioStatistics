@@ -1,6 +1,6 @@
 # 倾向性评分
 
-倾向性评分最大的优势是将多个混杂因素的影响用一个综合的值来表示，即**倾向性评分值（Propensity Score, PS）**，从而降低协变量的维度，因此该方法尤其适用于协变量较多的情况。
+倾向性评分最大的优势是将多个混杂因素的多维影响用一维的倾向值（接受某处理的概率）来表示，即**倾向性评分值（Propensity Score, PS）**，从而降低协变量的维度，因此该方法尤其适用于协变量较多的情况。
 
 [Applied Propensity Score Analysis with R](https://psa.bryer.org/index.html)
 
@@ -33,7 +33,6 @@ PS 值的估计是**以处理因素作为因变量，其他混杂因素作为自
 ```{r}
 library(tidyverse)
 library(MatchIt)
-library(Matching)
 library(PSAgraphics)
 require(tableone)
 data(lalonde, package='Matching')
@@ -136,7 +135,25 @@ PSAgraphics::cat.psa(categorical = lalonde$nodegr,
                      main = 'Covariate: nodegr')
 ```
 
-### 估计效应
+### 估计因果效应
+
+个体处理效应：
+
+$$
+ITE=\tau_i=y_i^1-y_i^0
+$$
+
+因果推断的基本难题：***Y=ZY^1^ +(1-Z)Y^0^ , Z=0 或 1***，2个实际结果，2个反事实结果
+
+平均处理效应
+
+$$
+\widehat {ATE} =E(\tau)=E(Y^1-Y^0)=E(Y^1)-E(Y^0)
+$$
+
+实验组平均处理效应ATT
+
+对照组平均处理效应ATC
 
 ```{r}
 PSAgraphics::loess.psa(response = log(lalonde$re78 + 1),
@@ -181,6 +198,10 @@ table(lalonde$tree_strata, lalonde$treat, useNA = 'ifany')
 ## 匹配（Matching）
 
 **倾向评分匹配**根据他们的*倾向评分*将治疗组中的每个人与对照组中的个体相匹配。对于每个人来说，*倾向得分*可以直观地视为从一系列协变量（和潜在混杂因素）计算出来的最近治疗的概率。两个人，一个来自治疗组，一个来自对照组，如果他们的倾向评分之间的差异很小，则被认为是匹配的。不匹配的参与者将被丢弃。
+
+```{r}
+library(Matching)
+```
 
 ```{r}
 lalonde_match <- Match(
@@ -278,7 +299,7 @@ rr2 <- Match(Y = lalonde$re78,
 summary(rr2) # The default estimate is ATT here
 ```
 
-### MachIt
+### MachIt套件类型
 
 ```{r}
 matchit.out <- MatchIt::matchit(lalonde_formu, data = lalonde)
@@ -332,6 +353,277 @@ rr3 <- Matchby(Y = lalonde$re78,
                by = lalonde[,c('nodegr','married')],
                print.level = 0)
 summary(rr3)
+```
+
+## 倾向值匹配法的概述与应用 R实现
+
+```{r}
+library(Matching)
+data(lalonde, package = 'Matching')
+```
+
+| 变量名    | 描述                        |
+|-----------|-----------------------------|
+| `age`     | 年龄                        |
+| `educ`    | 受教育年限                  |
+| `black`   | 分类变量，1为黑人           |
+| `hisp`    | 分类变量，1为西班牙裔       |
+| `married` | 分类变量，1为已婚           |
+| `nodegr`  | 分类变量，1为有高中学历证书 |
+| `re74`    | 1974年的收入                |
+| `re75`    | 1975年的收入                |
+| `re78`    | 1978年的收入                |
+| `u74`     | 分类变量，1为1974年收入为零 |
+| `u75`     | 分类变量，1为1975年收入为零 |
+| `treat`   | 分类变量，1为实验组         |
+
+### 估计倾向值分数
+
+```{r}
+attach(lalonde)
+glm_ps <- glm(
+    formula = treat ~ age + educ + black + hisp + married + nodegr + re74  + re75,
+    family = binomial(link = 'logit')
+)
+
+psm1 <- Match(Y=re78,
+             Tr = treat,
+             X=glm_ps$fitted.values,
+             estimand = "ATT",
+             M=1,
+             replace = TRUE)
+summary(psm1)
+```
+
+如上所示，使用1对1样本可替代匹配法，实验组平均效应为2624.3，因果效应的标准误为803.19，t值为3.2714，p值为0.0010702\<0.05，表明估计的实验组平均处理效应有统计学差异。
+
+```{r}
+psm2 <- Match(Y=re78,
+             Tr = treat,
+             X=glm_ps$fitted.values,
+             estimand = "ATT",
+             M=1,
+             replace = FALSE)
+summary(psm2)
+```
+
+### 检验
+
+受试者个体同质性，是否随机分配
+
+协变量分布是否平衡，是否重合：
+
+以`age` 为例，实验组匹配前25.816匹配后25.816，对照组匹配前25.054匹配后25.692 ，匹配后实验组与对照组更接近了；T-test p-value \> 0.05 ，表示匹配前后`age` 均值无统计学差异；KS Bootstrap p-value \> 0.05 ，表示匹配前后`age` 分布无统计学差异
+
+```         
+***** (V1) age *****                Before Matching 	 	 After Matching mean   treatment........          25.816 	 	     25.816  
+mean control..........     25.054 	 	     25.692 
+std mean diff.........     10.655 	 	     1.7342 
+
+mean raw eQQ diff.....    0.94054 	 	    0.73837  
+med  raw eQQ diff.....          1 	 	          0  
+max  raw eQQ diff.....          7 	 	          9   
+
+mean eCDF diff........   0.025364 	 	   0.021893  
+med  eCDF diff........   0.022193 	 	   0.020349  
+max  eCDF diff........   0.065177 	 	   0.061047   
+
+var ratio (Tr/Co).....     1.0278 	 	      1.083  
+T-test p-value........    0.26594 	 	    0.84975  
+KS Bootstrap p-value..      0.526 	 	      0.355  
+KS Naive p-value......     0.7481 	 	    0.54314  
+KS Statistic..........   0.065177 	 	   0.061047 
+```
+
+```{r}
+check_balance <- MatchBalance(
+    formul = treat ~ age + educ + black + hisp + married + nodegr + re74  + re75,
+    match.out = psm1,
+    nboots = 1000,data = lalonde
+)
+```
+
+```{r}
+# age 变平衡了
+qqplot(lalonde$age[psm1$index.control],lalonde$age[psm1$index.treated])
+abline(a=0,b=1)
+
+# re74 更不平衡了
+qqplot(lalonde$re74[psm1$index.control],lalonde$re74[psm1$index.treated])
+abline(a=0,b=1)
+```
+
+```{r}
+# # The covariates we want to match on
+x <- cbind(age , educ , black , hisp , married , nodegr , re74  , re75)
+
+# The covariates we want to obtain balance on
+BalanceMatrix = x
+set.seed(100)
+
+
+
+# Genetic Matching 自动适配平衡
+gen_match <- GenMatch(Tr=treat,
+                      X=glm_ps$fitted.values,
+                      BalanceMatrix = x,
+                      estimand = "ATT")
+
+PSM <-  Match(Y=re78,
+             Tr = treat,
+             X=glm_ps$fitted.values,
+             estimand = "ATT",
+             Weight.matrix = gen_match,
+             replace = TRUE,)
+summary(PSM)
+
+check_balance2 <- MatchBalance(
+    formul = treat ~ age + educ + black + hisp + married + nodegr + re74  + re75,
+    match.out = PSM,
+    nboots = 1000,data = lalonde
+)
+
+# age 变平衡了
+qqplot(lalonde$age[PSM$index.control],lalonde$age[PSM$index.treated])
+abline(a=0,b=1)
+
+# re74 也变平衡了
+qqplot(lalonde$re74[PSM$index.control],lalonde$re74[PSM$index.treated])
+abline(a=0,b=1)
+```
+
+敏感性分析
+
+```{r}
+library(rbounds)
+psens(x =lalonde[PSM$index.treated,"re78"],
+      y =lalonde[PSM$index.control,"re78"] ,Gamma = 2,GammaInc = 0.1)
+psens
+```
+
+对`PSM（Y=re78）`使用`psens()`进行Wilcoxon 符合秩检验，当τ=1.3，p值就大于0.05了，说明处理发生比为1.3时，就可以改变原先对于处理效应的结论，也就是说，这个隐藏性偏差不必太大就可以改变原来的结论，因此分析结果对隐藏性排除的影响非常敏感，结论不可靠。
+
+对 `PSM（Y=re78）`使用Hodges-Lehmann点估计检验法 `hlsens()` ，当τ=1.5，其95%置信区间包含零，说明此时处理效应是无效的。说明处理发生比为1.5时，隐藏性偏差就可以改变原来的结论，因此匹配后的结论不可靠。
+
+```{r}
+x = lalonde[PSM$index.treated, "re78"]
+y = lalonde[PSM$index.control, "re78"]
+hlsens(x, y,Gamma = 2,GammaInc = 0.1)
+```
+
+```{r}
+dir <- colMeans(x) - colMeans(y)
+trt <- x
+ctrl <- y
+dir_sign <- sign(dir)
+# 根据dir的符号分配控制组和处理组
+for (i in seq_along(dir_sign)) {
+    if (dir_sign[i] > 0) {
+        trt[, i] <- x[, i]  # x的这一列作为处理组
+        ctrl[, i] <- y[, i]  # y的这一列作为控制组
+    } else{
+        trt[, i] <- y[, i]  # y的这一列作为处理组
+        ctrl[, i] <- x[, i]  # x的这一列作为控制组
+    }
+}
+
+test_results <-  map2(
+    x,
+    y,
+    wilcox.test,
+    paired = TRUE,
+    conf.int = TRUE,
+    exact = FALSE
+)
+
+#map_vec(test_results,`$`,estimate)
+tau.up <- tau.l <- map_vec(test_results, `$`, estimate)
+```
+
+共同支持域的查验
+
+```{r}
+sum(glm_ps$fitted.values[treat==1]> max(glm_ps$fitted.values[treat==0]))
+
+sum(glm_ps$fitted.values[treat==1]< min(glm_ps$fitted.values[treat==0]))
+```
+
+丢弃的实验组样本共有4个。185-181
+
+```{r}
+summary(PSM)
+PSM_CS <-  Match(Y=re78,
+             Tr = treat,
+             X=glm_ps$fitted.values,
+             estimand = "ATT",
+             Weight.matrix = gen_match,
+             replace = TRUE,
+             CommonSupport = TRUE)
+summary(PSM_CS)
+```
+
+有查验共同支持域的ATT（2330），与无查验共同支持域（2439.3）存在差异，因此必须重新改进倾向值分析。
+
+### MatchIt
+
+#### 匹配数据
+
+```{r}
+library(MatchIt)
+NM <- MatchIt::matchit(
+    formula = treat ~ age + educ + black + hisp + married + nodegr + re74  + re75,
+    data = lalonde,
+    method = "nearest", # 最近邻匹配
+    ratio = 1, # 1:1
+    replace = FALSE
+)
+summary(NM)
+
+```
+
+#### 评估质量
+
+```{r}
+# 散点图展示了匹配后实验组和对照组样本倾向值的分布，凸显了分布平衡与不平衡，分布缺乏重合
+plot(NM,type = "jitter")
+```
+
+```{r}
+# QQ图 展示了 匹配前（All）匹配后（Matched）的平衡情况
+plot(NM,type = "QQ")
+
+# 直方图展示了匹配前后倾向值的分布
+plot(NM,type = "hist")
+```
+
+```{r}
+# 标准化平衡统计值，Std. Mean Diff.
+summary(NM,standardize = TRUE)
+```
+
+继续改进，调整模型和协变量
+
+#### 计算平均处理效应
+
+为了简化步骤，以当前的结果进行匹配后分析。
+
+```{r}
+
+# 提取匹配后的样本
+mData <- match.data(NM,group = "all")
+mData_trt <- match.data(NM,group = "treat")
+mData_ctrl <- match.data(NM,group = "control")
+ 
+# 包从CRAN剔除了
+```
+
+```{r}
+library(rbounds)
+psens(x =mData_trt$re78,
+      y =mData_ctrl$re78 ,Gamma = 2,GammaInc = 0.1)
+
+hlsens(x =mData_trt$re78,
+      y =mData_ctrl$re78 ,Gamma = 2,GammaInc = 0.1)
 ```
 
 ## 加权（Weighting）

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.4.553">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>医学与生物统计学 - 11&nbsp; 非参数秩检验</title>
+<title>医学与生物统计学 - 14&nbsp; 非参数秩检验</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -130,7 +130,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./probability_theory.html">概率论与数理统计</a></li><li class="breadcrumb-item"><a href="./nonparametric_test.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">非参数秩检验</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./probability_theory.html">概率论与数理统计</a></li><li class="breadcrumb-item"><a href="./nonparametric_test.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">非参数秩检验</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -222,32 +222,50 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./normality_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">正态性检验</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./variance_homogeneity_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">方差齐性检验</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./t_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">t 检验</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">t 检验</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./rate_proportion_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">比例检验</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">比例检验</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ANOVA.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">方差分析</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">方差分析</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./repeated_measures_ANOVA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">重复测量方差分析</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chi-square_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title"><span class="math inline">\(\chi^2\)</span> 检验</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title"><span class="math inline">\(\chi^2\)</span> 检验</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./nonparametric_test.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">非参数秩检验</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">非参数秩检验</span></span></a>
   </div>
 </li>
       </ul>
@@ -255,7 +273,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
- <span class="menu-text">线性模型</span></a>
+ <span class="menu-text">统计模型</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -264,31 +282,31 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./independence_correlation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">独立性与相关性</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">独立性与相关性</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./LinearRegression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">线性回归</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">线性回归</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./GLM.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">广义线性模型</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">广义线性模型</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./LME.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">线性混合效应模型</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">线性混合效应模型</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./GEE.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">广义估计方程</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">广义估计方程</span></span></a>
   </div>
 </li>
       </ul>
@@ -305,7 +323,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./SurvivalAnalysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">生存分析</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">生存分析</span></span></a>
   </div>
 </li>
       </ul>
@@ -313,7 +331,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
- <span class="menu-text">研究设计</span></a>
+ <span class="menu-text">倾向性评分</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -321,14 +339,31 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./diagnostic_tests.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">诊断价值评估</span></span></a>
+  <a href="./PropensityScore.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">倾向性评分</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text">研究设计</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./diagnostic_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">诊断性测试</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./observational_study_design.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">观察性研究设计</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">观察性研究设计</span></span></a>
   </div>
 </li>
       </ul>
@@ -341,22 +376,22 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#%E5%8D%95%E6%A0%B7%E6%9C%ACwilcoxon-signed-rank-%E6%A3%80%E9%AA%8C" id="toc-单样本wilcoxon-signed-rank-检验" class="nav-link active" data-scroll-target="#%E5%8D%95%E6%A0%B7%E6%9C%ACwilcoxon-signed-rank-%E6%A3%80%E9%AA%8C"><span class="header-section-number">11.1</span> 单样本Wilcoxon Signed-Rank 检验</a></li>
-  <li><a href="#%E9%85%8D%E5%AF%B9-wilcoxons-signed-rank-%E6%A3%80%E9%AA%8C" id="toc-配对-wilcoxons-signed-rank-检验" class="nav-link" data-scroll-target="#%E9%85%8D%E5%AF%B9-wilcoxons-signed-rank-%E6%A3%80%E9%AA%8C"><span class="header-section-number">11.2</span> 配对 Wilcoxon’s signed-rank 检验</a></li>
-  <li><a href="#%E7%8B%AC%E7%AB%8B%E5%8F%8C%E6%A0%B7%E6%9C%ACwilcoxons-rank-sum-%E6%A3%80%E9%AA%8C" id="toc-独立双样本wilcoxons-rank-sum-检验" class="nav-link" data-scroll-target="#%E7%8B%AC%E7%AB%8B%E5%8F%8C%E6%A0%B7%E6%9C%ACwilcoxons-rank-sum-%E6%A3%80%E9%AA%8C"><span class="header-section-number">11.3</span> 独立双样本Wilcoxon’s Rank-Sum 检验</a></li>
+<li><a href="#%E5%8D%95%E6%A0%B7%E6%9C%ACwilcoxon-signed-rank-%E6%A3%80%E9%AA%8C" id="toc-单样本wilcoxon-signed-rank-检验" class="nav-link active" data-scroll-target="#%E5%8D%95%E6%A0%B7%E6%9C%ACwilcoxon-signed-rank-%E6%A3%80%E9%AA%8C"><span class="header-section-number">14.1</span> 单样本Wilcoxon Signed-Rank 检验</a></li>
+  <li><a href="#%E9%85%8D%E5%AF%B9-wilcoxons-signed-rank-%E6%A3%80%E9%AA%8C" id="toc-配对-wilcoxons-signed-rank-检验" class="nav-link" data-scroll-target="#%E9%85%8D%E5%AF%B9-wilcoxons-signed-rank-%E6%A3%80%E9%AA%8C"><span class="header-section-number">14.2</span> 配对 Wilcoxon’s signed-rank 检验</a></li>
+  <li><a href="#%E7%8B%AC%E7%AB%8B%E5%8F%8C%E6%A0%B7%E6%9C%ACwilcoxons-rank-sum-%E6%A3%80%E9%AA%8C" id="toc-独立双样本wilcoxons-rank-sum-检验" class="nav-link" data-scroll-target="#%E7%8B%AC%E7%AB%8B%E5%8F%8C%E6%A0%B7%E6%9C%ACwilcoxons-rank-sum-%E6%A3%80%E9%AA%8C"><span class="header-section-number">14.3</span> 独立双样本Wilcoxon’s Rank-Sum 检验</a></li>
   <li>
-<a href="#%E7%8B%AC%E7%AB%8B%E5%A4%9A%E6%A0%B7%E6%9C%ACkruskal-wallis-%E6%A3%80%E9%AA%8C" id="toc-独立多样本kruskal-wallis-检验" class="nav-link" data-scroll-target="#%E7%8B%AC%E7%AB%8B%E5%A4%9A%E6%A0%B7%E6%9C%ACkruskal-wallis-%E6%A3%80%E9%AA%8C"><span class="header-section-number">11.4</span> 独立多样本Kruskal-Wallis 检验</a>
+<a href="#%E7%8B%AC%E7%AB%8B%E5%A4%9A%E6%A0%B7%E6%9C%ACkruskal-wallis-%E6%A3%80%E9%AA%8C" id="toc-独立多样本kruskal-wallis-检验" class="nav-link" data-scroll-target="#%E7%8B%AC%E7%AB%8B%E5%A4%9A%E6%A0%B7%E6%9C%ACkruskal-wallis-%E6%A3%80%E9%AA%8C"><span class="header-section-number">14.4</span> 独立多样本Kruskal-Wallis 检验</a>
   <ul>
-<li><a href="#%E5%A4%9A%E9%87%8D%E6%AF%94%E8%BE%83" id="toc-多重比较" class="nav-link" data-scroll-target="#%E5%A4%9A%E9%87%8D%E6%AF%94%E8%BE%83"><span class="header-section-number">11.4.1</span> 多重比较</a></li>
+<li><a href="#%E5%A4%9A%E9%87%8D%E6%AF%94%E8%BE%83" id="toc-多重比较" class="nav-link" data-scroll-target="#%E5%A4%9A%E9%87%8D%E6%AF%94%E8%BE%83"><span class="header-section-number">14.4.1</span> 多重比较</a></li>
   </ul>
 </li>
-  <li><a href="#%E9%9A%8F%E6%9C%BA%E5%8C%BA%E7%BB%84%E8%AE%BE%E8%AE%A1%E6%96%B9%E5%B7%AE%E5%88%86%E6%9E%90" id="toc-随机区组设计方差分析" class="nav-link" data-scroll-target="#%E9%9A%8F%E6%9C%BA%E5%8C%BA%E7%BB%84%E8%AE%BE%E8%AE%A1%E6%96%B9%E5%B7%AE%E5%88%86%E6%9E%90"><span class="header-section-number">11.5</span> 随机区组设计方差分析</a></li>
+  <li><a href="#%E5%8D%95%E5%9B%A0%E7%B4%A0%E9%87%8D%E5%A4%8D%E6%B5%8B%E9%87%8F%E6%96%B9%E5%B7%AE%E5%88%86%E6%9E%90%E7%9A%84%E9%9D%9E%E5%8F%82%E6%95%B0%E6%9B%BF%E4%BB%A3" id="toc-单因素重复测量方差分析的非参数替代" class="nav-link" data-scroll-target="#%E5%8D%95%E5%9B%A0%E7%B4%A0%E9%87%8D%E5%A4%8D%E6%B5%8B%E9%87%8F%E6%96%B9%E5%B7%AE%E5%88%86%E6%9E%90%E7%9A%84%E9%9D%9E%E5%8F%82%E6%95%B0%E6%9B%BF%E4%BB%A3"><span class="header-section-number">14.5</span> 单因素重复测量方差分析的非参数替代</a></li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./probability_theory.html">概率论与数理统计</a></li><li class="breadcrumb-item"><a href="./nonparametric_test.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">非参数秩检验</span></a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./probability_theory.html">概率论与数理统计</a></li><li class="breadcrumb-item"><a href="./nonparametric_test.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">非参数秩检验</span></a></li></ol></nav><div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">
-<span class="chapter-number">11</span>&nbsp; <span class="chapter-title">非参数秩检验</span>
+<span class="chapter-number">14</span>&nbsp; <span class="chapter-title">非参数秩检验</span>
 </h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 </div>
 
@@ -394,8 +429,8 @@ F(Median)=P(X\le Median)=0.5
 </div>
 </div>
 </div>
-<section id="单样本wilcoxon-signed-rank-检验" class="level2" data-number="11.1"><h2 data-number="11.1" class="anchored" data-anchor-id="单样本wilcoxon-signed-rank-检验">
-<span class="header-section-number">11.1</span> 单样本Wilcoxon Signed-Rank 检验</h2>
+<section id="单样本wilcoxon-signed-rank-检验" class="level2" data-number="14.1"><h2 data-number="14.1" class="anchored" data-anchor-id="单样本wilcoxon-signed-rank-检验">
+<span class="header-section-number">14.1</span> 单样本Wilcoxon Signed-Rank 检验</h2>
 <p>如果样本数据没有通过正态分布检验就要采用单样本wilcoxon符号秩检验进行计算。使用该检验需要满足的条件是样本值均匀地分布在均值两侧。</p>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span><span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">PlantGrowth</span>,<span class="va">group</span><span class="op">==</span><span class="st">"ctrl"</span><span class="op">)</span></span>
@@ -417,8 +452,8 @@ F(Median)=P(X\le Median)=0.5
 <span><span class="co">#&gt; alternative hypothesis: true location is not equal to 7</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="配对-wilcoxons-signed-rank-检验" class="level2" data-number="11.2"><h2 data-number="11.2" class="anchored" data-anchor-id="配对-wilcoxons-signed-rank-检验">
-<span class="header-section-number">11.2</span> 配对 Wilcoxon’s signed-rank 检验</h2>
+</section><section id="配对-wilcoxons-signed-rank-检验" class="level2" data-number="14.2"><h2 data-number="14.2" class="anchored" data-anchor-id="配对-wilcoxons-signed-rank-检验">
+<span class="header-section-number">14.2</span> 配对 Wilcoxon’s signed-rank 检验</h2>
 <p><span class="math display">\[
 T_++T_-=\frac{n(n+1)}{2},n为非零配对差值的数量
 \]</span></p>
@@ -451,8 +486,8 @@ T=min{(T_+,T_-)}
 <span><span class="co">#&gt; alternative hypothesis: true location shift is not equal to 0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="独立双样本wilcoxons-rank-sum-检验" class="level2" data-number="11.3"><h2 data-number="11.3" class="anchored" data-anchor-id="独立双样本wilcoxons-rank-sum-检验">
-<span class="header-section-number">11.3</span> 独立双样本Wilcoxon’s Rank-Sum 检验</h2>
+</section><section id="独立双样本wilcoxons-rank-sum-检验" class="level2" data-number="14.3"><h2 data-number="14.3" class="anchored" data-anchor-id="独立双样本wilcoxons-rank-sum-检验">
+<span class="header-section-number">14.3</span> 独立双样本Wilcoxon’s Rank-Sum 检验</h2>
 <p>当两个样本不满足正态分布时，使用Wilcoxon秩和检验进行非参数检验</p>
 <p><span class="math display">\[
 T=T_{min(n1,n2)}=T_1
@@ -482,8 +517,9 @@ T=T_{min(n1,n2)}=T_1
 <span><span class="va">W</span> <span class="op">&lt;-</span> <span class="va">T1</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">MVR</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">MVR</span><span class="op">)</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">/</span><span class="fl">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+<p>曼-惠特尼 U 统计量</p>
 <p><span class="math display">\[
-W=T_1-\frac{n_1(n_1+1)}{2}
+曼-惠特尼U统计量\ \ W= 威尔科克森W秩和\  \ \  T_1-\frac{n_1(n_1+1)}{2}
 \]</span></p>
 <p>n1&lt;10,n2-n1&lt;10，附录</p>
 <p>n1&gt;10,n2&gt;10，正态近似法</p>
@@ -513,8 +549,8 @@ W=T_1-\frac{n_1(n_1+1)}{2}
 </div>
 </div>
 </div>
-</section><section id="独立多样本kruskal-wallis-检验" class="level2" data-number="11.4"><h2 data-number="11.4" class="anchored" data-anchor-id="独立多样本kruskal-wallis-检验">
-<span class="header-section-number">11.4</span> 独立多样本Kruskal-Wallis 检验</h2>
+</section><section id="独立多样本kruskal-wallis-检验" class="level2" data-number="14.4"><h2 data-number="14.4" class="anchored" data-anchor-id="独立多样本kruskal-wallis-检验">
+<span class="header-section-number">14.4</span> 独立多样本Kruskal-Wallis 检验</h2>
 <p>假设：</p>
 <ol type="1">
 <li><p>随机，独立</p></li>
@@ -530,8 +566,8 @@ W=T_1-\frac{n_1(n_1+1)}{2}
 <span><span class="co">#&gt; Kruskal-Wallis chi-squared = 7.9882, df = 2, p-value = 0.01842</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<section id="多重比较" class="level3" data-number="11.4.1"><h3 data-number="11.4.1" class="anchored" data-anchor-id="多重比较">
-<span class="header-section-number">11.4.1</span> 多重比较</h3>
+<section id="多重比较" class="level3" data-number="14.4.1"><h3 data-number="14.4.1" class="anchored" data-anchor-id="多重比较">
+<span class="header-section-number">14.4.1</span> 多重比较</h3>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/pairwise.wilcox.test.html">pairwise.wilcox.test</a></span><span class="op">(</span><span class="va">PlantGrowth</span><span class="op">$</span><span class="va">weight</span>,<span class="va">PlantGrowth</span><span class="op">$</span><span class="va">group</span>,p.adjust.method <span class="op">=</span> <span class="st">"fdr"</span>,exact<span class="op">=</span><span class="cn">F</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -546,8 +582,8 @@ W=T_1-\frac{n_1(n_1+1)}{2}
 <span><span class="co">#&gt; P value adjustment method: fdr</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section></section><section id="随机区组设计方差分析" class="level2" data-number="11.5"><h2 data-number="11.5" class="anchored" data-anchor-id="随机区组设计方差分析">
-<span class="header-section-number">11.5</span> 随机区组设计方差分析</h2>
+</section></section><section id="单因素重复测量方差分析的非参数替代" class="level2" data-number="14.5"><h2 data-number="14.5" class="anchored" data-anchor-id="单因素重复测量方差分析的非参数替代">
+<span class="header-section-number">14.5</span> 单因素重复测量方差分析的非参数替代</h2>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/friedman.test.html">friedman.test</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
@@ -1017,12 +1053,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./chi-square_test.html" class="pagination-link" aria-label="$\chi^2$ 检验">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title"><span class="math inline">\(\chi^2\)</span> 检验</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title"><span class="math inline">\(\chi^2\)</span> 检验</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./independence_correlation.html" class="pagination-link" aria-label="独立性与相关性">
-        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">独立性与相关性</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">独立性与相关性</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
@@ -1112,55 +1148,57 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb10-92"><a href="#cb10-92" aria-hidden="true" tabindex="-1"></a>W <span class="ot">&lt;-</span> T1<span class="sc">-</span><span class="fu">length</span>(MVR)<span class="sc">*</span>(<span class="fu">length</span>(MVR)<span class="sc">+</span><span class="dv">1</span>)<span class="sc">/</span><span class="dv">2</span></span>
 <span id="cb10-93"><a href="#cb10-93" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb10-94"><a href="#cb10-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-95"><a href="#cb10-95" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb10-96"><a href="#cb10-96" aria-hidden="true" tabindex="-1"></a>W=T_1-\frac{n_1(n_1+1)}{2}</span>
+<span id="cb10-95"><a href="#cb10-95" aria-hidden="true" tabindex="-1"></a>曼-惠特尼 U 统计量</span>
+<span id="cb10-96"><a href="#cb10-96" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-97"><a href="#cb10-97" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb10-98"><a href="#cb10-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-99"><a href="#cb10-99" aria-hidden="true" tabindex="-1"></a>n1<span class="sc">\&lt;</span>10,n2-n1<span class="sc">\&lt;</span>10，附录</span>
+<span id="cb10-98"><a href="#cb10-98" aria-hidden="true" tabindex="-1"></a>曼-惠特尼U统计量\ \ W= 威尔科克森W秩和\  \ \  T_1-\frac{n_1(n_1+1)}{2}</span>
+<span id="cb10-99"><a href="#cb10-99" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb10-100"><a href="#cb10-100" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-101"><a href="#cb10-101" aria-hidden="true" tabindex="-1"></a>n1<span class="sc">\&gt;</span>10,n2<span class="sc">\&gt;</span>10，正态近似法</span>
+<span id="cb10-101"><a href="#cb10-101" aria-hidden="true" tabindex="-1"></a>n1<span class="sc">\&lt;</span>10,n2-n1<span class="sc">\&lt;</span>10，附录</span>
 <span id="cb10-102"><a href="#cb10-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-105"><a href="#cb10-105" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb10-106"><a href="#cb10-106" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(MVR,MVP,<span class="at">exact =</span> F,<span class="at">correct =</span> F)</span>
-<span id="cb10-107"><a href="#cb10-107" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb10-108"><a href="#cb10-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-111"><a href="#cb10-111" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb10-112"><a href="#cb10-112" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">xlim</span>(<span class="dv">0</span>,<span class="dv">50</span>) <span class="sc">+</span></span>
-<span id="cb10-113"><a href="#cb10-113" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_function</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">color=</span><span class="st">"Wilcox Distribution"</span>),</span>
-<span id="cb10-114"><a href="#cb10-114" aria-hidden="true" tabindex="-1"></a>                  <span class="at">fun =</span> dwilcox, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">m=</span><span class="dv">7</span> ,<span class="at">n=</span><span class="dv">9</span>), </span>
-<span id="cb10-115"><a href="#cb10-115" aria-hidden="true" tabindex="-1"></a>                 )<span class="sc">+</span></span>
-<span id="cb10-116"><a href="#cb10-116" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Wilcox Distribution"</span> <span class="ot">=</span> <span class="st">"blue"</span>))<span class="sc">+</span></span>
-<span id="cb10-117"><a href="#cb10-117" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">color =</span> <span class="st">"Distribution"</span>)</span>
-<span id="cb10-118"><a href="#cb10-118" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-119"><a href="#cb10-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-103"><a href="#cb10-103" aria-hidden="true" tabindex="-1"></a>n1<span class="sc">\&gt;</span>10,n2<span class="sc">\&gt;</span>10，正态近似法</span>
+<span id="cb10-104"><a href="#cb10-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-107"><a href="#cb10-107" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb10-108"><a href="#cb10-108" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(MVR,MVP,<span class="at">exact =</span> F,<span class="at">correct =</span> F)</span>
+<span id="cb10-109"><a href="#cb10-109" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-110"><a href="#cb10-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-113"><a href="#cb10-113" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb10-114"><a href="#cb10-114" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">xlim</span>(<span class="dv">0</span>,<span class="dv">50</span>) <span class="sc">+</span></span>
+<span id="cb10-115"><a href="#cb10-115" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_function</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">color=</span><span class="st">"Wilcox Distribution"</span>),</span>
+<span id="cb10-116"><a href="#cb10-116" aria-hidden="true" tabindex="-1"></a>                  <span class="at">fun =</span> dwilcox, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">m=</span><span class="dv">7</span> ,<span class="at">n=</span><span class="dv">9</span>), </span>
+<span id="cb10-117"><a href="#cb10-117" aria-hidden="true" tabindex="-1"></a>                 )<span class="sc">+</span></span>
+<span id="cb10-118"><a href="#cb10-118" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Wilcox Distribution"</span> <span class="ot">=</span> <span class="st">"blue"</span>))<span class="sc">+</span></span>
+<span id="cb10-119"><a href="#cb10-119" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">color =</span> <span class="st">"Distribution"</span>)</span>
 <span id="cb10-120"><a href="#cb10-120" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-121"><a href="#cb10-121" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-121"><a href="#cb10-121" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-122"><a href="#cb10-122" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-123"><a href="#cb10-123" aria-hidden="true" tabindex="-1"></a><span class="fu">## 独立多样本Kruskal-Wallis 检验</span></span>
+<span id="cb10-123"><a href="#cb10-123" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb10-124"><a href="#cb10-124" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-125"><a href="#cb10-125" aria-hidden="true" tabindex="-1"></a>假设：</span>
+<span id="cb10-125"><a href="#cb10-125" aria-hidden="true" tabindex="-1"></a><span class="fu">## 独立多样本Kruskal-Wallis 检验</span></span>
 <span id="cb10-126"><a href="#cb10-126" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-127"><a href="#cb10-127" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>随机，独立</span>
+<span id="cb10-127"><a href="#cb10-127" aria-hidden="true" tabindex="-1"></a>假设：</span>
 <span id="cb10-128"><a href="#cb10-128" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-129"><a href="#cb10-129" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>每个样本至少5个观测</span>
+<span id="cb10-129"><a href="#cb10-129" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>随机，独立</span>
 <span id="cb10-130"><a href="#cb10-130" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-131"><a href="#cb10-131" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>能够计算秩次</span>
+<span id="cb10-131"><a href="#cb10-131" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>每个样本至少5个观测</span>
 <span id="cb10-132"><a href="#cb10-132" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-135"><a href="#cb10-135" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb10-136"><a href="#cb10-136" aria-hidden="true" tabindex="-1"></a><span class="fu">kruskal.test</span>(weight<span class="sc">~</span>group,<span class="at">data =</span> PlantGrowth)</span>
-<span id="cb10-137"><a href="#cb10-137" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb10-138"><a href="#cb10-138" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-139"><a href="#cb10-139" aria-hidden="true" tabindex="-1"></a><span class="fu">### 多重比较</span></span>
+<span id="cb10-133"><a href="#cb10-133" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>能够计算秩次</span>
+<span id="cb10-134"><a href="#cb10-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-137"><a href="#cb10-137" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb10-138"><a href="#cb10-138" aria-hidden="true" tabindex="-1"></a><span class="fu">kruskal.test</span>(weight<span class="sc">~</span>group,<span class="at">data =</span> PlantGrowth)</span>
+<span id="cb10-139"><a href="#cb10-139" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb10-140"><a href="#cb10-140" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-143"><a href="#cb10-143" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb10-144"><a href="#cb10-144" aria-hidden="true" tabindex="-1"></a><span class="fu">pairwise.wilcox.test</span>(PlantGrowth<span class="sc">$</span>weight,PlantGrowth<span class="sc">$</span>group,<span class="at">p.adjust.method =</span> <span class="st">"fdr"</span>,<span class="at">exact=</span>F)</span>
-<span id="cb10-145"><a href="#cb10-145" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb10-146"><a href="#cb10-146" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-147"><a href="#cb10-147" aria-hidden="true" tabindex="-1"></a><span class="fu">## 随机区组设计方差分析</span></span>
+<span id="cb10-141"><a href="#cb10-141" aria-hidden="true" tabindex="-1"></a><span class="fu">### 多重比较</span></span>
+<span id="cb10-142"><a href="#cb10-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-145"><a href="#cb10-145" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb10-146"><a href="#cb10-146" aria-hidden="true" tabindex="-1"></a><span class="fu">pairwise.wilcox.test</span>(PlantGrowth<span class="sc">$</span>weight,PlantGrowth<span class="sc">$</span>group,<span class="at">p.adjust.method =</span> <span class="st">"fdr"</span>,<span class="at">exact=</span>F)</span>
+<span id="cb10-147"><a href="#cb10-147" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb10-148"><a href="#cb10-148" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-149"><a href="#cb10-149" aria-hidden="true" tabindex="-1"></a><span class="in">```{r eval=FALSE}</span></span>
-<span id="cb10-150"><a href="#cb10-150" aria-hidden="true" tabindex="-1"></a><span class="in">friedman.test()</span></span>
-<span id="cb10-151"><a href="#cb10-151" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-149"><a href="#cb10-149" aria-hidden="true" tabindex="-1"></a><span class="fu">## 单因素重复测量方差分析的非参数替代</span></span>
+<span id="cb10-150"><a href="#cb10-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-151"><a href="#cb10-151" aria-hidden="true" tabindex="-1"></a><span class="in">```{r eval=FALSE}</span></span>
+<span id="cb10-152"><a href="#cb10-152" aria-hidden="true" tabindex="-1"></a><span class="in">friedman.test()</span></span>
+<span id="cb10-153"><a href="#cb10-153" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

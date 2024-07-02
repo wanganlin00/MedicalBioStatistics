@@ -10,7 +10,7 @@
 
 ## 单因素组间方差分析
 
-### 多样本均值差异------F检验
+### 计算公式
 
 ![](images/one-way_ANOVA.png){fig-align="center" width="80%"}
 
@@ -58,6 +58,12 @@ df <- tibble(
     medium=c(33.2,30.6,23.9,26.4,35.9),
     high=c(11.5,21.9,18.6,13.6,9.5)
 )
+
+```
+
+### 手算
+
+```{r}
 k <- 3
 df_sum <- sum(df)
 df_sum_square <- sum(df^2)
@@ -72,7 +78,11 @@ SS_within <- SS_T-SS_between
 MS_between <- SS_between/(k-1)
 MS_within <- SS_within/(n-k)
 F_stat <-MS_between/MS_within 
+
+p_value <- pf(F_stat,2,12,lower.tail = F)
 ```
+
+### `stats::aov()`
 
 ```{r}
 df_long <- df |> pivot_longer(cols = everything(),
@@ -81,15 +91,38 @@ df_long <- df |> pivot_longer(cols = everything(),
 df_long$level <- factor(df_long$level)
 df_aov <- aov(value~level,data = df_long)
 
-summary(df_aov)
-
-
-# 异常观测点
-
-car::outlierTest(df_aov) 
+anova(df_aov)
 ```
 
-### 均值的多重比较
+### `ez::ezANOVA()`
+
+```{r}
+df_long <- df_long |> rowid_to_column(var = "id") |> 
+    relocate(id,.before = 1) |> mutate(id=factor(id))
+
+ez::ezANOVA(data = df_long,
+            dv = value,
+            wid = id,
+            between = level,
+            type = 3,
+            detailed = T)
+
+```
+
+### `stats::lm()`
+
+```{r}
+lm_aov <- lm(formula = value ~  level, data = df_long)
+lm_aov
+
+anova(lm_aov)
+
+model.matrix(~ level, data = df_long)
+lm(formula = value ~ 0 + level, data = df_long)
+model.matrix(~ 0 + level, data = df_long)
+```
+
+### 事后检验
 
 成对比较的数量 $N=\frac{k!}{2!(k-2)!},k≥3$，导致犯第Ⅰ类错误的概率迅速增加，$[1-(1-\alpha)^N]$。
 
@@ -226,6 +259,12 @@ LSD <- (k_means[2]-k_means[3])/sqrt(MS_within*(1/5+1/5))
 ### 独立性
 
 ### 正态性
+
+```{r}
+# 异常观测点
+
+car::outlierTest(df_aov) 
+```
 
 #### 直方图/茎叶图
 
@@ -406,4 +445,3 @@ $$
 $$
 Y=\arcsin {\sqrt{\pi}} \ \ \ \
 $$
-

@@ -28,12 +28,13 @@ book:
         - repeated_measures_ANOVA.qmd
         - chi-square_test.qmd
         - nonparametric_test.qmd
+        - correlation.qmd
+        
 
     #     - PowerAnalysis.qmd
     #     - Causal_Inference.qmd
     - part: "统计模型"
       chapters:
-        - independence_correlation.qmd
         - LinearRegression.qmd
         - GLM.qmd
         - LME.qmd
@@ -52,7 +53,7 @@ book:
 
     - part: "研究设计"
       chapters: 
-        - diagnostic_tests.qmd
+        - diagnostic_test.qmd
         - observational_study_design.qmd
 
         

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.4.553">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>医学与生物统计学 - 12&nbsp; 独立性与相关性</title>
+<title>医学与生物统计学 - 15&nbsp; 独立性与相关性</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -130,7 +130,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./independence_correlation.html">线性模型</a></li><li class="breadcrumb-item"><a href="./independence_correlation.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">独立性与相关性</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./independence_correlation.html">统计模型</a></li><li class="breadcrumb-item"><a href="./independence_correlation.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">独立性与相关性</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -222,32 +222,50 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./normality_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">正态性检验</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./variance_homogeneity_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">方差齐性检验</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./t_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">t 检验</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">t 检验</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./rate_proportion_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">比例检验</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">比例检验</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ANOVA.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">方差分析</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">方差分析</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./repeated_measures_ANOVA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">重复测量方差分析</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chi-square_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title"><span class="math inline">\(\chi^2\)</span> 检验</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title"><span class="math inline">\(\chi^2\)</span> 检验</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./nonparametric_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">非参数秩检验</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">非参数秩检验</span></span></a>
   </div>
 </li>
       </ul>
@@ -255,7 +273,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
- <span class="menu-text">线性模型</span></a>
+ <span class="menu-text">统计模型</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -264,31 +282,31 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./independence_correlation.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">独立性与相关性</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">独立性与相关性</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./LinearRegression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">线性回归</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">线性回归</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./GLM.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">广义线性模型</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">广义线性模型</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./LME.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">线性混合效应模型</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">线性混合效应模型</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./GEE.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">广义估计方程</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">广义估计方程</span></span></a>
   </div>
 </li>
       </ul>
@@ -305,7 +323,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./SurvivalAnalysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">生存分析</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">生存分析</span></span></a>
   </div>
 </li>
       </ul>
@@ -313,7 +331,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
- <span class="menu-text">研究设计</span></a>
+ <span class="menu-text">倾向性评分</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -321,14 +339,31 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./diagnostic_tests.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">诊断价值评估</span></span></a>
+  <a href="./PropensityScore.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">倾向性评分</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text">研究设计</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./diagnostic_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">诊断性测试</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./observational_study_design.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">观察性研究设计</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">观察性研究设计</span></span></a>
   </div>
 </li>
       </ul>
@@ -342,42 +377,42 @@ window.Quarto = {
    
   <ul>
 <li>
-<a href="#%E5%88%86%E7%B1%BB%E5%8F%98%E9%87%8F%E7%9A%84%E5%88%97%E8%81%94%E8%A1%A8%E5%92%8C%E7%8B%AC%E7%AB%8B%E6%80%A7%E6%A3%80%E9%AA%8C" id="toc-分类变量的列联表和独立性检验" class="nav-link active" data-scroll-target="#%E5%88%86%E7%B1%BB%E5%8F%98%E9%87%8F%E7%9A%84%E5%88%97%E8%81%94%E8%A1%A8%E5%92%8C%E7%8B%AC%E7%AB%8B%E6%80%A7%E6%A3%80%E9%AA%8C"><span class="header-section-number">12.1</span> 分类变量的列联表和独立性检验</a>
+<a href="#%E5%88%86%E7%B1%BB%E5%8F%98%E9%87%8F%E7%9A%84%E5%88%97%E8%81%94%E8%A1%A8%E5%92%8C%E7%8B%AC%E7%AB%8B%E6%80%A7%E6%A3%80%E9%AA%8C" id="toc-分类变量的列联表和独立性检验" class="nav-link active" data-scroll-target="#%E5%88%86%E7%B1%BB%E5%8F%98%E9%87%8F%E7%9A%84%E5%88%97%E8%81%94%E8%A1%A8%E5%92%8C%E7%8B%AC%E7%AB%8B%E6%80%A7%E6%A3%80%E9%AA%8C"><span class="header-section-number">15.1</span> 分类变量的列联表和独立性检验</a>
   <ul>
-<li><a href="#%E5%88%97%E8%81%94%E8%A1%A8" id="toc-列联表" class="nav-link" data-scroll-target="#%E5%88%97%E8%81%94%E8%A1%A8"><span class="header-section-number">12.1.1</span> 列联表</a></li>
-  <li><a href="#%E8%BE%B9%E9%99%85%E5%88%97%E8%81%94%E8%A1%A8" id="toc-边际列联表" class="nav-link" data-scroll-target="#%E8%BE%B9%E9%99%85%E5%88%97%E8%81%94%E8%A1%A8"><span class="header-section-number">12.1.2</span> 边际列联表</a></li>
+<li><a href="#%E5%88%97%E8%81%94%E8%A1%A8" id="toc-列联表" class="nav-link" data-scroll-target="#%E5%88%97%E8%81%94%E8%A1%A8"><span class="header-section-number">15.1.1</span> 列联表</a></li>
+  <li><a href="#%E8%BE%B9%E9%99%85%E5%88%97%E8%81%94%E8%A1%A8" id="toc-边际列联表" class="nav-link" data-scroll-target="#%E8%BE%B9%E9%99%85%E5%88%97%E8%81%94%E8%A1%A8"><span class="header-section-number">15.1.2</span> 边际列联表</a></li>
   <li>
-<a href="#%E7%8B%AC%E7%AB%8B%E6%80%A7%E6%A3%80%E9%AA%8C" id="toc-独立性检验" class="nav-link" data-scroll-target="#%E7%8B%AC%E7%AB%8B%E6%80%A7%E6%A3%80%E9%AA%8C"><span class="header-section-number">12.1.3</span> 独立性检验</a>
+<a href="#%E7%8B%AC%E7%AB%8B%E6%80%A7%E6%A3%80%E9%AA%8C" id="toc-独立性检验" class="nav-link" data-scroll-target="#%E7%8B%AC%E7%AB%8B%E6%80%A7%E6%A3%80%E9%AA%8C"><span class="header-section-number">15.1.3</span> 独立性检验</a>
   <ul class="collapse">
-<li><a href="#chi2-%E7%8B%AC%E7%AB%8B%E6%80%A7%E6%A3%80%E9%AA%8C" id="toc-chi2-独立性检验" class="nav-link" data-scroll-target="#chi2-%E7%8B%AC%E7%AB%8B%E6%80%A7%E6%A3%80%E9%AA%8C"><span class="header-section-number">12.1.3.1</span> <span class="math inline">\(\chi^2\)</span> 独立性检验</a></li>
-  <li><a href="#fisher%E7%B2%BE%E7%A1%AE%E6%A3%80%E9%AA%8C" id="toc-fisher精确检验" class="nav-link" data-scroll-target="#fisher%E7%B2%BE%E7%A1%AE%E6%A3%80%E9%AA%8C"><span class="header-section-number">12.1.3.2</span> Fisher精确检验</a></li>
-  <li><a href="#cochran-mantel-haenszel-chi2-%E6%A3%80%E9%AA%8C" id="toc-cochran-mantel-haenszel-chi2-检验" class="nav-link" data-scroll-target="#cochran-mantel-haenszel-chi2-%E6%A3%80%E9%AA%8C"><span class="header-section-number">12.1.3.3</span> Cochran-Mantel-Haenszel <span class="math inline">\(\chi^2\)</span> 检验</a></li>
-  <li><a href="#%E9%85%8D%E5%AF%B9%E5%88%97%E8%81%94%E8%A1%A8%E7%9A%84-%CF%87-2-%E6%A3%80%E9%AA%8C" id="toc-配对列联表的-χ-2-检验" class="nav-link" data-scroll-target="#%E9%85%8D%E5%AF%B9%E5%88%97%E8%81%94%E8%A1%A8%E7%9A%84-%CF%87-2-%E6%A3%80%E9%AA%8C"><span class="header-section-number">12.1.3.4</span> 配对列联表的 χ 2 检验</a></li>
+<li><a href="#chi2-%E7%8B%AC%E7%AB%8B%E6%80%A7%E6%A3%80%E9%AA%8C" id="toc-chi2-独立性检验" class="nav-link" data-scroll-target="#chi2-%E7%8B%AC%E7%AB%8B%E6%80%A7%E6%A3%80%E9%AA%8C"><span class="header-section-number">15.1.3.1</span> <span class="math inline">\(\chi^2\)</span> 独立性检验</a></li>
+  <li><a href="#fisher%E7%B2%BE%E7%A1%AE%E6%A3%80%E9%AA%8C" id="toc-fisher精确检验" class="nav-link" data-scroll-target="#fisher%E7%B2%BE%E7%A1%AE%E6%A3%80%E9%AA%8C"><span class="header-section-number">15.1.3.2</span> Fisher精确检验</a></li>
+  <li><a href="#cochran-mantel-haenszel-chi2-%E6%A3%80%E9%AA%8C" id="toc-cochran-mantel-haenszel-chi2-检验" class="nav-link" data-scroll-target="#cochran-mantel-haenszel-chi2-%E6%A3%80%E9%AA%8C"><span class="header-section-number">15.1.3.3</span> Cochran-Mantel-Haenszel <span class="math inline">\(\chi^2\)</span> 检验</a></li>
+  <li><a href="#%E9%85%8D%E5%AF%B9%E5%88%97%E8%81%94%E8%A1%A8%E7%9A%84-%CF%87-2-%E6%A3%80%E9%AA%8C" id="toc-配对列联表的-χ-2-检验" class="nav-link" data-scroll-target="#%E9%85%8D%E5%AF%B9%E5%88%97%E8%81%94%E8%A1%A8%E7%9A%84-%CF%87-2-%E6%A3%80%E9%AA%8C"><span class="header-section-number">15.1.3.4</span> 配对列联表的 χ 2 检验</a></li>
   </ul>
 </li>
   </ul>
 </li>
   <li>
-<a href="#%E5%88%86%E7%B1%BB%E5%8F%98%E9%87%8F%E9%97%B4%E7%9A%84%E7%9B%B8%E5%85%B3%E6%80%A7" id="toc-分类变量间的相关性" class="nav-link" data-scroll-target="#%E5%88%86%E7%B1%BB%E5%8F%98%E9%87%8F%E9%97%B4%E7%9A%84%E7%9B%B8%E5%85%B3%E6%80%A7"><span class="header-section-number">12.2</span> 分类变量间的相关性</a>
+<a href="#%E5%88%86%E7%B1%BB%E5%8F%98%E9%87%8F%E9%97%B4%E7%9A%84%E7%9B%B8%E5%85%B3%E6%80%A7" id="toc-分类变量间的相关性" class="nav-link" data-scroll-target="#%E5%88%86%E7%B1%BB%E5%8F%98%E9%87%8F%E9%97%B4%E7%9A%84%E7%9B%B8%E5%85%B3%E6%80%A7"><span class="header-section-number">15.2</span> 分类变量间的相关性</a>
   <ul>
-<li><a href="#%E7%9B%B8%E5%85%B3%E7%B3%BB%E6%95%B0" id="toc-相关系数" class="nav-link" data-scroll-target="#%E7%9B%B8%E5%85%B3%E7%B3%BB%E6%95%B0"><span class="header-section-number">12.2.1</span> 相关系数 　　</a></li>
-  <li><a href="#%E9%A9%AC%E8%B5%9B%E5%85%8B%E5%9B%BE" id="toc-马赛克图" class="nav-link" data-scroll-target="#%E9%A9%AC%E8%B5%9B%E5%85%8B%E5%9B%BE"><span class="header-section-number">12.2.2</span> 马赛克图</a></li>
+<li><a href="#%E7%9B%B8%E5%85%B3%E7%B3%BB%E6%95%B0" id="toc-相关系数" class="nav-link" data-scroll-target="#%E7%9B%B8%E5%85%B3%E7%B3%BB%E6%95%B0"><span class="header-section-number">15.2.1</span> 相关系数 　　</a></li>
+  <li><a href="#%E9%A9%AC%E8%B5%9B%E5%85%8B%E5%9B%BE" id="toc-马赛克图" class="nav-link" data-scroll-target="#%E9%A9%AC%E8%B5%9B%E5%85%8B%E5%9B%BE"><span class="header-section-number">15.2.2</span> 马赛克图</a></li>
   </ul>
 </li>
   <li>
-<a href="#%E8%BF%9E%E7%BB%AD%E5%8F%98%E9%87%8F%E7%9A%84%E7%9B%B8%E5%85%B3%E6%80%A7%E6%A3%80%E9%AA%8C" id="toc-连续变量的相关性检验" class="nav-link" data-scroll-target="#%E8%BF%9E%E7%BB%AD%E5%8F%98%E9%87%8F%E7%9A%84%E7%9B%B8%E5%85%B3%E6%80%A7%E6%A3%80%E9%AA%8C"><span class="header-section-number">12.3</span> 连续变量的相关性检验</a>
+<a href="#%E8%BF%9E%E7%BB%AD%E5%8F%98%E9%87%8F%E7%9A%84%E7%9B%B8%E5%85%B3%E6%80%A7%E6%A3%80%E9%AA%8C" id="toc-连续变量的相关性检验" class="nav-link" data-scroll-target="#%E8%BF%9E%E7%BB%AD%E5%8F%98%E9%87%8F%E7%9A%84%E7%9B%B8%E5%85%B3%E6%80%A7%E6%A3%80%E9%AA%8C"><span class="header-section-number">15.3</span> 连续变量的相关性检验</a>
   <ul>
-<li><a href="#%E7%9B%B8%E5%85%B3%E7%B3%BB%E6%95%B0-1" id="toc-相关系数-1" class="nav-link" data-scroll-target="#%E7%9B%B8%E5%85%B3%E7%B3%BB%E6%95%B0-1"><span class="header-section-number">12.3.0.1</span> 相关系数</a></li>
-  <li><a href="#%E7%9B%B8%E5%85%B3%E5%9B%BEcorrelogram" id="toc-相关图correlogram" class="nav-link" data-scroll-target="#%E7%9B%B8%E5%85%B3%E5%9B%BEcorrelogram"><span class="header-section-number">12.3.0.2</span> 相关图（correlogram）</a></li>
-  <li><a href="#%E7%9B%B8%E5%85%B3%E7%B3%BB%E6%95%B0%E7%9A%84%E6%98%BE%E8%91%97%E6%80%A7%E6%A3%80%E9%AA%8C" id="toc-相关系数的显著性检验" class="nav-link" data-scroll-target="#%E7%9B%B8%E5%85%B3%E7%B3%BB%E6%95%B0%E7%9A%84%E6%98%BE%E8%91%97%E6%80%A7%E6%A3%80%E9%AA%8C"><span class="header-section-number">12.3.0.3</span> 相关系数的显著性检验</a></li>
+<li><a href="#%E7%9B%B8%E5%85%B3%E7%B3%BB%E6%95%B0-1" id="toc-相关系数-1" class="nav-link" data-scroll-target="#%E7%9B%B8%E5%85%B3%E7%B3%BB%E6%95%B0-1"><span class="header-section-number">15.3.0.1</span> 相关系数</a></li>
+  <li><a href="#%E7%9B%B8%E5%85%B3%E5%9B%BEcorrelogram" id="toc-相关图correlogram" class="nav-link" data-scroll-target="#%E7%9B%B8%E5%85%B3%E5%9B%BEcorrelogram"><span class="header-section-number">15.3.0.2</span> 相关图（correlogram）</a></li>
+  <li><a href="#%E7%9B%B8%E5%85%B3%E7%B3%BB%E6%95%B0%E7%9A%84%E6%98%BE%E8%91%97%E6%80%A7%E6%A3%80%E9%AA%8C" id="toc-相关系数的显著性检验" class="nav-link" data-scroll-target="#%E7%9B%B8%E5%85%B3%E7%B3%BB%E6%95%B0%E7%9A%84%E6%98%BE%E8%91%97%E6%80%A7%E6%A3%80%E9%AA%8C"><span class="header-section-number">15.3.0.3</span> 相关系数的显著性检验</a></li>
   </ul>
 </li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./independence_correlation.html">线性模型</a></li><li class="breadcrumb-item"><a href="./independence_correlation.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">独立性与相关性</span></a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./independence_correlation.html">统计模型</a></li><li class="breadcrumb-item"><a href="./independence_correlation.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">独立性与相关性</span></a></li></ol></nav><div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">
-<span class="chapter-number">12</span>&nbsp; <span class="chapter-title">独立性与相关性</span>
+<span class="chapter-number">15</span>&nbsp; <span class="chapter-title">独立性与相关性</span>
 </h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 </div>
 
@@ -392,131 +427,12 @@ window.Quarto = {
   
 
 
-</header><section id="分类变量的列联表和独立性检验" class="level2" data-number="12.1"><h2 data-number="12.1" class="anchored" data-anchor-id="分类变量的列联表和独立性检验">
-<span class="header-section-number">12.1</span> 分类变量的列联表和独立性检验</h2>
-<section id="列联表" class="level3" data-number="12.1.1"><h3 data-number="12.1.1" class="anchored" data-anchor-id="列联表">
-<span class="header-section-number">12.1.1</span> 列联表</h3>
+</header><section id="分类变量的列联表和独立性检验" class="level2" data-number="15.1"><h2 data-number="15.1" class="anchored" data-anchor-id="分类变量的列联表和独立性检验">
+<span class="header-section-number">15.1</span> 分类变量的列联表和独立性检验</h2>
+<section id="列联表" class="level3" data-number="15.1.1"><h3 data-number="15.1.1" class="anchored" data-anchor-id="列联表">
+<span class="header-section-number">15.1.1</span> 列联表</h3>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">gss_cat</span><span class="op">)</span>  <span class="co">#因子数据集</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">gss_cat</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
-<div class="kable-table">
-<table class="table table-sm table-striped small">
-<colgroup>
-<col style="width: 4%">
-<col style="width: 13%">
-<col style="width: 3%">
-<col style="width: 5%">
-<col style="width: 14%">
-<col style="width: 17%">
-<col style="width: 17%">
-<col style="width: 15%">
-<col style="width: 7%">
-</colgroup>
-<thead><tr class="header">
-<th style="text-align: right;">year</th>
-<th style="text-align: left;">marital</th>
-<th style="text-align: right;">age</th>
-<th style="text-align: left;">race</th>
-<th style="text-align: left;">rincome</th>
-<th style="text-align: left;">partyid</th>
-<th style="text-align: left;">relig</th>
-<th style="text-align: left;">denom</th>
-<th style="text-align: right;">tvhours</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: right;">2000</td>
-<td style="text-align: left;">Never married</td>
-<td style="text-align: right;">26</td>
-<td style="text-align: left;">White</td>
-<td style="text-align: left;">$8000 to 9999</td>
-<td style="text-align: left;">Ind,near rep</td>
-<td style="text-align: left;">Protestant</td>
-<td style="text-align: left;">Southern baptist</td>
-<td style="text-align: right;">12</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">2000</td>
-<td style="text-align: left;">Divorced</td>
-<td style="text-align: right;">48</td>
-<td style="text-align: left;">White</td>
-<td style="text-align: left;">$8000 to 9999</td>
-<td style="text-align: left;">Not str republican</td>
-<td style="text-align: left;">Protestant</td>
-<td style="text-align: left;">Baptist-dk which</td>
-<td style="text-align: right;">NA</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">2000</td>
-<td style="text-align: left;">Widowed</td>
-<td style="text-align: right;">67</td>
-<td style="text-align: left;">White</td>
-<td style="text-align: left;">Not applicable</td>
-<td style="text-align: left;">Independent</td>
-<td style="text-align: left;">Protestant</td>
-<td style="text-align: left;">No denomination</td>
-<td style="text-align: right;">2</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">2000</td>
-<td style="text-align: left;">Never married</td>
-<td style="text-align: right;">39</td>
-<td style="text-align: left;">White</td>
-<td style="text-align: left;">Not applicable</td>
-<td style="text-align: left;">Ind,near rep</td>
-<td style="text-align: left;">Orthodox-christian</td>
-<td style="text-align: left;">Not applicable</td>
-<td style="text-align: right;">4</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">2000</td>
-<td style="text-align: left;">Divorced</td>
-<td style="text-align: right;">25</td>
-<td style="text-align: left;">White</td>
-<td style="text-align: left;">Not applicable</td>
-<td style="text-align: left;">Not str democrat</td>
-<td style="text-align: left;">None</td>
-<td style="text-align: left;">Not applicable</td>
-<td style="text-align: right;">1</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">2000</td>
-<td style="text-align: left;">Married</td>
-<td style="text-align: right;">25</td>
-<td style="text-align: left;">White</td>
-<td style="text-align: left;">$20000 - 24999</td>
-<td style="text-align: left;">Strong democrat</td>
-<td style="text-align: left;">Protestant</td>
-<td style="text-align: left;">Southern baptist</td>
-<td style="text-align: right;">NA</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">gss_cat</span><span class="op">$</span><span class="va">marital</span>,<span class="va">gss_cat</span><span class="op">$</span><span class="va">race</span><span class="op">)</span></span>
-<span><span class="co">#&gt;                </span></span>
-<span><span class="co">#&gt;                 Other Black White Not applicable</span></span>
-<span><span class="co">#&gt;   No answer         2     2    13              0</span></span>
-<span><span class="co">#&gt;   Never married   633  1305  3478              0</span></span>
-<span><span class="co">#&gt;   Separated       110   196   437              0</span></span>
-<span><span class="co">#&gt;   Divorced        212   495  2676              0</span></span>
-<span><span class="co">#&gt;   Widowed          70   262  1475              0</span></span>
-<span><span class="co">#&gt;   Married         932   869  8316              0</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/stats/xtabs.html">xtabs</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="op">~</span><span class="va">marital</span><span class="op">+</span><span class="va">race</span>,data <span class="op">=</span> <span class="va">gss_cat</span>,subset <span class="op">=</span><span class="cn">NULL</span><span class="op">)</span></span>
-<span><span class="co">#&gt;                race</span></span>
-<span><span class="co">#&gt; marital         Other Black White Not applicable</span></span>
-<span><span class="co">#&gt;   No answer         2     2    13              0</span></span>
-<span><span class="co">#&gt;   Never married   633  1305  3478              0</span></span>
-<span><span class="co">#&gt;   Separated       110   196   437              0</span></span>
-<span><span class="co">#&gt;   Divorced        212   495  2676              0</span></span>
-<span><span class="co">#&gt;   Widowed          70   262  1475              0</span></span>
-<span><span class="co">#&gt;   Married         932   869  8316              0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">eg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">156</span>,<span class="fl">9421</span>,<span class="fl">1531</span>,<span class="fl">14797</span><span class="op">)</span>,nrow<span class="op">=</span><span class="fl">2</span>,byrow<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">eg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">156</span>,<span class="fl">9421</span>,<span class="fl">1531</span>,<span class="fl">14797</span><span class="op">)</span>,nrow<span class="op">=</span><span class="fl">2</span>,byrow<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">eg</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Disease"</span>,<span class="st">"Control"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">eg</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Exposed"</span>,<span class="st">"Unexposed"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">eg</span><span class="op">)</span></span>
@@ -533,10 +449,10 @@ window.Quarto = {
 <span><span class="co">#&gt; Unexposed 0.09376531 0.9062347</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="边际列联表" class="level3" data-number="12.1.2"><h3 data-number="12.1.2" class="anchored" data-anchor-id="边际列联表">
-<span class="header-section-number">12.1.2</span> 边际列联表</h3>
+</section><section id="边际列联表" class="level3" data-number="15.1.2"><h3 data-number="15.1.2" class="anchored" data-anchor-id="边际列联表">
+<span class="header-section-number">15.1.2</span> 边际列联表</h3>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 边际</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 边际</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/marginSums.html">margin.table</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">eg</span>,margin <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>      <span class="co">#列和</span></span>
 <span><span class="co">#&gt; Disease Control </span></span>
 <span><span class="co">#&gt;    1687   24218</span></span>
@@ -567,13 +483,13 @@ window.Quarto = {
 <span><span class="co">#&gt; Unexposed     1531   14797</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="独立性检验" class="level3" data-number="12.1.3"><h3 data-number="12.1.3" class="anchored" data-anchor-id="独立性检验">
-<span class="header-section-number">12.1.3</span> 独立性检验</h3>
+</section><section id="独立性检验" class="level3" data-number="15.1.3"><h3 data-number="15.1.3" class="anchored" data-anchor-id="独立性检验">
+<span class="header-section-number">15.1.3</span> 独立性检验</h3>
 <p>独立性：判断两个或多个分类变量之间是否存在关联或取值互不影响，分析联合概率分布是否可以分解为各自概率分布的乘积。</p>
-<section id="chi2-独立性检验" class="level4" data-number="12.1.3.1"><h4 data-number="12.1.3.1" class="anchored" data-anchor-id="chi2-独立性检验">
-<span class="header-section-number">12.1.3.1</span> <span class="math inline">\(\chi^2\)</span> 独立性检验</h4>
+<section id="chi2-独立性检验" class="level4" data-number="15.1.3.1"><h4 data-number="15.1.3.1" class="anchored" data-anchor-id="chi2-独立性检验">
+<span class="header-section-number">15.1.3.1</span> <span class="math inline">\(\chi^2\)</span> 独立性检验</h4>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">M</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/table.html">as.table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">86</span>, <span class="fl">29</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">44</span>, <span class="fl">30</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">M</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/table.html">as.table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">86</span>, <span class="fl">29</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">44</span>, <span class="fl">30</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/dimnames.html">dimnames</a></span><span class="op">(</span><span class="va">M</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>gender <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"F"</span>, <span class="st">"M"</span><span class="op">)</span>,</span>
 <span>                    smoking <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Yes"</span>,<span class="st">"No"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">M</span></span>
@@ -608,11 +524,11 @@ window.Quarto = {
 <span><span class="co">#&gt; X-squared = 4.9237, df = 1, p-value = 0.02649</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="fisher精确检验" class="level4" data-number="12.1.3.2"><h4 data-number="12.1.3.2" class="anchored" data-anchor-id="fisher精确检验">
-<span class="header-section-number">12.1.3.2</span> Fisher精确检验</h4>
+</section><section id="fisher精确检验" class="level4" data-number="15.1.3.2"><h4 data-number="15.1.3.2" class="anchored" data-anchor-id="fisher精确检验">
+<span class="header-section-number">15.1.3.2</span> Fisher精确检验</h4>
 <p>　　如果观察总记录数 n 小于 40，或者频数表里的某个期望频数很小（小于 1） ，则需要使 用 Fisher 精确概率检验。</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Fisher's exact test to test independence of rows and columns in contingency table</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Fisher's exact test to test independence of rows and columns in contingency table</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/fisher.test.html">fisher.test</a></span><span class="op">(</span><span class="va">M</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  Fisher's Exact Test for Count Data</span></span>
@@ -627,12 +543,12 @@ window.Quarto = {
 <span><span class="co">#&gt;   2.014137</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="cochran-mantel-haenszel-chi2-检验" class="level4" data-number="12.1.3.3"><h4 data-number="12.1.3.3" class="anchored" data-anchor-id="cochran-mantel-haenszel-chi2-检验">
-<span class="header-section-number">12.1.3.3</span> Cochran-Mantel-Haenszel <span class="math inline">\(\chi^2\)</span> 检验</h4>
+</section><section id="cochran-mantel-haenszel-chi2-检验" class="level4" data-number="15.1.3.3"><h4 data-number="15.1.3.3" class="anchored" data-anchor-id="cochran-mantel-haenszel-chi2-检验">
+<span class="header-section-number">15.1.3.3</span> Cochran-Mantel-Haenszel <span class="math inline">\(\chi^2\)</span> 检验</h4>
 <p>又叫行均分检验，常用于按照某个变量进行分层后的检验，这个方法课本上说<strong>用于检验两个有序分类变量是否存在线性相关</strong>，但实际上用途很广泛，比如因变量是有序变量的单向有序列联表，也可以用。　　</p>
 <p>两个变量的关联有可能受到第三个变量的影响，因此我们有必要检验两个分类变量在 调整（控制）第三个变量的情况下是否独立。 Cochran-Mantel-Haenszel χ 2 检验常用于探索 变量间的混杂因素。其零假设是：两个分类变量在第三个变量的每一层都是条件独立的。函数 mantelhaen.test( ) 可以用来进行该检验。</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">Rabbits</span> <span class="op">&lt;-</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">Rabbits</span> <span class="op">&lt;-</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">6</span>, <span class="fl">5</span>,</span>
 <span>        <span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">3</span>, <span class="fl">6</span>,</span>
 <span>        <span class="fl">6</span>, <span class="fl">2</span>, <span class="fl">0</span>, <span class="fl">4</span>,</span>
@@ -693,11 +609,11 @@ window.Quarto = {
 <span><span class="co">#&gt;                 7</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="配对列联表的-χ-2-检验" class="level4" data-number="12.1.3.4"><h4 data-number="12.1.3.4" class="anchored" data-anchor-id="配对列联表的-χ-2-检验">
-<span class="header-section-number">12.1.3.4</span> 配对列联表的 χ 2 检验</h4>
+</section><section id="配对列联表的-χ-2-检验" class="level4" data-number="15.1.3.4"><h4 data-number="15.1.3.4" class="anchored" data-anchor-id="配对列联表的-χ-2-检验">
+<span class="header-section-number">15.1.3.4</span> 配对列联表的 χ 2 检验</h4>
 <p>　　医学科研实践中经常遇到配对设计的计数资料，例如两种检验方法、诊断方法结果的 比较。其特点是对每个研究对象分别用两种方法处理，然后观察两种处理方法的某两分类 变量的计数结果。对于这种数据，我们也可以整理成列联表的形式，但是不能用前述的 χ 2独立性检验，需进行 Mcnemar 检验。</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#　　某实验室分别用免疫荧光法和乳胶凝集法对 58 名疑似系统性红斑狼疮患者血清中抗 核抗体进行测定</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#　　某实验室分别用免疫荧光法和乳胶凝集法对 58 名疑似系统性红斑狼疮患者血清中抗 核抗体进行测定</span></span>
 <span><span class="va">result</span><span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">11</span>, <span class="fl">2</span>, <span class="fl">12</span>, <span class="fl">33</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">2</span>,dimnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"+"</span>,<span class="st">"-"</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"+"</span>,<span class="st">"-"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">result</span></span>
 <span><span class="co">#&gt;    +  -</span></span>
@@ -713,13 +629,13 @@ window.Quarto = {
 <span><span class="co">#&gt; McNemar's chi-squared = 5.7857, df = 1, p-value = 0.01616</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section></section></section><section id="分类变量间的相关性" class="level2" data-number="12.2"><h2 data-number="12.2" class="anchored" data-anchor-id="分类变量间的相关性">
-<span class="header-section-number">12.2</span> 分类变量间的相关性</h2>
+</section></section></section><section id="分类变量间的相关性" class="level2" data-number="15.2"><h2 data-number="15.2" class="anchored" data-anchor-id="分类变量间的相关性">
+<span class="header-section-number">15.2</span> 分类变量间的相关性</h2>
 <p>　　如果独立性检验的结果表明两个变量之间不独立，那么很自然地我们就想量化它们之间相关性的强弱。 <em>vcd</em> 包里的函数 <code><a href="https://rdrr.io/pkg/vcd/man/assocstats.html">assocstats( )</a></code>可以用来计算列联表的 <strong>Phi 系数</strong>、<strong>列联系数</strong>和 <strong>Cramer’s V 系数</strong>。其中， Phi 系数只适用于四格表。 　　 　　</p>
-<section id="相关系数" class="level3" data-number="12.2.1"><h3 data-number="12.2.1" class="anchored" data-anchor-id="相关系数">
-<span class="header-section-number">12.2.1</span> 相关系数 　　</h3>
+<section id="相关系数" class="level3" data-number="15.2.1"><h3 data-number="15.2.1" class="anchored" data-anchor-id="相关系数">
+<span class="header-section-number">15.2.1</span> 相关系数 　　</h3>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">vcd</span><span class="op">)</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">vcd</span><span class="op">)</span></span>
 <span><span class="va">mytable</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">Arthritis</span><span class="op">$</span><span class="va">Treatment</span>, <span class="va">Arthritis</span><span class="op">$</span><span class="va">Improved</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/assocstats.html">assocstats</a></span><span class="op">(</span><span class="va">mytable</span><span class="op">)</span></span>
 <span><span class="co">#&gt;                     X^2 df  P(&gt; X^2)</span></span>
@@ -733,7 +649,11 @@ window.Quarto = {
 </div>
 <p>　　对于<strong>配对列联表</strong>，可以计算一致性指标 Kappa 统计量。 epiDisplay 包里的函数 kap( )可以用于计算一致性的比例以及 Kappa 统计量的值 　　 　　</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">my.matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">11</span>, <span class="fl">2</span>, <span class="fl">12</span>, <span class="fl">33</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">my.matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">11</span>, <span class="fl">2</span>, <span class="fl">12</span>, <span class="fl">33</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu">vcd</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/Kappa.html">Kappa</a></span><span class="op">(</span><span class="va">my.matrix</span><span class="op">)</span></span>
+<span><span class="co">#&gt;            value    ASE     z Pr(&gt;|z|)</span></span>
+<span><span class="co">#&gt; Unweighted 0.455 0.1153 3.945 7.97e-05</span></span>
+<span><span class="co">#&gt; Weighted   0.455 0.1153 3.945 7.97e-05</span></span>
 <span><span class="fu">epiDisplay</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/epiDisplay/man/kap.html">kap</a></span><span class="op">(</span><span class="va">my.matrix</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  Table for calculation of kappa</span></span>
@@ -750,32 +670,32 @@ window.Quarto = {
 </div>
 <p>　　共 58 个对象，每一对象用两种检测方法检测，其中 1 个对象的两种检测结果都为阳 性， 33 个对象的两种检测结果都是阴性，所以总的一致性为 (1 + 33)/58 ≈ 75.86% 。为了解释期望一致性和 Kappa 值的含义，先计算各个单元格的期望频数。 　　 　　</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/chisq.test.html">chisq.test</a></span><span class="op">(</span><span class="va">my.matrix</span><span class="op">)</span><span class="op">$</span><span class="va">expected</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/chisq.test.html">chisq.test</a></span><span class="op">(</span><span class="va">my.matrix</span><span class="op">)</span><span class="op">$</span><span class="va">expected</span></span>
 <span><span class="co">#&gt;          [,1]     [,2]</span></span>
 <span><span class="co">#&gt; [1,] 5.155172 17.84483</span></span>
 <span><span class="co">#&gt; [2,] 7.844828 27.15517</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>　　对角线上的这两个单元格对应的期望频数分别约为 5.15 和 27.15 ，因此期望一致性为 (5.155 + 27.15)/58 ≈ 55.71% 。期望一致性是假定两种方法的检测结果都是完全随机的情况下的 一致性。也就是说，即使两种检测方法都毫无作用，平均也能达到 5.71% 的一致性。 Kappa 统 计量是超出随机的一致性的部分占最大可能超出随机的一致性的比例。在本例中，前者为 75.86% − 55.71% ， 后者为 100% − 55.71% 。 因此， Kappa 值为 (75.86 − 5.71)/(10 − 5.71) ≈ 0.45</p>
-</section><section id="马赛克图" class="level3" data-number="12.2.2"><h3 data-number="12.2.2" class="anchored" data-anchor-id="马赛克图">
-<span class="header-section-number">12.2.2</span> 马赛克图</h3>
+</section><section id="马赛克图" class="level3" data-number="15.2.2"><h3 data-number="15.2.2" class="anchored" data-anchor-id="马赛克图">
+<span class="header-section-number">15.2.2</span> 马赛克图</h3>
 <p>　　马赛克图中的矩形面积正比于多维列联表中单元格的频率 　　</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/mosaic.html">mosaic</a></span><span class="op">(</span><span class="op">~</span> <span class="va">Sex</span> <span class="op">+</span> <span class="va">Treatment</span> <span class="op">+</span> <span class="va">Improved</span>, data <span class="op">=</span> <span class="va">Arthritis</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/mosaic.html">mosaic</a></span><span class="op">(</span><span class="op">~</span> <span class="va">Sex</span> <span class="op">+</span> <span class="va">Treatment</span> <span class="op">+</span> <span class="va">Improved</span>, data <span class="op">=</span> <span class="va">Arthritis</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="independence_correlation_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="independence_correlation_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-</section></section><section id="连续变量的相关性检验" class="level2" data-number="12.3"><h2 data-number="12.3" class="anchored" data-anchor-id="连续变量的相关性检验">
-<span class="header-section-number">12.3</span> 连续变量的相关性检验</h2>
+</section></section><section id="连续变量的相关性检验" class="level2" data-number="15.3"><h2 data-number="15.3" class="anchored" data-anchor-id="连续变量的相关性检验">
+<span class="header-section-number">15.3</span> 连续变量的相关性检验</h2>
 <p>相关性：判断两个变量之间的线性关系强度和方向，无论是否独立。</p>
 <p>如果两个连续变量不相互独立时，使用协方差（covariance）来描述两个变量的关系。</p>
 <p>协方差（或相关系数）为零，不相关，不存在线性关系，但可能存在非线性关系。</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">mpg</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">8</span>,<span class="fl">9</span><span class="op">)</span><span class="op">]</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">mpg</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">8</span>,<span class="fl">9</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cov</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>    <span class="co"># 协方差矩阵</span></span>
 <span><span class="co">#&gt;           displ      cty       hwy</span></span>
 <span><span class="co">#&gt; displ  1.669158 -4.39069 -5.893111</span></span>
@@ -783,14 +703,14 @@ window.Quarto = {
 <span><span class="co">#&gt; hwy   -5.893111 24.22543 35.457779</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<section id="相关系数-1" class="level4" data-number="12.3.0.1"><h4 data-number="12.3.0.1" class="anchored" data-anchor-id="相关系数-1">
-<span class="header-section-number">12.3.0.1</span> 相关系数</h4>
+<section id="相关系数-1" class="level4" data-number="15.3.0.1"><h4 data-number="15.3.0.1" class="anchored" data-anchor-id="相关系数-1">
+<span class="header-section-number">15.3.0.1</span> 相关系数</h4>
 <p>相关系数的取值范围： <span class="math inline">\([-1,1]\)</span></p>
 <p><span class="math display">\[
 r(X,Y)=\frac {\sum_{i=1}^n (x_i-\bar x)(y_i-\bar y)}{\sqrt{\sum_{i=1}^n (x_i-\bar x)^2 \sum_{i=1}^n (y_i-\bar y)^2}}
 \]</span></p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Pearson's 积差相关系数 　　一般要求两个连续变量都服从正态分布</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Pearson's 积差相关系数 　　一般要求两个连续变量都服从正态分布</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">df</span>,use <span class="op">=</span> <span class="st">"everything"</span>,method<span class="op">=</span><span class="st">"pearson"</span><span class="op">)</span> <span class="co"># default</span></span>
 <span><span class="co">#&gt;           displ        cty        hwy</span></span>
 <span><span class="co">#&gt; displ  1.000000 -0.7985240 -0.7660200</span></span>
@@ -812,28 +732,28 @@ r(X,Y)=\frac {\sum_{i=1}^n (x_i-\bar x)(y_i-\bar y)}{\sqrt{\sum_{i=1}^n (x_i-\ba
 <span><span class="co">#&gt; hwy   -0.6536974  0.8628045  1.0000000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="相关图correlogram" class="level4" data-number="12.3.0.2"><h4 data-number="12.3.0.2" class="anchored" data-anchor-id="相关图correlogram">
-<span class="header-section-number">12.3.0.2</span> 相关图（correlogram）</h4>
+</section><section id="相关图correlogram" class="level4" data-number="15.3.0.2"><h4 data-number="15.3.0.2" class="anchored" data-anchor-id="相关图correlogram">
+<span class="header-section-number">15.3.0.2</span> 相关图（correlogram）</h4>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">ggcorrplot</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggcorrplot/man/ggcorrplot.html">ggcorrplot</a></span><span class="op">(</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">ggcorrplot</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggcorrplot/man/ggcorrplot.html">ggcorrplot</a></span><span class="op">(</span></span>
 <span>    corr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">df</span>,use <span class="op">=</span> <span class="st">"everything"</span>,method<span class="op">=</span><span class="st">"pearson"</span><span class="op">)</span> ,</span>
 <span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="independence_correlation_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="independence_correlation_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-</section><section id="相关系数的显著性检验" class="level4" data-number="12.3.0.3"><h4 data-number="12.3.0.3" class="anchored" data-anchor-id="相关系数的显著性检验">
-<span class="header-section-number">12.3.0.3</span> 相关系数的显著性检验</h4>
+</section><section id="相关系数的显著性检验" class="level4" data-number="15.3.0.3"><h4 data-number="15.3.0.3" class="anchored" data-anchor-id="相关系数的显著性检验">
+<span class="header-section-number">15.3.0.3</span> 相关系数的显著性检验</h4>
 <p>　　零假设为变量之间不相关（即两个总体的相关系数为 0 ） 。函数 cor.test( ) 可用于对相关系数进行显著性检 验。</p>
 <p>统计量</p>
 <p><span class="math display">\[
 t=\frac{r\sqrt{n-2}}{\sqrt{1-r^2}}
 \]</span></p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html">cor.test</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">displ</span>,<span class="va">df</span><span class="op">$</span><span class="va">hwy</span><span class="op">)</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html">cor.test</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">displ</span>,<span class="va">df</span><span class="op">$</span><span class="va">hwy</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  Pearson's product-moment correlation</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -849,7 +769,7 @@ t=\frac{r\sqrt{n-2}}{\sqrt{1-r^2}}
 </div>
 <p>psych包<code>corr.test()</code> 计算相关系数矩阵和显著性检验</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">psych</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/psych/man/corr.test.html">corr.test</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">psych</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/psych/man/corr.test.html">corr.test</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Call:psych::corr.test(x = df)</span></span>
 <span><span class="co">#&gt; Correlation matrix </span></span>
 <span><span class="co">#&gt;       displ   cty   hwy</span></span>
@@ -1353,215 +1273,209 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./nonparametric_test.html" class="pagination-link" aria-label="非参数秩检验">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">非参数秩检验</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">非参数秩检验</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./LinearRegression.html" class="pagination-link" aria-label="线性回归">
-        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">线性回归</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">线性回归</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb18" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># 独立性与相关性</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">## 分类变量的列联表和独立性检验</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="fu">### 列联表</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(gss_cat)  <span class="co">#因子数据集</span></span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(gss_cat)</span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(gss_cat<span class="sc">$</span>marital,gss_cat<span class="sc">$</span>race)</span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="fu">xtabs</span>(<span class="at">formula =</span> <span class="sc">~</span>marital<span class="sc">+</span>race,<span class="at">data =</span> gss_cat,<span class="at">subset =</span><span class="cn">NULL</span>)</span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>eg <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">156</span>,<span class="dv">9421</span>,<span class="dv">1531</span>,<span class="dv">14797</span>),<span class="at">nrow=</span><span class="dv">2</span>,<span class="at">byrow=</span><span class="cn">TRUE</span>)</span>
-<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(eg) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Disease"</span>,<span class="st">"Control"</span>)</span>
-<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(eg) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Exposed"</span>,<span class="st">"Unexposed"</span>)</span>
-<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(eg)</span>
-<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(eg)          <span class="co">#各单元格比例</span></span>
-<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(eg,<span class="at">margin =</span> <span class="dv">1</span>)        <span class="co">#行比例 </span></span>
-<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a><span class="fu">### 边际列联表</span></span>
-<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a><span class="co"># 边际</span></span>
-<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a><span class="fu">margin.table</span>(<span class="at">x=</span>eg,<span class="at">margin =</span> <span class="dv">2</span>)      <span class="co">#列和</span></span>
-<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a><span class="fu">addmargins</span>(eg)          <span class="co">#添加行和、列和</span></span>
-<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a><span class="fu">addmargins</span>(eg,<span class="dv">1</span>)        <span class="co">#添加列和</span></span>
-<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a><span class="fu">addmargins</span>(eg,<span class="dv">2</span>)        <span class="co">#添加行和</span></span>
-<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a><span class="fu">addmargins</span>(<span class="fu">prop.table</span>(eg,<span class="dv">1</span>))</span>
-<span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a><span class="fu">ftable</span>(eg)   <span class="co"># "平铺式"列联表</span></span>
-<span id="cb18-40"><a href="#cb18-40" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-41"><a href="#cb18-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-42"><a href="#cb18-42" aria-hidden="true" tabindex="-1"></a><span class="fu">### 独立性检验</span></span>
-<span id="cb18-43"><a href="#cb18-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-44"><a href="#cb18-44" aria-hidden="true" tabindex="-1"></a>独立性：判断两个或多个分类变量之间是否存在关联或取值互不影响，分析联合概率分布是否可以分解为各自概率分布的乘积。</span>
-<span id="cb18-45"><a href="#cb18-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-46"><a href="#cb18-46" aria-hidden="true" tabindex="-1"></a><span class="fu">#### $\chi^2$ 独立性检验</span></span>
-<span id="cb18-47"><a href="#cb18-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-50"><a href="#cb18-50" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-51"><a href="#cb18-51" aria-hidden="true" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fu">as.table</span>(<span class="fu">rbind</span>(<span class="fu">c</span>(<span class="dv">86</span>, <span class="dv">29</span>), <span class="fu">c</span>(<span class="dv">44</span>, <span class="dv">30</span>)))</span>
-<span id="cb18-52"><a href="#cb18-52" aria-hidden="true" tabindex="-1"></a><span class="fu">dimnames</span>(M) <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">gender =</span> <span class="fu">c</span>(<span class="st">"F"</span>, <span class="st">"M"</span>),</span>
-<span id="cb18-53"><a href="#cb18-53" aria-hidden="true" tabindex="-1"></a>                    <span class="at">smoking =</span> <span class="fu">c</span>(<span class="st">"Yes"</span>,<span class="st">"No"</span>))</span>
-<span id="cb18-54"><a href="#cb18-54" aria-hidden="true" tabindex="-1"></a>M</span>
-<span id="cb18-55"><a href="#cb18-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-56"><a href="#cb18-56" aria-hidden="true" tabindex="-1"></a>chisq <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(M)</span>
-<span id="cb18-57"><a href="#cb18-57" aria-hidden="true" tabindex="-1"></a>chisq</span>
-<span id="cb18-58"><a href="#cb18-58" aria-hidden="true" tabindex="-1"></a>chisq<span class="sc">$</span>expected  <span class="co"># 期望频数</span></span>
-<span id="cb18-59"><a href="#cb18-59" aria-hidden="true" tabindex="-1"></a>chisq<span class="sc">$</span>parameter <span class="co"># degrees of freedom</span></span>
-<span id="cb18-60"><a href="#cb18-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-61"><a href="#cb18-61" aria-hidden="true" tabindex="-1"></a><span class="co">#对于频数表中每个单元格的期望频数都比较大（大于 5）的大样本，correct设为 FALSE,不进行连续校正</span></span>
-<span id="cb18-62"><a href="#cb18-62" aria-hidden="true" tabindex="-1"></a>chisq2 <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(M,<span class="at">correct =</span> <span class="cn">FALSE</span>) </span>
-<span id="cb18-63"><a href="#cb18-63" aria-hidden="true" tabindex="-1"></a>chisq2</span>
-<span id="cb18-64"><a href="#cb18-64" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-65"><a href="#cb18-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-66"><a href="#cb18-66" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Fisher精确检验</span></span>
-<span id="cb18-67"><a href="#cb18-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-68"><a href="#cb18-68" aria-hidden="true" tabindex="-1"></a>　　如果观察总记录数 n 小于 40，或者频数表里的某个期望频数很小（小于 1） ，则需要使 用 Fisher 精确概率检验。</span>
-<span id="cb18-69"><a href="#cb18-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-72"><a href="#cb18-72" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-73"><a href="#cb18-73" aria-hidden="true" tabindex="-1"></a><span class="co"># Fisher's exact test to test independence of rows and columns in contingency table</span></span>
-<span id="cb18-74"><a href="#cb18-74" aria-hidden="true" tabindex="-1"></a><span class="fu">fisher.test</span>(M)</span>
-<span id="cb18-75"><a href="#cb18-75" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-76"><a href="#cb18-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-77"><a href="#cb18-77" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Cochran-Mantel-Haenszel $\chi^2$ 检验</span></span>
-<span id="cb18-78"><a href="#cb18-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-79"><a href="#cb18-79" aria-hidden="true" tabindex="-1"></a>又叫行均分检验，常用于按照某个变量进行分层后的检验，这个方法课本上说**用于检验两个有序分类变量是否存在线性相关**，但实际上用途很广泛，比如因变量是有序变量的单向有序列联表，也可以用。　　</span>
-<span id="cb18-80"><a href="#cb18-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-81"><a href="#cb18-81" aria-hidden="true" tabindex="-1"></a>两个变量的关联有可能受到第三个变量的影响，因此我们有必要检验两个分类变量在 调整（控制）第三个变量的情况下是否独立。 Cochran-Mantel-Haenszel χ 2 检验常用于探索 变量间的混杂因素。其零假设是：两个分类变量在第三个变量的每一层都是条件独立的。函数 mantelhaen.test( ) 可以用来进行该检验。</span>
-<span id="cb18-82"><a href="#cb18-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-85"><a href="#cb18-85" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-86"><a href="#cb18-86" aria-hidden="true" tabindex="-1"></a>Rabbits <span class="ot">&lt;-</span></span>
-<span id="cb18-87"><a href="#cb18-87" aria-hidden="true" tabindex="-1"></a><span class="fu">array</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">6</span>, <span class="dv">5</span>,</span>
-<span id="cb18-88"><a href="#cb18-88" aria-hidden="true" tabindex="-1"></a>        <span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">6</span>,</span>
-<span id="cb18-89"><a href="#cb18-89" aria-hidden="true" tabindex="-1"></a>        <span class="dv">6</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">4</span>,</span>
-<span id="cb18-90"><a href="#cb18-90" aria-hidden="true" tabindex="-1"></a>        <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">1</span>, <span class="dv">0</span>,</span>
-<span id="cb18-91"><a href="#cb18-91" aria-hidden="true" tabindex="-1"></a>        <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
-<span id="cb18-92"><a href="#cb18-92" aria-hidden="true" tabindex="-1"></a>      <span class="at">dim =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">5</span>),</span>
-<span id="cb18-93"><a href="#cb18-93" aria-hidden="true" tabindex="-1"></a>      <span class="at">dimnames =</span> <span class="fu">list</span>(</span>
-<span id="cb18-94"><a href="#cb18-94" aria-hidden="true" tabindex="-1"></a>          <span class="at">Delay =</span> <span class="fu">c</span>(<span class="st">"None"</span>, <span class="st">"1.5h"</span>),</span>
-<span id="cb18-95"><a href="#cb18-95" aria-hidden="true" tabindex="-1"></a>          <span class="at">Response =</span> <span class="fu">c</span>(<span class="st">"Cured"</span>, <span class="st">"Died"</span>),</span>
-<span id="cb18-96"><a href="#cb18-96" aria-hidden="true" tabindex="-1"></a>          <span class="at">Penicillin.Level =</span> <span class="fu">c</span>(<span class="st">"1/8"</span>, <span class="st">"1/4"</span>, <span class="st">"1/2"</span>, <span class="st">"1"</span>, <span class="st">"4"</span>)))</span>
-<span id="cb18-97"><a href="#cb18-97" aria-hidden="true" tabindex="-1"></a>Rabbits</span>
-<span id="cb18-98"><a href="#cb18-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-99"><a href="#cb18-99" aria-hidden="true" tabindex="-1"></a><span class="fu">mantelhaen.test</span>(Rabbits)</span>
-<span id="cb18-100"><a href="#cb18-100" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-101"><a href="#cb18-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-102"><a href="#cb18-102" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 配对列联表的 χ 2 检验</span></span>
-<span id="cb18-103"><a href="#cb18-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-104"><a href="#cb18-104" aria-hidden="true" tabindex="-1"></a>　　医学科研实践中经常遇到配对设计的计数资料，例如两种检验方法、诊断方法结果的 比较。其特点是对每个研究对象分别用两种方法处理，然后观察两种处理方法的某两分类 变量的计数结果。对于这种数据，我们也可以整理成列联表的形式，但是不能用前述的 χ 2独立性检验，需进行 Mcnemar 检验。</span>
-<span id="cb18-105"><a href="#cb18-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-108"><a href="#cb18-108" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-109"><a href="#cb18-109" aria-hidden="true" tabindex="-1"></a><span class="co">#　　某实验室分别用免疫荧光法和乳胶凝集法对 58 名疑似系统性红斑狼疮患者血清中抗 核抗体进行测定</span></span>
-<span id="cb18-110"><a href="#cb18-110" aria-hidden="true" tabindex="-1"></a>result<span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">11</span>, <span class="dv">2</span>, <span class="dv">12</span>, <span class="dv">33</span>), <span class="at">nrow =</span> <span class="dv">2</span>,<span class="at">dimnames =</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">"+"</span>,<span class="st">"-"</span>),<span class="fu">c</span>(<span class="st">"+"</span>,<span class="st">"-"</span>)))</span>
-<span id="cb18-111"><a href="#cb18-111" aria-hidden="true" tabindex="-1"></a>result</span>
-<span id="cb18-112"><a href="#cb18-112" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-113"><a href="#cb18-113" aria-hidden="true" tabindex="-1"></a><span class="co">#　　对于配对四格表，如果样本量较小（不一致的结果的总数小于 40 ） ，则需要进行连续性校正。</span></span>
-<span id="cb18-114"><a href="#cb18-114" aria-hidden="true" tabindex="-1"></a><span class="fu">mcnemar.test</span>(result,<span class="at">correct =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb18-115"><a href="#cb18-115" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-116"><a href="#cb18-116" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-117"><a href="#cb18-117" aria-hidden="true" tabindex="-1"></a><span class="fu">## 分类变量间的相关性</span></span>
-<span id="cb18-118"><a href="#cb18-118" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-119"><a href="#cb18-119" aria-hidden="true" tabindex="-1"></a>　　如果独立性检验的结果表明两个变量之间不独立，那么很自然地我们就想量化它们之间相关性的强弱。 *vcd* 包里的函数 `assocstats( )`可以用来计算列联表的 **Phi 系数**、**列联系数**和 **Cramer's V 系数**。其中， Phi 系数只适用于四格表。 　　 　　</span>
-<span id="cb18-120"><a href="#cb18-120" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-121"><a href="#cb18-121" aria-hidden="true" tabindex="-1"></a><span class="fu">### 相关系数 　　</span></span>
-<span id="cb18-122"><a href="#cb18-122" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-125"><a href="#cb18-125" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-126"><a href="#cb18-126" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vcd)</span>
-<span id="cb18-127"><a href="#cb18-127" aria-hidden="true" tabindex="-1"></a>mytable <span class="ot">&lt;-</span> <span class="fu">table</span>(Arthritis<span class="sc">$</span>Treatment, Arthritis<span class="sc">$</span>Improved)</span>
-<span id="cb18-128"><a href="#cb18-128" aria-hidden="true" tabindex="-1"></a><span class="fu">assocstats</span>(mytable)</span>
-<span id="cb18-129"><a href="#cb18-129" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-130"><a href="#cb18-130" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-131"><a href="#cb18-131" aria-hidden="true" tabindex="-1"></a>　　对于**配对列联表**，可以计算一致性指标 Kappa 统计量。 epiDisplay 包里的函数 kap( )可以用于计算一致性的比例以及 Kappa 统计量的值 　　 　　</span>
-<span id="cb18-132"><a href="#cb18-132" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-135"><a href="#cb18-135" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-136"><a href="#cb18-136" aria-hidden="true" tabindex="-1"></a>my.matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">11</span>, <span class="dv">2</span>, <span class="dv">12</span>, <span class="dv">33</span>), <span class="at">nrow =</span> <span class="dv">2</span>)</span>
-<span id="cb18-137"><a href="#cb18-137" aria-hidden="true" tabindex="-1"></a>epiDisplay<span class="sc">::</span><span class="fu">kap</span>(my.matrix)</span>
-<span id="cb18-138"><a href="#cb18-138" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-139"><a href="#cb18-139" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-140"><a href="#cb18-140" aria-hidden="true" tabindex="-1"></a>　　共 58 个对象，每一对象用两种检测方法检测，其中 1 个对象的两种检测结果都为阳 性， 33 个对象的两种检测结果都是阴性，所以总的一致性为 (1 + 33)/58 ≈ 75.86% 。为了解释期望一致性和 Kappa 值的含义，先计算各个单元格的期望频数。 　　 　　</span>
-<span id="cb18-141"><a href="#cb18-141" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-144"><a href="#cb18-144" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-145"><a href="#cb18-145" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(my.matrix)<span class="sc">$</span>expected</span>
-<span id="cb18-146"><a href="#cb18-146" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-147"><a href="#cb18-147" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-148"><a href="#cb18-148" aria-hidden="true" tabindex="-1"></a>　　对角线上的这两个单元格对应的期望频数分别约为 5.15 和 27.15 ，因此期望一致性为 (5.155 + 27.15)/58 ≈ 55.71% 。期望一致性是假定两种方法的检测结果都是完全随机的情况下的 一致性。也就是说，即使两种检测方法都毫无作用，平均也能达到 5.71% 的一致性。 Kappa 统 计量是超出随机的一致性的部分占最大可能超出随机的一致性的比例。在本例中，前者为 75.86% − 55.71% ， 后者为 100% − 55.71% 。 因此， Kappa 值为 (75.86 − 5.71)/(10 − 5.71) ≈ 0.45</span>
-<span id="cb18-149"><a href="#cb18-149" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-150"><a href="#cb18-150" aria-hidden="true" tabindex="-1"></a><span class="fu">### 马赛克图</span></span>
-<span id="cb18-151"><a href="#cb18-151" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-152"><a href="#cb18-152" aria-hidden="true" tabindex="-1"></a>　　马赛克图中的矩形面积正比于多维列联表中单元格的频率 　　</span>
-<span id="cb18-153"><a href="#cb18-153" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-156"><a href="#cb18-156" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-157"><a href="#cb18-157" aria-hidden="true" tabindex="-1"></a><span class="fu">mosaic</span>(<span class="sc">~</span> Sex <span class="sc">+</span> Treatment <span class="sc">+</span> Improved, <span class="at">data =</span> Arthritis)</span>
-<span id="cb18-158"><a href="#cb18-158" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-159"><a href="#cb18-159" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-160"><a href="#cb18-160" aria-hidden="true" tabindex="-1"></a><span class="fu">## 连续变量的相关性检验</span></span>
-<span id="cb18-161"><a href="#cb18-161" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-162"><a href="#cb18-162" aria-hidden="true" tabindex="-1"></a>相关性：判断两个变量之间的线性关系强度和方向，无论是否独立。</span>
-<span id="cb18-163"><a href="#cb18-163" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-164"><a href="#cb18-164" aria-hidden="true" tabindex="-1"></a>如果两个连续变量不相互独立时，使用协方差（covariance）来描述两个变量的关系。</span>
-<span id="cb18-165"><a href="#cb18-165" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-166"><a href="#cb18-166" aria-hidden="true" tabindex="-1"></a>协方差（或相关系数）为零，不相关，不存在线性关系，但可能存在非线性关系。</span>
-<span id="cb18-167"><a href="#cb18-167" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-170"><a href="#cb18-170" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-171"><a href="#cb18-171" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> mpg[,<span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">8</span>,<span class="dv">9</span>)]</span>
-<span id="cb18-172"><a href="#cb18-172" aria-hidden="true" tabindex="-1"></a><span class="fu">cov</span>(df)    <span class="co"># 协方差矩阵</span></span>
-<span id="cb18-173"><a href="#cb18-173" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-174"><a href="#cb18-174" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-175"><a href="#cb18-175" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 相关系数</span></span>
-<span id="cb18-176"><a href="#cb18-176" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-177"><a href="#cb18-177" aria-hidden="true" tabindex="-1"></a>相关系数的取值范围： $<span class="co">[</span><span class="ot">-1,1</span><span class="co">]</span>$</span>
-<span id="cb18-178"><a href="#cb18-178" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-179"><a href="#cb18-179" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb18-180"><a href="#cb18-180" aria-hidden="true" tabindex="-1"></a>r(X,Y)=\frac {\sum_{i=1}^n (x_i-\bar x)(y_i-\bar y)}{\sqrt{\sum_{i=1}^n (x_i-\bar x)^2 \sum_{i=1}^n (y_i-\bar y)^2}}</span>
-<span id="cb18-181"><a href="#cb18-181" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb18-182"><a href="#cb18-182" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-185"><a href="#cb18-185" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-186"><a href="#cb18-186" aria-hidden="true" tabindex="-1"></a><span class="co"># Pearson's 积差相关系数 　　一般要求两个连续变量都服从正态分布</span></span>
-<span id="cb18-187"><a href="#cb18-187" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(df,<span class="at">use =</span> <span class="st">"everything"</span>,<span class="at">method=</span><span class="st">"pearson"</span>) <span class="co"># default</span></span>
-<span id="cb18-188"><a href="#cb18-188" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-189"><a href="#cb18-189" aria-hidden="true" tabindex="-1"></a><span class="co"># Spearman's rank相关系数  　　非参数</span></span>
-<span id="cb18-190"><a href="#cb18-190" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(df,<span class="at">method =</span> <span class="st">"spearman"</span>)</span>
-<span id="cb18-191"><a href="#cb18-191" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-192"><a href="#cb18-192" aria-hidden="true" tabindex="-1"></a><span class="co"># Kendall's tau相关系数  　　非参数</span></span>
-<span id="cb18-193"><a href="#cb18-193" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(df,<span class="at">method =</span> <span class="st">"kendall"</span>)</span>
-<span id="cb18-194"><a href="#cb18-194" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-195"><a href="#cb18-195" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-196"><a href="#cb18-196" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-197"><a href="#cb18-197" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-198"><a href="#cb18-198" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 相关图（correlogram）</span></span>
-<span id="cb18-199"><a href="#cb18-199" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-202"><a href="#cb18-202" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-203"><a href="#cb18-203" aria-hidden="true" tabindex="-1"></a>ggcorrplot<span class="sc">::</span><span class="fu">ggcorrplot</span>(</span>
-<span id="cb18-204"><a href="#cb18-204" aria-hidden="true" tabindex="-1"></a>    <span class="at">corr =</span> <span class="fu">cor</span>(df,<span class="at">use =</span> <span class="st">"everything"</span>,<span class="at">method=</span><span class="st">"pearson"</span>) ,</span>
-<span id="cb18-205"><a href="#cb18-205" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-206"><a href="#cb18-206" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-207"><a href="#cb18-207" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-208"><a href="#cb18-208" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 相关系数的显著性检验</span></span>
-<span id="cb18-209"><a href="#cb18-209" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-210"><a href="#cb18-210" aria-hidden="true" tabindex="-1"></a>　　零假设为变量之间不相关（即两个总体的相关系数为 0 ） 。函数 cor.test( ) 可用于对相关系数进行显著性检 验。</span>
-<span id="cb18-211"><a href="#cb18-211" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-212"><a href="#cb18-212" aria-hidden="true" tabindex="-1"></a>统计量</span>
-<span id="cb18-213"><a href="#cb18-213" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-214"><a href="#cb18-214" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb18-215"><a href="#cb18-215" aria-hidden="true" tabindex="-1"></a>t=\frac{r\sqrt{n-2}}{\sqrt{1-r^2}}</span>
-<span id="cb18-216"><a href="#cb18-216" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb18-217"><a href="#cb18-217" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-220"><a href="#cb18-220" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-221"><a href="#cb18-221" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(df<span class="sc">$</span>displ,df<span class="sc">$</span>hwy)</span>
-<span id="cb18-222"><a href="#cb18-222" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-223"><a href="#cb18-223" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-224"><a href="#cb18-224" aria-hidden="true" tabindex="-1"></a>psych包<span class="in">`corr.test()`</span> 计算相关系数矩阵和显著性检验</span>
-<span id="cb18-225"><a href="#cb18-225" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-228"><a href="#cb18-228" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-229"><a href="#cb18-229" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">corr.test</span>(df)</span>
-<span id="cb18-230"><a href="#cb18-230" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-231"><a href="#cb18-231" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(psych<span class="sc">::</span><span class="fu">corr.test</span>(df), <span class="at">short =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb18-232"><a href="#cb18-232" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<div class="sourceCode" id="cb16" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># 独立性与相关性</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">## 分类变量的列联表和独立性检验</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fu">### 列联表</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>eg <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">156</span>,<span class="dv">9421</span>,<span class="dv">1531</span>,<span class="dv">14797</span>),<span class="at">nrow=</span><span class="dv">2</span>,<span class="at">byrow=</span><span class="cn">TRUE</span>)</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(eg) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Disease"</span>,<span class="st">"Control"</span>)</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(eg) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Exposed"</span>,<span class="st">"Unexposed"</span>)</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(eg)</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(eg)          <span class="co">#各单元格比例</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(eg,<span class="at">margin =</span> <span class="dv">1</span>)        <span class="co">#行比例 </span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="fu">### 边际列联表</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a><span class="co"># 边际</span></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a><span class="fu">margin.table</span>(<span class="at">x=</span>eg,<span class="at">margin =</span> <span class="dv">2</span>)      <span class="co">#列和</span></span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a><span class="fu">addmargins</span>(eg)          <span class="co">#添加行和、列和</span></span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a><span class="fu">addmargins</span>(eg,<span class="dv">1</span>)        <span class="co">#添加列和</span></span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a><span class="fu">addmargins</span>(eg,<span class="dv">2</span>)        <span class="co">#添加行和</span></span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a><span class="fu">addmargins</span>(<span class="fu">prop.table</span>(eg,<span class="dv">1</span>))</span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a><span class="fu">ftable</span>(eg)   <span class="co"># "平铺式"列联表</span></span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a><span class="fu">### 独立性检验</span></span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a>独立性：判断两个或多个分类变量之间是否存在关联或取值互不影响，分析联合概率分布是否可以分解为各自概率分布的乘积。</span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a><span class="fu">#### $\chi^2$ 独立性检验</span></span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fu">as.table</span>(<span class="fu">rbind</span>(<span class="fu">c</span>(<span class="dv">86</span>, <span class="dv">29</span>), <span class="fu">c</span>(<span class="dv">44</span>, <span class="dv">30</span>)))</span>
+<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a><span class="fu">dimnames</span>(M) <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">gender =</span> <span class="fu">c</span>(<span class="st">"F"</span>, <span class="st">"M"</span>),</span>
+<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a>                    <span class="at">smoking =</span> <span class="fu">c</span>(<span class="st">"Yes"</span>,<span class="st">"No"</span>))</span>
+<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a>M</span>
+<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a>chisq <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(M)</span>
+<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a>chisq</span>
+<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a>chisq<span class="sc">$</span>expected  <span class="co"># 期望频数</span></span>
+<span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a>chisq<span class="sc">$</span>parameter <span class="co"># degrees of freedom</span></span>
+<span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-52"><a href="#cb16-52" aria-hidden="true" tabindex="-1"></a><span class="co">#对于频数表中每个单元格的期望频数都比较大（大于 5）的大样本，correct设为 FALSE,不进行连续校正</span></span>
+<span id="cb16-53"><a href="#cb16-53" aria-hidden="true" tabindex="-1"></a>chisq2 <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(M,<span class="at">correct =</span> <span class="cn">FALSE</span>) </span>
+<span id="cb16-54"><a href="#cb16-54" aria-hidden="true" tabindex="-1"></a>chisq2</span>
+<span id="cb16-55"><a href="#cb16-55" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-56"><a href="#cb16-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-57"><a href="#cb16-57" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Fisher精确检验</span></span>
+<span id="cb16-58"><a href="#cb16-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-59"><a href="#cb16-59" aria-hidden="true" tabindex="-1"></a>　　如果观察总记录数 n 小于 40，或者频数表里的某个期望频数很小（小于 1） ，则需要使 用 Fisher 精确概率检验。</span>
+<span id="cb16-60"><a href="#cb16-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-63"><a href="#cb16-63" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-64"><a href="#cb16-64" aria-hidden="true" tabindex="-1"></a><span class="co"># Fisher's exact test to test independence of rows and columns in contingency table</span></span>
+<span id="cb16-65"><a href="#cb16-65" aria-hidden="true" tabindex="-1"></a><span class="fu">fisher.test</span>(M)</span>
+<span id="cb16-66"><a href="#cb16-66" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-67"><a href="#cb16-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-68"><a href="#cb16-68" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Cochran-Mantel-Haenszel $\chi^2$ 检验</span></span>
+<span id="cb16-69"><a href="#cb16-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-70"><a href="#cb16-70" aria-hidden="true" tabindex="-1"></a>又叫行均分检验，常用于按照某个变量进行分层后的检验，这个方法课本上说**用于检验两个有序分类变量是否存在线性相关**，但实际上用途很广泛，比如因变量是有序变量的单向有序列联表，也可以用。　　</span>
+<span id="cb16-71"><a href="#cb16-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-72"><a href="#cb16-72" aria-hidden="true" tabindex="-1"></a>两个变量的关联有可能受到第三个变量的影响，因此我们有必要检验两个分类变量在 调整（控制）第三个变量的情况下是否独立。 Cochran-Mantel-Haenszel χ 2 检验常用于探索 变量间的混杂因素。其零假设是：两个分类变量在第三个变量的每一层都是条件独立的。函数 mantelhaen.test( ) 可以用来进行该检验。</span>
+<span id="cb16-73"><a href="#cb16-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-76"><a href="#cb16-76" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-77"><a href="#cb16-77" aria-hidden="true" tabindex="-1"></a>Rabbits <span class="ot">&lt;-</span></span>
+<span id="cb16-78"><a href="#cb16-78" aria-hidden="true" tabindex="-1"></a><span class="fu">array</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">6</span>, <span class="dv">5</span>,</span>
+<span id="cb16-79"><a href="#cb16-79" aria-hidden="true" tabindex="-1"></a>        <span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">6</span>,</span>
+<span id="cb16-80"><a href="#cb16-80" aria-hidden="true" tabindex="-1"></a>        <span class="dv">6</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">4</span>,</span>
+<span id="cb16-81"><a href="#cb16-81" aria-hidden="true" tabindex="-1"></a>        <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">1</span>, <span class="dv">0</span>,</span>
+<span id="cb16-82"><a href="#cb16-82" aria-hidden="true" tabindex="-1"></a>        <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb16-83"><a href="#cb16-83" aria-hidden="true" tabindex="-1"></a>      <span class="at">dim =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">5</span>),</span>
+<span id="cb16-84"><a href="#cb16-84" aria-hidden="true" tabindex="-1"></a>      <span class="at">dimnames =</span> <span class="fu">list</span>(</span>
+<span id="cb16-85"><a href="#cb16-85" aria-hidden="true" tabindex="-1"></a>          <span class="at">Delay =</span> <span class="fu">c</span>(<span class="st">"None"</span>, <span class="st">"1.5h"</span>),</span>
+<span id="cb16-86"><a href="#cb16-86" aria-hidden="true" tabindex="-1"></a>          <span class="at">Response =</span> <span class="fu">c</span>(<span class="st">"Cured"</span>, <span class="st">"Died"</span>),</span>
+<span id="cb16-87"><a href="#cb16-87" aria-hidden="true" tabindex="-1"></a>          <span class="at">Penicillin.Level =</span> <span class="fu">c</span>(<span class="st">"1/8"</span>, <span class="st">"1/4"</span>, <span class="st">"1/2"</span>, <span class="st">"1"</span>, <span class="st">"4"</span>)))</span>
+<span id="cb16-88"><a href="#cb16-88" aria-hidden="true" tabindex="-1"></a>Rabbits</span>
+<span id="cb16-89"><a href="#cb16-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-90"><a href="#cb16-90" aria-hidden="true" tabindex="-1"></a><span class="fu">mantelhaen.test</span>(Rabbits)</span>
+<span id="cb16-91"><a href="#cb16-91" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-92"><a href="#cb16-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-93"><a href="#cb16-93" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 配对列联表的 χ 2 检验</span></span>
+<span id="cb16-94"><a href="#cb16-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-95"><a href="#cb16-95" aria-hidden="true" tabindex="-1"></a>　　医学科研实践中经常遇到配对设计的计数资料，例如两种检验方法、诊断方法结果的 比较。其特点是对每个研究对象分别用两种方法处理，然后观察两种处理方法的某两分类 变量的计数结果。对于这种数据，我们也可以整理成列联表的形式，但是不能用前述的 χ 2独立性检验，需进行 Mcnemar 检验。</span>
+<span id="cb16-96"><a href="#cb16-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-99"><a href="#cb16-99" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-100"><a href="#cb16-100" aria-hidden="true" tabindex="-1"></a><span class="co">#　　某实验室分别用免疫荧光法和乳胶凝集法对 58 名疑似系统性红斑狼疮患者血清中抗 核抗体进行测定</span></span>
+<span id="cb16-101"><a href="#cb16-101" aria-hidden="true" tabindex="-1"></a>result<span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">11</span>, <span class="dv">2</span>, <span class="dv">12</span>, <span class="dv">33</span>), <span class="at">nrow =</span> <span class="dv">2</span>,<span class="at">dimnames =</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">"+"</span>,<span class="st">"-"</span>),<span class="fu">c</span>(<span class="st">"+"</span>,<span class="st">"-"</span>)))</span>
+<span id="cb16-102"><a href="#cb16-102" aria-hidden="true" tabindex="-1"></a>result</span>
+<span id="cb16-103"><a href="#cb16-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-104"><a href="#cb16-104" aria-hidden="true" tabindex="-1"></a><span class="co">#　　对于配对四格表，如果样本量较小（不一致的结果的总数小于 40 ） ，则需要进行连续性校正。</span></span>
+<span id="cb16-105"><a href="#cb16-105" aria-hidden="true" tabindex="-1"></a><span class="fu">mcnemar.test</span>(result,<span class="at">correct =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb16-106"><a href="#cb16-106" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-107"><a href="#cb16-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-108"><a href="#cb16-108" aria-hidden="true" tabindex="-1"></a><span class="fu">## 分类变量间的相关性</span></span>
+<span id="cb16-109"><a href="#cb16-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-110"><a href="#cb16-110" aria-hidden="true" tabindex="-1"></a>　　如果独立性检验的结果表明两个变量之间不独立，那么很自然地我们就想量化它们之间相关性的强弱。 *vcd* 包里的函数 `assocstats( )`可以用来计算列联表的 **Phi 系数**、**列联系数**和 **Cramer's V 系数**。其中， Phi 系数只适用于四格表。 　　 　　</span>
+<span id="cb16-111"><a href="#cb16-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-112"><a href="#cb16-112" aria-hidden="true" tabindex="-1"></a><span class="fu">### 相关系数 　　</span></span>
+<span id="cb16-113"><a href="#cb16-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-116"><a href="#cb16-116" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-117"><a href="#cb16-117" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vcd)</span>
+<span id="cb16-118"><a href="#cb16-118" aria-hidden="true" tabindex="-1"></a>mytable <span class="ot">&lt;-</span> <span class="fu">table</span>(Arthritis<span class="sc">$</span>Treatment, Arthritis<span class="sc">$</span>Improved)</span>
+<span id="cb16-119"><a href="#cb16-119" aria-hidden="true" tabindex="-1"></a><span class="fu">assocstats</span>(mytable)</span>
+<span id="cb16-120"><a href="#cb16-120" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-121"><a href="#cb16-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-122"><a href="#cb16-122" aria-hidden="true" tabindex="-1"></a>　　对于**配对列联表**，可以计算一致性指标 Kappa 统计量。 epiDisplay 包里的函数 kap( )可以用于计算一致性的比例以及 Kappa 统计量的值 　　 　　</span>
+<span id="cb16-123"><a href="#cb16-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-126"><a href="#cb16-126" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-127"><a href="#cb16-127" aria-hidden="true" tabindex="-1"></a>my.matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">11</span>, <span class="dv">2</span>, <span class="dv">12</span>, <span class="dv">33</span>), <span class="at">nrow =</span> <span class="dv">2</span>)</span>
+<span id="cb16-128"><a href="#cb16-128" aria-hidden="true" tabindex="-1"></a>vcd<span class="sc">::</span><span class="fu">Kappa</span>(my.matrix)</span>
+<span id="cb16-129"><a href="#cb16-129" aria-hidden="true" tabindex="-1"></a>epiDisplay<span class="sc">::</span><span class="fu">kap</span>(my.matrix)</span>
+<span id="cb16-130"><a href="#cb16-130" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-131"><a href="#cb16-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-132"><a href="#cb16-132" aria-hidden="true" tabindex="-1"></a>　　共 58 个对象，每一对象用两种检测方法检测，其中 1 个对象的两种检测结果都为阳 性， 33 个对象的两种检测结果都是阴性，所以总的一致性为 (1 + 33)/58 ≈ 75.86% 。为了解释期望一致性和 Kappa 值的含义，先计算各个单元格的期望频数。 　　 　　</span>
+<span id="cb16-133"><a href="#cb16-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-136"><a href="#cb16-136" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-137"><a href="#cb16-137" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(my.matrix)<span class="sc">$</span>expected</span>
+<span id="cb16-138"><a href="#cb16-138" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-139"><a href="#cb16-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-140"><a href="#cb16-140" aria-hidden="true" tabindex="-1"></a>　　对角线上的这两个单元格对应的期望频数分别约为 5.15 和 27.15 ，因此期望一致性为 (5.155 + 27.15)/58 ≈ 55.71% 。期望一致性是假定两种方法的检测结果都是完全随机的情况下的 一致性。也就是说，即使两种检测方法都毫无作用，平均也能达到 5.71% 的一致性。 Kappa 统 计量是超出随机的一致性的部分占最大可能超出随机的一致性的比例。在本例中，前者为 75.86% − 55.71% ， 后者为 100% − 55.71% 。 因此， Kappa 值为 (75.86 − 5.71)/(10 − 5.71) ≈ 0.45</span>
+<span id="cb16-141"><a href="#cb16-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-142"><a href="#cb16-142" aria-hidden="true" tabindex="-1"></a><span class="fu">### 马赛克图</span></span>
+<span id="cb16-143"><a href="#cb16-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-144"><a href="#cb16-144" aria-hidden="true" tabindex="-1"></a>　　马赛克图中的矩形面积正比于多维列联表中单元格的频率 　　</span>
+<span id="cb16-145"><a href="#cb16-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-148"><a href="#cb16-148" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-149"><a href="#cb16-149" aria-hidden="true" tabindex="-1"></a><span class="fu">mosaic</span>(<span class="sc">~</span> Sex <span class="sc">+</span> Treatment <span class="sc">+</span> Improved, <span class="at">data =</span> Arthritis)</span>
+<span id="cb16-150"><a href="#cb16-150" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-151"><a href="#cb16-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-152"><a href="#cb16-152" aria-hidden="true" tabindex="-1"></a><span class="fu">## 连续变量的相关性检验</span></span>
+<span id="cb16-153"><a href="#cb16-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-154"><a href="#cb16-154" aria-hidden="true" tabindex="-1"></a>相关性：判断两个变量之间的线性关系强度和方向，无论是否独立。</span>
+<span id="cb16-155"><a href="#cb16-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-156"><a href="#cb16-156" aria-hidden="true" tabindex="-1"></a>如果两个连续变量不相互独立时，使用协方差（covariance）来描述两个变量的关系。</span>
+<span id="cb16-157"><a href="#cb16-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-158"><a href="#cb16-158" aria-hidden="true" tabindex="-1"></a>协方差（或相关系数）为零，不相关，不存在线性关系，但可能存在非线性关系。</span>
+<span id="cb16-159"><a href="#cb16-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-162"><a href="#cb16-162" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-163"><a href="#cb16-163" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> mpg[,<span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">8</span>,<span class="dv">9</span>)]</span>
+<span id="cb16-164"><a href="#cb16-164" aria-hidden="true" tabindex="-1"></a><span class="fu">cov</span>(df)    <span class="co"># 协方差矩阵</span></span>
+<span id="cb16-165"><a href="#cb16-165" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-166"><a href="#cb16-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-167"><a href="#cb16-167" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 相关系数</span></span>
+<span id="cb16-168"><a href="#cb16-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-169"><a href="#cb16-169" aria-hidden="true" tabindex="-1"></a>相关系数的取值范围： $<span class="co">[</span><span class="ot">-1,1</span><span class="co">]</span>$</span>
+<span id="cb16-170"><a href="#cb16-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-171"><a href="#cb16-171" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-172"><a href="#cb16-172" aria-hidden="true" tabindex="-1"></a>r(X,Y)=\frac {\sum_{i=1}^n (x_i-\bar x)(y_i-\bar y)}{\sqrt{\sum_{i=1}^n (x_i-\bar x)^2 \sum_{i=1}^n (y_i-\bar y)^2}}</span>
+<span id="cb16-173"><a href="#cb16-173" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-174"><a href="#cb16-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-177"><a href="#cb16-177" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-178"><a href="#cb16-178" aria-hidden="true" tabindex="-1"></a><span class="co"># Pearson's 积差相关系数 　　一般要求两个连续变量都服从正态分布</span></span>
+<span id="cb16-179"><a href="#cb16-179" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(df,<span class="at">use =</span> <span class="st">"everything"</span>,<span class="at">method=</span><span class="st">"pearson"</span>) <span class="co"># default</span></span>
+<span id="cb16-180"><a href="#cb16-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-181"><a href="#cb16-181" aria-hidden="true" tabindex="-1"></a><span class="co"># Spearman's rank相关系数  　　非参数</span></span>
+<span id="cb16-182"><a href="#cb16-182" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(df,<span class="at">method =</span> <span class="st">"spearman"</span>)</span>
+<span id="cb16-183"><a href="#cb16-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-184"><a href="#cb16-184" aria-hidden="true" tabindex="-1"></a><span class="co"># Kendall's tau相关系数  　　非参数</span></span>
+<span id="cb16-185"><a href="#cb16-185" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(df,<span class="at">method =</span> <span class="st">"kendall"</span>)</span>
+<span id="cb16-186"><a href="#cb16-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-187"><a href="#cb16-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-188"><a href="#cb16-188" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-189"><a href="#cb16-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-190"><a href="#cb16-190" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 相关图（correlogram）</span></span>
+<span id="cb16-191"><a href="#cb16-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-194"><a href="#cb16-194" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-195"><a href="#cb16-195" aria-hidden="true" tabindex="-1"></a>ggcorrplot<span class="sc">::</span><span class="fu">ggcorrplot</span>(</span>
+<span id="cb16-196"><a href="#cb16-196" aria-hidden="true" tabindex="-1"></a>    <span class="at">corr =</span> <span class="fu">cor</span>(df,<span class="at">use =</span> <span class="st">"everything"</span>,<span class="at">method=</span><span class="st">"pearson"</span>) ,</span>
+<span id="cb16-197"><a href="#cb16-197" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-198"><a href="#cb16-198" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-199"><a href="#cb16-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-200"><a href="#cb16-200" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 相关系数的显著性检验</span></span>
+<span id="cb16-201"><a href="#cb16-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-202"><a href="#cb16-202" aria-hidden="true" tabindex="-1"></a>　　零假设为变量之间不相关（即两个总体的相关系数为 0 ） 。函数 cor.test( ) 可用于对相关系数进行显著性检 验。</span>
+<span id="cb16-203"><a href="#cb16-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-204"><a href="#cb16-204" aria-hidden="true" tabindex="-1"></a>统计量</span>
+<span id="cb16-205"><a href="#cb16-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-206"><a href="#cb16-206" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-207"><a href="#cb16-207" aria-hidden="true" tabindex="-1"></a>t=\frac{r\sqrt{n-2}}{\sqrt{1-r^2}}</span>
+<span id="cb16-208"><a href="#cb16-208" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-209"><a href="#cb16-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-212"><a href="#cb16-212" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-213"><a href="#cb16-213" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(df<span class="sc">$</span>displ,df<span class="sc">$</span>hwy)</span>
+<span id="cb16-214"><a href="#cb16-214" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-215"><a href="#cb16-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-216"><a href="#cb16-216" aria-hidden="true" tabindex="-1"></a>psych包<span class="in">`corr.test()`</span> 计算相关系数矩阵和显著性检验</span>
+<span id="cb16-217"><a href="#cb16-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-220"><a href="#cb16-220" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-221"><a href="#cb16-221" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">corr.test</span>(df)</span>
+<span id="cb16-222"><a href="#cb16-222" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-223"><a href="#cb16-223" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(psych<span class="sc">::</span><span class="fu">corr.test</span>(df), <span class="at">short =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb16-224"><a href="#cb16-224" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
