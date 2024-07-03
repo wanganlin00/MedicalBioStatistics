@@ -1,5 +1,7 @@
 # 线性混合效应模型
 
+[Mixed Effects Models and Extensions in Ecology with R 第5章](https://link.springer.com/book/10.1007/978-0-387-87458-6)
+
 限制最大似然法，REML
 
 赤池信息准则AIC
@@ -7,10 +9,6 @@
 贝叶斯信息准则BIC
 
 线性混合模型，LME的表达式如下：
-
-$$
-Y_i=X_i\times \beta +Z_i\times b_i+\epsilon_i,\\其中，b_i\sim N(0,D),\epsilon_i \sim N(0,\Sigma_i),b_1,...,b_N,\epsilon_1,...,\epsilon_N 相互独立
-$$
 
 $$
 fit=lmer (data,formual= DV ~ Fixed\_Factor + (Random\_intercept + Random\_slope | Random\_Factor))
@@ -27,75 +25,119 @@ $$
 
 ```{r}
 library(lme4)
-df_long <- ChickWeight |> filter(Chick %in% c(1:3,21:23))
-
+library(nlme)
+df_long <- read_delim("data/AED/RIKZ.txt")
+df_long$Beach <- factor(df_long$Beach)
+df_long$Exposure <- factor(df_long$Exposure)
 str(df_long)
 ```
 
 ## 随机截距+随机斜率
 
 $$
-Y_i=X_i\times \beta +Z_i\times b_i+\epsilon_i,\\其中，b_i\sim N(0,D),\epsilon_i \sim N(0,\Sigma_i),b_1,...,b_N,\epsilon_1,...,\epsilon_N 相互独立
+\eta_{(nrow \ \times 1)}=\mathbf{X_{nrow×1}}\beta_{1\times1} +Z_{nrow\times 2n_{subjects}} \mathbf{\gamma}_{2n_{subjects}\times 1}+\epsilon_i
 $$
 
+Z有两倍于受试者数量的列，每个受试者的随机截距和随机斜率
+
 ```{r}
-m1 <- lmer(weight ~ Time+ (Time|Chick) ,data = df_long)
-summary(m1)
+lme1 <- lmer(Richness ~ 1 + NAP * Exposure+ (1 +NAP |Beach) ,data = df_long)
+summary(lme1)
+AIC(lme1)
+BIC(lme1)
+logLik(lme1)
+
+2*(1-pt(-3.914605,35,lower.tail = F))
+
+
+
+# nlme1 <- lme(Richness ~ 1 + NAP * Exposure,random= ~ 1+NAP |Beach ,data = df_long)
+# summary(nlme1)
+
+
 ```
 
 ```{r}
 # 标准化模型残差分布
-quantile(residuals(m1,type="pearson",scaled=T))
+quantile(residuals(lme1,type="pearson",scaled=T))
 
 # 随机因子随机效应和显著性检验
-ranef(m1)
-lmerTest::ranova(m1)
+ranef(lme1)
+lmerTest::ranova(lme1)
 
 # 查看固定效应和显著性检验
-coef(m1)
-anova(m1)
+coef(lme1)
+anova(lme1)
 
 #  查看 类和方法
-class(m1)
+class(lme1)
 methods(class = "lmerMod")
 
-# confint(m1,level = 0.95)
+# confint(lme1,level = 0.95)
 ```
 
 ## 随机截距+固定斜率
 
+$$
+\eta_{(nrow \ \times 1)}=\mathbf{X_{nrow×1}}\beta_{1\times1} +Z_{nrow\times n_{subjects}} \mathbf{\gamma}_{n_{subjects}\times 1}+\epsilon_i
+$$
+
+Z有一倍于受试者数量的列，每个受试者的随机截距。
+
 ```{r}
-m2 <- lmer(weight ~ Time+ (1|Chick) ,data = df_long)
-m2
+lme2 <- lmer(Richness ~ 1 + NAP+ (1 |Beach) ,data = df_long)
+summary(lme2)
+AIC(lme2)
+BIC(lme2)
+logLik(lme2)
+
+2*(1-pt(6.007,35,lower.tail = T))
+
+
+
+nlme2 <- lme(Richness ~ 1 + NAP * Exposure,random= ~ 1 |Beach ,data = df_long)
+summary(nlme2)
 ```
 
 ## 固定截距+随机斜率
 
 ```{r}
-m3 <- lmer(weight ~ Time+ (0 + Time|Chick) ,data = df_long)
-m3
+lme3 <- lmer(Richness ~ 1 + NAP+ (0 + NAP |Beach) ,data = df_long)
+summary(lme3)
+
+nlme3 <- lme(Richness ~ 1 + NAP,random= ~ 0+NAP |Beach ,data = df_long)
+summary(nlme3)
+```
+
+## 随机效应模型
+
+```{r}
+nlme4 <- lme(Richness ~ 1 ,random= ~ 1 |Beach ,data = df_long)
+summary(nlme4)
 ```
 
 ## 线性模型：固定截距+ 固定斜率
 
 ```{r}
-m4 <- lm(weight ~ Time ,data = df_long)
-m4
+lm4 <- lm(weight ~ 1 + Time ,data = df_long)
+lm4
 ```
 
 ## 模型选择
 
 ```{r}
 
-plot_lme <- function(model, label) {
+plot_lme <- function(model, title) {
     ggplot(df_long, aes(Time, weight, group = Chick, color = Chick)) +
         geom_point() +
         geom_line(
             bind_cols(df_long, .pred = predict(model, df_long)),
             mapping = aes(y = .pred),
-            size = 1
+            linewidth = 1
         ) +
-        labs(title = label)+
+        labs(title = title)+
+        scale_x_continuous(expand = (mult=c(0,.1)))+
+        scale_y_continuous(expand = (mult=c(0,.1)))+
     ggsci::scale_color_jco() +
         ggpubr::theme_pubr() +
         theme(legend.position = "right",
@@ -103,29 +145,15 @@ plot_lme <- function(model, label) {
 }
 
 
-lme_plot <- map2(list(m1,m2,m3,m4),list("随机截距+随机斜率","随机截距+固定斜率","固定截距+随机斜率","固定截距+固定斜率"),plot_lme)
+lme_plot <- map2(list(lme1,lme2,lme3,lm4),list("随机截距+随机斜率","随机截距+固定斜率","固定截距+随机斜率","固定截距+固定斜率"),plot_lme)
 
 
 lme_plot
 ```
 
 ```{r}
-anova(m1,m2,m3)
-anova(m1,m2,m3,m4)
+anova(lme1,lme2,lme3)
+anova(lme1,lme2,lme3,lm4)
 
-# p小于0.05,说明全模型与简化后模型存在差异，最终采用m1,AIC最小
-```
-
-```{r}
-df <- read_delim("data/麻醉诱导时相.txt")
-df_long <- df |> pivot_longer(
-    cols = starts_with("t"),
-    names_to = "time",
-    values_to = "SBP"
-)
-
-m1_1 <- nlme::lme(SBP~induced_method+time,random = (~1|id) ,data = df_long)
-summary(m1_1)
-
-anova(m1_1)
+# p小于0.05,说明全模型与简化后模型存在差异，最终采用lme1,AIC最小
 ```

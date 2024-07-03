@@ -1,22 +1,154 @@
 # 广义估计方程
 
+[Mixed Effects Models and Extensions in Ecology with R 第12章](https://link.springer.com/book/10.1007/978-0-387-87458-6)
+
 广义估计方程（Generalized Estimating Equations，GEE）用于分析重复测量、相关数据的统计推断。GEE的核心思想是通过建立一个`广义线性模型`来估计一组总体平均参数，同时考虑数据的相关性结构和缺失数据，而不需要假设数据的具体分布形式，从而使其适用于各组类型的数据，包括二项分布、正态分布、负二项分布、泊松分布等。
+
+## 数据集
+
+[数据集 Analyzing ecological data](https://github.com/romunov/AED)
+
+```{r}
+rfb <- read_delim("data/AED/RiceFieldBirds.txt")
+rfb$richness <- rowSums(rfb[,8:56] >0)
+rfb |> mutate(
+    FIELD = factor(FIELD),
+    SPTREAT = factor(SPTREAT),
+    log_AREA = log(rfb$AREA),
+    DEPTH2 = DEPTH ^ 2,
+    .after = 4
+) -> rfb
+
+
+ggplot(rfb,aes(Time,richness))+
+    geom_point(pch=21)+
+    geom_smooth(method = "loess",se=F)+
+    facet_wrap(vars(FIELD),labeller = "label_both")
+```
+
+```{r}
+owls <- read_delim("data/AED/Owls.txt")
+
+owls |> 
+    mutate(
+        NCalls=SiblingNegotiation,
+        log_broodsize=log(BroodSize),
+    )->owls
+```
+
+```{r}
+de <- read_delim("data/AED/DeerEcervi.txt")
+
+de |> 
+    mutate(
+        Ecervi_binary = if_else(Ecervi>0,1,Ecervi),
+        Sex = factor(Sex),
+        Length_center = scale(Length,center=T ,scale =F),
+    ) -> de
+```
+
+## GLM 连接函数
 
 GLM的形式如下：
 
-$$
-g(\mu_{ij})=\beta_0+\beta_1x_{ij_1}+\beta_2x_{ij_2}+...+\beta_px_{ij_p}
-$$
+$$ g(\mu_{ij})=\beta_0+\beta_1x_{ij_1}+\beta_2x_{ij_2}+...+\beta_px_{ij_p} $$
 
 其中，`g()` 是一个连接函数，用于将自变量的线性组合与因变量的均值联系起来。常见的连接函数包括恒等连接函数（identity）、logistic连接函数（logit）、逆正弦连接函数（inverse sine）函数等。`i` 表示观测对象的索引，`j` 表示时间点或相关性结构的索引，`uij` 表示因变量的均值，`β` 表示待估计的系数，`Xij` 表示自变量。
+
+$$
+\eta = \beta  \mathbf{X}+ \alpha
+$$
+
+$$
+E(y)=\eta=g^{-1}(\eta)
+$$
+
+对于计数数据：
+
+$$
+E(y)=e^{\eta}=e^{\beta \mathbf{X} +\alpha}, 此时g(\mu)=\ln(\mu)=\mathbf{X}\beta
+$$
+
+```{r}
+rfb_glm <- glm(richness ~ offset(log_AREA) +SPTREAT + DEPTH +DEPTH2,
+            family = quasipoisson(link = "log"),
+            data = rfb)
+
+owls_glm <- glm(
+    NCalls ~ offset(log_broodsize) + SexParent * FoodTreatment + SexParent *
+        ArrivalTime,
+    family = poisson(link = "log"),
+    data = owls
+)
+
+```
+
+对于二分类数据：
+
+$$
+E(y)=\frac{e^{\beta \mathbf{X} +\alpha}}{1+e^{\beta\mathbf{X}+\alpha}}, 此时g(\mu)=\ln(\frac{\mu}{1-\mu})=logit(\mu)
+$$
+
+```{r}
+de_glm <- glm(Ecervi_binary ~ Length_center *Sex,
+              family = binomial(link = "logit"),
+              data = de)
+summary(de_glm)
+```
+
+## 方差
+
+$$
+var(Y_{is}|X_{is})=\Phi × \nu(\mu_{is})
+$$
+
+其中，Φ 是scale parameter （overdispersion），v() 是方差函数。
+
+## 相关性结构
+
+R(α)
+
+1.  非结构化相关：cor(Y~is~,Y~it~)=α~st~
+
+2.  自回归相关：cor(Y~is~,Y~it~)=α^\|s-t\|^
+
+3.  exchangeable 等相关：cor(Y~is~,Y~it~)=α
+
+4.  independence，独立，cor(Y~is~,Y~it~)=**I**
+
+5.  
+
+## GEE
+
+GLM的期望和方差：
+
+$$ E(Y_{ij})=b'(\theta_{ij})\\ Var(Y_{ij})=b''(\theta_{ij})\ \Phi $$
+
+假定潜在的随机成分V~i~ ：
+
+$$
+V_i=A_i^{1/2}R(\alpha)A_i^{1/2}\ \Phi
+$$
+
+其中，`Ai =diag（b''(θi1)，...，b''(θij)）` 。
 
 GEE的形式如下：
 
 $$
-U(\beta)=X^TAW(\mu)(Y-\mu)=0
+U(\beta)=\sum_{i=1}^{n} D'_iV_i^{-1}(y_i-\mu_i)=0
 $$
 
-其中U(β) 是一个包含待估计参数的函数，X是设计矩阵，A是相关性结构矩阵，W(μ) 是权重矩阵，Y 是观测数据，μ 是模型的均值预测值。采用迭代重复加权最小二乘法（iteratively reweighted least squares (IWLS)），求解方程。
+其中，
+
+$$
+D'_i=(\frac{\partial \mu_i}{\partial \beta} )'
+$$
+
+其中U(β) 是一个包含待估计参数的函数，D是quasi-deviance，V是方差-协方差矩阵，R（α）是相关性结构矩阵，y 是观测数据，μ 是模型的均值预测值。采用迭代重复加权最小二乘法（iteratively reweighted least squares (IWLS)），偏微分方程估计参数。
+
+## `gee`
+
+<https://www.statsmodels.org/stable//gee.html>
 
 ```{r}
 library(nlme)
@@ -27,10 +159,6 @@ Oxboys |> head(n=18)
 
 df_long <- Oxboys
 ```
-
-## `gee`
-
-<https://www.statsmodels.org/stable//gee.html>
 
 ```{r}
 library(gee)
@@ -48,29 +176,35 @@ summary(gee1)
 
 ```{r}
 library(geepack)
-g2 <- geeglm(height~age,data = df_long ,id = Subject,corstr = "ar1")
-g2
 
-summary(g2)
+rfb_gee <- geeglm(richness ~ offset(log_AREA) +SPTREAT + DEPTH +DEPTH2,
+            family = poisson(link = "log"),
+            data = rfb,
+            id=FIELD,
+            corstr = "ar1")
 
-gee2 <- geeglm(y ~ age + trt + base,id=subject,data = epil,
-               family = poisson(link = "log"),
-               corstr ="exchangeable",std.err = "san.se" )
-summary(gee2)
+summary(rfb_gee)
+rfb_gee2 <- geeglm(richness ~ offset(log_AREA) +SPTREAT ,
+            family = poisson(link = "log"),
+            data = rfb,
+            id=FIELD,
+            corstr = "ar1")
+
+# Wald's Test
+anova(rfb_gee,rfb_gee2)
 ```
+
+$$
+E(Y_{is})=\mu_{is}=e^{-0.678+0.0498×DEPTH-0.001×DEPTH^2-0.522×SPTREAT_{is}}\\
+var(Y_{is})= 2.33 × \mu_{is} \\
+cor(Y_{is},Y_{it})=0.422^{|s-t|}
+$$
 
 作业相关矩阵 `corstr` ，比较QIC，一般越小越好。
 
--   independence，独立
-
--   exchangeable，等相关
-
--   ar1，一阶自回归
-
--   unstructured，非结构化相关
-
 ```{r}
-QIC(g2)
+QIC(rfb_gee)
+QIC(rfb_gee2)
 ```
 
 ```{r}

@@ -1,5 +1,31 @@
 # 广义线性模型
 
+广义线性模型，期望的线性函数`η`：
+
+$$
+\eta = \mathbf{X} \beta
+$$
+
+原始结果`y`
+
+$$
+E(y)=\mu
+$$
+
+通过期望值与线性函数的联系，连接函数`g(.)` ：
+
+$$
+\eta =g(\mu)=g(E(y))
+$$
+
+映射到 线性结果`η` 。
+
+反连接函数g^-1^ (.)：
+
+$$
+E(y)=\eta=g^{-1}(\eta)
+$$
+
 ## 逻辑回归
 
 逻辑回归一般需要引入虚拟变量（哑变量，dummy variable），通常取值伪0或1。
@@ -134,7 +160,7 @@ df |>
   ) |> select(student,prob)
 ```
 
-### K=2,p>1 multiple 多元逻辑回归
+### K=2,p\>1 multiple 多元逻辑回归
 
 ```{r}
 logit_multiple<-logit_spec |> fit(default~balance+income+student,data=df)
@@ -191,8 +217,7 @@ ordered_logit |> summary()
 predict(ordered_logit ,acl ,type = "p") |> as_tibble()
 ```
 
-### K>2,p>1 multinomial logistic regression
-
+### K\>2,p\>1 multinomial logistic regression
 
 #### `nnet::multinom()`
 
@@ -240,8 +265,6 @@ iris_mnlogit <- mn_spec |>
 iris_mnlogit |> glance()
 iris_mnlogit$fit
 ```
-
-
 
 ## 泊松回归
 
@@ -314,8 +337,6 @@ pois_fit_coef_mnths |>
        x = "Month", y = "Coefficient")
 ```
 
-
-
 ```{r}
 pois_acl <- pois_spec |> 
     fit(NChronic12_W1 ~ SelfEfficacy_W1,data = acl)
@@ -327,7 +348,6 @@ pois_acl |> tidy()
 AIC(pois_acl$fit)
 BIC(pois_acl$fit)
 ```
-
 
 ## 负二项回归
 
