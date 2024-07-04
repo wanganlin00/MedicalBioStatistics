@@ -5,7 +5,7 @@
 [Applied Propensity Score Analysis with R](https://psa.bryer.org/index.html)
 
 ```{r eval=FALSE}
-remotes::install_github('jbryer/psa', dependencies = 'Enhances')
+if(!require(psa)) remotes::install_github('jbryer/psa', dependencies = 'Enhances')
 ```
 
 <https://ehsanx.github.io/EpiMethods/propensityscore.html>

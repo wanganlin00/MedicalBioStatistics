@@ -1,5 +1,5 @@
 ```{r}
-install.packages("pwr")
+if(!require(pwr)) install.packages("pwr")
 #样本大小
 #显著性水平α
 #功效 1-β
