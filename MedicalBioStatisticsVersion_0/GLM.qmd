@@ -26,6 +26,25 @@ $$
 E(y)=\eta=g^{-1}(\eta)
 $$
 
+
+## gaussian
+
+identity link function
+
+t-statistic
+
+```{r}
+swiss
+glm1 <- linear_reg() |> 
+    set_engine("glm",family=stats::gaussian(link = "identity"))|> 
+    fit(Fertility~ Agriculture + Education + Catholic + Infant.Mortality,
+        data = swiss)
+
+tidy(glm1)
+glance(glm1) |> select(AIC,deviance)
+```
+
+
 ## 逻辑回归
 
 逻辑回归一般需要引入虚拟变量（哑变量，dummy variable），通常取值伪0或1。
@@ -124,6 +143,10 @@ ggplot(df,aes(balance,as.numeric(default)-1))+
 ```
 
 #### 逻辑回归
+
+logit link function
+
+z-statistic
 
 ```{r}
 logit_spec <- logistic_reg() |>
@@ -270,6 +293,14 @@ iris_mnlogit$fit
 
 因变量是计数变量（非负整数）
 
+log link function
+
+z-statistic
+
+`family=poisson(link = "log")`
+
+`family = quasipoisson(link = "log"))`
+
 $$
 P(X=x;\lambda)=\frac{e^{-\lambda}\lambda ^x}{x!}
 $$
@@ -353,6 +384,12 @@ BIC(pois_acl$fit)
 
 因变量是计数变量（非负整数）
 
+log link function
+
+z-statistic
+
+overdispersion
+
 probability mass function ：
 
 $$
@@ -366,7 +403,7 @@ $$
 ```{r}
 
 nb_spec <- linear_reg() |> 
-    set_engine("glm",family=negative.binomial(theta= 1,link = "log"))
+    set_engine("glm",family=MASS::negative.binomial(theta= 1,link = "log"))
 
 nb_acl <- nb_spec |> 
     fit(NChronic12_W1 ~ SelfEfficacy_W1,data = acl)
@@ -376,67 +413,8 @@ nb_acl |> tidy()
 
 AIC(nb_acl$fit)
 BIC(nb_acl$fit)
+
+# MASS::glm.nb()
 ```
 
-## glm
 
-```{r}
-swiss
-```
-
-### gaussian
-
-identity link function
-
-t-statistic
-
-```{r}
-glm1 <- linear_reg() |> 
-    set_engine("glm",family=stats::gaussian(link = "identity"))|> 
-    fit(Fertility~ Agriculture + Education + Catholic + Infant.Mortality,
-        data = swiss)
-
-tidy(glm1)
-glance(glm1) |> select(AIC,deviance)
-```
-
-### binomial
-
-logit link function
-
-z-statistic
-
-```{r eval=FALSE}
-hosp <-read.csv("d:/newbook/HospFoll7_Final.csv")
-head(hosp)
-hmod <-glm( r1cesd * r1agey_b + ragender + mstat + raedyrs + rawhca
-+rablafa + r1conde, data=hosp, family=binomial)
-exp(coef(hmod))
-exp(confint.default(hmod))
-```
-
-### poisson/negative binomial
-
-log link function
-
-z-statistic
-
-```{r eval=FALSE}
-cmod = glm(r10conde * ragender + r10agey_e + rahispan + ravetrn,
-data=cond10, family=poisson)
-summary(cmod)
-```
-
-overdispersion
-
-```{r eval=FALSE}
-library(MASS)
-summary(glnbmod <-glm.nb(r10conde * ragender + r10agey_e + rahispan + ravetrn, data=cond10))
-```
-
-### quasipoisson
-
-```{r eval=FALSE}
-summary(qp1 <-glm( r10conde * ragender + r10agey_e + rahispan + ravetrn,
-data = cond10, family = quasipoisson(link = "log")))
-```

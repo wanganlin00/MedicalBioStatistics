@@ -416,23 +416,23 @@ summary(psm2)
 以`age` 为例，实验组匹配前25.816匹配后25.816，对照组匹配前25.054匹配后25.692 ，匹配后实验组与对照组更接近了；T-test p-value \> 0.05 ，表示匹配前后`age` 均值无统计学差异；KS Bootstrap p-value \> 0.05 ，表示匹配前后`age` 分布无统计学差异
 
 ```         
-***** (V1) age *****                Before Matching 	 	 After Matching mean   treatment........          25.816 	 	     25.816  
-mean control..........     25.054 	 	     25.692 
-std mean diff.........     10.655 	 	     1.7342 
+***** (V1) age *****                Before Matching          After Matching mean   treatment........          25.816             25.816  
+mean control..........     25.054            25.692 
+std mean diff.........     10.655            1.7342 
 
-mean raw eQQ diff.....    0.94054 	 	    0.73837  
-med  raw eQQ diff.....          1 	 	          0  
-max  raw eQQ diff.....          7 	 	          9   
+mean raw eQQ diff.....    0.94054           0.73837  
+med  raw eQQ diff.....          1                 0  
+max  raw eQQ diff.....          7                 9   
 
-mean eCDF diff........   0.025364 	 	   0.021893  
-med  eCDF diff........   0.022193 	 	   0.020349  
-max  eCDF diff........   0.065177 	 	   0.061047   
+mean eCDF diff........   0.025364          0.021893  
+med  eCDF diff........   0.022193          0.020349  
+max  eCDF diff........   0.065177          0.061047   
 
-var ratio (Tr/Co).....     1.0278 	 	      1.083  
-T-test p-value........    0.26594 	 	    0.84975  
-KS Bootstrap p-value..      0.526 	 	      0.355  
-KS Naive p-value......     0.7481 	 	    0.54314  
-KS Statistic..........   0.065177 	 	   0.061047 
+var ratio (Tr/Co).....     1.0278             1.083  
+T-test p-value........    0.26594           0.84975  
+KS Bootstrap p-value..      0.526             0.355  
+KS Naive p-value......     0.7481           0.54314  
+KS Statistic..........   0.065177          0.061047 
 ```
 
 ```{r}
@@ -511,46 +511,20 @@ y = lalonde[PSM$index.control, "re78"]
 hlsens(x, y,Gamma = 2,GammaInc = 0.1)
 ```
 
-```{r}
-dir <- colMeans(x) - colMeans(y)
-trt <- x
-ctrl <- y
-dir_sign <- sign(dir)
-# 根据dir的符号分配控制组和处理组
-for (i in seq_along(dir_sign)) {
-    if (dir_sign[i] > 0) {
-        trt[, i] <- x[, i]  # x的这一列作为处理组
-        ctrl[, i] <- y[, i]  # y的这一列作为控制组
-    } else{
-        trt[, i] <- y[, i]  # y的这一列作为处理组
-        ctrl[, i] <- x[, i]  # x的这一列作为控制组
-    }
-}
-
-test_results <-  map2(
-    x,
-    y,
-    wilcox.test,
-    paired = TRUE,
-    conf.int = TRUE,
-    exact = FALSE
-)
-
-#map_vec(test_results,`$`,estimate)
-tau.up <- tau.l <- map_vec(test_results, `$`, estimate)
-```
-
 共同支持域的查验
 
 ```{r}
-sum(glm_ps$fitted.values[treat==1]> max(glm_ps$fitted.values[treat==0]))
+sum(glm_ps$fitted.values[lalonde$treat==1]> 
+        max(glm_ps$fitted.values[lalonde$treat==0]))
 
-sum(glm_ps$fitted.values[treat==1]< min(glm_ps$fitted.values[treat==0]))
+sum(glm_ps$fitted.values[lalonde$treat==1]< 
+        min(glm_ps$fitted.values[lalonde$treat==0]))
 ```
 
 丢弃的实验组样本共有4个。185-181
 
 ```{r}
+attach(lalonde)
 summary(PSM)
 PSM_CS <-  Match(Y=re78,
              Tr = treat,
@@ -560,6 +534,7 @@ PSM_CS <-  Match(Y=re78,
              replace = TRUE,
              CommonSupport = TRUE)
 summary(PSM_CS)
+detach(lalonde)
 ```
 
 有查验共同支持域的ATT（2330），与无查验共同支持域（2439.3）存在差异，因此必须重新改进倾向值分析。

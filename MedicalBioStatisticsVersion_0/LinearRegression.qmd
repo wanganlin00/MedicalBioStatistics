@@ -14,9 +14,9 @@ library(patchwork)
 [数据下载网站](https://www.statlearning.com/resources-second-edition)
 
 ```{r}
-advertising<-read_csv("data/Advertising.csv")
-income1<-read_csv("data/Income1.csv")
-income2<-read_csv("data/Income2.csv")
+advertising<-read_csv("data/ISLR/Advertising.csv")
+income1<-read_csv("data/ISLR/Income1.csv")
+income2<-read_csv("data/ISLR/Income2.csv")
 ```
 
 ## 一元线性回归

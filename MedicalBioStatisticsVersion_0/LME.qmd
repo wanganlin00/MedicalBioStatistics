@@ -119,7 +119,7 @@ summary(nlme4)
 ## 线性模型：固定截距+ 固定斜率
 
 ```{r}
-lm4 <- lm(weight ~ 1 + Time ,data = df_long)
+lm4 <- lm(Richness ~ 1 + NAP ,data = df_long)
 lm4
 ```
 
@@ -128,10 +128,10 @@ lm4
 ```{r}
 
 plot_lme <- function(model, title) {
-    ggplot(df_long, aes(Time, weight, group = Chick, color = Chick)) +
+    ggplot(df_long, aes(NAP, Richness, group = Beach, color = Beach)) +
         geom_point() +
         geom_line(
-            bind_cols(df_long, .pred = predict(model, df_long)),
+            data =  bind_cols(df_long, .pred = predict(model, df_long)),
             mapping = aes(y = .pred),
             linewidth = 1
         ) +

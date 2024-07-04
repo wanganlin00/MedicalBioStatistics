@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.553">
+<meta name="generator" content="quarto-1.4.555">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>医学与生物统计学 - 13&nbsp; \(\chi^2\) 检验</title>
 <style>
@@ -268,6 +268,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">非参数秩检验</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./correlation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">相关性</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -280,12 +286,6 @@ window.Quarto = {
       </div>
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./independence_correlation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">独立性与相关性</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./LinearRegression.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">线性回归</span></span></a>
@@ -397,6 +397,22 @@ window.Quarto = {
   </ul>
 </li>
   <li><a href="#%E6%8B%9F%E5%90%88%E4%BC%98%E5%BA%A6%E6%A3%80%E9%AA%8C" id="toc-拟合优度检验" class="nav-link" data-scroll-target="#%E6%8B%9F%E5%90%88%E4%BC%98%E5%BA%A6%E6%A3%80%E9%AA%8C"><span class="header-section-number">13.4</span> 拟合优度检验</a></li>
+  <li>
+<a href="#%E7%8B%AC%E7%AB%8B%E6%80%A7%E6%A3%80%E9%AA%8C" id="toc-独立性检验" class="nav-link" data-scroll-target="#%E7%8B%AC%E7%AB%8B%E6%80%A7%E6%A3%80%E9%AA%8C"><span class="header-section-number">13.5</span> 独立性检验</a>
+  <ul>
+<li><a href="#%E5%88%97%E8%81%94%E8%A1%A8" id="toc-列联表" class="nav-link" data-scroll-target="#%E5%88%97%E8%81%94%E8%A1%A8"><span class="header-section-number">13.5.1</span> 列联表</a></li>
+  <li><a href="#%E8%BE%B9%E9%99%85%E5%88%97%E8%81%94%E8%A1%A8" id="toc-边际列联表" class="nav-link" data-scroll-target="#%E8%BE%B9%E9%99%85%E5%88%97%E8%81%94%E8%A1%A8"><span class="header-section-number">13.5.2</span> 边际列联表</a></li>
+  <li>
+<a href="#%E7%8B%AC%E7%AB%8B%E6%80%A7%E6%A3%80%E9%AA%8C-1" id="toc-独立性检验-1" class="nav-link" data-scroll-target="#%E7%8B%AC%E7%AB%8B%E6%80%A7%E6%A3%80%E9%AA%8C-1"><span class="header-section-number">13.5.3</span> 独立性检验</a>
+  <ul class="collapse">
+<li><a href="#chi2-%E7%8B%AC%E7%AB%8B%E6%80%A7%E6%A3%80%E9%AA%8C" id="toc-chi2-独立性检验" class="nav-link" data-scroll-target="#chi2-%E7%8B%AC%E7%AB%8B%E6%80%A7%E6%A3%80%E9%AA%8C"><span class="header-section-number">13.5.3.1</span> <span class="math inline">\(\chi^2\)</span> 独立性检验</a></li>
+  <li><a href="#fisher%E7%B2%BE%E7%A1%AE%E6%A3%80%E9%AA%8C" id="toc-fisher精确检验" class="nav-link" data-scroll-target="#fisher%E7%B2%BE%E7%A1%AE%E6%A3%80%E9%AA%8C"><span class="header-section-number">13.5.3.2</span> Fisher精确检验</a></li>
+  <li><a href="#cochran-mantel-haenszel-chi2-%E6%A3%80%E9%AA%8C" id="toc-cochran-mantel-haenszel-chi2-检验" class="nav-link" data-scroll-target="#cochran-mantel-haenszel-chi2-%E6%A3%80%E9%AA%8C"><span class="header-section-number">13.5.3.3</span> Cochran-Mantel-Haenszel <span class="math inline">\(\chi^2\)</span> 检验</a></li>
+  <li><a href="#%E9%85%8D%E5%AF%B9%E5%88%97%E8%81%94%E8%A1%A8%E7%9A%84-%CF%87-2-%E6%A3%80%E9%AA%8C" id="toc-配对列联表的-χ-2-检验" class="nav-link" data-scroll-target="#%E9%85%8D%E5%AF%B9%E5%88%97%E8%81%94%E8%A1%A8%E7%9A%84-%CF%87-2-%E6%A3%80%E9%AA%8C"><span class="header-section-number">13.5.3.4</span> 配对列联表的 χ 2 检验</a></li>
+  </ul>
+</li>
+  </ul>
+</li>
   </ul></nav>
     </div>
 <!-- main -->
@@ -640,11 +656,213 @@ P=\sum_{i≤k} p_i
 </section></section><section id="拟合优度检验" class="level2" data-number="13.4"><h2 data-number="13.4" class="anchored" data-anchor-id="拟合优度检验">
 <span class="header-section-number">13.4</span> 拟合优度检验</h2>
 <p>Pearson’s <span class="math inline">\(\chi^2\)</span> goodness-of-fit test</p>
+</section><section id="独立性检验" class="level2" data-number="13.5"><h2 data-number="13.5" class="anchored" data-anchor-id="独立性检验">
+<span class="header-section-number">13.5</span> 独立性检验</h2>
+<section id="列联表" class="level3" data-number="13.5.1"><h3 data-number="13.5.1" class="anchored" data-anchor-id="列联表">
+<span class="header-section-number">13.5.1</span> 列联表</h3>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">eg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">156</span>,<span class="fl">9421</span>,<span class="fl">1531</span>,<span class="fl">14797</span><span class="op">)</span>,nrow<span class="op">=</span><span class="fl">2</span>,byrow<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">eg</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Disease"</span>,<span class="st">"Control"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">eg</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Exposed"</span>,<span class="st">"Unexposed"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">eg</span><span class="op">)</span></span>
+<span><span class="co">#&gt;           Disease Control</span></span>
+<span><span class="co">#&gt; Exposed       156    9421</span></span>
+<span><span class="co">#&gt; Unexposed    1531   14797</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/proportions.html">prop.table</a></span><span class="op">(</span><span class="va">eg</span><span class="op">)</span>          <span class="co">#各单元格比例</span></span>
+<span><span class="co">#&gt;               Disease   Control</span></span>
+<span><span class="co">#&gt; Exposed   0.006022003 0.3636750</span></span>
+<span><span class="co">#&gt; Unexposed 0.059100560 0.5712025</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/proportions.html">prop.table</a></span><span class="op">(</span><span class="va">eg</span>,margin <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>        <span class="co">#行比例 </span></span>
+<span><span class="co">#&gt;              Disease   Control</span></span>
+<span><span class="co">#&gt; Exposed   0.01628903 0.9837110</span></span>
+<span><span class="co">#&gt; Unexposed 0.09376531 0.9062347</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section><section id="边际列联表" class="level3" data-number="13.5.2"><h3 data-number="13.5.2" class="anchored" data-anchor-id="边际列联表">
+<span class="header-section-number">13.5.2</span> 边际列联表</h3>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 边际</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/marginSums.html">margin.table</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">eg</span>,margin <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>      <span class="co">#列和</span></span>
+<span><span class="co">#&gt; Disease Control </span></span>
+<span><span class="co">#&gt;    1687   24218</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/addmargins.html">addmargins</a></span><span class="op">(</span><span class="va">eg</span><span class="op">)</span>          <span class="co">#添加行和、列和</span></span>
+<span><span class="co">#&gt;           Disease Control   Sum</span></span>
+<span><span class="co">#&gt; Exposed       156    9421  9577</span></span>
+<span><span class="co">#&gt; Unexposed    1531   14797 16328</span></span>
+<span><span class="co">#&gt; Sum          1687   24218 25905</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/addmargins.html">addmargins</a></span><span class="op">(</span><span class="va">eg</span>,<span class="fl">1</span><span class="op">)</span>        <span class="co">#添加列和</span></span>
+<span><span class="co">#&gt;           Disease Control</span></span>
+<span><span class="co">#&gt; Exposed       156    9421</span></span>
+<span><span class="co">#&gt; Unexposed    1531   14797</span></span>
+<span><span class="co">#&gt; Sum          1687   24218</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/addmargins.html">addmargins</a></span><span class="op">(</span><span class="va">eg</span>,<span class="fl">2</span><span class="op">)</span>        <span class="co">#添加行和</span></span>
+<span><span class="co">#&gt;           Disease Control   Sum</span></span>
+<span><span class="co">#&gt; Exposed       156    9421  9577</span></span>
+<span><span class="co">#&gt; Unexposed    1531   14797 16328</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/addmargins.html">addmargins</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/proportions.html">prop.table</a></span><span class="op">(</span><span class="va">eg</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt;              Disease   Control Sum</span></span>
+<span><span class="co">#&gt; Exposed   0.01628903 0.9837110   1</span></span>
+<span><span class="co">#&gt; Unexposed 0.09376531 0.9062347   1</span></span>
+<span><span class="co">#&gt; Sum       0.11005434 1.8899457   2</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/ftable.html">ftable</a></span><span class="op">(</span><span class="va">eg</span><span class="op">)</span>   <span class="co"># "平铺式"列联表</span></span>
+<span><span class="co">#&gt;            Disease Control</span></span>
+<span><span class="co">#&gt;                           </span></span>
+<span><span class="co">#&gt; Exposed        156    9421</span></span>
+<span><span class="co">#&gt; Unexposed     1531   14797</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section><section id="独立性检验-1" class="level3" data-number="13.5.3"><h3 data-number="13.5.3" class="anchored" data-anchor-id="独立性检验-1">
+<span class="header-section-number">13.5.3</span> 独立性检验</h3>
+<p>独立性：判断两个或多个分类变量之间是否存在关联或取值互不影响，分析联合概率分布是否可以分解为各自概率分布的乘积。</p>
+<section id="chi2-独立性检验" class="level4" data-number="13.5.3.1"><h4 data-number="13.5.3.1" class="anchored" data-anchor-id="chi2-独立性检验">
+<span class="header-section-number">13.5.3.1</span> <span class="math inline">\(\chi^2\)</span> 独立性检验</h4>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">M</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/table.html">as.table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">86</span>, <span class="fl">29</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">44</span>, <span class="fl">30</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/dimnames.html">dimnames</a></span><span class="op">(</span><span class="va">M</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>gender <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"F"</span>, <span class="st">"M"</span><span class="op">)</span>,</span>
+<span>                    smoking <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Yes"</span>,<span class="st">"No"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">M</span></span>
+<span><span class="co">#&gt;       smoking</span></span>
+<span><span class="co">#&gt; gender Yes No</span></span>
+<span><span class="co">#&gt;      F  86 29</span></span>
+<span><span class="co">#&gt;      M  44 30</span></span>
+<span></span>
+<span><span class="va">chisq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/chisq.test.html">chisq.test</a></span><span class="op">(</span><span class="va">M</span><span class="op">)</span></span>
+<span><span class="va">chisq</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  Pearson's Chi-squared test with Yates' continuity correction</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; data:  M</span></span>
+<span><span class="co">#&gt; X-squared = 4.2359, df = 1, p-value = 0.03958</span></span>
+<span><span class="va">chisq</span><span class="op">$</span><span class="va">expected</span>  <span class="co"># 期望频数</span></span>
+<span><span class="co">#&gt;       smoking</span></span>
+<span><span class="co">#&gt; gender      Yes       No</span></span>
+<span><span class="co">#&gt;      F 79.10053 35.89947</span></span>
+<span><span class="co">#&gt;      M 50.89947 23.10053</span></span>
+<span><span class="va">chisq</span><span class="op">$</span><span class="va">parameter</span> <span class="co"># degrees of freedom</span></span>
+<span><span class="co">#&gt; df </span></span>
+<span><span class="co">#&gt;  1</span></span>
+<span></span>
+<span><span class="co">#对于频数表中每个单元格的期望频数都比较大（大于 5）的大样本，correct设为 FALSE,不进行连续校正</span></span>
+<span><span class="va">chisq2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/chisq.test.html">chisq.test</a></span><span class="op">(</span><span class="va">M</span>,correct <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> </span>
+<span><span class="va">chisq2</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  Pearson's Chi-squared test</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; data:  M</span></span>
+<span><span class="co">#&gt; X-squared = 4.9237, df = 1, p-value = 0.02649</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section><section id="fisher精确检验" class="level4" data-number="13.5.3.2"><h4 data-number="13.5.3.2" class="anchored" data-anchor-id="fisher精确检验">
+<span class="header-section-number">13.5.3.2</span> Fisher精确检验</h4>
+<p>　　如果观察总记录数 n 小于 40，或者频数表里的某个期望频数很小（小于 1） ，则需要使 用 Fisher 精确概率检验。</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Fisher's exact test to test independence of rows and columns in contingency table</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/fisher.test.html">fisher.test</a></span><span class="op">(</span><span class="va">M</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  Fisher's Exact Test for Count Data</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; data:  M</span></span>
+<span><span class="co">#&gt; p-value = 0.03618</span></span>
+<span><span class="co">#&gt; alternative hypothesis: true odds ratio is not equal to 1</span></span>
+<span><span class="co">#&gt; 95 percent confidence interval:</span></span>
+<span><span class="co">#&gt;  1.028780 3.964904</span></span>
+<span><span class="co">#&gt; sample estimates:</span></span>
+<span><span class="co">#&gt; odds ratio </span></span>
+<span><span class="co">#&gt;   2.014137</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section><section id="cochran-mantel-haenszel-chi2-检验" class="level4" data-number="13.5.3.3"><h4 data-number="13.5.3.3" class="anchored" data-anchor-id="cochran-mantel-haenszel-chi2-检验">
+<span class="header-section-number">13.5.3.3</span> Cochran-Mantel-Haenszel <span class="math inline">\(\chi^2\)</span> 检验</h4>
+<p>又叫行均分检验，常用于按照某个变量进行分层后的检验，这个方法课本上说<strong>用于检验两个有序分类变量是否存在线性相关</strong>，但实际上用途很广泛，比如因变量是有序变量的单向有序列联表，也可以用。　　</p>
+<p>两个变量的关联有可能受到第三个变量的影响，因此我们有必要检验两个分类变量在 调整（控制）第三个变量的情况下是否独立。 Cochran-Mantel-Haenszel χ 2 检验常用于探索 变量间的混杂因素。其零假设是：两个分类变量在第三个变量的每一层都是条件独立的。函数 mantelhaen.test( ) 可以用来进行该检验。</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">Rabbits</span> <span class="op">&lt;-</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">6</span>, <span class="fl">5</span>,</span>
+<span>        <span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">3</span>, <span class="fl">6</span>,</span>
+<span>        <span class="fl">6</span>, <span class="fl">2</span>, <span class="fl">0</span>, <span class="fl">4</span>,</span>
+<span>        <span class="fl">5</span>, <span class="fl">6</span>, <span class="fl">1</span>, <span class="fl">0</span>,</span>
+<span>        <span class="fl">2</span>, <span class="fl">5</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>,</span>
+<span>      dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">5</span><span class="op">)</span>,</span>
+<span>      dimnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>          Delay <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"None"</span>, <span class="st">"1.5h"</span><span class="op">)</span>,</span>
+<span>          Response <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Cured"</span>, <span class="st">"Died"</span><span class="op">)</span>,</span>
+<span>          Penicillin.Level <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1/8"</span>, <span class="st">"1/4"</span>, <span class="st">"1/2"</span>, <span class="st">"1"</span>, <span class="st">"4"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">Rabbits</span></span>
+<span><span class="co">#&gt; , , Penicillin.Level = 1/8</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;       Response</span></span>
+<span><span class="co">#&gt; Delay  Cured Died</span></span>
+<span><span class="co">#&gt;   None     0    6</span></span>
+<span><span class="co">#&gt;   1.5h     0    5</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; , , Penicillin.Level = 1/4</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;       Response</span></span>
+<span><span class="co">#&gt; Delay  Cured Died</span></span>
+<span><span class="co">#&gt;   None     3    3</span></span>
+<span><span class="co">#&gt;   1.5h     0    6</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; , , Penicillin.Level = 1/2</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;       Response</span></span>
+<span><span class="co">#&gt; Delay  Cured Died</span></span>
+<span><span class="co">#&gt;   None     6    0</span></span>
+<span><span class="co">#&gt;   1.5h     2    4</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; , , Penicillin.Level = 1</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;       Response</span></span>
+<span><span class="co">#&gt; Delay  Cured Died</span></span>
+<span><span class="co">#&gt;   None     5    1</span></span>
+<span><span class="co">#&gt;   1.5h     6    0</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; , , Penicillin.Level = 4</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;       Response</span></span>
+<span><span class="co">#&gt; Delay  Cured Died</span></span>
+<span><span class="co">#&gt;   None     2    0</span></span>
+<span><span class="co">#&gt;   1.5h     5    0</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/mantelhaen.test.html">mantelhaen.test</a></span><span class="op">(</span><span class="va">Rabbits</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  Mantel-Haenszel chi-squared test with continuity correction</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; data:  Rabbits</span></span>
+<span><span class="co">#&gt; Mantel-Haenszel X-squared = 3.9286, df = 1, p-value = 0.04747</span></span>
+<span><span class="co">#&gt; alternative hypothesis: true common odds ratio is not equal to 1</span></span>
+<span><span class="co">#&gt; 95 percent confidence interval:</span></span>
+<span><span class="co">#&gt;   1.026713 47.725133</span></span>
+<span><span class="co">#&gt; sample estimates:</span></span>
+<span><span class="co">#&gt; common odds ratio </span></span>
+<span><span class="co">#&gt;                 7</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section><section id="配对列联表的-χ-2-检验" class="level4" data-number="13.5.3.4"><h4 data-number="13.5.3.4" class="anchored" data-anchor-id="配对列联表的-χ-2-检验">
+<span class="header-section-number">13.5.3.4</span> 配对列联表的 χ 2 检验</h4>
+<p>　　医学科研实践中经常遇到配对设计的计数资料，例如两种检验方法、诊断方法结果的 比较。其特点是对每个研究对象分别用两种方法处理，然后观察两种处理方法的某两分类 变量的计数结果。对于这种数据，我们也可以整理成列联表的形式，但是不能用前述的 χ 2独立性检验，需进行 Mcnemar 检验。</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#　　某实验室分别用免疫荧光法和乳胶凝集法对 58 名疑似系统性红斑狼疮患者血清中抗 核抗体进行测定</span></span>
+<span><span class="va">result</span><span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">11</span>, <span class="fl">2</span>, <span class="fl">12</span>, <span class="fl">33</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">2</span>,dimnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"+"</span>,<span class="st">"-"</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"+"</span>,<span class="st">"-"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">result</span></span>
+<span><span class="co">#&gt;    +  -</span></span>
+<span><span class="co">#&gt; + 11 12</span></span>
+<span><span class="co">#&gt; -  2 33</span></span>
+<span></span>
+<span><span class="co">#　　对于配对四格表，如果样本量较小（不一致的结果的总数小于 40 ） ，则需要进行连续性校正。</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/mcnemar.test.html">mcnemar.test</a></span><span class="op">(</span><span class="va">result</span>,correct <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  McNemar's Chi-squared test with continuity correction</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; data:  result</span></span>
+<span><span class="co">#&gt; McNemar's chi-squared = 5.7857, df = 1, p-value = 0.01616</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 
 
 <!-- -->
 
-</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section></section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -1114,156 +1332,249 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb11" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># $\chi^2$ 检验</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>Pearson’s $\chi^2$ 检验 用于检验涉及双向无序多分类变量的概率或比例。</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">10</span>,<span class="dv">10</span>) <span class="sc">+</span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_function</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">color=</span><span class="st">"normal Distribution"</span>),</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>                  <span class="at">fun =</span> dnorm, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>                   )<span class="sc">+</span></span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_function</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">color=</span><span class="st">"chi-square Distribution"</span>),</span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>                  <span class="at">fun =</span> dchisq, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">df =</span> <span class="dv">1</span> ,<span class="at">ncp=</span><span class="dv">0</span>), </span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>                 )<span class="sc">+</span></span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"normal Distribution"</span> <span class="ot">=</span> <span class="st">"red"</span>,</span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"chi-square Distribution"</span> <span class="ot">=</span> <span class="st">"blue"</span>))<span class="sc">+</span></span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">color =</span> <span class="st">"Distribution"</span>)</span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="fu">## 独立2×2列联表</span></span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">97</span>,<span class="dv">73</span>,<span class="dv">7</span>,<span class="dv">30</span>),<span class="dv">2</span>,<span class="at">dimnames =</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">"experiment"</span>,<span class="st">"control"</span>),<span class="fu">c</span>(<span class="st">"+"</span>,<span class="st">"-"</span>)))</span>
-<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>x</span>
-<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>(k1 <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(x,<span class="at">correct =</span> F))</span>
-<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a><span class="co"># 期望频数列联表</span></span>
-<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>k1<span class="sc">$</span>expected</span>
-<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a><span class="fu">### Yate’s 校正</span></span>
-<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a>(k2 <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(x,<span class="at">correct =</span> T))</span>
-<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a><span class="fu">### Fisher's Exact 检验</span></span>
-<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a>T <span class="sc">\&lt;</span> 5 且 n <span class="sc">\&lt;</span> 40</span>
-<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-47"><a href="#cb11-47" aria-hidden="true" tabindex="-1"></a>超几何分布</span>
-<span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-51"><a href="#cb11-51" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb11-52"><a href="#cb11-52" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">10</span>,<span class="dv">10</span>) <span class="sc">+</span></span>
-<span id="cb11-53"><a href="#cb11-53" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_function</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">color=</span><span class="st">"normal Distribution"</span>),</span>
-<span id="cb11-54"><a href="#cb11-54" aria-hidden="true" tabindex="-1"></a>                  <span class="at">fun =</span> dnorm, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
-<span id="cb11-55"><a href="#cb11-55" aria-hidden="true" tabindex="-1"></a>                   )<span class="sc">+</span></span>
-<span id="cb11-56"><a href="#cb11-56" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_function</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">color=</span><span class="st">"hypergeometric Distribution"</span>),</span>
-<span id="cb11-57"><a href="#cb11-57" aria-hidden="true" tabindex="-1"></a>                  <span class="at">fun =</span> dhyper, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">m =</span> <span class="dv">5</span>,<span class="at">n=</span><span class="dv">10</span>,<span class="at">k=</span><span class="dv">2</span> ), </span>
-<span id="cb11-58"><a href="#cb11-58" aria-hidden="true" tabindex="-1"></a>                 )<span class="sc">+</span></span>
-<span id="cb11-59"><a href="#cb11-59" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"normal Distribution"</span> <span class="ot">=</span> <span class="st">"red"</span>,</span>
-<span id="cb11-60"><a href="#cb11-60" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"hypergeometric Distribution"</span> <span class="ot">=</span> <span class="st">"blue"</span>))<span class="sc">+</span></span>
-<span id="cb11-61"><a href="#cb11-61" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">color =</span> <span class="st">"Distribution"</span>)</span>
-<span id="cb11-62"><a href="#cb11-62" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb11-63"><a href="#cb11-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-66"><a href="#cb11-66" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb11-67"><a href="#cb11-67" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">7</span>,<span class="dv">2</span>,<span class="dv">7</span>,<span class="dv">17</span>),<span class="dv">2</span>,<span class="at">dimnames =</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">"A"</span>,<span class="st">"B"</span>),<span class="fu">c</span>(<span class="st">"Yes"</span>,<span class="st">"No"</span>)))</span>
-<span id="cb11-68"><a href="#cb11-68" aria-hidden="true" tabindex="-1"></a>x</span>
-<span id="cb11-69"><a href="#cb11-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-70"><a href="#cb11-70" aria-hidden="true" tabindex="-1"></a>(k5 <span class="ot">&lt;-</span> <span class="fu">fisher.test</span>(x))</span>
-<span id="cb11-71"><a href="#cb11-71" aria-hidden="true" tabindex="-1"></a> <span class="fu">chisq.test</span>(x)</span>
-<span id="cb11-72"><a href="#cb11-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-73"><a href="#cb11-73" aria-hidden="true" tabindex="-1"></a>E <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(x)<span class="sc">$</span>expected</span>
-<span id="cb11-74"><a href="#cb11-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-75"><a href="#cb11-75" aria-hidden="true" tabindex="-1"></a>chisq <span class="ot">&lt;-</span> <span class="fu">sum</span>((x<span class="sc">-</span>E)<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>E)</span>
-<span id="cb11-76"><a href="#cb11-76" aria-hidden="true" tabindex="-1"></a>chisq </span>
-<span id="cb11-77"><a href="#cb11-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-78"><a href="#cb11-78" aria-hidden="true" tabindex="-1"></a>p_value_asymptotic <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pchisq</span>(chisq, <span class="at">df =</span> <span class="dv">1</span>)</span>
-<span id="cb11-79"><a href="#cb11-79" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb11-80"><a href="#cb11-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-81"><a href="#cb11-81" aria-hidden="true" tabindex="-1"></a><span class="fu">## 配对四格表</span></span>
-<span id="cb11-82"><a href="#cb11-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-83"><a href="#cb11-83" aria-hidden="true" tabindex="-1"></a>二项分布</span>
-<span id="cb11-84"><a href="#cb11-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-87"><a href="#cb11-87" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb11-88"><a href="#cb11-88" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">10</span>,<span class="dv">10</span>) <span class="sc">+</span></span>
-<span id="cb11-89"><a href="#cb11-89" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_function</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">color=</span><span class="st">"normal Distribution"</span>),</span>
-<span id="cb11-90"><a href="#cb11-90" aria-hidden="true" tabindex="-1"></a>                  <span class="at">fun =</span> dnorm, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="dv">5</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
-<span id="cb11-91"><a href="#cb11-91" aria-hidden="true" tabindex="-1"></a>                   )<span class="sc">+</span></span>
-<span id="cb11-92"><a href="#cb11-92" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_function</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">color=</span><span class="st">"chi-square Distribution"</span>),</span>
-<span id="cb11-93"><a href="#cb11-93" aria-hidden="true" tabindex="-1"></a>                  <span class="at">fun =</span> dbinom, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">size=</span><span class="dv">10</span> ,<span class="at">prob=</span><span class="fl">0.5</span>), </span>
-<span id="cb11-94"><a href="#cb11-94" aria-hidden="true" tabindex="-1"></a>                 )<span class="sc">+</span></span>
-<span id="cb11-95"><a href="#cb11-95" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"normal Distribution"</span> <span class="ot">=</span> <span class="st">"red"</span>,</span>
-<span id="cb11-96"><a href="#cb11-96" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"chi-square Distribution"</span> <span class="ot">=</span> <span class="st">"blue"</span>))<span class="sc">+</span></span>
-<span id="cb11-97"><a href="#cb11-97" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">color =</span> <span class="st">"Distribution"</span>)</span>
-<span id="cb11-98"><a href="#cb11-98" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb11-99"><a href="#cb11-99" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-100"><a href="#cb11-100" aria-hidden="true" tabindex="-1"></a><span class="fu">### McNemar's 检验</span></span>
-<span id="cb11-101"><a href="#cb11-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-102"><a href="#cb11-102" aria-hidden="true" tabindex="-1"></a>**b+c =5 + 34 \&gt; 20**</span>
-<span id="cb11-103"><a href="#cb11-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-106"><a href="#cb11-106" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb11-107"><a href="#cb11-107" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">36</span>,<span class="dv">34</span>,<span class="dv">5</span>,<span class="dv">135</span>),<span class="dv">2</span>,<span class="at">dimnames =</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">"A+"</span>,<span class="st">"A-"</span>),<span class="fu">c</span>(<span class="st">"B+"</span>,<span class="st">"B-"</span>)))</span>
-<span id="cb11-108"><a href="#cb11-108" aria-hidden="true" tabindex="-1"></a>x</span>
-<span id="cb11-109"><a href="#cb11-109" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-110"><a href="#cb11-110" aria-hidden="true" tabindex="-1"></a>(k3 <span class="ot">&lt;-</span> <span class="fu">mcnemar.test</span>(x,<span class="at">correct =</span> F))</span>
-<span id="cb11-111"><a href="#cb11-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-112"><a href="#cb11-112" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-113"><a href="#cb11-113" aria-hidden="true" tabindex="-1"></a><span class="co"># 校正</span></span>
-<span id="cb11-114"><a href="#cb11-114" aria-hidden="true" tabindex="-1"></a>(k4 <span class="ot">&lt;-</span> <span class="fu">mcnemar.test</span>(x,<span class="at">correct =</span> T))</span>
-<span id="cb11-115"><a href="#cb11-115" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb11-116"><a href="#cb11-116" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-117"><a href="#cb11-117" aria-hidden="true" tabindex="-1"></a><span class="fu">### 精确 McNemar's 检验</span></span>
-<span id="cb11-118"><a href="#cb11-118" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-119"><a href="#cb11-119" aria-hidden="true" tabindex="-1"></a>b+c = 7 + 1 <span class="sc">\&lt;</span>20</span>
-<span id="cb11-120"><a href="#cb11-120" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-121"><a href="#cb11-121" aria-hidden="true" tabindex="-1"></a>二项分布B（b+c，0.5），k=min（b，c）</span>
-<span id="cb11-122"><a href="#cb11-122" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-123"><a href="#cb11-123" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb11-124"><a href="#cb11-124" aria-hidden="true" tabindex="-1"></a>P=\sum_{i≤k} p_i </span>
-<span id="cb11-125"><a href="#cb11-125" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb11-126"><a href="#cb11-126" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-129"><a href="#cb11-129" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb11-130"><a href="#cb11-130" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">7</span>,<span class="dv">9</span>),<span class="dv">2</span>,<span class="at">dimnames =</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">"A+"</span>,<span class="st">"A-"</span>),<span class="fu">c</span>(<span class="st">"B+"</span>,<span class="st">"B-"</span>)))</span>
-<span id="cb11-131"><a href="#cb11-131" aria-hidden="true" tabindex="-1"></a>x</span>
-<span id="cb11-132"><a href="#cb11-132" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-133"><a href="#cb11-133" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-134"><a href="#cb11-134" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-135"><a href="#cb11-135" aria-hidden="true" tabindex="-1"></a>P_two_sided <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span><span class="fu">sum</span>(<span class="fu">dbinom</span>(<span class="at">x=</span><span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>,<span class="at">size =</span> <span class="dv">8</span>,<span class="at">prob =</span> <span class="fl">0.5</span>))</span>
-<span id="cb11-136"><a href="#cb11-136" aria-hidden="true" tabindex="-1"></a>P_two_sided</span>
-<span id="cb11-137"><a href="#cb11-137" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-138"><a href="#cb11-138" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb11-139"><a href="#cb11-139" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-140"><a href="#cb11-140" aria-hidden="true" tabindex="-1"></a><span class="fu">## R×C列联表</span></span>
-<span id="cb11-141"><a href="#cb11-141" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-144"><a href="#cb11-144" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb11-145"><a href="#cb11-145" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">150</span>,<span class="dv">184</span>,<span class="dv">198</span>,<span class="dv">50</span>,<span class="dv">16</span>,<span class="dv">2</span>),<span class="dv">3</span>,<span class="at">dimnames =</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">"A"</span>,<span class="st">"B"</span>,<span class="st">"C"</span>),<span class="fu">c</span>(<span class="st">"Yes"</span>,<span class="st">"No"</span>)))</span>
-<span id="cb11-146"><a href="#cb11-146" aria-hidden="true" tabindex="-1"></a>x</span>
-<span id="cb11-147"><a href="#cb11-147" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-148"><a href="#cb11-148" aria-hidden="true" tabindex="-1"></a>(k <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(x,<span class="at">correct =</span> F))</span>
-<span id="cb11-149"><a href="#cb11-149" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb11-150"><a href="#cb11-150" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-151"><a href="#cb11-151" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>T <span class="sc">\&lt;</span> 5 的格子不超过1/5</span>
-<span id="cb11-152"><a href="#cb11-152" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-153"><a href="#cb11-153" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>没有 T <span class="sc">\&lt;</span>1 的格子</span>
-<span id="cb11-154"><a href="#cb11-154" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-157"><a href="#cb11-157" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb11-158"><a href="#cb11-158" aria-hidden="true" tabindex="-1"></a>(k <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(x,<span class="at">correct =</span> T))</span>
-<span id="cb11-159"><a href="#cb11-159" aria-hidden="true" tabindex="-1"></a>k<span class="sc">$</span>expected</span>
-<span id="cb11-160"><a href="#cb11-160" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb11-161"><a href="#cb11-161" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-162"><a href="#cb11-162" aria-hidden="true" tabindex="-1"></a><span class="fu">### 多重比较</span></span>
-<span id="cb11-163"><a href="#cb11-163" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-164"><a href="#cb11-164" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb11-165"><a href="#cb11-165" aria-hidden="true" tabindex="-1"></a>\alpha'=\frac {\alpha}{比较的次数=\frac{k(k-1)}{2}}</span>
-<span id="cb11-166"><a href="#cb11-166" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb11-167"><a href="#cb11-167" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-168"><a href="#cb11-168" aria-hidden="true" tabindex="-1"></a><span class="fu">## 拟合优度检验</span></span>
-<span id="cb11-169"><a href="#cb11-169" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-170"><a href="#cb11-170" aria-hidden="true" tabindex="-1"></a>Pearson’s $\chi^2$ goodness-of-fit test</span>
+<div class="sourceCode" id="cb17" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># $\chi^2$ 检验</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>Pearson’s $\chi^2$ 检验 用于检验涉及双向无序多分类变量的概率或比例。</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">10</span>,<span class="dv">10</span>) <span class="sc">+</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_function</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">color=</span><span class="st">"normal Distribution"</span>),</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>                  <span class="at">fun =</span> dnorm, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>                   )<span class="sc">+</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_function</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">color=</span><span class="st">"chi-square Distribution"</span>),</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>                  <span class="at">fun =</span> dchisq, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">df =</span> <span class="dv">1</span> ,<span class="at">ncp=</span><span class="dv">0</span>), </span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>                 )<span class="sc">+</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"normal Distribution"</span> <span class="ot">=</span> <span class="st">"red"</span>,</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"chi-square Distribution"</span> <span class="ot">=</span> <span class="st">"blue"</span>))<span class="sc">+</span></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">color =</span> <span class="st">"Distribution"</span>)</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a><span class="fu">## 独立2×2列联表</span></span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">97</span>,<span class="dv">73</span>,<span class="dv">7</span>,<span class="dv">30</span>),<span class="dv">2</span>,<span class="at">dimnames =</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">"experiment"</span>,<span class="st">"control"</span>),<span class="fu">c</span>(<span class="st">"+"</span>,<span class="st">"-"</span>)))</span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>x</span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a>(k1 <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(x,<span class="at">correct =</span> F))</span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a><span class="co"># 期望频数列联表</span></span>
+<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a>k1<span class="sc">$</span>expected</span>
+<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a><span class="fu">### Yate’s 校正</span></span>
+<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a>(k2 <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(x,<span class="at">correct =</span> T))</span>
+<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a><span class="fu">### Fisher's Exact 检验</span></span>
+<span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-45"><a href="#cb17-45" aria-hidden="true" tabindex="-1"></a>T <span class="sc">\&lt;</span> 5 且 n <span class="sc">\&lt;</span> 40</span>
+<span id="cb17-46"><a href="#cb17-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-47"><a href="#cb17-47" aria-hidden="true" tabindex="-1"></a>超几何分布</span>
+<span id="cb17-48"><a href="#cb17-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-51"><a href="#cb17-51" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb17-52"><a href="#cb17-52" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">10</span>,<span class="dv">10</span>) <span class="sc">+</span></span>
+<span id="cb17-53"><a href="#cb17-53" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_function</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">color=</span><span class="st">"normal Distribution"</span>),</span>
+<span id="cb17-54"><a href="#cb17-54" aria-hidden="true" tabindex="-1"></a>                  <span class="at">fun =</span> dnorm, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
+<span id="cb17-55"><a href="#cb17-55" aria-hidden="true" tabindex="-1"></a>                   )<span class="sc">+</span></span>
+<span id="cb17-56"><a href="#cb17-56" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_function</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">color=</span><span class="st">"hypergeometric Distribution"</span>),</span>
+<span id="cb17-57"><a href="#cb17-57" aria-hidden="true" tabindex="-1"></a>                  <span class="at">fun =</span> dhyper, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">m =</span> <span class="dv">5</span>,<span class="at">n=</span><span class="dv">10</span>,<span class="at">k=</span><span class="dv">2</span> ), </span>
+<span id="cb17-58"><a href="#cb17-58" aria-hidden="true" tabindex="-1"></a>                 )<span class="sc">+</span></span>
+<span id="cb17-59"><a href="#cb17-59" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"normal Distribution"</span> <span class="ot">=</span> <span class="st">"red"</span>,</span>
+<span id="cb17-60"><a href="#cb17-60" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"hypergeometric Distribution"</span> <span class="ot">=</span> <span class="st">"blue"</span>))<span class="sc">+</span></span>
+<span id="cb17-61"><a href="#cb17-61" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">color =</span> <span class="st">"Distribution"</span>)</span>
+<span id="cb17-62"><a href="#cb17-62" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-63"><a href="#cb17-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-66"><a href="#cb17-66" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb17-67"><a href="#cb17-67" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">7</span>,<span class="dv">2</span>,<span class="dv">7</span>,<span class="dv">17</span>),<span class="dv">2</span>,<span class="at">dimnames =</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">"A"</span>,<span class="st">"B"</span>),<span class="fu">c</span>(<span class="st">"Yes"</span>,<span class="st">"No"</span>)))</span>
+<span id="cb17-68"><a href="#cb17-68" aria-hidden="true" tabindex="-1"></a>x</span>
+<span id="cb17-69"><a href="#cb17-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-70"><a href="#cb17-70" aria-hidden="true" tabindex="-1"></a>(k5 <span class="ot">&lt;-</span> <span class="fu">fisher.test</span>(x))</span>
+<span id="cb17-71"><a href="#cb17-71" aria-hidden="true" tabindex="-1"></a> <span class="fu">chisq.test</span>(x)</span>
+<span id="cb17-72"><a href="#cb17-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-73"><a href="#cb17-73" aria-hidden="true" tabindex="-1"></a>E <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(x)<span class="sc">$</span>expected</span>
+<span id="cb17-74"><a href="#cb17-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-75"><a href="#cb17-75" aria-hidden="true" tabindex="-1"></a>chisq <span class="ot">&lt;-</span> <span class="fu">sum</span>((x<span class="sc">-</span>E)<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>E)</span>
+<span id="cb17-76"><a href="#cb17-76" aria-hidden="true" tabindex="-1"></a>chisq </span>
+<span id="cb17-77"><a href="#cb17-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-78"><a href="#cb17-78" aria-hidden="true" tabindex="-1"></a>p_value_asymptotic <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pchisq</span>(chisq, <span class="at">df =</span> <span class="dv">1</span>)</span>
+<span id="cb17-79"><a href="#cb17-79" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-80"><a href="#cb17-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-81"><a href="#cb17-81" aria-hidden="true" tabindex="-1"></a><span class="fu">## 配对四格表</span></span>
+<span id="cb17-82"><a href="#cb17-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-83"><a href="#cb17-83" aria-hidden="true" tabindex="-1"></a>二项分布</span>
+<span id="cb17-84"><a href="#cb17-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-87"><a href="#cb17-87" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb17-88"><a href="#cb17-88" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">10</span>,<span class="dv">10</span>) <span class="sc">+</span></span>
+<span id="cb17-89"><a href="#cb17-89" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_function</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">color=</span><span class="st">"normal Distribution"</span>),</span>
+<span id="cb17-90"><a href="#cb17-90" aria-hidden="true" tabindex="-1"></a>                  <span class="at">fun =</span> dnorm, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="dv">5</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
+<span id="cb17-91"><a href="#cb17-91" aria-hidden="true" tabindex="-1"></a>                   )<span class="sc">+</span></span>
+<span id="cb17-92"><a href="#cb17-92" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_function</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">color=</span><span class="st">"chi-square Distribution"</span>),</span>
+<span id="cb17-93"><a href="#cb17-93" aria-hidden="true" tabindex="-1"></a>                  <span class="at">fun =</span> dbinom, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">size=</span><span class="dv">10</span> ,<span class="at">prob=</span><span class="fl">0.5</span>), </span>
+<span id="cb17-94"><a href="#cb17-94" aria-hidden="true" tabindex="-1"></a>                 )<span class="sc">+</span></span>
+<span id="cb17-95"><a href="#cb17-95" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"normal Distribution"</span> <span class="ot">=</span> <span class="st">"red"</span>,</span>
+<span id="cb17-96"><a href="#cb17-96" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"chi-square Distribution"</span> <span class="ot">=</span> <span class="st">"blue"</span>))<span class="sc">+</span></span>
+<span id="cb17-97"><a href="#cb17-97" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">color =</span> <span class="st">"Distribution"</span>)</span>
+<span id="cb17-98"><a href="#cb17-98" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-99"><a href="#cb17-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-100"><a href="#cb17-100" aria-hidden="true" tabindex="-1"></a><span class="fu">### McNemar's 检验</span></span>
+<span id="cb17-101"><a href="#cb17-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-102"><a href="#cb17-102" aria-hidden="true" tabindex="-1"></a>**b+c =5 + 34 \&gt; 20**</span>
+<span id="cb17-103"><a href="#cb17-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-106"><a href="#cb17-106" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb17-107"><a href="#cb17-107" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">36</span>,<span class="dv">34</span>,<span class="dv">5</span>,<span class="dv">135</span>),<span class="dv">2</span>,<span class="at">dimnames =</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">"A+"</span>,<span class="st">"A-"</span>),<span class="fu">c</span>(<span class="st">"B+"</span>,<span class="st">"B-"</span>)))</span>
+<span id="cb17-108"><a href="#cb17-108" aria-hidden="true" tabindex="-1"></a>x</span>
+<span id="cb17-109"><a href="#cb17-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-110"><a href="#cb17-110" aria-hidden="true" tabindex="-1"></a>(k3 <span class="ot">&lt;-</span> <span class="fu">mcnemar.test</span>(x,<span class="at">correct =</span> F))</span>
+<span id="cb17-111"><a href="#cb17-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-112"><a href="#cb17-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-113"><a href="#cb17-113" aria-hidden="true" tabindex="-1"></a><span class="co"># 校正</span></span>
+<span id="cb17-114"><a href="#cb17-114" aria-hidden="true" tabindex="-1"></a>(k4 <span class="ot">&lt;-</span> <span class="fu">mcnemar.test</span>(x,<span class="at">correct =</span> T))</span>
+<span id="cb17-115"><a href="#cb17-115" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-116"><a href="#cb17-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-117"><a href="#cb17-117" aria-hidden="true" tabindex="-1"></a><span class="fu">### 精确 McNemar's 检验</span></span>
+<span id="cb17-118"><a href="#cb17-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-119"><a href="#cb17-119" aria-hidden="true" tabindex="-1"></a>b+c = 7 + 1 <span class="sc">\&lt;</span>20</span>
+<span id="cb17-120"><a href="#cb17-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-121"><a href="#cb17-121" aria-hidden="true" tabindex="-1"></a>二项分布B（b+c，0.5），k=min（b，c）</span>
+<span id="cb17-122"><a href="#cb17-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-123"><a href="#cb17-123" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb17-124"><a href="#cb17-124" aria-hidden="true" tabindex="-1"></a>P=\sum_{i≤k} p_i </span>
+<span id="cb17-125"><a href="#cb17-125" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb17-126"><a href="#cb17-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-129"><a href="#cb17-129" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb17-130"><a href="#cb17-130" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">7</span>,<span class="dv">9</span>),<span class="dv">2</span>,<span class="at">dimnames =</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">"A+"</span>,<span class="st">"A-"</span>),<span class="fu">c</span>(<span class="st">"B+"</span>,<span class="st">"B-"</span>)))</span>
+<span id="cb17-131"><a href="#cb17-131" aria-hidden="true" tabindex="-1"></a>x</span>
+<span id="cb17-132"><a href="#cb17-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-133"><a href="#cb17-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-134"><a href="#cb17-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-135"><a href="#cb17-135" aria-hidden="true" tabindex="-1"></a>P_two_sided <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span><span class="fu">sum</span>(<span class="fu">dbinom</span>(<span class="at">x=</span><span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>,<span class="at">size =</span> <span class="dv">8</span>,<span class="at">prob =</span> <span class="fl">0.5</span>))</span>
+<span id="cb17-136"><a href="#cb17-136" aria-hidden="true" tabindex="-1"></a>P_two_sided</span>
+<span id="cb17-137"><a href="#cb17-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-138"><a href="#cb17-138" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-139"><a href="#cb17-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-140"><a href="#cb17-140" aria-hidden="true" tabindex="-1"></a><span class="fu">## R×C列联表</span></span>
+<span id="cb17-141"><a href="#cb17-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-144"><a href="#cb17-144" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb17-145"><a href="#cb17-145" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">150</span>,<span class="dv">184</span>,<span class="dv">198</span>,<span class="dv">50</span>,<span class="dv">16</span>,<span class="dv">2</span>),<span class="dv">3</span>,<span class="at">dimnames =</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">"A"</span>,<span class="st">"B"</span>,<span class="st">"C"</span>),<span class="fu">c</span>(<span class="st">"Yes"</span>,<span class="st">"No"</span>)))</span>
+<span id="cb17-146"><a href="#cb17-146" aria-hidden="true" tabindex="-1"></a>x</span>
+<span id="cb17-147"><a href="#cb17-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-148"><a href="#cb17-148" aria-hidden="true" tabindex="-1"></a>(k <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(x,<span class="at">correct =</span> F))</span>
+<span id="cb17-149"><a href="#cb17-149" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-150"><a href="#cb17-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-151"><a href="#cb17-151" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>T <span class="sc">\&lt;</span> 5 的格子不超过1/5</span>
+<span id="cb17-152"><a href="#cb17-152" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-153"><a href="#cb17-153" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>没有 T <span class="sc">\&lt;</span>1 的格子</span>
+<span id="cb17-154"><a href="#cb17-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-157"><a href="#cb17-157" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb17-158"><a href="#cb17-158" aria-hidden="true" tabindex="-1"></a>(k <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(x,<span class="at">correct =</span> T))</span>
+<span id="cb17-159"><a href="#cb17-159" aria-hidden="true" tabindex="-1"></a>k<span class="sc">$</span>expected</span>
+<span id="cb17-160"><a href="#cb17-160" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-161"><a href="#cb17-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-162"><a href="#cb17-162" aria-hidden="true" tabindex="-1"></a><span class="fu">### 多重比较</span></span>
+<span id="cb17-163"><a href="#cb17-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-164"><a href="#cb17-164" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb17-165"><a href="#cb17-165" aria-hidden="true" tabindex="-1"></a>\alpha'=\frac {\alpha}{比较的次数=\frac{k(k-1)}{2}}</span>
+<span id="cb17-166"><a href="#cb17-166" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb17-167"><a href="#cb17-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-168"><a href="#cb17-168" aria-hidden="true" tabindex="-1"></a><span class="fu">## 拟合优度检验</span></span>
+<span id="cb17-169"><a href="#cb17-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-170"><a href="#cb17-170" aria-hidden="true" tabindex="-1"></a>Pearson’s $\chi^2$ goodness-of-fit test</span>
+<span id="cb17-171"><a href="#cb17-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-172"><a href="#cb17-172" aria-hidden="true" tabindex="-1"></a><span class="fu">## 独立性检验</span></span>
+<span id="cb17-173"><a href="#cb17-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-174"><a href="#cb17-174" aria-hidden="true" tabindex="-1"></a><span class="fu">### 列联表</span></span>
+<span id="cb17-175"><a href="#cb17-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-178"><a href="#cb17-178" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb17-179"><a href="#cb17-179" aria-hidden="true" tabindex="-1"></a>eg <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">156</span>,<span class="dv">9421</span>,<span class="dv">1531</span>,<span class="dv">14797</span>),<span class="at">nrow=</span><span class="dv">2</span>,<span class="at">byrow=</span><span class="cn">TRUE</span>)</span>
+<span id="cb17-180"><a href="#cb17-180" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(eg) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Disease"</span>,<span class="st">"Control"</span>)</span>
+<span id="cb17-181"><a href="#cb17-181" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(eg) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Exposed"</span>,<span class="st">"Unexposed"</span>)</span>
+<span id="cb17-182"><a href="#cb17-182" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(eg)</span>
+<span id="cb17-183"><a href="#cb17-183" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(eg)          <span class="co">#各单元格比例</span></span>
+<span id="cb17-184"><a href="#cb17-184" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(eg,<span class="at">margin =</span> <span class="dv">1</span>)        <span class="co">#行比例 </span></span>
+<span id="cb17-185"><a href="#cb17-185" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-186"><a href="#cb17-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-187"><a href="#cb17-187" aria-hidden="true" tabindex="-1"></a><span class="fu">### 边际列联表</span></span>
+<span id="cb17-188"><a href="#cb17-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-191"><a href="#cb17-191" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb17-192"><a href="#cb17-192" aria-hidden="true" tabindex="-1"></a><span class="co"># 边际</span></span>
+<span id="cb17-193"><a href="#cb17-193" aria-hidden="true" tabindex="-1"></a><span class="fu">margin.table</span>(<span class="at">x=</span>eg,<span class="at">margin =</span> <span class="dv">2</span>)      <span class="co">#列和</span></span>
+<span id="cb17-194"><a href="#cb17-194" aria-hidden="true" tabindex="-1"></a><span class="fu">addmargins</span>(eg)          <span class="co">#添加行和、列和</span></span>
+<span id="cb17-195"><a href="#cb17-195" aria-hidden="true" tabindex="-1"></a><span class="fu">addmargins</span>(eg,<span class="dv">1</span>)        <span class="co">#添加列和</span></span>
+<span id="cb17-196"><a href="#cb17-196" aria-hidden="true" tabindex="-1"></a><span class="fu">addmargins</span>(eg,<span class="dv">2</span>)        <span class="co">#添加行和</span></span>
+<span id="cb17-197"><a href="#cb17-197" aria-hidden="true" tabindex="-1"></a><span class="fu">addmargins</span>(<span class="fu">prop.table</span>(eg,<span class="dv">1</span>))</span>
+<span id="cb17-198"><a href="#cb17-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-199"><a href="#cb17-199" aria-hidden="true" tabindex="-1"></a><span class="fu">ftable</span>(eg)   <span class="co"># "平铺式"列联表</span></span>
+<span id="cb17-200"><a href="#cb17-200" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-201"><a href="#cb17-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-202"><a href="#cb17-202" aria-hidden="true" tabindex="-1"></a><span class="fu">### 独立性检验</span></span>
+<span id="cb17-203"><a href="#cb17-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-204"><a href="#cb17-204" aria-hidden="true" tabindex="-1"></a>独立性：判断两个或多个分类变量之间是否存在关联或取值互不影响，分析联合概率分布是否可以分解为各自概率分布的乘积。</span>
+<span id="cb17-205"><a href="#cb17-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-206"><a href="#cb17-206" aria-hidden="true" tabindex="-1"></a><span class="fu">#### $\chi^2$ 独立性检验</span></span>
+<span id="cb17-207"><a href="#cb17-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-210"><a href="#cb17-210" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb17-211"><a href="#cb17-211" aria-hidden="true" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fu">as.table</span>(<span class="fu">rbind</span>(<span class="fu">c</span>(<span class="dv">86</span>, <span class="dv">29</span>), <span class="fu">c</span>(<span class="dv">44</span>, <span class="dv">30</span>)))</span>
+<span id="cb17-212"><a href="#cb17-212" aria-hidden="true" tabindex="-1"></a><span class="fu">dimnames</span>(M) <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">gender =</span> <span class="fu">c</span>(<span class="st">"F"</span>, <span class="st">"M"</span>),</span>
+<span id="cb17-213"><a href="#cb17-213" aria-hidden="true" tabindex="-1"></a>                    <span class="at">smoking =</span> <span class="fu">c</span>(<span class="st">"Yes"</span>,<span class="st">"No"</span>))</span>
+<span id="cb17-214"><a href="#cb17-214" aria-hidden="true" tabindex="-1"></a>M</span>
+<span id="cb17-215"><a href="#cb17-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-216"><a href="#cb17-216" aria-hidden="true" tabindex="-1"></a>chisq <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(M)</span>
+<span id="cb17-217"><a href="#cb17-217" aria-hidden="true" tabindex="-1"></a>chisq</span>
+<span id="cb17-218"><a href="#cb17-218" aria-hidden="true" tabindex="-1"></a>chisq<span class="sc">$</span>expected  <span class="co"># 期望频数</span></span>
+<span id="cb17-219"><a href="#cb17-219" aria-hidden="true" tabindex="-1"></a>chisq<span class="sc">$</span>parameter <span class="co"># degrees of freedom</span></span>
+<span id="cb17-220"><a href="#cb17-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-221"><a href="#cb17-221" aria-hidden="true" tabindex="-1"></a><span class="co">#对于频数表中每个单元格的期望频数都比较大（大于 5）的大样本，correct设为 FALSE,不进行连续校正</span></span>
+<span id="cb17-222"><a href="#cb17-222" aria-hidden="true" tabindex="-1"></a>chisq2 <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(M,<span class="at">correct =</span> <span class="cn">FALSE</span>) </span>
+<span id="cb17-223"><a href="#cb17-223" aria-hidden="true" tabindex="-1"></a>chisq2</span>
+<span id="cb17-224"><a href="#cb17-224" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-225"><a href="#cb17-225" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-226"><a href="#cb17-226" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Fisher精确检验</span></span>
+<span id="cb17-227"><a href="#cb17-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-228"><a href="#cb17-228" aria-hidden="true" tabindex="-1"></a>　　如果观察总记录数 n 小于 40，或者频数表里的某个期望频数很小（小于 1） ，则需要使 用 Fisher 精确概率检验。</span>
+<span id="cb17-229"><a href="#cb17-229" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-232"><a href="#cb17-232" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb17-233"><a href="#cb17-233" aria-hidden="true" tabindex="-1"></a><span class="co"># Fisher's exact test to test independence of rows and columns in contingency table</span></span>
+<span id="cb17-234"><a href="#cb17-234" aria-hidden="true" tabindex="-1"></a><span class="fu">fisher.test</span>(M)</span>
+<span id="cb17-235"><a href="#cb17-235" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-236"><a href="#cb17-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-237"><a href="#cb17-237" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Cochran-Mantel-Haenszel $\chi^2$ 检验</span></span>
+<span id="cb17-238"><a href="#cb17-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-239"><a href="#cb17-239" aria-hidden="true" tabindex="-1"></a>又叫行均分检验，常用于按照某个变量进行分层后的检验，这个方法课本上说**用于检验两个有序分类变量是否存在线性相关**，但实际上用途很广泛，比如因变量是有序变量的单向有序列联表，也可以用。　　</span>
+<span id="cb17-240"><a href="#cb17-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-241"><a href="#cb17-241" aria-hidden="true" tabindex="-1"></a>两个变量的关联有可能受到第三个变量的影响，因此我们有必要检验两个分类变量在 调整（控制）第三个变量的情况下是否独立。 Cochran-Mantel-Haenszel χ 2 检验常用于探索 变量间的混杂因素。其零假设是：两个分类变量在第三个变量的每一层都是条件独立的。函数 mantelhaen.test( ) 可以用来进行该检验。</span>
+<span id="cb17-242"><a href="#cb17-242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-245"><a href="#cb17-245" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb17-246"><a href="#cb17-246" aria-hidden="true" tabindex="-1"></a>Rabbits <span class="ot">&lt;-</span></span>
+<span id="cb17-247"><a href="#cb17-247" aria-hidden="true" tabindex="-1"></a><span class="fu">array</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">6</span>, <span class="dv">5</span>,</span>
+<span id="cb17-248"><a href="#cb17-248" aria-hidden="true" tabindex="-1"></a>        <span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">6</span>,</span>
+<span id="cb17-249"><a href="#cb17-249" aria-hidden="true" tabindex="-1"></a>        <span class="dv">6</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">4</span>,</span>
+<span id="cb17-250"><a href="#cb17-250" aria-hidden="true" tabindex="-1"></a>        <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">1</span>, <span class="dv">0</span>,</span>
+<span id="cb17-251"><a href="#cb17-251" aria-hidden="true" tabindex="-1"></a>        <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb17-252"><a href="#cb17-252" aria-hidden="true" tabindex="-1"></a>      <span class="at">dim =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">5</span>),</span>
+<span id="cb17-253"><a href="#cb17-253" aria-hidden="true" tabindex="-1"></a>      <span class="at">dimnames =</span> <span class="fu">list</span>(</span>
+<span id="cb17-254"><a href="#cb17-254" aria-hidden="true" tabindex="-1"></a>          <span class="at">Delay =</span> <span class="fu">c</span>(<span class="st">"None"</span>, <span class="st">"1.5h"</span>),</span>
+<span id="cb17-255"><a href="#cb17-255" aria-hidden="true" tabindex="-1"></a>          <span class="at">Response =</span> <span class="fu">c</span>(<span class="st">"Cured"</span>, <span class="st">"Died"</span>),</span>
+<span id="cb17-256"><a href="#cb17-256" aria-hidden="true" tabindex="-1"></a>          <span class="at">Penicillin.Level =</span> <span class="fu">c</span>(<span class="st">"1/8"</span>, <span class="st">"1/4"</span>, <span class="st">"1/2"</span>, <span class="st">"1"</span>, <span class="st">"4"</span>)))</span>
+<span id="cb17-257"><a href="#cb17-257" aria-hidden="true" tabindex="-1"></a>Rabbits</span>
+<span id="cb17-258"><a href="#cb17-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-259"><a href="#cb17-259" aria-hidden="true" tabindex="-1"></a><span class="fu">mantelhaen.test</span>(Rabbits)</span>
+<span id="cb17-260"><a href="#cb17-260" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-261"><a href="#cb17-261" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-262"><a href="#cb17-262" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 配对列联表的 χ 2 检验</span></span>
+<span id="cb17-263"><a href="#cb17-263" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-264"><a href="#cb17-264" aria-hidden="true" tabindex="-1"></a>　　医学科研实践中经常遇到配对设计的计数资料，例如两种检验方法、诊断方法结果的 比较。其特点是对每个研究对象分别用两种方法处理，然后观察两种处理方法的某两分类 变量的计数结果。对于这种数据，我们也可以整理成列联表的形式，但是不能用前述的 χ 2独立性检验，需进行 Mcnemar 检验。</span>
+<span id="cb17-265"><a href="#cb17-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-268"><a href="#cb17-268" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb17-269"><a href="#cb17-269" aria-hidden="true" tabindex="-1"></a><span class="co">#　　某实验室分别用免疫荧光法和乳胶凝集法对 58 名疑似系统性红斑狼疮患者血清中抗 核抗体进行测定</span></span>
+<span id="cb17-270"><a href="#cb17-270" aria-hidden="true" tabindex="-1"></a>result<span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">11</span>, <span class="dv">2</span>, <span class="dv">12</span>, <span class="dv">33</span>), <span class="at">nrow =</span> <span class="dv">2</span>,<span class="at">dimnames =</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">"+"</span>,<span class="st">"-"</span>),<span class="fu">c</span>(<span class="st">"+"</span>,<span class="st">"-"</span>)))</span>
+<span id="cb17-271"><a href="#cb17-271" aria-hidden="true" tabindex="-1"></a>result</span>
+<span id="cb17-272"><a href="#cb17-272" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-273"><a href="#cb17-273" aria-hidden="true" tabindex="-1"></a><span class="co">#　　对于配对四格表，如果样本量较小（不一致的结果的总数小于 40 ） ，则需要进行连续性校正。</span></span>
+<span id="cb17-274"><a href="#cb17-274" aria-hidden="true" tabindex="-1"></a><span class="fu">mcnemar.test</span>(result,<span class="at">correct =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb17-275"><a href="#cb17-275" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
