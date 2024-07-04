@@ -29,7 +29,6 @@ book:
         - chi-square_test.qmd
         - nonparametric_test.qmd
         - correlation.qmd
-        
 
     #     - PowerAnalysis.qmd
     #     - Causal_Inference.qmd
@@ -48,8 +47,6 @@ book:
     - part: "倾向性评分"
       chapters:
         - PropensityScore.qmd
-   
-
 
     - part: "研究设计"
       chapters: 
