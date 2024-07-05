@@ -26,8 +26,15 @@ $$
 E(y)=\eta=g^{-1}(\eta)
 $$
 
+```{r}
+library(tidymodels)
+library(poissonreg)
+library(patchwork)
+```
 
-## gaussian
+## 广义线性回归
+
+gaussian
 
 identity link function
 
@@ -118,10 +125,7 @@ ggplot(df,aes(default,income,fill=default))+
   geom_boxplot()
 ```
 
-```{r}
-library(tidymodels)
-library(patchwork)
-```
+
 
 ### Binary logistic regression
 
