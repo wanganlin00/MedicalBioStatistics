@@ -10,96 +10,128 @@
 
 样本sample，由样本计算出的特征指标称为统计量statistic
 
-## 变量
-
 变量（variable）是随机变量的简称。
 
 变量的观测值称为数据（data）。
 
-## 数据类型
+## 数据类型及其分布
 
-1.  定量数据（quantitative data）
+### 定量数据（quantitative data）
 
-    i.  连续型
+#### 连续型
 
-        a.  正态分布：t 检验，方差分析，相关性检验
+a.  正态分布：t 检验，方差分析，相关性检验
 
-            ```{r}
-            library(ggplot2)
+$$
+f(x)= \frac{1}{2πσ} e^{ −(x−μ) ^2 /2σ^2 }，\mu是均值， \sigma是标准差
+$$
 
-            # 正态分布
-            normal_data <- tibble(x = seq(-5, 5, length.out = 500),
-                                  y = dnorm(x, mean = 0, sd = 1))
-
-            ggplot(normal_data, aes(x = x, y = y)) +
-                geom_line() +
-                ggtitle("Normal Distribution")
-            ```
-
-        b.  对数正态分布：非参数检验
-
-        c.  指数分布：对数秩（log-rank ）检验
-
-            ```{r}
-            # 指数分布
-            exponential_data <- tibble(x = seq(0, 3, length.out = 100),
-                                       y = dexp(x, rate = 1))
+```{r}
+library(ggplot2)
+# 标准正态分布
+normal_data <- tibble(x = seq(-5, 5, length.out = 500),
+                      y = dnorm(x, mean = 0, sd = 1))
 
 
-            ggplot(exponential_data, aes(x = x, y = y)) +
-                geom_line() +
-                ggtitle("Exponential Distribution")
-            ```
+ggplot(normal_data, aes(x = x, y = y)) +
+    geom_line() +
+    ggtitle("Normal Distribution")
+```
 
-        d.  均匀分布
+b.  对数正态分布：非参数检验
 
-    ii. 离散型
+c.  指数分布：对数秩（log-rank ）检验
 
-        a.  二项分布
+$$
+f(x)=λe^{−λx}，x\ge 0 ，默认rate：λ=1
+$$
 
-            ```{r}
-            # 二项分布
-            binomial_data <- tibble(x = 0:100,
-                                    y = dbinom(x, size = 100, prob = 0.5))
+```{r}
+# 指数分布
+exponential_data <- tibble(x = seq(0, 3, length.out = 100),
+                           y = dexp(x, rate = 1))
 
-            ggplot(binomial_data, aes(x = x, y = y)) +
-                geom_bar(stat = "identity") +
-                ggtitle("Binomial Distribution")
-            ```
 
-        b.  负二项分布：`DESeq2` 差异分析
+ggplot(exponential_data, aes(x = x, y = y)) +
+    geom_line() +
+    ggtitle("Exponential Distribution")
+```
 
-            ```{r}
+d.  均匀分布
 
-            # 负二项分布
-            negative_binomial_data <- tibble(x = 0:20,
-                                             y =  dnbinom(x, size = 1, prob = 0.5))
+#### 离散型
 
-            ggplot(negative_binomial_data, aes(x = x, y = y)) +
-                geom_bar(stat = "identity") +
-                ggtitle("Negative Binomial Distribution")
-            ```
+a.  二项分布
 
-        c.  超几何分布
+$$
+    P(x)=\binom{n}{x}p^x(1-p)^{n-x} 
+$$
 
-        d.  泊松分布
+```{r}
+# 二项分布
+binomial_data <- tibble(x = 0:100, y = dbinom(x, size = 100, prob = 0.5))
 
-            ```{r}
-            # 泊松分布
-            poisson_data <- tibble(x = 0:20,
-                                   y = dpois(x, lambda = 5))
+ggplot(binomial_data, aes(x = x, y = y, color = y)) +
+    geom_bar(stat = "identity") +
+    ggtitle("Binomial Distribution")
+```
 
-            ggplot(poisson_data, aes(x = x, y = y)) +
-                geom_bar(stat = "identity") +
-                ggtitle("Poisson Distribution")
-            ```
+b.  负二项分布：`DESeq2` 差异分析
 
-<!-- -->
+$$
+    P(x)=\frac{\Gamma(x+n)}{\Gamma(n)\ x!}p^n(1-p)^x
+$$
 
-2.  定性数据（qualitative data）
+均值 *`μ=n(1−p)/p`*，方差 *`(1−p)/p2`*
 
-    i.  无序分类数据
+```{r}
+# 负二项分布
+negative_binomial_data <- tibble(x = 0:20, y =  dnbinom(x, size = 1, prob = 0.5))
 
-    ii. 有序分类数据
+ggplot(negative_binomial_data, aes(x = x, y = y)) +
+    geom_bar(stat = "identity") +
+    ggtitle("Negative Binomial Distribution")
+```
+
+c.  泊松分布
+
+$$
+P(x)=\frac{\lambda^x e^{-\lambda}}{x!}，E(X)=Var(X)=λ
+$$
+
+```{r}
+# 泊松分布
+poisson_data <- tibble(x = 0:20,
+                       y = dpois(x, lambda = 5))
+
+ggplot(poisson_data, aes(x = x, y = y)) +
+    geom_bar(stat = "identity") +
+    ggtitle("Poisson Distribution")
+```
+
+d.  超几何分布
+
+Hypergeometric Distribution，不放回抽样
+
+$$
+P(x)=\frac{\binom {m}{x}\binom{n}{k-x}}{\binom{m+n}{k}}；x=0，...，k；p=m/(m+n) ；N=m+n
+$$
+
+均值 E\[X\]=μ=kp，方差Var(X)=kp(1−p) (m+n−1)/(m+n−k)
+
+```{r}
+# 超几何分布
+hypergeometric_data <- tibble(x = 0:9, y = dhyper(x, m = 10,n = 7,k = 8))
+
+ggplot(hypergeometric_data, aes(x = x, y = y)) +
+    geom_bar(stat = "identity") +
+    ggtitle("Hypergeometric Distribution")
+```
+
+### 定性数据（qualitative data）
+
+i.  名义型（nominal）
+
+ii. 有序型（ordered）
 
 ## 数据可视化

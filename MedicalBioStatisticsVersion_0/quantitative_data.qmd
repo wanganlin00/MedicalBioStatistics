@@ -24,7 +24,7 @@ ggplot(data = mtcars,aes(x=mpg))+
 as_tibble(mtcars$mpg)
 ```
 
-## 集中趋势
+## 集中趋势（central tendency）
 
 ```{r}
 #算术均数
@@ -36,10 +36,14 @@ median(mtcars$mpg)
 #众数 mode
 rstatix::get_mode(mtcars$mpg)
 
-fivenum(mtcars$mpg)
+x <- c(1,2:9,11)
+mean(x)
+
+mean(x,trim = 0.1)
+
 ```
 
-## 离散程度
+## 离散趋势（dispersion tendency）
 
 ```{r}
 # 值域
@@ -77,9 +81,9 @@ median(abs(mtcars$mpg-median(mtcars$mpg)))
 median(abs(mtcars$mpg-median(mtcars$mpg)))*1.4826
 ```
 
-## 分布形状
+## 分布形态
 
-### 偏度
+### 偏度系数
 
 #### 总体偏度（Population Skewness）
 
@@ -125,9 +129,9 @@ $$
 Sample\ Skewness(X) =  \frac{n}{(n-1)(n-2)} \sum_{i=1}^{n}  \left [\frac{X_i-\bar X}{S} \right ]^3
 $$
 
-![](images/sample_skewness_SE.png)
+![](images/sample_skewness_SE.png){fig-align="center"}
 
-### 峰度
+### 峰度系数
 
 #### 总体峰度（Population Kurtosis）
 
@@ -172,7 +176,13 @@ $$
 Sample \ Kurtosis(X) =   \frac{n(n+1)}{(n-1)(n-2)(n-3)} \sum_{i=1}^{n} \left [\frac{X_i-\bar X}{S} \right]^4-\frac{3(n-1)^2}{(n-2)(n-3)}
 $$
 
-![](images/sample_kurtosis_SE.png)
+![](images/sample_kurtosis_SE.png){fig-align="center"}
+
+## 标准化变换
+
+```{r}
+scale(mtcars$mpg,center = T,scale = T) |> tibble()
+```
 
 ## 统计摘要
 
