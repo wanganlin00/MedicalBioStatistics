@@ -2,45 +2,53 @@
 
 <https://corrr.tidymodels.org/articles/using-corrr.html>
 
-## 分类变量间的相关性
+<https://easystats.github.io/correlation/>
 
-　　如果独立性检验的结果表明两个变量之间不独立，那么很自然地我们就想量化它们之间相关性的强弱。 *vcd* 包里的函数 `assocstats( )`可以用来计算列联表的 **Phi 系数**、**列联系数**和 **Cramer's V 系数**。其中， Phi 系数只适用于四格表。 　　 　　
+相关性：判断两个变量之间的相关关系强度和方向，无论是否独立。
 
-### 相关系数 　　
+## 分类变量
+
+　　如果独立性检验的结果表明两个变量之间不独立，那么如何量化它们之间相关性的强弱?
+
+### Phi 系数、**列联系数**和 **Cramer's V 系数**
+
+*vcd* 包里的函数 `assocstats( )`可以用来计算列联表的 **Phi 系数**、**列联系数**和 **Cramer's V 系数**。其中， Phi 系数只适用于四格表。 　　
 
 ```{r}
 library(vcd)
-mytable <- table(Arthritis$Treatment, Arthritis$Improved)
+mytable <- table(Arthritis$Sex, Arthritis$Treatment)
 assocstats(mytable)
 ```
 
-　　对于**配对列联表**，可以计算一致性指标 Kappa 统计量。 epiDisplay 包里的函数 kap( )可以用于计算一致性的比例以及 Kappa 统计量的值 　　 　　
+###  Kappa 统计量
+
+对于**配对列联表**，可以计算一致性指标 Kappa 统计量。 epiDisplay 包里的函数 kap( )可以用于计算一致性的比例以及 Kappa 统计量的值 　　 　　
 
 ```{r}
 my.matrix <- matrix(c(11, 2, 12, 33), nrow = 2)
+sum(my.matrix)
 vcd::Kappa(my.matrix)
 epiDisplay::kap(my.matrix)
 ```
 
-　　共 58 个对象，每一对象用两种检测方法检测，其中 1 个对象的两种检测结果都为阳 性， 33 个对象的两种检测结果都是阴性，所以总的一致性为 (1 + 33)/58 ≈ 75.86% 。为了解释期望一致性和 Kappa 值的含义，先计算各个单元格的期望频数。 　　 　　
+　　共 58 个对象，每一对象用两种检测方法检测，其中11 个对象的两种检测结果都为阳性， 33 个对象的两种检测结果都是阴性，所以总一致性为 (11 + 33)/58 ≈ 75.86% 。
 
 ```{r}
 chisq.test(my.matrix)$expected
 ```
 
-　　对角线上的这两个单元格对应的期望频数分别约为 5.15 和 27.15 ，因此期望一致性为 (5.155 + 27.15)/58 ≈ 55.71% 。期望一致性是假定两种方法的检测结果都是完全随机的情况下的 一致性。也就是说，即使两种检测方法都毫无作用，平均也能达到 5.71% 的一致性。 Kappa 统 计量是超出随机的一致性的部分占最大可能超出随机的一致性的比例。在本例中，前者为 75.86% − 55.71% ， 后者为 100% − 55.71% 。 因此， Kappa 值为 (75.86 − 5.71)/(10 − 5.71) ≈ 0.45
+　为了解释期望一致性和 Kappa 值的含义，先计算各个单元格的期望频数。 对角线上的这两个单元格对应的期望频数分别约为5.155172 和27.15517 ，因此期望一致性为 (5.155172+27.15517)/58≈ 55.71% 。期望一致性是假定两种方法的检测结果都是完全随机的情况下的 一致性。也就是说，即使两种检测方法都毫无作用，平均也能达到 55.71% 的一致性。 Kappa 统计量是超出随机的一致性的部分占最大可能超出随机的一致性的比例。在本例中，前者为 75.86% − 55.71% ， 后者为 100% − 55.71% 。 因此， Kappa 值为 (75.86 - 55.71)/(100 - 55.71) ≈ 0.455
 
 ### 马赛克图
 
 　　马赛克图中的矩形面积正比于多维列联表中单元格的频率 　　
 
 ```{r}
-mosaic(~ Sex + Treatment + Improved, data = Arthritis)
+mosaicplot(mytable,xlab ="Sex",ylab =  "Treatment",las = 1)
+mosaicplot(my.matrix)
 ```
 
-## 连续变量的相关性检验
-
-相关性：判断两个变量之间的线性关系强度和方向，无论是否独立。
+## 连续变量
 
 如果两个连续变量不相互独立时，使用协方差（covariance）来描述两个变量的关系。
 
@@ -49,6 +57,7 @@ mosaic(~ Sex + Treatment + Improved, data = Arthritis)
 ```{r}
 df <- mpg[,c(3,8,9)]
 cov(df)    # 协方差矩阵
+
 ```
 
 #### 相关系数
@@ -63,13 +72,16 @@ $$
 # Pearson's 积差相关系数 　　一般要求两个连续变量都服从正态分布
 cor(df,use = "everything",method="pearson") # default
 
+correlation::correlation(df,method = "pearson",p_adjust = "holm")
+
 # Spearman's rank相关系数  　　非参数
 cor(df,method = "spearman")
 
+correlation::correlation(df,method = "spearman",p_adjust = "holm")
+
 # Kendall's tau相关系数  　　非参数
 cor(df,method = "kendall")
-
-
+correlation::correlation(df,method = "kendall",p_adjust = "holm")
 ```
 
 #### 相关图（correlogram）
@@ -77,6 +89,7 @@ cor(df,method = "kendall")
 ```{r}
 ggcorrplot::ggcorrplot(
     corr = cor(df,use = "everything",method="pearson") ,
+    lab = T
 )
 ```
 

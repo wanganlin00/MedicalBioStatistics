@@ -19,7 +19,9 @@ df
 
 ```
 
-## 密度图
+## 描述性统计方法
+
+### 密度图
 
 密度图提供了关于分布是否为钟形的视觉判断
 
@@ -30,7 +32,7 @@ ggdensity(df$ctrl, fill = "lightgray") +
            mean(df$ctrl) + 3 * sd(df$ctrl)))
 ```
 
-## Q-Q图
+### Q-Q图
 
 Q-Q图（或分位数-分位数图）绘制给定样本与正态分布之间的相关性。还绘制了一条 45 度参考线。在 QQ 图中，每个观测值都绘制为一个点。如果数据是正常的，则点应形成一条直线。
 
@@ -38,7 +40,19 @@ Q-Q图（或分位数-分位数图）绘制给定样本与正态分布之间的�
 ggqqplot(df$ctrl)
 ```
 
-## **D’Agostino-Pearson Omnibus Test**
+```{r}
+norm <- rnorm(1000,10,3)
+ggqqplot(norm)
+unif <- runif(1000,5,15)
+ggqqplot(unif)
+
+exp <- rexp(1000,1)
+ggqqplot(exp)
+```
+
+## 基于卡方分布
+
+### D’Agostino-Pearson Omnibus Test
 
 [D'Agostino-Pearson test](https://real-statistics.com/tests-normality-and-symmetry/statistical-tests-normality-symmetry/dagostino-pearson-test/)
 
@@ -62,12 +76,25 @@ moments::skewness(df$ctrl,na.rm = T)
 # 总体偏度
 e1071::skewness(df$ctrl,na.rm = T)
 
-
+nortest::pearson.test(df$ctrl)
+nortest::pearson.test(df$trt)
 ```
 
-## Shapiro-Wilk’s test
+### Jarque-Bera正态性检验
 
-Shapiro-Wilk检验而是将数据的实际SD与根据数据的QQ图斜率计算的SD进行比较，并计算其比率。如果数据从高斯分布中采样，则两个值将相似，因此比率将接近1.0，而比率与1相差很大则表明为非正态分布。如果每个值均唯一，则Shapiro-Wilk检验非常有效，但如果几个值均相同，则不那么有效。
+![](images/jarque-bera正态性检验.png){fig-align="center"}
+
+```{r}
+if(!require(tseries)){install.packages('tseries')}
+tseries::jarque.bera.test(df$ctrl)
+tseries::jarque.bera.test(df$trt)
+```
+
+## 基于回归和相关
+
+### Shapiro-Wilk’s test
+
+Shapiro-Wilk检验而是将数据的实际SD与根据数据的QQ图斜率计算的SD进行比较，并计算其比率。如果数据从高斯分布中采样，则两个值将相似，因此比率将接近1.0，而比率与1相差很大则表明为非正态分布。如果每个值均唯一，则Shapiro-Wilk检验非常有效，但如果几个值均相同，则不那么有效。推荐样本量 7\~2000。
 
 这些检验的原假设是“样本分布是正态的”。如果检验显著，则分布为非正态分布。Shapiro-Wilk 方法被广泛推荐用于正态性检验，它提供了比 K-S 更好的功率。 它基于数据与相应的正常分数之间的相关性。
 
@@ -95,26 +122,30 @@ iris %>% shapiro_test(Sepal.Length, Petal.Width)
 mshapiro_test(iris[, 1:3])
 ```
 
-## Kolmogorov-Smirnov (K-S) test with Dallal-Wilkinson-Lilliefors p value
+## 基于经验分布函数（empirical distribution function）
 
-Kolmogorov-Smirnov检验（K-S检验），这是一种非参数检验方法，用于比较一个样本的累积分布函数（CDF）与某个理论CDF的差异。在例子中，检验的是样本 `df$ctrl` 是否来自正态分布，使用的理论CDF是 `pnorm`，即正态分布的累积分布函数。
+### Kolmogorov-Smirnov (K-S) test
 
-不建议使用Kolmogorov-Smirnov检验
+Kolmogorov-Smirnov检验（K-S检验），这是一种非参数检验方法，用于比较一个样本的累积分布函数（CDF）与某个理论CDF的差异。需要指定总体的均值和方差
 
-```{r}
+不建议使用Kolmogorov-Smirnov检验。但在大样本（\>2000）实用
+
+```{r warning=TRUE}
 ks.test(df$ctrl,"pnorm",mean=mean(df$ctrl),sd=sd(df$ctrl))
 ```
 
 在执行单样本Kolmogorov-Smirnov检验时，数据中不应该存在“ties”，即不应该有重复的数值。如果存在重复的数值，它会影响检验的有效性，因为K-S检验对数据中的“ties”敏感。此时，可以考虑使用其他对“ties”不敏感的检验方法，例如Shapiro-Wilk检验或Lilliefors检验。
 
-Lilliefors test 是一个修改版的K-S检验，它使用样本均值和标准差来标准化数据，然后与标准正态分布进行比较
+### Lilliefors test
+
+**Lilliefors test** 是一个修改版的K-S检验，它使用样本均值和标准差来标准化数据，然后与标准正态分布进行比较
 
 ```{r}
 nortest::lillie.test(df$ctrl)
 nortest::lillie.test(df$trt)
 ```
 
-## Anderson-Darling test
+### Anderson-Darling test
 
 Anderson-Darling test 是基于累积分布函数（CDF）的比较，通过计算观测值与理论分布之间的差异程度来评估数据的拟合程度。在R语言中，可以使用 `nortest` 包中的 `ad.test()` 函数来执行此检验291011。此检验的原假设同样是数据服从正态分布，如果p值小于显著性水平，则拒绝原假设，认为数据不服从正态分布。
 
