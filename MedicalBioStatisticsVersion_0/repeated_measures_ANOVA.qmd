@@ -575,6 +575,22 @@ a2
 
 3.  球度校正结果，以防我们无法维持球形度假设。提供了文献中使用的两种常见校正：Greenhouse-Geisser epsilon （GGe） 和 Huynh-Feldt epsilon （HFe） 及其相应的 p 值
 
+```{r}
+library(ez)
+
+# 进行重复测量方差分析
+results <- ezANOVA(data = df_long,
+                   dv = BP,
+                   wid = id,
+                   within = time,
+                   between = group,
+                   detailed = TRUE)
+
+# 查看球形检验结果
+print(results)
+
+```
+
 ### **当满足球形度假设时**
 
 球形度的 Mauchly 检验不显著 （p \> 0.05）;这表明，受试者内因素水平之间的差异方差是相等的。因此，我们可以假设协方差矩阵的球形度，并解释方差分析表中可用的标准输出。
