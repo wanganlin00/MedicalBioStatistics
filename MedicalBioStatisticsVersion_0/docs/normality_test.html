@@ -300,7 +300,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./LME.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">线性混合效应模型</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">线性混合效应</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -387,7 +387,8 @@ window.Quarto = {
 <a href="#%E5%9F%BA%E4%BA%8E%E5%8D%A1%E6%96%B9%E5%88%86%E5%B8%83" id="toc-基于卡方分布" class="nav-link" data-scroll-target="#%E5%9F%BA%E4%BA%8E%E5%8D%A1%E6%96%B9%E5%88%86%E5%B8%83"><span class="header-section-number">7.2</span> 基于卡方分布</a>
   <ul>
 <li><a href="#dagostino-pearson-omnibus-test" id="toc-dagostino-pearson-omnibus-test" class="nav-link" data-scroll-target="#dagostino-pearson-omnibus-test"><span class="header-section-number">7.2.1</span> D’Agostino-Pearson Omnibus Test</a></li>
-  <li><a href="#jarque-bera%E6%AD%A3%E6%80%81%E6%80%A7%E6%A3%80%E9%AA%8C" id="toc-jarque-bera正态性检验" class="nav-link" data-scroll-target="#jarque-bera%E6%AD%A3%E6%80%81%E6%80%A7%E6%A3%80%E9%AA%8C"><span class="header-section-number">7.2.2</span> Jarque-Bera正态性检验</a></li>
+  <li><a href="#jarque-bera-%E6%AD%A3%E6%80%81%E6%80%A7%E6%A3%80%E9%AA%8C" id="toc-jarque-bera-正态性检验" class="nav-link" data-scroll-target="#jarque-bera-%E6%AD%A3%E6%80%81%E6%80%A7%E6%A3%80%E9%AA%8C"><span class="header-section-number">7.2.2</span> Jarque-Bera 正态性检验</a></li>
+  <li><a href="#pearsons-x2-test" id="toc-pearsons-x2-test" class="nav-link" data-scroll-target="#pearsons-x2-test"><span class="header-section-number">7.2.3</span> Pearson’s X2 test</a></li>
   </ul>
 </li>
   <li>
@@ -609,30 +610,22 @@ window.Quarto = {
 <span><span class="co">#&gt; skew = 0.15146, z = 0.31410, p-value = 0.7534</span></span>
 <span><span class="co">#&gt; alternative hypothesis: data have a skewness</span></span>
 <span></span>
-<span><span class="co"># 样本偏度</span></span>
-<span><span class="fu">moments</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/moments/man/skewness.html">skewness</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ctrl</span>,na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] -0.2013992</span></span>
+<span><span class="co"># 样本偏度和峰度</span></span>
+<span><span class="va">skewness</span> <span class="op">&lt;-</span> <span class="fu">moments</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/moments/man/skewness.html">skewness</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ctrl</span>,na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
+<span><span class="va">kurtosis</span> <span class="op">&lt;-</span> <span class="fu">moments</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/moments/man/kurtosis.html">kurtosis</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ctrl</span>,na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
+<span><span class="co"># D'Agostino's K² 检验</span></span>
+<span><span class="va">K2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ctrl</span><span class="op">)</span> <span class="op">*</span> <span class="op">(</span><span class="va">skewness</span><span class="op">^</span><span class="fl">2</span> <span class="op">/</span> <span class="fl">6</span> <span class="op">+</span> <span class="op">(</span><span class="va">kurtosis</span> <span class="op">-</span> <span class="fl">3</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span> <span class="op">/</span> <span class="fl">24</span><span class="op">)</span></span>
+<span><span class="va">p_value</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Chisquare.html">pchisq</a></span><span class="op">(</span><span class="va">K2</span>, df <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># 总体偏度</span></span>
-<span><span class="fu">e1071</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/e1071/man/skewness.html">skewness</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ctrl</span>,na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] -0.1828162</span></span>
-<span></span>
-<span><span class="fu">nortest</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/nortest/man/pearson.test.html">pearson.test</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ctrl</span><span class="op">)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;  Pearson chi-square normality test</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; data:  df$ctrl</span></span>
-<span><span class="co">#&gt; P = 2.375, p-value = 0.6671</span></span>
-<span><span class="fu">nortest</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/nortest/man/pearson.test.html">pearson.test</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">trt</span><span class="op">)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;  Pearson chi-square normality test</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; data:  df$trt</span></span>
-<span><span class="co">#&gt; P = 3.25, p-value = 0.5169</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="va">K2</span></span>
+<span><span class="co">#&gt; [1] 0.8247351</span></span>
+<span><span class="va">p_value</span></span>
+<span><span class="co">#&gt; [1] 0.6620809</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="jarque-bera正态性检验" class="level3" data-number="7.2.2"><h3 data-number="7.2.2" class="anchored" data-anchor-id="jarque-bera正态性检验">
-<span class="header-section-number">7.2.2</span> Jarque-Bera正态性检验</h3>
+</section><section id="jarque-bera-正态性检验" class="level3" data-number="7.2.2"><h3 data-number="7.2.2" class="anchored" data-anchor-id="jarque-bera-正态性检验">
+<span class="header-section-number">7.2.2</span> Jarque-Bera 正态性检验</h3>
+<p>Jarque-Bera检验也是一种基于样本偏度和峰度的正态性检验方法。</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="images/jarque-bera正态性检验.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
@@ -651,6 +644,25 @@ window.Quarto = {
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; data:  df$trt</span></span>
 <span><span class="co">#&gt; X-squared = 0.69681, df = 2, p-value = 0.7058</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section><section id="pearsons-x2-test" class="level3" data-number="7.2.3"><h3 data-number="7.2.3" class="anchored" data-anchor-id="pearsons-x2-test">
+<span class="header-section-number">7.2.3</span> Pearson’s X2 test</h3>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span></span>
+<span><span class="fu">nortest</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/nortest/man/pearson.test.html">pearson.test</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ctrl</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  Pearson chi-square normality test</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; data:  df$ctrl</span></span>
+<span><span class="co">#&gt; P = 2.375, p-value = 0.6671</span></span>
+<span><span class="fu">nortest</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/nortest/man/pearson.test.html">pearson.test</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">trt</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  Pearson chi-square normality test</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; data:  df$trt</span></span>
+<span><span class="co">#&gt; P = 3.25, p-value = 0.5169</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section></section><section id="基于回归和相关" class="level2" data-number="7.3"><h2 data-number="7.3" class="anchored" data-anchor-id="基于回归和相关">
@@ -673,7 +685,28 @@ Note
 </div>
 </div>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/shapiro_test.html">shapiro_test</a></span><span class="op">(</span><span class="va">ctrl</span>,<span class="va">trt</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html">map_df</a></span><span class="op">(</span><span class="va">df</span>,<span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"statistic"</span>,<span class="st">"p.value"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div class="kable-table">
+<table class="caption-top table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0.9607632</td>
+<td style="text-align: right;">0.6756693</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.9655983</td>
+<td style="text-align: right;">0.7632600</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/shapiro_test.html">shapiro_test</a></span><span class="op">(</span><span class="va">ctrl</span>,<span class="va">trt</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
@@ -699,7 +732,7 @@ Note
 </div>
 </div>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ToothGrowth</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ToothGrowth</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">dose</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/shapiro_test.html">shapiro_test</a></span><span class="op">(</span><span class="va">len</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
@@ -736,7 +769,7 @@ Note
 </div>
 </div>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Shapiro Wilk normality test for two variables</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Shapiro Wilk normality test for two variables</span></span>
 <span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/shapiro_test.html">shapiro_test</a></span><span class="op">(</span><span class="va">Sepal.Length</span>, <span class="va">Petal.Width</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div class="kable-table">
@@ -763,7 +796,7 @@ Note
 </div>
 </div>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Multivariate normality test</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Multivariate normality test</span></span>
 <span><span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/shapiro_test.html">mshapiro_test</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div class="kable-table">
@@ -787,7 +820,7 @@ Note
 <p>Kolmogorov-Smirnov检验（K-S检验），这是一种非参数检验方法，用于比较一个样本的累积分布函数（CDF）与某个理论CDF的差异。需要指定总体的均值和方差</p>
 <p>不建议使用Kolmogorov-Smirnov检验。但在大样本（&gt;2000）实用</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/ks.test.html">ks.test</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ctrl</span>,<span class="st">"pnorm"</span>,mean<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ctrl</span><span class="op">)</span>,sd<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ctrl</span><span class="op">)</span><span class="op">)</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/ks.test.html">ks.test</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ctrl</span>,<span class="st">"pnorm"</span>,mean<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ctrl</span><span class="op">)</span>,sd<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ctrl</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning in ks.test.default(df$ctrl, "pnorm", mean = mean(df$ctrl), sd =</span></span>
 <span><span class="co">#&gt; sd(df$ctrl)): ties should not be present for the one-sample Kolmogorov-Smirnov</span></span>
 <span><span class="co">#&gt; test</span></span>
@@ -804,7 +837,7 @@ Note
 <span class="header-section-number">7.4.2</span> Lilliefors test</h3>
 <p><strong>Lilliefors test</strong> 是一个修改版的K-S检验，它使用样本均值和标准差来标准化数据，然后与标准正态分布进行比较</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">nortest</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/nortest/man/lillie.test.html">lillie.test</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ctrl</span><span class="op">)</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">nortest</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/nortest/man/lillie.test.html">lillie.test</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ctrl</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  Lilliefors (Kolmogorov-Smirnov) normality test</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -820,9 +853,9 @@ Note
 </div>
 </section><section id="anderson-darling-test" class="level3" data-number="7.4.3"><h3 data-number="7.4.3" class="anchored" data-anchor-id="anderson-darling-test">
 <span class="header-section-number">7.4.3</span> Anderson-Darling test</h3>
-<p>Anderson-Darling test 是基于累积分布函数（CDF）的比较，通过计算观测值与理论分布之间的差异程度来评估数据的拟合程度。在R语言中，可以使用 <code>nortest</code> 包中的 <code>ad.test()</code> 函数来执行此检验291011。此检验的原假设同样是数据服从正态分布，如果p值小于显著性水平，则拒绝原假设，认为数据不服从正态分布。</p>
+<p>Anderson-Darling test 是基于累积分布函数（CDF）的比较，通过计算观测值与理论分布之间的差异程度来评估数据的拟合程度。在R语言中，可以使用 <code>nortest</code> 包中的 <code>ad.test()</code> 函数来执行此检验291011。此检验的原假设同样是数据服从正态分布，如果p值小于显著性水平，则拒绝原假设，认为数据不服从正态分布。对尾部敏感，适用于中等样本量的数据</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">nortest</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/nortest/man/ad.test.html">ad.test</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ctrl</span><span class="op">)</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">nortest</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/nortest/man/ad.test.html">ad.test</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ctrl</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  Anderson-Darling normality test</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -841,7 +874,7 @@ Note
 <section id="中度偏度-平方根变换" class="level3" data-number="7.5.1"><h3 data-number="7.5.1" class="anchored" data-anchor-id="中度偏度-平方根变换">
 <span class="header-section-number">7.5.1</span> 中度偏度-平方根变换</h3>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.r-project.org">moments</a></span><span class="op">)</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.r-project.org">moments</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/moments/man/skewness.html">skewness</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0.3117531</span></span>
 <span><span class="fu">e1071</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/e1071/man/skewness.html">skewness</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -869,7 +902,7 @@ Note
 <li><p>如果数据与此相反（因变量值随着自变量值的增加而减少得更快）可以考虑<code>square</code>变换</p></li>
 </ul>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpkgs.datanovia.com/ggpubr/">ggpubr</a></span><span class="op">)</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpkgs.datanovia.com/ggpubr/">ggpubr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.r-project.org">moments</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"USJudgeRatings"</span><span class="op">)</span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">USJudgeRatings</span></span>
@@ -1004,30 +1037,30 @@ Note
 </div>
 </div>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Distribution of CONT variable</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Distribution of CONT variable</span></span>
 <span><span class="fu"><a href="https://rpkgs.datanovia.com/ggpubr/reference/ggdensity.html">ggdensity</a></span><span class="op">(</span><span class="va">df</span>, x <span class="op">=</span> <span class="st">"CONT"</span>, fill <span class="op">=</span> <span class="st">"lightgray"</span>, title <span class="op">=</span> <span class="st">"CONT"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">12</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://rpkgs.datanovia.com/ggpubr/reference/stat_overlay_normal_density.html">stat_overlay_normal_density</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"red"</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="normality_test_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="normality_test_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="co"># Distribution of PHYS variable</span></span>
 <span><span class="fu"><a href="https://rpkgs.datanovia.com/ggpubr/reference/ggdensity.html">ggdensity</a></span><span class="op">(</span><span class="va">df</span>, x <span class="op">=</span> <span class="st">"PHYS"</span>, fill <span class="op">=</span> <span class="st">"lightgray"</span>, title <span class="op">=</span> <span class="st">"PHYS"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">12</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://rpkgs.datanovia.com/ggpubr/reference/stat_overlay_normal_density.html">stat_overlay_normal_density</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"red"</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="normality_test_files/figure-html/unnamed-chunk-17-2.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="normality_test_files/figure-html/unnamed-chunk-18-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/moments/man/skewness.html">skewness</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">CONT</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/moments/man/skewness.html">skewness</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">CONT</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 1.085972</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/moments/man/skewness.html">skewness</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">PHYS</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] -1.558215</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1036,7 +1069,7 @@ Note
 </section><section id="box-cox-幂次变换" class="level3" data-number="7.5.5"><h3 data-number="7.5.5" class="anchored" data-anchor-id="box-cox-幂次变换">
 <span class="header-section-number">7.5.5</span> Box-Cox 幂次变换</h3>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">bc</span> <span class="op">&lt;-</span> <span class="fu">car</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/powerTransform.html">powerTransform</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">bc</span> <span class="op">&lt;-</span> <span class="fu">car</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/powerTransform.html">powerTransform</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">bc</span></span>
 <span><span class="co">#&gt; Estimated transformation parameters </span></span>
@@ -1544,230 +1577,242 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb23" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># 正态性检验</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">统计检验与假设</span><span class="co">](https://www.datanovia.com/en/courses/statistical-tests-and-assumptions/)</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rstatix)</span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">ctrl=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">6</span>,<span class="dv">13</span>,<span class="dv">5</span>,<span class="dv">8</span>,<span class="dv">9</span>,<span class="dv">12</span>,<span class="dv">11</span>,<span class="dv">8</span>,<span class="dv">10</span>,<span class="dv">12</span>,<span class="dv">14</span>,<span class="dv">13</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">4</span>),</span>
-<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">trt=</span><span class="fu">c</span>(<span class="dv">8</span>,<span class="dv">6</span>,<span class="dv">8</span>,<span class="dv">9</span>,<span class="dv">12</span>,<span class="dv">12</span>,<span class="dv">14</span>,<span class="dv">15</span>,<span class="dv">16</span>,<span class="dv">17</span>,<span class="dv">14</span>,<span class="dv">12</span>,<span class="dv">11</span>,<span class="dv">8</span>,<span class="dv">10</span>,<span class="dv">10</span>)</span>
-<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>df</span>
-<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a><span class="fu">## 描述性统计方法</span></span>
-<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a><span class="fu">### 密度图</span></span>
-<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a>密度图提供了关于分布是否为钟形的视觉判断</span>
-<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-34"><a href="#cb23-34" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb23-35"><a href="#cb23-35" aria-hidden="true" tabindex="-1"></a><span class="fu">ggdensity</span>(df<span class="sc">$</span>ctrl, <span class="at">fill =</span> <span class="st">"lightgray"</span>) <span class="sc">+</span></span>
-<span id="cb23-36"><a href="#cb23-36" aria-hidden="true" tabindex="-1"></a>   <span class="co">#  stat_overlay_normal_density(color = "red", linetype = "dashed")+</span></span>
-<span id="cb23-37"><a href="#cb23-37" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlim</span>(<span class="fu">c</span>(<span class="fu">mean</span>(df<span class="sc">$</span>ctrl) <span class="sc">-</span> <span class="dv">3</span> <span class="sc">*</span> <span class="fu">sd</span>(df<span class="sc">$</span>ctrl), </span>
-<span id="cb23-38"><a href="#cb23-38" aria-hidden="true" tabindex="-1"></a>           <span class="fu">mean</span>(df<span class="sc">$</span>ctrl) <span class="sc">+</span> <span class="dv">3</span> <span class="sc">*</span> <span class="fu">sd</span>(df<span class="sc">$</span>ctrl)))</span>
-<span id="cb23-39"><a href="#cb23-39" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb23-40"><a href="#cb23-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-41"><a href="#cb23-41" aria-hidden="true" tabindex="-1"></a><span class="fu">### Q-Q图</span></span>
-<span id="cb23-42"><a href="#cb23-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-43"><a href="#cb23-43" aria-hidden="true" tabindex="-1"></a>Q-Q图（或分位数-分位数图）绘制给定样本与正态分布之间的相关性。还绘制了一条 45 度参考线。在 QQ 图中，每个观测值都绘制为一个点。如果数据是正常的，则点应形成一条直线。</span>
-<span id="cb23-44"><a href="#cb23-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-47"><a href="#cb23-47" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb23-48"><a href="#cb23-48" aria-hidden="true" tabindex="-1"></a><span class="fu">ggqqplot</span>(df<span class="sc">$</span>ctrl)</span>
-<span id="cb23-49"><a href="#cb23-49" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb23-50"><a href="#cb23-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-53"><a href="#cb23-53" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb23-54"><a href="#cb23-54" aria-hidden="true" tabindex="-1"></a>norm <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>,<span class="dv">10</span>,<span class="dv">3</span>)</span>
-<span id="cb23-55"><a href="#cb23-55" aria-hidden="true" tabindex="-1"></a><span class="fu">ggqqplot</span>(norm)</span>
-<span id="cb23-56"><a href="#cb23-56" aria-hidden="true" tabindex="-1"></a>unif <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1000</span>,<span class="dv">5</span>,<span class="dv">15</span>)</span>
-<span id="cb23-57"><a href="#cb23-57" aria-hidden="true" tabindex="-1"></a><span class="fu">ggqqplot</span>(unif)</span>
-<span id="cb23-58"><a href="#cb23-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-59"><a href="#cb23-59" aria-hidden="true" tabindex="-1"></a>exp <span class="ot">&lt;-</span> <span class="fu">rexp</span>(<span class="dv">1000</span>,<span class="dv">1</span>)</span>
-<span id="cb23-60"><a href="#cb23-60" aria-hidden="true" tabindex="-1"></a><span class="fu">ggqqplot</span>(exp)</span>
-<span id="cb23-61"><a href="#cb23-61" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb23-62"><a href="#cb23-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-63"><a href="#cb23-63" aria-hidden="true" tabindex="-1"></a><span class="fu">## 基于卡方分布</span></span>
-<span id="cb23-64"><a href="#cb23-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-65"><a href="#cb23-65" aria-hidden="true" tabindex="-1"></a><span class="fu">### D’Agostino-Pearson Omnibus Test</span></span>
-<span id="cb23-66"><a href="#cb23-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-67"><a href="#cb23-67" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">D'Agostino-Pearson test</span><span class="co">](https://real-statistics.com/tests-normality-and-symmetry/statistical-tests-normality-symmetry/dagostino-pearson-test/)</span></span>
-<span id="cb23-68"><a href="#cb23-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-69"><a href="#cb23-69" aria-hidden="true" tabindex="-1"></a>D'Agostino-Pearson 综合检验 是基于数据的偏度和峰度来评估数据是否接近正态分布的。</span>
-<span id="cb23-70"><a href="#cb23-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-71"><a href="#cb23-71" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/clipboard-3873541098.png)</span></span>
-<span id="cb23-72"><a href="#cb23-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-73"><a href="#cb23-73" aria-hidden="true" tabindex="-1"></a>首先计算偏斜度和峰度，以量化分布在不对称性和形状方面与高斯分布的差距。然后，其计算这些值中的每一个与高斯分布的预期值之间的差异，并基于这些差异的总和，计算各P值。这是一种通用和强大的正态性检验，通常推荐使用。但值得注意的是，该建议也有例外。具体而言，当该分布的偏度和峰度非常接近正态分布的偏度和峰度，但肯定是非正态分布时，该检验将无法将该分布确定为非正态分布。</span>
-<span id="cb23-74"><a href="#cb23-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-75"><a href="#cb23-75" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/D'Agostino-Pearson用形状评估正态性.png)</span>{fig-align="center"}</span>
-<span id="cb23-76"><a href="#cb23-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-77"><a href="#cb23-77" aria-hidden="true" tabindex="-1"></a>在R语言中，可以使用 <span class="in">`moments`</span> 包中的 <span class="in">`agostino.test()`</span> 函数来执行此检验。此检验的原假设是数据来自正态分布，如果检验的p值小于显著性水平（通常是0.05），则可以拒绝原假设，认为数据不服从正态分布。</span>
-<span id="cb23-78"><a href="#cb23-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-81"><a href="#cb23-81" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb23-82"><a href="#cb23-82" aria-hidden="true" tabindex="-1"></a>moments<span class="sc">::</span><span class="fu">agostino.test</span>(df<span class="sc">$</span>ctrl)</span>
-<span id="cb23-83"><a href="#cb23-83" aria-hidden="true" tabindex="-1"></a>moments<span class="sc">::</span><span class="fu">agostino.test</span>(df<span class="sc">$</span>trt)</span>
-<span id="cb23-84"><a href="#cb23-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-85"><a href="#cb23-85" aria-hidden="true" tabindex="-1"></a><span class="co"># 样本偏度</span></span>
-<span id="cb23-86"><a href="#cb23-86" aria-hidden="true" tabindex="-1"></a>moments<span class="sc">::</span><span class="fu">skewness</span>(df<span class="sc">$</span>ctrl,<span class="at">na.rm =</span> T)</span>
-<span id="cb23-87"><a href="#cb23-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-88"><a href="#cb23-88" aria-hidden="true" tabindex="-1"></a><span class="co"># 总体偏度</span></span>
-<span id="cb23-89"><a href="#cb23-89" aria-hidden="true" tabindex="-1"></a>e1071<span class="sc">::</span><span class="fu">skewness</span>(df<span class="sc">$</span>ctrl,<span class="at">na.rm =</span> T)</span>
-<span id="cb23-90"><a href="#cb23-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-91"><a href="#cb23-91" aria-hidden="true" tabindex="-1"></a>nortest<span class="sc">::</span><span class="fu">pearson.test</span>(df<span class="sc">$</span>ctrl)</span>
-<span id="cb23-92"><a href="#cb23-92" aria-hidden="true" tabindex="-1"></a>nortest<span class="sc">::</span><span class="fu">pearson.test</span>(df<span class="sc">$</span>trt)</span>
-<span id="cb23-93"><a href="#cb23-93" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb23-94"><a href="#cb23-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-95"><a href="#cb23-95" aria-hidden="true" tabindex="-1"></a><span class="fu">### Jarque-Bera正态性检验</span></span>
-<span id="cb23-96"><a href="#cb23-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-97"><a href="#cb23-97" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/jarque-bera正态性检验.png)</span>{fig-align="center"}</span>
-<span id="cb23-98"><a href="#cb23-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-101"><a href="#cb23-101" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb23-102"><a href="#cb23-102" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(tseries)){<span class="fu">install.packages</span>(<span class="st">'tseries'</span>)}</span>
-<span id="cb23-103"><a href="#cb23-103" aria-hidden="true" tabindex="-1"></a>tseries<span class="sc">::</span><span class="fu">jarque.bera.test</span>(df<span class="sc">$</span>ctrl)</span>
-<span id="cb23-104"><a href="#cb23-104" aria-hidden="true" tabindex="-1"></a>tseries<span class="sc">::</span><span class="fu">jarque.bera.test</span>(df<span class="sc">$</span>trt)</span>
-<span id="cb23-105"><a href="#cb23-105" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb23-106"><a href="#cb23-106" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-107"><a href="#cb23-107" aria-hidden="true" tabindex="-1"></a><span class="fu">## 基于回归和相关</span></span>
-<span id="cb23-108"><a href="#cb23-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-109"><a href="#cb23-109" aria-hidden="true" tabindex="-1"></a><span class="fu">### Shapiro-Wilk’s test</span></span>
-<span id="cb23-110"><a href="#cb23-110" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-111"><a href="#cb23-111" aria-hidden="true" tabindex="-1"></a>Shapiro-Wilk检验而是将数据的实际SD与根据数据的QQ图斜率计算的SD进行比较，并计算其比率。如果数据从高斯分布中采样，则两个值将相似，因此比率将接近1.0，而比率与1相差很大则表明为非正态分布。如果每个值均唯一，则Shapiro-Wilk检验非常有效，但如果几个值均相同，则不那么有效。推荐样本量 7\~2000。</span>
-<span id="cb23-112"><a href="#cb23-112" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-113"><a href="#cb23-113" aria-hidden="true" tabindex="-1"></a>这些检验的原假设是“样本分布是正态的”。如果检验显著，则分布为非正态分布。Shapiro-Wilk 方法被广泛推荐用于正态性检验，它提供了比 K-S 更好的功率。 它基于数据与相应的正常分数之间的相关性。</span>
-<span id="cb23-114"><a href="#cb23-114" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-115"><a href="#cb23-115" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
-<span id="cb23-116"><a href="#cb23-116" aria-hidden="true" tabindex="-1"></a>正态性检验对样本量很敏感。小样本通常通过正态性检验。因此，为了做出正确的决定，将图示法和显著性检验结合起来是很重要的。如果样本数量大于 50，则首选正态 QQ 图，因为在较大的样本量下，Shapiro-Wilk 检验变得非常敏感，即使与正态的微小偏差也是如此。</span>
-<span id="cb23-117"><a href="#cb23-117" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb23-118"><a href="#cb23-118" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-121"><a href="#cb23-121" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb23-122"><a href="#cb23-122" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">shapiro_test</span>(ctrl,trt)</span>
-<span id="cb23-123"><a href="#cb23-123" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb23-124"><a href="#cb23-124" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-127"><a href="#cb23-127" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb23-128"><a href="#cb23-128" aria-hidden="true" tabindex="-1"></a>ToothGrowth <span class="sc">%&gt;%</span></span>
-<span id="cb23-129"><a href="#cb23-129" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(dose) <span class="sc">%&gt;%</span></span>
-<span id="cb23-130"><a href="#cb23-130" aria-hidden="true" tabindex="-1"></a>  <span class="fu">shapiro_test</span>(len)</span>
-<span id="cb23-131"><a href="#cb23-131" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb23-132"><a href="#cb23-132" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-135"><a href="#cb23-135" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb23-136"><a href="#cb23-136" aria-hidden="true" tabindex="-1"></a><span class="co"># Shapiro Wilk normality test for two variables</span></span>
-<span id="cb23-137"><a href="#cb23-137" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> <span class="fu">shapiro_test</span>(Sepal.Length, Petal.Width)</span>
-<span id="cb23-138"><a href="#cb23-138" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb23-139"><a href="#cb23-139" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-142"><a href="#cb23-142" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb23-143"><a href="#cb23-143" aria-hidden="true" tabindex="-1"></a><span class="co"># Multivariate normality test</span></span>
-<span id="cb23-144"><a href="#cb23-144" aria-hidden="true" tabindex="-1"></a><span class="fu">mshapiro_test</span>(iris[, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>])</span>
-<span id="cb23-145"><a href="#cb23-145" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb23-146"><a href="#cb23-146" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-147"><a href="#cb23-147" aria-hidden="true" tabindex="-1"></a><span class="fu">## 基于经验分布函数（empirical distribution function）</span></span>
-<span id="cb23-148"><a href="#cb23-148" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-149"><a href="#cb23-149" aria-hidden="true" tabindex="-1"></a><span class="fu">### Kolmogorov-Smirnov (K-S) test</span></span>
-<span id="cb23-150"><a href="#cb23-150" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-151"><a href="#cb23-151" aria-hidden="true" tabindex="-1"></a>Kolmogorov-Smirnov检验（K-S检验），这是一种非参数检验方法，用于比较一个样本的累积分布函数（CDF）与某个理论CDF的差异。需要指定总体的均值和方差</span>
-<span id="cb23-152"><a href="#cb23-152" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-153"><a href="#cb23-153" aria-hidden="true" tabindex="-1"></a>不建议使用Kolmogorov-Smirnov检验。但在大样本（<span class="sc">\&gt;</span>2000）实用</span>
-<span id="cb23-154"><a href="#cb23-154" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-155"><a href="#cb23-155" aria-hidden="true" tabindex="-1"></a><span class="in">```{r warning=TRUE}</span></span>
-<span id="cb23-156"><a href="#cb23-156" aria-hidden="true" tabindex="-1"></a><span class="in">ks.test(df$ctrl,"pnorm",mean=mean(df$ctrl),sd=sd(df$ctrl))</span></span>
-<span id="cb23-157"><a href="#cb23-157" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb23-158"><a href="#cb23-158" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-159"><a href="#cb23-159" aria-hidden="true" tabindex="-1"></a>在执行单样本Kolmogorov-Smirnov检验时，数据中不应该存在“ties”，即不应该有重复的数值。如果存在重复的数值，它会影响检验的有效性，因为K-S检验对数据中的“ties”敏感。此时，可以考虑使用其他对“ties”不敏感的检验方法，例如Shapiro-Wilk检验或Lilliefors检验。</span>
-<span id="cb23-160"><a href="#cb23-160" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-161"><a href="#cb23-161" aria-hidden="true" tabindex="-1"></a><span class="fu">### Lilliefors test</span></span>
-<span id="cb23-162"><a href="#cb23-162" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-163"><a href="#cb23-163" aria-hidden="true" tabindex="-1"></a>**Lilliefors test** 是一个修改版的K-S检验，它使用样本均值和标准差来标准化数据，然后与标准正态分布进行比较</span>
-<span id="cb23-164"><a href="#cb23-164" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-167"><a href="#cb23-167" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb23-168"><a href="#cb23-168" aria-hidden="true" tabindex="-1"></a>nortest<span class="sc">::</span><span class="fu">lillie.test</span>(df<span class="sc">$</span>ctrl)</span>
-<span id="cb23-169"><a href="#cb23-169" aria-hidden="true" tabindex="-1"></a>nortest<span class="sc">::</span><span class="fu">lillie.test</span>(df<span class="sc">$</span>trt)</span>
-<span id="cb23-170"><a href="#cb23-170" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb23-171"><a href="#cb23-171" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-172"><a href="#cb23-172" aria-hidden="true" tabindex="-1"></a><span class="fu">### Anderson-Darling test</span></span>
-<span id="cb23-173"><a href="#cb23-173" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-174"><a href="#cb23-174" aria-hidden="true" tabindex="-1"></a>Anderson-Darling test 是基于累积分布函数（CDF）的比较，通过计算观测值与理论分布之间的差异程度来评估数据的拟合程度。在R语言中，可以使用 <span class="in">`nortest`</span> 包中的 <span class="in">`ad.test()`</span> 函数来执行此检验291011。此检验的原假设同样是数据服从正态分布，如果p值小于显著性水平，则拒绝原假设，认为数据不服从正态分布。</span>
-<span id="cb23-175"><a href="#cb23-175" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-178"><a href="#cb23-178" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb23-179"><a href="#cb23-179" aria-hidden="true" tabindex="-1"></a>nortest<span class="sc">::</span><span class="fu">ad.test</span>(df<span class="sc">$</span>ctrl)</span>
-<span id="cb23-180"><a href="#cb23-180" aria-hidden="true" tabindex="-1"></a>nortest<span class="sc">::</span><span class="fu">ad.test</span>(df<span class="sc">$</span>trt)</span>
-<span id="cb23-181"><a href="#cb23-181" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb23-182"><a href="#cb23-182" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-183"><a href="#cb23-183" aria-hidden="true" tabindex="-1"></a><span class="fu">## 数据变换</span></span>
-<span id="cb23-184"><a href="#cb23-184" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-185"><a href="#cb23-185" aria-hidden="true" tabindex="-1"></a><span class="fu">### 中度偏度-平方根变换</span></span>
-<span id="cb23-186"><a href="#cb23-186" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-189"><a href="#cb23-189" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb23-190"><a href="#cb23-190" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(moments)</span>
-<span id="cb23-191"><a href="#cb23-191" aria-hidden="true" tabindex="-1"></a><span class="fu">skewness</span>(iris<span class="sc">$</span>Sepal.Length, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb23-192"><a href="#cb23-192" aria-hidden="true" tabindex="-1"></a>e1071<span class="sc">::</span><span class="fu">skewness</span>(iris<span class="sc">$</span>Sepal.Length, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb23-193"><a href="#cb23-193" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb23-194"><a href="#cb23-194" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-195"><a href="#cb23-195" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`sqrt(x)`</span>对于正偏态数据，</span>
-<span id="cb23-196"><a href="#cb23-196" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-197"><a href="#cb23-197" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`sqrt(max(x+1) - x)`</span>对于负偏态数据</span>
-<span id="cb23-198"><a href="#cb23-198" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-199"><a href="#cb23-199" aria-hidden="true" tabindex="-1"></a><span class="fu">### 更偏态-对数变换</span></span>
-<span id="cb23-200"><a href="#cb23-200" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-201"><a href="#cb23-201" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`log10(x)`</span>对于正偏态数据，</span>
-<span id="cb23-202"><a href="#cb23-202" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-203"><a href="#cb23-203" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`log10(max(x+1) - x)`</span>对于负偏态数据</span>
-<span id="cb23-204"><a href="#cb23-204" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-205"><a href="#cb23-205" aria-hidden="true" tabindex="-1"></a><span class="fu">### 非常偏态-倒数</span></span>
-<span id="cb23-206"><a href="#cb23-206" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-207"><a href="#cb23-207" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`1/x`</span>对于正偏态数据</span>
-<span id="cb23-208"><a href="#cb23-208" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-209"><a href="#cb23-209" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`1/(max(x+1) - x)`</span>对于负偏态数据</span>
-<span id="cb23-210"><a href="#cb23-210" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-211"><a href="#cb23-211" aria-hidden="true" tabindex="-1"></a><span class="fu">### 线性度和异方差性</span></span>
-<span id="cb23-212"><a href="#cb23-212" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-213"><a href="#cb23-213" aria-hidden="true" tabindex="-1"></a>Linearity and heteroscedasticity</span>
-<span id="cb23-214"><a href="#cb23-214" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-215"><a href="#cb23-215" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>首先，在因变量随着自变量值的增加而开始更快地增加的情况下尝试<span class="in">`log`</span> 变换</span>
-<span id="cb23-216"><a href="#cb23-216" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-217"><a href="#cb23-217" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>如果数据与此相反（因变量值随着自变量值的增加而减少得更快）可以考虑<span class="in">`square`</span>变换</span>
-<span id="cb23-218"><a href="#cb23-218" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-221"><a href="#cb23-221" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb23-222"><a href="#cb23-222" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
-<span id="cb23-223"><a href="#cb23-223" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(moments)</span>
-<span id="cb23-224"><a href="#cb23-224" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"USJudgeRatings"</span>)</span>
-<span id="cb23-225"><a href="#cb23-225" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> USJudgeRatings</span>
-<span id="cb23-226"><a href="#cb23-226" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span>
-<span id="cb23-227"><a href="#cb23-227" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-228"><a href="#cb23-228" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb23-229"><a href="#cb23-229" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-232"><a href="#cb23-232" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb23-233"><a href="#cb23-233" aria-hidden="true" tabindex="-1"></a><span class="co"># Distribution of CONT variable</span></span>
-<span id="cb23-234"><a href="#cb23-234" aria-hidden="true" tabindex="-1"></a><span class="fu">ggdensity</span>(df, <span class="at">x =</span> <span class="st">"CONT"</span>, <span class="at">fill =</span> <span class="st">"lightgray"</span>, <span class="at">title =</span> <span class="st">"CONT"</span>) <span class="sc">+</span></span>
-<span id="cb23-235"><a href="#cb23-235" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">12</span>)) <span class="sc">+</span></span>
-<span id="cb23-236"><a href="#cb23-236" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_overlay_normal_density</span>(<span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>)</span>
-<span id="cb23-237"><a href="#cb23-237" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-238"><a href="#cb23-238" aria-hidden="true" tabindex="-1"></a><span class="co"># Distribution of PHYS variable</span></span>
-<span id="cb23-239"><a href="#cb23-239" aria-hidden="true" tabindex="-1"></a><span class="fu">ggdensity</span>(df, <span class="at">x =</span> <span class="st">"PHYS"</span>, <span class="at">fill =</span> <span class="st">"lightgray"</span>, <span class="at">title =</span> <span class="st">"PHYS"</span>) <span class="sc">+</span></span>
-<span id="cb23-240"><a href="#cb23-240" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">12</span>)) <span class="sc">+</span></span>
-<span id="cb23-241"><a href="#cb23-241" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_overlay_normal_density</span>(<span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>)</span>
-<span id="cb23-242"><a href="#cb23-242" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb23-243"><a href="#cb23-243" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-246"><a href="#cb23-246" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb23-247"><a href="#cb23-247" aria-hidden="true" tabindex="-1"></a><span class="fu">skewness</span>(df<span class="sc">$</span>CONT, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb23-248"><a href="#cb23-248" aria-hidden="true" tabindex="-1"></a><span class="fu">skewness</span>(df<span class="sc">$</span>PHYS, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb23-249"><a href="#cb23-249" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb23-250"><a href="#cb23-250" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-251"><a href="#cb23-251" aria-hidden="true" tabindex="-1"></a><span class="fu">### Box-Cox 幂次变换</span></span>
-<span id="cb23-252"><a href="#cb23-252" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-255"><a href="#cb23-255" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb23-256"><a href="#cb23-256" aria-hidden="true" tabindex="-1"></a>bc <span class="ot">&lt;-</span> car<span class="sc">::</span><span class="fu">powerTransform</span>(df)</span>
-<span id="cb23-257"><a href="#cb23-257" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-258"><a href="#cb23-258" aria-hidden="true" tabindex="-1"></a>bc</span>
-<span id="cb23-259"><a href="#cb23-259" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(bc)</span>
-<span id="cb23-260"><a href="#cb23-260" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<div class="sourceCode" id="cb25" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># 正态性检验</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">统计检验与假设</span><span class="co">](https://www.datanovia.com/en/courses/statistical-tests-and-assumptions/)</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rstatix)</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">ctrl=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">6</span>,<span class="dv">13</span>,<span class="dv">5</span>,<span class="dv">8</span>,<span class="dv">9</span>,<span class="dv">12</span>,<span class="dv">11</span>,<span class="dv">8</span>,<span class="dv">10</span>,<span class="dv">12</span>,<span class="dv">14</span>,<span class="dv">13</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">4</span>),</span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">trt=</span><span class="fu">c</span>(<span class="dv">8</span>,<span class="dv">6</span>,<span class="dv">8</span>,<span class="dv">9</span>,<span class="dv">12</span>,<span class="dv">12</span>,<span class="dv">14</span>,<span class="dv">15</span>,<span class="dv">16</span>,<span class="dv">17</span>,<span class="dv">14</span>,<span class="dv">12</span>,<span class="dv">11</span>,<span class="dv">8</span>,<span class="dv">10</span>,<span class="dv">10</span>)</span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>df</span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a><span class="fu">## 描述性统计方法</span></span>
+<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a><span class="fu">### 密度图</span></span>
+<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a>密度图提供了关于分布是否为钟形的视觉判断</span>
+<span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-34"><a href="#cb25-34" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-35"><a href="#cb25-35" aria-hidden="true" tabindex="-1"></a><span class="fu">ggdensity</span>(df<span class="sc">$</span>ctrl, <span class="at">fill =</span> <span class="st">"lightgray"</span>) <span class="sc">+</span></span>
+<span id="cb25-36"><a href="#cb25-36" aria-hidden="true" tabindex="-1"></a>   <span class="co">#  stat_overlay_normal_density(color = "red", linetype = "dashed")+</span></span>
+<span id="cb25-37"><a href="#cb25-37" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlim</span>(<span class="fu">c</span>(<span class="fu">mean</span>(df<span class="sc">$</span>ctrl) <span class="sc">-</span> <span class="dv">3</span> <span class="sc">*</span> <span class="fu">sd</span>(df<span class="sc">$</span>ctrl), </span>
+<span id="cb25-38"><a href="#cb25-38" aria-hidden="true" tabindex="-1"></a>           <span class="fu">mean</span>(df<span class="sc">$</span>ctrl) <span class="sc">+</span> <span class="dv">3</span> <span class="sc">*</span> <span class="fu">sd</span>(df<span class="sc">$</span>ctrl)))</span>
+<span id="cb25-39"><a href="#cb25-39" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-40"><a href="#cb25-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-41"><a href="#cb25-41" aria-hidden="true" tabindex="-1"></a><span class="fu">### Q-Q图</span></span>
+<span id="cb25-42"><a href="#cb25-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-43"><a href="#cb25-43" aria-hidden="true" tabindex="-1"></a>Q-Q图（或分位数-分位数图）绘制给定样本与正态分布之间的相关性。还绘制了一条 45 度参考线。在 QQ 图中，每个观测值都绘制为一个点。如果数据是正常的，则点应形成一条直线。</span>
+<span id="cb25-44"><a href="#cb25-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-47"><a href="#cb25-47" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-48"><a href="#cb25-48" aria-hidden="true" tabindex="-1"></a><span class="fu">ggqqplot</span>(df<span class="sc">$</span>ctrl)</span>
+<span id="cb25-49"><a href="#cb25-49" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-50"><a href="#cb25-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-53"><a href="#cb25-53" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-54"><a href="#cb25-54" aria-hidden="true" tabindex="-1"></a>norm <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>,<span class="dv">10</span>,<span class="dv">3</span>)</span>
+<span id="cb25-55"><a href="#cb25-55" aria-hidden="true" tabindex="-1"></a><span class="fu">ggqqplot</span>(norm)</span>
+<span id="cb25-56"><a href="#cb25-56" aria-hidden="true" tabindex="-1"></a>unif <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1000</span>,<span class="dv">5</span>,<span class="dv">15</span>)</span>
+<span id="cb25-57"><a href="#cb25-57" aria-hidden="true" tabindex="-1"></a><span class="fu">ggqqplot</span>(unif)</span>
+<span id="cb25-58"><a href="#cb25-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-59"><a href="#cb25-59" aria-hidden="true" tabindex="-1"></a>exp <span class="ot">&lt;-</span> <span class="fu">rexp</span>(<span class="dv">1000</span>,<span class="dv">1</span>)</span>
+<span id="cb25-60"><a href="#cb25-60" aria-hidden="true" tabindex="-1"></a><span class="fu">ggqqplot</span>(exp)</span>
+<span id="cb25-61"><a href="#cb25-61" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-62"><a href="#cb25-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-63"><a href="#cb25-63" aria-hidden="true" tabindex="-1"></a><span class="fu">## 基于卡方分布</span></span>
+<span id="cb25-64"><a href="#cb25-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-65"><a href="#cb25-65" aria-hidden="true" tabindex="-1"></a><span class="fu">### D’Agostino-Pearson Omnibus Test</span></span>
+<span id="cb25-66"><a href="#cb25-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-67"><a href="#cb25-67" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">D'Agostino-Pearson test</span><span class="co">](https://real-statistics.com/tests-normality-and-symmetry/statistical-tests-normality-symmetry/dagostino-pearson-test/)</span></span>
+<span id="cb25-68"><a href="#cb25-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-69"><a href="#cb25-69" aria-hidden="true" tabindex="-1"></a>D'Agostino-Pearson 综合检验 是基于数据的偏度和峰度来评估数据是否接近正态分布的。</span>
+<span id="cb25-70"><a href="#cb25-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-71"><a href="#cb25-71" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/clipboard-3873541098.png)</span></span>
+<span id="cb25-72"><a href="#cb25-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-73"><a href="#cb25-73" aria-hidden="true" tabindex="-1"></a>首先计算偏斜度和峰度，以量化分布在不对称性和形状方面与高斯分布的差距。然后，其计算这些值中的每一个与高斯分布的预期值之间的差异，并基于这些差异的总和，计算各P值。这是一种通用和强大的正态性检验，通常推荐使用。但值得注意的是，该建议也有例外。具体而言，当该分布的偏度和峰度非常接近正态分布的偏度和峰度，但肯定是非正态分布时，该检验将无法将该分布确定为非正态分布。</span>
+<span id="cb25-74"><a href="#cb25-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-75"><a href="#cb25-75" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/D'Agostino-Pearson用形状评估正态性.png)</span>{fig-align="center"}</span>
+<span id="cb25-76"><a href="#cb25-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-77"><a href="#cb25-77" aria-hidden="true" tabindex="-1"></a>在R语言中，可以使用 <span class="in">`moments`</span> 包中的 <span class="in">`agostino.test()`</span> 函数来执行此检验。此检验的原假设是数据来自正态分布，如果检验的p值小于显著性水平（通常是0.05），则可以拒绝原假设，认为数据不服从正态分布。</span>
+<span id="cb25-78"><a href="#cb25-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-81"><a href="#cb25-81" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-82"><a href="#cb25-82" aria-hidden="true" tabindex="-1"></a>moments<span class="sc">::</span><span class="fu">agostino.test</span>(df<span class="sc">$</span>ctrl)</span>
+<span id="cb25-83"><a href="#cb25-83" aria-hidden="true" tabindex="-1"></a>moments<span class="sc">::</span><span class="fu">agostino.test</span>(df<span class="sc">$</span>trt)</span>
+<span id="cb25-84"><a href="#cb25-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-85"><a href="#cb25-85" aria-hidden="true" tabindex="-1"></a><span class="co"># 样本偏度和峰度</span></span>
+<span id="cb25-86"><a href="#cb25-86" aria-hidden="true" tabindex="-1"></a>skewness <span class="ot">&lt;-</span> moments<span class="sc">::</span><span class="fu">skewness</span>(df<span class="sc">$</span>ctrl,<span class="at">na.rm =</span> T)</span>
+<span id="cb25-87"><a href="#cb25-87" aria-hidden="true" tabindex="-1"></a>kurtosis <span class="ot">&lt;-</span> moments<span class="sc">::</span><span class="fu">kurtosis</span>(df<span class="sc">$</span>ctrl,<span class="at">na.rm =</span> T)</span>
+<span id="cb25-88"><a href="#cb25-88" aria-hidden="true" tabindex="-1"></a><span class="co"># D'Agostino's K² 检验</span></span>
+<span id="cb25-89"><a href="#cb25-89" aria-hidden="true" tabindex="-1"></a>K2 <span class="ot">&lt;-</span> <span class="fu">length</span>(df<span class="sc">$</span>ctrl) <span class="sc">*</span> (skewness<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> <span class="dv">6</span> <span class="sc">+</span> (kurtosis <span class="sc">-</span> <span class="dv">3</span>)<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> <span class="dv">24</span>)</span>
+<span id="cb25-90"><a href="#cb25-90" aria-hidden="true" tabindex="-1"></a>p_value <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pchisq</span>(K2, <span class="at">df =</span> <span class="dv">2</span>)</span>
+<span id="cb25-91"><a href="#cb25-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-92"><a href="#cb25-92" aria-hidden="true" tabindex="-1"></a>K2</span>
+<span id="cb25-93"><a href="#cb25-93" aria-hidden="true" tabindex="-1"></a>p_value</span>
+<span id="cb25-94"><a href="#cb25-94" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-95"><a href="#cb25-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-96"><a href="#cb25-96" aria-hidden="true" tabindex="-1"></a><span class="fu">### Jarque-Bera 正态性检验</span></span>
+<span id="cb25-97"><a href="#cb25-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-98"><a href="#cb25-98" aria-hidden="true" tabindex="-1"></a>Jarque-Bera检验也是一种基于样本偏度和峰度的正态性检验方法。</span>
+<span id="cb25-99"><a href="#cb25-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-100"><a href="#cb25-100" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/jarque-bera正态性检验.png)</span>{fig-align="center"}</span>
+<span id="cb25-101"><a href="#cb25-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-104"><a href="#cb25-104" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-105"><a href="#cb25-105" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(tseries)){<span class="fu">install.packages</span>(<span class="st">'tseries'</span>)}</span>
+<span id="cb25-106"><a href="#cb25-106" aria-hidden="true" tabindex="-1"></a>tseries<span class="sc">::</span><span class="fu">jarque.bera.test</span>(df<span class="sc">$</span>ctrl)</span>
+<span id="cb25-107"><a href="#cb25-107" aria-hidden="true" tabindex="-1"></a>tseries<span class="sc">::</span><span class="fu">jarque.bera.test</span>(df<span class="sc">$</span>trt)</span>
+<span id="cb25-108"><a href="#cb25-108" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-109"><a href="#cb25-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-110"><a href="#cb25-110" aria-hidden="true" tabindex="-1"></a><span class="fu">### Pearson's X2 test</span></span>
+<span id="cb25-111"><a href="#cb25-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-114"><a href="#cb25-114" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-115"><a href="#cb25-115" aria-hidden="true" tabindex="-1"></a>nortest<span class="sc">::</span><span class="fu">pearson.test</span>(df<span class="sc">$</span>ctrl)</span>
+<span id="cb25-116"><a href="#cb25-116" aria-hidden="true" tabindex="-1"></a>nortest<span class="sc">::</span><span class="fu">pearson.test</span>(df<span class="sc">$</span>trt)</span>
+<span id="cb25-117"><a href="#cb25-117" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-118"><a href="#cb25-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-119"><a href="#cb25-119" aria-hidden="true" tabindex="-1"></a><span class="fu">## 基于回归和相关</span></span>
+<span id="cb25-120"><a href="#cb25-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-121"><a href="#cb25-121" aria-hidden="true" tabindex="-1"></a><span class="fu">### Shapiro-Wilk’s test</span></span>
+<span id="cb25-122"><a href="#cb25-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-123"><a href="#cb25-123" aria-hidden="true" tabindex="-1"></a>Shapiro-Wilk检验而是将数据的实际SD与根据数据的QQ图斜率计算的SD进行比较，并计算其比率。如果数据从高斯分布中采样，则两个值将相似，因此比率将接近1.0，而比率与1相差很大则表明为非正态分布。如果每个值均唯一，则Shapiro-Wilk检验非常有效，但如果几个值均相同，则不那么有效。推荐样本量 7\~2000。</span>
+<span id="cb25-124"><a href="#cb25-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-125"><a href="#cb25-125" aria-hidden="true" tabindex="-1"></a>这些检验的原假设是“样本分布是正态的”。如果检验显著，则分布为非正态分布。Shapiro-Wilk 方法被广泛推荐用于正态性检验，它提供了比 K-S 更好的功率。 它基于数据与相应的正常分数之间的相关性。</span>
+<span id="cb25-126"><a href="#cb25-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-127"><a href="#cb25-127" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
+<span id="cb25-128"><a href="#cb25-128" aria-hidden="true" tabindex="-1"></a>正态性检验对样本量很敏感。小样本通常通过正态性检验。因此，为了做出正确的决定，将图示法和显著性检验结合起来是很重要的。如果样本数量大于 50，则首选正态 QQ 图，因为在较大的样本量下，Shapiro-Wilk 检验变得非常敏感，即使与正态的微小偏差也是如此。</span>
+<span id="cb25-129"><a href="#cb25-129" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-130"><a href="#cb25-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-133"><a href="#cb25-133" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-134"><a href="#cb25-134" aria-hidden="true" tabindex="-1"></a><span class="fu">map_df</span>(df,<span class="sc">~</span> <span class="fu">shapiro.test</span>(.x)[<span class="fu">c</span>(<span class="st">"statistic"</span>,<span class="st">"p.value"</span>)])</span>
+<span id="cb25-135"><a href="#cb25-135" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">shapiro_test</span>(ctrl,trt)</span>
+<span id="cb25-136"><a href="#cb25-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-137"><a href="#cb25-137" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-138"><a href="#cb25-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-141"><a href="#cb25-141" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-142"><a href="#cb25-142" aria-hidden="true" tabindex="-1"></a>ToothGrowth <span class="sc">%&gt;%</span></span>
+<span id="cb25-143"><a href="#cb25-143" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(dose) <span class="sc">%&gt;%</span></span>
+<span id="cb25-144"><a href="#cb25-144" aria-hidden="true" tabindex="-1"></a>  <span class="fu">shapiro_test</span>(len)</span>
+<span id="cb25-145"><a href="#cb25-145" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-146"><a href="#cb25-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-149"><a href="#cb25-149" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-150"><a href="#cb25-150" aria-hidden="true" tabindex="-1"></a><span class="co"># Shapiro Wilk normality test for two variables</span></span>
+<span id="cb25-151"><a href="#cb25-151" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> <span class="fu">shapiro_test</span>(Sepal.Length, Petal.Width)</span>
+<span id="cb25-152"><a href="#cb25-152" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-153"><a href="#cb25-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-156"><a href="#cb25-156" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-157"><a href="#cb25-157" aria-hidden="true" tabindex="-1"></a><span class="co"># Multivariate normality test</span></span>
+<span id="cb25-158"><a href="#cb25-158" aria-hidden="true" tabindex="-1"></a><span class="fu">mshapiro_test</span>(iris[, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>])</span>
+<span id="cb25-159"><a href="#cb25-159" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-160"><a href="#cb25-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-161"><a href="#cb25-161" aria-hidden="true" tabindex="-1"></a><span class="fu">## 基于经验分布函数（empirical distribution function）</span></span>
+<span id="cb25-162"><a href="#cb25-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-163"><a href="#cb25-163" aria-hidden="true" tabindex="-1"></a><span class="fu">### Kolmogorov-Smirnov (K-S) test</span></span>
+<span id="cb25-164"><a href="#cb25-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-165"><a href="#cb25-165" aria-hidden="true" tabindex="-1"></a>Kolmogorov-Smirnov检验（K-S检验），这是一种非参数检验方法，用于比较一个样本的累积分布函数（CDF）与某个理论CDF的差异。需要指定总体的均值和方差</span>
+<span id="cb25-166"><a href="#cb25-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-167"><a href="#cb25-167" aria-hidden="true" tabindex="-1"></a>不建议使用Kolmogorov-Smirnov检验。但在大样本（<span class="sc">\&gt;</span>2000）实用</span>
+<span id="cb25-168"><a href="#cb25-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-169"><a href="#cb25-169" aria-hidden="true" tabindex="-1"></a><span class="in">```{r warning=TRUE}</span></span>
+<span id="cb25-170"><a href="#cb25-170" aria-hidden="true" tabindex="-1"></a><span class="in">ks.test(df$ctrl,"pnorm",mean=mean(df$ctrl),sd=sd(df$ctrl))</span></span>
+<span id="cb25-171"><a href="#cb25-171" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-172"><a href="#cb25-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-173"><a href="#cb25-173" aria-hidden="true" tabindex="-1"></a>在执行单样本Kolmogorov-Smirnov检验时，数据中不应该存在“ties”，即不应该有重复的数值。如果存在重复的数值，它会影响检验的有效性，因为K-S检验对数据中的“ties”敏感。此时，可以考虑使用其他对“ties”不敏感的检验方法，例如Shapiro-Wilk检验或Lilliefors检验。</span>
+<span id="cb25-174"><a href="#cb25-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-175"><a href="#cb25-175" aria-hidden="true" tabindex="-1"></a><span class="fu">### Lilliefors test</span></span>
+<span id="cb25-176"><a href="#cb25-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-177"><a href="#cb25-177" aria-hidden="true" tabindex="-1"></a>**Lilliefors test** 是一个修改版的K-S检验，它使用样本均值和标准差来标准化数据，然后与标准正态分布进行比较</span>
+<span id="cb25-178"><a href="#cb25-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-181"><a href="#cb25-181" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-182"><a href="#cb25-182" aria-hidden="true" tabindex="-1"></a>nortest<span class="sc">::</span><span class="fu">lillie.test</span>(df<span class="sc">$</span>ctrl)</span>
+<span id="cb25-183"><a href="#cb25-183" aria-hidden="true" tabindex="-1"></a>nortest<span class="sc">::</span><span class="fu">lillie.test</span>(df<span class="sc">$</span>trt)</span>
+<span id="cb25-184"><a href="#cb25-184" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-185"><a href="#cb25-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-186"><a href="#cb25-186" aria-hidden="true" tabindex="-1"></a><span class="fu">### Anderson-Darling test</span></span>
+<span id="cb25-187"><a href="#cb25-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-188"><a href="#cb25-188" aria-hidden="true" tabindex="-1"></a>Anderson-Darling test 是基于累积分布函数（CDF）的比较，通过计算观测值与理论分布之间的差异程度来评估数据的拟合程度。在R语言中，可以使用 <span class="in">`nortest`</span> 包中的 <span class="in">`ad.test()`</span> 函数来执行此检验291011。此检验的原假设同样是数据服从正态分布，如果p值小于显著性水平，则拒绝原假设，认为数据不服从正态分布。对尾部敏感，适用于中等样本量的数据</span>
+<span id="cb25-189"><a href="#cb25-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-192"><a href="#cb25-192" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-193"><a href="#cb25-193" aria-hidden="true" tabindex="-1"></a>nortest<span class="sc">::</span><span class="fu">ad.test</span>(df<span class="sc">$</span>ctrl)</span>
+<span id="cb25-194"><a href="#cb25-194" aria-hidden="true" tabindex="-1"></a>nortest<span class="sc">::</span><span class="fu">ad.test</span>(df<span class="sc">$</span>trt)</span>
+<span id="cb25-195"><a href="#cb25-195" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-196"><a href="#cb25-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-197"><a href="#cb25-197" aria-hidden="true" tabindex="-1"></a><span class="fu">## 数据变换</span></span>
+<span id="cb25-198"><a href="#cb25-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-199"><a href="#cb25-199" aria-hidden="true" tabindex="-1"></a><span class="fu">### 中度偏度-平方根变换</span></span>
+<span id="cb25-200"><a href="#cb25-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-203"><a href="#cb25-203" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-204"><a href="#cb25-204" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(moments)</span>
+<span id="cb25-205"><a href="#cb25-205" aria-hidden="true" tabindex="-1"></a><span class="fu">skewness</span>(iris<span class="sc">$</span>Sepal.Length, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb25-206"><a href="#cb25-206" aria-hidden="true" tabindex="-1"></a>e1071<span class="sc">::</span><span class="fu">skewness</span>(iris<span class="sc">$</span>Sepal.Length, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb25-207"><a href="#cb25-207" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-208"><a href="#cb25-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-209"><a href="#cb25-209" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`sqrt(x)`</span>对于正偏态数据，</span>
+<span id="cb25-210"><a href="#cb25-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-211"><a href="#cb25-211" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`sqrt(max(x+1) - x)`</span>对于负偏态数据</span>
+<span id="cb25-212"><a href="#cb25-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-213"><a href="#cb25-213" aria-hidden="true" tabindex="-1"></a><span class="fu">### 更偏态-对数变换</span></span>
+<span id="cb25-214"><a href="#cb25-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-215"><a href="#cb25-215" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`log10(x)`</span>对于正偏态数据，</span>
+<span id="cb25-216"><a href="#cb25-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-217"><a href="#cb25-217" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`log10(max(x+1) - x)`</span>对于负偏态数据</span>
+<span id="cb25-218"><a href="#cb25-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-219"><a href="#cb25-219" aria-hidden="true" tabindex="-1"></a><span class="fu">### 非常偏态-倒数</span></span>
+<span id="cb25-220"><a href="#cb25-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-221"><a href="#cb25-221" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`1/x`</span>对于正偏态数据</span>
+<span id="cb25-222"><a href="#cb25-222" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-223"><a href="#cb25-223" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`1/(max(x+1) - x)`</span>对于负偏态数据</span>
+<span id="cb25-224"><a href="#cb25-224" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-225"><a href="#cb25-225" aria-hidden="true" tabindex="-1"></a><span class="fu">### 线性度和异方差性</span></span>
+<span id="cb25-226"><a href="#cb25-226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-227"><a href="#cb25-227" aria-hidden="true" tabindex="-1"></a>Linearity and heteroscedasticity</span>
+<span id="cb25-228"><a href="#cb25-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-229"><a href="#cb25-229" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>首先，在因变量随着自变量值的增加而开始更快地增加的情况下尝试<span class="in">`log`</span> 变换</span>
+<span id="cb25-230"><a href="#cb25-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-231"><a href="#cb25-231" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>如果数据与此相反（因变量值随着自变量值的增加而减少得更快）可以考虑<span class="in">`square`</span>变换</span>
+<span id="cb25-232"><a href="#cb25-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-235"><a href="#cb25-235" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-236"><a href="#cb25-236" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
+<span id="cb25-237"><a href="#cb25-237" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(moments)</span>
+<span id="cb25-238"><a href="#cb25-238" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"USJudgeRatings"</span>)</span>
+<span id="cb25-239"><a href="#cb25-239" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> USJudgeRatings</span>
+<span id="cb25-240"><a href="#cb25-240" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span>
+<span id="cb25-241"><a href="#cb25-241" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-242"><a href="#cb25-242" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-243"><a href="#cb25-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-246"><a href="#cb25-246" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-247"><a href="#cb25-247" aria-hidden="true" tabindex="-1"></a><span class="co"># Distribution of CONT variable</span></span>
+<span id="cb25-248"><a href="#cb25-248" aria-hidden="true" tabindex="-1"></a><span class="fu">ggdensity</span>(df, <span class="at">x =</span> <span class="st">"CONT"</span>, <span class="at">fill =</span> <span class="st">"lightgray"</span>, <span class="at">title =</span> <span class="st">"CONT"</span>) <span class="sc">+</span></span>
+<span id="cb25-249"><a href="#cb25-249" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">12</span>)) <span class="sc">+</span></span>
+<span id="cb25-250"><a href="#cb25-250" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_overlay_normal_density</span>(<span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>)</span>
+<span id="cb25-251"><a href="#cb25-251" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-252"><a href="#cb25-252" aria-hidden="true" tabindex="-1"></a><span class="co"># Distribution of PHYS variable</span></span>
+<span id="cb25-253"><a href="#cb25-253" aria-hidden="true" tabindex="-1"></a><span class="fu">ggdensity</span>(df, <span class="at">x =</span> <span class="st">"PHYS"</span>, <span class="at">fill =</span> <span class="st">"lightgray"</span>, <span class="at">title =</span> <span class="st">"PHYS"</span>) <span class="sc">+</span></span>
+<span id="cb25-254"><a href="#cb25-254" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">12</span>)) <span class="sc">+</span></span>
+<span id="cb25-255"><a href="#cb25-255" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_overlay_normal_density</span>(<span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>)</span>
+<span id="cb25-256"><a href="#cb25-256" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-257"><a href="#cb25-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-260"><a href="#cb25-260" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-261"><a href="#cb25-261" aria-hidden="true" tabindex="-1"></a><span class="fu">skewness</span>(df<span class="sc">$</span>CONT, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb25-262"><a href="#cb25-262" aria-hidden="true" tabindex="-1"></a><span class="fu">skewness</span>(df<span class="sc">$</span>PHYS, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb25-263"><a href="#cb25-263" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-264"><a href="#cb25-264" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-265"><a href="#cb25-265" aria-hidden="true" tabindex="-1"></a><span class="fu">### Box-Cox 幂次变换</span></span>
+<span id="cb25-266"><a href="#cb25-266" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-269"><a href="#cb25-269" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-270"><a href="#cb25-270" aria-hidden="true" tabindex="-1"></a>bc <span class="ot">&lt;-</span> car<span class="sc">::</span><span class="fu">powerTransform</span>(df)</span>
+<span id="cb25-271"><a href="#cb25-271" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-272"><a href="#cb25-272" aria-hidden="true" tabindex="-1"></a>bc</span>
+<span id="cb25-273"><a href="#cb25-273" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(bc)</span>
+<span id="cb25-274"><a href="#cb25-274" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

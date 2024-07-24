@@ -300,7 +300,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./LME.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">线性混合效应模型</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">线性混合效应</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -395,7 +395,8 @@ window.Quarto = {
   <li><a href="#%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86-%E5%A4%A7%E6%A0%B7%E6%9C%AC%E9%87%8F-z%E6%A3%80%E9%AA%8C" id="toc-中心极限定理-大样本量-z检验" class="nav-link" data-scroll-target="#%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86-%E5%A4%A7%E6%A0%B7%E6%9C%AC%E9%87%8F-z%E6%A3%80%E9%AA%8C"><span class="header-section-number">9.5.4</span> 中心极限定理 大样本量—— Z检验</a></li>
   </ul>
 </li>
-  <li><a href="#%E5%8A%9F%E6%95%88%E5%88%86%E6%9E%90" id="toc-功效分析" class="nav-link" data-scroll-target="#%E5%8A%9F%E6%95%88%E5%88%86%E6%9E%90"><span class="header-section-number">9.6</span> 功效分析</a></li>
+  <li><a href="#%E6%89%B9%E9%87%8Ft%E6%A3%80%E9%AA%8C" id="toc-批量t检验" class="nav-link" data-scroll-target="#%E6%89%B9%E9%87%8Ft%E6%A3%80%E9%AA%8C"><span class="header-section-number">9.6</span> 批量t检验</a></li>
+  <li><a href="#%E5%8A%9F%E6%95%88%E5%88%86%E6%9E%90" id="toc-功效分析" class="nav-link" data-scroll-target="#%E5%8A%9F%E6%95%88%E5%88%86%E6%9E%90"><span class="header-section-number">9.7</span> 功效分析</a></li>
   </ul></nav>
     </div>
 <!-- main -->
@@ -419,9 +420,24 @@ window.Quarto = {
 </header><section id="假设" class="level2" data-number="9.1"><h2 data-number="9.1" class="anchored" data-anchor-id="假设">
 <span class="header-section-number">9.1</span> 假设</h2>
 <ol type="1">
-<li><p><strong>正态性假设</strong> (Normality): 两组数据都应来自正态分布的总体。<strong>对于大样本（通常 n &gt; 30），由于中心极限定理，即使原始数据不完全符合正态分布，t检验也可能是稳健的</strong>。</p></li>
-<li><p><strong>方差齐性假设</strong> (Homoscedasticity): 两组数据的方差应该相等。如果方差不相等，可能需要使用 Welch’s t-test，它不假设方差齐性。</p></li>
-<li><p><strong>独立性假设</strong> (Independence): 样本中的观测应该是相互独立的。这意味着一个观测的值不应该影响另一个观测的值。</p></li>
+<li>
+<p><strong>正态性假设 (Normality)</strong>：</p>
+<ul>
+<li>两组数据应来自正态分布的总体。对于大样本（通常 n &gt; 30），由于中心极限定理，即使数据不完全符合正态分布，t 检验通常仍然稳健。</li>
+</ul>
+</li>
+<li>
+<p><strong>方差齐性假设 (Homoscedasticity)</strong>：</p>
+<ul>
+<li>两组数据的方差应该相等。如果方差不相等，需使用 Welch’s t-test，它不假设方差齐性。</li>
+</ul>
+</li>
+<li>
+<p><strong>独立性假设 (Independence)</strong>：</p>
+<ul>
+<li>样本中的观测应相互独立，一个观测的值不应影响另一个观测的值。</li>
+</ul>
+</li>
 </ol></section><section id="t检验类型" class="level2" data-number="9.2"><h2 data-number="9.2" class="anchored" data-anchor-id="t检验类型">
 <span class="header-section-number">9.2</span> t检验类型</h2>
 <ul>
@@ -741,8 +757,10 @@ v'=\frac{(\frac{S_1^2}{n_1}+\frac{S_2^2}{n_2})^2}{\frac{(\frac{S_1^2}{n_1})^2}{n
 Z=\frac{(\bar X_1-\bar X_2)-(\mu_1-\mu_2)}{\sqrt{\frac{\sigma^2_1}{n_1}+\frac{\sigma^2_2}{n_2}}}=\frac{\bar X_1-\bar X_2}{\sqrt{\frac{\sigma^2_1}{n_1}+\frac{\sigma^2_2}{n_2}}}\dot\sim N(0,1)
 \]</span></p>
 <p>实际应用中，总体方差未知，使用t 检验，提供了对总体方差不确定性的自然估计。</p>
-</section></section><section id="功效分析" class="level2" data-number="9.6"><h2 data-number="9.6" class="anchored" data-anchor-id="功效分析">
-<span class="header-section-number">9.6</span> 功效分析</h2>
+</section></section><section id="批量t检验" class="level2" data-number="9.6"><h2 data-number="9.6" class="anchored" data-anchor-id="批量t检验">
+<span class="header-section-number">9.6</span> 批量t检验</h2>
+</section><section id="功效分析" class="level2" data-number="9.7"><h2 data-number="9.7" class="anchored" data-anchor-id="功效分析">
+<span class="header-section-number">9.7</span> 功效分析</h2>
 <p>功效(power) <span class="math inline">\(1-β\approx\Phi(-z_{1-\alpha/2}+\frac{|\mu_1-\mu_2|}{\sqrt {\sigma_1^2/n_1+\sigma_2^2/n_2}})\)</span></p>
 <p>样本量</p>
 <ol type="1">
@@ -1236,280 +1254,288 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">## 假设</span></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>**正态性假设** (Normality): 两组数据都应来自正态分布的总体。**对于大样本（通常 n \&gt; 30），由于中心极限定理，即使原始数据不完全符合正态分布，t检验也可能是稳健的**。</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>**正态性假设 (Normality)**：</span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>**方差齐性假设** (Homoscedasticity): 两组数据的方差应该相等。如果方差不相等，可能需要使用 Welch's t-test，它不假设方差齐性。</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>两组数据应来自正态分布的总体。对于大样本（通常 n <span class="sc">\&gt;</span> 30），由于中心极限定理，即使数据不完全符合正态分布，t 检验通常仍然稳健。</span>
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>**独立性假设** (Independence): 样本中的观测应该是相互独立的。这意味着一个观测的值不应该影响另一个观测的值。</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>**方差齐性假设 (Homoscedasticity)**：</span>
 <span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="fu">## t检验类型</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>两组数据的方差应该相等。如果方差不相等，需使用 Welch's t-test，它不假设方差齐性。</span>
 <span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**单样本t检验** (One-sample t-test): 用于比较单个样本的均值与已知的总体均值之间的差异。</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>**独立性假设 (Independence)**：</span>
 <span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**独立样本t检验** (Independent samples t-test): 用于比较两个独立样本的均值差异。</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>样本中的观测应相互独立，一个观测的值不应影响另一个观测的值。</span>
 <span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**配对样本t检验** (Paired samples t-test): 用于比较同一组受试者在两个不同条件下的均值差异。</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="fu">## t检验类型</span></span>
 <span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">10</span>,<span class="dv">10</span>) <span class="sc">+</span></span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_function</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">color=</span><span class="st">"normal Distribution"</span>),</span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>                  <span class="at">fun =</span> dnorm, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>                   )<span class="sc">+</span></span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_function</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">color=</span><span class="st">"t Distribution"</span>),</span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>                  <span class="at">fun =</span> dt, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">df =</span> <span class="dv">1</span> ,<span class="at">ncp=</span><span class="dv">0</span>), </span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>                 )<span class="sc">+</span></span>
-<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"normal Distribution"</span> <span class="ot">=</span> <span class="st">"red"</span>,</span>
-<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"t Distribution"</span> <span class="ot">=</span> <span class="st">"blue"</span>))<span class="sc">+</span></span>
-<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">color =</span> <span class="st">"Distribution"</span>)</span>
-<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>t 检验（Student‘s t test），主要用于小样本（n<span class="sc">\&lt;</span>30），标准差未知的正态分布总体。在进行t检验之前，可以先通过正态性检验 <span class="in">`shapiro.test()`</span></span>
-<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a><span class="fu">## 单样本 t 检验</span></span>
-<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>在数据符合正态分布的前提下使用单样本t-test来比较一组样本的均值和已知(理论/总体)均值，所谓的已知均值能来自于之前的实验数据或者理论值。根据研究问题(原假设)的不同又分为双尾(不等)和单尾检验(大于或者小于)</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**单样本t检验** (One-sample t-test): 用于比较单个样本的均值与已知的总体均值之间的差异。</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**独立样本t检验** (Independent samples t-test): 用于比较两个独立样本的均值差异。</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**配对样本t检验** (Paired samples t-test): 用于比较同一组受试者在两个不同条件下的均值差异。</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">10</span>,<span class="dv">10</span>) <span class="sc">+</span></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_function</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">color=</span><span class="st">"normal Distribution"</span>),</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>                  <span class="at">fun =</span> dnorm, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>                   )<span class="sc">+</span></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_function</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">color=</span><span class="st">"t Distribution"</span>),</span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>                  <span class="at">fun =</span> dt, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">df =</span> <span class="dv">1</span> ,<span class="at">ncp=</span><span class="dv">0</span>), </span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>                 )<span class="sc">+</span></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"normal Distribution"</span> <span class="ot">=</span> <span class="st">"red"</span>,</span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"t Distribution"</span> <span class="ot">=</span> <span class="st">"blue"</span>))<span class="sc">+</span></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">color =</span> <span class="st">"Distribution"</span>)</span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>$$t=\frac{\bar X-\mu_0}{S /\sqrt n} \sim t(\nu=n-1) $$</span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>t 检验（Student‘s t test），主要用于小样本（n<span class="sc">\&lt;</span>30），标准差未知的正态分布总体。在进行t检验之前，可以先通过正态性检验 <span class="in">`shapiro.test()`</span></span>
 <span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>它是一种参数检验，用于检验样本均值是否可以合理地为总体均值或特定值。</span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a><span class="fu">## 单样本 t 检验</span></span>
 <span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a>x<span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(PlantGrowth,group<span class="sc">==</span><span class="st">"ctrl"</span>)</span>
-<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(x<span class="sc">$</span>weight)</span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>在数据符合正态分布的前提下使用单样本t-test来比较一组样本的均值和已知(理论/总体)均值，所谓的已知均值能来自于之前的实验数据或者理论值。根据研究问题(原假设)的不同又分为双尾(不等)和单尾检验(大于或者小于)</span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a>$$t=\frac{\bar X-\mu_0}{S /\sqrt n} \sim t(\nu=n-1) $$</span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a>它是一种参数检验，用于检验样本均值是否可以合理地为总体均值或特定值。</span>
 <span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(x<span class="sc">$</span>weight)</span>
-<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(x<span class="sc">$</span>weight, <span class="at">mu=</span><span class="dv">5</span>)</span>
-<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a>t_test_two_sided <span class="ot">&lt;-</span> <span class="cf">function</span>(data,mu,<span class="at">level=</span><span class="fl">0.95</span>,...){</span>
-<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb9-59"><a href="#cb9-59" aria-hidden="true" tabindex="-1"></a>    bar_X <span class="ot">&lt;-</span> <span class="fu">mean</span>(data,<span class="at">na.rm =</span> T)</span>
-<span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a>    sd <span class="ot">&lt;-</span> <span class="fu">sd</span>(data, <span class="at">na.rm =</span> T)</span>
-<span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a>    n<span class="ot">=</span><span class="fu">length</span>(data)</span>
-<span id="cb9-62"><a href="#cb9-62" aria-hidden="true" tabindex="-1"></a>    se<span class="ot">=</span>sd<span class="sc">/</span><span class="fu">sqrt</span>(n)</span>
-<span id="cb9-63"><a href="#cb9-63" aria-hidden="true" tabindex="-1"></a>    t_statistic <span class="ot">&lt;-</span> (bar_X<span class="sc">-</span>mu)<span class="sc">/</span>se</span>
-<span id="cb9-64"><a href="#cb9-64" aria-hidden="true" tabindex="-1"></a>    p_value <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span><span class="fu">pt</span>(<span class="fu">abs</span>(t_statistic),<span class="at">df=</span>n<span class="dv">-1</span>))</span>
-<span id="cb9-65"><a href="#cb9-65" aria-hidden="true" tabindex="-1"></a>    t_critical <span class="ot">&lt;-</span> <span class="fu">qt</span>((<span class="dv">1</span><span class="sc">-</span>(<span class="dv">1</span><span class="sc">-</span>level)<span class="sc">/</span><span class="dv">2</span>),<span class="at">df =</span> n<span class="dv">-1</span>)</span>
-<span id="cb9-66"><a href="#cb9-66" aria-hidden="true" tabindex="-1"></a>    CI_lower <span class="ot">&lt;-</span> bar_X <span class="sc">-</span> t_critical <span class="sc">*</span> se</span>
-<span id="cb9-67"><a href="#cb9-67" aria-hidden="true" tabindex="-1"></a>    CI_upper <span class="ot">&lt;-</span> bar_X<span class="sc">+</span> t_critical <span class="sc">*</span> se</span>
-<span id="cb9-68"><a href="#cb9-68" aria-hidden="true" tabindex="-1"></a>    CI <span class="ot">&lt;-</span> <span class="fu">paste0</span>(level<span class="sc">*</span><span class="dv">100</span>,<span class="st">"%置信区间: "</span>,<span class="st">"["</span>,CI_lower,<span class="st">","</span>,CI_upper,<span class="st">"]"</span>,<span class="at">sep =</span> <span class="st">""</span>)</span>
-<span id="cb9-69"><a href="#cb9-69" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb9-70"><a href="#cb9-70" aria-hidden="true" tabindex="-1"></a>    output <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb9-71"><a href="#cb9-71" aria-hidden="true" tabindex="-1"></a>        均值<span class="ot">=</span>bar_X,</span>
-<span id="cb9-72"><a href="#cb9-72" aria-hidden="true" tabindex="-1"></a>        标准差<span class="ot">=</span>sd,</span>
-<span id="cb9-73"><a href="#cb9-73" aria-hidden="true" tabindex="-1"></a>        标准误<span class="ot">=</span>se,</span>
-<span id="cb9-74"><a href="#cb9-74" aria-hidden="true" tabindex="-1"></a>        <span class="at">t=</span>t_statistic,</span>
-<span id="cb9-75"><a href="#cb9-75" aria-hidden="true" tabindex="-1"></a>        <span class="at">df=</span>n<span class="dv">-1</span>,</span>
-<span id="cb9-76"><a href="#cb9-76" aria-hidden="true" tabindex="-1"></a>        <span class="at">p_value=</span>p_value,</span>
-<span id="cb9-77"><a href="#cb9-77" aria-hidden="true" tabindex="-1"></a>        <span class="at">CI=</span>CI</span>
-<span id="cb9-78"><a href="#cb9-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-79"><a href="#cb9-79" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb9-80"><a href="#cb9-80" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(output)</span>
-<span id="cb9-81"><a href="#cb9-81" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb9-82"><a href="#cb9-82" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb9-83"><a href="#cb9-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a>x<span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(PlantGrowth,group<span class="sc">==</span><span class="st">"ctrl"</span>)</span>
+<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(x<span class="sc">$</span>weight)</span>
+<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(x<span class="sc">$</span>weight)</span>
+<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(x<span class="sc">$</span>weight, <span class="at">mu=</span><span class="dv">5</span>)</span>
+<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-59"><a href="#cb9-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-62"><a href="#cb9-62" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb9-63"><a href="#cb9-63" aria-hidden="true" tabindex="-1"></a>t_test_two_sided <span class="ot">&lt;-</span> <span class="cf">function</span>(data,mu,<span class="at">level=</span><span class="fl">0.95</span>,...){</span>
+<span id="cb9-64"><a href="#cb9-64" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-65"><a href="#cb9-65" aria-hidden="true" tabindex="-1"></a>    bar_X <span class="ot">&lt;-</span> <span class="fu">mean</span>(data,<span class="at">na.rm =</span> T)</span>
+<span id="cb9-66"><a href="#cb9-66" aria-hidden="true" tabindex="-1"></a>    sd <span class="ot">&lt;-</span> <span class="fu">sd</span>(data, <span class="at">na.rm =</span> T)</span>
+<span id="cb9-67"><a href="#cb9-67" aria-hidden="true" tabindex="-1"></a>    n<span class="ot">=</span><span class="fu">length</span>(data)</span>
+<span id="cb9-68"><a href="#cb9-68" aria-hidden="true" tabindex="-1"></a>    se<span class="ot">=</span>sd<span class="sc">/</span><span class="fu">sqrt</span>(n)</span>
+<span id="cb9-69"><a href="#cb9-69" aria-hidden="true" tabindex="-1"></a>    t_statistic <span class="ot">&lt;-</span> (bar_X<span class="sc">-</span>mu)<span class="sc">/</span>se</span>
+<span id="cb9-70"><a href="#cb9-70" aria-hidden="true" tabindex="-1"></a>    p_value <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span><span class="fu">pt</span>(<span class="fu">abs</span>(t_statistic),<span class="at">df=</span>n<span class="dv">-1</span>))</span>
+<span id="cb9-71"><a href="#cb9-71" aria-hidden="true" tabindex="-1"></a>    t_critical <span class="ot">&lt;-</span> <span class="fu">qt</span>((<span class="dv">1</span><span class="sc">-</span>(<span class="dv">1</span><span class="sc">-</span>level)<span class="sc">/</span><span class="dv">2</span>),<span class="at">df =</span> n<span class="dv">-1</span>)</span>
+<span id="cb9-72"><a href="#cb9-72" aria-hidden="true" tabindex="-1"></a>    CI_lower <span class="ot">&lt;-</span> bar_X <span class="sc">-</span> t_critical <span class="sc">*</span> se</span>
+<span id="cb9-73"><a href="#cb9-73" aria-hidden="true" tabindex="-1"></a>    CI_upper <span class="ot">&lt;-</span> bar_X<span class="sc">+</span> t_critical <span class="sc">*</span> se</span>
+<span id="cb9-74"><a href="#cb9-74" aria-hidden="true" tabindex="-1"></a>    CI <span class="ot">&lt;-</span> <span class="fu">paste0</span>(level<span class="sc">*</span><span class="dv">100</span>,<span class="st">"%置信区间: "</span>,<span class="st">"["</span>,CI_lower,<span class="st">","</span>,CI_upper,<span class="st">"]"</span>,<span class="at">sep =</span> <span class="st">""</span>)</span>
+<span id="cb9-75"><a href="#cb9-75" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-76"><a href="#cb9-76" aria-hidden="true" tabindex="-1"></a>    output <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb9-77"><a href="#cb9-77" aria-hidden="true" tabindex="-1"></a>        均值<span class="ot">=</span>bar_X,</span>
+<span id="cb9-78"><a href="#cb9-78" aria-hidden="true" tabindex="-1"></a>        标准差<span class="ot">=</span>sd,</span>
+<span id="cb9-79"><a href="#cb9-79" aria-hidden="true" tabindex="-1"></a>        标准误<span class="ot">=</span>se,</span>
+<span id="cb9-80"><a href="#cb9-80" aria-hidden="true" tabindex="-1"></a>        <span class="at">t=</span>t_statistic,</span>
+<span id="cb9-81"><a href="#cb9-81" aria-hidden="true" tabindex="-1"></a>        <span class="at">df=</span>n<span class="dv">-1</span>,</span>
+<span id="cb9-82"><a href="#cb9-82" aria-hidden="true" tabindex="-1"></a>        <span class="at">p_value=</span>p_value,</span>
+<span id="cb9-83"><a href="#cb9-83" aria-hidden="true" tabindex="-1"></a>        <span class="at">CI=</span>CI</span>
 <span id="cb9-84"><a href="#cb9-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-85"><a href="#cb9-85" aria-hidden="true" tabindex="-1"></a><span class="fu">t_test_two_sided</span>(x<span class="sc">$</span>weight,<span class="at">mu =</span> <span class="dv">5</span>)</span>
-<span id="cb9-86"><a href="#cb9-86" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-87"><a href="#cb9-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-88"><a href="#cb9-88" aria-hidden="true" tabindex="-1"></a><span class="fu">## 配对样本t检验</span></span>
+<span id="cb9-85"><a href="#cb9-85" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb9-86"><a href="#cb9-86" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(output)</span>
+<span id="cb9-87"><a href="#cb9-87" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-88"><a href="#cb9-88" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb9-89"><a href="#cb9-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-90"><a href="#cb9-90" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb9-91"><a href="#cb9-91" aria-hidden="true" tabindex="-1"></a>H_0:\mu_{\bar d}=0</span>
-<span id="cb9-92"><a href="#cb9-92" aria-hidden="true" tabindex="-1"></a>$$ $$</span>
-<span id="cb9-93"><a href="#cb9-93" aria-hidden="true" tabindex="-1"></a>t=\frac{\bar d- \mu_{\bar d}}{S_d /\sqrt n} \sim t(\nu) </span>
-<span id="cb9-94"><a href="#cb9-94" aria-hidden="true" tabindex="-1"></a>$$ 其中$d= X_2-X_1,\mu_{\bar d}=0$。</span>
+<span id="cb9-90"><a href="#cb9-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-91"><a href="#cb9-91" aria-hidden="true" tabindex="-1"></a><span class="fu">t_test_two_sided</span>(x<span class="sc">$</span>weight,<span class="at">mu =</span> <span class="dv">5</span>)</span>
+<span id="cb9-92"><a href="#cb9-92" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-93"><a href="#cb9-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-94"><a href="#cb9-94" aria-hidden="true" tabindex="-1"></a><span class="fu">## 配对样本t检验</span></span>
 <span id="cb9-95"><a href="#cb9-95" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-98"><a href="#cb9-98" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb9-99"><a href="#cb9-99" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
-<span id="cb9-100"><a href="#cb9-100" aria-hidden="true" tabindex="-1"></a>    <span class="sc">~</span>id,<span class="sc">~</span>baseline,<span class="sc">~</span>ten_days_later,<span class="sc">~</span>d,</span>
-<span id="cb9-101"><a href="#cb9-101" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span>,<span class="fl">58.27</span>,<span class="fl">120.61</span>,<span class="fl">62.34</span>,</span>
-<span id="cb9-102"><a href="#cb9-102" aria-hidden="true" tabindex="-1"></a>    <span class="dv">2</span>,<span class="fl">59.51</span>,<span class="fl">126.33</span>,<span class="fl">66.82</span>,</span>
-<span id="cb9-103"><a href="#cb9-103" aria-hidden="true" tabindex="-1"></a>    <span class="dv">3</span>,<span class="fl">53.84</span>,<span class="fl">108.35</span>,<span class="fl">54.51</span>,</span>
-<span id="cb9-104"><a href="#cb9-104" aria-hidden="true" tabindex="-1"></a>    <span class="dv">4</span>,<span class="fl">54.70</span>,<span class="fl">139.99</span>,<span class="fl">85.29</span>,</span>
-<span id="cb9-105"><a href="#cb9-105" aria-hidden="true" tabindex="-1"></a>    <span class="dv">5</span>,<span class="fl">54.03</span>,<span class="fl">115.29</span>,<span class="fl">61.26</span>,</span>
-<span id="cb9-106"><a href="#cb9-106" aria-hidden="true" tabindex="-1"></a>    <span class="dv">6</span>,<span class="fl">61.29</span>,<span class="fl">146.96</span>,<span class="fl">85.67</span>,</span>
-<span id="cb9-107"><a href="#cb9-107" aria-hidden="true" tabindex="-1"></a>    <span class="dv">7</span>,<span class="fl">54.72</span>,<span class="fl">115.64</span>,<span class="fl">60.92</span>,</span>
-<span id="cb9-108"><a href="#cb9-108" aria-hidden="true" tabindex="-1"></a>    <span class="dv">8</span>,<span class="fl">70.43</span>,<span class="fl">124.62</span>,<span class="fl">54.19</span>,</span>
-<span id="cb9-109"><a href="#cb9-109" aria-hidden="true" tabindex="-1"></a>    <span class="dv">9</span>,<span class="fl">66.45</span>,<span class="fl">121.40</span>,<span class="fl">54.95</span>,</span>
-<span id="cb9-110"><a href="#cb9-110" aria-hidden="true" tabindex="-1"></a>    <span class="dv">10</span>,<span class="fl">59.31</span>,<span class="fl">134.81</span>,<span class="fl">75.50</span>,</span>
-<span id="cb9-111"><a href="#cb9-111" aria-hidden="true" tabindex="-1"></a>    <span class="dv">11</span>,<span class="fl">63.48</span>,<span class="fl">130.73</span>,<span class="fl">67.25</span>,</span>
-<span id="cb9-112"><a href="#cb9-112" aria-hidden="true" tabindex="-1"></a>    <span class="dv">12</span>,<span class="fl">67.19</span>,<span class="fl">118.37</span>,<span class="fl">51.18</span>,</span>
-<span id="cb9-113"><a href="#cb9-113" aria-hidden="true" tabindex="-1"></a>    <span class="dv">13</span>,<span class="fl">52.92</span>,<span class="fl">129.28</span>,<span class="fl">76.36</span>,</span>
-<span id="cb9-114"><a href="#cb9-114" aria-hidden="true" tabindex="-1"></a>    <span class="dv">14</span>,<span class="fl">71.99</span>,<span class="fl">117.40</span>,<span class="fl">45.41</span></span>
-<span id="cb9-115"><a href="#cb9-115" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb9-116"><a href="#cb9-116" aria-hidden="true" tabindex="-1"></a>d_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(df<span class="sc">$</span>d)</span>
-<span id="cb9-117"><a href="#cb9-117" aria-hidden="true" tabindex="-1"></a>d_sd <span class="ot">&lt;-</span> <span class="fu">sd</span>(df<span class="sc">$</span>d)</span>
-<span id="cb9-118"><a href="#cb9-118" aria-hidden="true" tabindex="-1"></a>d_se <span class="ot">&lt;-</span> d_sd<span class="sc">/</span><span class="fu">sqrt</span>(<span class="fu">length</span>(df<span class="sc">$</span>d))</span>
-<span id="cb9-119"><a href="#cb9-119" aria-hidden="true" tabindex="-1"></a>t_statistic <span class="ot">&lt;-</span> d_mean<span class="sc">/</span>d_se</span>
-<span id="cb9-120"><a href="#cb9-120" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">14</span></span>
-<span id="cb9-121"><a href="#cb9-121" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-122"><a href="#cb9-122" aria-hidden="true" tabindex="-1"></a><span class="co"># p值</span></span>
-<span id="cb9-123"><a href="#cb9-123" aria-hidden="true" tabindex="-1"></a>p_value <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> <span class="fu">pt</span>(<span class="fu">abs</span>(t_statistic),<span class="at">df =</span> n<span class="dv">-1</span> ))</span>
-<span id="cb9-124"><a href="#cb9-124" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-125"><a href="#cb9-125" aria-hidden="true" tabindex="-1"></a><span class="co"># 查找95%置信水平下的t分布的临界值</span></span>
-<span id="cb9-126"><a href="#cb9-126" aria-hidden="true" tabindex="-1"></a>t_critical <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df=</span>n<span class="dv">-1</span>)</span>
+<span id="cb9-96"><a href="#cb9-96" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-97"><a href="#cb9-97" aria-hidden="true" tabindex="-1"></a>H_0:\mu_{\bar d}=0</span>
+<span id="cb9-98"><a href="#cb9-98" aria-hidden="true" tabindex="-1"></a>$$ $$</span>
+<span id="cb9-99"><a href="#cb9-99" aria-hidden="true" tabindex="-1"></a>t=\frac{\bar d- \mu_{\bar d}}{S_d /\sqrt n} \sim t(\nu) </span>
+<span id="cb9-100"><a href="#cb9-100" aria-hidden="true" tabindex="-1"></a>$$ 其中$d= X_2-X_1,\mu_{\bar d}=0$。</span>
+<span id="cb9-101"><a href="#cb9-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-104"><a href="#cb9-104" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb9-105"><a href="#cb9-105" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
+<span id="cb9-106"><a href="#cb9-106" aria-hidden="true" tabindex="-1"></a>    <span class="sc">~</span>id,<span class="sc">~</span>baseline,<span class="sc">~</span>ten_days_later,<span class="sc">~</span>d,</span>
+<span id="cb9-107"><a href="#cb9-107" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span>,<span class="fl">58.27</span>,<span class="fl">120.61</span>,<span class="fl">62.34</span>,</span>
+<span id="cb9-108"><a href="#cb9-108" aria-hidden="true" tabindex="-1"></a>    <span class="dv">2</span>,<span class="fl">59.51</span>,<span class="fl">126.33</span>,<span class="fl">66.82</span>,</span>
+<span id="cb9-109"><a href="#cb9-109" aria-hidden="true" tabindex="-1"></a>    <span class="dv">3</span>,<span class="fl">53.84</span>,<span class="fl">108.35</span>,<span class="fl">54.51</span>,</span>
+<span id="cb9-110"><a href="#cb9-110" aria-hidden="true" tabindex="-1"></a>    <span class="dv">4</span>,<span class="fl">54.70</span>,<span class="fl">139.99</span>,<span class="fl">85.29</span>,</span>
+<span id="cb9-111"><a href="#cb9-111" aria-hidden="true" tabindex="-1"></a>    <span class="dv">5</span>,<span class="fl">54.03</span>,<span class="fl">115.29</span>,<span class="fl">61.26</span>,</span>
+<span id="cb9-112"><a href="#cb9-112" aria-hidden="true" tabindex="-1"></a>    <span class="dv">6</span>,<span class="fl">61.29</span>,<span class="fl">146.96</span>,<span class="fl">85.67</span>,</span>
+<span id="cb9-113"><a href="#cb9-113" aria-hidden="true" tabindex="-1"></a>    <span class="dv">7</span>,<span class="fl">54.72</span>,<span class="fl">115.64</span>,<span class="fl">60.92</span>,</span>
+<span id="cb9-114"><a href="#cb9-114" aria-hidden="true" tabindex="-1"></a>    <span class="dv">8</span>,<span class="fl">70.43</span>,<span class="fl">124.62</span>,<span class="fl">54.19</span>,</span>
+<span id="cb9-115"><a href="#cb9-115" aria-hidden="true" tabindex="-1"></a>    <span class="dv">9</span>,<span class="fl">66.45</span>,<span class="fl">121.40</span>,<span class="fl">54.95</span>,</span>
+<span id="cb9-116"><a href="#cb9-116" aria-hidden="true" tabindex="-1"></a>    <span class="dv">10</span>,<span class="fl">59.31</span>,<span class="fl">134.81</span>,<span class="fl">75.50</span>,</span>
+<span id="cb9-117"><a href="#cb9-117" aria-hidden="true" tabindex="-1"></a>    <span class="dv">11</span>,<span class="fl">63.48</span>,<span class="fl">130.73</span>,<span class="fl">67.25</span>,</span>
+<span id="cb9-118"><a href="#cb9-118" aria-hidden="true" tabindex="-1"></a>    <span class="dv">12</span>,<span class="fl">67.19</span>,<span class="fl">118.37</span>,<span class="fl">51.18</span>,</span>
+<span id="cb9-119"><a href="#cb9-119" aria-hidden="true" tabindex="-1"></a>    <span class="dv">13</span>,<span class="fl">52.92</span>,<span class="fl">129.28</span>,<span class="fl">76.36</span>,</span>
+<span id="cb9-120"><a href="#cb9-120" aria-hidden="true" tabindex="-1"></a>    <span class="dv">14</span>,<span class="fl">71.99</span>,<span class="fl">117.40</span>,<span class="fl">45.41</span></span>
+<span id="cb9-121"><a href="#cb9-121" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-122"><a href="#cb9-122" aria-hidden="true" tabindex="-1"></a>d_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(df<span class="sc">$</span>d)</span>
+<span id="cb9-123"><a href="#cb9-123" aria-hidden="true" tabindex="-1"></a>d_sd <span class="ot">&lt;-</span> <span class="fu">sd</span>(df<span class="sc">$</span>d)</span>
+<span id="cb9-124"><a href="#cb9-124" aria-hidden="true" tabindex="-1"></a>d_se <span class="ot">&lt;-</span> d_sd<span class="sc">/</span><span class="fu">sqrt</span>(<span class="fu">length</span>(df<span class="sc">$</span>d))</span>
+<span id="cb9-125"><a href="#cb9-125" aria-hidden="true" tabindex="-1"></a>t_statistic <span class="ot">&lt;-</span> d_mean<span class="sc">/</span>d_se</span>
+<span id="cb9-126"><a href="#cb9-126" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">14</span></span>
 <span id="cb9-127"><a href="#cb9-127" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-128"><a href="#cb9-128" aria-hidden="true" tabindex="-1"></a><span class="co"># 计算95%置信区间</span></span>
-<span id="cb9-129"><a href="#cb9-129" aria-hidden="true" tabindex="-1"></a>CI_lower <span class="ot">&lt;-</span> d_mean <span class="sc">-</span> t_critical <span class="sc">*</span> d_se</span>
-<span id="cb9-130"><a href="#cb9-130" aria-hidden="true" tabindex="-1"></a>CI_upper <span class="ot">&lt;-</span> d_mean <span class="sc">+</span> t_critical <span class="sc">*</span> d_se</span>
-<span id="cb9-131"><a href="#cb9-131" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-132"><a href="#cb9-132" aria-hidden="true" tabindex="-1"></a><span class="co"># 输出结果</span></span>
-<span id="cb9-133"><a href="#cb9-133" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"95% Confidence Interval:"</span>, CI_lower, <span class="st">"to"</span>, CI_upper)</span>
-<span id="cb9-134"><a href="#cb9-134" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-135"><a href="#cb9-135" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-138"><a href="#cb9-138" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb9-139"><a href="#cb9-139" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(df<span class="sc">$</span>baseline)</span>
-<span id="cb9-140"><a href="#cb9-140" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(df<span class="sc">$</span>ten_days_later)</span>
-<span id="cb9-141"><a href="#cb9-141" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(df<span class="sc">$</span>d)</span>
-<span id="cb9-142"><a href="#cb9-142" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(df<span class="sc">$</span>ten_days_later,df<span class="sc">$</span>baseline,<span class="at">paired =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb9-143"><a href="#cb9-143" aria-hidden="true" tabindex="-1"></a><span class="co">#t.test(Pair(df$ten_days_later,df$baseline)~1,data=df)</span></span>
-<span id="cb9-144"><a href="#cb9-144" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-145"><a href="#cb9-145" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-146"><a href="#cb9-146" aria-hidden="true" tabindex="-1"></a><span class="fu">## 两独立样本的均值差异</span></span>
-<span id="cb9-147"><a href="#cb9-147" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-148"><a href="#cb9-148" aria-hidden="true" tabindex="-1"></a><span class="fu">### 方差相等------t检验</span></span>
-<span id="cb9-149"><a href="#cb9-149" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-150"><a href="#cb9-150" aria-hidden="true" tabindex="-1"></a>$$H_0:\mu_1-\mu_2=0$$</span>
+<span id="cb9-128"><a href="#cb9-128" aria-hidden="true" tabindex="-1"></a><span class="co"># p值</span></span>
+<span id="cb9-129"><a href="#cb9-129" aria-hidden="true" tabindex="-1"></a>p_value <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> <span class="fu">pt</span>(<span class="fu">abs</span>(t_statistic),<span class="at">df =</span> n<span class="dv">-1</span> ))</span>
+<span id="cb9-130"><a href="#cb9-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-131"><a href="#cb9-131" aria-hidden="true" tabindex="-1"></a><span class="co"># 查找95%置信水平下的t分布的临界值</span></span>
+<span id="cb9-132"><a href="#cb9-132" aria-hidden="true" tabindex="-1"></a>t_critical <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df=</span>n<span class="dv">-1</span>)</span>
+<span id="cb9-133"><a href="#cb9-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-134"><a href="#cb9-134" aria-hidden="true" tabindex="-1"></a><span class="co"># 计算95%置信区间</span></span>
+<span id="cb9-135"><a href="#cb9-135" aria-hidden="true" tabindex="-1"></a>CI_lower <span class="ot">&lt;-</span> d_mean <span class="sc">-</span> t_critical <span class="sc">*</span> d_se</span>
+<span id="cb9-136"><a href="#cb9-136" aria-hidden="true" tabindex="-1"></a>CI_upper <span class="ot">&lt;-</span> d_mean <span class="sc">+</span> t_critical <span class="sc">*</span> d_se</span>
+<span id="cb9-137"><a href="#cb9-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-138"><a href="#cb9-138" aria-hidden="true" tabindex="-1"></a><span class="co"># 输出结果</span></span>
+<span id="cb9-139"><a href="#cb9-139" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"95% Confidence Interval:"</span>, CI_lower, <span class="st">"to"</span>, CI_upper)</span>
+<span id="cb9-140"><a href="#cb9-140" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-141"><a href="#cb9-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-144"><a href="#cb9-144" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb9-145"><a href="#cb9-145" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(df<span class="sc">$</span>baseline)</span>
+<span id="cb9-146"><a href="#cb9-146" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(df<span class="sc">$</span>ten_days_later)</span>
+<span id="cb9-147"><a href="#cb9-147" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(df<span class="sc">$</span>d)</span>
+<span id="cb9-148"><a href="#cb9-148" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(df<span class="sc">$</span>ten_days_later,df<span class="sc">$</span>baseline,<span class="at">paired =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb9-149"><a href="#cb9-149" aria-hidden="true" tabindex="-1"></a><span class="co">#t.test(Pair(df$ten_days_later,df$baseline)~1,data=df)</span></span>
+<span id="cb9-150"><a href="#cb9-150" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb9-151"><a href="#cb9-151" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-152"><a href="#cb9-152" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb9-153"><a href="#cb9-153" aria-hidden="true" tabindex="-1"></a>t=\frac{(\bar X_1-\bar X_2)-(\mu_1-\mu_2)}{S_{\bar X_1-\bar X_2}}=\frac{\bar X_1-\bar X_2}{S_C\sqrt{(\frac{1}{n_1}+\frac{1}{n_2})}}</span>
-<span id="cb9-154"><a href="#cb9-154" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-152"><a href="#cb9-152" aria-hidden="true" tabindex="-1"></a><span class="fu">## 两独立样本的均值差异</span></span>
+<span id="cb9-153"><a href="#cb9-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-154"><a href="#cb9-154" aria-hidden="true" tabindex="-1"></a><span class="fu">### 方差相等------t检验</span></span>
 <span id="cb9-155"><a href="#cb9-155" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-156"><a href="#cb9-156" aria-hidden="true" tabindex="-1"></a>其中，$S_c^2=\frac{(n_1-1)S_1^2+(n_2-1)S_2^2}{n_1+n_2-2}$</span>
+<span id="cb9-156"><a href="#cb9-156" aria-hidden="true" tabindex="-1"></a>$$H_0:\mu_1-\mu_2=0$$</span>
 <span id="cb9-157"><a href="#cb9-157" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-160"><a href="#cb9-160" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb9-161"><a href="#cb9-161" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb9-162"><a href="#cb9-162" aria-hidden="true" tabindex="-1"></a>    <span class="at">experimental=</span><span class="fu">c</span>(<span class="fl">120.61</span> ,<span class="fl">126.33</span> ,<span class="fl">108.35</span> ,<span class="fl">139.99</span> ,<span class="fl">115.29</span> ,<span class="fl">146.96</span> ,<span class="fl">115.64</span>,</span>
-<span id="cb9-163"><a href="#cb9-163" aria-hidden="true" tabindex="-1"></a>                   <span class="fl">124.62</span> ,<span class="fl">121.40</span> ,<span class="fl">134.81</span> ,<span class="fl">130.73</span> ,<span class="fl">118.37</span> ,<span class="fl">129.28</span> ,<span class="fl">117.45</span>),</span>
-<span id="cb9-164"><a href="#cb9-164" aria-hidden="true" tabindex="-1"></a>    <span class="at">control=</span><span class="fu">c</span>(<span class="fl">58.23</span> ,<span class="fl">54.50</span> ,<span class="fl">59.47</span> ,<span class="fl">59.64</span> ,<span class="fl">53.77</span> ,<span class="fl">43.48</span> ,</span>
-<span id="cb9-165"><a href="#cb9-165" aria-hidden="true" tabindex="-1"></a>              <span class="fl">54.63</span> ,<span class="fl">71.91</span> ,<span class="fl">53.97</span> ,<span class="fl">49.72</span> ,<span class="fl">61.26</span> ,<span class="fl">78.17</span>,<span class="cn">NA</span>,<span class="cn">NA</span>)</span>
-<span id="cb9-166"><a href="#cb9-166" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb9-167"><a href="#cb9-167" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-168"><a href="#cb9-168" aria-hidden="true" tabindex="-1"></a>e_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(df2<span class="sc">$</span>experimental)</span>
-<span id="cb9-169"><a href="#cb9-169" aria-hidden="true" tabindex="-1"></a>e_sd <span class="ot">&lt;-</span> <span class="fu">sd</span>(df2<span class="sc">$</span>experimental)</span>
-<span id="cb9-170"><a href="#cb9-170" aria-hidden="true" tabindex="-1"></a>n1 <span class="ot">&lt;-</span> <span class="fu">length</span>(df2<span class="sc">$</span>experimental)</span>
-<span id="cb9-171"><a href="#cb9-171" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-172"><a href="#cb9-172" aria-hidden="true" tabindex="-1"></a>ctrl_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(df2<span class="sc">$</span>control,<span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb9-173"><a href="#cb9-173" aria-hidden="true" tabindex="-1"></a>ctrl_sd <span class="ot">&lt;-</span> <span class="fu">sd</span>(df2<span class="sc">$</span>control,<span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb9-174"><a href="#cb9-174" aria-hidden="true" tabindex="-1"></a>n2 <span class="ot">&lt;-</span> <span class="fu">length</span>(df2<span class="sc">$</span>control)<span class="sc">-</span><span class="fu">sum</span>(<span class="fu">is.na</span>(df2<span class="sc">$</span>control))</span>
-<span id="cb9-175"><a href="#cb9-175" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-176"><a href="#cb9-176" aria-hidden="true" tabindex="-1"></a>Sc_2 <span class="ot">&lt;-</span> ((n1<span class="dv">-1</span>)<span class="sc">*</span>e_sd<span class="sc">^</span><span class="dv">2</span><span class="sc">+</span>(n2<span class="dv">-1</span>)<span class="sc">*</span>ctrl_sd<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>(n1<span class="sc">+</span>n2<span class="dv">-2</span>)</span>
+<span id="cb9-158"><a href="#cb9-158" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-159"><a href="#cb9-159" aria-hidden="true" tabindex="-1"></a>t=\frac{(\bar X_1-\bar X_2)-(\mu_1-\mu_2)}{S_{\bar X_1-\bar X_2}}=\frac{\bar X_1-\bar X_2}{S_C\sqrt{(\frac{1}{n_1}+\frac{1}{n_2})}}</span>
+<span id="cb9-160"><a href="#cb9-160" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-161"><a href="#cb9-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-162"><a href="#cb9-162" aria-hidden="true" tabindex="-1"></a>其中，$S_c^2=\frac{(n_1-1)S_1^2+(n_2-1)S_2^2}{n_1+n_2-2}$</span>
+<span id="cb9-163"><a href="#cb9-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-166"><a href="#cb9-166" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb9-167"><a href="#cb9-167" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb9-168"><a href="#cb9-168" aria-hidden="true" tabindex="-1"></a>    <span class="at">experimental=</span><span class="fu">c</span>(<span class="fl">120.61</span> ,<span class="fl">126.33</span> ,<span class="fl">108.35</span> ,<span class="fl">139.99</span> ,<span class="fl">115.29</span> ,<span class="fl">146.96</span> ,<span class="fl">115.64</span>,</span>
+<span id="cb9-169"><a href="#cb9-169" aria-hidden="true" tabindex="-1"></a>                   <span class="fl">124.62</span> ,<span class="fl">121.40</span> ,<span class="fl">134.81</span> ,<span class="fl">130.73</span> ,<span class="fl">118.37</span> ,<span class="fl">129.28</span> ,<span class="fl">117.45</span>),</span>
+<span id="cb9-170"><a href="#cb9-170" aria-hidden="true" tabindex="-1"></a>    <span class="at">control=</span><span class="fu">c</span>(<span class="fl">58.23</span> ,<span class="fl">54.50</span> ,<span class="fl">59.47</span> ,<span class="fl">59.64</span> ,<span class="fl">53.77</span> ,<span class="fl">43.48</span> ,</span>
+<span id="cb9-171"><a href="#cb9-171" aria-hidden="true" tabindex="-1"></a>              <span class="fl">54.63</span> ,<span class="fl">71.91</span> ,<span class="fl">53.97</span> ,<span class="fl">49.72</span> ,<span class="fl">61.26</span> ,<span class="fl">78.17</span>,<span class="cn">NA</span>,<span class="cn">NA</span>)</span>
+<span id="cb9-172"><a href="#cb9-172" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-173"><a href="#cb9-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-174"><a href="#cb9-174" aria-hidden="true" tabindex="-1"></a>e_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(df2<span class="sc">$</span>experimental)</span>
+<span id="cb9-175"><a href="#cb9-175" aria-hidden="true" tabindex="-1"></a>e_sd <span class="ot">&lt;-</span> <span class="fu">sd</span>(df2<span class="sc">$</span>experimental)</span>
+<span id="cb9-176"><a href="#cb9-176" aria-hidden="true" tabindex="-1"></a>n1 <span class="ot">&lt;-</span> <span class="fu">length</span>(df2<span class="sc">$</span>experimental)</span>
 <span id="cb9-177"><a href="#cb9-177" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-178"><a href="#cb9-178" aria-hidden="true" tabindex="-1"></a>t2 <span class="ot">&lt;-</span> (e_mean<span class="sc">-</span>ctrl_mean)<span class="sc">/</span><span class="fu">sqrt</span>(Sc_2<span class="sc">*</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">14</span><span class="sc">+</span><span class="dv">1</span><span class="sc">/</span><span class="dv">12</span>))</span>
-<span id="cb9-179"><a href="#cb9-179" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-180"><a href="#cb9-180" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(df2<span class="sc">$</span>experimental,df2<span class="sc">$</span>control,<span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb9-178"><a href="#cb9-178" aria-hidden="true" tabindex="-1"></a>ctrl_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(df2<span class="sc">$</span>control,<span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb9-179"><a href="#cb9-179" aria-hidden="true" tabindex="-1"></a>ctrl_sd <span class="ot">&lt;-</span> <span class="fu">sd</span>(df2<span class="sc">$</span>control,<span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb9-180"><a href="#cb9-180" aria-hidden="true" tabindex="-1"></a>n2 <span class="ot">&lt;-</span> <span class="fu">length</span>(df2<span class="sc">$</span>control)<span class="sc">-</span><span class="fu">sum</span>(<span class="fu">is.na</span>(df2<span class="sc">$</span>control))</span>
 <span id="cb9-181"><a href="#cb9-181" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-182"><a href="#cb9-182" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-182"><a href="#cb9-182" aria-hidden="true" tabindex="-1"></a>Sc_2 <span class="ot">&lt;-</span> ((n1<span class="dv">-1</span>)<span class="sc">*</span>e_sd<span class="sc">^</span><span class="dv">2</span><span class="sc">+</span>(n2<span class="dv">-1</span>)<span class="sc">*</span>ctrl_sd<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>(n1<span class="sc">+</span>n2<span class="dv">-2</span>)</span>
 <span id="cb9-183"><a href="#cb9-183" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-184"><a href="#cb9-184" aria-hidden="true" tabindex="-1"></a><span class="fu">### 方差是否相等------F检验</span></span>
+<span id="cb9-184"><a href="#cb9-184" aria-hidden="true" tabindex="-1"></a>t2 <span class="ot">&lt;-</span> (e_mean<span class="sc">-</span>ctrl_mean)<span class="sc">/</span><span class="fu">sqrt</span>(Sc_2<span class="sc">*</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">14</span><span class="sc">+</span><span class="dv">1</span><span class="sc">/</span><span class="dv">12</span>))</span>
 <span id="cb9-185"><a href="#cb9-185" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-186"><a href="#cb9-186" aria-hidden="true" tabindex="-1"></a>$$H_0:\frac{\sigma_1^2}{\sigma_2^2}=1$$</span>
+<span id="cb9-186"><a href="#cb9-186" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(df2<span class="sc">$</span>experimental,df2<span class="sc">$</span>control,<span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb9-187"><a href="#cb9-187" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-188"><a href="#cb9-188" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb9-189"><a href="#cb9-189" aria-hidden="true" tabindex="-1"></a>F=\frac{\frac {(n_1-1)S_1^2}{\sigma_1^2}/(n_1-1)}{\frac {(n_2-1)S_2^2}{\sigma_2^2}/(n_2-1)}=(\frac{S_1^2}{S_2^2})(\frac{\sigma_2^2}{\sigma_1^2})=\frac{S_1^2}{S_2^2}\sim F(\nu_1,\nu_2),\nu_1=n_1-1,\nu_2=n_2-1</span>
-<span id="cb9-190"><a href="#cb9-190" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-188"><a href="#cb9-188" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-189"><a href="#cb9-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-190"><a href="#cb9-190" aria-hidden="true" tabindex="-1"></a><span class="fu">### 方差是否相等------F检验</span></span>
 <span id="cb9-191"><a href="#cb9-191" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-194"><a href="#cb9-194" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb9-195"><a href="#cb9-195" aria-hidden="true" tabindex="-1"></a><span class="co"># 检验两个样本的方差是否相等</span></span>
-<span id="cb9-196"><a href="#cb9-196" aria-hidden="true" tabindex="-1"></a><span class="fu">var.test</span>(df2<span class="sc">$</span>experimental,df2<span class="sc">$</span>control)</span>
-<span id="cb9-197"><a href="#cb9-197" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-198"><a href="#cb9-198" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-201"><a href="#cb9-201" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb9-202"><a href="#cb9-202" aria-hidden="true" tabindex="-1"></a>F_stats <span class="ot">&lt;-</span> (e_sd<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>(ctrl_sd<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb9-203"><a href="#cb9-203" aria-hidden="true" tabindex="-1"></a>F_stats</span>
+<span id="cb9-192"><a href="#cb9-192" aria-hidden="true" tabindex="-1"></a>$$H_0:\frac{\sigma_1^2}{\sigma_2^2}=1$$</span>
+<span id="cb9-193"><a href="#cb9-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-194"><a href="#cb9-194" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-195"><a href="#cb9-195" aria-hidden="true" tabindex="-1"></a>F=\frac{\frac {(n_1-1)S_1^2}{\sigma_1^2}/(n_1-1)}{\frac {(n_2-1)S_2^2}{\sigma_2^2}/(n_2-1)}=(\frac{S_1^2}{S_2^2})(\frac{\sigma_2^2}{\sigma_1^2})=\frac{S_1^2}{S_2^2}\sim F(\nu_1,\nu_2),\nu_1=n_1-1,\nu_2=n_2-1</span>
+<span id="cb9-196"><a href="#cb9-196" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-197"><a href="#cb9-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-200"><a href="#cb9-200" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb9-201"><a href="#cb9-201" aria-hidden="true" tabindex="-1"></a><span class="co"># 检验两个样本的方差是否相等</span></span>
+<span id="cb9-202"><a href="#cb9-202" aria-hidden="true" tabindex="-1"></a><span class="fu">var.test</span>(df2<span class="sc">$</span>experimental,df2<span class="sc">$</span>control)</span>
+<span id="cb9-203"><a href="#cb9-203" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb9-204"><a href="#cb9-204" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-205"><a href="#cb9-205" aria-hidden="true" tabindex="-1"></a><span class="co"># 计算p值</span></span>
-<span id="cb9-206"><a href="#cb9-206" aria-hidden="true" tabindex="-1"></a>p_value <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pf</span>(F_stats, <span class="at">df1=</span><span class="dv">13</span>, <span class="at">df2=</span><span class="dv">11</span>, <span class="at">lower.tail =</span>F)</span>
-<span id="cb9-207"><a href="#cb9-207" aria-hidden="true" tabindex="-1"></a><span class="co"># p_value &lt;- pf(F_stats, df1=13, df2=11)</span></span>
-<span id="cb9-208"><a href="#cb9-208" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-209"><a href="#cb9-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-207"><a href="#cb9-207" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb9-208"><a href="#cb9-208" aria-hidden="true" tabindex="-1"></a>F_stats <span class="ot">&lt;-</span> (e_sd<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>(ctrl_sd<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb9-209"><a href="#cb9-209" aria-hidden="true" tabindex="-1"></a>F_stats</span>
 <span id="cb9-210"><a href="#cb9-210" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-211"><a href="#cb9-211" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
-<span id="cb9-212"><a href="#cb9-212" aria-hidden="true" tabindex="-1"></a>confidence_level <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> alpha</span>
-<span id="cb9-213"><a href="#cb9-213" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-214"><a href="#cb9-214" aria-hidden="true" tabindex="-1"></a><span class="co"># 计算F分布的临界值</span></span>
-<span id="cb9-215"><a href="#cb9-215" aria-hidden="true" tabindex="-1"></a>f_critical_lower <span class="ot">&lt;-</span> <span class="fu">qf</span>((<span class="dv">1</span> <span class="sc">-</span> confidence_level) <span class="sc">/</span> <span class="dv">2</span>, <span class="at">df1 =</span> <span class="dv">13</span>, <span class="at">df2 =</span> <span class="dv">11</span>)</span>
-<span id="cb9-216"><a href="#cb9-216" aria-hidden="true" tabindex="-1"></a>f_critical_upper <span class="ot">&lt;-</span> <span class="fu">qf</span>(confidence_level, <span class="at">df1 =</span> <span class="dv">13</span>, <span class="at">df2 =</span> <span class="dv">11</span>)</span>
-<span id="cb9-217"><a href="#cb9-217" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-218"><a href="#cb9-218" aria-hidden="true" tabindex="-1"></a><span class="co"># 计算方差比率的置信区间</span></span>
-<span id="cb9-219"><a href="#cb9-219" aria-hidden="true" tabindex="-1"></a>ci_lower <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(f_critical_lower <span class="sc">*</span> (ctrl_sd<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> e_sd<span class="sc">^</span><span class="dv">2</span>))</span>
-<span id="cb9-220"><a href="#cb9-220" aria-hidden="true" tabindex="-1"></a>ci_upper <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(f_critical_upper <span class="sc">*</span> (ctrl_sd<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> e_sd<span class="sc">^</span><span class="dv">2</span>))</span>
-<span id="cb9-221"><a href="#cb9-221" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-222"><a href="#cb9-222" aria-hidden="true" tabindex="-1"></a><span class="co"># 输出结果</span></span>
-<span id="cb9-223"><a href="#cb9-223" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"95% CI for variances ratio:"</span>, ci_lower, <span class="st">"to"</span>, ci_upper)</span>
-<span id="cb9-224"><a href="#cb9-224" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-225"><a href="#cb9-225" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-226"><a href="#cb9-226" aria-hidden="true" tabindex="-1"></a><span class="fu">### 方差不等------ Approximation t 检验</span></span>
+<span id="cb9-211"><a href="#cb9-211" aria-hidden="true" tabindex="-1"></a><span class="co"># 计算p值</span></span>
+<span id="cb9-212"><a href="#cb9-212" aria-hidden="true" tabindex="-1"></a>p_value <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pf</span>(F_stats, <span class="at">df1=</span><span class="dv">13</span>, <span class="at">df2=</span><span class="dv">11</span>, <span class="at">lower.tail =</span>F)</span>
+<span id="cb9-213"><a href="#cb9-213" aria-hidden="true" tabindex="-1"></a><span class="co"># p_value &lt;- pf(F_stats, df1=13, df2=11)</span></span>
+<span id="cb9-214"><a href="#cb9-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-215"><a href="#cb9-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-216"><a href="#cb9-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-217"><a href="#cb9-217" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb9-218"><a href="#cb9-218" aria-hidden="true" tabindex="-1"></a>confidence_level <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> alpha</span>
+<span id="cb9-219"><a href="#cb9-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-220"><a href="#cb9-220" aria-hidden="true" tabindex="-1"></a><span class="co"># 计算F分布的临界值</span></span>
+<span id="cb9-221"><a href="#cb9-221" aria-hidden="true" tabindex="-1"></a>f_critical_lower <span class="ot">&lt;-</span> <span class="fu">qf</span>((<span class="dv">1</span> <span class="sc">-</span> confidence_level) <span class="sc">/</span> <span class="dv">2</span>, <span class="at">df1 =</span> <span class="dv">13</span>, <span class="at">df2 =</span> <span class="dv">11</span>)</span>
+<span id="cb9-222"><a href="#cb9-222" aria-hidden="true" tabindex="-1"></a>f_critical_upper <span class="ot">&lt;-</span> <span class="fu">qf</span>(confidence_level, <span class="at">df1 =</span> <span class="dv">13</span>, <span class="at">df2 =</span> <span class="dv">11</span>)</span>
+<span id="cb9-223"><a href="#cb9-223" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-224"><a href="#cb9-224" aria-hidden="true" tabindex="-1"></a><span class="co"># 计算方差比率的置信区间</span></span>
+<span id="cb9-225"><a href="#cb9-225" aria-hidden="true" tabindex="-1"></a>ci_lower <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(f_critical_lower <span class="sc">*</span> (ctrl_sd<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> e_sd<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb9-226"><a href="#cb9-226" aria-hidden="true" tabindex="-1"></a>ci_upper <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(f_critical_upper <span class="sc">*</span> (ctrl_sd<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> e_sd<span class="sc">^</span><span class="dv">2</span>))</span>
 <span id="cb9-227"><a href="#cb9-227" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-228"><a href="#cb9-228" aria-hidden="true" tabindex="-1"></a>$$H_0:\mu_1-\mu_2=0$$</span>
-<span id="cb9-229"><a href="#cb9-229" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-230"><a href="#cb9-230" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb9-231"><a href="#cb9-231" aria-hidden="true" tabindex="-1"></a>t'=\frac{(\bar X_1-\bar X_2)-(\mu_1-\mu_2)}{\sqrt{\frac{S_1^2}{n_1}+\frac{S_2^2}{n_2}}}=\frac{\bar X_1-\bar X_2}{\sqrt{\frac{S_1^2}{n_1}+\frac{S_2^2}{n_2}}}\sim t(\nu ')</span>
-<span id="cb9-232"><a href="#cb9-232" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-228"><a href="#cb9-228" aria-hidden="true" tabindex="-1"></a><span class="co"># 输出结果</span></span>
+<span id="cb9-229"><a href="#cb9-229" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"95% CI for variances ratio:"</span>, ci_lower, <span class="st">"to"</span>, ci_upper)</span>
+<span id="cb9-230"><a href="#cb9-230" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-231"><a href="#cb9-231" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-232"><a href="#cb9-232" aria-hidden="true" tabindex="-1"></a><span class="fu">### 方差不等------ Approximation t 检验</span></span>
 <span id="cb9-233"><a href="#cb9-233" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-234"><a href="#cb9-234" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Cochran &amp; Cox Approximation t-test</span></span>
+<span id="cb9-234"><a href="#cb9-234" aria-hidden="true" tabindex="-1"></a>$$H_0:\mu_1-\mu_2=0$$</span>
 <span id="cb9-235"><a href="#cb9-235" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-236"><a href="#cb9-236" aria-hidden="true" tabindex="-1"></a>强调方差的变异</span>
-<span id="cb9-237"><a href="#cb9-237" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-238"><a href="#cb9-238" aria-hidden="true" tabindex="-1"></a>因为$t'$既不遵循t分布，也不遵循正态分布，因此t'的临界值需要特定的计算方法。</span>
+<span id="cb9-236"><a href="#cb9-236" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-237"><a href="#cb9-237" aria-hidden="true" tabindex="-1"></a>t'=\frac{(\bar X_1-\bar X_2)-(\mu_1-\mu_2)}{\sqrt{\frac{S_1^2}{n_1}+\frac{S_2^2}{n_2}}}=\frac{\bar X_1-\bar X_2}{\sqrt{\frac{S_1^2}{n_1}+\frac{S_2^2}{n_2}}}\sim t(\nu ')</span>
+<span id="cb9-238"><a href="#cb9-238" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb9-239"><a href="#cb9-239" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-240"><a href="#cb9-240" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb9-241"><a href="#cb9-241" aria-hidden="true" tabindex="-1"></a>t'_{\alpha/2}=\frac{S^2_{\bar X_1}t_{\nu_1,\alpha/2}+S^2_{\bar X_2}t_{\nu_2,\alpha/2}}{S^2_{\bar X_1}+S^2_{\bar X_2}}</span>
-<span id="cb9-242"><a href="#cb9-242" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-240"><a href="#cb9-240" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Cochran &amp; Cox Approximation t-test</span></span>
+<span id="cb9-241"><a href="#cb9-241" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-242"><a href="#cb9-242" aria-hidden="true" tabindex="-1"></a>强调方差的变异</span>
 <span id="cb9-243"><a href="#cb9-243" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-244"><a href="#cb9-244" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb9-245"><a href="#cb9-245" aria-hidden="true" tabindex="-1"></a>t'_{1-\alpha/2}=\frac{S^2_{\bar X_1}t_{\nu_1,1-\alpha/2}+S^2_{\bar X_2}t_{\nu_2,1-\alpha/2}}{S^2_{\bar X_1}+S^2_{\bar X_2}}</span>
-<span id="cb9-246"><a href="#cb9-246" aria-hidden="true" tabindex="-1"></a>$$ 其中$\nu_1=n_1-1,\nu_2=n_2-1,t_{\nu_1,1-\alpha/2}和t_{\nu_2,1-\alpha/2}$分别是$t_{\nu_1}和t_{\nu_2}$的临界值。</span>
-<span id="cb9-247"><a href="#cb9-247" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-248"><a href="#cb9-248" aria-hidden="true" tabindex="-1"></a>因为t分布是对称的，$t_{\nu,\alpha/2}=-t_{\nu,1-\alpha/2}$，所以$t'_{\alpha/2}=t'_{1-\alpha/2}$。</span>
+<span id="cb9-244"><a href="#cb9-244" aria-hidden="true" tabindex="-1"></a>因为$t'$既不遵循t分布，也不遵循正态分布，因此t'的临界值需要特定的计算方法。</span>
+<span id="cb9-245"><a href="#cb9-245" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-246"><a href="#cb9-246" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-247"><a href="#cb9-247" aria-hidden="true" tabindex="-1"></a>t'_{\alpha/2}=\frac{S^2_{\bar X_1}t_{\nu_1,\alpha/2}+S^2_{\bar X_2}t_{\nu_2,\alpha/2}}{S^2_{\bar X_1}+S^2_{\bar X_2}}</span>
+<span id="cb9-248"><a href="#cb9-248" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb9-249"><a href="#cb9-249" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-250"><a href="#cb9-250" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Satterthwaite Approximation t-test</span></span>
-<span id="cb9-251"><a href="#cb9-251" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-252"><a href="#cb9-252" aria-hidden="true" tabindex="-1"></a>强调自由度</span>
+<span id="cb9-250"><a href="#cb9-250" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-251"><a href="#cb9-251" aria-hidden="true" tabindex="-1"></a>t'_{1-\alpha/2}=\frac{S^2_{\bar X_1}t_{\nu_1,1-\alpha/2}+S^2_{\bar X_2}t_{\nu_2,1-\alpha/2}}{S^2_{\bar X_1}+S^2_{\bar X_2}}</span>
+<span id="cb9-252"><a href="#cb9-252" aria-hidden="true" tabindex="-1"></a>$$ 其中$\nu_1=n_1-1,\nu_2=n_2-1,t_{\nu_1,1-\alpha/2}和t_{\nu_2,1-\alpha/2}$分别是$t_{\nu_1}和t_{\nu_2}$的临界值。</span>
 <span id="cb9-253"><a href="#cb9-253" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-254"><a href="#cb9-254" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb9-255"><a href="#cb9-255" aria-hidden="true" tabindex="-1"></a>v'=\frac{(\frac{S_1^2}{n_1}+\frac{S_2^2}{n_2})^2}{\frac{(\frac{S_1^2}{n_1})^2}{n_1-1}+\frac{(\frac{S_2^2}{n_2})^2}{n_2-1}}(舍入到最近整数)</span>
-<span id="cb9-256"><a href="#cb9-256" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-254"><a href="#cb9-254" aria-hidden="true" tabindex="-1"></a>因为t分布是对称的，$t_{\nu,\alpha/2}=-t_{\nu,1-\alpha/2}$，所以$t'_{\alpha/2}=t'_{1-\alpha/2}$。</span>
+<span id="cb9-255"><a href="#cb9-255" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-256"><a href="#cb9-256" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Satterthwaite Approximation t-test</span></span>
 <span id="cb9-257"><a href="#cb9-257" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-258"><a href="#cb9-258" aria-hidden="true" tabindex="-1"></a><span class="fu">### 中心极限定理 大样本量------ Z检验</span></span>
+<span id="cb9-258"><a href="#cb9-258" aria-hidden="true" tabindex="-1"></a>强调自由度</span>
 <span id="cb9-259"><a href="#cb9-259" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-260"><a href="#cb9-260" aria-hidden="true" tabindex="-1"></a>当$n_1＞30\ <span class="sc">\&amp;</span>\ n_2＞30$时，</span>
-<span id="cb9-261"><a href="#cb9-261" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-260"><a href="#cb9-260" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-261"><a href="#cb9-261" aria-hidden="true" tabindex="-1"></a>v'=\frac{(\frac{S_1^2}{n_1}+\frac{S_2^2}{n_2})^2}{\frac{(\frac{S_1^2}{n_1})^2}{n_1-1}+\frac{(\frac{S_2^2}{n_2})^2}{n_2-1}}(舍入到最近整数)</span>
 <span id="cb9-262"><a href="#cb9-262" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb9-263"><a href="#cb9-263" aria-hidden="true" tabindex="-1"></a>\bar X_1\dot\sim N(\mu_1,\frac{\sigma^2_1}{n_1})</span>
-<span id="cb9-264"><a href="#cb9-264" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-263"><a href="#cb9-263" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-264"><a href="#cb9-264" aria-hidden="true" tabindex="-1"></a><span class="fu">### 中心极限定理 大样本量------ Z检验</span></span>
 <span id="cb9-265"><a href="#cb9-265" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-266"><a href="#cb9-266" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb9-267"><a href="#cb9-267" aria-hidden="true" tabindex="-1"></a>\bar X_2\dot\sim N(\mu_2,\frac{\sigma^2_2}{n_2})</span>
+<span id="cb9-266"><a href="#cb9-266" aria-hidden="true" tabindex="-1"></a>当$n_1＞30\ <span class="sc">\&amp;</span>\ n_2＞30$时，</span>
+<span id="cb9-267"><a href="#cb9-267" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-268"><a href="#cb9-268" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb9-269"><a href="#cb9-269" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-270"><a href="#cb9-270" aria-hidden="true" tabindex="-1"></a>$$H_0:\mu_1-\mu_2=0$$</span>
+<span id="cb9-269"><a href="#cb9-269" aria-hidden="true" tabindex="-1"></a>\bar X_1\dot\sim N(\mu_1,\frac{\sigma^2_1}{n_1})</span>
+<span id="cb9-270"><a href="#cb9-270" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb9-271"><a href="#cb9-271" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-272"><a href="#cb9-272" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb9-273"><a href="#cb9-273" aria-hidden="true" tabindex="-1"></a>Z=\frac{(\bar X_1-\bar X_2)-(\mu_1-\mu_2)}{\sqrt{\frac{\sigma^2_1}{n_1}+\frac{\sigma^2_2}{n_2}}}=\frac{\bar X_1-\bar X_2}{\sqrt{\frac{\sigma^2_1}{n_1}+\frac{\sigma^2_2}{n_2}}}\dot\sim N(0,1)</span>
+<span id="cb9-273"><a href="#cb9-273" aria-hidden="true" tabindex="-1"></a>\bar X_2\dot\sim N(\mu_2,\frac{\sigma^2_2}{n_2})</span>
 <span id="cb9-274"><a href="#cb9-274" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb9-275"><a href="#cb9-275" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-276"><a href="#cb9-276" aria-hidden="true" tabindex="-1"></a>实际应用中，总体方差未知，使用t 检验，提供了对总体方差不确定性的自然估计。</span>
+<span id="cb9-276"><a href="#cb9-276" aria-hidden="true" tabindex="-1"></a>$$H_0:\mu_1-\mu_2=0$$</span>
 <span id="cb9-277"><a href="#cb9-277" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-278"><a href="#cb9-278" aria-hidden="true" tabindex="-1"></a><span class="fu">## 功效分析</span></span>
-<span id="cb9-279"><a href="#cb9-279" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-280"><a href="#cb9-280" aria-hidden="true" tabindex="-1"></a>功效(power) $1-β\approx\Phi(-z_{1-\alpha/2}+\frac{|\mu_1-\mu_2|}{\sqrt {\sigma_1^2/n_1+\sigma_2^2/n_2}})$</span>
+<span id="cb9-278"><a href="#cb9-278" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-279"><a href="#cb9-279" aria-hidden="true" tabindex="-1"></a>Z=\frac{(\bar X_1-\bar X_2)-(\mu_1-\mu_2)}{\sqrt{\frac{\sigma^2_1}{n_1}+\frac{\sigma^2_2}{n_2}}}=\frac{\bar X_1-\bar X_2}{\sqrt{\frac{\sigma^2_1}{n_1}+\frac{\sigma^2_2}{n_2}}}\dot\sim N(0,1)</span>
+<span id="cb9-280"><a href="#cb9-280" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb9-281"><a href="#cb9-281" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-282"><a href="#cb9-282" aria-hidden="true" tabindex="-1"></a>样本量</span>
+<span id="cb9-282"><a href="#cb9-282" aria-hidden="true" tabindex="-1"></a>实际应用中，总体方差未知，使用t 检验，提供了对总体方差不确定性的自然估计。</span>
 <span id="cb9-283"><a href="#cb9-283" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-284"><a href="#cb9-284" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>两组样本量相等 $$</span>
-<span id="cb9-285"><a href="#cb9-285" aria-hidden="true" tabindex="-1"></a>    n=\frac{(\sigma_1^2+\sigma_1^2)(z_{1-\alpha/2}+z_{1-\beta})^2}{(\mu_1-\mu_2)^2}</span>
-<span id="cb9-286"><a href="#cb9-286" aria-hidden="true" tabindex="-1"></a>    $$</span>
+<span id="cb9-284"><a href="#cb9-284" aria-hidden="true" tabindex="-1"></a><span class="fu">## 批量t检验</span></span>
+<span id="cb9-285"><a href="#cb9-285" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-286"><a href="#cb9-286" aria-hidden="true" tabindex="-1"></a><span class="fu">## 功效分析</span></span>
 <span id="cb9-287"><a href="#cb9-287" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-288"><a href="#cb9-288" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>两组样本量不等（$n_2=kn_1$） $$</span>
-<span id="cb9-289"><a href="#cb9-289" aria-hidden="true" tabindex="-1"></a>    n_1=\frac{(\sigma_1^2+\sigma_1^2/k)(z_{1-\alpha/2}+z_{1-\beta})^2}{(\mu_1-\mu_2)^2}</span>
-<span id="cb9-290"><a href="#cb9-290" aria-hidden="true" tabindex="-1"></a>    $$</span>
+<span id="cb9-288"><a href="#cb9-288" aria-hidden="true" tabindex="-1"></a>功效(power) $1-β\approx\Phi(-z_{1-\alpha/2}+\frac{|\mu_1-\mu_2|}{\sqrt {\sigma_1^2/n_1+\sigma_2^2/n_2}})$</span>
+<span id="cb9-289"><a href="#cb9-289" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-290"><a href="#cb9-290" aria-hidden="true" tabindex="-1"></a>样本量</span>
 <span id="cb9-291"><a href="#cb9-291" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-292"><a href="#cb9-292" aria-hidden="true" tabindex="-1"></a>    $$</span>
-<span id="cb9-293"><a href="#cb9-293" aria-hidden="true" tabindex="-1"></a>    n_2=\frac{(k\sigma_1^2+\sigma_1^2)(z_{1-\alpha/2}+z_{1-\beta})^2}{(\mu_1-\mu_2)^2}</span>
+<span id="cb9-292"><a href="#cb9-292" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>两组样本量相等 $$</span>
+<span id="cb9-293"><a href="#cb9-293" aria-hidden="true" tabindex="-1"></a>    n=\frac{(\sigma_1^2+\sigma_1^2)(z_{1-\alpha/2}+z_{1-\beta})^2}{(\mu_1-\mu_2)^2}</span>
 <span id="cb9-294"><a href="#cb9-294" aria-hidden="true" tabindex="-1"></a>    $$</span>
+<span id="cb9-295"><a href="#cb9-295" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-296"><a href="#cb9-296" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>两组样本量不等（$n_2=kn_1$） $$</span>
+<span id="cb9-297"><a href="#cb9-297" aria-hidden="true" tabindex="-1"></a>    n_1=\frac{(\sigma_1^2+\sigma_1^2/k)(z_{1-\alpha/2}+z_{1-\beta})^2}{(\mu_1-\mu_2)^2}</span>
+<span id="cb9-298"><a href="#cb9-298" aria-hidden="true" tabindex="-1"></a>    $$</span>
+<span id="cb9-299"><a href="#cb9-299" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-300"><a href="#cb9-300" aria-hidden="true" tabindex="-1"></a>    $$</span>
+<span id="cb9-301"><a href="#cb9-301" aria-hidden="true" tabindex="-1"></a>    n_2=\frac{(k\sigma_1^2+\sigma_1^2)(z_{1-\alpha/2}+z_{1-\beta})^2}{(\mu_1-\mu_2)^2}</span>
+<span id="cb9-302"><a href="#cb9-302" aria-hidden="true" tabindex="-1"></a>    $$</span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

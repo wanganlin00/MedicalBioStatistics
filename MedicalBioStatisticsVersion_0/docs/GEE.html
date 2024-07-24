@@ -300,7 +300,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./LME.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">线性混合效应模型</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">线性混合效应</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -376,13 +376,18 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#%E6%95%B0%E6%8D%AE%E9%9B%86" id="toc-数据集" class="nav-link active" data-scroll-target="#%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="header-section-number">19.1</span> 数据集</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E9%9B%86%E5%A4%84%E7%90%86" id="toc-数据集处理" class="nav-link active" data-scroll-target="#%E6%95%B0%E6%8D%AE%E9%9B%86%E5%A4%84%E7%90%86"><span class="header-section-number">19.1</span> 数据集处理</a></li>
   <li><a href="#glm-%E8%BF%9E%E6%8E%A5%E5%87%BD%E6%95%B0" id="toc-glm-连接函数" class="nav-link" data-scroll-target="#glm-%E8%BF%9E%E6%8E%A5%E5%87%BD%E6%95%B0"><span class="header-section-number">19.2</span> GLM 连接函数</a></li>
   <li><a href="#%E6%96%B9%E5%B7%AE" id="toc-方差" class="nav-link" data-scroll-target="#%E6%96%B9%E5%B7%AE"><span class="header-section-number">19.3</span> 方差</a></li>
   <li><a href="#%E7%9B%B8%E5%85%B3%E6%80%A7%E7%BB%93%E6%9E%84" id="toc-相关性结构" class="nav-link" data-scroll-target="#%E7%9B%B8%E5%85%B3%E6%80%A7%E7%BB%93%E6%9E%84"><span class="header-section-number">19.4</span> 相关性结构</a></li>
   <li><a href="#gee" id="toc-gee" class="nav-link" data-scroll-target="#gee"><span class="header-section-number">19.5</span> GEE</a></li>
   <li><a href="#gee-1" id="toc-gee-1" class="nav-link" data-scroll-target="#gee-1"><span class="header-section-number">19.6</span> <code>gee</code></a></li>
-  <li><a href="#geepack" id="toc-geepack" class="nav-link" data-scroll-target="#geepack"><span class="header-section-number">19.7</span> <code>geepack</code></a></li>
+  <li>
+<a href="#geepack" id="toc-geepack" class="nav-link" data-scroll-target="#geepack"><span class="header-section-number">19.7</span> <code>geepack</code></a>
+  <ul>
+<li><a href="#%E7%A4%BA%E4%BE%8B" id="toc-示例" class="nav-link" data-scroll-target="#%E7%A4%BA%E4%BE%8B"><span class="header-section-number">19.7.1</span> 示例</a></li>
+  </ul>
+</li>
   </ul></nav>
     </div>
 <!-- main -->
@@ -404,13 +409,13 @@ window.Quarto = {
 
 
 </header><p><a href="https://link.springer.com/book/10.1007/978-0-387-87458-6">Mixed Effects Models and Extensions in Ecology with R 第12章</a></p>
-<p>广义估计方程（Generalized Estimating Equations，GEE）用于分析重复测量、相关数据的统计推断。GEE的核心思想是通过建立一个<code>广义线性模型</code>来估计一组总体平均参数，同时考虑数据的相关性结构和缺失数据，而不需要假设数据的具体分布形式，从而使其适用于各组类型的数据，包括二项分布、正态分布、负二项分布、泊松分布等。</p>
-<section id="数据集" class="level2" data-number="19.1"><h2 data-number="19.1" class="anchored" data-anchor-id="数据集">
-<span class="header-section-number">19.1</span> 数据集</h2>
+<p>广义估计方程（Generalized Estimating Equations，GEE）是一种用于分析重复测量或相关数据的统计方法。 GEE的核心思想是通过建立一个<code>广义线性模型</code>来估计一组总体均值参数，同时考虑数据的相关性结构和缺失数据，而不依赖于特定的分布假设，从而使其适用于多种数据类型，包括二项分布、正态分布、负二项分布。</p>
+<section id="数据集处理" class="level2" data-number="19.1"><h2 data-number="19.1" class="anchored" data-anchor-id="数据集处理">
+<span class="header-section-number">19.1</span> 数据集处理</h2>
 <p><a href="https://github.com/romunov/AED">数据集 Analyzing ecological data</a></p>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rfb</span> <span class="op">&lt;-</span> <span class="fu">read_delim</span><span class="op">(</span><span class="st">"data/AED/RiceFieldBirds.txt"</span><span class="op">)</span></span>
-<span><span class="va">rfb</span><span class="op">$</span><span class="va">richness</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">rfb</span><span class="op">[</span>,<span class="fl">8</span><span class="op">:</span><span class="fl">56</span><span class="op">]</span> <span class="op">&gt;</span><span class="fl">0</span><span class="op">)</span></span>
+<span><span class="va">rfb</span><span class="op">$</span><span class="va">richness</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">rfb</span><span class="op">[</span>, <span class="fl">8</span><span class="op">:</span><span class="fl">56</span><span class="op">]</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span></span>
 <span><span class="va">rfb</span> <span class="op">|&gt;</span> <span class="fu">mutate</span><span class="op">(</span></span>
 <span>    FIELD <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">FIELD</span><span class="op">)</span>,</span>
 <span>    SPTREAT <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">SPTREAT</span><span class="op">)</span>,</span>
@@ -420,10 +425,10 @@ window.Quarto = {
 <span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">rfb</span></span>
 <span></span>
 <span></span>
-<span><span class="fu">ggplot</span><span class="op">(</span><span class="va">rfb</span>,<span class="fu">aes</span><span class="op">(</span><span class="va">Time</span>,<span class="va">richness</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
-<span>    <span class="fu">geom_point</span><span class="op">(</span>pch<span class="op">=</span><span class="fl">21</span><span class="op">)</span><span class="op">+</span></span>
-<span>    <span class="fu">geom_smooth</span><span class="op">(</span>method <span class="op">=</span> <span class="st">"loess"</span>,se<span class="op">=</span><span class="cn">F</span><span class="op">)</span><span class="op">+</span></span>
-<span>    <span class="fu">facet_wrap</span><span class="op">(</span><span class="fu">vars</span><span class="op">(</span><span class="va">FIELD</span><span class="op">)</span>,labeller <span class="op">=</span> <span class="st">"label_both"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu">ggplot</span><span class="op">(</span><span class="va">rfb</span>, <span class="fu">aes</span><span class="op">(</span><span class="va">Time</span>, <span class="va">richness</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">geom_point</span><span class="op">(</span>pch <span class="op">=</span> <span class="fl">21</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">geom_smooth</span><span class="op">(</span>method <span class="op">=</span> <span class="st">"loess"</span>, se <span class="op">=</span> <span class="cn">F</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">facet_wrap</span><span class="op">(</span><span class="fu">vars</span><span class="op">(</span><span class="va">FIELD</span><span class="op">)</span>, labeller <span class="op">=</span> <span class="st">"label_both"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
 <figure class="figure"><p><img src="GEE_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
@@ -434,21 +439,19 @@ window.Quarto = {
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">owls</span> <span class="op">&lt;-</span> <span class="fu">read_delim</span><span class="op">(</span><span class="st">"data/AED/Owls.txt"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">owls</span> <span class="op">|&gt;</span> </span>
-<span>    <span class="fu">mutate</span><span class="op">(</span></span>
-<span>        NCalls<span class="op">=</span><span class="va">SiblingNegotiation</span>,</span>
-<span>        log_broodsize<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">BroodSize</span><span class="op">)</span>,</span>
-<span>    <span class="op">)</span><span class="op">-&gt;</span><span class="va">owls</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="va">owls</span> <span class="op">|&gt;</span></span>
+<span>    <span class="fu">mutate</span><span class="op">(</span>NCalls <span class="op">=</span> <span class="va">SiblingNegotiation</span>, log_broodsize <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">BroodSize</span><span class="op">)</span>, <span class="op">)</span> <span class="op">-&gt;</span></span>
+<span>    <span class="va">owls</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">de</span> <span class="op">&lt;-</span> <span class="fu">read_delim</span><span class="op">(</span><span class="st">"data/AED/DeerEcervi.txt"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">de</span> <span class="op">|&gt;</span> </span>
+<span><span class="va">de</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu">mutate</span><span class="op">(</span></span>
-<span>        Ecervi_binary <span class="op">=</span> <span class="fu">if_else</span><span class="op">(</span><span class="va">Ecervi</span><span class="op">&gt;</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="va">Ecervi</span><span class="op">)</span>,</span>
+<span>        Ecervi_binary <span class="op">=</span> <span class="fu">if_else</span><span class="op">(</span><span class="va">Ecervi</span> <span class="op">&gt;</span> <span class="fl">0</span>, <span class="fl">1</span>, <span class="va">Ecervi</span><span class="op">)</span>,</span>
 <span>        Sex <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">Sex</span><span class="op">)</span>,</span>
-<span>        Length_center <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/scale.html">scale</a></span><span class="op">(</span><span class="va">Length</span>,center<span class="op">=</span><span class="cn">T</span> ,scale <span class="op">=</span><span class="cn">F</span><span class="op">)</span>,</span>
+<span>        Length_center <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/scale.html">scale</a></span><span class="op">(</span><span class="va">Length</span>, center <span class="op">=</span> <span class="cn">T</span> , scale <span class="op">=</span> <span class="cn">F</span><span class="op">)</span>,</span>
 <span>    <span class="op">)</span> <span class="op">-&gt;</span> <span class="va">de</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
@@ -461,7 +464,7 @@ window.Quarto = {
 \eta = \beta  \mathbf{X}+ \alpha
 \]</span></p>
 <p><span class="math display">\[
-E(y)=\eta=g^{-1}(\eta)
+E(y)=g^{-1}(\eta)
 \]</span></p>
 <p>对于计数数据：</p>
 <p><span class="math display">\[
@@ -540,19 +543,13 @@ V_i=A_i^{1/2}R(\alpha)A_i^{1/2}\ \Phi
 <p><span class="math display">\[
 U(\beta)=\sum_{i=1}^{n} D'_iV_i^{-1}(y_i-\mu_i)=0
 \]</span></p>
-<p>其中，</p>
-<p><span class="math display">\[
-D'_i=(\frac{\partial \mu_i}{\partial \beta} )'
-\]</span></p>
-<p>其中U(β) 是一个包含待估计参数的函数，D是quasi-deviance，V是方差-协方差矩阵，R（α）是相关性结构矩阵，y 是观测数据，μ 是模型的均值预测值。采用迭代重复加权最小二乘法（iteratively reweighted least squares (IWLS)），偏微分方程估计参数。</p>
+<p>其中，$U(β) $是一个包含待估计参数的函数，quasi-deviance <span class="math inline">\(D'_i = \left(\frac{\partial \mu_i}{\partial \beta}\right)'\)</span>，<span class="math inline">\(V_i\)</span> 是方差-协方差矩阵，<span class="math inline">\(R(\alpha)\)</span> 是相关性结构矩阵，y 是观测数据，μ 是模型的均值预测值。采用迭代重复加权最小二乘法（iteratively reweighted least squares ，IWLS)），偏微分方程估计参数。</p>
 </section><section id="gee-1" class="level2" data-number="19.6"><h2 data-number="19.6" class="anchored" data-anchor-id="gee-1">
 <span class="header-section-number">19.6</span> <code>gee</code>
 </h2>
 <p><a href="https://www.statsmodels.org/stable//gee.html" class="uri">https://www.statsmodels.org/stable//gee.html</a></p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://svn.r-project.org/R-packages/trunk/nlme/">nlme</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">epil</span>,package <span class="op">=</span> <span class="st">"MASS"</span><span class="op">)</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">epil</span>,package <span class="op">=</span> <span class="st">"MASS"</span><span class="op">)</span></span>
 <span><span class="va">Oxboys</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">18</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div class="kable-table">
@@ -892,6 +889,8 @@ cor(Y_{is},Y_{it})=0.422^{|s-t|}
 <span><span class="co">#&gt;  -451.065  -457.436   230.718     5.185     2.000  -447.637</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+<section id="示例" class="level3" data-number="19.7.1"><h3 data-number="19.7.1" class="anchored" data-anchor-id="示例">
+<span class="header-section-number">19.7.1</span> 示例</h3>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">read_delim</span><span class="op">(</span><span class="st">"data/麻醉诱导时相.txt"</span><span class="op">)</span></span>
 <span><span class="va">df_long</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">|&gt;</span> <span class="fu">pivot_longer</span><span class="op">(</span></span>
@@ -975,7 +974,7 @@ cor(Y_{is},Y_{it})=0.422^{|s-t|}
 
 <!-- -->
 
-</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -1435,8 +1434,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./LME.html" class="pagination-link" aria-label="线性混合效应模型">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">线性混合效应模型</span></span>
+      <a href="./LME.html" class="pagination-link" aria-label="线性混合效应">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">线性混合效应</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
@@ -1449,15 +1448,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Mixed Effects Models and Extensions in Ecology with R 第12章</span><span class="co">](https://link.springer.com/book/10.1007/978-0-387-87458-6)</span></span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>广义估计方程（Generalized Estimating Equations，GEE）用于分析重复测量、相关数据的统计推断。GEE的核心思想是通过建立一个<span class="in">`广义线性模型`</span>来估计一组总体平均参数，同时考虑数据的相关性结构和缺失数据，而不需要假设数据的具体分布形式，从而使其适用于各组类型的数据，包括二项分布、正态分布、负二项分布、泊松分布等。</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>广义估计方程（Generalized Estimating Equations，GEE）是一种用于分析重复测量或相关数据的统计方法。 GEE的核心思想是通过建立一个<span class="in">`广义线性模型`</span>来估计一组总体均值参数，同时考虑数据的相关性结构和缺失数据，而不依赖于特定的分布假设，从而使其适用于多种数据类型，包括二项分布、正态分布、负二项分布。</span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="fu">## 数据集</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="fu">## 数据集处理</span></span>
 <span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">数据集 Analyzing ecological data</span><span class="co">](https://github.com/romunov/AED)</span></span>
 <span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>rfb <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"data/AED/RiceFieldBirds.txt"</span>)</span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>rfb<span class="sc">$</span>richness <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(rfb[,<span class="dv">8</span><span class="sc">:</span><span class="dv">56</span>] <span class="sc">&gt;</span><span class="dv">0</span>)</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>rfb<span class="sc">$</span>richness <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(rfb[, <span class="dv">8</span><span class="sc">:</span><span class="dv">56</span>] <span class="sc">&gt;</span> <span class="dv">0</span>)</span>
 <span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>rfb <span class="sc">|&gt;</span> <span class="fu">mutate</span>(</span>
 <span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">FIELD =</span> <span class="fu">factor</span>(FIELD),</span>
 <span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">SPTREAT =</span> <span class="fu">factor</span>(SPTREAT),</span>
@@ -1467,211 +1466,203 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>) <span class="ot">-&gt;</span> rfb</span>
 <span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(rfb,<span class="fu">aes</span>(Time,richness))<span class="sc">+</span></span>
-<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">pch=</span><span class="dv">21</span>)<span class="sc">+</span></span>
-<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"loess"</span>,<span class="at">se=</span>F)<span class="sc">+</span></span>
-<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(FIELD),<span class="at">labeller =</span> <span class="st">"label_both"</span>)</span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(rfb, <span class="fu">aes</span>(Time, richness)) <span class="sc">+</span></span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">pch =</span> <span class="dv">21</span>) <span class="sc">+</span></span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"loess"</span>, <span class="at">se =</span> F) <span class="sc">+</span></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(FIELD), <span class="at">labeller =</span> <span class="st">"label_both"</span>)</span>
 <span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>owls <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"data/AED/Owls.txt"</span>)</span>
 <span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>owls <span class="sc">|&gt;</span> </span>
-<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
-<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>        <span class="at">NCalls=</span>SiblingNegotiation,</span>
-<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>        <span class="at">log_broodsize=</span><span class="fu">log</span>(BroodSize),</span>
-<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>    )<span class="ot">-&gt;</span>owls</span>
-<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a>de <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"data/AED/DeerEcervi.txt"</span>)</span>
-<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a>de <span class="sc">|&gt;</span> </span>
-<span id="cb13-49"><a href="#cb13-49" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
-<span id="cb13-50"><a href="#cb13-50" aria-hidden="true" tabindex="-1"></a>        <span class="at">Ecervi_binary =</span> <span class="fu">if_else</span>(Ecervi<span class="sc">&gt;</span><span class="dv">0</span>,<span class="dv">1</span>,Ecervi),</span>
-<span id="cb13-51"><a href="#cb13-51" aria-hidden="true" tabindex="-1"></a>        <span class="at">Sex =</span> <span class="fu">factor</span>(Sex),</span>
-<span id="cb13-52"><a href="#cb13-52" aria-hidden="true" tabindex="-1"></a>        <span class="at">Length_center =</span> <span class="fu">scale</span>(Length,<span class="at">center=</span>T ,<span class="at">scale =</span>F),</span>
-<span id="cb13-53"><a href="#cb13-53" aria-hidden="true" tabindex="-1"></a>    ) <span class="ot">-&gt;</span> de</span>
-<span id="cb13-54"><a href="#cb13-54" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>owls <span class="sc">|&gt;</span></span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">NCalls =</span> SiblingNegotiation, <span class="at">log_broodsize =</span> <span class="fu">log</span>(BroodSize), ) <span class="ot">-&gt;</span></span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>    owls</span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a>de <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"data/AED/DeerEcervi.txt"</span>)</span>
+<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a>de <span class="sc">|&gt;</span></span>
+<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a>        <span class="at">Ecervi_binary =</span> <span class="fu">if_else</span>(Ecervi <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="dv">1</span>, Ecervi),</span>
+<span id="cb13-49"><a href="#cb13-49" aria-hidden="true" tabindex="-1"></a>        <span class="at">Sex =</span> <span class="fu">factor</span>(Sex),</span>
+<span id="cb13-50"><a href="#cb13-50" aria-hidden="true" tabindex="-1"></a>        <span class="at">Length_center =</span> <span class="fu">scale</span>(Length, <span class="at">center =</span> T , <span class="at">scale =</span> F),</span>
+<span id="cb13-51"><a href="#cb13-51" aria-hidden="true" tabindex="-1"></a>    ) <span class="ot">-&gt;</span> de</span>
+<span id="cb13-52"><a href="#cb13-52" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb13-53"><a href="#cb13-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-54"><a href="#cb13-54" aria-hidden="true" tabindex="-1"></a><span class="fu">## GLM 连接函数</span></span>
 <span id="cb13-55"><a href="#cb13-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-56"><a href="#cb13-56" aria-hidden="true" tabindex="-1"></a><span class="fu">## GLM 连接函数</span></span>
+<span id="cb13-56"><a href="#cb13-56" aria-hidden="true" tabindex="-1"></a>GLM的形式如下：</span>
 <span id="cb13-57"><a href="#cb13-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-58"><a href="#cb13-58" aria-hidden="true" tabindex="-1"></a>GLM的形式如下：</span>
+<span id="cb13-58"><a href="#cb13-58" aria-hidden="true" tabindex="-1"></a>$$ g(\mu_{ij})=\beta_0+\beta_1x_{ij_1}+\beta_2x_{ij_2}+...+\beta_px_{ij_p} $$</span>
 <span id="cb13-59"><a href="#cb13-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-60"><a href="#cb13-60" aria-hidden="true" tabindex="-1"></a>$$ g(\mu_{ij})=\beta_0+\beta_1x_{ij_1}+\beta_2x_{ij_2}+...+\beta_px_{ij_p} $$</span>
+<span id="cb13-60"><a href="#cb13-60" aria-hidden="true" tabindex="-1"></a>其中，<span class="in">`g()`</span> 是一个连接函数，用于将自变量的线性组合与因变量的均值联系起来。常见的连接函数包括恒等连接函数（identity）、logistic连接函数（logit）、逆正弦连接函数（inverse sine）函数等。<span class="in">`i`</span> 表示观测对象的索引，<span class="in">`j`</span> 表示时间点或相关性结构的索引，<span class="in">`uij`</span> 表示因变量的均值，<span class="in">`β`</span> 表示待估计的系数，<span class="in">`Xij`</span> 表示自变量。</span>
 <span id="cb13-61"><a href="#cb13-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-62"><a href="#cb13-62" aria-hidden="true" tabindex="-1"></a>其中，<span class="in">`g()`</span> 是一个连接函数，用于将自变量的线性组合与因变量的均值联系起来。常见的连接函数包括恒等连接函数（identity）、logistic连接函数（logit）、逆正弦连接函数（inverse sine）函数等。<span class="in">`i`</span> 表示观测对象的索引，<span class="in">`j`</span> 表示时间点或相关性结构的索引，<span class="in">`uij`</span> 表示因变量的均值，<span class="in">`β`</span> 表示待估计的系数，<span class="in">`Xij`</span> 表示自变量。</span>
-<span id="cb13-63"><a href="#cb13-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-62"><a href="#cb13-62" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb13-63"><a href="#cb13-63" aria-hidden="true" tabindex="-1"></a>\eta = \beta  \mathbf{X}+ \alpha</span>
 <span id="cb13-64"><a href="#cb13-64" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb13-65"><a href="#cb13-65" aria-hidden="true" tabindex="-1"></a>\eta = \beta  \mathbf{X}+ \alpha</span>
+<span id="cb13-65"><a href="#cb13-65" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-66"><a href="#cb13-66" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb13-67"><a href="#cb13-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-67"><a href="#cb13-67" aria-hidden="true" tabindex="-1"></a>E(y)=g^{-1}(\eta)</span>
 <span id="cb13-68"><a href="#cb13-68" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb13-69"><a href="#cb13-69" aria-hidden="true" tabindex="-1"></a>E(y)=\eta=g^{-1}(\eta)</span>
-<span id="cb13-70"><a href="#cb13-70" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb13-69"><a href="#cb13-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-70"><a href="#cb13-70" aria-hidden="true" tabindex="-1"></a>对于计数数据：</span>
 <span id="cb13-71"><a href="#cb13-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-72"><a href="#cb13-72" aria-hidden="true" tabindex="-1"></a>对于计数数据：</span>
-<span id="cb13-73"><a href="#cb13-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-72"><a href="#cb13-72" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb13-73"><a href="#cb13-73" aria-hidden="true" tabindex="-1"></a>E(y)=e^{\eta}=e^{\beta \mathbf{X} +\alpha}, 此时g(\mu)=\ln(\mu)=\mathbf{X}\beta</span>
 <span id="cb13-74"><a href="#cb13-74" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb13-75"><a href="#cb13-75" aria-hidden="true" tabindex="-1"></a>E(y)=e^{\eta}=e^{\beta \mathbf{X} +\alpha}, 此时g(\mu)=\ln(\mu)=\mathbf{X}\beta</span>
-<span id="cb13-76"><a href="#cb13-76" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb13-77"><a href="#cb13-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-80"><a href="#cb13-80" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb13-81"><a href="#cb13-81" aria-hidden="true" tabindex="-1"></a>rfb_glm <span class="ot">&lt;-</span> <span class="fu">glm</span>(richness <span class="sc">~</span> <span class="fu">offset</span>(log_AREA) <span class="sc">+</span>SPTREAT <span class="sc">+</span> DEPTH <span class="sc">+</span>DEPTH2,</span>
-<span id="cb13-82"><a href="#cb13-82" aria-hidden="true" tabindex="-1"></a>            <span class="at">family =</span> <span class="fu">quasipoisson</span>(<span class="at">link =</span> <span class="st">"log"</span>),</span>
-<span id="cb13-83"><a href="#cb13-83" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> rfb)</span>
-<span id="cb13-84"><a href="#cb13-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-85"><a href="#cb13-85" aria-hidden="true" tabindex="-1"></a>owls_glm <span class="ot">&lt;-</span> <span class="fu">glm</span>(</span>
-<span id="cb13-86"><a href="#cb13-86" aria-hidden="true" tabindex="-1"></a>    NCalls <span class="sc">~</span> <span class="fu">offset</span>(log_broodsize) <span class="sc">+</span> SexParent <span class="sc">*</span> FoodTreatment <span class="sc">+</span> SexParent <span class="sc">*</span></span>
-<span id="cb13-87"><a href="#cb13-87" aria-hidden="true" tabindex="-1"></a>        ArrivalTime,</span>
-<span id="cb13-88"><a href="#cb13-88" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>),</span>
-<span id="cb13-89"><a href="#cb13-89" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> owls</span>
-<span id="cb13-90"><a href="#cb13-90" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-75"><a href="#cb13-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-78"><a href="#cb13-78" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb13-79"><a href="#cb13-79" aria-hidden="true" tabindex="-1"></a>rfb_glm <span class="ot">&lt;-</span> <span class="fu">glm</span>(richness <span class="sc">~</span> <span class="fu">offset</span>(log_AREA) <span class="sc">+</span>SPTREAT <span class="sc">+</span> DEPTH <span class="sc">+</span>DEPTH2,</span>
+<span id="cb13-80"><a href="#cb13-80" aria-hidden="true" tabindex="-1"></a>            <span class="at">family =</span> <span class="fu">quasipoisson</span>(<span class="at">link =</span> <span class="st">"log"</span>),</span>
+<span id="cb13-81"><a href="#cb13-81" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> rfb)</span>
+<span id="cb13-82"><a href="#cb13-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-83"><a href="#cb13-83" aria-hidden="true" tabindex="-1"></a>owls_glm <span class="ot">&lt;-</span> <span class="fu">glm</span>(</span>
+<span id="cb13-84"><a href="#cb13-84" aria-hidden="true" tabindex="-1"></a>    NCalls <span class="sc">~</span> <span class="fu">offset</span>(log_broodsize) <span class="sc">+</span> SexParent <span class="sc">*</span> FoodTreatment <span class="sc">+</span> SexParent <span class="sc">*</span></span>
+<span id="cb13-85"><a href="#cb13-85" aria-hidden="true" tabindex="-1"></a>        ArrivalTime,</span>
+<span id="cb13-86"><a href="#cb13-86" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>),</span>
+<span id="cb13-87"><a href="#cb13-87" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> owls</span>
+<span id="cb13-88"><a href="#cb13-88" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-89"><a href="#cb13-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-90"><a href="#cb13-90" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb13-91"><a href="#cb13-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-92"><a href="#cb13-92" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb13-92"><a href="#cb13-92" aria-hidden="true" tabindex="-1"></a>对于二分类数据：</span>
 <span id="cb13-93"><a href="#cb13-93" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-94"><a href="#cb13-94" aria-hidden="true" tabindex="-1"></a>对于二分类数据：</span>
-<span id="cb13-95"><a href="#cb13-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-94"><a href="#cb13-94" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb13-95"><a href="#cb13-95" aria-hidden="true" tabindex="-1"></a>E(y)=\frac{e^{\beta \mathbf{X} +\alpha}}{1+e^{\beta\mathbf{X}+\alpha}}, 此时g(\mu)=\ln(\frac{\mu}{1-\mu})=logit(\mu)</span>
 <span id="cb13-96"><a href="#cb13-96" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb13-97"><a href="#cb13-97" aria-hidden="true" tabindex="-1"></a>E(y)=\frac{e^{\beta \mathbf{X} +\alpha}}{1+e^{\beta\mathbf{X}+\alpha}}, 此时g(\mu)=\ln(\frac{\mu}{1-\mu})=logit(\mu)</span>
-<span id="cb13-98"><a href="#cb13-98" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb13-99"><a href="#cb13-99" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-102"><a href="#cb13-102" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb13-103"><a href="#cb13-103" aria-hidden="true" tabindex="-1"></a>de_glm <span class="ot">&lt;-</span> <span class="fu">glm</span>(Ecervi_binary <span class="sc">~</span> Length_center <span class="sc">*</span>Sex,</span>
-<span id="cb13-104"><a href="#cb13-104" aria-hidden="true" tabindex="-1"></a>              <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">"logit"</span>),</span>
-<span id="cb13-105"><a href="#cb13-105" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> de)</span>
-<span id="cb13-106"><a href="#cb13-106" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(de_glm)</span>
-<span id="cb13-107"><a href="#cb13-107" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb13-97"><a href="#cb13-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-100"><a href="#cb13-100" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb13-101"><a href="#cb13-101" aria-hidden="true" tabindex="-1"></a>de_glm <span class="ot">&lt;-</span> <span class="fu">glm</span>(Ecervi_binary <span class="sc">~</span> Length_center <span class="sc">*</span>Sex,</span>
+<span id="cb13-102"><a href="#cb13-102" aria-hidden="true" tabindex="-1"></a>              <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">"logit"</span>),</span>
+<span id="cb13-103"><a href="#cb13-103" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> de)</span>
+<span id="cb13-104"><a href="#cb13-104" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(de_glm)</span>
+<span id="cb13-105"><a href="#cb13-105" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb13-106"><a href="#cb13-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-107"><a href="#cb13-107" aria-hidden="true" tabindex="-1"></a><span class="fu">## 方差</span></span>
 <span id="cb13-108"><a href="#cb13-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-109"><a href="#cb13-109" aria-hidden="true" tabindex="-1"></a><span class="fu">## 方差</span></span>
-<span id="cb13-110"><a href="#cb13-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-109"><a href="#cb13-109" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb13-110"><a href="#cb13-110" aria-hidden="true" tabindex="-1"></a>var(Y_{is}|X_{is})=\Phi × \nu(\mu_{is})</span>
 <span id="cb13-111"><a href="#cb13-111" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb13-112"><a href="#cb13-112" aria-hidden="true" tabindex="-1"></a>var(Y_{is}|X_{is})=\Phi × \nu(\mu_{is})</span>
-<span id="cb13-113"><a href="#cb13-113" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb13-112"><a href="#cb13-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-113"><a href="#cb13-113" aria-hidden="true" tabindex="-1"></a>其中，Φ 是scale parameter （overdispersion），v() 是方差函数。</span>
 <span id="cb13-114"><a href="#cb13-114" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-115"><a href="#cb13-115" aria-hidden="true" tabindex="-1"></a>其中，Φ 是scale parameter （overdispersion），v() 是方差函数。</span>
+<span id="cb13-115"><a href="#cb13-115" aria-hidden="true" tabindex="-1"></a><span class="fu">## 相关性结构</span></span>
 <span id="cb13-116"><a href="#cb13-116" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-117"><a href="#cb13-117" aria-hidden="true" tabindex="-1"></a><span class="fu">## 相关性结构</span></span>
+<span id="cb13-117"><a href="#cb13-117" aria-hidden="true" tabindex="-1"></a>R(α)</span>
 <span id="cb13-118"><a href="#cb13-118" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-119"><a href="#cb13-119" aria-hidden="true" tabindex="-1"></a>R(α)</span>
+<span id="cb13-119"><a href="#cb13-119" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>非结构化相关：cor(Y~is~,Y~it~)=α~st~</span>
 <span id="cb13-120"><a href="#cb13-120" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-121"><a href="#cb13-121" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>非结构化相关：cor(Y~is~,Y~it~)=α~st~</span>
+<span id="cb13-121"><a href="#cb13-121" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>自回归相关：cor(Y~is~,Y~it~)=α^\|s-t\|^</span>
 <span id="cb13-122"><a href="#cb13-122" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-123"><a href="#cb13-123" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>自回归相关：cor(Y~is~,Y~it~)=α^\|s-t\|^</span>
+<span id="cb13-123"><a href="#cb13-123" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>exchangeable 等相关：cor(Y~is~,Y~it~)=α</span>
 <span id="cb13-124"><a href="#cb13-124" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-125"><a href="#cb13-125" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>exchangeable 等相关：cor(Y~is~,Y~it~)=α</span>
+<span id="cb13-125"><a href="#cb13-125" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>independence，独立，cor(Y~is~,Y~it~)=**I**</span>
 <span id="cb13-126"><a href="#cb13-126" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-127"><a href="#cb13-127" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>independence，独立，cor(Y~is~,Y~it~)=**I**</span>
+<span id="cb13-127"><a href="#cb13-127" aria-hidden="true" tabindex="-1"></a><span class="ss">5.  </span></span>
 <span id="cb13-128"><a href="#cb13-128" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-129"><a href="#cb13-129" aria-hidden="true" tabindex="-1"></a><span class="ss">5.  </span></span>
+<span id="cb13-129"><a href="#cb13-129" aria-hidden="true" tabindex="-1"></a><span class="fu">## GEE</span></span>
 <span id="cb13-130"><a href="#cb13-130" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-131"><a href="#cb13-131" aria-hidden="true" tabindex="-1"></a><span class="fu">## GEE</span></span>
+<span id="cb13-131"><a href="#cb13-131" aria-hidden="true" tabindex="-1"></a>GLM的期望和方差：</span>
 <span id="cb13-132"><a href="#cb13-132" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-133"><a href="#cb13-133" aria-hidden="true" tabindex="-1"></a>GLM的期望和方差：</span>
+<span id="cb13-133"><a href="#cb13-133" aria-hidden="true" tabindex="-1"></a>$$ E(Y_{ij})=b'(\theta_{ij})<span class="sc">\\</span> Var(Y_{ij})=b''(\theta_{ij})\ \Phi $$</span>
 <span id="cb13-134"><a href="#cb13-134" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-135"><a href="#cb13-135" aria-hidden="true" tabindex="-1"></a>$$ E(Y_{ij})=b'(\theta_{ij})<span class="sc">\\</span> Var(Y_{ij})=b''(\theta_{ij})\ \Phi $$</span>
+<span id="cb13-135"><a href="#cb13-135" aria-hidden="true" tabindex="-1"></a>假定潜在的随机成分V~i~ ：</span>
 <span id="cb13-136"><a href="#cb13-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-137"><a href="#cb13-137" aria-hidden="true" tabindex="-1"></a>假定潜在的随机成分V~i~ ：</span>
-<span id="cb13-138"><a href="#cb13-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-137"><a href="#cb13-137" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb13-138"><a href="#cb13-138" aria-hidden="true" tabindex="-1"></a>V_i=A_i^{1/2}R(\alpha)A_i^{1/2}\ \Phi</span>
 <span id="cb13-139"><a href="#cb13-139" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb13-140"><a href="#cb13-140" aria-hidden="true" tabindex="-1"></a>V_i=A_i^{1/2}R(\alpha)A_i^{1/2}\ \Phi</span>
-<span id="cb13-141"><a href="#cb13-141" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb13-140"><a href="#cb13-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-141"><a href="#cb13-141" aria-hidden="true" tabindex="-1"></a>其中，<span class="in">`Ai =diag（b''(θi1)，...，b''(θij)）`</span> 。</span>
 <span id="cb13-142"><a href="#cb13-142" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-143"><a href="#cb13-143" aria-hidden="true" tabindex="-1"></a>其中，<span class="in">`Ai =diag（b''(θi1)，...，b''(θij)）`</span> 。</span>
+<span id="cb13-143"><a href="#cb13-143" aria-hidden="true" tabindex="-1"></a>GEE的形式如下：</span>
 <span id="cb13-144"><a href="#cb13-144" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-145"><a href="#cb13-145" aria-hidden="true" tabindex="-1"></a>GEE的形式如下：</span>
-<span id="cb13-146"><a href="#cb13-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-145"><a href="#cb13-145" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb13-146"><a href="#cb13-146" aria-hidden="true" tabindex="-1"></a>U(\beta)=\sum_{i=1}^{n} D'_iV_i^{-1}(y_i-\mu_i)=0</span>
 <span id="cb13-147"><a href="#cb13-147" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb13-148"><a href="#cb13-148" aria-hidden="true" tabindex="-1"></a>U(\beta)=\sum_{i=1}^{n} D'_iV_i^{-1}(y_i-\mu_i)=0</span>
-<span id="cb13-149"><a href="#cb13-149" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb13-148"><a href="#cb13-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-149"><a href="#cb13-149" aria-hidden="true" tabindex="-1"></a>其中，\$U(β) \$是一个包含待估计参数的函数，quasi-deviance $D'_i = \left(\frac{\partial \mu_i}{\partial \beta}\right)'$，$V_i$ 是方差-协方差矩阵，$R(\alpha)$ 是相关性结构矩阵，y 是观测数据，μ 是模型的均值预测值。采用迭代重复加权最小二乘法（iteratively reweighted least squares ，IWLS)），偏微分方程估计参数。</span>
 <span id="cb13-150"><a href="#cb13-150" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-151"><a href="#cb13-151" aria-hidden="true" tabindex="-1"></a>其中，</span>
+<span id="cb13-151"><a href="#cb13-151" aria-hidden="true" tabindex="-1"></a><span class="fu">## `gee`</span></span>
 <span id="cb13-152"><a href="#cb13-152" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-153"><a href="#cb13-153" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb13-154"><a href="#cb13-154" aria-hidden="true" tabindex="-1"></a>D'_i=(\frac{\partial \mu_i}{\partial \beta} )'</span>
-<span id="cb13-155"><a href="#cb13-155" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb13-156"><a href="#cb13-156" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-157"><a href="#cb13-157" aria-hidden="true" tabindex="-1"></a>其中U(β) 是一个包含待估计参数的函数，D是quasi-deviance，V是方差-协方差矩阵，R（α）是相关性结构矩阵，y 是观测数据，μ 是模型的均值预测值。采用迭代重复加权最小二乘法（iteratively reweighted least squares (IWLS)），偏微分方程估计参数。</span>
-<span id="cb13-158"><a href="#cb13-158" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-159"><a href="#cb13-159" aria-hidden="true" tabindex="-1"></a><span class="fu">## `gee`</span></span>
+<span id="cb13-153"><a href="#cb13-153" aria-hidden="true" tabindex="-1"></a><span class="ot">&lt;https://www.statsmodels.org/stable//gee.html&gt;</span></span>
+<span id="cb13-154"><a href="#cb13-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-157"><a href="#cb13-157" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb13-158"><a href="#cb13-158" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(epil,<span class="at">package =</span> <span class="st">"MASS"</span>)</span>
+<span id="cb13-159"><a href="#cb13-159" aria-hidden="true" tabindex="-1"></a>Oxboys <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="at">n=</span><span class="dv">18</span>)</span>
 <span id="cb13-160"><a href="#cb13-160" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-161"><a href="#cb13-161" aria-hidden="true" tabindex="-1"></a><span class="ot">&lt;https://www.statsmodels.org/stable//gee.html&gt;</span></span>
-<span id="cb13-162"><a href="#cb13-162" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-165"><a href="#cb13-165" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb13-166"><a href="#cb13-166" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nlme)</span>
-<span id="cb13-167"><a href="#cb13-167" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-168"><a href="#cb13-168" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(epil,<span class="at">package =</span> <span class="st">"MASS"</span>)</span>
-<span id="cb13-169"><a href="#cb13-169" aria-hidden="true" tabindex="-1"></a>Oxboys <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="at">n=</span><span class="dv">18</span>)</span>
-<span id="cb13-170"><a href="#cb13-170" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-171"><a href="#cb13-171" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-172"><a href="#cb13-172" aria-hidden="true" tabindex="-1"></a>df_long <span class="ot">&lt;-</span> Oxboys</span>
-<span id="cb13-173"><a href="#cb13-173" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb13-161"><a href="#cb13-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-162"><a href="#cb13-162" aria-hidden="true" tabindex="-1"></a>df_long <span class="ot">&lt;-</span> Oxboys</span>
+<span id="cb13-163"><a href="#cb13-163" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb13-164"><a href="#cb13-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-167"><a href="#cb13-167" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb13-168"><a href="#cb13-168" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gee)</span>
+<span id="cb13-169"><a href="#cb13-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-170"><a href="#cb13-170" aria-hidden="true" tabindex="-1"></a>g1 <span class="ot">&lt;-</span> <span class="fu">gee</span>(height<span class="sc">~</span>age,<span class="at">data =</span> df_long ,<span class="at">id =</span> Subject,<span class="at">corstr =</span> <span class="st">"AR-M"</span>,<span class="at">Mv =</span> <span class="dv">1</span>)</span>
+<span id="cb13-171"><a href="#cb13-171" aria-hidden="true" tabindex="-1"></a>g1</span>
+<span id="cb13-172"><a href="#cb13-172" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(g1)</span>
+<span id="cb13-173"><a href="#cb13-173" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-174"><a href="#cb13-174" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-177"><a href="#cb13-177" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb13-178"><a href="#cb13-178" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gee)</span>
-<span id="cb13-179"><a href="#cb13-179" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-180"><a href="#cb13-180" aria-hidden="true" tabindex="-1"></a>g1 <span class="ot">&lt;-</span> <span class="fu">gee</span>(height<span class="sc">~</span>age,<span class="at">data =</span> df_long ,<span class="at">id =</span> Subject,<span class="at">corstr =</span> <span class="st">"AR-M"</span>,<span class="at">Mv =</span> <span class="dv">1</span>)</span>
-<span id="cb13-181"><a href="#cb13-181" aria-hidden="true" tabindex="-1"></a>g1</span>
-<span id="cb13-182"><a href="#cb13-182" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(g1)</span>
-<span id="cb13-183"><a href="#cb13-183" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-184"><a href="#cb13-184" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-185"><a href="#cb13-185" aria-hidden="true" tabindex="-1"></a>gee1 <span class="ot">&lt;-</span> <span class="fu">gee</span>(y <span class="sc">~</span> age <span class="sc">+</span> trt <span class="sc">+</span> base,<span class="at">id=</span>subject,<span class="at">data =</span> epil,<span class="at">family =</span> poisson,<span class="at">corstr =</span><span class="st">"exchangeable"</span> )</span>
-<span id="cb13-186"><a href="#cb13-186" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(gee1)</span>
-<span id="cb13-187"><a href="#cb13-187" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb13-188"><a href="#cb13-188" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-189"><a href="#cb13-189" aria-hidden="true" tabindex="-1"></a><span class="fu">## `geepack`</span></span>
-<span id="cb13-190"><a href="#cb13-190" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-193"><a href="#cb13-193" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb13-194"><a href="#cb13-194" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(geepack)</span>
-<span id="cb13-195"><a href="#cb13-195" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-196"><a href="#cb13-196" aria-hidden="true" tabindex="-1"></a>rfb_gee <span class="ot">&lt;-</span> <span class="fu">geeglm</span>(richness <span class="sc">~</span> <span class="fu">offset</span>(log_AREA) <span class="sc">+</span>SPTREAT <span class="sc">+</span> DEPTH <span class="sc">+</span>DEPTH2,</span>
-<span id="cb13-197"><a href="#cb13-197" aria-hidden="true" tabindex="-1"></a>            <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>),</span>
-<span id="cb13-198"><a href="#cb13-198" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> rfb,</span>
-<span id="cb13-199"><a href="#cb13-199" aria-hidden="true" tabindex="-1"></a>            <span class="at">id=</span>FIELD,</span>
-<span id="cb13-200"><a href="#cb13-200" aria-hidden="true" tabindex="-1"></a>            <span class="at">corstr =</span> <span class="st">"ar1"</span>)</span>
-<span id="cb13-201"><a href="#cb13-201" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-202"><a href="#cb13-202" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(rfb_gee)</span>
-<span id="cb13-203"><a href="#cb13-203" aria-hidden="true" tabindex="-1"></a>rfb_gee2 <span class="ot">&lt;-</span> <span class="fu">geeglm</span>(richness <span class="sc">~</span> <span class="fu">offset</span>(log_AREA) <span class="sc">+</span>SPTREAT ,</span>
-<span id="cb13-204"><a href="#cb13-204" aria-hidden="true" tabindex="-1"></a>            <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>),</span>
-<span id="cb13-205"><a href="#cb13-205" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> rfb,</span>
-<span id="cb13-206"><a href="#cb13-206" aria-hidden="true" tabindex="-1"></a>            <span class="at">id=</span>FIELD,</span>
-<span id="cb13-207"><a href="#cb13-207" aria-hidden="true" tabindex="-1"></a>            <span class="at">corstr =</span> <span class="st">"ar1"</span>)</span>
+<span id="cb13-175"><a href="#cb13-175" aria-hidden="true" tabindex="-1"></a>gee1 <span class="ot">&lt;-</span> <span class="fu">gee</span>(y <span class="sc">~</span> age <span class="sc">+</span> trt <span class="sc">+</span> base,<span class="at">id=</span>subject,<span class="at">data =</span> epil,<span class="at">family =</span> poisson,<span class="at">corstr =</span><span class="st">"exchangeable"</span> )</span>
+<span id="cb13-176"><a href="#cb13-176" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(gee1)</span>
+<span id="cb13-177"><a href="#cb13-177" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb13-178"><a href="#cb13-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-179"><a href="#cb13-179" aria-hidden="true" tabindex="-1"></a><span class="fu">## `geepack`</span></span>
+<span id="cb13-180"><a href="#cb13-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-183"><a href="#cb13-183" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb13-184"><a href="#cb13-184" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(geepack)</span>
+<span id="cb13-185"><a href="#cb13-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-186"><a href="#cb13-186" aria-hidden="true" tabindex="-1"></a>rfb_gee <span class="ot">&lt;-</span> <span class="fu">geeglm</span>(richness <span class="sc">~</span> <span class="fu">offset</span>(log_AREA) <span class="sc">+</span>SPTREAT <span class="sc">+</span> DEPTH <span class="sc">+</span>DEPTH2,</span>
+<span id="cb13-187"><a href="#cb13-187" aria-hidden="true" tabindex="-1"></a>            <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>),</span>
+<span id="cb13-188"><a href="#cb13-188" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> rfb,</span>
+<span id="cb13-189"><a href="#cb13-189" aria-hidden="true" tabindex="-1"></a>            <span class="at">id=</span>FIELD,</span>
+<span id="cb13-190"><a href="#cb13-190" aria-hidden="true" tabindex="-1"></a>            <span class="at">corstr =</span> <span class="st">"ar1"</span>)</span>
+<span id="cb13-191"><a href="#cb13-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-192"><a href="#cb13-192" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(rfb_gee)</span>
+<span id="cb13-193"><a href="#cb13-193" aria-hidden="true" tabindex="-1"></a>rfb_gee2 <span class="ot">&lt;-</span> <span class="fu">geeglm</span>(richness <span class="sc">~</span> <span class="fu">offset</span>(log_AREA) <span class="sc">+</span>SPTREAT ,</span>
+<span id="cb13-194"><a href="#cb13-194" aria-hidden="true" tabindex="-1"></a>            <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>),</span>
+<span id="cb13-195"><a href="#cb13-195" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> rfb,</span>
+<span id="cb13-196"><a href="#cb13-196" aria-hidden="true" tabindex="-1"></a>            <span class="at">id=</span>FIELD,</span>
+<span id="cb13-197"><a href="#cb13-197" aria-hidden="true" tabindex="-1"></a>            <span class="at">corstr =</span> <span class="st">"ar1"</span>)</span>
+<span id="cb13-198"><a href="#cb13-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-199"><a href="#cb13-199" aria-hidden="true" tabindex="-1"></a><span class="co"># Wald's Test</span></span>
+<span id="cb13-200"><a href="#cb13-200" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(rfb_gee,rfb_gee2)</span>
+<span id="cb13-201"><a href="#cb13-201" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb13-202"><a href="#cb13-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-203"><a href="#cb13-203" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb13-204"><a href="#cb13-204" aria-hidden="true" tabindex="-1"></a>E(Y_{is})=\mu_{is}=e^{-0.678+0.0498×DEPTH-0.001×DEPTH^2-0.522×SPTREAT_{is}}<span class="sc">\\</span></span>
+<span id="cb13-205"><a href="#cb13-205" aria-hidden="true" tabindex="-1"></a>var(Y_{is})= 2.33 × \mu_{is} <span class="sc">\\</span></span>
+<span id="cb13-206"><a href="#cb13-206" aria-hidden="true" tabindex="-1"></a>cor(Y_{is},Y_{it})=0.422^{|s-t|}</span>
+<span id="cb13-207"><a href="#cb13-207" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb13-208"><a href="#cb13-208" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-209"><a href="#cb13-209" aria-hidden="true" tabindex="-1"></a><span class="co"># Wald's Test</span></span>
-<span id="cb13-210"><a href="#cb13-210" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(rfb_gee,rfb_gee2)</span>
-<span id="cb13-211"><a href="#cb13-211" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb13-212"><a href="#cb13-212" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-213"><a href="#cb13-213" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb13-214"><a href="#cb13-214" aria-hidden="true" tabindex="-1"></a>E(Y_{is})=\mu_{is}=e^{-0.678+0.0498×DEPTH-0.001×DEPTH^2-0.522×SPTREAT_{is}}<span class="sc">\\</span></span>
-<span id="cb13-215"><a href="#cb13-215" aria-hidden="true" tabindex="-1"></a>var(Y_{is})= 2.33 × \mu_{is} <span class="sc">\\</span></span>
-<span id="cb13-216"><a href="#cb13-216" aria-hidden="true" tabindex="-1"></a>cor(Y_{is},Y_{it})=0.422^{|s-t|}</span>
-<span id="cb13-217"><a href="#cb13-217" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb13-218"><a href="#cb13-218" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-219"><a href="#cb13-219" aria-hidden="true" tabindex="-1"></a>作业相关矩阵 <span class="in">`corstr`</span> ，比较QIC，一般越小越好。</span>
-<span id="cb13-220"><a href="#cb13-220" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-223"><a href="#cb13-223" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb13-224"><a href="#cb13-224" aria-hidden="true" tabindex="-1"></a><span class="fu">QIC</span>(rfb_gee)</span>
-<span id="cb13-225"><a href="#cb13-225" aria-hidden="true" tabindex="-1"></a><span class="fu">QIC</span>(rfb_gee2)</span>
-<span id="cb13-226"><a href="#cb13-226" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb13-227"><a href="#cb13-227" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-230"><a href="#cb13-230" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb13-231"><a href="#cb13-231" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"data/麻醉诱导时相.txt"</span>)</span>
-<span id="cb13-232"><a href="#cb13-232" aria-hidden="true" tabindex="-1"></a>df_long <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span> <span class="fu">pivot_longer</span>(</span>
-<span id="cb13-233"><a href="#cb13-233" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"t"</span>),</span>
-<span id="cb13-234"><a href="#cb13-234" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"time"</span>,</span>
-<span id="cb13-235"><a href="#cb13-235" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"SBP"</span></span>
-<span id="cb13-236"><a href="#cb13-236" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-209"><a href="#cb13-209" aria-hidden="true" tabindex="-1"></a>作业相关矩阵 <span class="in">`corstr`</span> ，比较QIC，一般越小越好。</span>
+<span id="cb13-210"><a href="#cb13-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-213"><a href="#cb13-213" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb13-214"><a href="#cb13-214" aria-hidden="true" tabindex="-1"></a><span class="fu">QIC</span>(rfb_gee)</span>
+<span id="cb13-215"><a href="#cb13-215" aria-hidden="true" tabindex="-1"></a><span class="fu">QIC</span>(rfb_gee2)</span>
+<span id="cb13-216"><a href="#cb13-216" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb13-217"><a href="#cb13-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-218"><a href="#cb13-218" aria-hidden="true" tabindex="-1"></a><span class="fu">### 示例</span></span>
+<span id="cb13-219"><a href="#cb13-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-222"><a href="#cb13-222" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb13-223"><a href="#cb13-223" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"data/麻醉诱导时相.txt"</span>)</span>
+<span id="cb13-224"><a href="#cb13-224" aria-hidden="true" tabindex="-1"></a>df_long <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span> <span class="fu">pivot_longer</span>(</span>
+<span id="cb13-225"><a href="#cb13-225" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"t"</span>),</span>
+<span id="cb13-226"><a href="#cb13-226" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"time"</span>,</span>
+<span id="cb13-227"><a href="#cb13-227" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"SBP"</span></span>
+<span id="cb13-228"><a href="#cb13-228" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-229"><a href="#cb13-229" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-230"><a href="#cb13-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-231"><a href="#cb13-231" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb13-232"><a href="#cb13-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-235"><a href="#cb13-235" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb13-236"><a href="#cb13-236" aria-hidden="true" tabindex="-1"></a>g3 <span class="ot">&lt;-</span> <span class="fu">geeglm</span>(SBP<span class="sc">~</span> group <span class="sc">*</span> time,<span class="at">data =</span> df_long ,<span class="at">id =</span> id,<span class="at">corstr =</span> <span class="st">"ar1"</span>)</span>
 <span id="cb13-237"><a href="#cb13-237" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-238"><a href="#cb13-238" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-239"><a href="#cb13-239" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb13-240"><a href="#cb13-240" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-243"><a href="#cb13-243" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb13-244"><a href="#cb13-244" aria-hidden="true" tabindex="-1"></a>g3 <span class="ot">&lt;-</span> <span class="fu">geeglm</span>(SBP<span class="sc">~</span> group <span class="sc">*</span> time,<span class="at">data =</span> df_long ,<span class="at">id =</span> id,<span class="at">corstr =</span> <span class="st">"ar1"</span>)</span>
-<span id="cb13-245"><a href="#cb13-245" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-246"><a href="#cb13-246" aria-hidden="true" tabindex="-1"></a>g3</span>
-<span id="cb13-247"><a href="#cb13-247" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(g3)</span>
-<span id="cb13-248"><a href="#cb13-248" aria-hidden="true" tabindex="-1"></a><span class="fu">QIC</span>(g3)</span>
-<span id="cb13-249"><a href="#cb13-249" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb13-238"><a href="#cb13-238" aria-hidden="true" tabindex="-1"></a>g3</span>
+<span id="cb13-239"><a href="#cb13-239" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(g3)</span>
+<span id="cb13-240"><a href="#cb13-240" aria-hidden="true" tabindex="-1"></a><span class="fu">QIC</span>(g3)</span>
+<span id="cb13-241"><a href="#cb13-241" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

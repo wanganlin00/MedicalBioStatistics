@@ -43,6 +43,7 @@ book:
     - part: "生存分析"
       chapters:
         - SurvivalAnalysis.qmd
+        - CoxProportionalHazardsModel.qmd
 
     - part: "倾向性评分"
       chapters:

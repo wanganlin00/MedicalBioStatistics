@@ -13,4 +13,3 @@
 -   [Applied Propensity Score Analysis with R](https://psa.bryer.org/index.html)
 
 -   [Modern Statistics for Modern Biology](https://www.huber.embl.de/msmb/)
-

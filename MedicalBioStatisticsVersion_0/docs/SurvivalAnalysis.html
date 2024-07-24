@@ -60,7 +60,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./PropensityScore.html" rel="next">
+<link href="./CoxProportionalHazardsModel.html" rel="next">
 <link href="./GEE.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -300,7 +300,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./LME.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">线性混合效应模型</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">线性混合效应</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -326,6 +326,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">生存分析</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./CoxProportionalHazardsModel.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Cox比例风险模型</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -340,7 +346,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./PropensityScore.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">倾向性评分</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">倾向性评分</span></span></a>
   </div>
 </li>
       </ul>
@@ -357,13 +363,13 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./diagnostic_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">诊断性测试</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">诊断性测试</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./observational_study_design.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">观察性研究设计</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">观察性研究设计</span></span></a>
   </div>
 </li>
       </ul>
@@ -376,24 +382,19 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li>
-<a href="#%E4%B9%98%E7%A7%AF%E6%9E%81%E9%99%90%E6%B3%95" id="toc-乘积极限法" class="nav-link active" data-scroll-target="#%E4%B9%98%E7%A7%AF%E6%9E%81%E9%99%90%E6%B3%95"><span class="header-section-number">20.1</span> 乘积极限法</a>
+<li><a href="#%E7%94%9F%E5%AD%98%E5%87%BD%E6%95%B0" id="toc-生存函数" class="nav-link active" data-scroll-target="#%E7%94%9F%E5%AD%98%E5%87%BD%E6%95%B0"><span class="header-section-number">20.1</span> 生存函数</a></li>
+  <li><a href="#%E9%A3%8E%E9%99%A9%E5%87%BD%E6%95%B0" id="toc-风险函数" class="nav-link" data-scroll-target="#%E9%A3%8E%E9%99%A9%E5%87%BD%E6%95%B0"><span class="header-section-number">20.2</span> 风险函数</a></li>
+  <li>
+<a href="#%E4%B9%98%E7%A7%AF%E6%9E%81%E9%99%90%E6%B3%95" id="toc-乘积极限法" class="nav-link" data-scroll-target="#%E4%B9%98%E7%A7%AF%E6%9E%81%E9%99%90%E6%B3%95"><span class="header-section-number">20.3</span> 乘积极限法</a>
   <ul>
-<li><a href="#%E7%82%B9%E4%BC%B0%E8%AE%A1st" id="toc-点估计st" class="nav-link" data-scroll-target="#%E7%82%B9%E4%BC%B0%E8%AE%A1st"><span class="header-section-number">20.1.1</span> 点估计S(t)</a></li>
-  <li><a href="#%E5%8C%BA%E9%97%B4%E4%BC%B0%E8%AE%A1st" id="toc-区间估计st" class="nav-link" data-scroll-target="#%E5%8C%BA%E9%97%B4%E4%BC%B0%E8%AE%A1st"><span class="header-section-number">20.1.2</span> 区间估计S(t)</a></li>
+<li><a href="#%E7%82%B9%E4%BC%B0%E8%AE%A1st" id="toc-点估计st" class="nav-link" data-scroll-target="#%E7%82%B9%E4%BC%B0%E8%AE%A1st"><span class="header-section-number">20.3.1</span> 点估计S(t)</a></li>
+  <li><a href="#%E5%8C%BA%E9%97%B4%E4%BC%B0%E8%AE%A1st" id="toc-区间估计st" class="nav-link" data-scroll-target="#%E5%8C%BA%E9%97%B4%E4%BC%B0%E8%AE%A1st"><span class="header-section-number">20.3.2</span> 区间估计S(t)</a></li>
   </ul>
 </li>
   <li>
-<a href="#%E5%8D%95%E5%9B%A0%E7%B4%A0%E5%88%86%E7%BB%84%E7%94%9F%E5%AD%98%E6%9B%B2%E7%BA%BF%E7%9A%84%E6%AF%94%E8%BE%83" id="toc-单因素分组生存曲线的比较" class="nav-link" data-scroll-target="#%E5%8D%95%E5%9B%A0%E7%B4%A0%E5%88%86%E7%BB%84%E7%94%9F%E5%AD%98%E6%9B%B2%E7%BA%BF%E7%9A%84%E6%AF%94%E8%BE%83"><span class="header-section-number">20.2</span> 单因素分组生存曲线的比较</a>
+<a href="#%E5%8D%95%E5%9B%A0%E7%B4%A0%E5%88%86%E7%BB%84%E7%94%9F%E5%AD%98%E6%9B%B2%E7%BA%BF%E7%9A%84%E6%AF%94%E8%BE%83" id="toc-单因素分组生存曲线的比较" class="nav-link" data-scroll-target="#%E5%8D%95%E5%9B%A0%E7%B4%A0%E5%88%86%E7%BB%84%E7%94%9F%E5%AD%98%E6%9B%B2%E7%BA%BF%E7%9A%84%E6%AF%94%E8%BE%83"><span class="header-section-number">20.4</span> 单因素分组生存曲线的比较</a>
   <ul>
-<li><a href="#log-rank-test" id="toc-log-rank-test" class="nav-link" data-scroll-target="#log-rank-test"><span class="header-section-number">20.2.1</span> log-rank test</a></li>
-  </ul>
-</li>
-  <li>
-<a href="#cox%E6%AF%94%E4%BE%8B%E9%A3%8E%E9%99%A9%E6%A8%A1%E5%9E%8B" id="toc-cox比例风险模型" class="nav-link" data-scroll-target="#cox%E6%AF%94%E4%BE%8B%E9%A3%8E%E9%99%A9%E6%A8%A1%E5%9E%8B"><span class="header-section-number">20.3</span> Cox比例风险模型</a>
-  <ul>
-<li><a href="#%E6%A8%A1%E5%9E%8B%E7%B3%BB%E6%95%B0%E7%9A%84%E4%BC%B0%E8%AE%A1" id="toc-模型系数的估计" class="nav-link" data-scroll-target="#%E6%A8%A1%E5%9E%8B%E7%B3%BB%E6%95%B0%E7%9A%84%E4%BC%B0%E8%AE%A1"><span class="header-section-number">20.3.1</span> 模型系数的估计</a></li>
-  <li><a href="#%E6%A8%A1%E5%9E%8B%E7%B3%BB%E6%95%B0%E7%9A%84%E5%81%87%E8%AE%BE%E6%A3%80%E9%AA%8C" id="toc-模型系数的假设检验" class="nav-link" data-scroll-target="#%E6%A8%A1%E5%9E%8B%E7%B3%BB%E6%95%B0%E7%9A%84%E5%81%87%E8%AE%BE%E6%A3%80%E9%AA%8C"><span class="header-section-number">20.3.2</span> 模型系数的假设检验</a></li>
+<li><a href="#log-rank-test" id="toc-log-rank-test" class="nav-link" data-scroll-target="#log-rank-test"><span class="header-section-number">20.4.1</span> log-rank test</a></li>
   </ul>
 </li>
   </ul></nav>
@@ -417,12 +418,14 @@ window.Quarto = {
 
 
 </header><p><a href="https://bookdown.org/wangzhen/survival/">医学研究中的生存数据建模</a></p>
-<p>生存函数</p>
+<section id="生存函数" class="level2" data-number="20.1"><h2 data-number="20.1" class="anchored" data-anchor-id="生存函数">
+<span class="header-section-number">20.1</span> 生存函数</h2>
 <p><span class="math display">\[
 S(t)=P(T&gt;t)=1-F(t)=\int_{t}^{+\infty}f(x)dx
 \]</span></p>
 <p>其中S(t)是累计生存概率或生存率，量化了生存时间大于t的概率。f(x)是密度函数，呈右偏态分布，反映了任意时间点 t 终点事件的瞬时发生率。F(t)=P(T&lt;t)是f(t)在区间[0,t]的累计形式，也称为分布函数或累积函数。</p>
-<p>风险函数</p>
+</section><section id="风险函数" class="level2" data-number="20.2"><h2 data-number="20.2" class="anchored" data-anchor-id="风险函数">
+<span class="header-section-number">20.2</span> 风险函数</h2>
 <p><span class="math display">\[
 \begin{aligned}
 h(t)=&amp;\lim_{\Delta t\to 0}\frac{P(t\le T&lt;t+\Delta t|T\ge t)}{\Delta t}\\
@@ -431,7 +434,7 @@ h(t)=&amp;\lim_{\Delta t\to 0}\frac{P(t\le T&lt;t+\Delta t|T\ge t)}{\Delta t}\\
 =&amp;-\frac{d(\ln S(t))}{dt}
 \end{aligned}
 \]</span></p>
-<p>$S(t)=e^{-_0^t h(u)du} $</p>
+<p><span class="math display">\[S(t)=e^{-\int_0^t h(u)du} \]</span></p>
 <p><span class="math display">\[
 \begin{aligned}
 h(t)\Delta t=&amp;P(t\le T&lt;t+\Delta t|T\ge t)
@@ -441,12 +444,12 @@ h(t)\Delta t=&amp;P(t\le T&lt;t+\Delta t|T\ge t)
 \end{aligned}
 \]</span></p>
 <p><span class="math inline">\(f(t)=h(t)S(t)\)</span></p>
-<section id="乘积极限法" class="level2" data-number="20.1"><h2 data-number="20.1" class="anchored" data-anchor-id="乘积极限法">
-<span class="header-section-number">20.1</span> 乘积极限法</h2>
+</section><section id="乘积极限法" class="level2" data-number="20.3"><h2 data-number="20.3" class="anchored" data-anchor-id="乘积极限法">
+<span class="header-section-number">20.3</span> 乘积极限法</h2>
 <p>product limit method 也称为Kaplan-Meier 法。</p>
 <p><span class="math inline">\(t_1&lt;t_2&lt;t_3&lt;...&lt;t_n\)</span>，样本量大小n，t<sub>i</sub> 代表个体i发生终点事件或右删失的时间。由于一些个体有相同的生存时间，它们被称为 tied 观测时间，生存时间的个数小于样本量n。</p>
-<section id="点估计st" class="level3" data-number="20.1.1"><h3 data-number="20.1.1" class="anchored" data-anchor-id="点估计st">
-<span class="header-section-number">20.1.1</span> 点估计S(t)</h3>
+<section id="点估计st" class="level3" data-number="20.3.1"><h3 data-number="20.3.1" class="anchored" data-anchor-id="点估计st">
+<span class="header-section-number">20.3.1</span> 点估计S(t)</h3>
 <p><span class="math inline">\(n_1&gt;n_2&gt;n_3&gt;...&gt;n_n\)</span> ,n<sub>i</sub> d代表在时间点t<sub>i</sub> 暴露于特定事件风险的幸存者数量。</p>
 <p><span class="math inline">\(d_i\)</span> 代表在时间点t<sub>i</sub> 发生终点事件的数量。（如果没有 tie，d<sub>i</sub>=1或0）</p>
 <p>生存率的KM估计计算公式：</p>
@@ -454,8 +457,8 @@ h(t)\Delta t=&amp;P(t\le T&lt;t+\Delta t|T\ge t)
 \hat S(t)=\prod_{t_i\le t}\frac{n_i-d_i}{n_i}
 \tag{20.1}\]</span></span></p>
 <p><a href="#eq-KM" class="quarto-xref">Equation&nbsp;<span>20.1</span></a> 包括了删失情况，如果从t<sub>i-1</sub> 到t<sub>i</sub> 发生了删失，但没有终点事件，d<sub>i</sub> =0，条件概率等于1。</p>
-</section><section id="区间估计st" class="level3" data-number="20.1.2"><h3 data-number="20.1.2" class="anchored" data-anchor-id="区间估计st">
-<span class="header-section-number">20.1.2</span> 区间估计S(t)</h3>
+</section><section id="区间估计st" class="level3" data-number="20.3.2"><h3 data-number="20.3.2" class="anchored" data-anchor-id="区间估计st">
+<span class="header-section-number">20.3.2</span> 区间估计S(t)</h3>
 <p>(1-α)×100% CI <span class="math inline">\([\hat S(t)-z_{1-\alpha/2}\sqrt{Var\left [\hat S(t)  \right]},\hat S(t)+z_{1-\alpha/2}\sqrt{Var\left [\hat S(t)  \right]}]\)</span></p>
 <p>其中<span class="math inline">\(Var\left [\hat S(t)  \right]=\hat S(t)^2\sum_{t_i\le t}\frac{d_i}{n_i(n_i-d_i)}\)</span> (Greenwood method )</p>
 <div class="cell">
@@ -547,8 +550,8 @@ h(t)\Delta t=&amp;P(t\le T&lt;t+\Delta t|T\ge t)
 <span><span class="co">#&gt;  44.3      2       1      0.3   0.239       0.0631            1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section></section><section id="单因素分组生存曲线的比较" class="level2" data-number="20.2"><h2 data-number="20.2" class="anchored" data-anchor-id="单因素分组生存曲线的比较">
-<span class="header-section-number">20.2</span> 单因素分组生存曲线的比较</h2>
+</section></section><section id="单因素分组生存曲线的比较" class="level2" data-number="20.4"><h2 data-number="20.4" class="anchored" data-anchor-id="单因素分组生存曲线的比较">
+<span class="header-section-number">20.4</span> 单因素分组生存曲线的比较</h2>
 <table class="caption-top table">
 <thead><tr class="header">
 <th>检验方法</th>
@@ -577,8 +580,8 @@ h(t)\Delta t=&amp;P(t\le T&lt;t+\Delta t|T\ge t)
 <p><span class="math display">\[
 \chi^2=\frac{\left(\sum_jw(t_j)(m_{ij}-e_{ij})\right)^2}{\hat {Var}\left(\sum_jw(t_j)(m_{ij}-e_{ij})\right)}
 \]</span></p>
-<section id="log-rank-test" class="level3" data-number="20.2.1"><h3 data-number="20.2.1" class="anchored" data-anchor-id="log-rank-test">
-<span class="header-section-number">20.2.1</span> log-rank test</h3>
+<section id="log-rank-test" class="level3" data-number="20.4.1"><h3 data-number="20.4.1" class="anchored" data-anchor-id="log-rank-test">
+<span class="header-section-number">20.4.1</span> log-rank test</h3>
 <ol type="1">
 <li><p>H<sub>0</sub> :两总体的生存曲线是相同的。</p></li>
 <li>
@@ -664,98 +667,6 @@ h(t)\Delta t=&amp;P(t\le T&lt;t+\Delta t|T\ge t)
 <span><span class="co">#&gt; [1] 1.268397e-12</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section></section><section id="cox比例风险模型" class="level2" data-number="20.3"><h2 data-number="20.3" class="anchored" data-anchor-id="cox比例风险模型">
-<span class="header-section-number">20.3</span> Cox比例风险模型</h2>
-<p>对于有风险因子<span class="math inline">\(x_1,x_2,...,x_k\)</span> 的个体在时间 t 的风险率<span class="math inline">\(h(t|x_1,x_2,...,x_k)\)</span></p>
-<p><span class="math display">\[
-h(t|x_1,x_2,...,x_k)=h_0(t)g(x_1,x_2,...,x_k)=h_0(t)exp(\sum_{j=1}^k\beta_jx_j)
-\]</span></p>
-<p>其中</p>
-<ol type="1">
-<li><p>h<sub>0</sub> (t) 是给定所有风险因子（协变量）为零的随时间变化的基线风险函数。</p></li>
-<li><p>g(X) 是k个独立风险因子的集合函数，代表变量的风险效应。</p></li>
-<li><p>β<sub>j</sub> 是部分回归系数，表示风险比的比例变化。</p></li>
-</ol>
-<p>Cox比例风险模型是一种半参数方法</p>
-<p>比例风险假设（proportional hazards assumption）</p>
-<p><span class="math display">\[
-\frac{h(t)}{h_0(t)}=exp(\sum_{j=1}^k\beta_jx_j)
-\]</span></p>
-<p>风险比（hazard ratio）</p>
-<p>假设有两个个体，分别具有独立变量，两个个体的风险函数之比称为风险比</p>
-<p><span class="math display">\[
-HR=\frac{h(t|x_1,x_2,...,x_k)}{h(t|x_1^*,x_2^*,...,x_k^*)}=exp(\sum_{j=1}^k\beta_j(x_j-x_j^*))
-\]</span></p>
-<div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 拟合Cox比例风险模型</span></span>
-<span><span class="va">cox_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/coxph.html">coxph</a></span><span class="op">(</span><span class="va">surv_formula</span>, data <span class="op">=</span> <span class="va">df</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># 查看模型结果</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">cox_model</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Call:</span></span>
-<span><span class="co">#&gt; coxph(formula = surv_formula, data = df)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   n= 56, number of events= 39 </span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;                       coef exp(coef)  se(coef)      z Pr(&gt;|z|)    </span></span>
-<span><span class="co">#&gt; treatmentDPVB    -2.740141  0.064561  0.580664 -4.719 2.37e-06 ***</span></span>
-<span><span class="co">#&gt; treatmentLDRT    -0.383558  0.681432  0.387499 -0.990    0.322    </span></span>
-<span><span class="co">#&gt; treatmentLR_DPVB -4.632850  0.009727  0.878661 -5.273 1.34e-07 ***</span></span>
-<span><span class="co">#&gt; ---</span></span>
-<span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;                  exp(coef) exp(-coef) lower .95 upper .95</span></span>
-<span><span class="co">#&gt; treatmentDPVB     0.064561     15.489  0.020688   0.20148</span></span>
-<span><span class="co">#&gt; treatmentLDRT     0.681432      1.467  0.318848   1.45634</span></span>
-<span><span class="co">#&gt; treatmentLR_DPVB  0.009727    102.807  0.001738   0.05444</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Concordance= 0.822  (se = 0.025 )</span></span>
-<span><span class="co">#&gt; Likelihood ratio test= 61.41  on 3 df,   p=3e-13</span></span>
-<span><span class="co">#&gt; Wald test            = 36.01  on 3 df,   p=7e-08</span></span>
-<span><span class="co">#&gt; Score (logrank) test = 60.47  on 3 df,   p=5e-13</span></span>
-<span></span>
-<span><span class="co"># 检查比例风险假设</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/cox.zph.html">cox.zph</a></span><span class="op">(</span><span class="va">cox_model</span><span class="op">)</span></span>
-<span><span class="co">#&gt;           chisq df    p</span></span>
-<span><span class="co">#&gt; treatment 0.833  3 0.84</span></span>
-<span><span class="co">#&gt; GLOBAL    0.833  3 0.84</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<section id="模型系数的估计" class="level3" data-number="20.3.1"><h3 data-number="20.3.1" class="anchored" data-anchor-id="模型系数的估计">
-<span class="header-section-number">20.3.1</span> 模型系数的估计</h3>
-<p>条件死亡概率和局部似然函数方法</p>
-<p><span class="math display">\[
-\ln L_p(\beta)=\sum_{i=1}^{d}\left[ \sum_{j=1}^k\beta_jx_{ij}-\ln\sum_{m\in R_i}exp( \sum_{j=1}^k\beta_jx_{mj})         \right]
-\]</span></p>
-<p>Newton-Raphson iterative method</p>
-<p><span class="math display">\[
-\begin{cases}
-\frac{\partial \ln L_p(\beta)}{\partial \beta_1}=0\\
-\frac{\partial \ln L_p(\beta)}{\partial \beta_2}=0\\
-\vdots\\
-\frac{\partial \ln L_p(\beta)}{\partial \beta_k}=0\\
-\end{cases}
-\]</span></p>
-</section><section id="模型系数的假设检验" class="level3" data-number="20.3.2"><h3 data-number="20.3.2" class="anchored" data-anchor-id="模型系数的假设检验">
-<span class="header-section-number">20.3.2</span> 模型系数的假设检验</h3>
-<ol type="1">
-<li>
-<p>Wald‘s test</p>
-<p>检验是否有独立变量需要被消除，统计量<span class="math inline">\(Z=b_j/S_{b_j}\)</span></p>
-<p>当样本量足够大时，Z服从标准正态分布，Z<sup>2</sup> 服从自由度为1 的<span class="math inline">\(\chi^2\)</span> 分布</p>
-<p><span class="math display">\[
-\chi^2_W=(b_j/S_{b_j})^2\sim \chi^2(1)
-\]</span></p>
-</li>
-<li>
-<p>Partial likelihood Ratio test</p>
-<p>主要用于非显著性变量的消除，新变量的引入和模型的比较。</p>
-<p><span class="math display">\[
-\chi^2_{LR}=2\left[ \ln L_p(\beta_k)-\ln L_p(\beta_{k-1}) \right]\sim\chi^2(1)
-\]</span></p>
-<p>其中分别是包含 k 个和 k-1 个（不包含要检验的第 j 个变量）独立变量的对数局部似然函数</p>
-</li>
-</ol>
 
 
 <!-- -->
@@ -1225,250 +1136,166 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./PropensityScore.html" class="pagination-link" aria-label="倾向性评分">
-        <span class="nav-page-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">倾向性评分</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./CoxProportionalHazardsModel.html" class="pagination-link" aria-label="Cox比例风险模型">
+        <span class="nav-page-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Cox比例风险模型</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb5" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># 生存分析</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">医学研究中的生存数据建模</span><span class="co">](https://bookdown.org/wangzhen/survival/)</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>生存函数</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>S(t)=P(T&gt;t)=1-F(t)=\int_{t}^{+\infty}f(x)dx</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>其中S(t)是累计生存概率或生存率，量化了生存时间大于t的概率。f(x)是密度函数，呈右偏态分布，反映了任意时间点 t 终点事件的瞬时发生率。F(t)=P(T<span class="sc">\&lt;</span>t)是f(t)在区间<span class="sc">\[</span>0,t<span class="sc">\]</span>的累计形式，也称为分布函数或累积函数。</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>风险函数</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>\begin{aligned}</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>h(t)=&amp;\lim_{\Delta t\to 0}\frac{P(t\le T&lt;t+\Delta t|T\ge t)}{\Delta t}<span class="sc">\\</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>=&amp;\lim_{\Delta t\to 0}\frac{P(t\le T&lt;t+\Delta t\ <span class="sc">\&amp;</span>\ T\ge t)}{\Delta t·P(T\ge t) }<span class="sc">\\</span></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>=&amp;\lim_{\Delta t\to 0}\frac{S(t)- S(t+\Delta t)}{\Delta t·S(t)}<span class="sc">\\</span></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>=&amp;-\frac{d(\ln S(t))}{dt}</span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>\end{aligned}</span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>\$S(t)=e\^{-\int<span class="sc">\_</span>0\^t h(u)du} \$</span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>\begin{aligned}</span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>h(t)\Delta t=&amp;P(t\le T&lt;t+\Delta t|T\ge t)</span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>=\frac{P(t\le T&lt;t+\Delta t\ <span class="sc">\&amp;</span>\ T\ge t)}{P(T\ge t) }<span class="sc">\\</span></span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>=&amp;\frac{P(t\le T&lt;t+\Delta t)}{P(T\ge t) }<span class="sc">\\</span></span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>=&amp;\frac{f(t)\Delta t}{S(t)}</span>
-<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>\end{aligned}</span>
-<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>$f(t)=h(t)S(t)$</span>
-<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a><span class="fu">## 乘积极限法</span></span>
-<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>product limit method 也称为Kaplan-Meier 法。</span>
-<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>$t_1&lt;t_2&lt;t_3&lt;...&lt;t_n$，样本量大小n，t~i~ 代表个体i发生终点事件或右删失的时间。由于一些个体有相同的生存时间，它们被称为 tied 观测时间，生存时间的个数小于样本量n。</span>
-<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a><span class="fu">### 点估计S(t)</span></span>
-<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>$n_1&gt;n_2&gt;n_3&gt;...&gt;n_n$ ,n~i~ d代表在时间点t~i~ 暴露于特定事件风险的幸存者数量。</span>
-<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>$d_i$ 代表在时间点t~i~ 发生终点事件的数量。（如果没有 tie，d~i~=1或0）</span>
-<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>生存率的KM估计计算公式：</span>
-<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a>\hat S(t)=\prod_{t_i\le t}\frac{n_i-d_i}{n_i}</span>
-<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a>$$ {#eq-KM}</span>
-<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a>@eq-KM 包括了删失情况，如果从t~i-1~ 到t~i~ 发生了删失，但没有终点事件，d~i~ =0，条件概率等于1。</span>
-<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a><span class="fu">### 区间估计S(t)</span></span>
-<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a>(1-α)×100% CI $<span class="co">[</span><span class="ot">\hat S(t)-z_{1-\alpha/2}\sqrt{Var\left [\hat S(t)  \right]},\hat S(t)+z_{1-\alpha/2}\sqrt{Var\left [\hat S(t)  \right]}</span><span class="co">]</span>$</span>
-<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a>其中$Var\left <span class="co">[</span><span class="ot">\hat S(t)  \right</span><span class="co">]</span>=\hat S(t)^2\sum_{t_i\le t}\frac{d_i}{n_i(n_i-d_i)}$ (Greenwood method )</span>
-<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a>df_raw <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a>    <span class="at">id=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
-<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a>    <span class="at">sex=</span><span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"Male"</span>,<span class="st">"Male"</span>,<span class="st">"Female"</span>,<span class="st">"Male"</span>,<span class="st">"Female"</span>)),</span>
-<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a>    <span class="at">age_years=</span><span class="fu">c</span>(<span class="dv">53</span>,<span class="dv">62</span>,<span class="dv">75</span>,<span class="dv">73</span>,<span class="dv">61</span>),</span>
-<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a>    <span class="at">outcome=</span><span class="fu">c</span>(<span class="st">"Loss to follow-up"</span>,<span class="st">"Death"</span>,<span class="st">"Death"</span>,<span class="st">"Relapse"</span>,<span class="st">"Survival"</span>),</span>
-<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a>    <span class="at">time=</span><span class="fu">c</span>(<span class="st">"37.5+"</span>,<span class="fl">44.3</span>,<span class="fl">25.3</span>,<span class="fl">18.1</span>,<span class="st">"56.7+"</span>)</span>
-<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df_raw <span class="sc">|&gt;</span> <span class="fu">arrange</span>(time) <span class="sc">|&gt;</span> <span class="fu">select</span>(id,outcome,time) <span class="sc">|&gt;</span> </span>
-<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
-<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a>        <span class="at">d_i=</span><span class="fu">if_else</span>(outcome<span class="sc">==</span><span class="st">"Relapse"</span><span class="sc">|</span>outcome<span class="sc">==</span><span class="st">"Death"</span>,<span class="dv">1</span>,<span class="dv">0</span>),</span>
-<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a>        <span class="at">time=</span><span class="fu">parse_number</span>(time),</span>
-<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb5-78"><a href="#cb5-78" aria-hidden="true" tabindex="-1"></a>df</span>
-<span id="cb5-79"><a href="#cb5-79" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-80"><a href="#cb5-80" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survminer)</span>
-<span id="cb5-81"><a href="#cb5-81" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survival)</span>
-<span id="cb5-82"><a href="#cb5-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-83"><a href="#cb5-83" aria-hidden="true" tabindex="-1"></a>km_fit<span class="ot">&lt;-</span><span class="fu">survfit</span>(<span class="fu">Surv</span>(time,d_i)<span class="sc">~</span><span class="dv">1</span>,<span class="at">data=</span>df)</span>
-<span id="cb5-84"><a href="#cb5-84" aria-hidden="true" tabindex="-1"></a><span class="co"># t_i</span></span>
-<span id="cb5-85"><a href="#cb5-85" aria-hidden="true" tabindex="-1"></a>km_fit<span class="sc">$</span>time</span>
-<span id="cb5-86"><a href="#cb5-86" aria-hidden="true" tabindex="-1"></a><span class="co"># d_i</span></span>
-<span id="cb5-87"><a href="#cb5-87" aria-hidden="true" tabindex="-1"></a>km_fit<span class="sc">$</span>n.event</span>
-<span id="cb5-88"><a href="#cb5-88" aria-hidden="true" tabindex="-1"></a><span class="co"># cnesored</span></span>
-<span id="cb5-89"><a href="#cb5-89" aria-hidden="true" tabindex="-1"></a>km_fit<span class="sc">$</span>n.censor</span>
-<span id="cb5-90"><a href="#cb5-90" aria-hidden="true" tabindex="-1"></a><span class="co"># n_i</span></span>
-<span id="cb5-91"><a href="#cb5-91" aria-hidden="true" tabindex="-1"></a>km_fit<span class="sc">$</span>n.risk</span>
-<span id="cb5-92"><a href="#cb5-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-93"><a href="#cb5-93" aria-hidden="true" tabindex="-1"></a><span class="co"># 生存率</span></span>
-<span id="cb5-94"><a href="#cb5-94" aria-hidden="true" tabindex="-1"></a>km_fit<span class="sc">$</span>surv</span>
-<span id="cb5-95"><a href="#cb5-95" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-96"><a href="#cb5-96" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(km_fit)</span>
-<span id="cb5-97"><a href="#cb5-97" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb5-98"><a href="#cb5-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-99"><a href="#cb5-99" aria-hidden="true" tabindex="-1"></a><span class="fu">## 单因素分组生存曲线的比较</span></span>
-<span id="cb5-100"><a href="#cb5-100" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-101"><a href="#cb5-101" aria-hidden="true" tabindex="-1"></a>| 检验方法         | 权重          |</span>
-<span id="cb5-102"><a href="#cb5-102" aria-hidden="true" tabindex="-1"></a>|------------------|---------------|</span>
-<span id="cb5-103"><a href="#cb5-103" aria-hidden="true" tabindex="-1"></a>| log-rank test    | 1             |</span>
-<span id="cb5-104"><a href="#cb5-104" aria-hidden="true" tabindex="-1"></a>| Wilcoxon test    | n~j~          |</span>
-<span id="cb5-105"><a href="#cb5-105" aria-hidden="true" tabindex="-1"></a>| Tarone-Ware test | $\sqrt{n_j}$  |</span>
-<span id="cb5-106"><a href="#cb5-106" aria-hidden="true" tabindex="-1"></a>| Peto test        | $\hat S(t_j)$ |</span>
-<span id="cb5-107"><a href="#cb5-107" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-108"><a href="#cb5-108" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb5-109"><a href="#cb5-109" aria-hidden="true" tabindex="-1"></a>\chi^2=\frac{\left(\sum_jw(t_j)(m_{ij}-e_{ij})\right)^2}{\hat {Var}\left(\sum_jw(t_j)(m_{ij}-e_{ij})\right)}</span>
-<span id="cb5-110"><a href="#cb5-110" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb5-111"><a href="#cb5-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-112"><a href="#cb5-112" aria-hidden="true" tabindex="-1"></a><span class="fu">### log-rank test</span></span>
-<span id="cb5-113"><a href="#cb5-113" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-114"><a href="#cb5-114" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>H~0~ :两总体的生存曲线是相同的。</span>
-<span id="cb5-115"><a href="#cb5-115" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-116"><a href="#cb5-116" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>计算当第j次发生终点事件各组终点事件的期望值（e~1j~ ,e~2j~ ）</span>
-<span id="cb5-117"><a href="#cb5-117" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-118"><a href="#cb5-118" aria-hidden="true" tabindex="-1"></a>    $e_{1j}=\left ( \frac{n_{1j}}{n_{1j}+n_{2j}}\right)\times (m_{1j}+m_{2j})$</span>
-<span id="cb5-119"><a href="#cb5-119" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-120"><a href="#cb5-120" aria-hidden="true" tabindex="-1"></a>    $e_{2j}=\left ( \frac{n_{2j}}{n_{1j}+n_{2j}}\right)\times (m_{1j}+m_{2j})$</span>
-<span id="cb5-121"><a href="#cb5-121" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-122"><a href="#cb5-122" aria-hidden="true" tabindex="-1"></a>    其中m~ij~ 表示在第 j 个时间点第 i 组终点事件的数量，n~ij~ 表示在第 j 个时间点第 i 组初始观测的数量</span>
-<span id="cb5-123"><a href="#cb5-123" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-124"><a href="#cb5-124" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>对所有时间点对终点事件的观测值和期望值的差异求和</span>
-<span id="cb5-125"><a href="#cb5-125" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-126"><a href="#cb5-126" aria-hidden="true" tabindex="-1"></a>    $O_i-Ei=\sum_j(m_{ij}-e_{ij})\ \ \ (i=1,2)$</span>
-<span id="cb5-127"><a href="#cb5-127" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-128"><a href="#cb5-128" aria-hidden="true" tabindex="-1"></a>    计算其方差估计值</span>
-<span id="cb5-129"><a href="#cb5-129" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-130"><a href="#cb5-130" aria-hidden="true" tabindex="-1"></a>    $\hat{Var}=\sum_j\frac{n_{1j}n_{2j}(m_{1j}+m_{2j})(n_{1j}+n_{2j}-m_{1j}-m_{2j})}{(n_{1j}+n_{2j})^2(n_{1j}+n_{2j}-1)}\ \ \ (i=1,2)$</span>
-<span id="cb5-131"><a href="#cb5-131" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-132"><a href="#cb5-132" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>计算log-rank test 的检验统计量</span>
-<span id="cb5-133"><a href="#cb5-133" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-134"><a href="#cb5-134" aria-hidden="true" tabindex="-1"></a>    $$</span>
-<span id="cb5-135"><a href="#cb5-135" aria-hidden="true" tabindex="-1"></a>    \chi^2=\frac{(O_1-E_1)^2}{\hat{Var}(O_1-E_1)} \ 或者 \ \chi^2=\frac{(O_2-E_2)^2}{\hat{Var}(O_2-E_2)} </span>
-<span id="cb5-136"><a href="#cb5-136" aria-hidden="true" tabindex="-1"></a>    $$</span>
-<span id="cb5-137"><a href="#cb5-137" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-138"><a href="#cb5-138" aria-hidden="true" tabindex="-1"></a>    也可以近似估计为</span>
-<span id="cb5-139"><a href="#cb5-139" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-140"><a href="#cb5-140" aria-hidden="true" tabindex="-1"></a>    $$</span>
-<span id="cb5-141"><a href="#cb5-141" aria-hidden="true" tabindex="-1"></a>    \chi^2=\sum_{i=1}^2\frac{(O_i-E_i)^2}{E_i} \sim \chi^2(\nu=1)</span>
-<span id="cb5-142"><a href="#cb5-142" aria-hidden="true" tabindex="-1"></a>    $$</span>
-<span id="cb5-143"><a href="#cb5-143" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-146"><a href="#cb5-146" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb5-147"><a href="#cb5-147" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/log-rank-survival.csv"</span>)</span>
-<span id="cb5-148"><a href="#cb5-148" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-149"><a href="#cb5-149" aria-hidden="true" tabindex="-1"></a><span class="co"># 使用 Kaplan-Meier 方法创建一个Surv对象</span></span>
-<span id="cb5-150"><a href="#cb5-150" aria-hidden="true" tabindex="-1"></a>surv_formula <span class="ot">&lt;-</span> <span class="fu">Surv</span>(Days,status)<span class="sc">~</span>treatment</span>
-<span id="cb5-151"><a href="#cb5-151" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-152"><a href="#cb5-152" aria-hidden="true" tabindex="-1"></a>km<span class="ot">&lt;-</span><span class="fu">survfit</span>(surv_formula,<span class="at">data=</span>df)</span>
-<span id="cb5-153"><a href="#cb5-153" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(km)</span>
-<span id="cb5-154"><a href="#cb5-154" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-155"><a href="#cb5-155" aria-hidden="true" tabindex="-1"></a><span class="co"># 执行Log-rank检验</span></span>
-<span id="cb5-156"><a href="#cb5-156" aria-hidden="true" tabindex="-1"></a>logrank_test <span class="ot">&lt;-</span> <span class="fu">survdiff</span>(surv_formula,<span class="at">data =</span> df,<span class="at">subset =</span> T,<span class="at">na.action =</span> <span class="st">"na.omit"</span>)</span>
-<span id="cb5-157"><a href="#cb5-157" aria-hidden="true" tabindex="-1"></a>logrank_test<span class="sc">$</span>chisq</span>
-<span id="cb5-158"><a href="#cb5-158" aria-hidden="true" tabindex="-1"></a>logrank_test<span class="sc">$</span>pvalue</span>
-<span id="cb5-159"><a href="#cb5-159" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb5-160"><a href="#cb5-160" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-161"><a href="#cb5-161" aria-hidden="true" tabindex="-1"></a><span class="fu">## Cox比例风险模型</span></span>
-<span id="cb5-162"><a href="#cb5-162" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-163"><a href="#cb5-163" aria-hidden="true" tabindex="-1"></a>对于有风险因子$x_1,x_2,...,x_k$ 的个体在时间 t 的风险率$h(t|x_1,x_2,...,x_k)$</span>
-<span id="cb5-164"><a href="#cb5-164" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-165"><a href="#cb5-165" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb5-166"><a href="#cb5-166" aria-hidden="true" tabindex="-1"></a>h(t|x_1,x_2,...,x_k)=h_0(t)g(x_1,x_2,...,x_k)=h_0(t)exp(\sum_{j=1}^k\beta_jx_j)</span>
-<span id="cb5-167"><a href="#cb5-167" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb5-168"><a href="#cb5-168" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-169"><a href="#cb5-169" aria-hidden="true" tabindex="-1"></a>其中</span>
-<span id="cb5-170"><a href="#cb5-170" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-171"><a href="#cb5-171" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>h~0~ (t) 是给定所有风险因子（协变量）为零的随时间变化的基线风险函数。</span>
-<span id="cb5-172"><a href="#cb5-172" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-173"><a href="#cb5-173" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>g(X) 是k个独立风险因子的集合函数，代表变量的风险效应。</span>
-<span id="cb5-174"><a href="#cb5-174" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-175"><a href="#cb5-175" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>β~j~ 是部分回归系数，表示风险比的比例变化。</span>
-<span id="cb5-176"><a href="#cb5-176" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-177"><a href="#cb5-177" aria-hidden="true" tabindex="-1"></a>Cox比例风险模型是一种半参数方法</span>
-<span id="cb5-178"><a href="#cb5-178" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-179"><a href="#cb5-179" aria-hidden="true" tabindex="-1"></a>比例风险假设（proportional hazards assumption）</span>
-<span id="cb5-180"><a href="#cb5-180" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-181"><a href="#cb5-181" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb5-182"><a href="#cb5-182" aria-hidden="true" tabindex="-1"></a>\frac{h(t)}{h_0(t)}=exp(\sum_{j=1}^k\beta_jx_j)</span>
-<span id="cb5-183"><a href="#cb5-183" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb5-184"><a href="#cb5-184" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-185"><a href="#cb5-185" aria-hidden="true" tabindex="-1"></a>风险比（hazard ratio）</span>
-<span id="cb5-186"><a href="#cb5-186" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-187"><a href="#cb5-187" aria-hidden="true" tabindex="-1"></a>假设有两个个体，分别具有独立变量，两个个体的风险函数之比称为风险比</span>
-<span id="cb5-188"><a href="#cb5-188" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-189"><a href="#cb5-189" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb5-190"><a href="#cb5-190" aria-hidden="true" tabindex="-1"></a>HR=\frac{h(t|x_1,x_2,...,x_k)}{h(t|x_1^*,x_2^*,...,x_k^*)}=exp(\sum_{j=1}^k\beta_j(x_j-x_j^*))</span>
-<span id="cb5-191"><a href="#cb5-191" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb5-192"><a href="#cb5-192" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-195"><a href="#cb5-195" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb5-196"><a href="#cb5-196" aria-hidden="true" tabindex="-1"></a><span class="co"># 拟合Cox比例风险模型</span></span>
-<span id="cb5-197"><a href="#cb5-197" aria-hidden="true" tabindex="-1"></a>cox_model <span class="ot">&lt;-</span> <span class="fu">coxph</span>(surv_formula, <span class="at">data =</span> df)</span>
-<span id="cb5-198"><a href="#cb5-198" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-199"><a href="#cb5-199" aria-hidden="true" tabindex="-1"></a><span class="co"># 查看模型结果</span></span>
-<span id="cb5-200"><a href="#cb5-200" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cox_model)</span>
-<span id="cb5-201"><a href="#cb5-201" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-202"><a href="#cb5-202" aria-hidden="true" tabindex="-1"></a><span class="co"># 检查比例风险假设</span></span>
-<span id="cb5-203"><a href="#cb5-203" aria-hidden="true" tabindex="-1"></a><span class="fu">cox.zph</span>(cox_model)</span>
-<span id="cb5-204"><a href="#cb5-204" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb5-205"><a href="#cb5-205" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-206"><a href="#cb5-206" aria-hidden="true" tabindex="-1"></a><span class="fu">### 模型系数的估计</span></span>
-<span id="cb5-207"><a href="#cb5-207" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-208"><a href="#cb5-208" aria-hidden="true" tabindex="-1"></a>条件死亡概率和局部似然函数方法</span>
-<span id="cb5-209"><a href="#cb5-209" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-210"><a href="#cb5-210" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb5-211"><a href="#cb5-211" aria-hidden="true" tabindex="-1"></a>\ln L_p(\beta)=\sum_{i=1}^{d}\left<span class="co">[</span><span class="ot"> \sum_{j=1}^k\beta_jx_{ij}-\ln\sum_{m\in R_i}exp( \sum_{j=1}^k\beta_jx_{mj})         \right</span><span class="co">]</span></span>
-<span id="cb5-212"><a href="#cb5-212" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb5-213"><a href="#cb5-213" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-214"><a href="#cb5-214" aria-hidden="true" tabindex="-1"></a>Newton-Raphson iterative method</span>
-<span id="cb5-215"><a href="#cb5-215" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-216"><a href="#cb5-216" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb5-217"><a href="#cb5-217" aria-hidden="true" tabindex="-1"></a> \begin{cases} </span>
-<span id="cb5-218"><a href="#cb5-218" aria-hidden="true" tabindex="-1"></a>\frac{\partial \ln L_p(\beta)}{\partial \beta_1}=0<span class="sc">\\</span></span>
-<span id="cb5-219"><a href="#cb5-219" aria-hidden="true" tabindex="-1"></a>\frac{\partial \ln L_p(\beta)}{\partial \beta_2}=0<span class="sc">\\</span></span>
-<span id="cb5-220"><a href="#cb5-220" aria-hidden="true" tabindex="-1"></a>\vdots<span class="sc">\\</span></span>
-<span id="cb5-221"><a href="#cb5-221" aria-hidden="true" tabindex="-1"></a>\frac{\partial \ln L_p(\beta)}{\partial \beta_k}=0<span class="sc">\\</span></span>
-<span id="cb5-222"><a href="#cb5-222" aria-hidden="true" tabindex="-1"></a>\end{cases}</span>
-<span id="cb5-223"><a href="#cb5-223" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb5-224"><a href="#cb5-224" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-225"><a href="#cb5-225" aria-hidden="true" tabindex="-1"></a><span class="fu">### 模型系数的假设检验</span></span>
-<span id="cb5-226"><a href="#cb5-226" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-227"><a href="#cb5-227" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>Wald‘s test</span>
-<span id="cb5-228"><a href="#cb5-228" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-229"><a href="#cb5-229" aria-hidden="true" tabindex="-1"></a>    检验是否有独立变量需要被消除，统计量$Z=b_j/S_{b_j}$</span>
-<span id="cb5-230"><a href="#cb5-230" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-231"><a href="#cb5-231" aria-hidden="true" tabindex="-1"></a>    当样本量足够大时，Z服从标准正态分布，Z^2^ 服从自由度为1 的$\chi^2$ 分布</span>
-<span id="cb5-232"><a href="#cb5-232" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-233"><a href="#cb5-233" aria-hidden="true" tabindex="-1"></a>    $$</span>
-<span id="cb5-234"><a href="#cb5-234" aria-hidden="true" tabindex="-1"></a>    \chi^2_W=(b_j/S_{b_j})^2\sim \chi^2(1)</span>
-<span id="cb5-235"><a href="#cb5-235" aria-hidden="true" tabindex="-1"></a>    $$</span>
-<span id="cb5-236"><a href="#cb5-236" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-237"><a href="#cb5-237" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>Partial likelihood Ratio test</span>
-<span id="cb5-238"><a href="#cb5-238" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-239"><a href="#cb5-239" aria-hidden="true" tabindex="-1"></a>    主要用于非显著性变量的消除，新变量的引入和模型的比较。</span>
-<span id="cb5-240"><a href="#cb5-240" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-241"><a href="#cb5-241" aria-hidden="true" tabindex="-1"></a>    $$</span>
-<span id="cb5-242"><a href="#cb5-242" aria-hidden="true" tabindex="-1"></a>    \chi^2_{LR}=2\left[ \ln L_p(\beta_k)-\ln L_p(\beta_{k-1}) \right]\sim\chi^2(1)</span>
-<span id="cb5-243"><a href="#cb5-243" aria-hidden="true" tabindex="-1"></a>    $$</span>
-<span id="cb5-244"><a href="#cb5-244" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-245"><a href="#cb5-245" aria-hidden="true" tabindex="-1"></a>    其中分别是包含 k 个和 k-1 个（不包含要检验的第 j 个变量）独立变量的对数局部似然函数</span>
+<div class="sourceCode" id="cb4" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># 生存分析</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">医学研究中的生存数据建模</span><span class="co">](https://bookdown.org/wangzhen/survival/)</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">## 生存函数</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>S(t)=P(T&gt;t)=1-F(t)=\int_{t}^{+\infty}f(x)dx</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>其中S(t)是累计生存概率或生存率，量化了生存时间大于t的概率。f(x)是密度函数，呈右偏态分布，反映了任意时间点 t 终点事件的瞬时发生率。F(t)=P(T<span class="sc">\&lt;</span>t)是f(t)在区间<span class="sc">\[</span>0,t<span class="sc">\]</span>的累计形式，也称为分布函数或累积函数。</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="fu">## 风险函数</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>\begin{aligned}</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>h(t)=&amp;\lim_{\Delta t\to 0}\frac{P(t\le T&lt;t+\Delta t|T\ge t)}{\Delta t}<span class="sc">\\</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>=&amp;\lim_{\Delta t\to 0}\frac{P(t\le T&lt;t+\Delta t\ <span class="sc">\&amp;</span>\ T\ge t)}{\Delta t·P(T\ge t) }<span class="sc">\\</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>=&amp;\lim_{\Delta t\to 0}\frac{S(t)- S(t+\Delta t)}{\Delta t·S(t)}<span class="sc">\\</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>=&amp;-\frac{d(\ln S(t))}{dt}</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>\end{aligned}</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>$$S(t)=e^{-\int_0^t h(u)du} $$</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>\begin{aligned}</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>h(t)\Delta t=&amp;P(t\le T&lt;t+\Delta t|T\ge t)</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>=\frac{P(t\le T&lt;t+\Delta t\ <span class="sc">\&amp;</span>\ T\ge t)}{P(T\ge t) }<span class="sc">\\</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>=&amp;\frac{P(t\le T&lt;t+\Delta t)}{P(T\ge t) }<span class="sc">\\</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>=&amp;\frac{f(t)\Delta t}{S(t)}</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>\end{aligned}</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>$f(t)=h(t)S(t)$</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a><span class="fu">## 乘积极限法</span></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>product limit method 也称为Kaplan-Meier 法。</span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>$t_1&lt;t_2&lt;t_3&lt;...&lt;t_n$，样本量大小n，t~i~ 代表个体i发生终点事件或右删失的时间。由于一些个体有相同的生存时间，它们被称为 tied 观测时间，生存时间的个数小于样本量n。</span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a><span class="fu">### 点估计S(t)</span></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>$n_1&gt;n_2&gt;n_3&gt;...&gt;n_n$ ,n~i~ d代表在时间点t~i~ 暴露于特定事件风险的幸存者数量。</span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>$d_i$ 代表在时间点t~i~ 发生终点事件的数量。（如果没有 tie，d~i~=1或0）</span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>生存率的KM估计计算公式：</span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>\hat S(t)=\prod_{t_i\le t}\frac{n_i-d_i}{n_i}</span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>$$ {#eq-KM}</span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>@eq-KM 包括了删失情况，如果从t~i-1~ 到t~i~ 发生了删失，但没有终点事件，d~i~ =0，条件概率等于1。</span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a><span class="fu">### 区间估计S(t)</span></span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>(1-α)×100% CI $<span class="co">[</span><span class="ot">\hat S(t)-z_{1-\alpha/2}\sqrt{Var\left [\hat S(t)  \right]},\hat S(t)+z_{1-\alpha/2}\sqrt{Var\left [\hat S(t)  \right]}</span><span class="co">]</span>$</span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>其中$Var\left <span class="co">[</span><span class="ot">\hat S(t)  \right</span><span class="co">]</span>=\hat S(t)^2\sum_{t_i\le t}\frac{d_i}{n_i(n_i-d_i)}$ (Greenwood method )</span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a>df_raw <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a>    <span class="at">id=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a>    <span class="at">sex=</span><span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"Male"</span>,<span class="st">"Male"</span>,<span class="st">"Female"</span>,<span class="st">"Male"</span>,<span class="st">"Female"</span>)),</span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a>    <span class="at">age_years=</span><span class="fu">c</span>(<span class="dv">53</span>,<span class="dv">62</span>,<span class="dv">75</span>,<span class="dv">73</span>,<span class="dv">61</span>),</span>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>    <span class="at">outcome=</span><span class="fu">c</span>(<span class="st">"Loss to follow-up"</span>,<span class="st">"Death"</span>,<span class="st">"Death"</span>,<span class="st">"Relapse"</span>,<span class="st">"Survival"</span>),</span>
+<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a>    <span class="at">time=</span><span class="fu">c</span>(<span class="st">"37.5+"</span>,<span class="fl">44.3</span>,<span class="fl">25.3</span>,<span class="fl">18.1</span>,<span class="st">"56.7+"</span>)</span>
+<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df_raw <span class="sc">|&gt;</span> <span class="fu">arrange</span>(time) <span class="sc">|&gt;</span> <span class="fu">select</span>(id,outcome,time) <span class="sc">|&gt;</span> </span>
+<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a>        <span class="at">d_i=</span><span class="fu">if_else</span>(outcome<span class="sc">==</span><span class="st">"Relapse"</span><span class="sc">|</span>outcome<span class="sc">==</span><span class="st">"Death"</span>,<span class="dv">1</span>,<span class="dv">0</span>),</span>
+<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a>        <span class="at">time=</span><span class="fu">parse_number</span>(time),</span>
+<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a>df</span>
+<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survminer)</span>
+<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survival)</span>
+<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a>km_fit<span class="ot">&lt;-</span><span class="fu">survfit</span>(<span class="fu">Surv</span>(time,d_i)<span class="sc">~</span><span class="dv">1</span>,<span class="at">data=</span>df)</span>
+<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a><span class="co"># t_i</span></span>
+<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a>km_fit<span class="sc">$</span>time</span>
+<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a><span class="co"># d_i</span></span>
+<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a>km_fit<span class="sc">$</span>n.event</span>
+<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a><span class="co"># cnesored</span></span>
+<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a>km_fit<span class="sc">$</span>n.censor</span>
+<span id="cb4-90"><a href="#cb4-90" aria-hidden="true" tabindex="-1"></a><span class="co"># n_i</span></span>
+<span id="cb4-91"><a href="#cb4-91" aria-hidden="true" tabindex="-1"></a>km_fit<span class="sc">$</span>n.risk</span>
+<span id="cb4-92"><a href="#cb4-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-93"><a href="#cb4-93" aria-hidden="true" tabindex="-1"></a><span class="co"># 生存率</span></span>
+<span id="cb4-94"><a href="#cb4-94" aria-hidden="true" tabindex="-1"></a>km_fit<span class="sc">$</span>surv</span>
+<span id="cb4-95"><a href="#cb4-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-96"><a href="#cb4-96" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(km_fit)</span>
+<span id="cb4-97"><a href="#cb4-97" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb4-98"><a href="#cb4-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-99"><a href="#cb4-99" aria-hidden="true" tabindex="-1"></a><span class="fu">## 单因素分组生存曲线的比较</span></span>
+<span id="cb4-100"><a href="#cb4-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-101"><a href="#cb4-101" aria-hidden="true" tabindex="-1"></a>| 检验方法         | 权重          |</span>
+<span id="cb4-102"><a href="#cb4-102" aria-hidden="true" tabindex="-1"></a>|------------------|---------------|</span>
+<span id="cb4-103"><a href="#cb4-103" aria-hidden="true" tabindex="-1"></a>| log-rank test    | 1             |</span>
+<span id="cb4-104"><a href="#cb4-104" aria-hidden="true" tabindex="-1"></a>| Wilcoxon test    | n~j~          |</span>
+<span id="cb4-105"><a href="#cb4-105" aria-hidden="true" tabindex="-1"></a>| Tarone-Ware test | $\sqrt{n_j}$  |</span>
+<span id="cb4-106"><a href="#cb4-106" aria-hidden="true" tabindex="-1"></a>| Peto test        | $\hat S(t_j)$ |</span>
+<span id="cb4-107"><a href="#cb4-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-108"><a href="#cb4-108" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb4-109"><a href="#cb4-109" aria-hidden="true" tabindex="-1"></a>\chi^2=\frac{\left(\sum_jw(t_j)(m_{ij}-e_{ij})\right)^2}{\hat {Var}\left(\sum_jw(t_j)(m_{ij}-e_{ij})\right)}</span>
+<span id="cb4-110"><a href="#cb4-110" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb4-111"><a href="#cb4-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-112"><a href="#cb4-112" aria-hidden="true" tabindex="-1"></a><span class="fu">### log-rank test</span></span>
+<span id="cb4-113"><a href="#cb4-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-114"><a href="#cb4-114" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>H~0~ :两总体的生存曲线是相同的。</span>
+<span id="cb4-115"><a href="#cb4-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-116"><a href="#cb4-116" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>计算当第j次发生终点事件各组终点事件的期望值（e~1j~ ,e~2j~ ）</span>
+<span id="cb4-117"><a href="#cb4-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-118"><a href="#cb4-118" aria-hidden="true" tabindex="-1"></a>    $e_{1j}=\left ( \frac{n_{1j}}{n_{1j}+n_{2j}}\right)\times (m_{1j}+m_{2j})$</span>
+<span id="cb4-119"><a href="#cb4-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-120"><a href="#cb4-120" aria-hidden="true" tabindex="-1"></a>    $e_{2j}=\left ( \frac{n_{2j}}{n_{1j}+n_{2j}}\right)\times (m_{1j}+m_{2j})$</span>
+<span id="cb4-121"><a href="#cb4-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-122"><a href="#cb4-122" aria-hidden="true" tabindex="-1"></a>    其中m~ij~ 表示在第 j 个时间点第 i 组终点事件的数量，n~ij~ 表示在第 j 个时间点第 i 组初始观测的数量</span>
+<span id="cb4-123"><a href="#cb4-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-124"><a href="#cb4-124" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>对所有时间点对终点事件的观测值和期望值的差异求和</span>
+<span id="cb4-125"><a href="#cb4-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-126"><a href="#cb4-126" aria-hidden="true" tabindex="-1"></a>    $O_i-Ei=\sum_j(m_{ij}-e_{ij})\ \ \ (i=1,2)$</span>
+<span id="cb4-127"><a href="#cb4-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-128"><a href="#cb4-128" aria-hidden="true" tabindex="-1"></a>    计算其方差估计值</span>
+<span id="cb4-129"><a href="#cb4-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-130"><a href="#cb4-130" aria-hidden="true" tabindex="-1"></a>    $\hat{Var}=\sum_j\frac{n_{1j}n_{2j}(m_{1j}+m_{2j})(n_{1j}+n_{2j}-m_{1j}-m_{2j})}{(n_{1j}+n_{2j})^2(n_{1j}+n_{2j}-1)}\ \ \ (i=1,2)$</span>
+<span id="cb4-131"><a href="#cb4-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-132"><a href="#cb4-132" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>计算log-rank test 的检验统计量</span>
+<span id="cb4-133"><a href="#cb4-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-134"><a href="#cb4-134" aria-hidden="true" tabindex="-1"></a>    $$</span>
+<span id="cb4-135"><a href="#cb4-135" aria-hidden="true" tabindex="-1"></a>    \chi^2=\frac{(O_1-E_1)^2}{\hat{Var}(O_1-E_1)} \ 或者 \ \chi^2=\frac{(O_2-E_2)^2}{\hat{Var}(O_2-E_2)} </span>
+<span id="cb4-136"><a href="#cb4-136" aria-hidden="true" tabindex="-1"></a>    $$</span>
+<span id="cb4-137"><a href="#cb4-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-138"><a href="#cb4-138" aria-hidden="true" tabindex="-1"></a>    也可以近似估计为</span>
+<span id="cb4-139"><a href="#cb4-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-140"><a href="#cb4-140" aria-hidden="true" tabindex="-1"></a>    $$</span>
+<span id="cb4-141"><a href="#cb4-141" aria-hidden="true" tabindex="-1"></a>    \chi^2=\sum_{i=1}^2\frac{(O_i-E_i)^2}{E_i} \sim \chi^2(\nu=1)</span>
+<span id="cb4-142"><a href="#cb4-142" aria-hidden="true" tabindex="-1"></a>    $$</span>
+<span id="cb4-143"><a href="#cb4-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-146"><a href="#cb4-146" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb4-147"><a href="#cb4-147" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/log-rank-survival.csv"</span>)</span>
+<span id="cb4-148"><a href="#cb4-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-149"><a href="#cb4-149" aria-hidden="true" tabindex="-1"></a><span class="co"># 使用 Kaplan-Meier 方法创建一个Surv对象</span></span>
+<span id="cb4-150"><a href="#cb4-150" aria-hidden="true" tabindex="-1"></a>surv_formula <span class="ot">&lt;-</span> <span class="fu">Surv</span>(Days,status)<span class="sc">~</span>treatment</span>
+<span id="cb4-151"><a href="#cb4-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-152"><a href="#cb4-152" aria-hidden="true" tabindex="-1"></a>km<span class="ot">&lt;-</span><span class="fu">survfit</span>(surv_formula,<span class="at">data=</span>df)</span>
+<span id="cb4-153"><a href="#cb4-153" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(km)</span>
+<span id="cb4-154"><a href="#cb4-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-155"><a href="#cb4-155" aria-hidden="true" tabindex="-1"></a><span class="co"># 执行Log-rank检验</span></span>
+<span id="cb4-156"><a href="#cb4-156" aria-hidden="true" tabindex="-1"></a>logrank_test <span class="ot">&lt;-</span> <span class="fu">survdiff</span>(surv_formula,<span class="at">data =</span> df,<span class="at">subset =</span> T,<span class="at">na.action =</span> <span class="st">"na.omit"</span>)</span>
+<span id="cb4-157"><a href="#cb4-157" aria-hidden="true" tabindex="-1"></a>logrank_test<span class="sc">$</span>chisq</span>
+<span id="cb4-158"><a href="#cb4-158" aria-hidden="true" tabindex="-1"></a>logrank_test<span class="sc">$</span>pvalue</span>
+<span id="cb4-159"><a href="#cb4-159" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

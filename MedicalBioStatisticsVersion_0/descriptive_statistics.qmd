@@ -2,17 +2,17 @@
 
 ## 基本概念
 
-同质homogeneity
+-   **同质 (Homogeneity)**：指数据样本的同质性，即样本中各个个体之间的相似性或一致性。
 
-变异variation
+-   **变异 (Variation)**：指数据样本中各个个体之间的差异性或变化程度。
 
-总体population，描述总体特征的统计学指标称为参数parameter
+-   **总体 (Population)**：研究对象的全部个体的集合。描述总体特征的统计学指标称为参数 (Parameter)。
 
-样本sample，由样本计算出的特征指标称为统计量statistic
+-   **样本 (Sample)**：从总体中抽取的一部分个体。由样本计算出的特征指标称为统计量 (Statistic)。
 
-变量（variable）是随机变量的简称。
+-   **变量 (Variable)**：随机变量的简称，是研究对象的属性或特征，可以在不同个体之间或同一个体在不同时间上取不同值。
 
-变量的观测值称为数据（data）。
+-   **数据 (Data)**：变量的观测值
 
 ## 数据类型及其分布
 
@@ -23,11 +23,14 @@
 a.  正态分布：t 检验，方差分析，相关性检验
 
 $$
-f(x)= \frac{1}{2πσ} e^{ −(x−μ) ^2 /2σ^2 }，\mu是均值， \sigma是标准差
+f(x)= \frac{1}{\sqrt{2πσ^2}} e^{\frac {−(x−μ) ^2 }{2σ^2 }}
 $$
+
+其中，，$\mu$是均值， $\sigma$是标准差
 
 ```{r}
 library(ggplot2)
+library(tibble)
 # 标准正态分布
 normal_data <- tibble(x = seq(-5, 5, length.out = 500),
                       y = dnorm(x, mean = 0, sd = 1))
@@ -40,11 +43,13 @@ ggplot(normal_data, aes(x = x, y = y)) +
 
 b.  对数正态分布：非参数检验
 
-c.  指数分布：对数秩（log-rank ）检验
+c.  指数分布：广义线性模型，对数秩（log-rank ）检验
 
 $$
-f(x)=λe^{−λx}，x\ge 0 ，默认rate：λ=1
+f(x)=λe^{−λx}，x\ge 0
 $$
+
+其中，默认(rate)：$\lambda = 1$。
 
 ```{r}
 # 指数分布
@@ -82,7 +87,7 @@ $$
     P(x)=\frac{\Gamma(x+n)}{\Gamma(n)\ x!}p^n(1-p)^x
 $$
 
-均值 *`μ=n(1−p)/p`*，方差 *`(1−p)/p2`*
+其中，均值 $\mu = \frac{n(1-p)}{p}$，方差 $\frac{(1-p)}{p^2}$。
 
 ```{r}
 # 负二项分布
@@ -117,7 +122,7 @@ $$
 P(x)=\frac{\binom {m}{x}\binom{n}{k-x}}{\binom{m+n}{k}}；x=0，...，k；p=m/(m+n) ；N=m+n
 $$
 
-均值 E\[X\]=μ=kp，方差Var(X)=kp(1−p) (m+n−1)/(m+n−k)
+其中，$p = \frac{m}{m+n}$，$N = m+n$，均值 $E[X] = \mu = kp$，方差 $Var(X) = kp(1-p) \frac{(m+n-1)}{(m+n-k)}$。
 
 ```{r}
 # 超几何分布

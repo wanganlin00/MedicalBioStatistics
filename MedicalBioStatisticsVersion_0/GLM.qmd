@@ -1,29 +1,29 @@
 # 广义线性模型
 
-广义线性模型，期望的线性函数`η`：
+## 广义线性模型组件
+
+1.  线性预测函数：
 
 $$
 \eta = \mathbf{X} \beta
 $$
 
-原始结果`y`
+2.  期望值与线性预测函数的关系：
 
 $$
 E(y)=\mu
 $$
 
-通过期望值与线性函数的联系，连接函数`g(.)` ：
+3.  连接函数 `g(.)` ：
 
 $$
 \eta =g(\mu)=g(E(y))
 $$
 
-映射到 线性结果`η` 。
-
-反连接函数g^-1^ (.)：
+4.  反连接函数g^-1^ (.)：
 
 $$
-E(y)=\eta=g^{-1}(\eta)
+E(y)=g^{-1}(\eta)
 $$
 
 ```{r}
@@ -32,29 +32,30 @@ library(poissonreg)
 library(patchwork)
 ```
 
-## 广义线性回归
+## 高斯线性回归
 
-gaussian
-
-identity link function
-
-t-statistic
+高斯线性回归是一种简单的线性回归模型，其中假设响应变量服从正态分布，并且使用恒等连接函数（identity link function）。t-statistic
 
 ```{r}
-swiss
+library(tidymodels)
+
+# 使用 glm() 函数进行高斯线性回归
 glm1 <- linear_reg() |> 
-    set_engine("glm",family=stats::gaussian(link = "identity"))|> 
-    fit(Fertility~ Agriculture + Education + Catholic + Infant.Mortality,
-        data = swiss)
+  set_engine("glm", family = stats::gaussian(link = "identity")) |> 
+  fit(Fertility ~ Agriculture + Education + Catholic + Infant.Mortality,
+      data = swiss)
 
+# 查看模型的系数
 tidy(glm1)
-glance(glm1) |> select(AIC,deviance)
-```
 
+# 查看模型的 AIC 和 Deviance
+glance(glm1) |> select(AIC, deviance)
+
+```
 
 ## 逻辑回归
 
-逻辑回归一般需要引入虚拟变量（哑变量，dummy variable），通常取值伪0或1。
+逻辑回归用于处理二元分类问题。其模型假设响应变量的对数优势（log odds）服从线性模型。
 
 Sigmoid 激活函数：
 
@@ -76,6 +77,8 @@ ggplot(sigmoid,aes(x,y))+
 $$
 \pi(Y=k|X=(X_1,X_2,...,X_p)=\frac{e^{\beta_{k0}+\beta_{k1}X_1+\beta_{k2}X_2+...+\beta_{kp}X_p}}{1+\sum_{l=1}^{K-1} e^{\beta_{l0}+\beta_{l1}X_1+\beta_{l2}X_2+...+\beta_{lp}X_p}}
 $$ 其中$\pi$ 是成功概率，$k=1,2,...,K-1$是因变量的水平数，$p$ 是自变量个数。
+
+逻辑回归一般需要引入虚拟变量（哑变量，dummy variable），通常取值伪0或1。
 
 1.  当$K=2$时，$k=l=p=1$即简单逻辑回归。
 
@@ -105,6 +108,8 @@ $$ 其中$\pi$ 是成功概率，$k=1,2,...,K-1$是因变量的水平数，$p$ �
     \log (\frac{P(Y=k|X=x)}{P(Y=K|X=x)})=\beta_{k0}+\beta_{k1}X_1+\beta_{k2}X_2+...+\beta_{kp}X_p
     $$
 
+[数据下载网站](https://www.statlearning.com/resources-second-edition)
+
 ```{r}
 df <- read_csv("data/ISLR/Default.csv")
 df$default <- factor(df$default,levels = c("No","Yes"),labels = c(0,1))
@@ -114,8 +119,6 @@ head(df)
 table(df$default,df$student)
 ```
 
-[数据下载网站](https://www.statlearning.com/resources-second-edition)
-
 ```{r}
 ggplot(df,aes(balance,income))+
   geom_point(aes(shape=default,color=default),show.legend = F)|
@@ -124,8 +127,6 @@ ggplot(df,aes(default,balance,fill=default),)+
 ggplot(df,aes(default,income,fill=default))+
   geom_boxplot()
 ```
-
-
 
 ### Binary logistic regression
 
@@ -187,7 +188,7 @@ df |>
   ) |> select(student,prob)
 ```
 
-### K=2,p\>1 multiple 多元逻辑回归
+### K=2,p\>1 多元逻辑回归
 
 ```{r}
 logit_multiple<-logit_spec |> fit(default~balance+income+student,data=df)
@@ -244,7 +245,9 @@ ordered_logit |> summary()
 predict(ordered_logit ,acl ,type = "p") |> as_tibble()
 ```
 
-### K\>2,p\>1 multinomial logistic regression
+### K\>2,p\>1 多分类逻辑回归
+
+用于处理具有多于两个类别的响应变量的情况。例如，分类问题中的三个或更多类别。
 
 #### `nnet::multinom()`
 
@@ -258,8 +261,9 @@ iris_mnlogit |> glance()
 iris_mnlogit |> tidy()
 
 
-augment(iris_mnlogit,new_data = iris) |> 
-    conf_mat(truth=Species,estimate=.pred_class)
+augment(iris_mnlogit, new_data = iris) |>
+    conf_mat(truth = Species, estimate = .pred_class) |>
+    autoplot(type = "heatmap")
 ```
 
 #### `glmnet::glmnet()`
@@ -295,11 +299,7 @@ iris_mnlogit$fit
 
 ## 泊松回归
 
-因变量是计数变量（非负整数）
-
-log link function
-
-z-statistic
+泊松回归用于计数数据，假设响应变量服从泊松分布，并使用对数连接函数（log link function）。z-statistic
 
 `family=poisson(link = "log")`
 
@@ -330,6 +330,7 @@ df2 <- read_csv("data/ISLR/Bikeshare.csv")
 ```
 
 ```{r}
+# 泊松回归模型
 pois_spec <- poisson_reg() |> 
   set_mode("regression") |> 
   set_engine("glm",family=poisson(link = "log"))
@@ -346,6 +347,8 @@ pois_fit <- pois_wf |> fit(data = df2)
 
 tidy(pois_fit)
 
+
+# 绘制实际值与预测值的关系图
 augment(pois_fit, new_data = df2,type="response") |> 
   ggplot(aes(bikers, .pred)) +
   geom_point(alpha = 0.1) +
@@ -386,13 +389,9 @@ BIC(pois_acl$fit)
 
 ## 负二项回归
 
-因变量是计数变量（非负整数）
+负二项回归用于处理计数数据且存在过度离散（overdispersion）的问题。
 
-log link function
-
-z-statistic
-
-overdispersion
+log link function，z-statistic
 
 probability mass function ：
 
@@ -405,20 +404,21 @@ $$
 方差是 $\lambda + \frac{\lambda ^2}{\nu}$ 。
 
 ```{r}
-
+library(MASS)
+# 负二项回归模型
 nb_spec <- linear_reg() |> 
-    set_engine("glm",family=MASS::negative.binomial(theta= 1,link = "log"))
+  set_engine("glm", family = MASS::negative.binomial(theta = 1, link = "log"))
 
 nb_acl <- nb_spec |> 
-    fit(NChronic12_W1 ~ SelfEfficacy_W1,data = acl)
-nb_acl |> glance()
+  fit(NChronic12_W1 ~ SelfEfficacy_W1, data = acl)
 
+# 查看模型结果
+nb_acl |> glance()
 nb_acl |> tidy()
+
 
 AIC(nb_acl$fit)
 BIC(nb_acl$fit)
 
 # MASS::glm.nb()
 ```
-
-

@@ -2,22 +2,25 @@
 
 ## 频数分布
 
--   极差 $R=X_{max}-X_{min}$
+-   极差(Range) : $R=X_{max}-X_{min}$
 
--   组数$k$（$8-15$）
+-   组数 (Number of Bins) $k$ : 通常选择 $8$ 到 $15$ 之间的值。
 
--   组距（$interval=R/k$）
+-   组距 (Bin Width) : $interval=\frac{R}{k}$
 
--   频数$count$
+-   频数 (Frequency) : $Frequency = count$
 
--   频率$\frac{count}{n} \times 100\%$
+-   频率 (Relative Frequency)： $Relative\ Frequency = \frac{count}{n} \times 100\%$
 
 ```{r}
-ggplot(data = mtcars,aes(x=mpg))+
-    geom_histogram(color="black",bins = 10)
+library(ggplot2)
+library(tibble)
+ggplot(data = mtcars, aes(x = mpg)) +
+    geom_histogram(color = "black", bins = 10)
 
-ggplot(data = mtcars,aes(x=mpg))+
-    geom_histogram(color="black",binwidth =diff(range(mtcars$mpg))/9 )
+ggplot(data = mtcars, aes(x = mpg)) +
+    geom_histogram(color = "black", binwidth = diff(range(mtcars$mpg)) / 9)
+
 ```
 
 ```{r}
@@ -30,18 +33,19 @@ as_tibble(mtcars$mpg)
 #算术均数
 mean(mtcars$mpg)     
 
-#中位数
-median(mtcars$mpg)   
-
-#众数 mode
-rstatix::get_mode(mtcars$mpg)
-
+# 截尾均数
 x <- c(1,2:9,11)
 mean(x)
 
 mean(x,trim = 0.1)
+#中位数
+median(mtcars$mpg)   
 
+#众数 mode 
+rstatix::get_mode(mtcars$mpg)
 ```
+
+注意：函数`rstatix::get_mode()` 可能返回多个众数，如果存在多个众数，请检查其处理方式。
 
 ## 离散趋势（dispersion tendency）
 
@@ -64,22 +68,21 @@ sd(mtcars$mpg)
 
 
 # 变异系数 Coefficient of Variation
-CV <- function(x,na.rm=TRUE){  
-    if(na.rm) x <- x[!is.na(x)]
-    CV=sd(x)/mean(x)*100
-    sprintf("%.6f%%",CV)
+CV <- function(x, na.rm = TRUE) {  
+    if (na.rm) x <- x[!is.na(x)]
+    CV = sd(x) / mean(x) * 100
+    sprintf("%.6f%%", CV)
 }
 CV(mtcars$mpg)
 
 
 # 绝对中位差 median absolute deviation
 mad(mtcars$mpg,constant = 1.4826)
-
-# 为了达到渐进正态一致性，`mad()` 的计算乘了一个比例因子`constant=1.4826`
-
 median(abs(mtcars$mpg-median(mtcars$mpg)))
 median(abs(mtcars$mpg-median(mtcars$mpg)))*1.4826
 ```
+
+说明：`mad()` 计算时乘以比例因子 `constant = 1.4826` 以实现渐进正态一致性。
 
 ## 分布形态
 

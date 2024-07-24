@@ -1,12 +1,26 @@
-# 线性混合效应模型
+# 线性混合效应
+
+线性混合效应模型（LMM）用于分析具有固定效应和随机效应的数据结构。它能够处理数据中的组内相关性和个体差异，广泛应用于生态学、心理学等领域的统计分析。
 
 [Mixed Effects Models and Extensions in Ecology with R 第5章](https://link.springer.com/book/10.1007/978-0-387-87458-6)
 
-限制最大似然法，REML
+## 模型公式
 
-赤池信息准则AIC
+$$
+\eta = \mathbf{X} \beta + \mathbf{Z} \gamma + \epsilon
+$$
 
-贝叶斯信息准则BIC
+其中：
+
+-   $\mathbf{X}$是固定效应设计矩阵。
+
+-   $\beta$ 是固定效应系数。
+
+-   $\mathbf{Z}$ 是随机效应设计矩阵。
+
+-   $\gamma$ 是随机效应系数。
+
+-   $\epsilon$ 是误差项。
 
 线性混合模型，LME的表达式如下：
 
@@ -23,24 +37,45 @@ $$
 | 固定截距+随机斜率           | y\~x+( 0+x \| id ) | NA               |
 | 线性模型：固定截距+固定斜率 | y\~x               | NA               |
 
+### 模型选择标准
+
+限制最大似然法REML，赤池信息准则AIC，贝叶斯信息准则BIC
+
+1.  **赤池信息准则（AIC）**
+
+    $$ kIC=−2log(\mathcal{L})+2k$$
+
+    其中：
+
+    -   $\mathcal{L}$ 是似然函数。
+
+    -   $k$ 是模型参数的数量。
+
+2.  **贝叶斯信息准则（BIC）**
+
+    $$ BIC=−2log(\mathcal{L})+klog(n) $$
+
+    其中：
+
+    -   $n$ 是样本量。
+
+## 随机截距+随机斜率
+
 ```{r}
-library(lme4)
-library(nlme)
 df_long <- read_delim("data/AED/RIKZ.txt")
 df_long$Beach <- factor(df_long$Beach)
 df_long$Exposure <- factor(df_long$Exposure)
 str(df_long)
 ```
 
-## 随机截距+随机斜率
-
 $$
-\eta_{(nrow \ \times 1)}=\mathbf{X_{nrow×1}}\beta_{1\times1} +Z_{nrow\times 2n_{subjects}} \mathbf{\gamma}_{2n_{subjects}\times 1}+\epsilon_i
+\eta_{(nrow \times 1)} = \mathbf{X}_{nrow \times 1} \beta_{1 \times 1} + \mathbf{Z}_{nrow \times 2n_{subjects}} \mathbf{\gamma}_{2n_{subjects} \times 1} + \epsilon_i
 $$
 
 Z有两倍于受试者数量的列，每个受试者的随机截距和随机斜率
 
 ```{r}
+library(lme4)
 lme1 <- lmer(Richness ~ 1 + NAP * Exposure+ (1 +NAP |Beach) ,data = df_long)
 summary(lme1)
 AIC(lme1)
@@ -49,13 +84,20 @@ logLik(lme1)
 
 2*(1-pt(-3.914605,35,lower.tail = F))
 
+library(nlme)
 
-
-# nlme1 <- lme(Richness ~ 1 + NAP * Exposure,random= ~ 1+NAP |Beach ,data = df_long)
-# summary(nlme1)
-
-
+nlme1 <- lme(Richness ~ 1 + NAP * Exposure,
+             random = ~ 1 + NAP | Beach ,
+             data = df_long,
+             control = lmeControl(opt = "optim", msMaxIter = 100, msMaxEval = 5000))
+summary(nlme1)
 ```
+
+这个模型的公式可以分解为：
+
+-   **固定效应部分**：`Richness` 的预测由截距、NAP（数值变量）和 Exposure（分类变量，包含 Exposure10 和 Exposure11）及其交互项构成。
+
+-   **随机效应部分**：`Beach` 作为随机因子，包含随机截距和随机斜率（NAP）。
 
 ```{r}
 # 标准化模型残差分布
@@ -101,8 +143,14 @@ summary(nlme2)
 
 ## 固定截距+随机斜率
 
+$$
+\eta_{(nrow \times 1)} = \mathbf{X}_{nrow \times 1} \beta_{1 \times 1} + \mathbf{Z}_{nrow \times n_{subjects}} \mathbf{\gamma}_{n_{subjects} \times 1} + \epsilon_i
+$$
+
+Z 有一倍于受试者数量的列，每个受试者的随机斜率。
+
 ```{r}
-lme3 <- lmer(Richness ~ 1 + NAP+ (0 + NAP |Beach) ,data = df_long)
+lme3 <- lmer(Richness ~ 1 +  NAP+ (0 + NAP |Beach) ,data = df_long)
 summary(lme3)
 
 nlme3 <- lme(Richness ~ 1 + NAP,random= ~ 0+NAP |Beach ,data = df_long)
@@ -112,6 +160,10 @@ summary(nlme3)
 ## 随机效应模型
 
 ```{r}
+
+lme4 <- lmer(Richness ~ 1 + (1|Beach) ,data = df_long)
+summary(lme4)
+
 nlme4 <- lme(Richness ~ 1 ,random= ~ 1 |Beach ,data = df_long)
 summary(nlme4)
 ```
@@ -119,8 +171,8 @@ summary(nlme4)
 ## 线性模型：固定截距+ 固定斜率
 
 ```{r}
-lm4 <- lm(Richness ~ 1 + NAP ,data = df_long)
-lm4
+lm <- lm(Richness ~ 1 + NAP ,data = df_long)
+lm
 ```
 
 ## 模型选择
@@ -145,7 +197,7 @@ plot_lme <- function(model, title) {
 }
 
 
-lme_plot <- map2(list(lme1,lme2,lme3,lm4),list("随机截距+随机斜率","随机截距+固定斜率","固定截距+随机斜率","固定截距+固定斜率"),plot_lme)
+lme_plot <- map2(list(lme1,lme2,lme3,lm),list("随机截距+随机斜率","随机截距+固定斜率","固定截距+随机斜率","固定截距+固定斜率"),plot_lme)
 
 
 lme_plot
@@ -153,7 +205,7 @@ lme_plot
 
 ```{r}
 anova(lme1,lme2,lme3)
-anova(lme1,lme2,lme3,lm4)
+anova(lme1,lme2,lme3,lme4,lm)
 
 # p小于0.05,说明全模型与简化后模型存在差异，最终采用lme1,AIC最小
 ```

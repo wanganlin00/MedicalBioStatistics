@@ -2,7 +2,7 @@
 
 [医学研究中的生存数据建模](https://bookdown.org/wangzhen/survival/)
 
-生存函数
+## 生存函数
 
 $$
 S(t)=P(T>t)=1-F(t)=\int_{t}^{+\infty}f(x)dx
@@ -10,7 +10,7 @@ $$
 
 其中S(t)是累计生存概率或生存率，量化了生存时间大于t的概率。f(x)是密度函数，呈右偏态分布，反映了任意时间点 t 终点事件的瞬时发生率。F(t)=P(T\<t)是f(t)在区间\[0,t\]的累计形式，也称为分布函数或累积函数。
 
-风险函数
+## 风险函数
 
 $$
 \begin{aligned}
@@ -21,7 +21,7 @@ h(t)=&\lim_{\Delta t\to 0}\frac{P(t\le T<t+\Delta t|T\ge t)}{\Delta t}\\
 \end{aligned}
 $$
 
-\$S(t)=e\^{-\int\_0\^t h(u)du} \$
+$$S(t)=e^{-\int_0^t h(u)du} $$
 
 $$
 \begin{aligned}
@@ -153,87 +153,3 @@ logrank_test <- survdiff(surv_formula,data = df,subset = T,na.action = "na.omit"
 logrank_test$chisq
 logrank_test$pvalue
 ```
-
-## Cox比例风险模型
-
-对于有风险因子$x_1,x_2,...,x_k$ 的个体在时间 t 的风险率$h(t|x_1,x_2,...,x_k)$
-
-$$
-h(t|x_1,x_2,...,x_k)=h_0(t)g(x_1,x_2,...,x_k)=h_0(t)exp(\sum_{j=1}^k\beta_jx_j)
-$$
-
-其中
-
-1.  h~0~ (t) 是给定所有风险因子（协变量）为零的随时间变化的基线风险函数。
-
-2.  g(X) 是k个独立风险因子的集合函数，代表变量的风险效应。
-
-3.  β~j~ 是部分回归系数，表示风险比的比例变化。
-
-Cox比例风险模型是一种半参数方法
-
-比例风险假设（proportional hazards assumption）
-
-$$
-\frac{h(t)}{h_0(t)}=exp(\sum_{j=1}^k\beta_jx_j)
-$$
-
-风险比（hazard ratio）
-
-假设有两个个体，分别具有独立变量，两个个体的风险函数之比称为风险比
-
-$$
-HR=\frac{h(t|x_1,x_2,...,x_k)}{h(t|x_1^*,x_2^*,...,x_k^*)}=exp(\sum_{j=1}^k\beta_j(x_j-x_j^*))
-$$
-
-```{r}
-# 拟合Cox比例风险模型
-cox_model <- coxph(surv_formula, data = df)
-
-# 查看模型结果
-summary(cox_model)
-
-# 检查比例风险假设
-cox.zph(cox_model)
-```
-
-### 模型系数的估计
-
-条件死亡概率和局部似然函数方法
-
-$$
-\ln L_p(\beta)=\sum_{i=1}^{d}\left[ \sum_{j=1}^k\beta_jx_{ij}-\ln\sum_{m\in R_i}exp( \sum_{j=1}^k\beta_jx_{mj})         \right]
-$$
-
-Newton-Raphson iterative method
-
-$$
- \begin{cases} 
-\frac{\partial \ln L_p(\beta)}{\partial \beta_1}=0\\
-\frac{\partial \ln L_p(\beta)}{\partial \beta_2}=0\\
-\vdots\\
-\frac{\partial \ln L_p(\beta)}{\partial \beta_k}=0\\
-\end{cases}
-$$
-
-### 模型系数的假设检验
-
-1.  Wald‘s test
-
-    检验是否有独立变量需要被消除，统计量$Z=b_j/S_{b_j}$
-
-    当样本量足够大时，Z服从标准正态分布，Z^2^ 服从自由度为1 的$\chi^2$ 分布
-
-    $$
-    \chi^2_W=(b_j/S_{b_j})^2\sim \chi^2(1)
-    $$
-
-2.  Partial likelihood Ratio test
-
-    主要用于非显著性变量的消除，新变量的引入和模型的比较。
-
-    $$
-    \chi^2_{LR}=2\left[ \ln L_p(\beta_k)-\ln L_p(\beta_{k-1}) \right]\sim\chi^2(1)
-    $$
-
-    其中分别是包含 k 个和 k-1 个（不包含要检验的第 j 个变量）独立变量的对数局部似然函数

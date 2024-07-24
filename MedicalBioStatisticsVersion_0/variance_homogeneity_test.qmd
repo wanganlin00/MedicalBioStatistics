@@ -6,7 +6,11 @@
 
 F 检验：比较两组的方差。数据必须呈正态分布。
 
-F 检验用于评估两个总体（A 和 B）的方差是否相等。在使用 F 检验之前，您需要检查数据是否呈正态分布。
+**步骤**：
+
+1.  检查数据是否呈正态分布（例如使用 Shapiro-Wilk 检验）。
+
+2.  进行 F 检验以比较两组的方差。
 
 ```{r}
 df <- tibble(
@@ -78,7 +82,7 @@ ToothGrowth$dose <- factor(ToothGrowth$dose)
 leveneTest(len ~ supp*dose, data = ToothGrowth)
 ```
 
--   Brown-Forsythe 检验
+-   Brown-Forsythe 检验 作为 Levene 检验的扩展，特别适用于处理非正态数据。
 
 ```{r}
 leveneTest(weight ~ group, data = PlantGrowth,center=median)

@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.4.555">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-
-<title>医学与生物统计学</title>
+<title>医学与生物统计学 - 21&nbsp; Cox比例风险模型</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -56,7 +53,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
-
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
@@ -64,7 +60,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./descriptive_statistics.html" rel="next">
+<link href="./PropensityScore.html" rel="next">
+<link href="./SurvivalAnalysis.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -73,8 +70,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -100,12 +96,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script>
-
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
+}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
 const typesetMath = (el) => {
   if (window.MathJax) {
     // MathJax Typeset
@@ -130,34 +121,25 @@ const typesetMath = (el) => {
 window.Quarto = {
   typesetMath
 };
-</script>
-
-<link rel="stylesheet" href="styles.css">
+</script><link rel="stylesheet" href="styles.css">
 </head>
-
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">推荐阅读</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./SurvivalAnalysis.html">生存分析</a></li><li class="breadcrumb-item"><a href="./CoxProportionalHazardsModel.html"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Cox比例风险模型</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">医学与生物统计学</a> 
         <div class="sidebar-tools-main">
@@ -176,9 +158,9 @@ window.Quarto = {
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">推荐阅读</span></a>
   </div>
 </li>
@@ -190,8 +172,8 @@ window.Quarto = {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./quantitative_data.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">定量数据的描述</span></span></a>
@@ -204,7 +186,7 @@ window.Quarto = {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
@@ -213,8 +195,8 @@ window.Quarto = {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./probability_theory.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">概率论基础</span></span></a>
@@ -293,7 +275,7 @@ window.Quarto = {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
@@ -302,8 +284,8 @@ window.Quarto = {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./LinearRegression.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">线性回归</span></span></a>
@@ -328,7 +310,7 @@ window.Quarto = {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
@@ -337,15 +319,21 @@ window.Quarto = {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./SurvivalAnalysis.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">生存分析</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./CoxProportionalHazardsModel.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Cox比例风险模型</span></span></a>
+  </div>
+</li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
@@ -354,15 +342,15 @@ window.Quarto = {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./PropensityScore.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">倾向性评分</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">倾向性评分</span></span></a>
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
@@ -371,41 +359,46 @@ window.Quarto = {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./diagnostic_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">诊断性测试</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">诊断性测试</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./observational_study_design.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">观察性研究设计</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">观察性研究设计</span></span></a>
   </div>
 </li>
       </ul>
-  </li>
+</li>
     </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
-    <h2 id="toc-title">Table of contents</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#推荐阅读" id="toc-推荐阅读" class="nav-link active" data-scroll-target="#推荐阅读">推荐阅读</a></li>
+<li><a href="#%E9%A3%8E%E9%99%A9%E5%87%BD%E6%95%B0" id="toc-风险函数" class="nav-link active" data-scroll-target="#%E9%A3%8E%E9%99%A9%E5%87%BD%E6%95%B0"><span class="header-section-number">21.1</span> 风险函数</a></li>
+  <li><a href="#%E9%A3%8E%E9%99%A9%E7%8E%87" id="toc-风险率" class="nav-link" data-scroll-target="#%E9%A3%8E%E9%99%A9%E7%8E%87"><span class="header-section-number">21.2</span> 风险率</a></li>
+  <li><a href="#%E6%AF%94%E4%BE%8B%E9%A3%8E%E9%99%A9%E5%81%87%E8%AE%BE" id="toc-比例风险假设" class="nav-link" data-scroll-target="#%E6%AF%94%E4%BE%8B%E9%A3%8E%E9%99%A9%E5%81%87%E8%AE%BE"><span class="header-section-number">21.3</span> 比例风险假设</a></li>
+  <li>
+<a href="#%E9%A3%8E%E9%99%A9%E6%AF%94hazard-ratio" id="toc-风险比hazard-ratio" class="nav-link" data-scroll-target="#%E9%A3%8E%E9%99%A9%E6%AF%94hazard-ratio"><span class="header-section-number">21.4</span> 风险比（hazard ratio）</a>
+  <ul>
+<li><a href="#%E6%A8%A1%E5%9E%8B%E7%B3%BB%E6%95%B0%E7%9A%84%E4%BC%B0%E8%AE%A1" id="toc-模型系数的估计" class="nav-link" data-scroll-target="#%E6%A8%A1%E5%9E%8B%E7%B3%BB%E6%95%B0%E7%9A%84%E4%BC%B0%E8%AE%A1"><span class="header-section-number">21.4.1</span> 模型系数的估计</a></li>
+  <li><a href="#%E6%A8%A1%E5%9E%8B%E7%B3%BB%E6%95%B0%E7%9A%84%E5%81%87%E8%AE%BE%E6%A3%80%E9%AA%8C" id="toc-模型系数的假设检验" class="nav-link" data-scroll-target="#%E6%A8%A1%E5%9E%8B%E7%B3%BB%E6%95%B0%E7%9A%84%E5%81%87%E8%AE%BE%E6%A3%80%E9%AA%8C"><span class="header-section-number">21.4.2</span> 模型系数的假设检验</a></li>
   </ul>
-</nav>
+</li>
+  </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">医学与生物统计学</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./SurvivalAnalysis.html">生存分析</a></li><li class="breadcrumb-item"><a href="./CoxProportionalHazardsModel.html"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Cox比例风险模型</span></a></li></ol></nav><div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">
+<span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Cox比例风险模型</span>
+</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 </div>
 
 
@@ -419,28 +412,97 @@ window.Quarto = {
   
 
 
-</header>
-
-
-<section id="推荐阅读" class="level1 unnumbered" style="color:red">
-<h1 class="unnumbered" style="color:red">推荐阅读</h1>
-<ul>
-<li><p><a href="https://www.math.pku.edu.cn/teachers/lidf/docs/Rbook/html/_Rbook/">R语言教程 Ⅶ 统计模型 ——李东风</a></p></li>
-<li><p><a href="https://www.statlearning.com/">统计学习 ISLR</a></p></li>
-<li><p><a href="https://ayueme.github.io/R_medical_stat/">R语言实战医学统计</a></p></li>
-<li><p><a href="https://www.tidymodels.org/" class="uri">https://www.tidymodels.org/</a></p></li>
-<li><p><a href="https://bookdown.org/wangzhen/survival/">医学研究中的生存数据建模（4e）</a></p></li>
-<li><p><a href="https://psa.bryer.org/index.html">Applied Propensity Score Analysis with R</a></p></li>
-<li><p><a href="https://www.huber.embl.de/msmb/">Modern Statistics for Modern Biology</a></p></li>
-</ul>
+</header><p>Cox比例风险模型是一种半参数方法</p>
+<section id="风险函数" class="level2" data-number="21.1"><h2 data-number="21.1" class="anchored" data-anchor-id="风险函数">
+<span class="header-section-number">21.1</span> 风险函数</h2>
+<p><span class="math display">\[
+\begin{aligned} h(t)=&amp;\lim_{\Delta t\to 0}\frac{P(t\le T&lt;t+\Delta t|T\ge t)}{\Delta t}\\ =&amp;\lim_{\Delta t\to 0}\frac{P(t\le T&lt;t+\Delta t\ \&amp;\ T\ge t)}{\Delta t·P(T\ge t) }\\ =&amp;\lim_{\Delta t\to 0}\frac{S(t)- S(t+\Delta t)}{\Delta t·S(t)}\\ =&amp;-\frac{d(\ln S(t))}{dt} \end{aligned}
+\]</span></p>
+</section><section id="风险率" class="level2" data-number="21.2"><h2 data-number="21.2" class="anchored" data-anchor-id="风险率">
+<span class="header-section-number">21.2</span> 风险率</h2>
+<p>对于有风险因子<span class="math inline">\(x_1,x_2,...,x_k\)</span> 的个体在时间 t 的风险率<span class="math inline">\(h(t|x_1,x_2,...,x_k)\)</span></p>
+<p><span class="math display">\[ h(t|x_1,x_2,...,x_k)=h_0(t)g(x_1,x_2,...,x_k)=h_0(t)exp(\sum_{j=1}^k\beta_jx_j) \]</span></p>
+<p>其中</p>
+<ol type="1">
+<li><p><span class="math inline">\(h0 (t)\)</span>是给定所有风险因子（协变量）为零的随时间变化的<strong>基线风险函数</strong>。</p></li>
+<li><p><span class="math inline">\(g(X)\)</span>是<strong>k个独立风险因子</strong>的集合函数，代表变量的风险效应。</p></li>
+<li><p><span class="math inline">\(β_j\)</span>是部分回归系数，表示风险比的比例变化。</p></li>
+</ol></section><section id="比例风险假设" class="level2" data-number="21.3"><h2 data-number="21.3" class="anchored" data-anchor-id="比例风险假设">
+<span class="header-section-number">21.3</span> 比例风险假设</h2>
+<p>（proportional hazards assumption）</p>
+<p><span class="math display">\[ \frac{h(t)}{h_0(t)}=exp(\sum_{j=1}^k\beta_jx_j) \]</span></p>
+</section><section id="风险比hazard-ratio" class="level2" data-number="21.4"><h2 data-number="21.4" class="anchored" data-anchor-id="风险比hazard-ratio">
+<span class="header-section-number">21.4</span> 风险比（hazard ratio）</h2>
+<p>假设有两个个体，分别具有独立变量，两个个体的风险函数之比称为风险比</p>
+<p><span class="math display">\[ HR=\frac{h(t|x_1,x_2,...,x_k)}{h(t|x_1^*,x_2^*,...,x_k^*)}=exp(\sum_{j=1}^k\beta_j(x_j-x_j^*)) \]</span></p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data/log-rank-survival.csv"</span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpkgs.datanovia.com/survminer/index.html">survminer</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/therneau/survival">survival</a></span><span class="op">)</span></span>
+<span><span class="co"># 使用 Kaplan-Meier 方法创建一个Surv对象</span></span>
+<span><span class="va">surv_formula</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html">Surv</a></span><span class="op">(</span><span class="va">Days</span>,<span class="va">status</span><span class="op">)</span><span class="op">~</span><span class="va">treatment</span></span>
+<span></span>
+<span><span class="co"># 拟合Cox比例风险模型 </span></span>
+<span><span class="va">cox_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/coxph.html">coxph</a></span><span class="op">(</span><span class="va">surv_formula</span>, data <span class="op">=</span> <span class="va">df</span><span class="op">)</span>  </span>
+<span><span class="co"># 查看模型结果 </span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">cox_model</span><span class="op">)</span>  </span>
+<span><span class="co">#&gt; Call:</span></span>
+<span><span class="co">#&gt; coxph(formula = surv_formula, data = df)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   n= 56, number of events= 39 </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;                       coef exp(coef)  se(coef)      z Pr(&gt;|z|)    </span></span>
+<span><span class="co">#&gt; treatmentDPVB    -2.740141  0.064561  0.580664 -4.719 2.37e-06 ***</span></span>
+<span><span class="co">#&gt; treatmentLDRT    -0.383558  0.681432  0.387499 -0.990    0.322    </span></span>
+<span><span class="co">#&gt; treatmentLR_DPVB -4.632850  0.009727  0.878661 -5.273 1.34e-07 ***</span></span>
+<span><span class="co">#&gt; ---</span></span>
+<span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;                  exp(coef) exp(-coef) lower .95 upper .95</span></span>
+<span><span class="co">#&gt; treatmentDPVB     0.064561     15.489  0.020688   0.20148</span></span>
+<span><span class="co">#&gt; treatmentLDRT     0.681432      1.467  0.318848   1.45634</span></span>
+<span><span class="co">#&gt; treatmentLR_DPVB  0.009727    102.807  0.001738   0.05444</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Concordance= 0.822  (se = 0.025 )</span></span>
+<span><span class="co">#&gt; Likelihood ratio test= 61.41  on 3 df,   p=3e-13</span></span>
+<span><span class="co">#&gt; Wald test            = 36.01  on 3 df,   p=7e-08</span></span>
+<span><span class="co">#&gt; Score (logrank) test = 60.47  on 3 df,   p=5e-13</span></span>
+<span><span class="co"># 检查比例风险假设 </span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/cox.zph.html">cox.zph</a></span><span class="op">(</span><span class="va">cox_model</span><span class="op">)</span></span>
+<span><span class="co">#&gt;           chisq df    p</span></span>
+<span><span class="co">#&gt; treatment 0.833  3 0.84</span></span>
+<span><span class="co">#&gt; GLOBAL    0.833  3 0.84</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<section id="模型系数的估计" class="level3" data-number="21.4.1"><h3 data-number="21.4.1" class="anchored" data-anchor-id="模型系数的估计">
+<span class="header-section-number">21.4.1</span> 模型系数的估计</h3>
+<p>条件死亡概率和局部似然函数方法</p>
+<p><span class="math display">\[ \ln L_p(\beta)=\sum_{i=1}^{d}\left[ \sum_{j=1}^k\beta_jx_{ij}-\ln\sum_{m\in R_i}exp( \sum_{j=1}^k\beta_jx_{mj})         \right] \]</span></p>
+<p>Newton-Raphson iterative method</p>
+<p><span class="math display">\[  \begin{cases}  \frac{\partial \ln L_p(\beta)}{\partial \beta_1}=0\\ \frac{\partial \ln L_p(\beta)}{\partial \beta_2}=0\\ \vdots\\ \frac{\partial \ln L_p(\beta)}{\partial \beta_k}=0\\ \end{cases} \]</span></p>
+</section><section id="模型系数的假设检验" class="level3" data-number="21.4.2"><h3 data-number="21.4.2" class="anchored" data-anchor-id="模型系数的假设检验">
+<span class="header-section-number">21.4.2</span> 模型系数的假设检验</h3>
+<ol type="1">
+<li>
+<p>Wald‘s test</p>
+<p>检验是否有独立变量需要被消除，统计量<span class="math inline">\(Z=b_j/S_{b_j}\)</span></p>
+<p>当样本量足够大时，Z服从标准正态分布，Z<sup>2</sup> 服从自由度为1 的<span class="math inline">\(\chi^2\)</span> 分布</p>
+<p><span class="math display">\[ \chi^2_W=(b_j/S_{b_j})^2\sim \chi^2(1) \]</span></p>
+</li>
+<li>
+<p>Partial likelihood Ratio test</p>
+<p>主要用于非显著性变量的消除，新变量的引入和模型的比较。</p>
+<p><span class="math display">\[ \chi^2_{LR}=2\left[ \ln L_p(\beta_k)-\ln L_p(\beta_{k-1}) \right]\sim\chi^2(1) \]</span></p>
+<p>其中分别是包含 k 个和 k-1 个（不包含要检验的第 j 个变量）独立变量的对数局部似然函数</p>
+</li>
+</ol>
 
 
 <!-- -->
 
-</section>
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -899,34 +961,100 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./SurvivalAnalysis.html" class="pagination-link" aria-label="生存分析">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">生存分析</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./descriptive_statistics.html" class="pagination-link" aria-label="描述性统计">
-        <span class="nav-page-text">描述性统计</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./PropensityScore.html" class="pagination-link" aria-label="倾向性评分">
+        <span class="nav-page-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">倾向性评分</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># 推荐阅读 {.unnumbered style="color:red"}</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">R语言教程 Ⅶ 统计模型 ——李东风</span><span class="co">](https://www.math.pku.edu.cn/teachers/lidf/docs/Rbook/html/_Rbook/)</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">统计学习 ISLR</span><span class="co">](https://www.statlearning.com/)</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">R语言实战医学统计</span><span class="co">](https://ayueme.github.io/R_medical_stat/)</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="ot">&lt;https://www.tidymodels.org/&gt;</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">医学研究中的生存数据建模（4e）</span><span class="co">](https://bookdown.org/wangzhen/survival/)</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Applied Propensity Score Analysis with R</span><span class="co">](https://psa.bryer.org/index.html)</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Modern Statistics for Modern Biology</span><span class="co">](https://www.huber.embl.de/msmb/)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Cox比例风险模型</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>Cox比例风险模型是一种半参数方法</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">## 风险函数</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>$$ </span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>\begin{aligned} h(t)=&amp;\lim_{\Delta t\to 0}\frac{P(t\le T&lt;t+\Delta t|T\ge t)}{\Delta t}<span class="sc">\\</span> =&amp;\lim_{\Delta t\to 0}\frac{P(t\le T&lt;t+\Delta t\ <span class="sc">\&amp;</span>\ T\ge t)}{\Delta t·P(T\ge t) }<span class="sc">\\</span> =&amp;\lim_{\Delta t\to 0}\frac{S(t)- S(t+\Delta t)}{\Delta t·S(t)}<span class="sc">\\</span> =&amp;-\frac{d(\ln S(t))}{dt} \end{aligned} </span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">## 风险率</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>对于有风险因子$x_1,x_2,...,x_k$ 的个体在时间 t 的风险率$h(t|x_1,x_2,...,x_k)$</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>$$ h(t|x_1,x_2,...,x_k)=h_0(t)g(x_1,x_2,...,x_k)=h_0(t)exp(\sum_{j=1}^k\beta_jx_j) $$</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>其中</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>$h0 (t)$是给定所有风险因子（协变量）为零的随时间变化的**基线风险函数**。</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>$g(X)$是**k个独立风险因子**的集合函数，代表变量的风险效应。</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>$β_j$是部分回归系数，表示风险比的比例变化。</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="fu">## 比例风险假设</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>（proportional hazards assumption）</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>$$ \frac{h(t)}{h_0(t)}=exp(\sum_{j=1}^k\beta_jx_j) $$</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="fu">## 风险比（hazard ratio）</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>假设有两个个体，分别具有独立变量，两个个体的风险函数之比称为风险比</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>$$ HR=\frac{h(t|x_1,x_2,...,x_k)}{h(t|x_1^*,x_2^*,...,x_k^*)}=exp(\sum_{j=1}^k\beta_j(x_j-x_j^*)) $$</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/log-rank-survival.csv"</span>)</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survminer)</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survival)</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a><span class="co"># 使用 Kaplan-Meier 方法创建一个Surv对象</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>surv_formula <span class="ot">&lt;-</span> <span class="fu">Surv</span>(Days,status)<span class="sc">~</span>treatment</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a><span class="co"># 拟合Cox比例风险模型 </span></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>cox_model <span class="ot">&lt;-</span> <span class="fu">coxph</span>(surv_formula, <span class="at">data =</span> df)  </span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a><span class="co"># 查看模型结果 </span></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cox_model)  </span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a><span class="co"># 检查比例风险假设 </span></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a><span class="fu">cox.zph</span>(cox_model)</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a><span class="fu">### 模型系数的估计</span></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>条件死亡概率和局部似然函数方法</span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>$$ \ln L_p(\beta)=\sum_{i=1}^{d}\left<span class="co">[</span><span class="ot"> \sum_{j=1}^k\beta_jx_{ij}-\ln\sum_{m\in R_i}exp( \sum_{j=1}^k\beta_jx_{mj})         \right</span><span class="co">]</span> $$</span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>Newton-Raphson iterative method</span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>$$  \begin{cases}  \frac{\partial \ln L_p(\beta)}{\partial \beta_1}=0<span class="sc">\\</span> \frac{\partial \ln L_p(\beta)}{\partial \beta_2}=0<span class="sc">\\</span> \vdots<span class="sc">\\</span> \frac{\partial \ln L_p(\beta)}{\partial \beta_k}=0<span class="sc">\\</span> \end{cases} $$</span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a><span class="fu">### 模型系数的假设检验</span></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>Wald‘s test</span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>    检验是否有独立变量需要被消除，统计量$Z=b_j/S_{b_j}$</span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>    当样本量足够大时，Z服从标准正态分布，Z^2^ 服从自由度为1 的$\chi^2$ 分布</span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>    $$ \chi^2_W=(b_j/S_{b_j})^2\sim \chi^2(1) $$</span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>Partial likelihood Ratio test</span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>    主要用于非显著性变量的消除，新变量的引入和模型的比较。</span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>    $$ \chi^2_{LR}=2\left[ \ln L_p(\beta_k)-\ln L_p(\beta_{k-1}) \right]\sim\chi^2(1) $$</span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a>    其中分别是包含 k 个和 k-1 个（不包含要检验的第 j 个变量）独立变量的对数局部似然函数</span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
-
 
 
 
