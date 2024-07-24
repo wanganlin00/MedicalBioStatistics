@@ -70,17 +70,20 @@ D'Agostino-Pearson 综合检验 是基于数据的偏度和峰度来评估数据
 moments::agostino.test(df$ctrl)
 moments::agostino.test(df$trt)
 
-# 样本偏度
-moments::skewness(df$ctrl,na.rm = T)
+# 样本偏度和峰度
+skewness <- moments::skewness(df$ctrl,na.rm = T)
+kurtosis <- moments::kurtosis(df$ctrl,na.rm = T)
+# D'Agostino's K² 检验
+K2 <- length(df$ctrl) * (skewness^2 / 6 + (kurtosis - 3)^2 / 24)
+p_value <- 1 - pchisq(K2, df = 2)
 
-# 总体偏度
-e1071::skewness(df$ctrl,na.rm = T)
-
-nortest::pearson.test(df$ctrl)
-nortest::pearson.test(df$trt)
+K2
+p_value
 ```
 
-### Jarque-Bera正态性检验
+### Jarque-Bera 正态性检验
+
+Jarque-Bera检验也是一种基于样本偏度和峰度的正态性检验方法。
 
 ![](images/jarque-bera正态性检验.png){fig-align="center"}
 
@@ -88,6 +91,15 @@ nortest::pearson.test(df$trt)
 if(!require(tseries)){install.packages('tseries')}
 tseries::jarque.bera.test(df$ctrl)
 tseries::jarque.bera.test(df$trt)
+```
+
+### Pearson's X2 test
+
+```{r}
+
+
+nortest::pearson.test(df$ctrl)
+nortest::pearson.test(df$trt)
 ```
 
 ## 基于回归和相关
@@ -103,7 +115,9 @@ Shapiro-Wilk检验而是将数据的实际SD与根据数据的QQ图斜率计算�
 :::
 
 ```{r}
+map_df(df,~ shapiro.test(.x)[c("statistic","p.value")])
 df %>% shapiro_test(ctrl,trt)
+
 ```
 
 ```{r}
@@ -147,7 +161,7 @@ nortest::lillie.test(df$trt)
 
 ### Anderson-Darling test
 
-Anderson-Darling test 是基于累积分布函数（CDF）的比较，通过计算观测值与理论分布之间的差异程度来评估数据的拟合程度。在R语言中，可以使用 `nortest` 包中的 `ad.test()` 函数来执行此检验291011。此检验的原假设同样是数据服从正态分布，如果p值小于显著性水平，则拒绝原假设，认为数据不服从正态分布。
+Anderson-Darling test 是基于累积分布函数（CDF）的比较，通过计算观测值与理论分布之间的差异程度来评估数据的拟合程度。在R语言中，可以使用 `nortest` 包中的 `ad.test()` 函数来执行此检验291011。此检验的原假设同样是数据服从正态分布，如果p值小于显著性水平，则拒绝原假设，认为数据不服从正态分布。对尾部敏感，适用于中等样本量的数据
 
 ```{r}
 nortest::ad.test(df$ctrl)
