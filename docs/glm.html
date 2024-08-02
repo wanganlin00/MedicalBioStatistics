@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.4.555">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>医学与生物统计学 - 17&nbsp; 广义线性模型</title>
+<title>医学与生物统计学 - 18&nbsp; 广义线性模型</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -60,8 +60,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./LME.html" rel="next">
-<link href="./LinearRegression.html" rel="prev">
+<link href="./GEE.html" rel="next">
+<link href="./LME.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -130,7 +130,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./LinearRegression.html">统计模型</a></li><li class="breadcrumb-item"><a href="./GLM.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">广义线性模型</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./LinearRegression.html">统计模型</a></li><li class="breadcrumb-item"><a href="./GLM.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">广义线性模型</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -293,14 +293,14 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./GLM.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">广义线性模型</span></span></a>
+  <a href="./LME.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">线性混合模型</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./LME.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">线性混合效应</span></span></a>
+  <a href="./GLM.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">广义线性模型</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -326,6 +326,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">生存分析</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./CoxProportionalHazardsModel.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Cox比例风险模型</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -340,7 +346,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./PropensityScore.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">倾向性评分</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">倾向性评分</span></span></a>
   </div>
 </li>
       </ul>
@@ -357,13 +363,13 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./diagnostic_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">诊断性测试</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">诊断性测试</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./observational_study_design.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">观察性研究设计</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">观察性研究设计</span></span></a>
   </div>
 </li>
       </ul>
@@ -376,38 +382,38 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#%E5%B9%BF%E4%B9%89%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B%E7%BB%84%E4%BB%B6" id="toc-广义线性模型组件" class="nav-link active" data-scroll-target="#%E5%B9%BF%E4%B9%89%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B%E7%BB%84%E4%BB%B6"><span class="header-section-number">17.1</span> 广义线性模型组件</a></li>
-  <li><a href="#%E9%AB%98%E6%96%AF%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92" id="toc-高斯线性回归" class="nav-link" data-scroll-target="#%E9%AB%98%E6%96%AF%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92"><span class="header-section-number">17.2</span> 高斯线性回归</a></li>
+<li><a href="#%E5%B9%BF%E4%B9%89%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B%E7%BB%84%E4%BB%B6" id="toc-广义线性模型组件" class="nav-link active" data-scroll-target="#%E5%B9%BF%E4%B9%89%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B%E7%BB%84%E4%BB%B6"><span class="header-section-number">18.1</span> 广义线性模型组件</a></li>
+  <li><a href="#%E9%AB%98%E6%96%AF%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92" id="toc-高斯线性回归" class="nav-link" data-scroll-target="#%E9%AB%98%E6%96%AF%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92"><span class="header-section-number">18.2</span> 高斯线性回归</a></li>
   <li>
-<a href="#%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92" id="toc-逻辑回归" class="nav-link" data-scroll-target="#%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92"><span class="header-section-number">17.3</span> 逻辑回归</a>
+<a href="#%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92" id="toc-逻辑回归" class="nav-link" data-scroll-target="#%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92"><span class="header-section-number">18.3</span> 逻辑回归</a>
   <ul>
 <li>
-<a href="#binary-logistic-regression" id="toc-binary-logistic-regression" class="nav-link" data-scroll-target="#binary-logistic-regression"><span class="header-section-number">17.3.1</span> Binary logistic regression</a>
+<a href="#binary-logistic-regression" id="toc-binary-logistic-regression" class="nav-link" data-scroll-target="#binary-logistic-regression"><span class="header-section-number">18.3.1</span> Binary logistic regression</a>
   <ul class="collapse">
-<li><a href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E7%94%A8%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92" id="toc-为什么不用线性回归" class="nav-link" data-scroll-target="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E7%94%A8%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92"><span class="header-section-number">17.3.1.1</span> 为什么不用线性回归</a></li>
-  <li><a href="#%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92-1" id="toc-逻辑回归-1" class="nav-link" data-scroll-target="#%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92-1"><span class="header-section-number">17.3.1.2</span> 逻辑回归</a></li>
-  <li><a href="#%E8%87%AA%E5%8F%98%E9%87%8F%E6%98%AF%E5%88%86%E7%B1%BB%E5%8F%98%E9%87%8F" id="toc-自变量是分类变量" class="nav-link" data-scroll-target="#%E8%87%AA%E5%8F%98%E9%87%8F%E6%98%AF%E5%88%86%E7%B1%BB%E5%8F%98%E9%87%8F"><span class="header-section-number">17.3.1.3</span> 自变量是分类变量</a></li>
+<li><a href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E7%94%A8%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92" id="toc-为什么不用线性回归" class="nav-link" data-scroll-target="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E7%94%A8%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92"><span class="header-section-number">18.3.1.1</span> 为什么不用线性回归</a></li>
+  <li><a href="#%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92-1" id="toc-逻辑回归-1" class="nav-link" data-scroll-target="#%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92-1"><span class="header-section-number">18.3.1.2</span> 逻辑回归</a></li>
+  <li><a href="#%E8%87%AA%E5%8F%98%E9%87%8F%E6%98%AF%E5%88%86%E7%B1%BB%E5%8F%98%E9%87%8F" id="toc-自变量是分类变量" class="nav-link" data-scroll-target="#%E8%87%AA%E5%8F%98%E9%87%8F%E6%98%AF%E5%88%86%E7%B1%BB%E5%8F%98%E9%87%8F"><span class="header-section-number">18.3.1.3</span> 自变量是分类变量</a></li>
   </ul>
 </li>
-  <li><a href="#k2p1-%E5%A4%9A%E5%85%83%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92" id="toc-k2p1-多元逻辑回归" class="nav-link" data-scroll-target="#k2p1-%E5%A4%9A%E5%85%83%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92"><span class="header-section-number">17.3.2</span> K=2,p&gt;1 多元逻辑回归</a></li>
-  <li><a href="#%E6%9C%89%E5%BA%8F%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92" id="toc-有序逻辑回归" class="nav-link" data-scroll-target="#%E6%9C%89%E5%BA%8F%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92"><span class="header-section-number">17.3.3</span> 有序逻辑回归</a></li>
+  <li><a href="#k2p1-%E5%A4%9A%E5%85%83%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92" id="toc-k2p1-多元逻辑回归" class="nav-link" data-scroll-target="#k2p1-%E5%A4%9A%E5%85%83%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92"><span class="header-section-number">18.3.2</span> K=2,p&gt;1 多元逻辑回归</a></li>
+  <li><a href="#%E6%9C%89%E5%BA%8F%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92" id="toc-有序逻辑回归" class="nav-link" data-scroll-target="#%E6%9C%89%E5%BA%8F%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92"><span class="header-section-number">18.3.3</span> 有序逻辑回归</a></li>
   <li>
-<a href="#k2p1-%E5%A4%9A%E5%88%86%E7%B1%BB%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92" id="toc-k2p1-多分类逻辑回归" class="nav-link" data-scroll-target="#k2p1-%E5%A4%9A%E5%88%86%E7%B1%BB%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92"><span class="header-section-number">17.3.4</span> K&gt;2,p&gt;1 多分类逻辑回归</a>
+<a href="#k2p1-%E5%A4%9A%E5%88%86%E7%B1%BB%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92" id="toc-k2p1-多分类逻辑回归" class="nav-link" data-scroll-target="#k2p1-%E5%A4%9A%E5%88%86%E7%B1%BB%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92"><span class="header-section-number">18.3.4</span> K&gt;2,p&gt;1 多分类逻辑回归</a>
   <ul class="collapse">
-<li><a href="#nnetmultinom" id="toc-nnetmultinom" class="nav-link" data-scroll-target="#nnetmultinom"><span class="header-section-number">17.3.4.1</span> <code>nnet::multinom()</code></a></li>
-  <li><a href="#glmnetglmnet" id="toc-glmnetglmnet" class="nav-link" data-scroll-target="#glmnetglmnet"><span class="header-section-number">17.3.4.2</span> <code>glmnet::glmnet()</code></a></li>
+<li><a href="#nnetmultinom" id="toc-nnetmultinom" class="nav-link" data-scroll-target="#nnetmultinom"><span class="header-section-number">18.3.4.1</span> <code>nnet::multinom()</code></a></li>
+  <li><a href="#glmnetglmnet" id="toc-glmnetglmnet" class="nav-link" data-scroll-target="#glmnetglmnet"><span class="header-section-number">18.3.4.2</span> <code>glmnet::glmnet()</code></a></li>
   </ul>
 </li>
   </ul>
 </li>
-  <li><a href="#%E6%B3%8A%E6%9D%BE%E5%9B%9E%E5%BD%92" id="toc-泊松回归" class="nav-link" data-scroll-target="#%E6%B3%8A%E6%9D%BE%E5%9B%9E%E5%BD%92"><span class="header-section-number">17.4</span> 泊松回归</a></li>
-  <li><a href="#%E8%B4%9F%E4%BA%8C%E9%A1%B9%E5%9B%9E%E5%BD%92" id="toc-负二项回归" class="nav-link" data-scroll-target="#%E8%B4%9F%E4%BA%8C%E9%A1%B9%E5%9B%9E%E5%BD%92"><span class="header-section-number">17.5</span> 负二项回归</a></li>
+  <li><a href="#%E6%B3%8A%E6%9D%BE%E5%9B%9E%E5%BD%92" id="toc-泊松回归" class="nav-link" data-scroll-target="#%E6%B3%8A%E6%9D%BE%E5%9B%9E%E5%BD%92"><span class="header-section-number">18.4</span> 泊松回归</a></li>
+  <li><a href="#%E8%B4%9F%E4%BA%8C%E9%A1%B9%E5%9B%9E%E5%BD%92" id="toc-负二项回归" class="nav-link" data-scroll-target="#%E8%B4%9F%E4%BA%8C%E9%A1%B9%E5%9B%9E%E5%BD%92"><span class="header-section-number">18.5</span> 负二项回归</a></li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./LinearRegression.html">统计模型</a></li><li class="breadcrumb-item"><a href="./GLM.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">广义线性模型</span></a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./LinearRegression.html">统计模型</a></li><li class="breadcrumb-item"><a href="./GLM.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">广义线性模型</span></a></li></ol></nav><div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">
-<span class="chapter-number">17</span>&nbsp; <span class="chapter-title">广义线性模型</span>
+<span class="chapter-number">18</span>&nbsp; <span class="chapter-title">广义线性模型</span>
 </h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 </div>
 
@@ -422,8 +428,12 @@ window.Quarto = {
   
 
 
-</header><section id="广义线性模型组件" class="level2" data-number="17.1"><h2 data-number="17.1" class="anchored" data-anchor-id="广义线性模型组件">
-<span class="header-section-number">17.1</span> 广义线性模型组件</h2>
+</header><section id="广义线性模型组件" class="level2" data-number="18.1"><h2 data-number="18.1" class="anchored" data-anchor-id="广义线性模型组件">
+<span class="header-section-number">18.1</span> 广义线性模型组件</h2>
+<p>广义线性模型是对线性模型的扩展，适用于非正态分布的数据，假设观测值之间是独立的，不能处理组内相关性。模型形式为：</p>
+<p><span class="math display">\[
+g(E(Y))=\mathbf{X} \beta
+\]</span></p>
 <ol type="1">
 <li>线性预测函数：</li>
 </ol>
@@ -431,7 +441,7 @@ window.Quarto = {
 \eta = \mathbf{X} \beta
 \]</span></p>
 <ol start="2" type="1">
-<li>期望值与线性预测函数的关系：</li>
+<li>因变量的期望值与线性预测函数的关系：</li>
 </ol>
 <p><span class="math display">\[
 E(y)=\mu
@@ -443,7 +453,7 @@ E(y)=\mu
 \eta =g(\mu)=g(E(y))
 \]</span></p>
 <ol start="4" type="1">
-<li>反连接函数g<sup>-1</sup> (.)：</li>
+<li>反连接函数<code>g-1 (.)</code>：</li>
 </ol>
 <p><span class="math display">\[
 E(y)=g^{-1}(\eta)
@@ -454,8 +464,8 @@ E(y)=g^{-1}(\eta)
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="高斯线性回归" class="level2" data-number="17.2"><h2 data-number="17.2" class="anchored" data-anchor-id="高斯线性回归">
-<span class="header-section-number">17.2</span> 高斯线性回归</h2>
+</section><section id="高斯线性回归" class="level2" data-number="18.2"><h2 data-number="18.2" class="anchored" data-anchor-id="高斯线性回归">
+<span class="header-section-number">18.2</span> 高斯线性回归</h2>
 <p>高斯线性回归是一种简单的线性回归模型，其中假设响应变量服从正态分布，并且使用恒等连接函数（identity link function）。t-statistic</p>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidymodels.tidymodels.org">tidymodels</a></span><span class="op">)</span></span>
@@ -536,8 +546,8 @@ E(y)=g^{-1}(\eta)
 </div>
 </div>
 </div>
-</section><section id="逻辑回归" class="level2" data-number="17.3"><h2 data-number="17.3" class="anchored" data-anchor-id="逻辑回归">
-<span class="header-section-number">17.3</span> 逻辑回归</h2>
+</section><section id="逻辑回归" class="level2" data-number="18.3"><h2 data-number="18.3" class="anchored" data-anchor-id="逻辑回归">
+<span class="header-section-number">18.3</span> 逻辑回归</h2>
 <p>逻辑回归用于处理二元分类问题。其模型假设响应变量的对数优势（log odds）服从线性模型。</p>
 <p>Sigmoid 激活函数：</p>
 <p><span class="math display">\[
@@ -666,10 +676,10 @@ logit(\pi(X))=\ln (\frac{\pi(X)}{1-\pi(X)})=\beta_0+\beta_1X_1+\beta_2X_2+...+\b
 </div>
 </div>
 </div>
-<section id="binary-logistic-regression" class="level3" data-number="17.3.1"><h3 data-number="17.3.1" class="anchored" data-anchor-id="binary-logistic-regression">
-<span class="header-section-number">17.3.1</span> Binary logistic regression</h3>
-<section id="为什么不用线性回归" class="level4" data-number="17.3.1.1"><h4 data-number="17.3.1.1" class="anchored" data-anchor-id="为什么不用线性回归">
-<span class="header-section-number">17.3.1.1</span> 为什么不用线性回归</h4>
+<section id="binary-logistic-regression" class="level3" data-number="18.3.1"><h3 data-number="18.3.1" class="anchored" data-anchor-id="binary-logistic-regression">
+<span class="header-section-number">18.3.1</span> Binary logistic regression</h3>
+<section id="为什么不用线性回归" class="level4" data-number="18.3.1.1"><h4 data-number="18.3.1.1" class="anchored" data-anchor-id="为什么不用线性回归">
+<span class="header-section-number">18.3.1.1</span> 为什么不用线性回归</h4>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">lm_spec</span><span class="op">&lt;-</span><span class="fu"><a href="https://parsnip.tidymodels.org/reference/linear_reg.html">linear_reg</a></span><span class="op">(</span>mode <span class="op">=</span><span class="st">"regression"</span>,engine <span class="op">=</span> <span class="st">"lm"</span> <span class="op">)</span></span>
 <span></span>
@@ -696,8 +706,8 @@ logit(\pi(X))=\ln (\frac{\pi(X)}{1-\pi(X)})=\beta_0+\beta_1X_1+\beta_2X_2+...+\b
 </div>
 </div>
 </div>
-</section><section id="逻辑回归-1" class="level4" data-number="17.3.1.2"><h4 data-number="17.3.1.2" class="anchored" data-anchor-id="逻辑回归-1">
-<span class="header-section-number">17.3.1.2</span> 逻辑回归</h4>
+</section><section id="逻辑回归-1" class="level4" data-number="18.3.1.2"><h4 data-number="18.3.1.2" class="anchored" data-anchor-id="逻辑回归-1">
+<span class="header-section-number">18.3.1.2</span> 逻辑回归</h4>
 <p>logit link function</p>
 <p>z-statistic</p>
 <div class="cell">
@@ -790,8 +800,8 @@ logit(\pi(X))=\ln (\frac{\pi(X)}{1-\pi(X)})=\beta_0+\beta_1X_1+\beta_2X_2+...+\b
 </div>
 </div>
 </div>
-</section><section id="自变量是分类变量" class="level4" data-number="17.3.1.3"><h4 data-number="17.3.1.3" class="anchored" data-anchor-id="自变量是分类变量">
-<span class="header-section-number">17.3.1.3</span> 自变量是分类变量</h4>
+</section><section id="自变量是分类变量" class="level4" data-number="18.3.1.3"><h4 data-number="18.3.1.3" class="anchored" data-anchor-id="自变量是分类变量">
+<span class="header-section-number">18.3.1.3</span> 自变量是分类变量</h4>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">logit_default_student</span> <span class="op">&lt;-</span> <span class="va">logit_spec</span> <span class="op">|&gt;</span><span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span><span class="va">default</span> <span class="op">~</span> <span class="va">student</span>, data <span class="op">=</span> <span class="va">df</span><span class="op">)</span></span>
 <span></span>
@@ -40844,8 +40854,8 @@ logit(\pi(X))=\ln (\frac{\pi(X)}{1-\pi(X)})=\beta_0+\beta_1X_1+\beta_2X_2+...+\b
 </div>
 </div>
 </div>
-</section></section><section id="k2p1-多元逻辑回归" class="level3" data-number="17.3.2"><h3 data-number="17.3.2" class="anchored" data-anchor-id="k2p1-多元逻辑回归">
-<span class="header-section-number">17.3.2</span> K=2,p&gt;1 多元逻辑回归</h3>
+</section></section><section id="k2p1-多元逻辑回归" class="level3" data-number="18.3.2"><h3 data-number="18.3.2" class="anchored" data-anchor-id="k2p1-多元逻辑回归">
+<span class="header-section-number">18.3.2</span> K=2,p&gt;1 多元逻辑回归</h3>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">logit_multiple</span><span class="op">&lt;-</span><span class="va">logit_spec</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span><span class="va">default</span><span class="op">~</span><span class="va">balance</span><span class="op">+</span><span class="va">income</span><span class="op">+</span><span class="va">student</span>,data<span class="op">=</span><span class="va">df</span><span class="op">)</span></span>
 <span></span>
@@ -40985,8 +40995,8 @@ logit(\pi(X))=\ln (\frac{\pi(X)}{1-\pi(X)})=\beta_0+\beta_1X_1+\beta_2X_2+...+\b
 </div>
 </div>
 </div>
-</section><section id="有序逻辑回归" class="level3" data-number="17.3.3"><h3 data-number="17.3.3" class="anchored" data-anchor-id="有序逻辑回归">
-<span class="header-section-number">17.3.3</span> 有序逻辑回归</h3>
+</section><section id="有序逻辑回归" class="level3" data-number="18.3.3"><h3 data-number="18.3.3" class="anchored" data-anchor-id="有序逻辑回归">
+<span class="header-section-number">18.3.3</span> 有序逻辑回归</h3>
 <p><span class="math display">\[
     \log \left(\frac{P(Y\le k|X=x)}{1-P(Y\le k|X=x)}\right)
 \]</span></p>
@@ -66354,11 +66364,11 @@ logit(\pi(X))=\ln (\frac{\pi(X)}{1-\pi(X)})=\beta_0+\beta_1X_1+\beta_2X_2+...+\b
 </div>
 </div>
 </div>
-</section><section id="k2p1-多分类逻辑回归" class="level3" data-number="17.3.4"><h3 data-number="17.3.4" class="anchored" data-anchor-id="k2p1-多分类逻辑回归">
-<span class="header-section-number">17.3.4</span> K&gt;2,p&gt;1 多分类逻辑回归</h3>
+</section><section id="k2p1-多分类逻辑回归" class="level3" data-number="18.3.4"><h3 data-number="18.3.4" class="anchored" data-anchor-id="k2p1-多分类逻辑回归">
+<span class="header-section-number">18.3.4</span> K&gt;2,p&gt;1 多分类逻辑回归</h3>
 <p>用于处理具有多于两个类别的响应变量的情况。例如，分类问题中的三个或更多类别。</p>
-<section id="nnetmultinom" class="level4" data-number="17.3.4.1"><h4 data-number="17.3.4.1" class="anchored" data-anchor-id="nnetmultinom">
-<span class="header-section-number">17.3.4.1</span> <code>nnet::multinom()</code>
+<section id="nnetmultinom" class="level4" data-number="18.3.4.1"><h4 data-number="18.3.4.1" class="anchored" data-anchor-id="nnetmultinom">
+<span class="header-section-number">18.3.4.1</span> <code>nnet::multinom()</code>
 </h4>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mn_spec</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://parsnip.tidymodels.org/reference/multinom_reg.html">multinom_reg</a></span><span class="op">(</span>mode <span class="op">=</span> <span class="st">"classification"</span>, engine <span class="op">=</span> <span class="st">"nnet"</span><span class="op">)</span></span>
@@ -66502,8 +66512,8 @@ logit(\pi(X))=\ln (\frac{\pi(X)}{1-\pi(X)})=\beta_0+\beta_1X_1+\beta_2X_2+...+\b
 </div>
 </div>
 </div>
-</section><section id="glmnetglmnet" class="level4" data-number="17.3.4.2"><h4 data-number="17.3.4.2" class="anchored" data-anchor-id="glmnetglmnet">
-<span class="header-section-number">17.3.4.2</span> <code>glmnet::glmnet()</code>
+</section><section id="glmnetglmnet" class="level4" data-number="18.3.4.2"><h4 data-number="18.3.4.2" class="anchored" data-anchor-id="glmnetglmnet">
+<span class="header-section-number">18.3.4.2</span> <code>glmnet::glmnet()</code>
 </h4>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://glmnet.stanford.edu">glmnet</a></span><span class="op">)</span> <span class="co"># 多项回归</span></span>
@@ -66823,8 +66833,8 @@ logit(\pi(X))=\ln (\frac{\pi(X)}{1-\pi(X)})=\beta_0+\beta_1X_1+\beta_2X_2+...+\b
 <span><span class="co">#&gt; 100  4 96.38 0.00004</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section></section></section><section id="泊松回归" class="level2" data-number="17.4"><h2 data-number="17.4" class="anchored" data-anchor-id="泊松回归">
-<span class="header-section-number">17.4</span> 泊松回归</h2>
+</section></section></section><section id="泊松回归" class="level2" data-number="18.4"><h2 data-number="18.4" class="anchored" data-anchor-id="泊松回归">
+<span class="header-section-number">18.4</span> 泊松回归</h2>
 <p>泊松回归用于计数数据，假设响应变量服从泊松分布，并使用对数连接函数（log link function）。z-statistic</p>
 <p><code>family=poisson(link = "log")</code></p>
 <p><code>family = quasipoisson(link = "log"))</code></p>
@@ -67137,8 +67147,8 @@ P(X=x;\lambda)=\frac{e^{-\lambda}\lambda ^x}{x!}
 <span><span class="co">#&gt; [1] 10338.9</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="负二项回归" class="level2" data-number="17.5"><h2 data-number="17.5" class="anchored" data-anchor-id="负二项回归">
-<span class="header-section-number">17.5</span> 负二项回归</h2>
+</section><section id="负二项回归" class="level2" data-number="18.5"><h2 data-number="18.5" class="anchored" data-anchor-id="负二项回归">
+<span class="header-section-number">18.5</span> 负二项回归</h2>
 <p>负二项回归用于处理计数数据且存在过度离散（overdispersion）的问题。</p>
 <p>log link function，z-statistic</p>
 <p>probability mass function ：</p>
@@ -67698,13 +67708,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./LinearRegression.html" class="pagination-link" aria-label="线性回归">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">线性回归</span></span>
+      <a href="./LME.html" class="pagination-link" aria-label="线性混合模型">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">线性混合模型</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./LME.html" class="pagination-link" aria-label="线性混合效应">
-        <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">线性混合效应</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./GEE.html" class="pagination-link" aria-label="广义估计方程">
+        <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">广义估计方程</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
@@ -67712,425 +67722,431 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="fu">## 广义线性模型组件</span></span>
 <span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>线性预测函数：</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>广义线性模型是对线性模型的扩展，适用于非正态分布的数据，假设观测值之间是独立的，不能处理组内相关性。模型形式为：</span>
 <span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>\eta = \mathbf{X} \beta</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>g(E(Y))=\mathbf{X} \beta</span>
 <span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>期望值与线性预测函数的关系：</span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>线性预测函数：</span>
 <span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a>E(y)=\mu</span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a>\eta = \mathbf{X} \beta</span>
 <span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-17"><a href="#cb40-17" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>连接函数 <span class="in">`g(.)`</span> ：</span>
+<span id="cb40-17"><a href="#cb40-17" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>因变量的期望值与线性预测函数的关系：</span>
 <span id="cb40-18"><a href="#cb40-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb40-19"><a href="#cb40-19" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb40-20"><a href="#cb40-20" aria-hidden="true" tabindex="-1"></a>\eta =g(\mu)=g(E(y))</span>
+<span id="cb40-20"><a href="#cb40-20" aria-hidden="true" tabindex="-1"></a>E(y)=\mu</span>
 <span id="cb40-21"><a href="#cb40-21" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb40-22"><a href="#cb40-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-23"><a href="#cb40-23" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>反连接函数g^-1^ (.)：</span>
+<span id="cb40-23"><a href="#cb40-23" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>连接函数 <span class="in">`g(.)`</span> ：</span>
 <span id="cb40-24"><a href="#cb40-24" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb40-25"><a href="#cb40-25" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb40-26"><a href="#cb40-26" aria-hidden="true" tabindex="-1"></a>E(y)=g^{-1}(\eta)</span>
+<span id="cb40-26"><a href="#cb40-26" aria-hidden="true" tabindex="-1"></a>\eta =g(\mu)=g(E(y))</span>
 <span id="cb40-27"><a href="#cb40-27" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb40-28"><a href="#cb40-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-31"><a href="#cb40-31" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb40-32"><a href="#cb40-32" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidymodels)</span>
-<span id="cb40-33"><a href="#cb40-33" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(poissonreg)</span>
-<span id="cb40-34"><a href="#cb40-34" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
-<span id="cb40-35"><a href="#cb40-35" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb40-36"><a href="#cb40-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-37"><a href="#cb40-37" aria-hidden="true" tabindex="-1"></a><span class="fu">## 高斯线性回归</span></span>
-<span id="cb40-38"><a href="#cb40-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-39"><a href="#cb40-39" aria-hidden="true" tabindex="-1"></a>高斯线性回归是一种简单的线性回归模型，其中假设响应变量服从正态分布，并且使用恒等连接函数（identity link function）。t-statistic</span>
-<span id="cb40-40"><a href="#cb40-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-43"><a href="#cb40-43" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb40-44"><a href="#cb40-44" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidymodels)</span>
-<span id="cb40-45"><a href="#cb40-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-46"><a href="#cb40-46" aria-hidden="true" tabindex="-1"></a><span class="co"># 使用 glm() 函数进行高斯线性回归</span></span>
-<span id="cb40-47"><a href="#cb40-47" aria-hidden="true" tabindex="-1"></a>glm1 <span class="ot">&lt;-</span> <span class="fu">linear_reg</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb40-48"><a href="#cb40-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_engine</span>(<span class="st">"glm"</span>, <span class="at">family =</span> stats<span class="sc">::</span><span class="fu">gaussian</span>(<span class="at">link =</span> <span class="st">"identity"</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb40-49"><a href="#cb40-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit</span>(Fertility <span class="sc">~</span> Agriculture <span class="sc">+</span> Education <span class="sc">+</span> Catholic <span class="sc">+</span> Infant.Mortality,</span>
-<span id="cb40-50"><a href="#cb40-50" aria-hidden="true" tabindex="-1"></a>      <span class="at">data =</span> swiss)</span>
+<span id="cb40-29"><a href="#cb40-29" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>反连接函数<span class="in">`g-1 (.)`</span>：</span>
+<span id="cb40-30"><a href="#cb40-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-31"><a href="#cb40-31" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb40-32"><a href="#cb40-32" aria-hidden="true" tabindex="-1"></a>E(y)=g^{-1}(\eta)</span>
+<span id="cb40-33"><a href="#cb40-33" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb40-34"><a href="#cb40-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-37"><a href="#cb40-37" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb40-38"><a href="#cb40-38" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidymodels)</span>
+<span id="cb40-39"><a href="#cb40-39" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(poissonreg)</span>
+<span id="cb40-40"><a href="#cb40-40" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb40-41"><a href="#cb40-41" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb40-42"><a href="#cb40-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-43"><a href="#cb40-43" aria-hidden="true" tabindex="-1"></a><span class="fu">## 高斯线性回归</span></span>
+<span id="cb40-44"><a href="#cb40-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-45"><a href="#cb40-45" aria-hidden="true" tabindex="-1"></a>高斯线性回归是一种简单的线性回归模型，其中假设响应变量服从正态分布，并且使用恒等连接函数（identity link function）。t-statistic</span>
+<span id="cb40-46"><a href="#cb40-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-49"><a href="#cb40-49" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb40-50"><a href="#cb40-50" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidymodels)</span>
 <span id="cb40-51"><a href="#cb40-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-52"><a href="#cb40-52" aria-hidden="true" tabindex="-1"></a><span class="co"># 查看模型的系数</span></span>
-<span id="cb40-53"><a href="#cb40-53" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(glm1)</span>
-<span id="cb40-54"><a href="#cb40-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-55"><a href="#cb40-55" aria-hidden="true" tabindex="-1"></a><span class="co"># 查看模型的 AIC 和 Deviance</span></span>
-<span id="cb40-56"><a href="#cb40-56" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(glm1) <span class="sc">|&gt;</span> <span class="fu">select</span>(AIC, deviance)</span>
+<span id="cb40-52"><a href="#cb40-52" aria-hidden="true" tabindex="-1"></a><span class="co"># 使用 glm() 函数进行高斯线性回归</span></span>
+<span id="cb40-53"><a href="#cb40-53" aria-hidden="true" tabindex="-1"></a>glm1 <span class="ot">&lt;-</span> <span class="fu">linear_reg</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb40-54"><a href="#cb40-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_engine</span>(<span class="st">"glm"</span>, <span class="at">family =</span> stats<span class="sc">::</span><span class="fu">gaussian</span>(<span class="at">link =</span> <span class="st">"identity"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb40-55"><a href="#cb40-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit</span>(Fertility <span class="sc">~</span> Agriculture <span class="sc">+</span> Education <span class="sc">+</span> Catholic <span class="sc">+</span> Infant.Mortality,</span>
+<span id="cb40-56"><a href="#cb40-56" aria-hidden="true" tabindex="-1"></a>      <span class="at">data =</span> swiss)</span>
 <span id="cb40-57"><a href="#cb40-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-58"><a href="#cb40-58" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb40-59"><a href="#cb40-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-60"><a href="#cb40-60" aria-hidden="true" tabindex="-1"></a><span class="fu">## 逻辑回归</span></span>
-<span id="cb40-61"><a href="#cb40-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-62"><a href="#cb40-62" aria-hidden="true" tabindex="-1"></a>逻辑回归用于处理二元分类问题。其模型假设响应变量的对数优势（log odds）服从线性模型。</span>
+<span id="cb40-58"><a href="#cb40-58" aria-hidden="true" tabindex="-1"></a><span class="co"># 查看模型的系数</span></span>
+<span id="cb40-59"><a href="#cb40-59" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(glm1)</span>
+<span id="cb40-60"><a href="#cb40-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-61"><a href="#cb40-61" aria-hidden="true" tabindex="-1"></a><span class="co"># 查看模型的 AIC 和 Deviance</span></span>
+<span id="cb40-62"><a href="#cb40-62" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(glm1) <span class="sc">|&gt;</span> <span class="fu">select</span>(AIC, deviance)</span>
 <span id="cb40-63"><a href="#cb40-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-64"><a href="#cb40-64" aria-hidden="true" tabindex="-1"></a>Sigmoid 激活函数：</span>
+<span id="cb40-64"><a href="#cb40-64" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb40-65"><a href="#cb40-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-66"><a href="#cb40-66" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb40-67"><a href="#cb40-67" aria-hidden="true" tabindex="-1"></a>f(x)=\frac{1}{1+e^{-x}}=\frac{e^x}{1+e^x}</span>
-<span id="cb40-68"><a href="#cb40-68" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb40-66"><a href="#cb40-66" aria-hidden="true" tabindex="-1"></a><span class="fu">## 逻辑回归</span></span>
+<span id="cb40-67"><a href="#cb40-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-68"><a href="#cb40-68" aria-hidden="true" tabindex="-1"></a>逻辑回归用于处理二元分类问题。其模型假设响应变量的对数优势（log odds）服从线性模型。</span>
 <span id="cb40-69"><a href="#cb40-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-72"><a href="#cb40-72" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb40-73"><a href="#cb40-73" aria-hidden="true" tabindex="-1"></a>sigmoid <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb40-74"><a href="#cb40-74" aria-hidden="true" tabindex="-1"></a>    <span class="at">x=</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">6</span>,<span class="dv">6</span>,<span class="at">length.out=</span><span class="dv">1000</span>),</span>
-<span id="cb40-75"><a href="#cb40-75" aria-hidden="true" tabindex="-1"></a>    <span class="at">y=</span><span class="dv">1</span><span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span><span class="fu">exp</span>(<span class="sc">-</span>x)),</span>
-<span id="cb40-76"><a href="#cb40-76" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb40-77"><a href="#cb40-77" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sigmoid,<span class="fu">aes</span>(x,y))<span class="sc">+</span></span>
-<span id="cb40-78"><a href="#cb40-78" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>()</span>
-<span id="cb40-79"><a href="#cb40-79" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb40-80"><a href="#cb40-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-81"><a href="#cb40-81" aria-hidden="true" tabindex="-1"></a>逻辑回归( logistic regression )的一般数学方程：</span>
-<span id="cb40-82"><a href="#cb40-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-83"><a href="#cb40-83" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb40-84"><a href="#cb40-84" aria-hidden="true" tabindex="-1"></a>\pi(Y=k|X=(X_1,X_2,...,X_p)=\frac{e^{\beta_{k0}+\beta_{k1}X_1+\beta_{k2}X_2+...+\beta_{kp}X_p}}{1+\sum_{l=1}^{K-1} e^{\beta_{l0}+\beta_{l1}X_1+\beta_{l2}X_2+...+\beta_{lp}X_p}}</span>
-<span id="cb40-85"><a href="#cb40-85" aria-hidden="true" tabindex="-1"></a>$$ 其中$\pi$ 是成功概率，$k=1,2,...,K-1$是因变量的水平数，$p$ 是自变量个数。</span>
+<span id="cb40-70"><a href="#cb40-70" aria-hidden="true" tabindex="-1"></a>Sigmoid 激活函数：</span>
+<span id="cb40-71"><a href="#cb40-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-72"><a href="#cb40-72" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb40-73"><a href="#cb40-73" aria-hidden="true" tabindex="-1"></a>f(x)=\frac{1}{1+e^{-x}}=\frac{e^x}{1+e^x}</span>
+<span id="cb40-74"><a href="#cb40-74" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb40-75"><a href="#cb40-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-78"><a href="#cb40-78" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb40-79"><a href="#cb40-79" aria-hidden="true" tabindex="-1"></a>sigmoid <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb40-80"><a href="#cb40-80" aria-hidden="true" tabindex="-1"></a>    <span class="at">x=</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">6</span>,<span class="dv">6</span>,<span class="at">length.out=</span><span class="dv">1000</span>),</span>
+<span id="cb40-81"><a href="#cb40-81" aria-hidden="true" tabindex="-1"></a>    <span class="at">y=</span><span class="dv">1</span><span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span><span class="fu">exp</span>(<span class="sc">-</span>x)),</span>
+<span id="cb40-82"><a href="#cb40-82" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb40-83"><a href="#cb40-83" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sigmoid,<span class="fu">aes</span>(x,y))<span class="sc">+</span></span>
+<span id="cb40-84"><a href="#cb40-84" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>()</span>
+<span id="cb40-85"><a href="#cb40-85" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb40-86"><a href="#cb40-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-87"><a href="#cb40-87" aria-hidden="true" tabindex="-1"></a>逻辑回归一般需要引入虚拟变量（哑变量，dummy variable），通常取值伪0或1。</span>
+<span id="cb40-87"><a href="#cb40-87" aria-hidden="true" tabindex="-1"></a>逻辑回归( logistic regression )的一般数学方程：</span>
 <span id="cb40-88"><a href="#cb40-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-89"><a href="#cb40-89" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>当$K=2$时，$k=l=p=1$即简单逻辑回归。</span>
-<span id="cb40-90"><a href="#cb40-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-91"><a href="#cb40-91" aria-hidden="true" tabindex="-1"></a>    极大似然法（maximum likelihood），*likelihood function*：</span>
+<span id="cb40-89"><a href="#cb40-89" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb40-90"><a href="#cb40-90" aria-hidden="true" tabindex="-1"></a>\pi(Y=k|X=(X_1,X_2,...,X_p)=\frac{e^{\beta_{k0}+\beta_{k1}X_1+\beta_{k2}X_2+...+\beta_{kp}X_p}}{1+\sum_{l=1}^{K-1} e^{\beta_{l0}+\beta_{l1}X_1+\beta_{l2}X_2+...+\beta_{lp}X_p}}</span>
+<span id="cb40-91"><a href="#cb40-91" aria-hidden="true" tabindex="-1"></a>$$ 其中$\pi$ 是成功概率，$k=1,2,...,K-1$是因变量的水平数，$p$ 是自变量个数。</span>
 <span id="cb40-92"><a href="#cb40-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-93"><a href="#cb40-93" aria-hidden="true" tabindex="-1"></a>    $$</span>
-<span id="cb40-94"><a href="#cb40-94" aria-hidden="true" tabindex="-1"></a>    \ell (\beta_0,\beta_1)=\prod_{i:y_i=1}\pi(x_i)\prod_{i':y_{i'}=0}(1-\pi(x_{i'}))</span>
-<span id="cb40-95"><a href="#cb40-95" aria-hidden="true" tabindex="-1"></a>    $$</span>
+<span id="cb40-93"><a href="#cb40-93" aria-hidden="true" tabindex="-1"></a>逻辑回归一般需要引入虚拟变量（哑变量，dummy variable），通常取值伪0或1。</span>
+<span id="cb40-94"><a href="#cb40-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-95"><a href="#cb40-95" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>当$K=2$时，$k=l=p=1$即简单逻辑回归。</span>
 <span id="cb40-96"><a href="#cb40-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-97"><a href="#cb40-97" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>当$K=2$时，$k=l=1,p&gt;1$即多元逻辑回归（multiple logistic regression）。</span>
+<span id="cb40-97"><a href="#cb40-97" aria-hidden="true" tabindex="-1"></a>    极大似然法（maximum likelihood），*likelihood function*：</span>
 <span id="cb40-98"><a href="#cb40-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-99"><a href="#cb40-99" aria-hidden="true" tabindex="-1"></a>    优势（odds）</span>
-<span id="cb40-100"><a href="#cb40-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-99"><a href="#cb40-99" aria-hidden="true" tabindex="-1"></a>    $$</span>
+<span id="cb40-100"><a href="#cb40-100" aria-hidden="true" tabindex="-1"></a>    \ell (\beta_0,\beta_1)=\prod_{i:y_i=1}\pi(x_i)\prod_{i':y_{i'}=0}(1-\pi(x_{i'}))</span>
 <span id="cb40-101"><a href="#cb40-101" aria-hidden="true" tabindex="-1"></a>    $$</span>
-<span id="cb40-102"><a href="#cb40-102" aria-hidden="true" tabindex="-1"></a>    Odds=\frac{\pi(X)}{1-\pi(X)}=e^{\beta_0+\beta_1X_1+\beta_2X_2+...+\beta_pX_p}</span>
-<span id="cb40-103"><a href="#cb40-103" aria-hidden="true" tabindex="-1"></a>    $$</span>
+<span id="cb40-102"><a href="#cb40-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-103"><a href="#cb40-103" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>当$K=2$时，$k=l=1,p&gt;1$即多元逻辑回归（multiple logistic regression）。</span>
 <span id="cb40-104"><a href="#cb40-104" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-105"><a href="#cb40-105" aria-hidden="true" tabindex="-1"></a>    log odds (logit)</span>
+<span id="cb40-105"><a href="#cb40-105" aria-hidden="true" tabindex="-1"></a>    优势（odds）</span>
 <span id="cb40-106"><a href="#cb40-106" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb40-107"><a href="#cb40-107" aria-hidden="true" tabindex="-1"></a>    $$</span>
-<span id="cb40-108"><a href="#cb40-108" aria-hidden="true" tabindex="-1"></a>    logit(\pi(X))=\ln (\frac{\pi(X)}{1-\pi(X)})=\beta_0+\beta_1X_1+\beta_2X_2+...+\beta_pX_p</span>
+<span id="cb40-108"><a href="#cb40-108" aria-hidden="true" tabindex="-1"></a>    Odds=\frac{\pi(X)}{1-\pi(X)}=e^{\beta_0+\beta_1X_1+\beta_2X_2+...+\beta_pX_p}</span>
 <span id="cb40-109"><a href="#cb40-109" aria-hidden="true" tabindex="-1"></a>    $$</span>
 <span id="cb40-110"><a href="#cb40-110" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-111"><a href="#cb40-111" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>当$K&gt;2$时，$k,l,p&gt;1$即多项逻辑回归（multinomial logistic regression）。</span>
+<span id="cb40-111"><a href="#cb40-111" aria-hidden="true" tabindex="-1"></a>    log odds (logit)</span>
 <span id="cb40-112"><a href="#cb40-112" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb40-113"><a href="#cb40-113" aria-hidden="true" tabindex="-1"></a>    $$</span>
-<span id="cb40-114"><a href="#cb40-114" aria-hidden="true" tabindex="-1"></a>    \log (\frac{P(Y=k|X=x)}{P(Y=K|X=x)})=\beta_{k0}+\beta_{k1}X_1+\beta_{k2}X_2+...+\beta_{kp}X_p</span>
+<span id="cb40-114"><a href="#cb40-114" aria-hidden="true" tabindex="-1"></a>    logit(\pi(X))=\ln (\frac{\pi(X)}{1-\pi(X)})=\beta_0+\beta_1X_1+\beta_2X_2+...+\beta_pX_p</span>
 <span id="cb40-115"><a href="#cb40-115" aria-hidden="true" tabindex="-1"></a>    $$</span>
 <span id="cb40-116"><a href="#cb40-116" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-117"><a href="#cb40-117" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">数据下载网站</span><span class="co">](https://www.statlearning.com/resources-second-edition)</span></span>
+<span id="cb40-117"><a href="#cb40-117" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>当$K&gt;2$时，$k,l,p&gt;1$即多项逻辑回归（multinomial logistic regression）。</span>
 <span id="cb40-118"><a href="#cb40-118" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-121"><a href="#cb40-121" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb40-122"><a href="#cb40-122" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/ISLR/Default.csv"</span>)</span>
-<span id="cb40-123"><a href="#cb40-123" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>default <span class="ot">&lt;-</span> <span class="fu">factor</span>(df<span class="sc">$</span>default,<span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"No"</span>,<span class="st">"Yes"</span>),<span class="at">labels =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>))</span>
-<span id="cb40-124"><a href="#cb40-124" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>student<span class="ot">&lt;-</span> <span class="fu">factor</span>(df<span class="sc">$</span>student,<span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"No"</span>,<span class="st">"Yes"</span>),<span class="at">labels =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>))</span>
-<span id="cb40-125"><a href="#cb40-125" aria-hidden="true" tabindex="-1"></a><span class="co"># 违约 学生 余额 收入</span></span>
-<span id="cb40-126"><a href="#cb40-126" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span>
-<span id="cb40-127"><a href="#cb40-127" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(df<span class="sc">$</span>default,df<span class="sc">$</span>student)</span>
-<span id="cb40-128"><a href="#cb40-128" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb40-129"><a href="#cb40-129" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-132"><a href="#cb40-132" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb40-133"><a href="#cb40-133" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df,<span class="fu">aes</span>(balance,income))<span class="sc">+</span></span>
-<span id="cb40-134"><a href="#cb40-134" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">shape=</span>default,<span class="at">color=</span>default),<span class="at">show.legend =</span> F)<span class="sc">|</span></span>
-<span id="cb40-135"><a href="#cb40-135" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df,<span class="fu">aes</span>(default,balance,<span class="at">fill=</span>default),)<span class="sc">+</span></span>
-<span id="cb40-136"><a href="#cb40-136" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">show.legend =</span> F)<span class="sc">+</span></span>
-<span id="cb40-137"><a href="#cb40-137" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df,<span class="fu">aes</span>(default,income,<span class="at">fill=</span>default))<span class="sc">+</span></span>
-<span id="cb40-138"><a href="#cb40-138" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span>
-<span id="cb40-139"><a href="#cb40-139" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb40-140"><a href="#cb40-140" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-141"><a href="#cb40-141" aria-hidden="true" tabindex="-1"></a><span class="fu">### Binary logistic regression</span></span>
-<span id="cb40-142"><a href="#cb40-142" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-143"><a href="#cb40-143" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 为什么不用线性回归</span></span>
-<span id="cb40-144"><a href="#cb40-144" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-147"><a href="#cb40-147" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb40-148"><a href="#cb40-148" aria-hidden="true" tabindex="-1"></a>lm_spec<span class="ot">&lt;-</span><span class="fu">linear_reg</span>(<span class="at">mode =</span><span class="st">"regression"</span>,<span class="at">engine =</span> <span class="st">"lm"</span> )</span>
-<span id="cb40-149"><a href="#cb40-149" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-150"><a href="#cb40-150" aria-hidden="true" tabindex="-1"></a>lm_default_balance<span class="ot">&lt;-</span>lm_spec <span class="sc">|&gt;</span> </span>
-<span id="cb40-151"><a href="#cb40-151" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit</span>(<span class="fu">as.numeric</span>(default)<span class="sc">-</span><span class="dv">1</span><span class="sc">~</span>balance,<span class="at">data=</span>df)</span>
-<span id="cb40-152"><a href="#cb40-152" aria-hidden="true" tabindex="-1"></a>lm_default_balance<span class="sc">$</span>fit</span>
-<span id="cb40-153"><a href="#cb40-153" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-154"><a href="#cb40-154" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df,<span class="fu">aes</span>(balance,<span class="fu">as.numeric</span>(default)<span class="sc">-</span><span class="dv">1</span>))<span class="sc">+</span></span>
-<span id="cb40-155"><a href="#cb40-155" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">"orange"</span>,<span class="at">size=</span><span class="fl">1.25</span>)<span class="sc">+</span></span>
-<span id="cb40-156"><a href="#cb40-156" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>,<span class="at">se=</span><span class="cn">FALSE</span>)<span class="sc">+</span></span>
-<span id="cb40-157"><a href="#cb40-157" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="at">linetype=</span><span class="dv">2</span>)<span class="sc">+</span></span>
-<span id="cb40-158"><a href="#cb40-158" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"linear regression"</span>)</span>
+<span id="cb40-119"><a href="#cb40-119" aria-hidden="true" tabindex="-1"></a>    $$</span>
+<span id="cb40-120"><a href="#cb40-120" aria-hidden="true" tabindex="-1"></a>    \log (\frac{P(Y=k|X=x)}{P(Y=K|X=x)})=\beta_{k0}+\beta_{k1}X_1+\beta_{k2}X_2+...+\beta_{kp}X_p</span>
+<span id="cb40-121"><a href="#cb40-121" aria-hidden="true" tabindex="-1"></a>    $$</span>
+<span id="cb40-122"><a href="#cb40-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-123"><a href="#cb40-123" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">数据下载网站</span><span class="co">](https://www.statlearning.com/resources-second-edition)</span></span>
+<span id="cb40-124"><a href="#cb40-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-127"><a href="#cb40-127" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb40-128"><a href="#cb40-128" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/ISLR/Default.csv"</span>)</span>
+<span id="cb40-129"><a href="#cb40-129" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>default <span class="ot">&lt;-</span> <span class="fu">factor</span>(df<span class="sc">$</span>default,<span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"No"</span>,<span class="st">"Yes"</span>),<span class="at">labels =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>))</span>
+<span id="cb40-130"><a href="#cb40-130" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>student<span class="ot">&lt;-</span> <span class="fu">factor</span>(df<span class="sc">$</span>student,<span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"No"</span>,<span class="st">"Yes"</span>),<span class="at">labels =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>))</span>
+<span id="cb40-131"><a href="#cb40-131" aria-hidden="true" tabindex="-1"></a><span class="co"># 违约 学生 余额 收入</span></span>
+<span id="cb40-132"><a href="#cb40-132" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span>
+<span id="cb40-133"><a href="#cb40-133" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(df<span class="sc">$</span>default,df<span class="sc">$</span>student)</span>
+<span id="cb40-134"><a href="#cb40-134" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb40-135"><a href="#cb40-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-138"><a href="#cb40-138" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb40-139"><a href="#cb40-139" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df,<span class="fu">aes</span>(balance,income))<span class="sc">+</span></span>
+<span id="cb40-140"><a href="#cb40-140" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">shape=</span>default,<span class="at">color=</span>default),<span class="at">show.legend =</span> F)<span class="sc">|</span></span>
+<span id="cb40-141"><a href="#cb40-141" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df,<span class="fu">aes</span>(default,balance,<span class="at">fill=</span>default),)<span class="sc">+</span></span>
+<span id="cb40-142"><a href="#cb40-142" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">show.legend =</span> F)<span class="sc">+</span></span>
+<span id="cb40-143"><a href="#cb40-143" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df,<span class="fu">aes</span>(default,income,<span class="at">fill=</span>default))<span class="sc">+</span></span>
+<span id="cb40-144"><a href="#cb40-144" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span>
+<span id="cb40-145"><a href="#cb40-145" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb40-146"><a href="#cb40-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-147"><a href="#cb40-147" aria-hidden="true" tabindex="-1"></a><span class="fu">### Binary logistic regression</span></span>
+<span id="cb40-148"><a href="#cb40-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-149"><a href="#cb40-149" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 为什么不用线性回归</span></span>
+<span id="cb40-150"><a href="#cb40-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-153"><a href="#cb40-153" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb40-154"><a href="#cb40-154" aria-hidden="true" tabindex="-1"></a>lm_spec<span class="ot">&lt;-</span><span class="fu">linear_reg</span>(<span class="at">mode =</span><span class="st">"regression"</span>,<span class="at">engine =</span> <span class="st">"lm"</span> )</span>
+<span id="cb40-155"><a href="#cb40-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-156"><a href="#cb40-156" aria-hidden="true" tabindex="-1"></a>lm_default_balance<span class="ot">&lt;-</span>lm_spec <span class="sc">|&gt;</span> </span>
+<span id="cb40-157"><a href="#cb40-157" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit</span>(<span class="fu">as.numeric</span>(default)<span class="sc">-</span><span class="dv">1</span><span class="sc">~</span>balance,<span class="at">data=</span>df)</span>
+<span id="cb40-158"><a href="#cb40-158" aria-hidden="true" tabindex="-1"></a>lm_default_balance<span class="sc">$</span>fit</span>
 <span id="cb40-159"><a href="#cb40-159" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-160"><a href="#cb40-160" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb40-161"><a href="#cb40-161" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-162"><a href="#cb40-162" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 逻辑回归</span></span>
-<span id="cb40-163"><a href="#cb40-163" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-164"><a href="#cb40-164" aria-hidden="true" tabindex="-1"></a>logit link function</span>
+<span id="cb40-160"><a href="#cb40-160" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df,<span class="fu">aes</span>(balance,<span class="fu">as.numeric</span>(default)<span class="sc">-</span><span class="dv">1</span>))<span class="sc">+</span></span>
+<span id="cb40-161"><a href="#cb40-161" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">"orange"</span>,<span class="at">size=</span><span class="fl">1.25</span>)<span class="sc">+</span></span>
+<span id="cb40-162"><a href="#cb40-162" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>,<span class="at">se=</span><span class="cn">FALSE</span>)<span class="sc">+</span></span>
+<span id="cb40-163"><a href="#cb40-163" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="at">linetype=</span><span class="dv">2</span>)<span class="sc">+</span></span>
+<span id="cb40-164"><a href="#cb40-164" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"linear regression"</span>)</span>
 <span id="cb40-165"><a href="#cb40-165" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-166"><a href="#cb40-166" aria-hidden="true" tabindex="-1"></a>z-statistic</span>
+<span id="cb40-166"><a href="#cb40-166" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb40-167"><a href="#cb40-167" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-170"><a href="#cb40-170" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb40-171"><a href="#cb40-171" aria-hidden="true" tabindex="-1"></a>logit_spec <span class="ot">&lt;-</span> <span class="fu">logistic_reg</span>() <span class="sc">|&gt;</span></span>
-<span id="cb40-172"><a href="#cb40-172" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_engine</span>(<span class="st">"glm"</span>,<span class="at">family=</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">"logit"</span>)) </span>
+<span id="cb40-168"><a href="#cb40-168" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 逻辑回归</span></span>
+<span id="cb40-169"><a href="#cb40-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-170"><a href="#cb40-170" aria-hidden="true" tabindex="-1"></a>logit link function</span>
+<span id="cb40-171"><a href="#cb40-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-172"><a href="#cb40-172" aria-hidden="true" tabindex="-1"></a>z-statistic</span>
 <span id="cb40-173"><a href="#cb40-173" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-174"><a href="#cb40-174" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-175"><a href="#cb40-175" aria-hidden="true" tabindex="-1"></a>logit_default_balance <span class="ot">&lt;-</span> logit_spec <span class="sc">|&gt;</span> <span class="fu">fit</span>(default<span class="sc">~</span>balance,<span class="at">data=</span>df)</span>
-<span id="cb40-176"><a href="#cb40-176" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-177"><a href="#cb40-177" aria-hidden="true" tabindex="-1"></a>logit_default_balance <span class="sc">|&gt;</span> <span class="fu">glance</span>()</span>
-<span id="cb40-178"><a href="#cb40-178" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-179"><a href="#cb40-179" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(logit_default_balance)</span>
+<span id="cb40-176"><a href="#cb40-176" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb40-177"><a href="#cb40-177" aria-hidden="true" tabindex="-1"></a>logit_spec <span class="ot">&lt;-</span> <span class="fu">logistic_reg</span>() <span class="sc">|&gt;</span></span>
+<span id="cb40-178"><a href="#cb40-178" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_engine</span>(<span class="st">"glm"</span>,<span class="at">family=</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">"logit"</span>)) </span>
+<span id="cb40-179"><a href="#cb40-179" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb40-180"><a href="#cb40-180" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-181"><a href="#cb40-181" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-182"><a href="#cb40-182" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df,<span class="fu">aes</span>(balance,<span class="fu">as.numeric</span>(default)<span class="sc">-</span><span class="dv">1</span>))<span class="sc">+</span></span>
-<span id="cb40-183"><a href="#cb40-183" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">"orange"</span>,<span class="at">size=</span><span class="fl">1.25</span>)<span class="sc">+</span></span>
-<span id="cb40-184"><a href="#cb40-184" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"glm"</span>,</span>
-<span id="cb40-185"><a href="#cb40-185" aria-hidden="true" tabindex="-1"></a>              <span class="at">method.args=</span><span class="fu">list</span>(<span class="at">family=</span><span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">"logit"</span>)),<span class="at">se=</span><span class="cn">FALSE</span>)<span class="sc">+</span></span>
-<span id="cb40-186"><a href="#cb40-186" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="at">linetype=</span><span class="dv">2</span>)<span class="sc">+</span></span>
-<span id="cb40-187"><a href="#cb40-187" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"logistic regression"</span>)</span>
-<span id="cb40-188"><a href="#cb40-188" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-189"><a href="#cb40-189" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb40-190"><a href="#cb40-190" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-191"><a href="#cb40-191" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 自变量是分类变量</span></span>
-<span id="cb40-192"><a href="#cb40-192" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-195"><a href="#cb40-195" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb40-196"><a href="#cb40-196" aria-hidden="true" tabindex="-1"></a>logit_default_student <span class="ot">&lt;-</span> logit_spec <span class="sc">|&gt;</span><span class="fu">fit</span>(default <span class="sc">~</span> student, <span class="at">data =</span> df)</span>
-<span id="cb40-197"><a href="#cb40-197" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-198"><a href="#cb40-198" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(logit_default_student)</span>
-<span id="cb40-199"><a href="#cb40-199" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-200"><a href="#cb40-200" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span> </span>
-<span id="cb40-201"><a href="#cb40-201" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb40-202"><a href="#cb40-202" aria-hidden="true" tabindex="-1"></a>    <span class="at">prob=</span><span class="dv">1</span><span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span><span class="fu">exp</span>(<span class="sc">-</span>(logit_default_student<span class="sc">$</span>fit<span class="sc">$</span>coefficients[<span class="dv">1</span>]<span class="sc">+</span>logit_default_student<span class="sc">$</span>fit<span class="sc">$</span>coefficients[<span class="dv">2</span>]<span class="sc">*</span>(<span class="fu">as.numeric</span>(student)<span class="sc">-</span><span class="dv">1</span>)))),</span>
-<span id="cb40-203"><a href="#cb40-203" aria-hidden="true" tabindex="-1"></a>    <span class="at">logit=</span><span class="fu">log</span>(prob<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>prob))</span>
-<span id="cb40-204"><a href="#cb40-204" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> <span class="fu">select</span>(student,prob)</span>
-<span id="cb40-205"><a href="#cb40-205" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb40-206"><a href="#cb40-206" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-207"><a href="#cb40-207" aria-hidden="true" tabindex="-1"></a><span class="fu">### K=2,p\&gt;1 多元逻辑回归</span></span>
-<span id="cb40-208"><a href="#cb40-208" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-211"><a href="#cb40-211" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb40-212"><a href="#cb40-212" aria-hidden="true" tabindex="-1"></a>logit_multiple<span class="ot">&lt;-</span>logit_spec <span class="sc">|&gt;</span> <span class="fu">fit</span>(default<span class="sc">~</span>balance<span class="sc">+</span>income<span class="sc">+</span>student,<span class="at">data=</span>df)</span>
-<span id="cb40-213"><a href="#cb40-213" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-214"><a href="#cb40-214" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(logit_multiple)</span>
-<span id="cb40-215"><a href="#cb40-215" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-216"><a href="#cb40-216" aria-hidden="true" tabindex="-1"></a><span class="co"># confusion matrix 混淆矩阵</span></span>
-<span id="cb40-217"><a href="#cb40-217" aria-hidden="true" tabindex="-1"></a><span class="fu">augment</span>(logit_multiple, <span class="at">new_data =</span> df) <span class="sc">|&gt;</span></span>
-<span id="cb40-218"><a href="#cb40-218" aria-hidden="true" tabindex="-1"></a>  <span class="fu">conf_mat</span>(<span class="at">truth =</span> default, <span class="at">estimate =</span> .pred_class) <span class="sc">|&gt;</span> </span>
-<span id="cb40-219"><a href="#cb40-219" aria-hidden="true" tabindex="-1"></a>    <span class="fu">autoplot</span>(<span class="at">type =</span> <span class="st">"heatmap"</span>)</span>
-<span id="cb40-220"><a href="#cb40-220" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-221"><a href="#cb40-221" aria-hidden="true" tabindex="-1"></a><span class="co">#准确性 </span></span>
-<span id="cb40-222"><a href="#cb40-222" aria-hidden="true" tabindex="-1"></a>(<span class="dv">9627</span><span class="sc">+</span><span class="dv">105</span>)<span class="sc">/</span>(<span class="dv">9627</span><span class="sc">+</span><span class="dv">105</span><span class="sc">+</span><span class="dv">40</span><span class="sc">+</span><span class="dv">228</span>)</span>
+<span id="cb40-181"><a href="#cb40-181" aria-hidden="true" tabindex="-1"></a>logit_default_balance <span class="ot">&lt;-</span> logit_spec <span class="sc">|&gt;</span> <span class="fu">fit</span>(default<span class="sc">~</span>balance,<span class="at">data=</span>df)</span>
+<span id="cb40-182"><a href="#cb40-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-183"><a href="#cb40-183" aria-hidden="true" tabindex="-1"></a>logit_default_balance <span class="sc">|&gt;</span> <span class="fu">glance</span>()</span>
+<span id="cb40-184"><a href="#cb40-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-185"><a href="#cb40-185" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(logit_default_balance)</span>
+<span id="cb40-186"><a href="#cb40-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-187"><a href="#cb40-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-188"><a href="#cb40-188" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df,<span class="fu">aes</span>(balance,<span class="fu">as.numeric</span>(default)<span class="sc">-</span><span class="dv">1</span>))<span class="sc">+</span></span>
+<span id="cb40-189"><a href="#cb40-189" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">"orange"</span>,<span class="at">size=</span><span class="fl">1.25</span>)<span class="sc">+</span></span>
+<span id="cb40-190"><a href="#cb40-190" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"glm"</span>,</span>
+<span id="cb40-191"><a href="#cb40-191" aria-hidden="true" tabindex="-1"></a>              <span class="at">method.args=</span><span class="fu">list</span>(<span class="at">family=</span><span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">"logit"</span>)),<span class="at">se=</span><span class="cn">FALSE</span>)<span class="sc">+</span></span>
+<span id="cb40-192"><a href="#cb40-192" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="at">linetype=</span><span class="dv">2</span>)<span class="sc">+</span></span>
+<span id="cb40-193"><a href="#cb40-193" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"logistic regression"</span>)</span>
+<span id="cb40-194"><a href="#cb40-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-195"><a href="#cb40-195" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb40-196"><a href="#cb40-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-197"><a href="#cb40-197" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 自变量是分类变量</span></span>
+<span id="cb40-198"><a href="#cb40-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-201"><a href="#cb40-201" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb40-202"><a href="#cb40-202" aria-hidden="true" tabindex="-1"></a>logit_default_student <span class="ot">&lt;-</span> logit_spec <span class="sc">|&gt;</span><span class="fu">fit</span>(default <span class="sc">~</span> student, <span class="at">data =</span> df)</span>
+<span id="cb40-203"><a href="#cb40-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-204"><a href="#cb40-204" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(logit_default_student)</span>
+<span id="cb40-205"><a href="#cb40-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-206"><a href="#cb40-206" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span> </span>
+<span id="cb40-207"><a href="#cb40-207" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb40-208"><a href="#cb40-208" aria-hidden="true" tabindex="-1"></a>    <span class="at">prob=</span><span class="dv">1</span><span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span><span class="fu">exp</span>(<span class="sc">-</span>(logit_default_student<span class="sc">$</span>fit<span class="sc">$</span>coefficients[<span class="dv">1</span>]<span class="sc">+</span>logit_default_student<span class="sc">$</span>fit<span class="sc">$</span>coefficients[<span class="dv">2</span>]<span class="sc">*</span>(<span class="fu">as.numeric</span>(student)<span class="sc">-</span><span class="dv">1</span>)))),</span>
+<span id="cb40-209"><a href="#cb40-209" aria-hidden="true" tabindex="-1"></a>    <span class="at">logit=</span><span class="fu">log</span>(prob<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>prob))</span>
+<span id="cb40-210"><a href="#cb40-210" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> <span class="fu">select</span>(student,prob)</span>
+<span id="cb40-211"><a href="#cb40-211" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb40-212"><a href="#cb40-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-213"><a href="#cb40-213" aria-hidden="true" tabindex="-1"></a><span class="fu">### K=2,p\&gt;1 多元逻辑回归</span></span>
+<span id="cb40-214"><a href="#cb40-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-217"><a href="#cb40-217" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb40-218"><a href="#cb40-218" aria-hidden="true" tabindex="-1"></a>logit_multiple<span class="ot">&lt;-</span>logit_spec <span class="sc">|&gt;</span> <span class="fu">fit</span>(default<span class="sc">~</span>balance<span class="sc">+</span>income<span class="sc">+</span>student,<span class="at">data=</span>df)</span>
+<span id="cb40-219"><a href="#cb40-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-220"><a href="#cb40-220" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(logit_multiple)</span>
+<span id="cb40-221"><a href="#cb40-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-222"><a href="#cb40-222" aria-hidden="true" tabindex="-1"></a><span class="co"># confusion matrix 混淆矩阵</span></span>
 <span id="cb40-223"><a href="#cb40-223" aria-hidden="true" tabindex="-1"></a><span class="fu">augment</span>(logit_multiple, <span class="at">new_data =</span> df) <span class="sc">|&gt;</span></span>
-<span id="cb40-224"><a href="#cb40-224" aria-hidden="true" tabindex="-1"></a>  <span class="fu">accuracy</span>(<span class="at">truth =</span> default, <span class="at">estimate =</span> .pred_class)</span>
-<span id="cb40-225"><a href="#cb40-225" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb40-224"><a href="#cb40-224" aria-hidden="true" tabindex="-1"></a>  <span class="fu">conf_mat</span>(<span class="at">truth =</span> default, <span class="at">estimate =</span> .pred_class) <span class="sc">|&gt;</span> </span>
+<span id="cb40-225"><a href="#cb40-225" aria-hidden="true" tabindex="-1"></a>    <span class="fu">autoplot</span>(<span class="at">type =</span> <span class="st">"heatmap"</span>)</span>
 <span id="cb40-226"><a href="#cb40-226" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-227"><a href="#cb40-227" aria-hidden="true" tabindex="-1"></a>减少弱相关或无关变量</span>
-<span id="cb40-228"><a href="#cb40-228" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-231"><a href="#cb40-231" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb40-232"><a href="#cb40-232" aria-hidden="true" tabindex="-1"></a>logit_multiple_2<span class="ot">&lt;-</span>logit_spec <span class="sc">|&gt;</span> <span class="fu">fit</span>(default<span class="sc">~</span>balance<span class="sc">+</span>student,<span class="at">data=</span>df)</span>
-<span id="cb40-233"><a href="#cb40-233" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-234"><a href="#cb40-234" aria-hidden="true" tabindex="-1"></a><span class="fu">augment</span>(logit_multiple_2, <span class="at">new_data =</span>df) <span class="sc">|&gt;</span></span>
-<span id="cb40-235"><a href="#cb40-235" aria-hidden="true" tabindex="-1"></a>  <span class="fu">conf_mat</span>(<span class="at">truth =</span> default, <span class="at">estimate =</span> .pred_class) </span>
-<span id="cb40-236"><a href="#cb40-236" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb40-237"><a href="#cb40-237" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-238"><a href="#cb40-238" aria-hidden="true" tabindex="-1"></a>预测特定值</span>
+<span id="cb40-227"><a href="#cb40-227" aria-hidden="true" tabindex="-1"></a><span class="co">#准确性 </span></span>
+<span id="cb40-228"><a href="#cb40-228" aria-hidden="true" tabindex="-1"></a>(<span class="dv">9627</span><span class="sc">+</span><span class="dv">105</span>)<span class="sc">/</span>(<span class="dv">9627</span><span class="sc">+</span><span class="dv">105</span><span class="sc">+</span><span class="dv">40</span><span class="sc">+</span><span class="dv">228</span>)</span>
+<span id="cb40-229"><a href="#cb40-229" aria-hidden="true" tabindex="-1"></a><span class="fu">augment</span>(logit_multiple, <span class="at">new_data =</span> df) <span class="sc">|&gt;</span></span>
+<span id="cb40-230"><a href="#cb40-230" aria-hidden="true" tabindex="-1"></a>  <span class="fu">accuracy</span>(<span class="at">truth =</span> default, <span class="at">estimate =</span> .pred_class)</span>
+<span id="cb40-231"><a href="#cb40-231" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb40-232"><a href="#cb40-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-233"><a href="#cb40-233" aria-hidden="true" tabindex="-1"></a>减少弱相关或无关变量</span>
+<span id="cb40-234"><a href="#cb40-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-237"><a href="#cb40-237" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb40-238"><a href="#cb40-238" aria-hidden="true" tabindex="-1"></a>logit_multiple_2<span class="ot">&lt;-</span>logit_spec <span class="sc">|&gt;</span> <span class="fu">fit</span>(default<span class="sc">~</span>balance<span class="sc">+</span>student,<span class="at">data=</span>df)</span>
 <span id="cb40-239"><a href="#cb40-239" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-242"><a href="#cb40-242" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb40-243"><a href="#cb40-243" aria-hidden="true" tabindex="-1"></a>df_new <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb40-244"><a href="#cb40-244" aria-hidden="true" tabindex="-1"></a>  <span class="at">balance =</span> <span class="fu">c</span>(<span class="dv">1000</span>, <span class="dv">2000</span>), </span>
-<span id="cb40-245"><a href="#cb40-245" aria-hidden="true" tabindex="-1"></a>  <span class="at">student =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>)),</span>
-<span id="cb40-246"><a href="#cb40-246" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb40-247"><a href="#cb40-247" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(logit_multiple_2, <span class="at">new_data =</span> df_new,<span class="at">type=</span><span class="st">"class"</span>)</span>
-<span id="cb40-248"><a href="#cb40-248" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(logit_multiple_2, <span class="at">new_data =</span> df_new, <span class="at">type =</span> <span class="st">"prob"</span>)</span>
-<span id="cb40-249"><a href="#cb40-249" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb40-250"><a href="#cb40-250" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-251"><a href="#cb40-251" aria-hidden="true" tabindex="-1"></a><span class="fu">### 有序逻辑回归</span></span>
-<span id="cb40-252"><a href="#cb40-252" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-253"><a href="#cb40-253" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb40-254"><a href="#cb40-254" aria-hidden="true" tabindex="-1"></a>    \log \left(\frac{P(Y\le k|X=x)}{1-P(Y\le k|X=x)}\right)</span>
-<span id="cb40-255"><a href="#cb40-255" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb40-240"><a href="#cb40-240" aria-hidden="true" tabindex="-1"></a><span class="fu">augment</span>(logit_multiple_2, <span class="at">new_data =</span>df) <span class="sc">|&gt;</span></span>
+<span id="cb40-241"><a href="#cb40-241" aria-hidden="true" tabindex="-1"></a>  <span class="fu">conf_mat</span>(<span class="at">truth =</span> default, <span class="at">estimate =</span> .pred_class) </span>
+<span id="cb40-242"><a href="#cb40-242" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb40-243"><a href="#cb40-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-244"><a href="#cb40-244" aria-hidden="true" tabindex="-1"></a>预测特定值</span>
+<span id="cb40-245"><a href="#cb40-245" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-248"><a href="#cb40-248" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb40-249"><a href="#cb40-249" aria-hidden="true" tabindex="-1"></a>df_new <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb40-250"><a href="#cb40-250" aria-hidden="true" tabindex="-1"></a>  <span class="at">balance =</span> <span class="fu">c</span>(<span class="dv">1000</span>, <span class="dv">2000</span>), </span>
+<span id="cb40-251"><a href="#cb40-251" aria-hidden="true" tabindex="-1"></a>  <span class="at">student =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>)),</span>
+<span id="cb40-252"><a href="#cb40-252" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb40-253"><a href="#cb40-253" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(logit_multiple_2, <span class="at">new_data =</span> df_new,<span class="at">type=</span><span class="st">"class"</span>)</span>
+<span id="cb40-254"><a href="#cb40-254" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(logit_multiple_2, <span class="at">new_data =</span> df_new, <span class="at">type =</span> <span class="st">"prob"</span>)</span>
+<span id="cb40-255"><a href="#cb40-255" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb40-256"><a href="#cb40-256" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-259"><a href="#cb40-259" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb40-260"><a href="#cb40-260" aria-hidden="true" tabindex="-1"></a>acl <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">"data/icpsr/advanced_acl_data.rds"</span>)</span>
-<span id="cb40-261"><a href="#cb40-261" aria-hidden="true" tabindex="-1"></a>acl<span class="sc">$</span>PhysActCat_W1 <span class="ot">&lt;-</span> <span class="fu">factor</span>(acl<span class="sc">$</span>PhysActCat_W1,<span class="at">ordered =</span> T)</span>
-<span id="cb40-262"><a href="#cb40-262" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(acl<span class="sc">$</span>PhysActCat_W1)</span>
-<span id="cb40-263"><a href="#cb40-263" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-264"><a href="#cb40-264" aria-hidden="true" tabindex="-1"></a>ordered_logit <span class="ot">&lt;-</span> MASS<span class="sc">::</span><span class="fu">polr</span>(PhysActCat_W1 <span class="sc">~</span> SelfEfficacy_W1, <span class="at">data =</span> acl,</span>
-<span id="cb40-265"><a href="#cb40-265" aria-hidden="true" tabindex="-1"></a>                            <span class="at">method =</span> <span class="st">"logistic"</span>)</span>
-<span id="cb40-266"><a href="#cb40-266" aria-hidden="true" tabindex="-1"></a>ordered_logit <span class="sc">|&gt;</span> <span class="fu">summary</span>()</span>
-<span id="cb40-267"><a href="#cb40-267" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-268"><a href="#cb40-268" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-269"><a href="#cb40-269" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(ordered_logit ,acl ,<span class="at">type =</span> <span class="st">"p"</span>) <span class="sc">|&gt;</span> <span class="fu">as_tibble</span>()</span>
-<span id="cb40-270"><a href="#cb40-270" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb40-271"><a href="#cb40-271" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-272"><a href="#cb40-272" aria-hidden="true" tabindex="-1"></a><span class="fu">### K\&gt;2,p\&gt;1 多分类逻辑回归</span></span>
+<span id="cb40-257"><a href="#cb40-257" aria-hidden="true" tabindex="-1"></a><span class="fu">### 有序逻辑回归</span></span>
+<span id="cb40-258"><a href="#cb40-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-259"><a href="#cb40-259" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb40-260"><a href="#cb40-260" aria-hidden="true" tabindex="-1"></a>    \log \left(\frac{P(Y\le k|X=x)}{1-P(Y\le k|X=x)}\right)</span>
+<span id="cb40-261"><a href="#cb40-261" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb40-262"><a href="#cb40-262" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-265"><a href="#cb40-265" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb40-266"><a href="#cb40-266" aria-hidden="true" tabindex="-1"></a>acl <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">"data/icpsr/advanced_acl_data.rds"</span>)</span>
+<span id="cb40-267"><a href="#cb40-267" aria-hidden="true" tabindex="-1"></a>acl<span class="sc">$</span>PhysActCat_W1 <span class="ot">&lt;-</span> <span class="fu">factor</span>(acl<span class="sc">$</span>PhysActCat_W1,<span class="at">ordered =</span> T)</span>
+<span id="cb40-268"><a href="#cb40-268" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(acl<span class="sc">$</span>PhysActCat_W1)</span>
+<span id="cb40-269"><a href="#cb40-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-270"><a href="#cb40-270" aria-hidden="true" tabindex="-1"></a>ordered_logit <span class="ot">&lt;-</span> MASS<span class="sc">::</span><span class="fu">polr</span>(PhysActCat_W1 <span class="sc">~</span> SelfEfficacy_W1, <span class="at">data =</span> acl,</span>
+<span id="cb40-271"><a href="#cb40-271" aria-hidden="true" tabindex="-1"></a>                            <span class="at">method =</span> <span class="st">"logistic"</span>)</span>
+<span id="cb40-272"><a href="#cb40-272" aria-hidden="true" tabindex="-1"></a>ordered_logit <span class="sc">|&gt;</span> <span class="fu">summary</span>()</span>
 <span id="cb40-273"><a href="#cb40-273" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-274"><a href="#cb40-274" aria-hidden="true" tabindex="-1"></a>用于处理具有多于两个类别的响应变量的情况。例如，分类问题中的三个或更多类别。</span>
-<span id="cb40-275"><a href="#cb40-275" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-276"><a href="#cb40-276" aria-hidden="true" tabindex="-1"></a><span class="fu">#### `nnet::multinom()`</span></span>
+<span id="cb40-274"><a href="#cb40-274" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-275"><a href="#cb40-275" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(ordered_logit ,acl ,<span class="at">type =</span> <span class="st">"p"</span>) <span class="sc">|&gt;</span> <span class="fu">as_tibble</span>()</span>
+<span id="cb40-276"><a href="#cb40-276" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb40-277"><a href="#cb40-277" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-280"><a href="#cb40-280" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb40-281"><a href="#cb40-281" aria-hidden="true" tabindex="-1"></a>mn_spec <span class="ot">&lt;-</span> <span class="fu">multinom_reg</span>(<span class="at">mode =</span> <span class="st">"classification"</span>, <span class="at">engine =</span> <span class="st">"nnet"</span>)</span>
-<span id="cb40-282"><a href="#cb40-282" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-283"><a href="#cb40-283" aria-hidden="true" tabindex="-1"></a>iris_mnlogit <span class="ot">&lt;-</span> mn_spec <span class="sc">|&gt;</span> </span>
-<span id="cb40-284"><a href="#cb40-284" aria-hidden="true" tabindex="-1"></a>    <span class="fu">fit</span>(Species <span class="sc">~</span> ., <span class="at">data =</span> iris)</span>
-<span id="cb40-285"><a href="#cb40-285" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-286"><a href="#cb40-286" aria-hidden="true" tabindex="-1"></a>iris_mnlogit <span class="sc">|&gt;</span> <span class="fu">glance</span>()</span>
-<span id="cb40-287"><a href="#cb40-287" aria-hidden="true" tabindex="-1"></a>iris_mnlogit <span class="sc">|&gt;</span> <span class="fu">tidy</span>()</span>
+<span id="cb40-278"><a href="#cb40-278" aria-hidden="true" tabindex="-1"></a><span class="fu">### K\&gt;2,p\&gt;1 多分类逻辑回归</span></span>
+<span id="cb40-279"><a href="#cb40-279" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-280"><a href="#cb40-280" aria-hidden="true" tabindex="-1"></a>用于处理具有多于两个类别的响应变量的情况。例如，分类问题中的三个或更多类别。</span>
+<span id="cb40-281"><a href="#cb40-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-282"><a href="#cb40-282" aria-hidden="true" tabindex="-1"></a><span class="fu">#### `nnet::multinom()`</span></span>
+<span id="cb40-283"><a href="#cb40-283" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-286"><a href="#cb40-286" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb40-287"><a href="#cb40-287" aria-hidden="true" tabindex="-1"></a>mn_spec <span class="ot">&lt;-</span> <span class="fu">multinom_reg</span>(<span class="at">mode =</span> <span class="st">"classification"</span>, <span class="at">engine =</span> <span class="st">"nnet"</span>)</span>
 <span id="cb40-288"><a href="#cb40-288" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-289"><a href="#cb40-289" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-290"><a href="#cb40-290" aria-hidden="true" tabindex="-1"></a><span class="fu">augment</span>(iris_mnlogit, <span class="at">new_data =</span> iris) <span class="sc">|&gt;</span></span>
-<span id="cb40-291"><a href="#cb40-291" aria-hidden="true" tabindex="-1"></a>    <span class="fu">conf_mat</span>(<span class="at">truth =</span> Species, <span class="at">estimate =</span> .pred_class) <span class="sc">|&gt;</span></span>
-<span id="cb40-292"><a href="#cb40-292" aria-hidden="true" tabindex="-1"></a>    <span class="fu">autoplot</span>(<span class="at">type =</span> <span class="st">"heatmap"</span>)</span>
-<span id="cb40-293"><a href="#cb40-293" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb40-289"><a href="#cb40-289" aria-hidden="true" tabindex="-1"></a>iris_mnlogit <span class="ot">&lt;-</span> mn_spec <span class="sc">|&gt;</span> </span>
+<span id="cb40-290"><a href="#cb40-290" aria-hidden="true" tabindex="-1"></a>    <span class="fu">fit</span>(Species <span class="sc">~</span> ., <span class="at">data =</span> iris)</span>
+<span id="cb40-291"><a href="#cb40-291" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-292"><a href="#cb40-292" aria-hidden="true" tabindex="-1"></a>iris_mnlogit <span class="sc">|&gt;</span> <span class="fu">glance</span>()</span>
+<span id="cb40-293"><a href="#cb40-293" aria-hidden="true" tabindex="-1"></a>iris_mnlogit <span class="sc">|&gt;</span> <span class="fu">tidy</span>()</span>
 <span id="cb40-294"><a href="#cb40-294" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-295"><a href="#cb40-295" aria-hidden="true" tabindex="-1"></a><span class="fu">#### `glmnet::glmnet()`</span></span>
-<span id="cb40-296"><a href="#cb40-296" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-299"><a href="#cb40-299" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb40-300"><a href="#cb40-300" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glmnet) <span class="co"># 多项回归</span></span>
-<span id="cb40-301"><a href="#cb40-301" aria-hidden="true" tabindex="-1"></a>iris_glmnet <span class="ot">&lt;-</span> <span class="fu">glmnet</span>(<span class="at">x =</span> iris[, <span class="sc">-</span><span class="dv">5</span>], <span class="at">y =</span> iris[, <span class="dv">5</span>], <span class="at">family =</span> <span class="st">"multinomial"</span>)</span>
-<span id="cb40-302"><a href="#cb40-302" aria-hidden="true" tabindex="-1"></a>iris_glmnet</span>
-<span id="cb40-303"><a href="#cb40-303" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(iris_glmnet )</span>
-<span id="cb40-304"><a href="#cb40-304" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(iris_glmnet)</span>
-<span id="cb40-305"><a href="#cb40-305" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(iris_glmnet<span class="sc">$</span>lambda,</span>
-<span id="cb40-306"><a href="#cb40-306" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="fu">expression</span>(lambda), <span class="at">xlab =</span> <span class="st">"迭代次数"</span>, <span class="at">main =</span> <span class="st">"惩罚系数的迭代路径"</span></span>
-<span id="cb40-307"><a href="#cb40-307" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb40-308"><a href="#cb40-308" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-309"><a href="#cb40-309" aria-hidden="true" tabindex="-1"></a><span class="co"># 选择一个迭代趋于稳定时的 lambda，比如 iris_glmnet$lambda[80]</span></span>
-<span id="cb40-310"><a href="#cb40-310" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(iris_glmnet, <span class="at">s =</span> <span class="fl">0.0002796185</span>)</span>
-<span id="cb40-311"><a href="#cb40-311" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-312"><a href="#cb40-312" aria-hidden="true" tabindex="-1"></a>iris_pred_glmnet <span class="ot">&lt;-</span> <span class="fu">predict</span>(</span>
-<span id="cb40-313"><a href="#cb40-313" aria-hidden="true" tabindex="-1"></a>  <span class="at">object =</span> iris_glmnet, <span class="at">newx =</span> <span class="fu">as.matrix</span>(iris[, <span class="sc">-</span><span class="dv">5</span>]),</span>
-<span id="cb40-314"><a href="#cb40-314" aria-hidden="true" tabindex="-1"></a>  <span class="at">s =</span> <span class="fl">0.0002796185</span>, <span class="at">type =</span> <span class="st">"class"</span></span>
-<span id="cb40-315"><a href="#cb40-315" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb40-316"><a href="#cb40-316" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-317"><a href="#cb40-317" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb40-318"><a href="#cb40-318" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-321"><a href="#cb40-321" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb40-322"><a href="#cb40-322" aria-hidden="true" tabindex="-1"></a>mn_spec <span class="ot">&lt;-</span> <span class="fu">multinom_reg</span>(<span class="at">mode =</span> <span class="st">"classification"</span>, <span class="at">engine =</span> <span class="st">"glmnet"</span> ,<span class="at">penalty =</span> <span class="fu">tune</span>())</span>
-<span id="cb40-323"><a href="#cb40-323" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-324"><a href="#cb40-324" aria-hidden="true" tabindex="-1"></a>iris_mnlogit <span class="ot">&lt;-</span> mn_spec <span class="sc">|&gt;</span> </span>
-<span id="cb40-325"><a href="#cb40-325" aria-hidden="true" tabindex="-1"></a>    <span class="fu">fit</span>(Species <span class="sc">~</span> ., <span class="at">data =</span> iris)</span>
-<span id="cb40-326"><a href="#cb40-326" aria-hidden="true" tabindex="-1"></a>iris_mnlogit <span class="sc">|&gt;</span> <span class="fu">glance</span>()</span>
-<span id="cb40-327"><a href="#cb40-327" aria-hidden="true" tabindex="-1"></a>iris_mnlogit<span class="sc">$</span>fit</span>
-<span id="cb40-328"><a href="#cb40-328" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb40-295"><a href="#cb40-295" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-296"><a href="#cb40-296" aria-hidden="true" tabindex="-1"></a><span class="fu">augment</span>(iris_mnlogit, <span class="at">new_data =</span> iris) <span class="sc">|&gt;</span></span>
+<span id="cb40-297"><a href="#cb40-297" aria-hidden="true" tabindex="-1"></a>    <span class="fu">conf_mat</span>(<span class="at">truth =</span> Species, <span class="at">estimate =</span> .pred_class) <span class="sc">|&gt;</span></span>
+<span id="cb40-298"><a href="#cb40-298" aria-hidden="true" tabindex="-1"></a>    <span class="fu">autoplot</span>(<span class="at">type =</span> <span class="st">"heatmap"</span>)</span>
+<span id="cb40-299"><a href="#cb40-299" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb40-300"><a href="#cb40-300" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-301"><a href="#cb40-301" aria-hidden="true" tabindex="-1"></a><span class="fu">#### `glmnet::glmnet()`</span></span>
+<span id="cb40-302"><a href="#cb40-302" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-305"><a href="#cb40-305" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb40-306"><a href="#cb40-306" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glmnet) <span class="co"># 多项回归</span></span>
+<span id="cb40-307"><a href="#cb40-307" aria-hidden="true" tabindex="-1"></a>iris_glmnet <span class="ot">&lt;-</span> <span class="fu">glmnet</span>(<span class="at">x =</span> iris[, <span class="sc">-</span><span class="dv">5</span>], <span class="at">y =</span> iris[, <span class="dv">5</span>], <span class="at">family =</span> <span class="st">"multinomial"</span>)</span>
+<span id="cb40-308"><a href="#cb40-308" aria-hidden="true" tabindex="-1"></a>iris_glmnet</span>
+<span id="cb40-309"><a href="#cb40-309" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(iris_glmnet )</span>
+<span id="cb40-310"><a href="#cb40-310" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(iris_glmnet)</span>
+<span id="cb40-311"><a href="#cb40-311" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(iris_glmnet<span class="sc">$</span>lambda,</span>
+<span id="cb40-312"><a href="#cb40-312" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="fu">expression</span>(lambda), <span class="at">xlab =</span> <span class="st">"迭代次数"</span>, <span class="at">main =</span> <span class="st">"惩罚系数的迭代路径"</span></span>
+<span id="cb40-313"><a href="#cb40-313" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb40-314"><a href="#cb40-314" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-315"><a href="#cb40-315" aria-hidden="true" tabindex="-1"></a><span class="co"># 选择一个迭代趋于稳定时的 lambda，比如 iris_glmnet$lambda[80]</span></span>
+<span id="cb40-316"><a href="#cb40-316" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(iris_glmnet, <span class="at">s =</span> <span class="fl">0.0002796185</span>)</span>
+<span id="cb40-317"><a href="#cb40-317" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-318"><a href="#cb40-318" aria-hidden="true" tabindex="-1"></a>iris_pred_glmnet <span class="ot">&lt;-</span> <span class="fu">predict</span>(</span>
+<span id="cb40-319"><a href="#cb40-319" aria-hidden="true" tabindex="-1"></a>  <span class="at">object =</span> iris_glmnet, <span class="at">newx =</span> <span class="fu">as.matrix</span>(iris[, <span class="sc">-</span><span class="dv">5</span>]),</span>
+<span id="cb40-320"><a href="#cb40-320" aria-hidden="true" tabindex="-1"></a>  <span class="at">s =</span> <span class="fl">0.0002796185</span>, <span class="at">type =</span> <span class="st">"class"</span></span>
+<span id="cb40-321"><a href="#cb40-321" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb40-322"><a href="#cb40-322" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-323"><a href="#cb40-323" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb40-324"><a href="#cb40-324" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-327"><a href="#cb40-327" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb40-328"><a href="#cb40-328" aria-hidden="true" tabindex="-1"></a>mn_spec <span class="ot">&lt;-</span> <span class="fu">multinom_reg</span>(<span class="at">mode =</span> <span class="st">"classification"</span>, <span class="at">engine =</span> <span class="st">"glmnet"</span> ,<span class="at">penalty =</span> <span class="fu">tune</span>())</span>
 <span id="cb40-329"><a href="#cb40-329" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-330"><a href="#cb40-330" aria-hidden="true" tabindex="-1"></a><span class="fu">## 泊松回归</span></span>
-<span id="cb40-331"><a href="#cb40-331" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-332"><a href="#cb40-332" aria-hidden="true" tabindex="-1"></a>泊松回归用于计数数据，假设响应变量服从泊松分布，并使用对数连接函数（log link function）。z-statistic</span>
-<span id="cb40-333"><a href="#cb40-333" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-334"><a href="#cb40-334" aria-hidden="true" tabindex="-1"></a><span class="in">`family=poisson(link = "log")`</span></span>
+<span id="cb40-330"><a href="#cb40-330" aria-hidden="true" tabindex="-1"></a>iris_mnlogit <span class="ot">&lt;-</span> mn_spec <span class="sc">|&gt;</span> </span>
+<span id="cb40-331"><a href="#cb40-331" aria-hidden="true" tabindex="-1"></a>    <span class="fu">fit</span>(Species <span class="sc">~</span> ., <span class="at">data =</span> iris)</span>
+<span id="cb40-332"><a href="#cb40-332" aria-hidden="true" tabindex="-1"></a>iris_mnlogit <span class="sc">|&gt;</span> <span class="fu">glance</span>()</span>
+<span id="cb40-333"><a href="#cb40-333" aria-hidden="true" tabindex="-1"></a>iris_mnlogit<span class="sc">$</span>fit</span>
+<span id="cb40-334"><a href="#cb40-334" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb40-335"><a href="#cb40-335" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-336"><a href="#cb40-336" aria-hidden="true" tabindex="-1"></a><span class="in">`family = quasipoisson(link = "log"))`</span></span>
+<span id="cb40-336"><a href="#cb40-336" aria-hidden="true" tabindex="-1"></a><span class="fu">## 泊松回归</span></span>
 <span id="cb40-337"><a href="#cb40-337" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-338"><a href="#cb40-338" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb40-339"><a href="#cb40-339" aria-hidden="true" tabindex="-1"></a>P(X=x;\lambda)=\frac{e^{-\lambda}\lambda ^x}{x!}</span>
-<span id="cb40-340"><a href="#cb40-340" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb40-338"><a href="#cb40-338" aria-hidden="true" tabindex="-1"></a>泊松回归用于计数数据，假设响应变量服从泊松分布，并使用对数连接函数（log link function）。z-statistic</span>
+<span id="cb40-339"><a href="#cb40-339" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-340"><a href="#cb40-340" aria-hidden="true" tabindex="-1"></a><span class="in">`family=poisson(link = "log")`</span></span>
 <span id="cb40-341"><a href="#cb40-341" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-344"><a href="#cb40-344" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb40-345"><a href="#cb40-345" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">tibble</span>(<span class="at">x=</span><span class="dv">0</span><span class="sc">:</span><span class="dv">20</span>,</span>
-<span id="cb40-346"><a href="#cb40-346" aria-hidden="true" tabindex="-1"></a>              <span class="at">y1=</span><span class="fu">dpois</span>(x,<span class="at">lambda =</span> <span class="dv">2</span>),</span>
-<span id="cb40-347"><a href="#cb40-347" aria-hidden="true" tabindex="-1"></a>              <span class="at">y2=</span><span class="fu">dpois</span>(x,<span class="at">lambda =</span> <span class="dv">6</span>),</span>
-<span id="cb40-348"><a href="#cb40-348" aria-hidden="true" tabindex="-1"></a>              ),</span>
-<span id="cb40-349"><a href="#cb40-349" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(x)</span>
-<span id="cb40-350"><a href="#cb40-350" aria-hidden="true" tabindex="-1"></a>       )<span class="sc">+</span></span>
-<span id="cb40-351"><a href="#cb40-351" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">y=</span>y1),<span class="at">fill =</span> <span class="st">"lightblue"</span>)<span class="sc">+</span></span>
-<span id="cb40-352"><a href="#cb40-352" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">y=</span>y2),<span class="at">fill =</span> <span class="st">"yellow"</span>,<span class="at">alpha=</span>.<span class="dv">3</span>)<span class="sc">+</span></span>
-<span id="cb40-353"><a href="#cb40-353" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">"Poisson Density"</span>)</span>
-<span id="cb40-354"><a href="#cb40-354" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-355"><a href="#cb40-355" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-356"><a href="#cb40-356" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb40-357"><a href="#cb40-357" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-360"><a href="#cb40-360" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb40-361"><a href="#cb40-361" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(poissonreg)</span>
-<span id="cb40-362"><a href="#cb40-362" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/ISLR/Bikeshare.csv"</span>)</span>
-<span id="cb40-363"><a href="#cb40-363" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb40-364"><a href="#cb40-364" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-367"><a href="#cb40-367" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb40-368"><a href="#cb40-368" aria-hidden="true" tabindex="-1"></a><span class="co"># 泊松回归模型</span></span>
-<span id="cb40-369"><a href="#cb40-369" aria-hidden="true" tabindex="-1"></a>pois_spec <span class="ot">&lt;-</span> <span class="fu">poisson_reg</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb40-370"><a href="#cb40-370" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_mode</span>(<span class="st">"regression"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb40-371"><a href="#cb40-371" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_engine</span>(<span class="st">"glm"</span>,<span class="at">family=</span><span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>))</span>
-<span id="cb40-372"><a href="#cb40-372" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-373"><a href="#cb40-373" aria-hidden="true" tabindex="-1"></a>pois_rec_spec <span class="ot">&lt;-</span> <span class="fu">recipe</span>(bikers <span class="sc">~</span> mnth <span class="sc">+</span> hr <span class="sc">+</span> workingday <span class="sc">+</span> temp <span class="sc">+</span> weathersit, <span class="at">data =</span> df2) <span class="sc">|&gt;</span> </span>
-<span id="cb40-374"><a href="#cb40-374" aria-hidden="true" tabindex="-1"></a>    <span class="fu">step_dummy</span>(<span class="fu">all_nominal_predictors</span>()) <span class="co"># 虚拟变量</span></span>
-<span id="cb40-375"><a href="#cb40-375" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-376"><a href="#cb40-376" aria-hidden="true" tabindex="-1"></a>pois_wf <span class="ot">&lt;-</span> <span class="fu">workflow</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb40-377"><a href="#cb40-377" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_recipe</span>(pois_rec_spec) <span class="sc">|&gt;</span> </span>
-<span id="cb40-378"><a href="#cb40-378" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_model</span>(pois_spec)</span>
-<span id="cb40-379"><a href="#cb40-379" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-380"><a href="#cb40-380" aria-hidden="true" tabindex="-1"></a>pois_fit <span class="ot">&lt;-</span> pois_wf <span class="sc">|&gt;</span> <span class="fu">fit</span>(<span class="at">data =</span> df2)</span>
+<span id="cb40-342"><a href="#cb40-342" aria-hidden="true" tabindex="-1"></a><span class="in">`family = quasipoisson(link = "log"))`</span></span>
+<span id="cb40-343"><a href="#cb40-343" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-344"><a href="#cb40-344" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb40-345"><a href="#cb40-345" aria-hidden="true" tabindex="-1"></a>P(X=x;\lambda)=\frac{e^{-\lambda}\lambda ^x}{x!}</span>
+<span id="cb40-346"><a href="#cb40-346" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb40-347"><a href="#cb40-347" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-350"><a href="#cb40-350" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb40-351"><a href="#cb40-351" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">tibble</span>(<span class="at">x=</span><span class="dv">0</span><span class="sc">:</span><span class="dv">20</span>,</span>
+<span id="cb40-352"><a href="#cb40-352" aria-hidden="true" tabindex="-1"></a>              <span class="at">y1=</span><span class="fu">dpois</span>(x,<span class="at">lambda =</span> <span class="dv">2</span>),</span>
+<span id="cb40-353"><a href="#cb40-353" aria-hidden="true" tabindex="-1"></a>              <span class="at">y2=</span><span class="fu">dpois</span>(x,<span class="at">lambda =</span> <span class="dv">6</span>),</span>
+<span id="cb40-354"><a href="#cb40-354" aria-hidden="true" tabindex="-1"></a>              ),</span>
+<span id="cb40-355"><a href="#cb40-355" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(x)</span>
+<span id="cb40-356"><a href="#cb40-356" aria-hidden="true" tabindex="-1"></a>       )<span class="sc">+</span></span>
+<span id="cb40-357"><a href="#cb40-357" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">y=</span>y1),<span class="at">fill =</span> <span class="st">"lightblue"</span>)<span class="sc">+</span></span>
+<span id="cb40-358"><a href="#cb40-358" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">y=</span>y2),<span class="at">fill =</span> <span class="st">"yellow"</span>,<span class="at">alpha=</span>.<span class="dv">3</span>)<span class="sc">+</span></span>
+<span id="cb40-359"><a href="#cb40-359" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">"Poisson Density"</span>)</span>
+<span id="cb40-360"><a href="#cb40-360" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-361"><a href="#cb40-361" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-362"><a href="#cb40-362" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb40-363"><a href="#cb40-363" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-366"><a href="#cb40-366" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb40-367"><a href="#cb40-367" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(poissonreg)</span>
+<span id="cb40-368"><a href="#cb40-368" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/ISLR/Bikeshare.csv"</span>)</span>
+<span id="cb40-369"><a href="#cb40-369" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb40-370"><a href="#cb40-370" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-373"><a href="#cb40-373" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb40-374"><a href="#cb40-374" aria-hidden="true" tabindex="-1"></a><span class="co"># 泊松回归模型</span></span>
+<span id="cb40-375"><a href="#cb40-375" aria-hidden="true" tabindex="-1"></a>pois_spec <span class="ot">&lt;-</span> <span class="fu">poisson_reg</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb40-376"><a href="#cb40-376" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_mode</span>(<span class="st">"regression"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb40-377"><a href="#cb40-377" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_engine</span>(<span class="st">"glm"</span>,<span class="at">family=</span><span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>))</span>
+<span id="cb40-378"><a href="#cb40-378" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-379"><a href="#cb40-379" aria-hidden="true" tabindex="-1"></a>pois_rec_spec <span class="ot">&lt;-</span> <span class="fu">recipe</span>(bikers <span class="sc">~</span> mnth <span class="sc">+</span> hr <span class="sc">+</span> workingday <span class="sc">+</span> temp <span class="sc">+</span> weathersit, <span class="at">data =</span> df2) <span class="sc">|&gt;</span> </span>
+<span id="cb40-380"><a href="#cb40-380" aria-hidden="true" tabindex="-1"></a>    <span class="fu">step_dummy</span>(<span class="fu">all_nominal_predictors</span>()) <span class="co"># 虚拟变量</span></span>
 <span id="cb40-381"><a href="#cb40-381" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-382"><a href="#cb40-382" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-383"><a href="#cb40-383" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(pois_fit)</span>
-<span id="cb40-384"><a href="#cb40-384" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-382"><a href="#cb40-382" aria-hidden="true" tabindex="-1"></a>pois_wf <span class="ot">&lt;-</span> <span class="fu">workflow</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb40-383"><a href="#cb40-383" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_recipe</span>(pois_rec_spec) <span class="sc">|&gt;</span> </span>
+<span id="cb40-384"><a href="#cb40-384" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_model</span>(pois_spec)</span>
 <span id="cb40-385"><a href="#cb40-385" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-386"><a href="#cb40-386" aria-hidden="true" tabindex="-1"></a><span class="co"># 绘制实际值与预测值的关系图</span></span>
-<span id="cb40-387"><a href="#cb40-387" aria-hidden="true" tabindex="-1"></a><span class="fu">augment</span>(pois_fit, <span class="at">new_data =</span> df2,<span class="at">type=</span><span class="st">"response"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb40-388"><a href="#cb40-388" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(bikers, .pred)) <span class="sc">+</span></span>
-<span id="cb40-389"><a href="#cb40-389" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb40-390"><a href="#cb40-390" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">slope =</span> <span class="dv">1</span>, <span class="at">linewidth =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">"grey40"</span>) <span class="sc">+</span></span>
-<span id="cb40-391"><a href="#cb40-391" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Predicting the number of bikers per hour using Poission Regression"</span>,</span>
-<span id="cb40-392"><a href="#cb40-392" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Actual"</span>, <span class="at">y =</span> <span class="st">"Predicted"</span>)</span>
-<span id="cb40-393"><a href="#cb40-393" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb40-394"><a href="#cb40-394" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-397"><a href="#cb40-397" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb40-398"><a href="#cb40-398" aria-hidden="true" tabindex="-1"></a>pois_fit_coef_mnths <span class="ot">&lt;-</span> </span>
-<span id="cb40-399"><a href="#cb40-399" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tidy</span>(pois_fit) <span class="sc">|&gt;</span> </span>
-<span id="cb40-400"><a href="#cb40-400" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="fu">grepl</span>(<span class="st">"^mnth"</span>, term)) <span class="sc">|&gt;</span> </span>
-<span id="cb40-401"><a href="#cb40-401" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb40-402"><a href="#cb40-402" aria-hidden="true" tabindex="-1"></a>    <span class="at">term =</span> stringr<span class="sc">::</span><span class="fu">str_replace</span>(term, <span class="st">"mnth_"</span>, <span class="st">""</span>),</span>
-<span id="cb40-403"><a href="#cb40-403" aria-hidden="true" tabindex="-1"></a>    <span class="at">term =</span> forcats<span class="sc">::</span><span class="fu">fct_inorder</span>(term)</span>
-<span id="cb40-404"><a href="#cb40-404" aria-hidden="true" tabindex="-1"></a>  ) </span>
-<span id="cb40-405"><a href="#cb40-405" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-406"><a href="#cb40-406" aria-hidden="true" tabindex="-1"></a>pois_fit_coef_mnths <span class="sc">|&gt;</span> </span>
-<span id="cb40-407"><a href="#cb40-407" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(term, estimate)) <span class="sc">+</span></span>
-<span id="cb40-408"><a href="#cb40-408" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">group =</span> <span class="dv">1</span>,<span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
-<span id="cb40-409"><a href="#cb40-409" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">stroke =</span> <span class="fl">1.5</span>, </span>
-<span id="cb40-410"><a href="#cb40-410" aria-hidden="true" tabindex="-1"></a>             <span class="at">fill =</span> <span class="st">"black"</span>, <span class="at">color =</span> <span class="st">"white"</span>,<span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
-<span id="cb40-411"><a href="#cb40-411" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Coefficient value from Poission Regression"</span>,</span>
-<span id="cb40-412"><a href="#cb40-412" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Month"</span>, <span class="at">y =</span> <span class="st">"Coefficient"</span>)</span>
-<span id="cb40-413"><a href="#cb40-413" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb40-414"><a href="#cb40-414" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-417"><a href="#cb40-417" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb40-418"><a href="#cb40-418" aria-hidden="true" tabindex="-1"></a>pois_acl <span class="ot">&lt;-</span> pois_spec <span class="sc">|&gt;</span> </span>
-<span id="cb40-419"><a href="#cb40-419" aria-hidden="true" tabindex="-1"></a>    <span class="fu">fit</span>(NChronic12_W1 <span class="sc">~</span> SelfEfficacy_W1,<span class="at">data =</span> acl)</span>
+<span id="cb40-386"><a href="#cb40-386" aria-hidden="true" tabindex="-1"></a>pois_fit <span class="ot">&lt;-</span> pois_wf <span class="sc">|&gt;</span> <span class="fu">fit</span>(<span class="at">data =</span> df2)</span>
+<span id="cb40-387"><a href="#cb40-387" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-388"><a href="#cb40-388" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-389"><a href="#cb40-389" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(pois_fit)</span>
+<span id="cb40-390"><a href="#cb40-390" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-391"><a href="#cb40-391" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-392"><a href="#cb40-392" aria-hidden="true" tabindex="-1"></a><span class="co"># 绘制实际值与预测值的关系图</span></span>
+<span id="cb40-393"><a href="#cb40-393" aria-hidden="true" tabindex="-1"></a><span class="fu">augment</span>(pois_fit, <span class="at">new_data =</span> df2,<span class="at">type=</span><span class="st">"response"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb40-394"><a href="#cb40-394" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(bikers, .pred)) <span class="sc">+</span></span>
+<span id="cb40-395"><a href="#cb40-395" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb40-396"><a href="#cb40-396" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">slope =</span> <span class="dv">1</span>, <span class="at">linewidth =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">"grey40"</span>) <span class="sc">+</span></span>
+<span id="cb40-397"><a href="#cb40-397" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Predicting the number of bikers per hour using Poission Regression"</span>,</span>
+<span id="cb40-398"><a href="#cb40-398" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Actual"</span>, <span class="at">y =</span> <span class="st">"Predicted"</span>)</span>
+<span id="cb40-399"><a href="#cb40-399" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb40-400"><a href="#cb40-400" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-403"><a href="#cb40-403" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb40-404"><a href="#cb40-404" aria-hidden="true" tabindex="-1"></a>pois_fit_coef_mnths <span class="ot">&lt;-</span> </span>
+<span id="cb40-405"><a href="#cb40-405" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tidy</span>(pois_fit) <span class="sc">|&gt;</span> </span>
+<span id="cb40-406"><a href="#cb40-406" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="fu">grepl</span>(<span class="st">"^mnth"</span>, term)) <span class="sc">|&gt;</span> </span>
+<span id="cb40-407"><a href="#cb40-407" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb40-408"><a href="#cb40-408" aria-hidden="true" tabindex="-1"></a>    <span class="at">term =</span> stringr<span class="sc">::</span><span class="fu">str_replace</span>(term, <span class="st">"mnth_"</span>, <span class="st">""</span>),</span>
+<span id="cb40-409"><a href="#cb40-409" aria-hidden="true" tabindex="-1"></a>    <span class="at">term =</span> forcats<span class="sc">::</span><span class="fu">fct_inorder</span>(term)</span>
+<span id="cb40-410"><a href="#cb40-410" aria-hidden="true" tabindex="-1"></a>  ) </span>
+<span id="cb40-411"><a href="#cb40-411" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-412"><a href="#cb40-412" aria-hidden="true" tabindex="-1"></a>pois_fit_coef_mnths <span class="sc">|&gt;</span> </span>
+<span id="cb40-413"><a href="#cb40-413" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(term, estimate)) <span class="sc">+</span></span>
+<span id="cb40-414"><a href="#cb40-414" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">group =</span> <span class="dv">1</span>,<span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb40-415"><a href="#cb40-415" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">stroke =</span> <span class="fl">1.5</span>, </span>
+<span id="cb40-416"><a href="#cb40-416" aria-hidden="true" tabindex="-1"></a>             <span class="at">fill =</span> <span class="st">"black"</span>, <span class="at">color =</span> <span class="st">"white"</span>,<span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb40-417"><a href="#cb40-417" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Coefficient value from Poission Regression"</span>,</span>
+<span id="cb40-418"><a href="#cb40-418" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Month"</span>, <span class="at">y =</span> <span class="st">"Coefficient"</span>)</span>
+<span id="cb40-419"><a href="#cb40-419" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb40-420"><a href="#cb40-420" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-421"><a href="#cb40-421" aria-hidden="true" tabindex="-1"></a>pois_acl <span class="sc">|&gt;</span> <span class="fu">glance</span>()</span>
-<span id="cb40-422"><a href="#cb40-422" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-423"><a href="#cb40-423" aria-hidden="true" tabindex="-1"></a>pois_acl <span class="sc">|&gt;</span> <span class="fu">tidy</span>()</span>
-<span id="cb40-424"><a href="#cb40-424" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-425"><a href="#cb40-425" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(pois_acl<span class="sc">$</span>fit)</span>
-<span id="cb40-426"><a href="#cb40-426" aria-hidden="true" tabindex="-1"></a><span class="fu">BIC</span>(pois_acl<span class="sc">$</span>fit)</span>
-<span id="cb40-427"><a href="#cb40-427" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb40-423"><a href="#cb40-423" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb40-424"><a href="#cb40-424" aria-hidden="true" tabindex="-1"></a>pois_acl <span class="ot">&lt;-</span> pois_spec <span class="sc">|&gt;</span> </span>
+<span id="cb40-425"><a href="#cb40-425" aria-hidden="true" tabindex="-1"></a>    <span class="fu">fit</span>(NChronic12_W1 <span class="sc">~</span> SelfEfficacy_W1,<span class="at">data =</span> acl)</span>
+<span id="cb40-426"><a href="#cb40-426" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-427"><a href="#cb40-427" aria-hidden="true" tabindex="-1"></a>pois_acl <span class="sc">|&gt;</span> <span class="fu">glance</span>()</span>
 <span id="cb40-428"><a href="#cb40-428" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-429"><a href="#cb40-429" aria-hidden="true" tabindex="-1"></a><span class="fu">## 负二项回归</span></span>
+<span id="cb40-429"><a href="#cb40-429" aria-hidden="true" tabindex="-1"></a>pois_acl <span class="sc">|&gt;</span> <span class="fu">tidy</span>()</span>
 <span id="cb40-430"><a href="#cb40-430" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-431"><a href="#cb40-431" aria-hidden="true" tabindex="-1"></a>负二项回归用于处理计数数据且存在过度离散（overdispersion）的问题。</span>
-<span id="cb40-432"><a href="#cb40-432" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-433"><a href="#cb40-433" aria-hidden="true" tabindex="-1"></a>log link function，z-statistic</span>
+<span id="cb40-431"><a href="#cb40-431" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(pois_acl<span class="sc">$</span>fit)</span>
+<span id="cb40-432"><a href="#cb40-432" aria-hidden="true" tabindex="-1"></a><span class="fu">BIC</span>(pois_acl<span class="sc">$</span>fit)</span>
+<span id="cb40-433"><a href="#cb40-433" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb40-434"><a href="#cb40-434" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-435"><a href="#cb40-435" aria-hidden="true" tabindex="-1"></a>probability mass function ：</span>
+<span id="cb40-435"><a href="#cb40-435" aria-hidden="true" tabindex="-1"></a><span class="fu">## 负二项回归</span></span>
 <span id="cb40-436"><a href="#cb40-436" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-437"><a href="#cb40-437" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb40-438"><a href="#cb40-438" aria-hidden="true" tabindex="-1"></a>P(X=x;\lambda,\nu)=\binom{x+\nu - 1}{ x} \left ( \frac{\lambda}{\lambda +\nu} \right)^x \left ( \frac{\nu}{\nu + \lambda} \right)^{\nu}</span>
-<span id="cb40-439"><a href="#cb40-439" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb40-437"><a href="#cb40-437" aria-hidden="true" tabindex="-1"></a>负二项回归用于处理计数数据且存在过度离散（overdispersion）的问题。</span>
+<span id="cb40-438"><a href="#cb40-438" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-439"><a href="#cb40-439" aria-hidden="true" tabindex="-1"></a>log link function，z-statistic</span>
 <span id="cb40-440"><a href="#cb40-440" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-441"><a href="#cb40-441" aria-hidden="true" tabindex="-1"></a>负二项分布的均值是 $\lambda$ ，</span>
+<span id="cb40-441"><a href="#cb40-441" aria-hidden="true" tabindex="-1"></a>probability mass function ：</span>
 <span id="cb40-442"><a href="#cb40-442" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-443"><a href="#cb40-443" aria-hidden="true" tabindex="-1"></a>方差是 $\lambda + \frac{\lambda ^2}{\nu}$ 。</span>
-<span id="cb40-444"><a href="#cb40-444" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-447"><a href="#cb40-447" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb40-448"><a href="#cb40-448" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
-<span id="cb40-449"><a href="#cb40-449" aria-hidden="true" tabindex="-1"></a><span class="co"># 负二项回归模型</span></span>
-<span id="cb40-450"><a href="#cb40-450" aria-hidden="true" tabindex="-1"></a>nb_spec <span class="ot">&lt;-</span> <span class="fu">linear_reg</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb40-451"><a href="#cb40-451" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_engine</span>(<span class="st">"glm"</span>, <span class="at">family =</span> MASS<span class="sc">::</span><span class="fu">negative.binomial</span>(<span class="at">theta =</span> <span class="dv">1</span>, <span class="at">link =</span> <span class="st">"log"</span>))</span>
-<span id="cb40-452"><a href="#cb40-452" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-453"><a href="#cb40-453" aria-hidden="true" tabindex="-1"></a>nb_acl <span class="ot">&lt;-</span> nb_spec <span class="sc">|&gt;</span> </span>
-<span id="cb40-454"><a href="#cb40-454" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit</span>(NChronic12_W1 <span class="sc">~</span> SelfEfficacy_W1, <span class="at">data =</span> acl)</span>
-<span id="cb40-455"><a href="#cb40-455" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-456"><a href="#cb40-456" aria-hidden="true" tabindex="-1"></a><span class="co"># 查看模型结果</span></span>
-<span id="cb40-457"><a href="#cb40-457" aria-hidden="true" tabindex="-1"></a>nb_acl <span class="sc">|&gt;</span> <span class="fu">glance</span>()</span>
-<span id="cb40-458"><a href="#cb40-458" aria-hidden="true" tabindex="-1"></a>nb_acl <span class="sc">|&gt;</span> <span class="fu">tidy</span>()</span>
-<span id="cb40-459"><a href="#cb40-459" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-460"><a href="#cb40-460" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-461"><a href="#cb40-461" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(nb_acl<span class="sc">$</span>fit)</span>
-<span id="cb40-462"><a href="#cb40-462" aria-hidden="true" tabindex="-1"></a><span class="fu">BIC</span>(nb_acl<span class="sc">$</span>fit)</span>
-<span id="cb40-463"><a href="#cb40-463" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-464"><a href="#cb40-464" aria-hidden="true" tabindex="-1"></a><span class="co"># MASS::glm.nb()</span></span>
-<span id="cb40-465"><a href="#cb40-465" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb40-443"><a href="#cb40-443" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb40-444"><a href="#cb40-444" aria-hidden="true" tabindex="-1"></a>P(X=x;\lambda,\nu)=\binom{x+\nu - 1}{ x} \left ( \frac{\lambda}{\lambda +\nu} \right)^x \left ( \frac{\nu}{\nu + \lambda} \right)^{\nu}</span>
+<span id="cb40-445"><a href="#cb40-445" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb40-446"><a href="#cb40-446" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-447"><a href="#cb40-447" aria-hidden="true" tabindex="-1"></a>负二项分布的均值是 $\lambda$ ，</span>
+<span id="cb40-448"><a href="#cb40-448" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-449"><a href="#cb40-449" aria-hidden="true" tabindex="-1"></a>方差是 $\lambda + \frac{\lambda ^2}{\nu}$ 。</span>
+<span id="cb40-450"><a href="#cb40-450" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-453"><a href="#cb40-453" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb40-454"><a href="#cb40-454" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb40-455"><a href="#cb40-455" aria-hidden="true" tabindex="-1"></a><span class="co"># 负二项回归模型</span></span>
+<span id="cb40-456"><a href="#cb40-456" aria-hidden="true" tabindex="-1"></a>nb_spec <span class="ot">&lt;-</span> <span class="fu">linear_reg</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb40-457"><a href="#cb40-457" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_engine</span>(<span class="st">"glm"</span>, <span class="at">family =</span> MASS<span class="sc">::</span><span class="fu">negative.binomial</span>(<span class="at">theta =</span> <span class="dv">1</span>, <span class="at">link =</span> <span class="st">"log"</span>))</span>
+<span id="cb40-458"><a href="#cb40-458" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-459"><a href="#cb40-459" aria-hidden="true" tabindex="-1"></a>nb_acl <span class="ot">&lt;-</span> nb_spec <span class="sc">|&gt;</span> </span>
+<span id="cb40-460"><a href="#cb40-460" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit</span>(NChronic12_W1 <span class="sc">~</span> SelfEfficacy_W1, <span class="at">data =</span> acl)</span>
+<span id="cb40-461"><a href="#cb40-461" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-462"><a href="#cb40-462" aria-hidden="true" tabindex="-1"></a><span class="co"># 查看模型结果</span></span>
+<span id="cb40-463"><a href="#cb40-463" aria-hidden="true" tabindex="-1"></a>nb_acl <span class="sc">|&gt;</span> <span class="fu">glance</span>()</span>
+<span id="cb40-464"><a href="#cb40-464" aria-hidden="true" tabindex="-1"></a>nb_acl <span class="sc">|&gt;</span> <span class="fu">tidy</span>()</span>
+<span id="cb40-465"><a href="#cb40-465" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-466"><a href="#cb40-466" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-467"><a href="#cb40-467" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(nb_acl<span class="sc">$</span>fit)</span>
+<span id="cb40-468"><a href="#cb40-468" aria-hidden="true" tabindex="-1"></a><span class="fu">BIC</span>(nb_acl<span class="sc">$</span>fit)</span>
+<span id="cb40-469"><a href="#cb40-469" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-470"><a href="#cb40-470" aria-hidden="true" tabindex="-1"></a><span class="co"># MASS::glm.nb()</span></span>
+<span id="cb40-471"><a href="#cb40-471" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
