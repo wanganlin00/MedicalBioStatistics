@@ -1,31 +1,37 @@
-# 线性混合效应
+# 线性混合模型
 
-线性混合效应模型（LMM）用于分析具有固定效应和随机效应的数据结构。它能够处理数据中的组内相关性和个体差异，广泛应用于生态学、心理学等领域的统计分析。
+线性混合效应模型 （Linear Mixed-effect Model, LMM）用于分析具有固定效应和随机效应的数据结构。它能够处理数据中的组内相关性和个体差异，广泛应用于生态学、心理学等领域的统计分析。如果数据满足正态分布但有组内相关性，使用线性混合模型（LMM）。
 
 [Mixed Effects Models and Extensions in Ecology with R 第5章](https://link.springer.com/book/10.1007/978-0-387-87458-6)
 
-## 模型公式
+线性混合模型的一般表达形式：
 
 $$
-\eta = \mathbf{X} \beta + \mathbf{Z} \gamma + \epsilon
+Y = \mathbf{X} \beta + \mathbf{Z} \gamma + \epsilon
 $$
 
 其中：
 
--   $\mathbf{X}$是固定效应设计矩阵。
+-   $\mathbf{X}$是固定效应自变量矩阵。
 
--   $\beta$ 是固定效应系数。
+-   $\beta$ 是固定效应的回归系数。
 
--   $\mathbf{Z}$ 是随机效应设计矩阵。
+-   $\mathbf{Z}$ 是随机效应自变量矩阵。
 
--   $\gamma$ 是随机效应系数。
+-   $\gamma$ 是随机效应的回归系数。
 
 -   $\epsilon$ 是误差项。
 
-线性混合模型，LME的表达式如下：
+## `lme4::lmer()`
+
+```{r}
+lme4::lmer
+```
+
+`lmer()` 的表达式如下：
 
 $$
-fit=lmer (data,formual= DV ~ Fixed\_Factor + (Random\_intercept + Random\_slope | Random\_Factor))
+lmer (data,formual= DV ~ Fixed\_Factor + (Random\_intercept + Random\_slope | Random\_Factor))
 $$
 
 截距中，1表示随机截距，0表示固定截距，默认截距为1。
@@ -37,27 +43,11 @@ $$
 | 固定截距+随机斜率           | y\~x+( 0+x \| id ) | NA               |
 | 线性模型：固定截距+固定斜率 | y\~x               | NA               |
 
-### 模型选择标准
+## `nlme::lme()`
 
-限制最大似然法REML，赤池信息准则AIC，贝叶斯信息准则BIC
-
-1.  **赤池信息准则（AIC）**
-
-    $$ kIC=−2log(\mathcal{L})+2k$$
-
-    其中：
-
-    -   $\mathcal{L}$ 是似然函数。
-
-    -   $k$ 是模型参数的数量。
-
-2.  **贝叶斯信息准则（BIC）**
-
-    $$ BIC=−2log(\mathcal{L})+klog(n) $$
-
-    其中：
-
-    -   $n$ 是样本量。
+```{r}
+nlme::nlme
+```
 
 ## 随机截距+随机斜率
 
@@ -65,7 +55,7 @@ $$
 df_long <- read_delim("data/AED/RIKZ.txt")
 df_long$Beach <- factor(df_long$Beach)
 df_long$Exposure <- factor(df_long$Exposure)
-str(df_long)
+head(df_long)
 ```
 
 $$
@@ -113,7 +103,7 @@ anova(lme1)
 
 #  查看 类和方法
 class(lme1)
-methods(class = "lmerMod")
+# methods(class = "lmerMod")
 
 # confint(lme1,level = 0.95)
 ```
@@ -176,6 +166,26 @@ lm
 ```
 
 ## 模型选择
+
+限制最大似然法REML
+
+1.  **赤池信息准则（AIC）**
+
+    $$ kIC=−2log(\mathcal{L})+2k$$
+
+    其中：
+
+    -   $\mathcal{L}$ 是似然函数。
+
+    -   $k$ 是模型参数的数量。
+
+2.  **贝叶斯信息准则（BIC）**
+
+    $$ BIC=−2log(\mathcal{L})+klog(n) $$
+
+    其中：
+
+    -   $n$ 是样本量。
 
 ```{r}
 

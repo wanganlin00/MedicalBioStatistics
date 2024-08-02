@@ -1,5 +1,13 @@
 # 线性回归
 
+线性模型用于解释一个连续因变量和一个或多个自变量之间的线性关系。模型形式一般为：
+
+$$
+Y=X\beta + \epsilon
+$$
+
+其中， Y 是因变量，X 是自变量矩阵，β 是回归系数，ϵ 是误差项。
+
 一般线性模型中，其自变量全部为固定效应自变量，3点假设：
 
 1.  正态性，因变量y服从正态分布。
@@ -25,8 +33,8 @@ income2<-read_csv("data/ISLR/Income2.csv")
 
 ```{r}
 #linear model specification 线性模型规范
-lm_spec <-linear_reg() |>
-  set_mode("regression") |>
+lm_spec <-linear_reg() %>%
+  set_mode("regression") %>%
   set_engine("lm")  
 lm_spec
 ```
@@ -47,10 +55,10 @@ p_sales(TV)|p_sales(radio)|p_sales(newspaper)
 ```
 
 ```{r}
-lm_sales_tv <- lm_spec |>  fit(sales ~ TV, data = advertising)
+lm_sales_tv <- lm_spec %>%  fit(sales ~ TV, data = advertising)
 # 模型摘要
-lm_sales_tv  # lm_sales_tv |>  pluck("fit")
-summary(lm_sales_tv$fit)  # lm_sales_tv |>pluck("fit") |>summary()
+lm_sales_tv  # lm_sales_tv %>%  pluck("fit")
+summary(lm_sales_tv$fit)  # lm_sales_tv %>%pluck("fit") %>%summary()
 
 
 # 参数估计值、标准误、统计量、p值
@@ -63,19 +71,24 @@ broom::glance(lm_sales_tv)
 
 ```{r}
 # 预测
-stats::predict(lm_sales_tv, new_data = advertising)
-predict(lm_sales_tv, new_data = advertising, type = "conf_int")
+stats::predict(lm_sales_tv, new_data = advertising) %>% 
+    head(n = 10)
+predict(lm_sales_tv, new_data = advertising, type = "conf_int") %>% 
+    head(n = 10)
 
 
 
 # 比较观测值与预测值
-bind_cols( predict(lm_sales_tv, new_data = advertising), advertising)
-    
-bind_cols( predict(lm_sales_tv, new_data = advertising), advertising) |> 
-  select(sales, .pred)
+bind_cols(predict(lm_sales_tv, new_data = advertising), advertising) %>%
+    head(n = 10)
 
-augment(lm_sales_tv, new_data = advertising) |>   
-  select(sales, .pred)
+bind_cols(predict(lm_sales_tv, new_data = advertising), advertising) %>%
+    select(sales, .pred) %>%
+    head(n = 10)
+
+augment(lm_sales_tv, new_data = advertising) %>%
+    select(sales, .pred) %>%
+    head(n = 10)
 ```
 
 ### 最小二乘法
@@ -90,7 +103,7 @@ $$
 
 ```{r}
 # 可视化
-bind_cols(predict(lm_sales_tv, new_data = advertising), advertising) |>
+bind_cols(predict(lm_sales_tv, new_data = advertising), advertising) %>%
     ggplot(aes(x = TV)) +
     geom_linerange(aes(ymin = sales, ymax = .pred)) +
     geom_point(aes(y = sales), color = "red") +
@@ -116,7 +129,7 @@ plot(lm_sales_tv$fit,1)
 tibble(
     `Fitted values`=lm_sales_tv$fit$fitted.values,
     Residuals = lm_sales_tv$fit$residuals
-) |> ggplot(aes(x = `Fitted values` , y = Residuals)) +
+) %>% ggplot(aes(x = `Fitted values` , y = Residuals)) +
   geom_point(pch=21) +
     geom_smooth(formula = "y~x",color="red",lwd=0.5)+
   geom_hline(yintercept = 0,lty=2) +
@@ -126,7 +139,7 @@ tibble(
 ```{r}
 # 检查线性回归模型的残差是否与观测值无关，即残差的分布是否随机。
 tibble(Sales = lm_sales_tv$fit$model$sales,
-       Residuals = lm_sales_tv$fit$residuals,) |> 
+       Residuals = lm_sales_tv$fit$residuals,) %>% 
     ggplot(aes(x = Sales , y = Residuals)) +
     geom_point(pch=21) +
     geom_smooth(,color="red",lwd=0.5) +
@@ -141,7 +154,7 @@ plot(lm_sales_tv$fit,3)
 tibble(
     fitted_values=lm_sales_tv$fit$fitted.values,
     StandardizedResiduals = rstudent(lm_sales_tv$fit) ,
-) |>
+) %>%
     ggplot(aes(x = fitted_values, y = sqrt(abs(StandardizedResiduals)))) +
     geom_point(pch=21) +
     geom_smooth(color="red",lwd=0.5)+
@@ -156,7 +169,7 @@ plot(lm_sales_tv$fit,2)
 
 ```{r}
 tibble(
-       StandardizedResiduals =rstandard(lm_sales_tv$fit) ) |> 
+       StandardizedResiduals =rstandard(lm_sales_tv$fit) ) %>% 
     ggplot(aes(sample=StandardizedResiduals)) +
     stat_qq(pch=21)+
     stat_qq_line(color="red",lty=2)+
@@ -175,7 +188,7 @@ threshold <- 4 / (nrow(lm_sales_tv$fit$model) - length(coef(lm_sales_tv$fit)) - 
 
 tibble(x = 1:nrow(advertising),
        CooksD = cooks.distance(lm_sales_tv$fit),
-       Threshold = CooksD > threshold)|>
+       Threshold = CooksD > threshold)%>%
     ggplot() +
     geom_segment(aes(x=x,xend=x,y=0,yend=CooksD,color=Threshold)) +
     geom_text(aes(x=x,y=CooksD,label=if_else(Threshold,x,NA)),vjust=-0.2)+
@@ -192,7 +205,7 @@ plot(lm_sales_tv$fit,5)
 tibble(
     leverage = hatvalues(lm_sales_tv$fit),
     StandardizedResiduals = rstandard(lm_sales_tv$fit) ,
-) |>
+) %>%
     ggplot(aes(x = leverage, y = StandardizedResiduals)) +
     geom_point(pch=21) +
     geom_smooth(color="red",lwd=0.5)+
@@ -268,11 +281,11 @@ anova(ols_mlm)
 ### `lm()`
 
 ```{r}
-lm_mlm <- lm_spec |> 
+lm_mlm <- lm_spec %>% 
     fit(SWL_W1 ~ Sex + AGE_W1 + SESCategory ,data = acl)
 
-lm_mlm |> glance()
-lm_mlm |> tidy()
+lm_mlm %>% glance()
+lm_mlm %>% tidy()
 
 
 logLik(lm_mlm$fit)
@@ -283,22 +296,22 @@ car::vif(lm_mlm$fit)
 
 ```{r}
 glm_mlm <- linear_reg() %>%
-    set_engine('glm',family=gaussian(link = "identity")) |> 
+    set_engine('glm',family=gaussian(link = "identity")) %>% 
     fit(SWL_W1 ~ Sex + AGE_W1 + SESCategory ,data = acl)
 
-glm_mlm |> glance()
-glm_mlm |> tidy()
+glm_mlm %>% glance()
+glm_mlm %>% tidy()
 
 summary(glm_mlm$fit)
 ```
 
 ```{r}
 #第一步，检测变量相关关系
-ad <- advertising |> select(-1)
+ad <- advertising %>% select(-1)
 cor(ad)
 
 #第二步，多元线性回归
-lm_sales_multi<- lm_spec |> fit(sales~TV+radio+newspaper,data = advertising)
+lm_sales_multi<- lm_spec %>% fit(sales~TV+radio+newspaper,data = advertising)
 summary(lm_sales_multi$fit)
 
 tidy(lm_sales_multi)
@@ -308,7 +321,7 @@ glance(lm_sales_multi)
 ## 交互项
 
 ```{r}
-lm_sales_tv_radio <- lm_spec |>  fit(sales ~ TV*radio, data = advertising)
+lm_sales_tv_radio <- lm_spec %>%  fit(sales ~ TV*radio, data = advertising)
 
 lm_sales_tv_radio
 ```
@@ -316,19 +329,19 @@ lm_sales_tv_radio
 ```{r}
 # pre-processing specification
 
-rec_spec_interact <- recipe(sales ~ TV+radio, data = advertising) |>  
+rec_spec_interact <- recipe(sales ~ TV+radio, data = advertising) %>%  
   step_interact(~ TV:radio) 
 
 rec_spec_interact
 
 # combine the linear regression model specification with the pre-processing specification
-lm_sales_tv_radio_interact <- workflow() |>  
-  add_model(lm_spec) |>  
+lm_sales_tv_radio_interact <- workflow() %>%  
+  add_model(lm_spec) %>%  
   add_recipe(rec_spec_interact)  
 
 lm_sales_tv_radio_interact
 
-lm <- lm_sales_tv_radio_interact |> fit(advertising)
+lm <- lm_sales_tv_radio_interact %>% fit(advertising)
 tidy(lm)
 glance(lm)
 ```
@@ -339,15 +352,15 @@ glance(lm)
 
 ```{r}
 
-rec_spec_square <- recipe(sales ~ TV, data = advertising) |>  
+rec_spec_square <- recipe(sales ~ TV, data = advertising) %>%  
   step_mutate(`TV^2` = TV^2)  
 rec_spec_square
 
-lm_wf_square <- workflow() |>  
-  add_model(lm_spec) |>  
+lm_wf_square <- workflow() %>%  
+  add_model(lm_spec) %>%  
   add_recipe(rec_spec_square)  
 
-lm_wf_square |>
+lm_wf_square %>%
   fit(advertising)
 
 ```
@@ -355,14 +368,14 @@ lm_wf_square |>
 ### 对数变换
 
 ```{r}
-rec_spec_log <- recipe(sales ~ TV, data = advertising) |>  
+rec_spec_log <- recipe(sales ~ TV, data = advertising) %>%  
   step_log(TV)  
 
-lm_wf_log <- workflow() |> 
-  add_model(lm_spec) |>  
+lm_wf_log <- workflow() %>% 
+  add_model(lm_spec) %>%  
   add_recipe(rec_spec_log) 
 
-lm_wf_log |>
+lm_wf_log %>%
   fit(advertising)
 ```
 
@@ -417,7 +430,7 @@ spreadLevelPlot(lm_sales_multi$fit)
 tibble(
     abs_studentized_residuals=abs(rstudent(lm_sales_multi$fit)),
     fitted_values=lm_sales_multi$fit$model$sales
-) |> ggplot(aes(fitted_values,abs_studentized_residuals))+
+) %>% ggplot(aes(fitted_values,abs_studentized_residuals))+
     geom_point(pch=21)+
     geom_smooth()
 ```
@@ -492,8 +505,8 @@ sqrt(vif(lm_sales_multi$fit))>=2       #vif平方根 ≥2 存在
 
 ```{r}
 ########################两模型比较
-lm1 <- lm_spec |> fit(sales~TV+radio+newspaper,data = advertising)
-lm2 <- lm_spec |> fit(sales~TV*radio*newspaper,data = advertising[-1])
+lm1 <- lm_spec %>% fit(sales~TV+radio+newspaper,data = advertising)
+lm2 <- lm_spec %>% fit(sales~TV*radio*newspaper,data = advertising[-1])
 
 anova(lm2$fit,lm1$fit) #anova() 嵌套模型
 

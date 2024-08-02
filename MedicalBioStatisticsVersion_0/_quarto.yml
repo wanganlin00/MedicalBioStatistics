@@ -35,8 +35,8 @@ book:
     - part: "统计模型"
       chapters:
         - LinearRegression.qmd
-        - GLM.qmd
         - LME.qmd
+        - GLM.qmd
         - GEE.qmd
 
 
