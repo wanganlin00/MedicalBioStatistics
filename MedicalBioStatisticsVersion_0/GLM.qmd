@@ -43,7 +43,6 @@ library(patchwork)
 高斯线性回归是一种简单的线性回归模型，其中假设响应变量服从正态分布，并且使用恒等连接函数（identity link function）。t-statistic
 
 ```{r}
-library(tidymodels)
 
 # 使用 glm() 函数进行高斯线性回归
 glm1 <- linear_reg() |> 
@@ -180,7 +179,7 @@ ggplot(df,aes(balance,as.numeric(default)-1))+
 
 ```
 
-#### 自变量是分类变量
+#### 自变量含分类变量
 
 ```{r}
 logit_default_student <- logit_spec |>fit(default ~ student, data = df)
@@ -191,7 +190,8 @@ df |>
   mutate(
     prob=1/(1+exp(-(logit_default_student$fit$coefficients[1]+logit_default_student$fit$coefficients[2]*(as.numeric(student)-1)))),
     logit=log(prob/(1-prob))
-  ) |> select(student,prob)
+  ) |> select(student,prob) %>% 
+    DT::datatable()
 ```
 
 ### K=2,p\>1 多元逻辑回归
@@ -248,7 +248,9 @@ ordered_logit <- MASS::polr(PhysActCat_W1 ~ SelfEfficacy_W1, data = acl,
 ordered_logit |> summary()
 
 
-predict(ordered_logit ,acl ,type = "p") |> as_tibble()
+predict(ordered_logit ,acl ,type = "p") |> 
+    as_tibble() %>% 
+    DT::datatable()
 ```
 
 ### K\>2,p\>1 多分类逻辑回归
@@ -300,7 +302,7 @@ mn_spec <- multinom_reg(mode = "classification", engine = "glmnet" ,penalty = tu
 iris_mnlogit <- mn_spec |> 
     fit(Species ~ ., data = iris)
 iris_mnlogit |> glance()
-iris_mnlogit$fit
+iris_mnlogit$fit %>% tidy() %>% DT::datatable()
 ```
 
 ## 泊松回归
@@ -355,12 +357,13 @@ tidy(pois_fit)
 
 
 # 绘制实际值与预测值的关系图
-augment(pois_fit, new_data = df2,type="response") |> 
-  ggplot(aes(bikers, .pred)) +
-  geom_point(alpha = 0.1) +
-  geom_abline(slope = 1, linewidth = 1, color = "grey40") +
-  labs(title = "Predicting the number of bikers per hour using Poission Regression",
-       x = "Actual", y = "Predicted")
+augment(pois_fit, new_data = df2, type = "response") |>
+    ggplot(aes(bikers, .pred)) +
+    geom_point(alpha = 0.1) +
+    geom_abline(slope = 1,
+                linewidth = 1,
+                color = "grey40") +
+    labs(title = "Predicting the number of bikers per hour using Poission Regression", x = "Actual", y = "Predicted")
 ```
 
 ```{r}
