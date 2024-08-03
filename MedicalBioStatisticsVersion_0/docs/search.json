@@ -714,7 +714,7 @@
     "href": "chi-square_test.html#拟合优度检验",
     "title": "\n13  \\(\\chi^2\\) 检验\n",
     "section": "\n13.5 拟合优度检验",
-    "text": "13.5 拟合优度检验\nPearson’s \\(\\chi^2\\) goodness-of-fit test\n\n13.5.0.1",
+    "text": "13.5 拟合优度检验\nPearson’s \\(\\chi^2\\) goodness-of-fit test",
     "crumbs": [
       "概率论与数理统计",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>$\\chi^2$ 检验</span>"
@@ -780,7 +780,7 @@
     "href": "nonparametric_test.html#多样本",
     "title": "\n14  非参数秩检验\n",
     "section": "\n14.5 多样本",
-    "text": "14.5 多样本\n\n14.5.1 独立 Kruskal-Wallis 检验\n用于比较三个或更多独立样本的中位数是否相等。\n假设：\n\n随机，独立\n每个样本至少5个观测\n能够计算秩次\n\n\nCodekruskal.test(weight~group,data = PlantGrowth)\n#&gt; \n#&gt;  Kruskal-Wallis rank sum test\n#&gt; \n#&gt; data:  weight by group\n#&gt; Kruskal-Wallis chi-squared = 7.9882, df = 2, p-value = 0.01842\n\n\n\n14.5.2 多重比较\n\nCodepairwise.wilcox.test(PlantGrowth$weight,PlantGrowth$group,p.adjust.method = \"fdr\",exact=F)\n#&gt; \n#&gt;  Pairwise comparisons using Wilcoxon rank sum test with continuity correction \n#&gt; \n#&gt; data:  PlantGrowth$weight and PlantGrowth$group \n#&gt; \n#&gt;      ctrl  trt1 \n#&gt; trt1 0.199 -    \n#&gt; trt2 0.096 0.034\n#&gt; \n#&gt; P value adjustment method: fdr\n\n\n\n14.5.3 相关 Friedman 检验\n用于比较三个或更多相关样本的中位数是否相等。\n\nCode# 假设有三个相关样本 x, y, z\nx &lt;- c(14, 17, 20, 23, 25)\ny &lt;- c(15, 18, 21, 24, 26)\nz &lt;- c(16, 19, 22, 25, 27)\n\n# 将样本合并成一个数据框，并指定组别和受试者\ndata &lt;- data.frame(\n  value = c(x, y, z),\n  group = factor(rep(c(\"x\", \"y\", \"z\"), each = 5)),\n  subject = factor(rep(1:5, 3))\n)\n\n# 使用 friedman.test() 函数进行检验\nresult &lt;- friedman.test(value ~ group | subject, data = data)\n\n# 输出检验结果\nprint(result)\n#&gt; \n#&gt;  Friedman rank sum test\n#&gt; \n#&gt; data:  value and group and subject\n#&gt; Friedman chi-squared = 10, df = 2, p-value = 0.006738",
+    "text": "14.5 多样本\n\n14.5.1 独立 Kruskal-Wallis 检验\n用于比较三个或更多独立样本的中位数是否相等。\n假设：\n\n随机，独立\n每个样本至少5个观测\n能够计算秩次\n\n\nCodekruskal.test(weight~group,data = PlantGrowth)\n#&gt; \n#&gt;  Kruskal-Wallis rank sum test\n#&gt; \n#&gt; data:  weight by group\n#&gt; Kruskal-Wallis chi-squared = 7.9882, df = 2, p-value = 0.01842\n\n\n\n14.5.1.1 多重比较\n\nCodepairwise.wilcox.test(PlantGrowth$weight,PlantGrowth$group,p.adjust.method = \"fdr\",exact=F)\n#&gt; \n#&gt;  Pairwise comparisons using Wilcoxon rank sum test with continuity correction \n#&gt; \n#&gt; data:  PlantGrowth$weight and PlantGrowth$group \n#&gt; \n#&gt;      ctrl  trt1 \n#&gt; trt1 0.199 -    \n#&gt; trt2 0.096 0.034\n#&gt; \n#&gt; P value adjustment method: fdr\n\n\n\n14.5.2 相关 Friedman 检验\n用于比较三个或更多相关样本的中位数是否相等。\n\nCode# 假设有三个相关样本 x, y, z\nx &lt;- c(14, 17, 20, 23, 25)\ny &lt;- c(15, 18, 21, 24, 26)\nz &lt;- c(16, 19, 22, 25, 27)\n\n# 将样本合并成一个数据框，并指定组别和受试者\ndata &lt;- data.frame(\n  value = c(x, y, z),\n  group = factor(rep(c(\"x\", \"y\", \"z\"), each = 5)),\n  subject = factor(rep(1:5, 3))\n)\n\n# 使用 friedman.test() 函数进行检验\nresult &lt;- friedman.test(value ~ group | subject, data = data)\n\n# 输出检验结果\nprint(result)\n#&gt; \n#&gt;  Friedman rank sum test\n#&gt; \n#&gt; data:  value and group and subject\n#&gt; Friedman chi-squared = 10, df = 2, p-value = 0.006738",
     "crumbs": [
       "概率论与数理统计",
       "<span class='chapter-number'>14</span>  <span class='chapter-title'>非参数秩检验</span>"

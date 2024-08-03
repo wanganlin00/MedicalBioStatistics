@@ -137,7 +137,7 @@ tibble(
 kruskal.test(weight~group,data = PlantGrowth)
 ```
 
-### 多重比较
+#### 多重比较
 
 ```{r}
 pairwise.wilcox.test(PlantGrowth$weight,PlantGrowth$group,p.adjust.method = "fdr",exact=F)
@@ -168,7 +168,7 @@ print(result)
 
 ```
 
-##  Kendall's Tau 检验
+## Kendall's Tau 检验
 
 用途：用于检验两个变量之间的相关性。
 
