@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.4.555">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>医学与生物统计学 - 21&nbsp; 倾向性评分</title>
+<title>医学与生物统计学 - 22&nbsp; 倾向性评分</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -61,7 +61,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./diagnostic_test.html" rel="next">
-<link href="./SurvivalAnalysis.html" rel="prev">
+<link href="./CoxProportionalHazardsModel.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -130,7 +130,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./PropensityScore.html">倾向性评分</a></li><li class="breadcrumb-item"><a href="./PropensityScore.html"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">倾向性评分</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./PropensityScore.html">倾向性评分</a></li><li class="breadcrumb-item"><a href="./PropensityScore.html"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">倾向性评分</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -167,7 +167,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./descriptive_statistics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">描述性统计</span></a>
+ <span class="menu-text">描述性统计学</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -176,7 +176,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./quantitative_data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">定量数据的描述</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">定量数据的统计描述</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -240,20 +240,20 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./rate_proportion_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">比例检验</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./ANOVA.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">方差分析</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">方差分析</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./repeated_measures_ANOVA.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">重复测量方差分析</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">重复测量方差分析</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./rate_proportion_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">比例检验</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -279,7 +279,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
- <span class="menu-text">统计模型</span></a>
+ <span class="menu-text">推断统计模型</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -293,14 +293,14 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./GLM.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">广义线性模型</span></span></a>
+  <a href="./LME.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">线性混合模型</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./LME.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">线性混合效应</span></span></a>
+  <a href="./GLM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">广义线性模型</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -326,6 +326,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">生存分析</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./CoxProportionalHazardsModel.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Cox比例风险模型</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -340,7 +346,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./PropensityScore.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">倾向性评分</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">倾向性评分</span></span></a>
   </div>
 </li>
       </ul>
@@ -357,13 +363,13 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./diagnostic_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">诊断性测试</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">诊断性测试</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./observational_study_design.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">观察性研究设计</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">观察性研究设计</span></span></a>
   </div>
 </li>
       </ul>
@@ -377,57 +383,57 @@ window.Quarto = {
    
   <ul>
 <li>
-<a href="#%E5%88%86%E5%B1%82stratification" id="toc-分层stratification" class="nav-link active" data-scroll-target="#%E5%88%86%E5%B1%82stratification"><span class="header-section-number">21.1</span> 分层（Stratification）</a>
+<a href="#%E5%88%86%E5%B1%82stratification" id="toc-分层stratification" class="nav-link active" data-scroll-target="#%E5%88%86%E5%B1%82stratification"><span class="header-section-number">22.1</span> 分层（Stratification）</a>
   <ul>
 <li>
-<a href="#%E4%BC%B0%E8%AE%A1%E5%80%BE%E5%90%91%E5%BE%97%E5%88%86%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92" id="toc-估计倾向得分逻辑回归" class="nav-link" data-scroll-target="#%E4%BC%B0%E8%AE%A1%E5%80%BE%E5%90%91%E5%BE%97%E5%88%86%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92"><span class="header-section-number">21.1.1</span> 估计倾向得分（逻辑回归）</a>
+<a href="#%E4%BC%B0%E8%AE%A1%E5%80%BE%E5%90%91%E5%BE%97%E5%88%86%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92" id="toc-估计倾向得分逻辑回归" class="nav-link" data-scroll-target="#%E4%BC%B0%E8%AE%A1%E5%80%BE%E5%90%91%E5%BE%97%E5%88%86%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92"><span class="header-section-number">22.1.1</span> 估计倾向得分（逻辑回归）</a>
   <ul class="collapse">
-<li><a href="#%E5%88%86%E5%B1%82" id="toc-分层" class="nav-link" data-scroll-target="#%E5%88%86%E5%B1%82"><span class="header-section-number">21.1.1.1</span> 分层</a></li>
-  <li><a href="#%E6%9F%A5%E7%9C%8B%E5%B9%B3%E8%A1%A1%E6%B7%B7%E6%9D%82%E6%95%88%E5%BA%94" id="toc-查看平衡混杂效应" class="nav-link" data-scroll-target="#%E6%9F%A5%E7%9C%8B%E5%B9%B3%E8%A1%A1%E6%B7%B7%E6%9D%82%E6%95%88%E5%BA%94"><span class="header-section-number">21.1.1.2</span> 查看平衡混杂效应</a></li>
+<li><a href="#%E5%88%86%E5%B1%82" id="toc-分层" class="nav-link" data-scroll-target="#%E5%88%86%E5%B1%82"><span class="header-section-number">22.1.1.1</span> 分层</a></li>
+  <li><a href="#%E6%9F%A5%E7%9C%8B%E5%B9%B3%E8%A1%A1%E6%B7%B7%E6%9D%82%E6%95%88%E5%BA%94" id="toc-查看平衡混杂效应" class="nav-link" data-scroll-target="#%E6%9F%A5%E7%9C%8B%E5%B9%B3%E8%A1%A1%E6%B7%B7%E6%9D%82%E6%95%88%E5%BA%94"><span class="header-section-number">22.1.1.2</span> 查看平衡混杂效应</a></li>
   </ul>
 </li>
-  <li><a href="#%E4%BC%B0%E8%AE%A1%E5%9B%A0%E6%9E%9C%E6%95%88%E5%BA%94" id="toc-估计因果效应" class="nav-link" data-scroll-target="#%E4%BC%B0%E8%AE%A1%E5%9B%A0%E6%9E%9C%E6%95%88%E5%BA%94"><span class="header-section-number">21.1.2</span> 估计因果效应</a></li>
+  <li><a href="#%E4%BC%B0%E8%AE%A1%E5%9B%A0%E6%9E%9C%E6%95%88%E5%BA%94" id="toc-估计因果效应" class="nav-link" data-scroll-target="#%E4%BC%B0%E8%AE%A1%E5%9B%A0%E6%9E%9C%E6%95%88%E5%BA%94"><span class="header-section-number">22.1.2</span> 估计因果效应</a></li>
   <li>
-<a href="#%E6%95%8F%E6%84%9F%E6%80%A7%E5%88%86%E6%9E%90" id="toc-敏感性分析" class="nav-link" data-scroll-target="#%E6%95%8F%E6%84%9F%E6%80%A7%E5%88%86%E6%9E%90"><span class="header-section-number">21.1.3</span> 敏感性分析</a>
+<a href="#%E6%95%8F%E6%84%9F%E6%80%A7%E5%88%86%E6%9E%90" id="toc-敏感性分析" class="nav-link" data-scroll-target="#%E6%95%8F%E6%84%9F%E6%80%A7%E5%88%86%E6%9E%90"><span class="header-section-number">22.1.3</span> 敏感性分析</a>
   <ul class="collapse">
-<li><a href="#%E4%BC%B0%E8%AE%A1%E5%80%BE%E5%90%91%E5%BE%97%E5%88%86%E5%88%86%E7%B1%BB%E6%A0%91" id="toc-估计倾向得分分类树" class="nav-link" data-scroll-target="#%E4%BC%B0%E8%AE%A1%E5%80%BE%E5%90%91%E5%BE%97%E5%88%86%E5%88%86%E7%B1%BB%E6%A0%91"><span class="header-section-number">21.1.3.1</span> 估计倾向得分（分类树）</a></li>
+<li><a href="#%E4%BC%B0%E8%AE%A1%E5%80%BE%E5%90%91%E5%BE%97%E5%88%86%E5%88%86%E7%B1%BB%E6%A0%91" id="toc-估计倾向得分分类树" class="nav-link" data-scroll-target="#%E4%BC%B0%E8%AE%A1%E5%80%BE%E5%90%91%E5%BE%97%E5%88%86%E5%88%86%E7%B1%BB%E6%A0%91"><span class="header-section-number">22.1.3.1</span> 估计倾向得分（分类树）</a></li>
   </ul>
 </li>
   </ul>
 </li>
   <li>
-<a href="#%E5%8C%B9%E9%85%8Dmatching" id="toc-匹配matching" class="nav-link" data-scroll-target="#%E5%8C%B9%E9%85%8Dmatching"><span class="header-section-number">21.2</span> 匹配（Matching）</a>
+<a href="#%E5%8C%B9%E9%85%8Dmatching" id="toc-匹配matching" class="nav-link" data-scroll-target="#%E5%8C%B9%E9%85%8Dmatching"><span class="header-section-number">22.2</span> 匹配（Matching）</a>
   <ul>
-<li><a href="#%E4%B8%80%E5%AF%B9%E4%B8%80%E5%8C%B9%E9%85%8Datt" id="toc-一对一匹配att" class="nav-link" data-scroll-target="#%E4%B8%80%E5%AF%B9%E4%B8%80%E5%8C%B9%E9%85%8Datt"><span class="header-section-number">21.2.1</span> 一对一匹配ATT</a></li>
-  <li><a href="#%E4%B8%80%E5%AF%B9%E4%B8%80%E5%8C%B9%E9%85%8Date" id="toc-一对一匹配ate" class="nav-link" data-scroll-target="#%E4%B8%80%E5%AF%B9%E4%B8%80%E5%8C%B9%E9%85%8Date"><span class="header-section-number">21.2.2</span> 一对一匹配ATE</a></li>
-  <li><a href="#%E4%B8%80%E5%AF%B9%E5%A4%9A%E5%8C%B9%E9%85%8D-att" id="toc-一对多匹配-att" class="nav-link" data-scroll-target="#%E4%B8%80%E5%AF%B9%E5%A4%9A%E5%8C%B9%E9%85%8D-att"><span class="header-section-number">21.2.3</span> 一对多匹配 （ATT）</a></li>
-  <li><a href="#machit%E5%A5%97%E4%BB%B6%E7%B1%BB%E5%9E%8B" id="toc-machit套件类型" class="nav-link" data-scroll-target="#machit%E5%A5%97%E4%BB%B6%E7%B1%BB%E5%9E%8B"><span class="header-section-number">21.2.4</span> MachIt套件类型</a></li>
+<li><a href="#%E4%B8%80%E5%AF%B9%E4%B8%80%E5%8C%B9%E9%85%8Datt" id="toc-一对一匹配att" class="nav-link" data-scroll-target="#%E4%B8%80%E5%AF%B9%E4%B8%80%E5%8C%B9%E9%85%8Datt"><span class="header-section-number">22.2.1</span> 一对一匹配ATT</a></li>
+  <li><a href="#%E4%B8%80%E5%AF%B9%E4%B8%80%E5%8C%B9%E9%85%8Date" id="toc-一对一匹配ate" class="nav-link" data-scroll-target="#%E4%B8%80%E5%AF%B9%E4%B8%80%E5%8C%B9%E9%85%8Date"><span class="header-section-number">22.2.2</span> 一对一匹配ATE</a></li>
+  <li><a href="#%E4%B8%80%E5%AF%B9%E5%A4%9A%E5%8C%B9%E9%85%8D-att" id="toc-一对多匹配-att" class="nav-link" data-scroll-target="#%E4%B8%80%E5%AF%B9%E5%A4%9A%E5%8C%B9%E9%85%8D-att"><span class="header-section-number">22.2.3</span> 一对多匹配 （ATT）</a></li>
+  <li><a href="#machit%E5%A5%97%E4%BB%B6%E7%B1%BB%E5%9E%8B" id="toc-machit套件类型" class="nav-link" data-scroll-target="#machit%E5%A5%97%E4%BB%B6%E7%B1%BB%E5%9E%8B"><span class="header-section-number">22.2.4</span> MachIt套件类型</a></li>
   </ul>
 </li>
   <li>
-<a href="#%E5%80%BE%E5%90%91%E5%80%BC%E5%8C%B9%E9%85%8D%E6%B3%95%E7%9A%84%E6%A6%82%E8%BF%B0%E4%B8%8E%E5%BA%94%E7%94%A8-r%E5%AE%9E%E7%8E%B0" id="toc-倾向值匹配法的概述与应用-r实现" class="nav-link" data-scroll-target="#%E5%80%BE%E5%90%91%E5%80%BC%E5%8C%B9%E9%85%8D%E6%B3%95%E7%9A%84%E6%A6%82%E8%BF%B0%E4%B8%8E%E5%BA%94%E7%94%A8-r%E5%AE%9E%E7%8E%B0"><span class="header-section-number">21.3</span> 倾向值匹配法的概述与应用 R实现</a>
+<a href="#%E5%80%BE%E5%90%91%E5%80%BC%E5%8C%B9%E9%85%8D%E6%B3%95%E7%9A%84%E6%A6%82%E8%BF%B0%E4%B8%8E%E5%BA%94%E7%94%A8-r%E5%AE%9E%E7%8E%B0" id="toc-倾向值匹配法的概述与应用-r实现" class="nav-link" data-scroll-target="#%E5%80%BE%E5%90%91%E5%80%BC%E5%8C%B9%E9%85%8D%E6%B3%95%E7%9A%84%E6%A6%82%E8%BF%B0%E4%B8%8E%E5%BA%94%E7%94%A8-r%E5%AE%9E%E7%8E%B0"><span class="header-section-number">22.3</span> 倾向值匹配法的概述与应用 R实现</a>
   <ul>
-<li><a href="#%E4%BC%B0%E8%AE%A1%E5%80%BE%E5%90%91%E5%80%BC%E5%88%86%E6%95%B0" id="toc-估计倾向值分数" class="nav-link" data-scroll-target="#%E4%BC%B0%E8%AE%A1%E5%80%BE%E5%90%91%E5%80%BC%E5%88%86%E6%95%B0"><span class="header-section-number">21.3.1</span> 估计倾向值分数</a></li>
-  <li><a href="#%E6%A3%80%E9%AA%8C" id="toc-检验" class="nav-link" data-scroll-target="#%E6%A3%80%E9%AA%8C"><span class="header-section-number">21.3.2</span> 检验</a></li>
+<li><a href="#%E4%BC%B0%E8%AE%A1%E5%80%BE%E5%90%91%E5%80%BC%E5%88%86%E6%95%B0" id="toc-估计倾向值分数" class="nav-link" data-scroll-target="#%E4%BC%B0%E8%AE%A1%E5%80%BE%E5%90%91%E5%80%BC%E5%88%86%E6%95%B0"><span class="header-section-number">22.3.1</span> 估计倾向值分数</a></li>
+  <li><a href="#%E6%A3%80%E9%AA%8C" id="toc-检验" class="nav-link" data-scroll-target="#%E6%A3%80%E9%AA%8C"><span class="header-section-number">22.3.2</span> 检验</a></li>
   <li>
-<a href="#matchit" id="toc-matchit" class="nav-link" data-scroll-target="#matchit"><span class="header-section-number">21.3.3</span> MatchIt</a>
+<a href="#matchit" id="toc-matchit" class="nav-link" data-scroll-target="#matchit"><span class="header-section-number">22.3.3</span> MatchIt</a>
   <ul class="collapse">
-<li><a href="#%E5%8C%B9%E9%85%8D%E6%95%B0%E6%8D%AE" id="toc-匹配数据" class="nav-link" data-scroll-target="#%E5%8C%B9%E9%85%8D%E6%95%B0%E6%8D%AE"><span class="header-section-number">21.3.3.1</span> 匹配数据</a></li>
-  <li><a href="#%E8%AF%84%E4%BC%B0%E8%B4%A8%E9%87%8F" id="toc-评估质量" class="nav-link" data-scroll-target="#%E8%AF%84%E4%BC%B0%E8%B4%A8%E9%87%8F"><span class="header-section-number">21.3.3.2</span> 评估质量</a></li>
-  <li><a href="#%E8%AE%A1%E7%AE%97%E5%B9%B3%E5%9D%87%E5%A4%84%E7%90%86%E6%95%88%E5%BA%94" id="toc-计算平均处理效应" class="nav-link" data-scroll-target="#%E8%AE%A1%E7%AE%97%E5%B9%B3%E5%9D%87%E5%A4%84%E7%90%86%E6%95%88%E5%BA%94"><span class="header-section-number">21.3.3.3</span> 计算平均处理效应</a></li>
+<li><a href="#%E5%8C%B9%E9%85%8D%E6%95%B0%E6%8D%AE" id="toc-匹配数据" class="nav-link" data-scroll-target="#%E5%8C%B9%E9%85%8D%E6%95%B0%E6%8D%AE"><span class="header-section-number">22.3.3.1</span> 匹配数据</a></li>
+  <li><a href="#%E8%AF%84%E4%BC%B0%E8%B4%A8%E9%87%8F" id="toc-评估质量" class="nav-link" data-scroll-target="#%E8%AF%84%E4%BC%B0%E8%B4%A8%E9%87%8F"><span class="header-section-number">22.3.3.2</span> 评估质量</a></li>
+  <li><a href="#%E8%AE%A1%E7%AE%97%E5%B9%B3%E5%9D%87%E5%A4%84%E7%90%86%E6%95%88%E5%BA%94" id="toc-计算平均处理效应" class="nav-link" data-scroll-target="#%E8%AE%A1%E7%AE%97%E5%B9%B3%E5%9D%87%E5%A4%84%E7%90%86%E6%95%88%E5%BA%94"><span class="header-section-number">22.3.3.3</span> 计算平均处理效应</a></li>
   </ul>
 </li>
   </ul>
 </li>
-  <li><a href="#%E5%8A%A0%E6%9D%83weighting" id="toc-加权weighting" class="nav-link" data-scroll-target="#%E5%8A%A0%E6%9D%83weighting"><span class="header-section-number">21.4</span> 加权（Weighting）</a></li>
-  <li><a href="#%E5%9B%9E%E5%BD%92" id="toc-回归" class="nav-link" data-scroll-target="#%E5%9B%9E%E5%BD%92"><span class="header-section-number">21.5</span> 回归</a></li>
-  <li><a href="#psapsa_shiny" id="toc-psapsa_shiny" class="nav-link" data-scroll-target="#psapsa_shiny"><span class="header-section-number">21.6</span> psa::psa_shiny()</a></li>
+  <li><a href="#%E5%8A%A0%E6%9D%83weighting" id="toc-加权weighting" class="nav-link" data-scroll-target="#%E5%8A%A0%E6%9D%83weighting"><span class="header-section-number">22.4</span> 加权（Weighting）</a></li>
+  <li><a href="#%E5%9B%9E%E5%BD%92" id="toc-回归" class="nav-link" data-scroll-target="#%E5%9B%9E%E5%BD%92"><span class="header-section-number">22.5</span> 回归</a></li>
+  <li><a href="#psapsa_shiny" id="toc-psapsa_shiny" class="nav-link" data-scroll-target="#psapsa_shiny"><span class="header-section-number">22.6</span> psa::psa_shiny()</a></li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./PropensityScore.html">倾向性评分</a></li><li class="breadcrumb-item"><a href="./PropensityScore.html"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">倾向性评分</span></a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./PropensityScore.html">倾向性评分</a></li><li class="breadcrumb-item"><a href="./PropensityScore.html"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">倾向性评分</span></a></li></ol></nav><div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">
-<span class="chapter-number">21</span>&nbsp; <span class="chapter-title">倾向性评分</span>
+<span class="chapter-number">22</span>&nbsp; <span class="chapter-title">倾向性评分</span>
 </h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 </div>
 
@@ -490,10 +496,10 @@ C. 重复 A 和 B，直到优化足够的平衡</p>
 <span><span class="co">#&gt; $ treat   &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,…</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<section id="分层stratification" class="level2" data-number="21.1"><h2 data-number="21.1" class="anchored" data-anchor-id="分层stratification">
-<span class="header-section-number">21.1</span> 分层（Stratification）</h2>
-<section id="估计倾向得分逻辑回归" class="level3" data-number="21.1.1"><h3 data-number="21.1.1" class="anchored" data-anchor-id="估计倾向得分逻辑回归">
-<span class="header-section-number">21.1.1</span> 估计倾向得分（逻辑回归）</h3>
+<section id="分层stratification" class="level2" data-number="22.1"><h2 data-number="22.1" class="anchored" data-anchor-id="分层stratification">
+<span class="header-section-number">22.1</span> 分层（Stratification）</h2>
+<section id="估计倾向得分逻辑回归" class="level3" data-number="22.1.1"><h3 data-number="22.1.1" class="anchored" data-anchor-id="估计倾向得分逻辑回归">
+<span class="header-section-number">22.1.1</span> 估计倾向得分（逻辑回归）</h3>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">lalonde</span>, package <span class="op">=</span> <span class="st">'Matching'</span><span class="op">)</span></span>
 <span></span>
@@ -553,8 +559,8 @@ C. 重复 A 和 B，直到优化足够的平衡</p>
 </div>
 </div>
 </div>
-<section id="分层" class="level4" data-number="21.1.1.1"><h4 data-number="21.1.1.1" class="anchored" data-anchor-id="分层">
-<span class="header-section-number">21.1.1.1</span> 分层</h4>
+<section id="分层" class="level4" data-number="22.1.1.1"><h4 data-number="22.1.1.1" class="anchored" data-anchor-id="分层">
+<span class="header-section-number">22.1.1.1</span> 分层</h4>
 <p>使用五分位数进行分层</p>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">breaks5</span> <span class="op">&lt;-</span> <span class="fu">psa</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/psa/man/get_strata_breaks.html">get_strata_breaks</a></span><span class="op">(</span><span class="va">lalonde</span><span class="op">$</span><span class="va">lr_ps</span><span class="op">)</span></span>
@@ -611,8 +617,8 @@ C. 重复 A 和 B，直到优化足够的平衡</p>
 </div>
 </div>
 </div>
-</section><section id="查看平衡混杂效应" class="level4" data-number="21.1.1.2"><h4 data-number="21.1.1.2" class="anchored" data-anchor-id="查看平衡混杂效应">
-<span class="header-section-number">21.1.1.2</span> 查看平衡混杂效应</h4>
+</section><section id="查看平衡混杂效应" class="level4" data-number="22.1.1.2"><h4 data-number="22.1.1.2" class="anchored" data-anchor-id="查看平衡混杂效应">
+<span class="header-section-number">22.1.1.2</span> 查看平衡混杂效应</h4>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">covars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/allnames.html">all.vars</a></span><span class="op">(</span><span class="va">lalonde_formu</span><span class="op">)</span></span>
 <span><span class="va">covars</span> <span class="op">&lt;-</span> <span class="va">lalonde</span><span class="op">[</span>,<span class="va">covars</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
@@ -661,8 +667,8 @@ C. 重复 A 和 B，直到优化足够的平衡</p>
 #&gt; 0   0   0   0   0 0.036 0.03 0.302 0.37 0.737 0.706
 #&gt; 1   1   1   1   1 0.964 0.97 0.698 0.63 0.263 0.294</code></pre>
 </div>
-</section></section><section id="估计因果效应" class="level3" data-number="21.1.2"><h3 data-number="21.1.2" class="anchored" data-anchor-id="估计因果效应">
-<span class="header-section-number">21.1.2</span> 估计因果效应</h3>
+</section></section><section id="估计因果效应" class="level3" data-number="22.1.2"><h3 data-number="22.1.2" class="anchored" data-anchor-id="估计因果效应">
+<span class="header-section-number">22.1.2</span> 估计因果效应</h3>
 <p>个体处理效应：</p>
 <p><span class="math display">\[
 ITE=\tau_i=y_i^1-y_i^0
@@ -764,10 +770,10 @@ psa::loess_plot(ps = lalonde$lr_ps,
 #&gt; $CI.95
 #&gt; [1] 0.1292676 1.6882048</code></pre>
 </div>
-</section><section id="敏感性分析" class="level3" data-number="21.1.3"><h3 data-number="21.1.3" class="anchored" data-anchor-id="敏感性分析">
-<span class="header-section-number">21.1.3</span> 敏感性分析</h3>
-<section id="估计倾向得分分类树" class="level4" data-number="21.1.3.1"><h4 data-number="21.1.3.1" class="anchored" data-anchor-id="估计倾向得分分类树">
-<span class="header-section-number">21.1.3.1</span> 估计倾向得分（分类树）</h4>
+</section><section id="敏感性分析" class="level3" data-number="22.1.3"><h3 data-number="22.1.3" class="anchored" data-anchor-id="敏感性分析">
+<span class="header-section-number">22.1.3</span> 敏感性分析</h3>
+<section id="估计倾向得分分类树" class="level4" data-number="22.1.3.1"><h4 data-number="22.1.3.1" class="anchored" data-anchor-id="估计倾向得分分类树">
+<span class="header-section-number">22.1.3.1</span> 估计倾向得分（分类树）</h4>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">tree</span><span class="op">)</span></span>
 <span><span class="va">tree_out</span> <span class="op">&lt;-</span> <span class="fu">tree</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tree/man/tree.html">tree</a></span><span class="op">(</span><span class="va">lalonde_formu</span>,</span>
@@ -801,8 +807,8 @@ psa::loess_plot(ps = lalonde$lr_ps,
 <span><span class="co">#&gt;   11   0   6</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section></section></section><section id="匹配matching" class="level2" data-number="21.2"><h2 data-number="21.2" class="anchored" data-anchor-id="匹配matching">
-<span class="header-section-number">21.2</span> 匹配（Matching）</h2>
+</section></section></section><section id="匹配matching" class="level2" data-number="22.2"><h2 data-number="22.2" class="anchored" data-anchor-id="匹配matching">
+<span class="header-section-number">22.2</span> 匹配（Matching）</h2>
 <p><strong>倾向评分匹配</strong>根据他们的<em>倾向评分</em>将治疗组中的每个人与对照组中的个体相匹配。对于每个人来说，<em>倾向得分</em>可以直观地视为从一系列协变量（和潜在混杂因素）计算出来的最近治疗的概率。两个人，一个来自治疗组，一个来自对照组，如果他们的倾向评分之间的差异很小，则被认为是匹配的。不匹配的参与者将被丢弃。</p>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/JasjeetSekhon/Matching">Matching</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -874,8 +880,8 @@ psa::loess_plot(ps = lalonde$lr_ps,
 </div>
 </div>
 <p>匹配后，治疗组和对照组应具有非常相似的特征。可以使用简单的回归模型来估计治疗对结果的影响。</p>
-<section id="一对一匹配att" class="level3" data-number="21.2.1"><h3 data-number="21.2.1" class="anchored" data-anchor-id="一对一匹配att">
-<span class="header-section-number">21.2.1</span> 一对一匹配ATT</h3>
+<section id="一对一匹配att" class="level3" data-number="22.2.1"><h3 data-number="22.2.1" class="anchored" data-anchor-id="一对一匹配att">
+<span class="header-section-number">22.2.1</span> 一对一匹配ATT</h3>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rr_att</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Matching/man/Match.html">Match</a></span><span class="op">(</span>Y <span class="op">=</span> <span class="va">lalonde</span><span class="op">$</span><span class="va">re78</span>, </span>
 <span>                Tr <span class="op">=</span> <span class="va">lalonde</span><span class="op">$</span><span class="va">treat</span>, </span>
@@ -950,8 +956,8 @@ psa::loess_plot(ps = lalonde$lr_ps,
 <span><span class="co">#&gt; u74       -0.06356 0.14183           81.5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="一对一匹配ate" class="level3" data-number="21.2.2"><h3 data-number="21.2.2" class="anchored" data-anchor-id="一对一匹配ate">
-<span class="header-section-number">21.2.2</span> 一对一匹配ATE</h3>
+</section><section id="一对一匹配ate" class="level3" data-number="22.2.2"><h3 data-number="22.2.2" class="anchored" data-anchor-id="一对一匹配ate">
+<span class="header-section-number">22.2.2</span> 一对一匹配ATE</h3>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rr.ate</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Matching/man/Match.html">Match</a></span><span class="op">(</span>Y <span class="op">=</span> <span class="va">lalonde</span><span class="op">$</span><span class="va">re78</span>, </span>
 <span>                Tr <span class="op">=</span> <span class="va">lalonde</span><span class="op">$</span><span class="va">treat</span>, </span>
@@ -971,8 +977,8 @@ psa::loess_plot(ps = lalonde$lr_ps,
 <span><span class="co">#&gt; Matched number of observations  (unweighted).  756</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="一对多匹配-att" class="level3" data-number="21.2.3"><h3 data-number="21.2.3" class="anchored" data-anchor-id="一对多匹配-att">
-<span class="header-section-number">21.2.3</span> 一对多匹配 （ATT）</h3>
+</section><section id="一对多匹配-att" class="level3" data-number="22.2.3"><h3 data-number="22.2.3" class="anchored" data-anchor-id="一对多匹配-att">
+<span class="header-section-number">22.2.3</span> 一对多匹配 （ATT）</h3>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rr2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Matching/man/Match.html">Match</a></span><span class="op">(</span>Y <span class="op">=</span> <span class="va">lalonde</span><span class="op">$</span><span class="va">re78</span>,      </span>
 <span>             Tr <span class="op">=</span> <span class="va">lalonde</span><span class="op">$</span><span class="va">treat</span>, </span>
@@ -994,8 +1000,8 @@ psa::loess_plot(ps = lalonde$lr_ps,
 <span><span class="co">#&gt; Matched number of observations  (unweighted).  346</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="machit套件类型" class="level3" data-number="21.2.4"><h3 data-number="21.2.4" class="anchored" data-anchor-id="machit套件类型">
-<span class="header-section-number">21.2.4</span> MachIt套件类型</h3>
+</section><section id="machit套件类型" class="level3" data-number="22.2.4"><h3 data-number="22.2.4" class="anchored" data-anchor-id="machit套件类型">
+<span class="header-section-number">22.2.4</span> MachIt套件类型</h3>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">matchit.out</span> <span class="op">&lt;-</span> <span class="fu">MatchIt</span><span class="fu">::</span><span class="fu"><a href="https://kosukeimai.github.io/MatchIt/reference/matchit.html">matchit</a></span><span class="op">(</span><span class="va">lalonde_formu</span>, data <span class="op">=</span> <span class="va">lalonde</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">matchit.out</span><span class="op">)</span></span>
@@ -1168,8 +1174,8 @@ psa::loess_plot(ps = lalonde$lr_ps,
 <span><span class="co">#&gt; Matched number of observations  (unweighted).  185</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section></section><section id="倾向值匹配法的概述与应用-r实现" class="level2" data-number="21.3"><h2 data-number="21.3" class="anchored" data-anchor-id="倾向值匹配法的概述与应用-r实现">
-<span class="header-section-number">21.3</span> 倾向值匹配法的概述与应用 R实现</h2>
+</section></section><section id="倾向值匹配法的概述与应用-r实现" class="level2" data-number="22.3"><h2 data-number="22.3" class="anchored" data-anchor-id="倾向值匹配法的概述与应用-r实现">
+<span class="header-section-number">22.3</span> 倾向值匹配法的概述与应用 R实现</h2>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/JasjeetSekhon/Matching">Matching</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">lalonde</span>, package <span class="op">=</span> <span class="st">'Matching'</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1231,8 +1237,8 @@ psa::loess_plot(ps = lalonde$lr_ps,
 </tr>
 </tbody>
 </table>
-<section id="估计倾向值分数" class="level3" data-number="21.3.1"><h3 data-number="21.3.1" class="anchored" data-anchor-id="估计倾向值分数">
-<span class="header-section-number">21.3.1</span> 估计倾向值分数</h3>
+<section id="估计倾向值分数" class="level3" data-number="22.3.1"><h3 data-number="22.3.1" class="anchored" data-anchor-id="估计倾向值分数">
+<span class="header-section-number">22.3.1</span> 估计倾向值分数</h3>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/attach.html">attach</a></span><span class="op">(</span><span class="va">lalonde</span><span class="op">)</span></span>
 <span><span class="va">glm_ps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span></span>
@@ -1280,8 +1286,8 @@ psa::loess_plot(ps = lalonde$lr_ps,
 <span><span class="co">#&gt; Matched number of observations  (unweighted).  185</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="检验" class="level3" data-number="21.3.2"><h3 data-number="21.3.2" class="anchored" data-anchor-id="检验">
-<span class="header-section-number">21.3.2</span> 检验</h3>
+</section><section id="检验" class="level3" data-number="22.3.2"><h3 data-number="22.3.2" class="anchored" data-anchor-id="检验">
+<span class="header-section-number">22.3.2</span> 检验</h3>
 <p>受试者个体同质性，是否随机分配</p>
 <p>协变量分布是否平衡，是否重合：</p>
 <p>以<code>age</code> 为例，实验组匹配前25.816匹配后25.816，对照组匹配前25.054匹配后25.692 ，匹配后实验组与对照组更接近了；T-test p-value &gt; 0.05 ，表示匹配前后<code>age</code> 均值无统计学差异；KS Bootstrap p-value &gt; 0.05 ，表示匹配前后<code>age</code> 分布无统计学差异</p>
@@ -2013,10 +2019,10 @@ KS Statistic..........   0.065177          0.061047 </code></pre>
 </details>
 </div>
 <p>有查验共同支持域的ATT（2330），与无查验共同支持域（2439.3）存在差异，因此必须重新改进倾向值分析。</p>
-</section><section id="matchit" class="level3" data-number="21.3.3"><h3 data-number="21.3.3" class="anchored" data-anchor-id="matchit">
-<span class="header-section-number">21.3.3</span> MatchIt</h3>
-<section id="匹配数据" class="level4" data-number="21.3.3.1"><h4 data-number="21.3.3.1" class="anchored" data-anchor-id="匹配数据">
-<span class="header-section-number">21.3.3.1</span> 匹配数据</h4>
+</section><section id="matchit" class="level3" data-number="22.3.3"><h3 data-number="22.3.3" class="anchored" data-anchor-id="matchit">
+<span class="header-section-number">22.3.3</span> MatchIt</h3>
+<section id="匹配数据" class="level4" data-number="22.3.3.1"><h4 data-number="22.3.3.1" class="anchored" data-anchor-id="匹配数据">
+<span class="header-section-number">22.3.3.1</span> 匹配数据</h4>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb42"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://kosukeimai.github.io/MatchIt/">MatchIt</a></span><span class="op">)</span></span>
 <span><span class="va">NM</span> <span class="op">&lt;-</span> <span class="fu">MatchIt</span><span class="fu">::</span><span class="fu"><a href="https://kosukeimai.github.io/MatchIt/reference/matchit.html">matchit</a></span><span class="op">(</span></span>
@@ -2085,8 +2091,8 @@ KS Statistic..........   0.065177          0.061047 </code></pre>
 <span><span class="co">#&gt; Discarded       0       0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="评估质量" class="level4" data-number="21.3.3.2"><h4 data-number="21.3.3.2" class="anchored" data-anchor-id="评估质量">
-<span class="header-section-number">21.3.3.2</span> 评估质量</h4>
+</section><section id="评估质量" class="level4" data-number="22.3.3.2"><h4 data-number="22.3.3.2" class="anchored" data-anchor-id="评估质量">
+<span class="header-section-number">22.3.3.2</span> 评估质量</h4>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb43"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 散点图展示了匹配后实验组和对照组样本倾向值的分布，凸显了分布平衡与不平衡，分布缺乏重合</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">NM</span>,type <span class="op">=</span> <span class="st">"jitter"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2191,8 +2197,8 @@ KS Statistic..........   0.065177          0.061047 </code></pre>
 </details>
 </div>
 <p>继续改进，调整模型和协变量</p>
-</section><section id="计算平均处理效应" class="level4" data-number="21.3.3.3"><h4 data-number="21.3.3.3" class="anchored" data-anchor-id="计算平均处理效应">
-<span class="header-section-number">21.3.3.3</span> 计算平均处理效应</h4>
+</section><section id="计算平均处理效应" class="level4" data-number="22.3.3.3"><h4 data-number="22.3.3.3" class="anchored" data-anchor-id="计算平均处理效应">
+<span class="header-section-number">22.3.3.3</span> 计算平均处理效应</h4>
 <p>为了简化步骤，以当前的结果进行匹配后分析。</p>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb48"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
@@ -2255,14 +2261,14 @@ KS Statistic..........   0.065177          0.061047 </code></pre>
 <span><span class="co">#&gt; </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section></section></section><section id="加权weighting" class="level2" data-number="21.4"><h2 data-number="21.4" class="anchored" data-anchor-id="加权weighting">
-<span class="header-section-number">21.4</span> 加权（Weighting）</h2>
+</section></section></section><section id="加权weighting" class="level2" data-number="22.4"><h2 data-number="22.4" class="anchored" data-anchor-id="加权weighting">
+<span class="header-section-number">22.4</span> 加权（Weighting）</h2>
 <p>……</p>
-</section><section id="回归" class="level2" data-number="21.5"><h2 data-number="21.5" class="anchored" data-anchor-id="回归">
-<span class="header-section-number">21.5</span> 回归</h2>
+</section><section id="回归" class="level2" data-number="22.5"><h2 data-number="22.5" class="anchored" data-anchor-id="回归">
+<span class="header-section-number">22.5</span> 回归</h2>
 <p>……</p>
-</section><section id="psapsa_shiny" class="level2" data-number="21.6"><h2 data-number="21.6" class="anchored" data-anchor-id="psapsa_shiny">
-<span class="header-section-number">21.6</span> psa::psa_shiny()</h2>
+</section><section id="psapsa_shiny" class="level2" data-number="22.6"><h2 data-number="22.6" class="anchored" data-anchor-id="psapsa_shiny">
+<span class="header-section-number">22.6</span> psa::psa_shiny()</h2>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb50"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">psa</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/psa/man/psa_shiny.html">psa_shiny</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
@@ -2731,13 +2737,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./SurvivalAnalysis.html" class="pagination-link" aria-label="生存分析">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">生存分析</span></span>
+      <a href="./CoxProportionalHazardsModel.html" class="pagination-link" aria-label="Cox比例风险模型">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Cox比例风险模型</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./diagnostic_test.html" class="pagination-link" aria-label="诊断性测试">
-        <span class="nav-page-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">诊断性测试</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">诊断性测试</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">

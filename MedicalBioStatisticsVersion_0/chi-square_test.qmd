@@ -25,9 +25,15 @@ ggplot() + xlim(-10,10) +
 
 在使用卡方检验时，需要的一个参数被称为自由度，指的是独立变量的个数（组数减去限制数）。通常，二项分布已知 $\pi$ ，泊松分布已知 $\lambda$ ，正态分布已知 $\mu$ 和 $\sigma^2$ 时的自由度是n-1。进行独立性检验时，n行m列联列表的自由度是(n-1) x (m-1)。
 
-Pearson’s $\chi^2$ 检验 用于检验涉及双向无序多分类变量的概率或比例。
+Pearson’s $\chi^2$ 检验 用于检验涉及**双向无序多分类变量**的概率或比例。
 
-## 独立2×2列联表
+## 2×2列联表
+
+独立性：判断两个或多个分类变量之间是否存在关联或取值互不影响，分析联合概率分布是否可以分解为各自概率分布的乘积。
+
+### 卡方检验
+
+对于频数表中每个单元格的期望频数都比较大（大于 5）的大样本，`correct`设为`FALSE`,不进行连续校正。
 
 ```{r}
 x <- matrix(c(97,73,7,30),2,dimnames = list(c("experiment","control"),c("+","-")))
@@ -38,32 +44,31 @@ x
 # 期望频数列联表
 k1$expected
 
+k1$parameter # degrees of freedom
 ```
 
 ### Yate’s 校正
 
+某些单元格的期望频数接近于或小于 5 时，进行 Yates' 连续校正以修正卡方统计量提高准确性。
+
 ```{r}
+x <- matrix(c(1004, 325, 20, 1), 2, 
+            dimnames = list(c("experiment", "control"), c("+", "-")))
+x
+
+chisq.test(x,correct = F)$expected
+
+# 校正
 (k2 <- chisq.test(x,correct = T))
 ```
 
 ### Fisher's Exact 检验
 
-T \< 5 且 n \< 40
+Fisher 精确概率检验（Fisher's Exact Test）通常在以下情况中使用：
 
-超几何分布
+1.  总样本数 n 小于 40；
 
-```{r}
-ggplot() + xlim(-10,10) +
-    geom_function(mapping = aes(color="normal Distribution"),
-                  fun = dnorm, args = list(mean = 0, sd = 1),
-                   )+
-    geom_function(mapping = aes(color="hypergeometric Distribution"),
-                  fun = dhyper, args = list(m = 5,n=10,k=2 ), 
-                 )+
-    scale_color_manual(values = c("normal Distribution" = "red",
-                                  "hypergeometric Distribution" = "blue"))+
-    labs(color = "Distribution")
-```
+2.  列联表中任何一个单元格的期望频数小于 5。
 
 ```{r}
 x <- matrix(c(7,2,7,17),2,dimnames = list(c("A","B"),c("Yes","No")))
@@ -80,26 +85,46 @@ chisq
 p_value_asymptotic <- 1 - pchisq(chisq, df = 1)
 ```
 
+### **超几何分布**
+
+```{r warning=FALSE}
+
+tibble(
+    x = -10:10,
+    y_hyper = dhyper(x, m = 10,n = 7,k = 8),
+) %>% 
+    ggplot()+
+    geom_col(aes(x=x,y = y_hyper,color="Hypergeometric Distribution"),fill=NA)+
+    geom_function(aes(color="Normal Distribution"),
+                  fun= dnorm, args = list(mean = 0, sd = 1))+
+    scale_color_manual(values = c("Normal Distribution" = "red",
+                                  "Hypergeometric Distribution" = "blue"))+
+    labs(color = "Distribution")
+```
+
 ## 配对四格表
 
-二项分布
+### 二项分布
 
 ```{r}
-ggplot() + xlim(-10,10) +
+
+tibble(
+    x = -5:15,
+    y_binom = dbinom(x, size = 10,prob = 0.5),
+) %>% 
+ggplot()+
+    geom_col(aes(x=x,y=y_binom,color="binomal Distribution"),fill=NA)+
     geom_function(mapping = aes(color="normal Distribution"),
                   fun = dnorm, args = list(mean = 5, sd = 1),
                    )+
-    geom_function(mapping = aes(color="chi-square Distribution"),
-                  fun = dbinom, args = list(size=10 ,prob=0.5), 
-                 )+
     scale_color_manual(values = c("normal Distribution" = "red",
-                                  "chi-square Distribution" = "blue"))+
+                                  "binomal Distribution" = "blue"))+
     labs(color = "Distribution")
 ```
 
 ### McNemar's 检验
 
-**b+c =5 + 34 \> 20**
+20 \< **b+c =**5 + 34 \< 40
 
 ```{r}
 x <- matrix(c(36,34,5,135),2,dimnames = list(c("A+","A-"),c("B+","B-")))
@@ -108,13 +133,22 @@ x
 (k3 <- mcnemar.test(x,correct = F))
 
 
-# 校正
+# 对于配对四格表，如果样本量较小（不一致的结果的总数小于 40 ） ，则需要进行连续性校正。
 (k4 <- mcnemar.test(x,correct = T))
+```
+
+```{r}
+#　　某实验室分别用免疫荧光法和乳胶凝集法对 58 名疑似系统性红斑狼疮患者血清中抗 核抗体进行测定
+result<- matrix(c(11, 2, 12, 33), nrow = 2,dimnames = list(c("+","-"),c("+","-")))
+result
+
+#　　对于配对四格表，如果样本量较小（不一致的结果的总数小于 40 ） ，则需要进行连续性校正。
+mcnemar.test(result,correct = TRUE)
 ```
 
 ### 精确 McNemar's 检验
 
-b+c = 7 + 1 \<20
+**b+c = 7 + 1 \<20**
 
 二项分布B（b+c，0.5），k=min（b，c）
 
@@ -126,14 +160,21 @@ $$
 x <- matrix(c(3,1,7,9),2,dimnames = list(c("A+","A-"),c("B+","B-")))
 x
 
-
-
 P_two_sided <- 2*sum(dbinom(x=0:1,size = 8,prob = 0.5))
 P_two_sided
-
 ```
 
 ## R×C列联表
+
+### 卡方检验
+
+在 R×C 列联表的情况下，如果表中的单元格期望频数满足以下条件：
+
+1.  **期望频数** T \< 5 的单元格不超过 1/5。
+
+2.  **没有单元格期望频数** T \< 1 。
+
+那么可以选择不进行连续校正
 
 ```{r}
 x <- matrix(c(150,184,198,50,16,2),3,dimnames = list(c("A","B","C"),c("Yes","No")))
@@ -141,10 +182,6 @@ x
 
 (k <- chisq.test(x,correct = F))
 ```
-
--   T \< 5 的格子不超过1/5
-
--   没有 T \<1 的格子
 
 ```{r}
 (k <- chisq.test(x,correct = T))
@@ -234,10 +271,10 @@ signifcance <- case_when(
     
     
 results <- tibble(
-    Dimension = rownames(data),
-    X2 = X2,
-    P_Value = p_values,
-    Adjusted_P_Value = adjusted_p_values,
+    dimension = rownames(data),
+    chisq_statistic = X2,
+    p_value = p_values,
+    p_adjust = adjusted_p_values,
     signifcance = signifcance
 )
 
@@ -248,66 +285,11 @@ print(results)
 
 Pearson’s $\chi^2$ goodness-of-fit test
 
-## 独立性检验
+#### 
 
-### 列联表
+## Cochran-Mantel-Haenszel $\chi^2$ 检验
 
-```{r}
-eg <- matrix(c(156,9421,1531,14797),nrow=2,byrow=TRUE)
-colnames(eg) <- c("Disease","Control")
-rownames(eg) <- c("Exposed","Unexposed")
-print(eg)
-prop.table(eg)          #各单元格比例
-prop.table(eg,margin = 1)        #行比例 
-```
-
-### 边际列联表
-
-```{r}
-# 边际
-margin.table(x=eg,margin = 2)      #列和
-addmargins(eg)          #添加行和、列和
-addmargins(eg,1)        #添加列和
-addmargins(eg,2)        #添加行和
-addmargins(prop.table(eg,1))
-
-ftable(eg)   # "平铺式"列联表
-```
-
-### 独立性检验
-
-独立性：判断两个或多个分类变量之间是否存在关联或取值互不影响，分析联合概率分布是否可以分解为各自概率分布的乘积。
-
-#### $\chi^2$ 独立性检验
-
-```{r}
-M <- as.table(rbind(c(86, 29), c(44, 30)))
-dimnames(M) <- list(gender = c("F", "M"),
-                    smoking = c("Yes","No"))
-M
-
-chisq <- chisq.test(M)
-chisq
-chisq$expected  # 期望频数
-chisq$parameter # degrees of freedom
-
-#对于频数表中每个单元格的期望频数都比较大（大于 5）的大样本，correct设为 FALSE,不进行连续校正
-chisq2 <- chisq.test(M,correct = FALSE) 
-chisq2
-```
-
-#### Fisher精确检验
-
-　　如果观察总记录数 n 小于 40，或者频数表里的某个期望频数很小（小于 1） ，则需要使 用 Fisher 精确概率检验。
-
-```{r}
-# Fisher's exact test to test independence of rows and columns in contingency table
-fisher.test(M)
-```
-
-#### Cochran-Mantel-Haenszel $\chi^2$ 检验
-
-又叫行均分检验，常用于按照某个变量进行分层后的检验，这个方法课本上说**用于检验两个有序分类变量是否存在线性相关**，但实际上用途很广泛，比如因变量是有序变量的单向有序列联表，也可以用。　　
+又叫行均分检验，常用于按照某个变量进行分层后的检验，**用于检验两个有序分类变量是否存在线性相关**，但实际上用途很广泛，比如因变量是有序变量的单向有序列联表，也可以用。　　
 
 两个变量的关联有可能受到第三个变量的影响，因此我们有必要检验两个分类变量在 调整（控制）第三个变量的情况下是否独立。 Cochran-Mantel-Haenszel χ 2 检验常用于探索 变量间的混杂因素。其零假设是：两个分类变量在第三个变量的每一层都是条件独立的。函数 mantelhaen.test( ) 可以用来进行该检验。
 
@@ -326,17 +308,4 @@ array(c(0, 0, 6, 5,
 Rabbits
 
 mantelhaen.test(Rabbits)
-```
-
-#### 配对列联表的 χ 2 检验
-
-　　医学科研实践中经常遇到配对设计的计数资料，例如两种检验方法、诊断方法结果的 比较。其特点是对每个研究对象分别用两种方法处理，然后观察两种处理方法的某两分类 变量的计数结果。对于这种数据，我们也可以整理成列联表的形式，但是不能用前述的 χ 2独立性检验，需进行 Mcnemar 检验。
-
-```{r}
-#　　某实验室分别用免疫荧光法和乳胶凝集法对 58 名疑似系统性红斑狼疮患者血清中抗 核抗体进行测定
-result<- matrix(c(11, 2, 12, 33), nrow = 2,dimnames = list(c("+","-"),c("+","-")))
-result
-
-#　　对于配对四格表，如果样本量较小（不一致的结果的总数小于 40 ） ，则需要进行连续性校正。
-mcnemar.test(result,correct = TRUE)
 ```

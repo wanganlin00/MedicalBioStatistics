@@ -1,4 +1,4 @@
-## 定性数据的统计描述
+# 定性数据的统计描述
 
 ### 率
 
@@ -6,41 +6,69 @@
 
 标准化率（standardized rate）
 
-### 构成比
+## 构成比
 
 构成比（proportion）
 
-### 相对比
+## 相对比
 
 相对比（relative ratio）是A和B两个有关联指标值之比。
 
+[Using R for Biomedical Statistics](https://a-little-book-of-r-for-biomedical-statistics.readthedocs.io/en/latest/src/biomedicalstats.html)
+
 -   相对危险度 （Relative Risk，RR），是指暴露组人群的发病率与非暴露组人群的发病率之比。RR 用于反映暴露因素与结局事件的关联程度， 其 取值范围为 0 到无穷大。数值为 1 时，表明暴露因素与结局事件无关联；小于 1 时，表 明暴露因素导致结局事件的发生率降低；大于 1 时，表明暴露因素导致结局事件的发生率增加。相对风险适用于前瞻性队列研究。
+
+    ```{r}
+    x <- matrix(c(156,9421,1531,14797),nrow=2,byrow=TRUE,
+                 dimnames = list(c("Exposed","Unexposed"),c("Disease","Control")))
+
+    x
+    # RR
+    156/(156+9421)*(1531+14797)/1531
+    source("function/calcRelativeRisk.R")
+    calcRelativeRisk(x,alpha=0.05)
+
+    # OR
+    156/9421/(1531/14797)
+    source("function/calcOddsRatio.R")
+    calcOddsRatio(x,alpha = 0.05)
+    ```
 
 -   优势比（Odds Ratio，OR），是指暴露组中病例与非病例人数的比值除以非暴露组中病例与非病例人数的比值。　　OR 的取值范围也为 0 到无穷大。如果 OR 值大于 1 ，说明该暴露因素更 容易导致结果事件发生，或者说该因素是一个危险因素；小于 1 ，则说明该暴露因素更不 容易导致结果事件发生，或者说该因素是一个保护因素。比值比适用于队列研究和病例对照研究。
 
-[Using R for Biomedical Statistics](https://a-little-book-of-r-for-biomedical-statistics.readthedocs.io/en/latest/src/biomedicalstats.html)
+    ```{r}
+    y <- matrix(c(30,24,76,241,82,509),nrow=3,byrow=TRUE,
+                dimnames = list(c("Exposure1","Exposure2","Unexposed"),
+                                c("Disease","Control")))
+    y
+    calcOddsRatio(y, referencerow=3)
+    calcRelativeRisk(y, referencerow=3)
+    ```
+
+## 列联表
 
 ```{r}
-x <- matrix(c(156,9421,1531,14797),nrow=2,byrow=TRUE,
-             dimnames = list(c("Exposed","Unexposed"),c("Disease","Control")))
-
-x
-# RR
-156/(156+9421)*(1531+14797)/1531
-source("function/calcRelativeRisk.R")
-calcRelativeRisk(x,alpha=0.05)
-
-# OR
-156/9421/(1531/14797)
-source("function/calcOddsRatio.R")
-calcOddsRatio(x,alpha = 0.05)
+eg <- matrix(c(156,9421,1531,14797),nrow=2,byrow=TRUE)
+colnames(eg) <- c("Disease","Control")
+rownames(eg) <- c("Exposed","Unexposed")
+print(eg)
+prop.table(eg)          #各单元格比例
+prop.table(eg,margin = 1)        #行比例 
 ```
+
+## 边际列联表
 
 ```{r}
-y <- matrix(c(30,24,76,241,82,509),nrow=3,byrow=TRUE,
-            dimnames = list(c("Exposure1","Exposure2","Unexposed"),
-                            c("Disease","Control")))
-y
-calcOddsRatio(y, referencerow=3)
-calcRelativeRisk(y, referencerow=3)
+# 边际
+margin.table(x=eg,margin = 2)      #列和
+addmargins(eg)          #添加行和、列和
+addmargins(eg,1)        #添加列和
+addmargins(eg,2)        #添加行和
+addmargins(prop.table(eg,1))
+
+ftable(eg)   # "平铺式"列联表
 ```
+
+## 混淆矩阵
+
+![](images/confusing_matrix.png){fig-align="center"}

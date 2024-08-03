@@ -1,4 +1,4 @@
-# 描述性统计 {.unnumbered}
+# 描述性统计学 {.unnumbered}
 
 ## 基本概念
 
@@ -20,13 +20,13 @@
 
 #### 连续型
 
-a.  正态分布：t 检验，方差分析，相关性检验
+a.  **正态分布**：t 检验，方差分析，相关性检验
 
 $$
 f(x)= \frac{1}{\sqrt{2πσ^2}} e^{\frac {−(x−μ) ^2 }{2σ^2 }}
 $$
 
-其中，，$\mu$是均值， $\sigma$是标准差
+其中，$\mu$是均值， $\sigma$是标准差
 
 ```{r}
 library(ggplot2)
@@ -41,9 +41,9 @@ ggplot(normal_data, aes(x = x, y = y)) +
     ggtitle("Normal Distribution")
 ```
 
-b.  对数正态分布：非参数检验
+b.  **对数正态分布**：非参数检验
 
-c.  指数分布：广义线性模型，对数秩（log-rank ）检验
+c.  **指数分布**：广义线性模型，对数秩（log-rank ）检验
 
 $$
 f(x)=λe^{−λx}，x\ge 0
@@ -62,11 +62,11 @@ ggplot(exponential_data, aes(x = x, y = y)) +
     ggtitle("Exponential Distribution")
 ```
 
-d.  均匀分布
+d.  **均匀分布**
 
 #### 离散型
 
-a.  二项分布
+a.  **二项分布**
 
 $$
     P(x)=\binom{n}{x}p^x(1-p)^{n-x} 
@@ -81,7 +81,7 @@ ggplot(binomial_data, aes(x = x, y = y, color = y)) +
     ggtitle("Binomial Distribution")
 ```
 
-b.  负二项分布：`DESeq2` 差异分析
+b.  **负二项分布**：`DESeq2` 差异分析
 
 $$
     P(x)=\frac{\Gamma(x+n)}{\Gamma(n)\ x!}p^n(1-p)^x
@@ -98,7 +98,7 @@ ggplot(negative_binomial_data, aes(x = x, y = y)) +
     ggtitle("Negative Binomial Distribution")
 ```
 
-c.  泊松分布
+c.  **泊松分布**
 
 $$
 P(x)=\frac{\lambda^x e^{-\lambda}}{x!}，E(X)=Var(X)=λ
@@ -114,9 +114,7 @@ ggplot(poisson_data, aes(x = x, y = y)) +
     ggtitle("Poisson Distribution")
 ```
 
-d.  超几何分布
-
-Hypergeometric Distribution，不放回抽样
+d.  **超几何分布**：Hypergeometric Distribution，不放回抽样 ， Fisher's Exact Test
 
 $$
 P(x)=\frac{\binom {m}{x}\binom{n}{k-x}}{\binom{m+n}{k}}；x=0，...，k；p=m/(m+n) ；N=m+n
@@ -126,7 +124,7 @@ $$
 
 ```{r}
 # 超几何分布
-hypergeometric_data <- tibble(x = 0:9, y = dhyper(x, m = 10,n = 7,k = 8))
+hypergeometric_data <- tibble(x = -10:10, y = dhyper(x, m = 10,n = 7,k = 8))
 
 ggplot(hypergeometric_data, aes(x = x, y = y)) +
     geom_bar(stat = "identity") +
@@ -135,8 +133,8 @@ ggplot(hypergeometric_data, aes(x = x, y = y)) +
 
 ### 定性数据（qualitative data）
 
-i.  名义型（nominal）
+#### 名义型（nominal）
 
-ii. 有序型（ordered）
+#### 有序型（ordered）
 
 ## 数据可视化

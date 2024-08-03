@@ -34,9 +34,9 @@ $$ 其中，$Y_{ijk}$ 是第i 个组、第j 个时间点或条件下、第k 个�
 -   **检验方法**：RM-ANOVA的主要检验方法包括F检验，用于检验组效应、时间效应和交互作用是否显著。
 :::
 
-## 单因素重复测量
+## 单因素重复测量方差分析
 
-### 公式
+### 原理公式
 
 $$
 SS_T=\sum_{j=1}^{t}\sum_{i=1}^{n}X_{ij}^2-\frac{(\sum_{j=1}^{t}\sum_{i=1}^{n}X_{ij})^2}{nt}=SS_{受试者间}+SS_{不同时间点}+SS_{E\ \ 随机误差}，\nu_T=nt-1
@@ -86,8 +86,6 @@ shapiro.test(df$ten)
 shapiro.test(df$twenty)
 shapiro.test(df$thirty)
 bartlett.test(df[-1])
-
-
     
 # 总变异
 xij_sum <- sum(df_long$ALT)
@@ -116,14 +114,14 @@ F_stat <- MS_W/MS_E
 
 ```
 
+### 线性混合模型`nlme::lme()`
+
 ```{r}
 library(nlme)
 model <- lme(fixed=ALT ~ week, random = ~1| id/week, data = df_long)
 summary(model)
 anova_results <- anova(model)
 anova_results
-
-
 ```
 
 ### 事后检验
@@ -137,7 +135,7 @@ summary(glht_result)
 glht_result
 ```
 
-### 计算示例
+### 第二个示例
 
 ```{r}
 df2 <- tribble(
@@ -169,7 +167,7 @@ df_total <- 3*4-1
 
 SS~total~ ，SS~A~，SS~P~
 
-## 含组间因子的单因素重复测量
+## 含组间因子和组内因子的重复测量
 
 $$
 \begin{aligned}
@@ -183,12 +181,14 @@ $$
 ### 第一个案例
 
 ```{r}
-df <- read_rds("data/repeated_measures_design_ANOVA.rds")
+df <- read_rds("data/SLAMF6+-PBS.rds")
 
-df
+df %>% 
+    DT::datatable()
 ```
 
 ```{r}
+#| code-fold: show
 # 2x2 mixed: 独立变量（被试间） : age
 # 独立变量（被试内） : time 依赖变量: value
 # aov_age_time <- aov(value ~ age * time + Error(subject/time),
@@ -205,11 +205,16 @@ df
 # aov.bww <- aov(y ~ b1*b2*w1 + Error(subject/(w1)) + b1*b2, data=data_long)
 ```
 
+#### `stats::aov()`
+
 ```{r}
 # 第一种  有混合效应无法事后检验
+
 aov_1 <- aov(volume ~ method*Days+Error(id/Days),data = df)
 summary(aov_1)
 ```
+
+#### `nlme::lme()`
 
 ```{r}
 # 第二种 最好
@@ -226,6 +231,8 @@ print(method_means)
 method_comparisons <- pairs(method_means)  
 print(method_comparisons)
 ```
+
+#### `afex::aov_*()`
 
 ```{r}
 library("afex")     # needed for ANOVA functions.
@@ -250,6 +257,7 @@ pairs(m1)
 
 ### 第二个案例
 
+
 ```{r}
 # 医学统计学 人卫版 第7版
 df <- read_delim("data/麻醉诱导时相.txt")
@@ -262,8 +270,11 @@ df_long <- df |> pivot_longer(cols = starts_with("t"),
         group=factor(group),
         time=factor(time)
     )
-df_long
+df_long %>% 
+    DT::datatable()
 ```
+
+#### `nlme::lme()`
 
 ```{r}
 # 第一种方法
@@ -281,6 +292,8 @@ method_comparisons <- pairs(method_means)
 print(method_comparisons)
 ```
 
+#### `rstatix::anova_test()`
+
 ```{r}
 library(rstatix)
 a2 <- anova_test(data = df_long,
@@ -294,6 +307,9 @@ a2
 
 ```
 
+#### `afex::aov_*()`
+
+
 <https://cran.r-project.org/web/packages/afex/vignettes/afex_anova_example.html>
 
 ```{r}
@@ -304,27 +320,26 @@ library("ggplot2")  # for customizing plots.
 
 
 
-a1 <- aov_ez("id", "BP", df_long, between ="group" , 
+a3 <- aov_ez("id", "BP", df_long, between ="group" , 
        within = c("time"))
-a1
+a3
+
 
 aov_car(BP ~ group + Error(id/time), data = df_long)
 aov_4(BP ~ group + (time|id), data = df_long)
 
-print(xtable::xtable(anova(a1), digits = c(rep(2, 5), 3, 4)), type = "html")
-
 
 # 事后检验
-m1 <- emmeans(a1, ~ group)
-m1
-pairs(m1)
-# summary(as.glht(pairs(m1)), test=adjusted("fdr"))
-# p1 <- afex_plot(a1, x = "time", #trace = "BP", 
-#                 panel = "group", error = "none", 
-#                 mapping = c("color", "fill"), 
-#                 data_geom = geom_boxplot, data_arg = list(width = 0.4), 
-#                 point_arg = list(size = 1.5), line_arg = list(size = 1))
-# p1
+m3 <- emmeans(a3, ~ group)
+m3
+pairs(m3)
+summary(as.glht(pairs(m1)), test=adjusted("fdr"))
+p1 <- afex_plot(a3, x = "time",# trace = "BP",
+                panel = "group", error = "none",
+                mapping = c("color", "fill"),
+                data_geom = geom_boxplot, data_arg = list(width = 0.4),
+                point_arg = list(size = 1.5), line_arg = list(size = 1))
+p1
 ```
 
 $$
@@ -391,9 +406,9 @@ SS_between
 group__summary <- df_long |> group_by(group) |> 
     summarise(n=n(),mean=mean(BP),sum=sum(BP))
 group__summary 
-
-
 ```
+
+##### SS~处理~
 
 $$
 SS_{处理}= \sum_i^k n_k (\bar X_k - \bar X)^2
@@ -426,7 +441,7 @@ SS_within
 
 ```
 
-![](images/clipboard-710716399.png)
+##### SS~时间~
 
 $$
 SS_{时间}=\sum _{t=1}^T n_t （\bar X_{.t}-\bar X）^2
@@ -446,6 +461,8 @@ for (i in seq_along(t_mean)) {
 names(SS_time) <- "SS_time"
 SS_time
 ```
+
+##### SS~处理与时间交互~
 
 $$
 SS_{处理与时间交互}=\sum_{i=1}^{k}\sum_{j=1}^{T}n_{ij}\left (\bar X_{ij.} -\bar X_{i..}-\bar X_{.j.} + \bar X_{...} \right )^2
@@ -515,18 +532,7 @@ library(ggpubr)
 library(rstatix)
 ```
 
-```{r}
-df <- read_delim("data/麻醉诱导时相.txt")
-df
-df_long <- df |> pivot_longer(cols = starts_with("t"),
-                              names_to = "time",
-                              values_to = "BP") |> 
-    mutate(
-        id=factor(id),
-        group=factor(group),
-        time=factor(time)
-    )
-df_long
+```{}
 ```
 
 ### 计算 sphericity 和 Mauchly 检验
@@ -583,11 +589,11 @@ mauchly.test(lm(df2~1),M=~group+times,X=~ times)
 
 ### 方差分析
 
+#### `rstatix::anova_test()`
+
 ```{r}
 
-
-
-a2 <- anova_test(data = df_long,
+a2 <- rstatix::anova_test(data = df_long,
            dv = BP,
            wid = id,
            within = time,
@@ -605,11 +611,13 @@ a2
 
 3.  球度校正结果，以防我们无法维持球形度假设。提供了文献中使用的两种常见校正：Greenhouse-Geisser epsilon （GGe） 和 Huynh-Feldt epsilon （HFe） 及其相应的 p 值
 
+#### `ez::ezANOVA()`
+
 ```{r}
 library(ez)
 
 # 进行重复测量方差分析
-results <- ezANOVA(data = df_long,
+aov_ez <- ezANOVA(data = df_long,
                    dv = BP,
                    wid = id,
                    within = time,
@@ -617,7 +625,7 @@ results <- ezANOVA(data = df_long,
                    detailed = TRUE)
 
 # 查看球形检验结果
-print(results)
+print(aov_ez)
 
 ```
 

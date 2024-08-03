@@ -1,38 +1,43 @@
 # 非参数秩检验
 
-排序
+## 秩
 
 $$
 F(Median)=P(X\le Median)=0.5
 $$
 
-二项分布B（n，0.5）
+## 二项分布B(n，0.5)
 
-```{r}
-ggplot() + xlim(-10,10) +
+```{r warning=FALSE}
+tibble(
+    x = -5:15,
+    y_binom = dbinom(x, size = 10,prob = 0.5),
+) %>% 
+ggplot()+
+    geom_col(aes(x=x,y=y_binom,color="binomal Distribution"),fill=NA)+
     geom_function(mapping = aes(color="normal Distribution"),
                   fun = dnorm, args = list(mean = 5, sd = 1),
                    )+
-    geom_function(mapping = aes(color="binomial Distribution"),
-                  fun = dbinom, args = list(size=10 ,prob=0.5), 
-                 )+
     scale_color_manual(values = c("normal Distribution" = "red",
-                                  "binomial Distribution" = "blue"))+
+                                  "binomal Distribution" = "blue"))+
     labs(color = "Distribution")
 ```
 
-## 单样本Wilcoxon Signed-Rank 检验
+## 单样本 Wilcoxon Signed-Rank exact test
 
 如果样本数据没有通过正态分布检验就要采用单样本wilcoxon符号秩检验进行计算。使用该检验需要满足的条件是样本值均匀地分布在均值两侧。
 
 ```{r}
-x<- dplyr::filter(PlantGrowth,group=="ctrl")
-shapiro.test(x$weight)
-summary(x$weight)
-wilcox.test(x$weight, mu=7) 
+set.seed(123)
+x <- runif(n = 100,min = 6,max = 8)
+hist(x)
+shapiro.test(x)
+wilcox.test(x, mu=7) 
 ```
 
-## 配对 Wilcoxon's signed-rank 检验
+## 双样本
+
+### 配对 Wilcoxon's signed-rank test(Mann-Whitney U 检验)
 
 $$
 T_++T_-=\frac{n(n+1)}{2},n为非零配对差值的数量
@@ -55,13 +60,15 @@ df <- tibble(
 
 shapiro.test(df$high-df$low)
 
-# 忽略 差值为0
+# 忽略 差值为0的值对
 wilcox.test(df$low[-1],df$high[-1],exact = T,paired = T)
 ```
 
-## 独立双样本Wilcoxon's Rank-Sum 检验
+### 独立 Wilcoxon's Rank-Sum 检验
 
 当两个样本不满足正态分布时，使用Wilcoxon秩和检验进行非参数检验
+
+用于比较两个独立样本的中位数是否相等。
 
 $$
 T=T_{min(n1,n2)}=T_1
@@ -99,21 +106,24 @@ n1\>10,n2\>10，正态近似法
 wilcox.test(MVR,MVP,exact = F,correct = F)
 ```
 
+### Wilcoxon Distribution
+
 ```{r}
 
-
-ggplot() + xlim(0,50) +
-    geom_function(mapping = aes(color="Wilcox Distribution"),
-                  fun = dwilcox, args = list(m=7 ,n=9), 
-                 )+
-    scale_color_manual(values = c("Wilcox Distribution" = "blue"))+
-    labs(color = "Distribution")
-
-
-
+tibble(
+    x = 0:100,
+    y =dwilcox(x,m = 7,n = 9)
+) %>% 
+    ggplot() +
+    geom_col(aes(x,y),fill="lightblue",color="black")+
+    ggtitle("Wilcoxon Distribution")
 ```
 
-## 独立多样本Kruskal-Wallis 检验
+## 多样本
+
+### 独立 Kruskal-Wallis 检验
+
+用于比较三个或更多独立样本的中位数是否相等。
 
 假设：
 
@@ -133,8 +143,61 @@ kruskal.test(weight~group,data = PlantGrowth)
 pairwise.wilcox.test(PlantGrowth$weight,PlantGrowth$group,p.adjust.method = "fdr",exact=F)
 ```
 
-## 单因素重复测量方差分析的非参数替代
+### 相关 Friedman 检验
 
-```{r eval=FALSE}
-friedman.test()
+用于比较三个或更多相关样本的中位数是否相等。
+
+```{r}
+# 假设有三个相关样本 x, y, z
+x <- c(14, 17, 20, 23, 25)
+y <- c(15, 18, 21, 24, 26)
+z <- c(16, 19, 22, 25, 27)
+
+# 将样本合并成一个数据框，并指定组别和受试者
+data <- data.frame(
+  value = c(x, y, z),
+  group = factor(rep(c("x", "y", "z"), each = 5)),
+  subject = factor(rep(1:5, 3))
+)
+
+# 使用 friedman.test() 函数进行检验
+result <- friedman.test(value ~ group | subject, data = data)
+
+# 输出检验结果
+print(result)
+
+```
+
+##  Kendall's Tau 检验
+
+用途：用于检验两个变量之间的相关性。
+
+```{r}
+# 假设有两个变量 x 和 y
+x <- c(14, 17, 20, 23, 25)
+y <- c(15, 18, 21, 24, 26)
+
+# 使用 cor.test() 函数进行 Kendall's Tau 检验
+result <- cor.test(x, y, method = "kendall")
+
+# 输出检验结果
+print(result)
+
+```
+
+## Spearman's Rank Correlation 检验
+
+用途：用于检验两个变量之间的相关性，适用于数据非线性关系。
+
+```{r}
+# 假设有两个变量 x 和 y
+x <- c(14, 17, 20, 23, 25)
+y <- c(15, 18, 21, 24, 26)
+
+# 使用 cor.test() 函数进行 Spearman's Rank Correlation 检验
+result <- cor.test(x, y, method = "spearman")
+
+# 输出检验结果
+print(result)
+
 ```

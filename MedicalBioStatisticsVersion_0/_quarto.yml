@@ -19,20 +19,23 @@ book:
         - probability_theory.qmd
         - SamplingDistribution.qmd
         - ParameterEstimation.qmd
+        
         - hypothesis_test.qmd
         - normality_test.qmd
         - variance_homogeneity_test.qmd
         - t_test.qmd
-        - rate_proportion_test.qmd
         - ANOVA.qmd
         - repeated_measures_ANOVA.qmd
+        
+        - rate_proportion_test.qmd
         - chi-square_test.qmd
         - nonparametric_test.qmd
+        
         - correlation.qmd
 
     #     - PowerAnalysis.qmd
     #     - Causal_Inference.qmd
-    - part: "统计模型"
+    - part: "推断统计模型"
       chapters:
         - LinearRegression.qmd
         - LME.qmd

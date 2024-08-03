@@ -92,10 +92,6 @@ $$P(B)=\sum_{i=1}^{n}P(A_i)P(B|A_i)$$
 
 $$P(A_k |B)=\frac{P(A_k)P(B|A_k)}{\sum_{i=1}^{n}P(A_i)P(B|A_i)}$$
 
-### 混淆矩阵
-
-![](images/confusing_matrix.png){fig-align="center"}
-
 ## 离散型随机变量
 
 离散型随机变量的全部可能取值只有有限多个或可列无穷多个。

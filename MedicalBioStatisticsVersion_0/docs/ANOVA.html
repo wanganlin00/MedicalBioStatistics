@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.4.555">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>医学与生物统计学 - 11&nbsp; 方差分析</title>
+<title>医学与生物统计学 - 10&nbsp; 方差分析</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -61,7 +61,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./repeated_measures_ANOVA.html" rel="next">
-<link href="./rate_proportion_test.html" rel="prev">
+<link href="./t_test.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -130,7 +130,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./probability_theory.html">概率论与数理统计</a></li><li class="breadcrumb-item"><a href="./ANOVA.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">方差分析</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./probability_theory.html">概率论与数理统计</a></li><li class="breadcrumb-item"><a href="./ANOVA.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">方差分析</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -167,7 +167,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./descriptive_statistics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">描述性统计</span></a>
+ <span class="menu-text">描述性统计学</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -176,7 +176,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./quantitative_data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">定量数据的描述</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">定量数据的统计描述</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -240,20 +240,20 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./rate_proportion_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">比例检验</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./ANOVA.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">方差分析</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">方差分析</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./repeated_measures_ANOVA.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">重复测量方差分析</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">重复测量方差分析</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./rate_proportion_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">比例检验</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -279,7 +279,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
- <span class="menu-text">统计模型</span></a>
+ <span class="menu-text">推断统计模型</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -293,14 +293,14 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./GLM.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">广义线性模型</span></span></a>
+  <a href="./LME.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">线性混合模型</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./LME.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">线性混合效应</span></span></a>
+  <a href="./GLM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">广义线性模型</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -326,6 +326,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">生存分析</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./CoxProportionalHazardsModel.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Cox比例风险模型</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -340,7 +346,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./PropensityScore.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">倾向性评分</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">倾向性评分</span></span></a>
   </div>
 </li>
       </ul>
@@ -357,13 +363,13 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./diagnostic_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">诊断性测试</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">诊断性测试</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./observational_study_design.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">观察性研究设计</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">观察性研究设计</span></span></a>
   </div>
 </li>
       </ul>
@@ -377,61 +383,61 @@ window.Quarto = {
    
   <ul>
 <li>
-<a href="#%E5%8D%95%E5%9B%A0%E7%B4%A0%E7%BB%84%E9%97%B4%E6%96%B9%E5%B7%AE%E5%88%86%E6%9E%90" id="toc-单因素组间方差分析" class="nav-link active" data-scroll-target="#%E5%8D%95%E5%9B%A0%E7%B4%A0%E7%BB%84%E9%97%B4%E6%96%B9%E5%B7%AE%E5%88%86%E6%9E%90"><span class="header-section-number">11.1</span> 单因素组间方差分析</a>
+<a href="#%E5%8D%95%E5%9B%A0%E7%B4%A0%E7%BB%84%E9%97%B4%E6%96%B9%E5%B7%AE%E5%88%86%E6%9E%90" id="toc-单因素组间方差分析" class="nav-link active" data-scroll-target="#%E5%8D%95%E5%9B%A0%E7%B4%A0%E7%BB%84%E9%97%B4%E6%96%B9%E5%B7%AE%E5%88%86%E6%9E%90"><span class="header-section-number">10.1</span> 单因素组间方差分析</a>
   <ul>
-<li><a href="#%E8%AE%A1%E7%AE%97%E5%85%AC%E5%BC%8F" id="toc-计算公式" class="nav-link" data-scroll-target="#%E8%AE%A1%E7%AE%97%E5%85%AC%E5%BC%8F"><span class="header-section-number">11.1.1</span> 计算公式</a></li>
-  <li><a href="#%E6%89%8B%E7%AE%97" id="toc-手算" class="nav-link" data-scroll-target="#%E6%89%8B%E7%AE%97"><span class="header-section-number">11.1.2</span> 手算</a></li>
-  <li><a href="#statsaov" id="toc-statsaov" class="nav-link" data-scroll-target="#statsaov"><span class="header-section-number">11.1.3</span> <code>stats::aov()</code></a></li>
-  <li><a href="#ezezanova" id="toc-ezezanova" class="nav-link" data-scroll-target="#ezezanova"><span class="header-section-number">11.1.4</span> <code>ez::ezANOVA()</code></a></li>
-  <li><a href="#statslm" id="toc-statslm" class="nav-link" data-scroll-target="#statslm"><span class="header-section-number">11.1.5</span> <code>stats::lm()</code></a></li>
+<li><a href="#%E8%AE%A1%E7%AE%97%E5%85%AC%E5%BC%8F" id="toc-计算公式" class="nav-link" data-scroll-target="#%E8%AE%A1%E7%AE%97%E5%85%AC%E5%BC%8F"><span class="header-section-number">10.1.1</span> 计算公式</a></li>
+  <li><a href="#%E6%89%8B%E7%AE%97" id="toc-手算" class="nav-link" data-scroll-target="#%E6%89%8B%E7%AE%97"><span class="header-section-number">10.1.2</span> 手算</a></li>
+  <li><a href="#statsaov" id="toc-statsaov" class="nav-link" data-scroll-target="#statsaov"><span class="header-section-number">10.1.3</span> <code>stats::aov()</code></a></li>
+  <li><a href="#ezezanova" id="toc-ezezanova" class="nav-link" data-scroll-target="#ezezanova"><span class="header-section-number">10.1.4</span> <code>ez::ezANOVA()</code></a></li>
+  <li><a href="#statslm" id="toc-statslm" class="nav-link" data-scroll-target="#statslm"><span class="header-section-number">10.1.5</span> <code>stats::lm()</code></a></li>
   <li>
-<a href="#%E4%BA%8B%E5%90%8E%E6%A3%80%E9%AA%8C" id="toc-事后检验" class="nav-link" data-scroll-target="#%E4%BA%8B%E5%90%8E%E6%A3%80%E9%AA%8C"><span class="header-section-number">11.1.6</span> 事后检验</a>
+<a href="#%E4%BA%8B%E5%90%8E%E6%A3%80%E9%AA%8C" id="toc-事后检验" class="nav-link" data-scroll-target="#%E4%BA%8B%E5%90%8E%E6%A3%80%E9%AA%8C"><span class="header-section-number">10.1.6</span> 事后检验</a>
   <ul class="collapse">
-<li><a href="#tukeys-test" id="toc-tukeys-test" class="nav-link" data-scroll-target="#tukeys-test"><span class="header-section-number">11.1.6.1</span> Tukey’s test</a></li>
-  <li><a href="#dunnetts-test" id="toc-dunnetts-test" class="nav-link" data-scroll-target="#dunnetts-test"><span class="header-section-number">11.1.6.2</span> Dunnett’s test</a></li>
-  <li><a href="#lsd-t-test" id="toc-lsd-t-test" class="nav-link" data-scroll-target="#lsd-t-test"><span class="header-section-number">11.1.6.3</span> LSD-t test</a></li>
+<li><a href="#tukeys-test" id="toc-tukeys-test" class="nav-link" data-scroll-target="#tukeys-test"><span class="header-section-number">10.1.6.1</span> Tukey’s test</a></li>
+  <li><a href="#dunnetts-test" id="toc-dunnetts-test" class="nav-link" data-scroll-target="#dunnetts-test"><span class="header-section-number">10.1.6.2</span> Dunnett’s test</a></li>
+  <li><a href="#lsd-t-test" id="toc-lsd-t-test" class="nav-link" data-scroll-target="#lsd-t-test"><span class="header-section-number">10.1.6.3</span> LSD-t test</a></li>
   </ul>
 </li>
   </ul>
 </li>
   <li>
-<a href="#%E6%96%B9%E5%B7%AE%E5%88%86%E6%9E%90%E5%81%87%E8%AE%BE" id="toc-方差分析假设" class="nav-link" data-scroll-target="#%E6%96%B9%E5%B7%AE%E5%88%86%E6%9E%90%E5%81%87%E8%AE%BE"><span class="header-section-number">11.2</span> 方差分析假设</a>
+<a href="#%E6%96%B9%E5%B7%AE%E5%88%86%E6%9E%90%E5%81%87%E8%AE%BE" id="toc-方差分析假设" class="nav-link" data-scroll-target="#%E6%96%B9%E5%B7%AE%E5%88%86%E6%9E%90%E5%81%87%E8%AE%BE"><span class="header-section-number">10.2</span> 方差分析假设</a>
   <ul>
-<li><a href="#%E7%8B%AC%E7%AB%8B%E6%80%A7" id="toc-独立性" class="nav-link" data-scroll-target="#%E7%8B%AC%E7%AB%8B%E6%80%A7"><span class="header-section-number">11.2.1</span> 独立性</a></li>
+<li><a href="#%E7%8B%AC%E7%AB%8B%E6%80%A7" id="toc-独立性" class="nav-link" data-scroll-target="#%E7%8B%AC%E7%AB%8B%E6%80%A7"><span class="header-section-number">10.2.1</span> 独立性</a></li>
   <li>
-<a href="#%E6%AD%A3%E6%80%81%E6%80%A7" id="toc-正态性" class="nav-link" data-scroll-target="#%E6%AD%A3%E6%80%81%E6%80%A7"><span class="header-section-number">11.2.2</span> 正态性</a>
+<a href="#%E6%AD%A3%E6%80%81%E6%80%A7" id="toc-正态性" class="nav-link" data-scroll-target="#%E6%AD%A3%E6%80%81%E6%80%A7"><span class="header-section-number">10.2.2</span> 正态性</a>
   <ul class="collapse">
-<li><a href="#%E7%9B%B4%E6%96%B9%E5%9B%BE%E8%8C%8E%E5%8F%B6%E5%9B%BE" id="toc-直方图茎叶图" class="nav-link" data-scroll-target="#%E7%9B%B4%E6%96%B9%E5%9B%BE%E8%8C%8E%E5%8F%B6%E5%9B%BE"><span class="header-section-number">11.2.2.1</span> 直方图/茎叶图</a></li>
-  <li><a href="#p-p%E5%9B%BEq-q%E5%9B%BE" id="toc-p-p图q-q图" class="nav-link" data-scroll-target="#p-p%E5%9B%BEq-q%E5%9B%BE"><span class="header-section-number">11.2.2.2</span> P-P图/Q-Q图</a></li>
-  <li><a href="#%E5%81%8F%E5%BA%A6%E5%92%8C%E5%B3%B0%E5%BA%A6" id="toc-偏度和峰度" class="nav-link" data-scroll-target="#%E5%81%8F%E5%BA%A6%E5%92%8C%E5%B3%B0%E5%BA%A6"><span class="header-section-number">11.2.2.3</span> 偏度和峰度</a></li>
-  <li><a href="#shapiro-wilk%E6%A3%80%E9%AA%8C%E5%B0%8F%E6%A0%B7%E6%9C%AC" id="toc-shapiro-wilk检验小样本" class="nav-link" data-scroll-target="#shapiro-wilk%E6%A3%80%E9%AA%8C%E5%B0%8F%E6%A0%B7%E6%9C%AC"><span class="header-section-number">11.2.2.4</span> Shapiro-Wilk检验（小样本）</a></li>
-  <li><a href="#kolmogorov-smirnov%E6%A3%80%E9%AA%8Clilliefors-correction-%E5%A4%A7%E6%A0%B7%E6%9C%AC" id="toc-kolmogorov-smirnov检验lilliefors-correction-大样本" class="nav-link" data-scroll-target="#kolmogorov-smirnov%E6%A3%80%E9%AA%8Clilliefors-correction-%E5%A4%A7%E6%A0%B7%E6%9C%AC"><span class="header-section-number">11.2.2.5</span> Kolmogorov-Smirnov检验（Lilliefors correction 大样本）</a></li>
+<li><a href="#%E7%9B%B4%E6%96%B9%E5%9B%BE%E8%8C%8E%E5%8F%B6%E5%9B%BE" id="toc-直方图茎叶图" class="nav-link" data-scroll-target="#%E7%9B%B4%E6%96%B9%E5%9B%BE%E8%8C%8E%E5%8F%B6%E5%9B%BE"><span class="header-section-number">10.2.2.1</span> 直方图/茎叶图</a></li>
+  <li><a href="#p-p%E5%9B%BEq-q%E5%9B%BE" id="toc-p-p图q-q图" class="nav-link" data-scroll-target="#p-p%E5%9B%BEq-q%E5%9B%BE"><span class="header-section-number">10.2.2.2</span> P-P图/Q-Q图</a></li>
+  <li><a href="#%E5%81%8F%E5%BA%A6%E5%92%8C%E5%B3%B0%E5%BA%A6" id="toc-偏度和峰度" class="nav-link" data-scroll-target="#%E5%81%8F%E5%BA%A6%E5%92%8C%E5%B3%B0%E5%BA%A6"><span class="header-section-number">10.2.2.3</span> 偏度和峰度</a></li>
+  <li><a href="#shapiro-wilk%E6%A3%80%E9%AA%8C%E5%B0%8F%E6%A0%B7%E6%9C%AC" id="toc-shapiro-wilk检验小样本" class="nav-link" data-scroll-target="#shapiro-wilk%E6%A3%80%E9%AA%8C%E5%B0%8F%E6%A0%B7%E6%9C%AC"><span class="header-section-number">10.2.2.4</span> Shapiro-Wilk检验（小样本）</a></li>
+  <li><a href="#kolmogorov-smirnov%E6%A3%80%E9%AA%8Clilliefors-correction-%E5%A4%A7%E6%A0%B7%E6%9C%AC" id="toc-kolmogorov-smirnov检验lilliefors-correction-大样本" class="nav-link" data-scroll-target="#kolmogorov-smirnov%E6%A3%80%E9%AA%8Clilliefors-correction-%E5%A4%A7%E6%A0%B7%E6%9C%AC"><span class="header-section-number">10.2.2.5</span> Kolmogorov-Smirnov检验（Lilliefors correction 大样本）</a></li>
   </ul>
 </li>
   <li>
-<a href="#%E6%96%B9%E5%B7%AE%E9%BD%90%E6%80%A7" id="toc-方差齐性" class="nav-link" data-scroll-target="#%E6%96%B9%E5%B7%AE%E9%BD%90%E6%80%A7"><span class="header-section-number">11.2.3</span> 方差齐性</a>
+<a href="#%E6%96%B9%E5%B7%AE%E9%BD%90%E6%80%A7" id="toc-方差齐性" class="nav-link" data-scroll-target="#%E6%96%B9%E5%B7%AE%E9%BD%90%E6%80%A7"><span class="header-section-number">10.2.3</span> 方差齐性</a>
   <ul class="collapse">
-<li><a href="#bartletts-test" id="toc-bartletts-test" class="nav-link" data-scroll-target="#bartletts-test"><span class="header-section-number">11.2.3.1</span> Bartlett’s test</a></li>
-  <li><a href="#levenes-test" id="toc-levenes-test" class="nav-link" data-scroll-target="#levenes-test"><span class="header-section-number">11.2.3.2</span> Levene’s test</a></li>
+<li><a href="#bartletts-test" id="toc-bartletts-test" class="nav-link" data-scroll-target="#bartletts-test"><span class="header-section-number">10.2.3.1</span> Bartlett’s test</a></li>
+  <li><a href="#levenes-test" id="toc-levenes-test" class="nav-link" data-scroll-target="#levenes-test"><span class="header-section-number">10.2.3.2</span> Levene’s test</a></li>
   </ul>
 </li>
   </ul>
 </li>
-  <li><a href="#welchs-anova-test" id="toc-welchs-anova-test" class="nav-link" data-scroll-target="#welchs-anova-test"><span class="header-section-number">11.3</span> Welch’s ANOVA Test</a></li>
+  <li><a href="#welchs-anova-test" id="toc-welchs-anova-test" class="nav-link" data-scroll-target="#welchs-anova-test"><span class="header-section-number">10.3</span> Welch’s ANOVA Test</a></li>
   <li>
-<a href="#%E6%95%B0%E6%8D%AE%E5%8F%98%E6%8D%A2" id="toc-数据变换" class="nav-link" data-scroll-target="#%E6%95%B0%E6%8D%AE%E5%8F%98%E6%8D%A2"><span class="header-section-number">11.4</span> 数据变换</a>
+<a href="#%E6%95%B0%E6%8D%AE%E5%8F%98%E6%8D%A2" id="toc-数据变换" class="nav-link" data-scroll-target="#%E6%95%B0%E6%8D%AE%E5%8F%98%E6%8D%A2"><span class="header-section-number">10.4</span> 数据变换</a>
   <ul>
-<li><a href="#%E5%B9%B3%E6%96%B9%E6%A0%B9%E5%8F%98%E6%8D%A2" id="toc-平方根变换" class="nav-link" data-scroll-target="#%E5%B9%B3%E6%96%B9%E6%A0%B9%E5%8F%98%E6%8D%A2"><span class="header-section-number">11.4.1</span> 平方根变换</a></li>
-  <li><a href="#%E5%AF%B9%E6%95%B0%E5%8F%98%E6%8D%A2" id="toc-对数变换" class="nav-link" data-scroll-target="#%E5%AF%B9%E6%95%B0%E5%8F%98%E6%8D%A2"><span class="header-section-number">11.4.2</span> 对数变换</a></li>
-  <li><a href="#%E5%8F%8D%E6%AD%A3%E5%BC%A6%E5%B9%B3%E6%96%B9%E6%A0%B9%E5%8F%98%E6%8D%A2" id="toc-反正弦平方根变换" class="nav-link" data-scroll-target="#%E5%8F%8D%E6%AD%A3%E5%BC%A6%E5%B9%B3%E6%96%B9%E6%A0%B9%E5%8F%98%E6%8D%A2"><span class="header-section-number">11.4.3</span> 反正弦平方根变换</a></li>
+<li><a href="#%E5%B9%B3%E6%96%B9%E6%A0%B9%E5%8F%98%E6%8D%A2" id="toc-平方根变换" class="nav-link" data-scroll-target="#%E5%B9%B3%E6%96%B9%E6%A0%B9%E5%8F%98%E6%8D%A2"><span class="header-section-number">10.4.1</span> 平方根变换</a></li>
+  <li><a href="#%E5%AF%B9%E6%95%B0%E5%8F%98%E6%8D%A2" id="toc-对数变换" class="nav-link" data-scroll-target="#%E5%AF%B9%E6%95%B0%E5%8F%98%E6%8D%A2"><span class="header-section-number">10.4.2</span> 对数变换</a></li>
+  <li><a href="#%E5%8F%8D%E6%AD%A3%E5%BC%A6%E5%B9%B3%E6%96%B9%E6%A0%B9%E5%8F%98%E6%8D%A2" id="toc-反正弦平方根变换" class="nav-link" data-scroll-target="#%E5%8F%8D%E6%AD%A3%E5%BC%A6%E5%B9%B3%E6%96%B9%E6%A0%B9%E5%8F%98%E6%8D%A2"><span class="header-section-number">10.4.3</span> 反正弦平方根变换</a></li>
   </ul>
 </li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./probability_theory.html">概率论与数理统计</a></li><li class="breadcrumb-item"><a href="./ANOVA.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">方差分析</span></a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./probability_theory.html">概率论与数理统计</a></li><li class="breadcrumb-item"><a href="./ANOVA.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">方差分析</span></a></li></ol></nav><div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">
-<span class="chapter-number">11</span>&nbsp; <span class="chapter-title">方差分析</span>
+<span class="chapter-number">10</span>&nbsp; <span class="chapter-title">方差分析</span>
 </h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 </div>
 
@@ -452,10 +458,10 @@ window.Quarto = {
 <li><p>正态性 <code><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test()</a></code></p></li>
 <li><p>方差齐性 正态 <code><a href="https://rdrr.io/r/stats/bartlett.test.html">bartlett.test()</a></code>，非正态<code>Levene's test</code></p></li>
 </ol>
-<section id="单因素组间方差分析" class="level2" data-number="11.1"><h2 data-number="11.1" class="anchored" data-anchor-id="单因素组间方差分析">
-<span class="header-section-number">11.1</span> 单因素组间方差分析</h2>
-<section id="计算公式" class="level3" data-number="11.1.1"><h3 data-number="11.1.1" class="anchored" data-anchor-id="计算公式">
-<span class="header-section-number">11.1.1</span> 计算公式</h3>
+<section id="单因素组间方差分析" class="level2" data-number="10.1"><h2 data-number="10.1" class="anchored" data-anchor-id="单因素组间方差分析">
+<span class="header-section-number">10.1</span> 单因素组间方差分析</h2>
+<section id="计算公式" class="level3" data-number="10.1.1"><h3 data-number="10.1.1" class="anchored" data-anchor-id="计算公式">
+<span class="header-section-number">10.1.1</span> 计算公式</h3>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="images/one-way_ANOVA.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
 </figure>
@@ -496,8 +502,8 @@ F=\frac{\frac{SS_{组间}}{(k-1)\sigma^2}}{\frac{SS_{组内}}{(n-k)\sigma^2}}=\f
 <span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="手算" class="level3" data-number="11.1.2"><h3 data-number="11.1.2" class="anchored" data-anchor-id="手算">
-<span class="header-section-number">11.1.2</span> 手算</h3>
+</section><section id="手算" class="level3" data-number="10.1.2"><h3 data-number="10.1.2" class="anchored" data-anchor-id="手算">
+<span class="header-section-number">10.1.2</span> 手算</h3>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">k</span> <span class="op">&lt;-</span> <span class="fl">3</span></span>
 <span><span class="va">df_sum</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
@@ -517,8 +523,8 @@ F=\frac{\frac{SS_{组间}}{(k-1)\sigma^2}}{\frac{SS_{组内}}{(n-k)\sigma^2}}=\f
 <span><span class="va">p_value</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Fdist.html">pf</a></span><span class="op">(</span><span class="va">F_stat</span>,<span class="fl">2</span>,<span class="fl">12</span>,lower.tail <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="statsaov" class="level3" data-number="11.1.3"><h3 data-number="11.1.3" class="anchored" data-anchor-id="statsaov">
-<span class="header-section-number">11.1.3</span> <code>stats::aov()</code>
+</section><section id="statsaov" class="level3" data-number="10.1.3"><h3 data-number="10.1.3" class="anchored" data-anchor-id="statsaov">
+<span class="header-section-number">10.1.3</span> <code>stats::aov()</code>
 </h3>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df_long</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">|&gt;</span> <span class="fu">pivot_longer</span><span class="op">(</span>cols <span class="op">=</span> <span class="fu">everything</span><span class="op">(</span><span class="op">)</span>,</span>
@@ -561,8 +567,8 @@ F=\frac{\frac{SS_{组间}}{(k-1)\sigma^2}}{\frac{SS_{组内}}{(n-k)\sigma^2}}=\f
 </div>
 </div>
 </div>
-</section><section id="ezezanova" class="level3" data-number="11.1.4"><h3 data-number="11.1.4" class="anchored" data-anchor-id="ezezanova">
-<span class="header-section-number">11.1.4</span> <code>ez::ezANOVA()</code>
+</section><section id="ezezanova" class="level3" data-number="10.1.4"><h3 data-number="10.1.4" class="anchored" data-anchor-id="ezezanova">
+<span class="header-section-number">10.1.4</span> <code>ez::ezANOVA()</code>
 </h3>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df_long</span> <span class="op">&lt;-</span> <span class="va">df_long</span> <span class="op">|&gt;</span> <span class="fu">rowid_to_column</span><span class="op">(</span>var <span class="op">=</span> <span class="st">"id"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -584,8 +590,8 @@ F=\frac{\frac{SS_{组间}}{(k-1)\sigma^2}}{\frac{SS_{组内}}{(n-k)\sigma^2}}=\f
 <span><span class="co">#&gt; 1   2  12 0.05733333 92.36 0.003724556 0.9962835</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="statslm" class="level3" data-number="11.1.5"><h3 data-number="11.1.5" class="anchored" data-anchor-id="statslm">
-<span class="header-section-number">11.1.5</span> <code>stats::lm()</code>
+</section><section id="statslm" class="level3" data-number="10.1.5"><h3 data-number="10.1.5" class="anchored" data-anchor-id="statslm">
+<span class="header-section-number">10.1.5</span> <code>stats::lm()</code>
 </h3>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">lm_aov</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">value</span> <span class="op">~</span>  <span class="va">level</span>, data <span class="op">=</span> <span class="va">df_long</span><span class="op">)</span></span>
@@ -686,11 +692,11 @@ F=\frac{\frac{SS_{组间}}{(k-1)\sigma^2}}{\frac{SS_{组内}}{(n-k)\sigma^2}}=\f
 <span><span class="co">#&gt; [1] "contr.treatment"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="事后检验" class="level3" data-number="11.1.6"><h3 data-number="11.1.6" class="anchored" data-anchor-id="事后检验">
-<span class="header-section-number">11.1.6</span> 事后检验</h3>
+</section><section id="事后检验" class="level3" data-number="10.1.6"><h3 data-number="10.1.6" class="anchored" data-anchor-id="事后检验">
+<span class="header-section-number">10.1.6</span> 事后检验</h3>
 <p>成对比较的数量 <span class="math inline">\(N=\frac{k!}{2!(k-2)!},k≥3\)</span>，导致犯第Ⅰ类错误的概率迅速增加，<span class="math inline">\([1-(1-\alpha)^N]\)</span>。</p>
-<section id="tukeys-test" class="level4" data-number="11.1.6.1"><h4 data-number="11.1.6.1" class="anchored" data-anchor-id="tukeys-test">
-<span class="header-section-number">11.1.6.1</span> Tukey’s test</h4>
+<section id="tukeys-test" class="level4" data-number="10.1.6.1"><h4 data-number="10.1.6.1" class="anchored" data-anchor-id="tukeys-test">
+<span class="header-section-number">10.1.6.1</span> Tukey’s test</h4>
 <p>Tukey’s test 也被称为Tukey’s honestly significant difference (Tukey’s HSD) test。</p>
 <ol type="1">
 <li>k个均值从大到小排列；</li>
@@ -758,8 +764,8 @@ H_0:\mu_i=\mu_j(i≠j)
 <span><span class="co">#&gt; medium-low  -20.02 -28.485946 -11.55405 0.0001069</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="dunnetts-test" class="level4" data-number="11.1.6.2"><h4 data-number="11.1.6.2" class="anchored" data-anchor-id="dunnetts-test">
-<span class="header-section-number">11.1.6.2</span> Dunnett’s test</h4>
+</section><section id="dunnetts-test" class="level4" data-number="10.1.6.2"><h4 data-number="10.1.6.2" class="anchored" data-anchor-id="dunnetts-test">
+<span class="header-section-number">10.1.6.2</span> Dunnett’s test</h4>
 <p><em>Dunnett’s test</em>也称为<em>q’</em>-test,是两独立样本t-test的一种修正。Dunnett’s test 假设数据符合正态分布，并且各组的方差相等。 控制对照组（C）与其他每个实验组（T）比较。</p>
 <p><span class="math inline">\(H_0:\mu_C=\mu_T\)</span></p>
 <p><span class="math display">\[
@@ -820,8 +826,8 @@ q'=\frac{\bar X_T-\bar X_C}{\sqrt{MS_{组内}(\frac{1}{n_T}+\frac{1}{n_C})}} \si
 <span><span class="co">#&gt; (Adjusted p values reported -- single-step method)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="lsd-t-test" class="level4" data-number="11.1.6.3"><h4 data-number="11.1.6.3" class="anchored" data-anchor-id="lsd-t-test">
-<span class="header-section-number">11.1.6.3</span> LSD-t test</h4>
+</section><section id="lsd-t-test" class="level4" data-number="10.1.6.3"><h4 data-number="10.1.6.3" class="anchored" data-anchor-id="lsd-t-test">
+<span class="header-section-number">10.1.6.3</span> LSD-t test</h4>
 <p>least significant difference t-test</p>
 <p>挑选任意感兴趣的两组进行比较</p>
 <p><span class="math display">\[
@@ -837,13 +843,13 @@ LSD-t=\frac{\bar X_i-\bar X_j}{\sqrt{MS_{组内}(\frac{1}{n_i}+\frac{1}{n_j})}} 
 <span><span class="co"># 附录 t(12,1-0.05/2)=2.719</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section></section></section><section id="方差分析假设" class="level2" data-number="11.2"><h2 data-number="11.2" class="anchored" data-anchor-id="方差分析假设">
-<span class="header-section-number">11.2</span> 方差分析假设</h2>
+</section></section></section><section id="方差分析假设" class="level2" data-number="10.2"><h2 data-number="10.2" class="anchored" data-anchor-id="方差分析假设">
+<span class="header-section-number">10.2</span> 方差分析假设</h2>
 <p><a href="https://www.statmethods.net/stats/rdiagnostics.html" class="uri">https://www.statmethods.net/stats/rdiagnostics.html</a></p>
-<section id="独立性" class="level3" data-number="11.2.1"><h3 data-number="11.2.1" class="anchored" data-anchor-id="独立性">
-<span class="header-section-number">11.2.1</span> 独立性</h3>
-</section><section id="正态性" class="level3" data-number="11.2.2"><h3 data-number="11.2.2" class="anchored" data-anchor-id="正态性">
-<span class="header-section-number">11.2.2</span> 正态性</h3>
+<section id="独立性" class="level3" data-number="10.2.1"><h3 data-number="10.2.1" class="anchored" data-anchor-id="独立性">
+<span class="header-section-number">10.2.1</span> 独立性</h3>
+</section><section id="正态性" class="level3" data-number="10.2.2"><h3 data-number="10.2.2" class="anchored" data-anchor-id="正态性">
+<span class="header-section-number">10.2.2</span> 正态性</h3>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 异常观测点</span></span>
 <span></span>
@@ -854,20 +860,20 @@ LSD-t=\frac{\bar X_i-\bar X_j}{\sqrt{MS_{组内}(\frac{1}{n_i}+\frac{1}{n_j})}} 
 <span><span class="co">#&gt; 6  1.63682            0.12993           NA</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<section id="直方图茎叶图" class="level4" data-number="11.2.2.1"><h4 data-number="11.2.2.1" class="anchored" data-anchor-id="直方图茎叶图">
-<span class="header-section-number">11.2.2.1</span> 直方图/茎叶图</h4>
-</section><section id="p-p图q-q图" class="level4" data-number="11.2.2.2"><h4 data-number="11.2.2.2" class="anchored" data-anchor-id="p-p图q-q图">
-<span class="header-section-number">11.2.2.2</span> P-P图/Q-Q图</h4>
-</section><section id="偏度和峰度" class="level4" data-number="11.2.2.3"><h4 data-number="11.2.2.3" class="anchored" data-anchor-id="偏度和峰度">
-<span class="header-section-number">11.2.2.3</span> 偏度和峰度</h4>
+<section id="直方图茎叶图" class="level4" data-number="10.2.2.1"><h4 data-number="10.2.2.1" class="anchored" data-anchor-id="直方图茎叶图">
+<span class="header-section-number">10.2.2.1</span> 直方图/茎叶图</h4>
+</section><section id="p-p图q-q图" class="level4" data-number="10.2.2.2"><h4 data-number="10.2.2.2" class="anchored" data-anchor-id="p-p图q-q图">
+<span class="header-section-number">10.2.2.2</span> P-P图/Q-Q图</h4>
+</section><section id="偏度和峰度" class="level4" data-number="10.2.2.3"><h4 data-number="10.2.2.3" class="anchored" data-anchor-id="偏度和峰度">
+<span class="header-section-number">10.2.2.3</span> 偏度和峰度</h4>
 <p><span class="math display">\[
 H_0:总体偏度系数\gamma_1=0 或者总体峰度系数\gamma_2=0
 \]</span></p>
 <p><span class="math display">\[
 z_i=\frac{g_i-0}{\sigma_{g_i}}  \ \ \ \ 临界值z_{1-\alpha/2}
 \]</span></p>
-</section><section id="shapiro-wilk检验小样本" class="level4" data-number="11.2.2.4"><h4 data-number="11.2.2.4" class="anchored" data-anchor-id="shapiro-wilk检验小样本">
-<span class="header-section-number">11.2.2.4</span> Shapiro-Wilk检验（小样本）</h4>
+</section><section id="shapiro-wilk检验小样本" class="level4" data-number="10.2.2.4"><h4 data-number="10.2.2.4" class="anchored" data-anchor-id="shapiro-wilk检验小样本">
+<span class="header-section-number">10.2.2.4</span> Shapiro-Wilk检验（小样本）</h4>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">low</span><span class="op">)</span>  </span>
 <span><span class="co">#&gt; </span></span>
@@ -897,8 +903,8 @@ z_i=\frac{g_i-0}{\sigma_{g_i}}  \ \ \ \ 临界值z_{1-\alpha/2}
 <span><span class="co">#&gt; W = 0.94559, p-value = 0.4578</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="kolmogorov-smirnov检验lilliefors-correction-大样本" class="level4" data-number="11.2.2.5"><h4 data-number="11.2.2.5" class="anchored" data-anchor-id="kolmogorov-smirnov检验lilliefors-correction-大样本">
-<span class="header-section-number">11.2.2.5</span> Kolmogorov-Smirnov检验（Lilliefors correction 大样本）</h4>
+</section><section id="kolmogorov-smirnov检验lilliefors-correction-大样本" class="level4" data-number="10.2.2.5"><h4 data-number="10.2.2.5" class="anchored" data-anchor-id="kolmogorov-smirnov检验lilliefors-correction-大样本">
+<span class="header-section-number">10.2.2.5</span> Kolmogorov-Smirnov检验（Lilliefors correction 大样本）</h4>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/ks.test.html">ks.test</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">low</span>,<span class="va">df</span><span class="op">$</span><span class="va">medium</span>,<span class="va">df</span><span class="op">$</span><span class="va">high</span><span class="op">)</span>,<span class="st">"pnorm"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -938,11 +944,11 @@ z_i=\frac{g_i-0}{\sigma_{g_i}}  \ \ \ \ 临界值z_{1-\alpha/2}
 <span><span class="co">#&gt; alternative hypothesis: two-sided</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section></section><section id="方差齐性" class="level3" data-number="11.2.3"><h3 data-number="11.2.3" class="anchored" data-anchor-id="方差齐性">
-<span class="header-section-number">11.2.3</span> 方差齐性</h3>
+</section></section><section id="方差齐性" class="level3" data-number="10.2.3"><h3 data-number="10.2.3" class="anchored" data-anchor-id="方差齐性">
+<span class="header-section-number">10.2.3</span> 方差齐性</h3>
 <p><a href="http://www.cookbook-r.com/Statistical_analysis/Homogeneity_of_variance/" class="uri">http://www.cookbook-r.com/Statistical_analysis/Homogeneity_of_variance/</a></p>
-<section id="bartletts-test" class="level4" data-number="11.2.3.1"><h4 data-number="11.2.3.1" class="anchored" data-anchor-id="bartletts-test">
-<span class="header-section-number">11.2.3.1</span> Bartlett’s test</h4>
+<section id="bartletts-test" class="level4" data-number="10.2.3.1"><h4 data-number="10.2.3.1" class="anchored" data-anchor-id="bartletts-test">
+<span class="header-section-number">10.2.3.1</span> Bartlett’s test</h4>
 <p>数据满足正态性</p>
 <p>比较每一组方差的加权算术均值和几何均值。</p>
 <p><span class="math display">\[
@@ -988,8 +994,8 @@ B=\frac{\sum_{j=1}^{k}(n_j-1)ln\frac{\bar S^2}{S_j^2}}{1+\frac{1}{3(k-1)}(\sum_{
 <span><span class="co">#&gt; Bartlett's K-squared = 0.0081595, df = 2, p-value = 0.9959</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="levenes-test" class="level4" data-number="11.2.3.2"><h4 data-number="11.2.3.2" class="anchored" data-anchor-id="levenes-test">
-<span class="header-section-number">11.2.3.2</span> Levene’s test</h4>
+</section><section id="levenes-test" class="level4" data-number="10.2.3.2"><h4 data-number="10.2.3.2" class="anchored" data-anchor-id="levenes-test">
+<span class="header-section-number">10.2.3.2</span> Levene’s test</h4>
 <p>数据不满足正态性</p>
 <ol type="1">
 <li>k个随机样本是独立的</li>
@@ -1073,14 +1079,14 @@ W=\frac{MS_{组间}}{MS_{组内}}=\frac{\sum_jn_j(\bar Z_{.j}-\bar Z_{..})^2/(k-
 <span><span class="co">#&gt; [1] 0.0254</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section></section></section><section id="welchs-anova-test" class="level2" data-number="11.3"><h2 data-number="11.3" class="anchored" data-anchor-id="welchs-anova-test">
-<span class="header-section-number">11.3</span> Welch’s ANOVA Test</h2>
+</section></section></section><section id="welchs-anova-test" class="level2" data-number="10.3"><h2 data-number="10.3" class="anchored" data-anchor-id="welchs-anova-test">
+<span class="header-section-number">10.3</span> Welch’s ANOVA Test</h2>
 <p><img src="images/clipboard-1694958347.png" class="img-fluid"></p>
-</section><section id="数据变换" class="level2" data-number="11.4"><h2 data-number="11.4" class="anchored" data-anchor-id="数据变换">
-<span class="header-section-number">11.4</span> 数据变换</h2>
+</section><section id="数据变换" class="level2" data-number="10.4"><h2 data-number="10.4" class="anchored" data-anchor-id="数据变换">
+<span class="header-section-number">10.4</span> 数据变换</h2>
 <p>当方差分析的正态性假设或方差齐性假设不为真时，通常使用(1)数据变换方法；(2)非参数检验方法 比较均值差异</p>
-<section id="平方根变换" class="level3" data-number="11.4.1"><h3 data-number="11.4.1" class="anchored" data-anchor-id="平方根变换">
-<span class="header-section-number">11.4.1</span> 平方根变换</h3>
+<section id="平方根变换" class="level3" data-number="10.4.1"><h3 data-number="10.4.1" class="anchored" data-anchor-id="平方根变换">
+<span class="header-section-number">10.4.1</span> 平方根变换</h3>
 <p>当每个水平组的方差与均值成比例，尤其是样本来自泊松分布</p>
 <p><span class="math display">\[
 Y=\sqrt{X}
@@ -1089,8 +1095,8 @@ Y=\sqrt{X}
 <p><span class="math display">\[
 Y=\sqrt{X+a} \ \ \ \ a=0.5或0.1
 \]</span></p>
-</section><section id="对数变换" class="level3" data-number="11.4.2"><h3 data-number="11.4.2" class="anchored" data-anchor-id="对数变换">
-<span class="header-section-number">11.4.2</span> 对数变换</h3>
+</section><section id="对数变换" class="level3" data-number="10.4.2"><h3 data-number="10.4.2" class="anchored" data-anchor-id="对数变换">
+<span class="header-section-number">10.4.2</span> 对数变换</h3>
 <p>当数据方差不齐且每个水平组标准差与均值成比例时</p>
 <p><span class="math display">\[
 Y=\log{X} \ \ \ \ base=e或10
@@ -1099,8 +1105,8 @@ Y=\log{X} \ \ \ \ base=e或10
 <p><span class="math display">\[
 Y=\log{(X+a)} \ \ \ \ a为实数，使得X+a&gt;0
 \]</span></p>
-</section><section id="反正弦平方根变换" class="level3" data-number="11.4.3"><h3 data-number="11.4.3" class="anchored" data-anchor-id="反正弦平方根变换">
-<span class="header-section-number">11.4.3</span> 反正弦平方根变换</h3>
+</section><section id="反正弦平方根变换" class="level3" data-number="10.4.3"><h3 data-number="10.4.3" class="anchored" data-anchor-id="反正弦平方根变换">
+<span class="header-section-number">10.4.3</span> 反正弦平方根变换</h3>
 <p>率，服从二项分布<span class="math inline">\(B(n,\pi)\)</span></p>
 <p><span class="math display">\[
 Y=\arcsin {\sqrt{\pi}} \ \ \ \
@@ -1569,13 +1575,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./rate_proportion_test.html" class="pagination-link" aria-label="比例检验">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">比例检验</span></span>
+      <a href="./t_test.html" class="pagination-link" aria-label="t 检验">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">t 检验</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./repeated_measures_ANOVA.html" class="pagination-link" aria-label="重复测量方差分析">
-        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">重复测量方差分析</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">重复测量方差分析</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">

@@ -1,4 +1,4 @@
-# 定量数据的描述
+# 定量数据的统计描述
 
 ## 频数分布
 
@@ -21,10 +21,6 @@ ggplot(data = mtcars, aes(x = mpg)) +
 ggplot(data = mtcars, aes(x = mpg)) +
     geom_histogram(color = "black", binwidth = diff(range(mtcars$mpg)) / 9)
 
-```
-
-```{r}
-as_tibble(mtcars$mpg)
 ```
 
 ## 集中趋势（central tendency）
@@ -184,7 +180,8 @@ $$
 ## 标准化变换
 
 ```{r}
-scale(mtcars$mpg,center = T,scale = T) |> tibble()
+scale(mtcars$mpg,center = T,scale = T) %>%  tibble(normalization = .) %>% 
+    DT::datatable()
 ```
 
 ## 统计摘要
