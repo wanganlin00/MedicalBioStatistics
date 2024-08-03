@@ -413,12 +413,7 @@ window.Quarto = {
 </li>
   </ul>
 </li>
-  <li>
-<a href="#%E6%8B%9F%E5%90%88%E4%BC%98%E5%BA%A6%E6%A3%80%E9%AA%8C" id="toc-拟合优度检验" class="nav-link" data-scroll-target="#%E6%8B%9F%E5%90%88%E4%BC%98%E5%BA%A6%E6%A3%80%E9%AA%8C"><span class="header-section-number">13.5</span> 拟合优度检验</a>
-  <ul>
-<li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"><span class="header-section-number">13.5.0.1</span> </a></li>
-  </ul>
-</li>
+  <li><a href="#%E6%8B%9F%E5%90%88%E4%BC%98%E5%BA%A6%E6%A3%80%E9%AA%8C" id="toc-拟合优度检验" class="nav-link" data-scroll-target="#%E6%8B%9F%E5%90%88%E4%BC%98%E5%BA%A6%E6%A3%80%E9%AA%8C"><span class="header-section-number">13.5</span> 拟合优度检验</a></li>
   <li><a href="#cochran-mantel-haenszel-chi2-%E6%A3%80%E9%AA%8C" id="toc-cochran-mantel-haenszel-chi2-检验" class="nav-link" data-scroll-target="#cochran-mantel-haenszel-chi2-%E6%A3%80%E9%AA%8C"><span class="header-section-number">13.6</span> Cochran-Mantel-Haenszel <span class="math inline">\(\chi^2\)</span> 检验</a></li>
   </ul></nav>
     </div>
@@ -825,9 +820,7 @@ P=\sum_{i≤k} p_i
 </section></section></section><section id="拟合优度检验" class="level2" data-number="13.5"><h2 data-number="13.5" class="anchored" data-anchor-id="拟合优度检验">
 <span class="header-section-number">13.5</span> 拟合优度检验</h2>
 <p>Pearson’s <span class="math inline">\(\chi^2\)</span> goodness-of-fit test</p>
-<section id="section" class="level4" data-number="13.5.0.1"><h4 data-number="13.5.0.1" class="anchored" data-anchor-id="section">
-<span class="header-section-number">13.5.0.1</span> </h4>
-</section></section><section id="cochran-mantel-haenszel-chi2-检验" class="level2" data-number="13.6"><h2 data-number="13.6" class="anchored" data-anchor-id="cochran-mantel-haenszel-chi2-检验">
+</section><section id="cochran-mantel-haenszel-chi2-检验" class="level2" data-number="13.6"><h2 data-number="13.6" class="anchored" data-anchor-id="cochran-mantel-haenszel-chi2-检验">
 <span class="header-section-number">13.6</span> Cochran-Mantel-Haenszel <span class="math inline">\(\chi^2\)</span> 检验</h2>
 <p>又叫行均分检验，常用于按照某个变量进行分层后的检验，<strong>用于检验两个有序分类变量是否存在线性相关</strong>，但实际上用途很广泛，比如因变量是有序变量的单向有序列联表，也可以用。　　</p>
 <p>两个变量的关联有可能受到第三个变量的影响，因此我们有必要检验两个分类变量在 调整（控制）第三个变量的情况下是否独立。 Cochran-Mantel-Haenszel χ 2 检验常用于探索 变量间的混杂因素。其零假设是：两个分类变量在第三个变量的每一层都是条件独立的。函数 mantelhaen.test( ) 可以用来进行该检验。</p>
@@ -1652,30 +1645,28 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb14-305"><a href="#cb14-305" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-306"><a href="#cb14-306" aria-hidden="true" tabindex="-1"></a>Pearson’s $\chi^2$ goodness-of-fit test</span>
 <span id="cb14-307"><a href="#cb14-307" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-308"><a href="#cb14-308" aria-hidden="true" tabindex="-1"></a><span class="fu">#### </span></span>
+<span id="cb14-308"><a href="#cb14-308" aria-hidden="true" tabindex="-1"></a><span class="fu">## Cochran-Mantel-Haenszel $\chi^2$ 检验</span></span>
 <span id="cb14-309"><a href="#cb14-309" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-310"><a href="#cb14-310" aria-hidden="true" tabindex="-1"></a><span class="fu">## Cochran-Mantel-Haenszel $\chi^2$ 检验</span></span>
+<span id="cb14-310"><a href="#cb14-310" aria-hidden="true" tabindex="-1"></a>又叫行均分检验，常用于按照某个变量进行分层后的检验，**用于检验两个有序分类变量是否存在线性相关**，但实际上用途很广泛，比如因变量是有序变量的单向有序列联表，也可以用。　　</span>
 <span id="cb14-311"><a href="#cb14-311" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-312"><a href="#cb14-312" aria-hidden="true" tabindex="-1"></a>又叫行均分检验，常用于按照某个变量进行分层后的检验，**用于检验两个有序分类变量是否存在线性相关**，但实际上用途很广泛，比如因变量是有序变量的单向有序列联表，也可以用。　　</span>
+<span id="cb14-312"><a href="#cb14-312" aria-hidden="true" tabindex="-1"></a>两个变量的关联有可能受到第三个变量的影响，因此我们有必要检验两个分类变量在 调整（控制）第三个变量的情况下是否独立。 Cochran-Mantel-Haenszel χ 2 检验常用于探索 变量间的混杂因素。其零假设是：两个分类变量在第三个变量的每一层都是条件独立的。函数 mantelhaen.test( ) 可以用来进行该检验。</span>
 <span id="cb14-313"><a href="#cb14-313" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-314"><a href="#cb14-314" aria-hidden="true" tabindex="-1"></a>两个变量的关联有可能受到第三个变量的影响，因此我们有必要检验两个分类变量在 调整（控制）第三个变量的情况下是否独立。 Cochran-Mantel-Haenszel χ 2 检验常用于探索 变量间的混杂因素。其零假设是：两个分类变量在第三个变量的每一层都是条件独立的。函数 mantelhaen.test( ) 可以用来进行该检验。</span>
-<span id="cb14-315"><a href="#cb14-315" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-318"><a href="#cb14-318" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb14-319"><a href="#cb14-319" aria-hidden="true" tabindex="-1"></a>Rabbits <span class="ot">&lt;-</span></span>
-<span id="cb14-320"><a href="#cb14-320" aria-hidden="true" tabindex="-1"></a><span class="fu">array</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">6</span>, <span class="dv">5</span>,</span>
-<span id="cb14-321"><a href="#cb14-321" aria-hidden="true" tabindex="-1"></a>        <span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">6</span>,</span>
-<span id="cb14-322"><a href="#cb14-322" aria-hidden="true" tabindex="-1"></a>        <span class="dv">6</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">4</span>,</span>
-<span id="cb14-323"><a href="#cb14-323" aria-hidden="true" tabindex="-1"></a>        <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">1</span>, <span class="dv">0</span>,</span>
-<span id="cb14-324"><a href="#cb14-324" aria-hidden="true" tabindex="-1"></a>        <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
-<span id="cb14-325"><a href="#cb14-325" aria-hidden="true" tabindex="-1"></a>      <span class="at">dim =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">5</span>),</span>
-<span id="cb14-326"><a href="#cb14-326" aria-hidden="true" tabindex="-1"></a>      <span class="at">dimnames =</span> <span class="fu">list</span>(</span>
-<span id="cb14-327"><a href="#cb14-327" aria-hidden="true" tabindex="-1"></a>          <span class="at">Delay =</span> <span class="fu">c</span>(<span class="st">"None"</span>, <span class="st">"1.5h"</span>),</span>
-<span id="cb14-328"><a href="#cb14-328" aria-hidden="true" tabindex="-1"></a>          <span class="at">Response =</span> <span class="fu">c</span>(<span class="st">"Cured"</span>, <span class="st">"Died"</span>),</span>
-<span id="cb14-329"><a href="#cb14-329" aria-hidden="true" tabindex="-1"></a>          <span class="at">Penicillin.Level =</span> <span class="fu">c</span>(<span class="st">"1/8"</span>, <span class="st">"1/4"</span>, <span class="st">"1/2"</span>, <span class="st">"1"</span>, <span class="st">"4"</span>)))</span>
-<span id="cb14-330"><a href="#cb14-330" aria-hidden="true" tabindex="-1"></a>Rabbits</span>
-<span id="cb14-331"><a href="#cb14-331" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-332"><a href="#cb14-332" aria-hidden="true" tabindex="-1"></a><span class="fu">mantelhaen.test</span>(Rabbits)</span>
-<span id="cb14-333"><a href="#cb14-333" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-316"><a href="#cb14-316" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb14-317"><a href="#cb14-317" aria-hidden="true" tabindex="-1"></a>Rabbits <span class="ot">&lt;-</span></span>
+<span id="cb14-318"><a href="#cb14-318" aria-hidden="true" tabindex="-1"></a><span class="fu">array</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">6</span>, <span class="dv">5</span>,</span>
+<span id="cb14-319"><a href="#cb14-319" aria-hidden="true" tabindex="-1"></a>        <span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">6</span>,</span>
+<span id="cb14-320"><a href="#cb14-320" aria-hidden="true" tabindex="-1"></a>        <span class="dv">6</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">4</span>,</span>
+<span id="cb14-321"><a href="#cb14-321" aria-hidden="true" tabindex="-1"></a>        <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">1</span>, <span class="dv">0</span>,</span>
+<span id="cb14-322"><a href="#cb14-322" aria-hidden="true" tabindex="-1"></a>        <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb14-323"><a href="#cb14-323" aria-hidden="true" tabindex="-1"></a>      <span class="at">dim =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">5</span>),</span>
+<span id="cb14-324"><a href="#cb14-324" aria-hidden="true" tabindex="-1"></a>      <span class="at">dimnames =</span> <span class="fu">list</span>(</span>
+<span id="cb14-325"><a href="#cb14-325" aria-hidden="true" tabindex="-1"></a>          <span class="at">Delay =</span> <span class="fu">c</span>(<span class="st">"None"</span>, <span class="st">"1.5h"</span>),</span>
+<span id="cb14-326"><a href="#cb14-326" aria-hidden="true" tabindex="-1"></a>          <span class="at">Response =</span> <span class="fu">c</span>(<span class="st">"Cured"</span>, <span class="st">"Died"</span>),</span>
+<span id="cb14-327"><a href="#cb14-327" aria-hidden="true" tabindex="-1"></a>          <span class="at">Penicillin.Level =</span> <span class="fu">c</span>(<span class="st">"1/8"</span>, <span class="st">"1/4"</span>, <span class="st">"1/2"</span>, <span class="st">"1"</span>, <span class="st">"4"</span>)))</span>
+<span id="cb14-328"><a href="#cb14-328" aria-hidden="true" tabindex="-1"></a>Rabbits</span>
+<span id="cb14-329"><a href="#cb14-329" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-330"><a href="#cb14-330" aria-hidden="true" tabindex="-1"></a><span class="fu">mantelhaen.test</span>(Rabbits)</span>
+<span id="cb14-331"><a href="#cb14-331" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

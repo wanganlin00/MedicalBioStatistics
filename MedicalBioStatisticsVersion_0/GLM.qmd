@@ -45,8 +45,8 @@ library(patchwork)
 ```{r}
 
 # 使用 glm() 函数进行高斯线性回归
-glm1 <- linear_reg() |> 
-  set_engine("glm", family = stats::gaussian(link = "identity")) |> 
+glm1 <- linear_reg() %>% 
+  set_engine("glm", family = stats::gaussian(link = "identity")) %>% 
   fit(Fertility ~ Agriculture + Education + Catholic + Infant.Mortality,
       data = swiss)
 
@@ -54,8 +54,7 @@ glm1 <- linear_reg() |>
 tidy(glm1)
 
 # 查看模型的 AIC 和 Deviance
-glance(glm1) |> select(AIC, deviance)
-
+glance(glm1) %>% dplyr::select(AIC, deviance)
 ```
 
 ## 逻辑回归
@@ -140,7 +139,7 @@ ggplot(df,aes(default,income,fill=default))+
 ```{r}
 lm_spec<-linear_reg(mode ="regression",engine = "lm" )
 
-lm_default_balance<-lm_spec |> 
+lm_default_balance<-lm_spec %>% 
   fit(as.numeric(default)-1~balance,data=df)
 lm_default_balance$fit
 
@@ -159,13 +158,13 @@ logit link function
 z-statistic
 
 ```{r}
-logit_spec <- logistic_reg() |>
+logit_spec <- logistic_reg() %>%
   set_engine("glm",family= binomial(link = "logit")) 
 
 
-logit_default_balance <- logit_spec |> fit(default~balance,data=df)
+logit_default_balance <- logit_spec %>% fit(default~balance,data=df)
 
-logit_default_balance |> glance()
+logit_default_balance %>% glance()
 
 tidy(logit_default_balance)
 
@@ -182,42 +181,43 @@ ggplot(df,aes(balance,as.numeric(default)-1))+
 #### 自变量含分类变量
 
 ```{r}
-logit_default_student <- logit_spec |>fit(default ~ student, data = df)
+logit_default_student <- logit_spec %>%fit(default ~ student, data = df)
 
 tidy(logit_default_student)
 
-df |> 
+df %>% 
   mutate(
     prob=1/(1+exp(-(logit_default_student$fit$coefficients[1]+logit_default_student$fit$coefficients[2]*(as.numeric(student)-1)))),
     logit=log(prob/(1-prob))
-  ) |> select(student,prob) %>% 
+  ) %>% 
+    dplyr::select(student,prob) %>% 
     DT::datatable()
 ```
 
 ### K=2,p\>1 多元逻辑回归
 
 ```{r}
-logit_multiple<-logit_spec |> fit(default~balance+income+student,data=df)
+logit_multiple<-logit_spec %>% fit(default~balance+income+student,data=df)
 
 tidy(logit_multiple)
 
 # confusion matrix 混淆矩阵
-augment(logit_multiple, new_data = df) |>
-  conf_mat(truth = default, estimate = .pred_class) |> 
+augment(logit_multiple, new_data = df) %>%
+  conf_mat(truth = default, estimate = .pred_class) %>% 
     autoplot(type = "heatmap")
 
 #准确性 
 (9627+105)/(9627+105+40+228)
-augment(logit_multiple, new_data = df) |>
+augment(logit_multiple, new_data = df) %>%
   accuracy(truth = default, estimate = .pred_class)
 ```
 
 减少弱相关或无关变量
 
 ```{r}
-logit_multiple_2<-logit_spec |> fit(default~balance+student,data=df)
+logit_multiple_2<-logit_spec %>% fit(default~balance+student,data=df)
 
-augment(logit_multiple_2, new_data =df) |>
+augment(logit_multiple_2, new_data =df) %>%
   conf_mat(truth = default, estimate = .pred_class) 
 ```
 
@@ -245,10 +245,10 @@ levels(acl$PhysActCat_W1)
 
 ordered_logit <- MASS::polr(PhysActCat_W1 ~ SelfEfficacy_W1, data = acl,
                             method = "logistic")
-ordered_logit |> summary()
+ordered_logit %>% summary()
 
 
-predict(ordered_logit ,acl ,type = "p") |> 
+predict(ordered_logit ,acl ,type = "p") %>% 
     as_tibble() %>% 
     DT::datatable()
 ```
@@ -262,15 +262,15 @@ predict(ordered_logit ,acl ,type = "p") |>
 ```{r}
 mn_spec <- multinom_reg(mode = "classification", engine = "nnet")
 
-iris_mnlogit <- mn_spec |> 
+iris_mnlogit <- mn_spec %>% 
     fit(Species ~ ., data = iris)
 
-iris_mnlogit |> glance()
-iris_mnlogit |> tidy()
+iris_mnlogit %>% glance()
+iris_mnlogit %>% tidy()
 
 
-augment(iris_mnlogit, new_data = iris) |>
-    conf_mat(truth = Species, estimate = .pred_class) |>
+augment(iris_mnlogit, new_data = iris) %>%
+    conf_mat(truth = Species, estimate = .pred_class) %>%
     autoplot(type = "heatmap")
 ```
 
@@ -299,9 +299,9 @@ iris_pred_glmnet <- predict(
 ```{r}
 mn_spec <- multinom_reg(mode = "classification", engine = "glmnet" ,penalty = tune())
 
-iris_mnlogit <- mn_spec |> 
+iris_mnlogit <- mn_spec %>% 
     fit(Species ~ ., data = iris)
-iris_mnlogit |> glance()
+iris_mnlogit %>% glance()
 iris_mnlogit$fit %>% tidy() %>% DT::datatable()
 ```
 
@@ -339,25 +339,25 @@ df2 <- read_csv("data/ISLR/Bikeshare.csv")
 
 ```{r}
 # 泊松回归模型
-pois_spec <- poisson_reg() |> 
-  set_mode("regression") |> 
+pois_spec <- poisson_reg() %>% 
+  set_mode("regression") %>% 
   set_engine("glm",family=poisson(link = "log"))
 
-pois_rec_spec <- recipe(bikers ~ mnth + hr + workingday + temp + weathersit, data = df2) |> 
+pois_rec_spec <- recipe(bikers ~ mnth + hr + workingday + temp + weathersit, data = df2) %>% 
     step_dummy(all_nominal_predictors()) # 虚拟变量
 
-pois_wf <- workflow() |> 
-  add_recipe(pois_rec_spec) |> 
+pois_wf <- workflow() %>% 
+  add_recipe(pois_rec_spec) %>% 
   add_model(pois_spec)
 
-pois_fit <- pois_wf |> fit(data = df2)
+pois_fit <- pois_wf %>% fit(data = df2)
 
 
 tidy(pois_fit)
 
 
 # 绘制实际值与预测值的关系图
-augment(pois_fit, new_data = df2, type = "response") |>
+augment(pois_fit, new_data = df2, type = "response") %>%
     ggplot(aes(bikers, .pred)) +
     geom_point(alpha = 0.1) +
     geom_abline(slope = 1,
@@ -368,14 +368,14 @@ augment(pois_fit, new_data = df2, type = "response") |>
 
 ```{r}
 pois_fit_coef_mnths <- 
-  tidy(pois_fit) |> 
-  dplyr::filter(grepl("^mnth", term)) |> 
+  tidy(pois_fit) %>% 
+  dplyr::filter(grepl("^mnth", term)) %>% 
   mutate(
     term = stringr::str_replace(term, "mnth_", ""),
     term = forcats::fct_inorder(term)
   ) 
 
-pois_fit_coef_mnths |> 
+pois_fit_coef_mnths %>% 
   ggplot(aes(term, estimate)) +
   geom_line(group = 1,na.rm = TRUE) +
   geom_point(shape = 21, size = 3, stroke = 1.5, 
@@ -385,12 +385,12 @@ pois_fit_coef_mnths |>
 ```
 
 ```{r}
-pois_acl <- pois_spec |> 
+pois_acl <- pois_spec %>% 
     fit(NChronic12_W1 ~ SelfEfficacy_W1,data = acl)
 
-pois_acl |> glance()
+pois_acl %>% glance()
 
-pois_acl |> tidy()
+pois_acl %>% tidy()
 
 AIC(pois_acl$fit)
 BIC(pois_acl$fit)
@@ -415,15 +415,15 @@ $$
 ```{r}
 library(MASS)
 # 负二项回归模型
-nb_spec <- linear_reg() |> 
+nb_spec <- linear_reg() %>% 
   set_engine("glm", family = MASS::negative.binomial(theta = 1, link = "log"))
 
-nb_acl <- nb_spec |> 
+nb_acl <- nb_spec %>% 
   fit(NChronic12_W1 ~ SelfEfficacy_W1, data = acl)
 
 # 查看模型结果
-nb_acl |> glance()
-nb_acl |> tidy()
+nb_acl %>% glance()
+nb_acl %>% tidy()
 
 
 AIC(nb_acl$fit)
