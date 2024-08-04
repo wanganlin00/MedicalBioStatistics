@@ -221,7 +221,7 @@ augment(logit_multiple_2, new_data =df) %>%
   conf_mat(truth = default, estimate = .pred_class) 
 ```
 
-预测特定值
+#### 预测特定值
 
 ```{r}
 df_new <- tibble(
@@ -231,6 +231,63 @@ df_new <- tibble(
 predict(logit_multiple_2, new_data = df_new,type="class")
 predict(logit_multiple_2, new_data = df_new, type = "prob")
 ```
+
+#### 优势比，Wald卡方检验
+
+```{r}
+library(broom)
+
+# 示例数据
+set.seed(123)
+n <- 200
+data <- data.frame(
+    outcome = sample(c(0, 1), n, replace = TRUE),
+    age = rnorm(n, 50, 10),
+    gender = factor(sample(c("male", "female"), n, replace = TRUE)),
+    bmi = rnorm(n, 25, 5)
+)
+
+# 拟合逻辑回归模型
+logit_model <- glm(outcome ~ age + gender + bmi, data = data, family = binomial)
+
+logit_model
+
+
+summary <- summary(logit_model)
+
+# 提取模型结果
+
+model_summary <- tidy(logit_model, conf.int = TRUE)  # 计算置信区间
+
+# 计算优势比（OR）
+model_summary <- model_summary %>%
+    mutate(
+        estimate_OR = exp(estimate),
+        # 计算优势比
+        conf.low_OR = exp(conf.low),
+        # 置信区间下限
+        conf.high_OR = exp(conf.high),  # 置信区间上限
+        Estimate = summary$coefficients[, "Estimate"],
+        Std.Error = summary$coefficients[, "Std. Error"],
+        z_value = summary$coefficients[, "Estimate"] / summary$coefficients[, "Std. Error"],
+        Wald.ChiSq = (summary$coefficients[, "Estimate"] / summary$coefficients[, "Std. Error"]) ^
+            2,
+        # Wald卡方值可以用来检验各个变量系数是否显著不同于零。它是通过系数估计的平方除以其标准误差的平方来计算的。
+        # 即 z值的平方
+        P.Value = summary$coefficients[, "Pr(>|z|)"]
+    )
+
+
+# 打印结果表格
+print(model_summary)
+
+
+library(xtable)
+# 创建LaTeX表格
+xtable(model_summary, caption = "逻辑回归模型结果")
+```
+
+
 
 ### 有序逻辑回归
 
