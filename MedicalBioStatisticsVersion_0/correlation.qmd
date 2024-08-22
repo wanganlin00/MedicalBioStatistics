@@ -20,7 +20,7 @@ mytable <- table(Arthritis$Sex, Arthritis$Treatment)
 assocstats(mytable)
 ```
 
-###  Kappa 统计量
+### Kappa 统计量
 
 对于**配对列联表**，可以计算一致性指标 Kappa 统计量。 epiDisplay 包里的函数 kap( )可以用于计算一致性的比例以及 Kappa 统计量的值 　　 　　
 

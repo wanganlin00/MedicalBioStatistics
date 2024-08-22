@@ -37,8 +37,7 @@ wilcox.test(x, mu=7)
 
 ## 双样本
 
-### 配对 Wilcoxon's signed-rank test(Mann-Whitney U 检验)
-
+### 配对 Wilcoxon's signed-rank test
 $$
 T_++T_-=\frac{n(n+1)}{2},n为非零配对差值的数量
 $$
@@ -62,9 +61,12 @@ shapiro.test(df$high-df$low)
 
 # 忽略 差值为0的值对
 wilcox.test(df$low[-1],df$high[-1],exact = T,paired = T)
+
+
 ```
 
-### 独立 Wilcoxon's Rank-Sum 检验
+### 独立 Wilcoxon's Rank-Sum 检验 (Mann-Whitney U 检验)
+
 
 当两个样本不满足正态分布时，使用Wilcoxon秩和检验进行非参数检验
 

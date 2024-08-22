@@ -39,6 +39,33 @@ $$
 
 $$ FPR=1-Sp $$
 
+![](images/clipboard-4129364148.png){fig-align="center"}
+
+```{r}
+# 构建列联表
+observed_sensitivity <- matrix(c(28, 11, 37, 2), nrow = 2, byrow = TRUE,
+                   dimnames = list('检验方式' = c('尿糖检验', '血糖检验'),
+                                   '结果' = c('检出阳性', '未检出阳性')))
+observed_sensitivity
+# 进行卡方检验
+s <- chisq.test(observed_sensitivity,correct = F)
+
+# 输出结果
+s
+
+
+# 构建列联表
+observed_accuracy <- matrix(c(29, 11, 38, 2), nrow = 2, byrow = TRUE,
+                            dimnames = list('检验方式' = c('尿糖检验', '血糖检验'),
+                                            '结果' = c('检准', '不准')))
+
+# 进行卡方检验
+accuracy <- chisq.test(observed_accuracy,correct = F)
+
+# 输出结果
+accuracy
+```
+
 ### Youden's Index
 
 $$

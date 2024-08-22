@@ -302,11 +302,6 @@ model_summary <- model_summary %>%
 
 # 打印结果表格
 print(model_summary)
-
-
-library(xtable)
-# 创建LaTeX表格
-xtable(model_summary, caption = "逻辑回归模型结果")
 ```
 
 ### 有序逻辑回归
