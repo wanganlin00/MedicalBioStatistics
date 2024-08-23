@@ -56,8 +56,8 @@ $$
 
 ```{r}
 library(tidymodels)
-library(poissonreg)
 library(patchwork)
+library(ggfortify)
 ```
 
 ## 高斯线性回归
@@ -77,6 +77,11 @@ tidy(glm1)
 
 # 查看模型的 AIC 和 Deviance
 glance(glm1) %>% dplyr::select(AIC, deviance)
+
+
+# Change the theme and colour
+autoplot(glm1, which = 1:6, ncol = 2, label.size = 3,
+         colour = "steelblue") + theme_bw()
 ```
 
 ## 逻辑回归
@@ -502,4 +507,18 @@ AIC(nb_acl$fit)
 BIC(nb_acl$fit)
 
 # MASS::glm.nb()
+```
+
+## 正则化广义线性模型
+
+Ridge、Lasso
+
+```{r}
+library(glmnet)
+data(QuickStartExample)
+fit <- glmnet::glmnet(x = QuickStartExample$x, y = QuickStartExample$y)
+autoplot(fit)
+
+fit <- glmnet::cv.glmnet(x = QuickStartExample$x, y = QuickStartExample$y)
+autoplot(fit, colour = 'blue')
 ```

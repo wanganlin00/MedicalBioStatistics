@@ -217,5 +217,35 @@ lme_plot
 anova(lme1,lme2,lme3)
 anova(lme1,lme2,lme3,lme4,lm)
 
-# p小于0.05,说明全模型与简化后模型存在差异，最终采用lme1,AIC最小
+# p小于0.05,说明全模型与简化后模型存在差异，最终采用lme1,AIC
+```
+
+## 模型诊断
+
+sleepstudy
+
+```{r}
+# 拟合线性混合模型
+model <- lme1
+# 1. 残差图
+residuals <- resid(model)
+fitted <- fitted(model)
+ggplot(data.frame(fitted, residuals), aes(fitted, residuals)) +
+  geom_point() +
+  geom_smooth(method = "loess", se = FALSE) +
+  labs(title = "Residuals vs Fitted", x = "Fitted values", y = "Residuals")
+
+# 2. QQ图
+qqnorm(residuals)
+qqline(residuals)
+
+# 3. Cook's 距离
+cooksd <- cooks.distance(model)
+plot(cooksd, type = "h", main = "Cook's Distance")
+
+# 4. 随机效应的分布
+rand_dist <- ranef(model)
+
+qqnorm(rand_dist$Beach$NAP)
+qqline(rand_dist$Beach$NAP)
 ```

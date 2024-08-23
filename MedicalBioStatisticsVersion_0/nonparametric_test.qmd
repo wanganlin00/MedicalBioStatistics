@@ -38,6 +38,7 @@ wilcox.test(x, mu=7)
 ## 双样本
 
 ### 配对 Wilcoxon's signed-rank test
+
 $$
 T_++T_-=\frac{n(n+1)}{2},n为非零配对差值的数量
 $$
@@ -59,7 +60,7 @@ df <- tibble(
 
 shapiro.test(df$high-df$low)
 
-# 忽略 差值为0的值对
+# 忽略  差异绝对值为“0”的数剔除；
 wilcox.test(df$low[-1],df$high[-1],exact = T,paired = T)
 
 
@@ -67,13 +68,12 @@ wilcox.test(df$low[-1],df$high[-1],exact = T,paired = T)
 
 ### 独立 Wilcoxon's Rank-Sum 检验 (Mann-Whitney U 检验)
 
-
 当两个样本不满足正态分布时，使用Wilcoxon秩和检验进行非参数检验
 
 用于比较两个独立样本的中位数是否相等。
 
 $$
-T=T_{min(n1,n2)}=T_1
+Wilxoxon秩和\ T=min\{T_1,T_2\}
 $$
 
 ```{r}
@@ -91,21 +91,71 @@ MVP_ranks <- ranked_data[(length(MVR)+1):length(combined_data)]
 T1 <- sum(MVR_ranks)
 T2 <- sum(MVP_ranks)
 
-W <- T1-length(MVR)*(length(MVR)+1)/2
+T1-length(MVR)*(length(MVR)+1)/2
+wilcox.test(MVR,MVP,exact = F,correct = F)
 ```
 
-曼-惠特尼 U 统计量
-
-$$
-曼-惠特尼U统计量\ \ W= 威尔科克森W秩和\  \ \  T_1-\frac{n_1(n_1+1)}{2}
-$$
+#### W统计量
 
 n1\<10,n2-n1\<10，附录
 
 n1\>10,n2\>10，正态近似法
 
 ```{r}
-wilcox.test(MVR,MVP,exact = F,correct = F)
+x <- c(17, 12, 13, 16, 9, 19, 21, 12, 18, 17)
+y <- c(10, 6, 15, 9, 8, 11, 8, 16, 13, 7, 5, 14)
+wilcox.test(x, y, correct = F)
+
+rank(c(x,y))[1:10] %>% sum()
+rank(c(x,y))[11:22] %>% sum()
+
+156.5-10*11/2
+
+a <- wilcox.test(x,y,correct=FALSE)
+str(a) 
+n1 <- length(x)
+a$statistic <- a$statistic + n1*(n1+1)/2
+names(a$statistic) <- "T.W"
+a
+```
+
+#### 曼-惠特尼 U 统计量
+
+$$
+曼-惠特尼U统计量= 威尔科克森W(较小秩和)-\frac{n_{T_{min}}(n_{T_{min}}+1)}{2}
+$$
+
+#### Z 统计量 coin::wilcox_test()
+
+```{r}
+library(coin)
+df <- read_excel("data/coin：：wilcox_test .xlsx") %>% mutate(group=as.factor(group))
+df
+
+rank <- rank(df$HADS得分)
+
+g1rankSum <- sum(rank[1:120])
+g2rankSum <- sum(rank[121:240])
+
+
+SPSS_威尔科克森W <- min(g1rankSum,g2rankSum)
+
+SPSS_曼惠特尼U <-  SPSS_威尔科克森W -120*121/2
+
+# SPSS  z统计量
+coin::wilcox_test( HADS得分 ~ group,data=df, distribution = "asymptotic") #   exact   asymptotic    approximate
+n <- 120
+Z=(abs(SPSS_威尔科克森W-n*(n+1)/4)-0.5)/sqrt(n*(n+1)*(2*n+1)/24)#秩和检验根据N求Z的公式
+```
+
+SPSS 用较小秩和减去对应 n(n+1)/2
+
+R有时用较小秩和减去对应 n(n+1)/2，有时用较大秩和减去对应 n(n+1)/2
+
+```{r}
+wilcox.test(HADS得分 ~ group,data=df,exact = F,correct = F)
+
+g1rankSum-120*121/2
 ```
 
 ### Wilcoxon Distribution

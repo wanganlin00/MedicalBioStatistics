@@ -17,6 +17,7 @@ $$
 ```{r}
 library(tidymodels)
 library(patchwork)
+library(ggfortify)
 ```
 
 [数据下载网站](https://www.statlearning.com/resources-second-edition)
@@ -67,6 +68,26 @@ broom::tidy(lm_sales_tv)
 broom::glance(lm_sales_tv) 
 ```
 
+#### 点须图 
+
+```{r}
+
+# 整理回归模型结果
+tidy_lm <- tidy(lm_sales_tv, conf.int=T) %>% dplyr::filter(term !='(Intercept)' )
+# 绘制点须图
+ggplot(tidy_lm, aes(x = estimate, y = term)) +
+  geom_point(size = 2, color = "black") + # 绘制点
+  geom_errorbarh(aes(xmin = conf.low, 
+                     xmax = conf.high), 
+                 height = 0, color = "black") + # 绘制误差线
+  geom_vline(xintercept = 0, colour = "grey50", linetype = 2) + # 绘制参考线
+  labs(x = NULL, y = NULL) 
+
+```
+
+
+
+
 ### 预测
 
 ```{r}
@@ -115,7 +136,11 @@ bind_cols(predict(lm_sales_tv, new_data = advertising), advertising) %>%
     )
 ```
 
-### 回归诊断
+### 模型诊断
+
+```{r}
+autoplot(lm_sales_tv, which = 1:6, ncol = 2, label.size = 3)
+```
 
 #### 残差图
 
@@ -291,6 +316,8 @@ lm_mlm %>% tidy()
 logLik(lm_mlm$fit)
 car::vif(lm_mlm$fit)
 ```
+
+
 
 ### `glm()`
 
