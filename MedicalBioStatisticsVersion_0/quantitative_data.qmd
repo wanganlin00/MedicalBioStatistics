@@ -25,6 +25,11 @@ ggplot(data = mtcars, aes(x = mpg)) +
 
 ## 集中趋势（central tendency）
 
+
+总体方差除以 n
+
+样本方差除以（n-1），R 计算的是样本方差
+
 ```{r}
 #算术均数
 mean(mtcars$mpg)     
