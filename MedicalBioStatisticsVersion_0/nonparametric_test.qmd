@@ -142,10 +142,11 @@ SPSS_威尔科克森W <- min(g1rankSum,g2rankSum)
 
 SPSS_曼惠特尼U <-  SPSS_威尔科克森W -120*121/2
 
+
+wilcox.test(HADS得分 ~ group,data=df,correct=F)
 # SPSS  z统计量
 coin::wilcox_test( HADS得分 ~ group,data=df, distribution = "asymptotic") #   exact   asymptotic    approximate
-n <- 120
-Z=(abs(SPSS_威尔科克森W-n*(n+1)/4)-0.5)/sqrt(n*(n+1)*(2*n+1)/24)#秩和检验根据N求Z的公式
+coin::wilcox_test( HADS得分 ~ group,data=df, distribution = "approximate")
 ```
 
 SPSS 用较小秩和减去对应 n(n+1)/2

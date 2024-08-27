@@ -68,16 +68,20 @@ d.  **均匀分布**
 
 a.  **二项分布**
 
+伯努利分布
+
+Bernoulli 试验
+
 $$
     P(x)=\binom{n}{x}p^x(1-p)^{n-x} 
 $$
 
 ```{r}
 # 二项分布
-binomial_data <- tibble(x = 0:100, y = dbinom(x, size = 100, prob = 0.5))
+binomial_data <- tibble(x = 0:30, y = dbinom(x, size = 30, prob = 0.5))
 
 ggplot(binomial_data, aes(x = x, y = y, color = y)) +
-    geom_bar(stat = "identity") +
+    geom_col() +
     ggtitle("Binomial Distribution")
 ```
 
@@ -100,6 +104,8 @@ ggplot(negative_binomial_data, aes(x = x, y = y)) +
 
 c.  **泊松分布**
 
+DNA 点突变
+
 $$
 P(x)=\frac{\lambda^x e^{-\lambda}}{x!}，E(X)=Var(X)=λ
 $$
@@ -110,7 +116,7 @@ poisson_data <- tibble(x = 0:20,
                        y = dpois(x, lambda = 5))
 
 ggplot(poisson_data, aes(x = x, y = y)) +
-    geom_bar(stat = "identity") +
+    geom_col() +
     ggtitle("Poisson Distribution")
 ```
 
@@ -129,6 +135,20 @@ hypergeometric_data <- tibble(x = -10:10, y = dhyper(x, m = 10,n = 7,k = 8))
 ggplot(hypergeometric_data, aes(x = x, y = y)) +
     geom_bar(stat = "identity") +
     ggtitle("Hypergeometric Distribution")
+```
+
+e.  **多项式分布**
+
+DNA \[ A, G, C, T \]
+
+![](images/clipboard-3833682314.png)
+
+假设我们有四个可能性相等的框。使用公式，在第一个框中观察到 4，在第二个框中观察到 2，而在其他两个框中没有观察到的概率是多少？
+
+![](images/clipboard-1126193759.png)
+
+```{r}
+dmultinom(c(4, 2, 0, 0), prob = rep(1/4, 4))
 ```
 
 ### 定性数据（qualitative data）

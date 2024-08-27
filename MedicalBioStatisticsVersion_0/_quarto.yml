@@ -37,7 +37,8 @@ book:
     #     - Causal_Inference.qmd
     - part: "推断统计模型"
       chapters:
-        - LinearRegression.qmd
+        - simple_linear_regression.qmd
+        - multiple_liner_regression.qmd
         - LME.qmd
         - GLM.qmd
         - GEE.qmd

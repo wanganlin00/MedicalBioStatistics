@@ -1,0 +1,320 @@
+# 多元线性回归
+
+$$
+Y_i=\beta_0+\sum_{i=1}^p \beta_p X_{pi}+\epsilon_i,其中\epsilon_i\sim N(0,\sigma^2)
+$$
+
+**Y**=**βX**+ε
+
+在矩阵表示法中，因变量是一个向量 Y，每个样本都有一行。自变量组合成一个矩阵X，其中每个特征有一列，另外还有一列 1值用于截距。每列每个示例都有一行。回归系数β和残差ε也是向量。
+
+向量β的最佳估计值计算为：
+
+$$
+\hat{\mathbf{\beta}}=  (X^TX)^{-1}X^TY
+$$
+
+```{r}
+reg <- function(y, x) { 
+    x <- as.matrix(x) 
+    x <- cbind(Intercept = 1, x) 
+    b <- solve(t(x) %*% x) %*% t(x) %*% y 
+    colnames(b) <- "estimate" 
+    print(b) 
+}
+
+# solve()取矩阵的逆
+# t()用于转置矩阵
+# %*% 将两个矩阵相乘
+
+reg(advertising$sales,advertising[c(-1,-5)])
+```
+
+```{r}
+library(tidymodels)
+library(patchwork)
+library(ggfortify)
+advertising<-read_csv("data/ISLR/Advertising.csv")
+# 检测变量相关关系
+ad <- advertising %>% select(-1)
+cor(ad)
+```
+
+## `rms::ols()`
+
+```{r}
+
+ols_mlm <- rms::ols(sales~TV+radio+newspaper,data = advertising)
+ols_mlm 
+texreg::texreg(ols_mlm)
+
+car::vif(ols_mlm)
+anova(ols_mlm)
+```
+
+## `lm()`
+
+```{r}
+# 多元线性回归
+lm_spec <-linear_reg() %>%
+  set_mode("regression") %>%
+  set_engine("lm")  
+lm_spec
+lm_sales_multi<- lm_spec %>% fit(sales~TV+radio+newspaper,data = advertising)
+summary(lm_sales_multi$fit)
+
+tidy(lm_sales_multi)
+glance(lm_sales_multi)
+
+logLik(lm_sales_multi$fit)
+car::vif(lm_sales_multi$fit)
+```
+
+## 交互项
+
+```{r}
+lm_interact<- lm_spec %>%  fit(sales ~ TV*radio, data = advertising)
+
+lm_interact
+```
+
+## 变换
+
+### 多项式
+
+```{r}
+rec_spec_square <- recipe(sales ~ TV, data = advertising) %>%  
+  step_mutate(`TV^2` = TV^2)  
+rec_spec_square
+
+lm_wf_square <- workflow() %>%  
+  add_model(lm_spec) %>%  
+  add_recipe(rec_spec_square)  
+
+lm_wf_square %>%
+  fit(advertising)
+
+lm(sales ~ TV+ I(TV^2),data = advertising)
+```
+
+### 对数变换
+
+```{r}
+rec_spec_log <- recipe(sales ~ TV, data = advertising) %>%  
+  step_log(TV)  
+
+lm_wf_log <- workflow() %>% 
+  add_model(lm_spec) %>%  
+  add_recipe(rec_spec_log) 
+
+lm_wf_log %>%
+  fit(advertising)
+
+lm(sales ~ log(TV),data = advertising)
+```
+
+## 回归诊断
+
+<https://www.statmethods.net/stats/rdiagnostics.html>
+
+```{r}
+library(car)
+car::scatterplotMatrix(ad)  # 多重共线性
+confint(lm_sales_multi$fit)  # 95%置信区间
+plot(lm_sales_multi$fit)
+autoplot(lm_sales_multi) #回归诊断图
+```
+
+#### 线性假设
+
+残差图， 成分残差图
+
+```{r}
+plot(lm_sales_multi$fit,1)  
+crPlots(lm_sales_multi$fit)
+```
+
+#### 正态性假设Q-Q图
+
+Standardized Residuals
+
+```{r}
+plot(lm_sales_multi$fit,2) 
+summary(powerTransform(lm_sales_multi$fit))  
+```
+
+```{r}
+plot(lm_sales_tv$fit,3)
+```
+
+#### 误差相关性
+
+```{r}
+durbinWatsonTest(lm_sales_multi$fit)      #结果表明rho=0
+```
+
+#### 误差项的方差齐性
+
+```{r}
+ncvTest(lm_sales_multi$fit)
+spreadLevelPlot(lm_sales_multi$fit)
+```
+
+```{r}
+tibble(
+    abs_studentized_residuals=abs(rstudent(lm_sales_multi$fit)),
+    fitted_values=lm_sales_multi$fit$model$sales
+) %>% ggplot(aes(fitted_values,abs_studentized_residuals))+
+    geom_point(pch=21)+
+    geom_smooth()
+```
+
+#### 异常观测点
+
+```{r}
+# studentized residual Plot
+residplot<-function(fit,nbreaks=10){
+  z<-rstudent(fit)
+  hist(z,breaks=nbreaks,freq=FALSE)     #密度直方图
+  title(xlab="Studentized Residual")
+  rug(z,col="brown")                    #轴须图
+  curve(dnorm(x,mean=mean(z),sd=sd(z)),add=TRUE,col="blue",lwd=2) #正态密度曲线
+  lines(density(z)$x,density(z)$y,col="red",lwd=2)       #样本密度曲线
+  legend("topright",c("Normal Curve","Kernel Density Curve"),#图例
+  lty = c(3,2),pch = c(21,22),col=c("blue","red"),cex=.7)
+}
+residplot(lm_sales_tv$fit)
+```
+
+```{r eval=FALSE}
+#######################################################################
+library(car)
+outlierTest(lm_sales_tv$fit)            #离群点
+#高杠杆值点
+hat.plot<-function(fit){
+  p<-length(coefficients(fit)) #模型估计的参数数目（包含截距项）
+  n<-length(fitted(fit))       #样本量
+  plot(hatvalues(fit),main="Index Plot of Hat Values")#帽子值
+  abline(h=c(2,3)*p/n,col="red",lty=2)  #大于帽子均值p/n的2或3倍被认为是高杠杆值
+  identity(1:n,hatvalues(fit),names(hatvalues(fit)))
+}
+hat.plot(lm_sales_tv$fit)
+####强影响点
+#Cook's D图形    大于4/(n-k-1)  k为预测变量数目
+cutoff<-4/(nrow(advertising)-length(lm_sales_tv$fit$coefficients)-2)
+{plot(lm_sales_tv$fit,which=4,cook.levels=cutoff)
+abline(h=cutoff,lty=2,col="red")}
+#变量添加图
+avPlots(lm_sales_tv$fit,ask=FALSE,id.method="identity")
+
+###
+influencePlot(lm_sales_tv$fit,id.method="identity",main="Influence Plot")
+```
+
+#### 多重共线性
+
+```{r}
+vif(lm_sales_multi$fit)
+
+sqrt(vif(lm_sales_multi$fit))>=2       #vif平方根 ≥2 存在
+```
+
+## 逐步回归
+
+逐步回归是筛选变量，有向前、向后和两个方向同时进行三个方法。
+
+-   `direction = "both"`双向
+
+-   `direction = "backward"`向后
+
+-   `direction = "forward"`向前
+
+```{r}
+step_full <- lm(sales~ . ,data = advertising[-1])
+step_lm_0 <- lm(sales~ 1 ,data = advertising[-1])
+
+step_forward <- stats::step(step_lm_0,scope =formula(step_full),  
+                            direction = "forward")
+summary(step_forward)
+
+
+
+step_backward <- stats::step(object = setp_full,#scope = formula(step_lm_0) ,
+                         direction = "backward")
+summary(step_backward )
+
+step_both<- stats::step(object = step_lm_0, scope = formula(step_full) ,
+                         direction = "both")
+summary(step_both)
+```
+
+## 模型选择和优化
+
+```{r}
+########################两模型比较
+lm1 <- lm_spec %>% fit(sales~TV+radio+newspaper,data = advertising)
+lm2 <- lm_spec %>% fit(sales~TV*radio*newspaper,data = advertising[-1])
+
+anova(lm2$fit,lm1$fit) #anova() 嵌套模型
+
+
+##########################################            AIC 
+AIC(lm2$fit,lm1$fit)  # 赤池信息准则  AIC值小的优先选择
+#BIC
+
+
+####################################相对重要性##################################
+ad <- scale(advertising[-1])
+ad
+#R平方贡献率  #相对权重 
+relweights<-function(fit,...){
+  R<-cor(fit$model)
+  nvar<-ncol(R)
+  rxx<-R[2:nvar,2:nvar]
+  rxy<-R[2:nvar,1]
+  svd<-eigen(rxx)
+  evec<-svd$vectors
+  ev<-svd$values
+  delta<-diag(sqrt(ev))
+  lambda<-evec %*%delta %*% t(evec)
+  lambdaasq<-lambda^2
+  beta<-solve(lambda) %*% rxy
+  r2<-colSums(beta^2)
+  rawwgt<-lambdaasq%*%beta^2
+  import<-(rawwgt/r2)*100            #计算相对权重
+  import<-data.frame(Weights=import)  #数据框化
+  row.names(import)<-names(fit$model[2:nvar])
+  import<-import[order(import$Weights),1,drop=FALSE] #升序排序
+  dotchart(import$Weights,labels=row.names(import),   #点图
+           xlab = "% of R-Square",pch=19,
+           main="Relative Importiance of Predictor Variables ",
+           sub=paste("Total R-Square =",round(r2,digits = 3)),
+  ...)
+return(import)
+}
+relweights(lm1$fit,col="blue")
+```
+
+## 线性可加模型
+
+additive model
+
+$$
+Y_i=\beta_0+ \beta_1 X_i+  \beta_2 X_i^2+\epsilon_i
+$$
+
+$$
+Y_i=\beta_0+ \beta_1\times \log(X_i)+\epsilon_i
+$$
+
+$$
+Y_i=\beta_0+ \beta_1 (X_i\times W_i)+\epsilon_i
+$$
+
+$$
+Y_i=\beta_0+ \beta_1\times \exp(X_i)+\epsilon_i
+$$
+
+$$
+Y_i=\beta_0+ \beta_1\times \sin(X_i)+\epsilon_i
+$$
