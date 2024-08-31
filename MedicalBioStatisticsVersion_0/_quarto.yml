@@ -38,7 +38,7 @@ book:
     - part: "推断统计模型"
       chapters:
         - simple_linear_regression.qmd
-        - multiple_liner_regression.qmd
+        - multiple_linear_regression.qmd
         - GLM.qmd
         - LME.qmd
         - GEE.qmd
@@ -49,14 +49,17 @@ book:
         - SurvivalAnalysis.qmd
         - CoxProportionalHazardsModel.qmd
 
-    - part: "倾向性评分"
+    - part: PropensityScore.qmd
       chapters:
-        - PropensityScore.qmd
+        - stratification.qmd
+        - matching.qmd
+        # - weighting.qmd
+        # - regression.qmd
 
     - part: "研究设计"
       chapters: 
         - diagnostic_test.qmd
-        - observational_study_design.qmd
+        # - observational_study_design.qmd
 
         
 

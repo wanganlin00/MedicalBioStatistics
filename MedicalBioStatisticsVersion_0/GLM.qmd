@@ -54,18 +54,14 @@ $$
 |                         [二项式](https://zh.wikipedia.org/wiki/%E4%BA%8C%E9%A1%B9%E5%BC%8F%E5%88%86%E5%B8%83 "二项式分布")                          |                   [Logit](https://zh.wikipedia.org/wiki/Logit "Logit")                    | Xβ=ln⁡\[μ/(1−μ)\]![{\\displaystyle \\mathbf {X} {\\boldsymbol {\\beta }}=\\ln {\\left({\\frac {\\mu }{1-\\mu }}\\right)}\\,\\!}](https://wikimedia.org/api/rest_v1/media/math/render/svg/b1399fce891de947b987e2e8ae8abd942316a681){alt="{\\displaystyle \\mathbf {X} {\\boldsymbol {\\beta }}=\\ln {\\left({\\frac {\\mu }{1-\\mu }}\\right)}\\,\\!}"} | μ=exp⁡(Xβ)/(1+exp⁡(Xβ)![{\\displaystyle \\mu ={\\frac {\\exp {(\\mathbf {X} {\\boldsymbol {\\beta }})}}{1+\\exp {(\\mathbf {X} {\\boldsymbol {\\beta }})}}}\\,\\!}](https://wikimedia.org/api/rest_v1/media/math/render/svg/d6ffa52841bbde6699049034181cc032d5f14533){alt="{\\displaystyle \\mu ={\\frac {\\exp {(\\mathbf {X} {\\boldsymbol {\\beta }})}}{1+\\exp {(\\mathbf {X} {\\boldsymbol {\\beta }})}}}\\,\\!}"} |
 | [多项式](https://zh.wikipedia.org/w/index.php?title=%E5%A4%9A%E9%A0%85%E5%BC%8F%E5%88%86%E4%BD%88&action=edit&redlink=1 "多项式分布（页面不存在）") |                                                                                           |                                                                                                                                                                                                                                                                                                                                                       |                                                                                                                                                                                                                                                                                                                                                                                                                       |
 
-```{r}
-library(tidymodels)
-library(patchwork)
-library(ggfortify)
-```
-
 ## 广义线性回归
 
 高斯线性回归是一种简单的线性回归模型，其中假设响应变量服从正态分布，并且使用恒等连接函数（identity link function）。t-statistic
 
 ```{r}
-
+library(tidymodels)
+library(patchwork)
+library(ggfortify)
 # 使用 glm() 函数进行高斯线性回归
 glm1 <- linear_reg() %>% 
   set_engine("glm", family = stats::gaussian(link = "identity")) %>% 
@@ -246,10 +242,11 @@ augment(logit_multiple, new_data = df) %>%
 ```{r}
 df_new <- tibble(
   balance = c(1000, 2000), 
+  income = c(14144,24141),
   student = factor(c(1, 0)),
 )
-predict(logit_multiple_2, new_data = df_new,type="class")
-predict(logit_multiple_2, new_data = df_new, type = "prob")
+predict(logit_multiple, new_data = df_new,type="class")
+predict(logit_multiple, new_data = df_new, type = "prob")
 ```
 
 #### 优势比，Wald卡方检验
@@ -310,8 +307,7 @@ likelihood ratio tests (LRT)
 
 ![](images/clipboard-317605604.png)
 
-相应的p-value 源自具有  个自由度的 卡方 分布（即模型中测试的参数数量之差）。
-
+相应的p-value 源自具有 个自由度的 卡方 分布（即模型中测试的参数数量之差）。
 
 ```{r}
 logit_default_balance
@@ -329,8 +325,6 @@ out
 
 1-pchisq(out$Deviance[2],2)
 ```
-
-
 
 ### 有序逻辑回归
 

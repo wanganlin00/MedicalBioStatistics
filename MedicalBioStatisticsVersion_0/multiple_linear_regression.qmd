@@ -31,6 +31,8 @@ reg <- function(y, x) {
 # t()用于转置矩阵
 # %*% 将两个矩阵相乘
 
+advertising<-read_csv("data/ISLR/Advertising.csv")
+
 reg(advertising$sales,advertising[c(-1,-5)])
 ```
 
@@ -40,7 +42,7 @@ reg(advertising$sales,advertising[c(-1,-5)])
 library(tidymodels)
 library(patchwork)
 library(ggfortify)
-advertising<-read_csv("data/ISLR/Advertising.csv")
+
 # 检测变量相关关系
 ad <- advertising %>% select(-1)
 cor(ad)
@@ -172,7 +174,7 @@ summary(powerTransform(lm_sales_multi$fit))
 ```
 
 ```{r}
-plot(lm_sales_tv$fit,3)
+plot(lm_sales_multi$fit,3)
 ```
 
 ### 误差相关性
@@ -211,13 +213,13 @@ residplot<-function(fit,nbreaks=10){
   legend("topright",c("Normal Curve","Kernel Density Curve"),#图例
   lty = c(3,2),pch = c(21,22),col=c("blue","red"),cex=.7)
 }
-residplot(lm_sales_tv$fit)
+residplot(lm_sales_multi$fit)
 ```
 
 ```{r eval=FALSE}
 #######################################################################
 library(car)
-outlierTest(lm_sales_tv$fit)            #离群点
+outlierTest(lm_sales_multi$fit)            #离群点
 #高杠杆值点
 hat.plot<-function(fit){
   p<-length(coefficients(fit)) #模型估计的参数数目（包含截距项）
@@ -226,17 +228,17 @@ hat.plot<-function(fit){
   abline(h=c(2,3)*p/n,col="red",lty=2)  #大于帽子均值p/n的2或3倍被认为是高杠杆值
   identity(1:n,hatvalues(fit),names(hatvalues(fit)))
 }
-hat.plot(lm_sales_tv$fit)
+hat.plot(lm_sales_multi$fit)
 ####强影响点
 #Cook's D图形    大于4/(n-k-1)  k为预测变量数目
-cutoff<-4/(nrow(advertising)-length(lm_sales_tv$fit$coefficients)-2)
-{plot(lm_sales_tv$fit,which=4,cook.levels=cutoff)
+cutoff<-4/(nrow(advertising)-length(lm_sales_multi$fit$coefficients)-2)
+{plot(lm_sales_multi$fit,which=4,cook.levels=cutoff)
 abline(h=cutoff,lty=2,col="red")}
 #变量添加图
-avPlots(lm_sales_tv$fit,ask=FALSE,id.method="identity")
+avPlots(lm_sales_multi$fit,ask=FALSE,id.method="identity")
 
 ###
-influencePlot(lm_sales_tv$fit,id.method="identity",main="Influence Plot")
+influencePlot(lm_sales_multi$fit,id.method="identity",main="Influence Plot")
 ```
 
 ### 多重共线性
@@ -267,7 +269,7 @@ summary(step_forward)
 
 
 
-step_backward <- stats::step(object = setp_full,#scope = formula(step_lm_0) ,
+step_backward <- stats::step(object = step_full,#scope = formula(step_lm_0) ,
                          direction = "backward")
 summary(step_backward )
 

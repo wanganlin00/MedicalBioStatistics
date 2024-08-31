@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.4.555">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>医学与生物统计学 - 17&nbsp; 线性混合模型</title>
+<title>医学与生物统计学 - 19&nbsp; 线性混合模型</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -60,8 +60,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./GLM.html" rel="next">
-<link href="./LinearRegression.html" rel="prev">
+<link href="./GEE.html" rel="next">
+<link href="./GLM.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -130,7 +130,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./LinearRegression.html">推断统计模型</a></li><li class="breadcrumb-item"><a href="./LME.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">线性混合模型</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./simple_linear_regression.html">推断统计模型</a></li><li class="breadcrumb-item"><a href="./LME.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">线性混合模型</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -287,14 +287,14 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./LinearRegression.html" class="sidebar-item-text sidebar-link">
+  <a href="./simple_linear_regression.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">线性回归</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./LME.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">线性混合模型</span></span></a>
+  <a href="./multiple_linear_regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">多元线性回归</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -305,8 +305,14 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./LME.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">线性混合模型</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./GEE.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">广义估计方程</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">广义估计方程</span></span></a>
   </div>
 </li>
       </ul>
@@ -323,20 +329,20 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./SurvivalAnalysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">生存分析</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">生存分析</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./CoxProportionalHazardsModel.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Cox比例风险模型</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Cox比例风险模型</span></span></a>
   </div>
 </li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <a href="./PropensityScore.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">倾向性评分</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -345,8 +351,14 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./PropensityScore.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">倾向性评分</span></span></a>
+  <a href="./stratification.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">分层（Stratification）</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./matching.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">匹配（Matching）</span></span></a>
   </div>
 </li>
       </ul>
@@ -363,13 +375,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./diagnostic_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">诊断性测试</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./observational_study_design.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">观察性研究设计</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">诊断性测试</span></span></a>
   </div>
 </li>
       </ul>
@@ -382,20 +388,21 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#lme4lmer" id="toc-lme4lmer" class="nav-link active" data-scroll-target="#lme4lmer"><span class="header-section-number">17.1</span> <code>lme4::lmer()</code></a></li>
-  <li><a href="#nlmelme" id="toc-nlmelme" class="nav-link" data-scroll-target="#nlmelme"><span class="header-section-number">17.2</span> <code>nlme::lme()</code></a></li>
-  <li><a href="#%E9%9A%8F%E6%9C%BA%E6%88%AA%E8%B7%9D%E9%9A%8F%E6%9C%BA%E6%96%9C%E7%8E%87" id="toc-随机截距随机斜率" class="nav-link" data-scroll-target="#%E9%9A%8F%E6%9C%BA%E6%88%AA%E8%B7%9D%E9%9A%8F%E6%9C%BA%E6%96%9C%E7%8E%87"><span class="header-section-number">17.3</span> 随机截距+随机斜率</a></li>
-  <li><a href="#%E9%9A%8F%E6%9C%BA%E6%88%AA%E8%B7%9D%E5%9B%BA%E5%AE%9A%E6%96%9C%E7%8E%87" id="toc-随机截距固定斜率" class="nav-link" data-scroll-target="#%E9%9A%8F%E6%9C%BA%E6%88%AA%E8%B7%9D%E5%9B%BA%E5%AE%9A%E6%96%9C%E7%8E%87"><span class="header-section-number">17.4</span> 随机截距+固定斜率</a></li>
-  <li><a href="#%E5%9B%BA%E5%AE%9A%E6%88%AA%E8%B7%9D%E9%9A%8F%E6%9C%BA%E6%96%9C%E7%8E%87" id="toc-固定截距随机斜率" class="nav-link" data-scroll-target="#%E5%9B%BA%E5%AE%9A%E6%88%AA%E8%B7%9D%E9%9A%8F%E6%9C%BA%E6%96%9C%E7%8E%87"><span class="header-section-number">17.5</span> 固定截距+随机斜率</a></li>
-  <li><a href="#%E9%9A%8F%E6%9C%BA%E6%95%88%E5%BA%94%E6%A8%A1%E5%9E%8B" id="toc-随机效应模型" class="nav-link" data-scroll-target="#%E9%9A%8F%E6%9C%BA%E6%95%88%E5%BA%94%E6%A8%A1%E5%9E%8B"><span class="header-section-number">17.6</span> 随机效应模型</a></li>
-  <li><a href="#%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B%E5%9B%BA%E5%AE%9A%E6%88%AA%E8%B7%9D-%E5%9B%BA%E5%AE%9A%E6%96%9C%E7%8E%87" id="toc-线性模型固定截距-固定斜率" class="nav-link" data-scroll-target="#%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B%E5%9B%BA%E5%AE%9A%E6%88%AA%E8%B7%9D-%E5%9B%BA%E5%AE%9A%E6%96%9C%E7%8E%87"><span class="header-section-number">17.7</span> 线性模型：固定截距+ 固定斜率</a></li>
-  <li><a href="#%E6%A8%A1%E5%9E%8B%E9%80%89%E6%8B%A9" id="toc-模型选择" class="nav-link" data-scroll-target="#%E6%A8%A1%E5%9E%8B%E9%80%89%E6%8B%A9"><span class="header-section-number">17.8</span> 模型选择</a></li>
+<li><a href="#lme4lmer" id="toc-lme4lmer" class="nav-link active" data-scroll-target="#lme4lmer"><span class="header-section-number">19.1</span> <code>lme4::lmer()</code></a></li>
+  <li><a href="#nlmelme" id="toc-nlmelme" class="nav-link" data-scroll-target="#nlmelme"><span class="header-section-number">19.2</span> <code>nlme::lme()</code></a></li>
+  <li><a href="#%E9%9A%8F%E6%9C%BA%E6%88%AA%E8%B7%9D%E9%9A%8F%E6%9C%BA%E6%96%9C%E7%8E%87" id="toc-随机截距随机斜率" class="nav-link" data-scroll-target="#%E9%9A%8F%E6%9C%BA%E6%88%AA%E8%B7%9D%E9%9A%8F%E6%9C%BA%E6%96%9C%E7%8E%87"><span class="header-section-number">19.3</span> 随机截距+随机斜率</a></li>
+  <li><a href="#%E9%9A%8F%E6%9C%BA%E6%88%AA%E8%B7%9D%E5%9B%BA%E5%AE%9A%E6%96%9C%E7%8E%87" id="toc-随机截距固定斜率" class="nav-link" data-scroll-target="#%E9%9A%8F%E6%9C%BA%E6%88%AA%E8%B7%9D%E5%9B%BA%E5%AE%9A%E6%96%9C%E7%8E%87"><span class="header-section-number">19.4</span> 随机截距+固定斜率</a></li>
+  <li><a href="#%E5%9B%BA%E5%AE%9A%E6%88%AA%E8%B7%9D%E9%9A%8F%E6%9C%BA%E6%96%9C%E7%8E%87" id="toc-固定截距随机斜率" class="nav-link" data-scroll-target="#%E5%9B%BA%E5%AE%9A%E6%88%AA%E8%B7%9D%E9%9A%8F%E6%9C%BA%E6%96%9C%E7%8E%87"><span class="header-section-number">19.5</span> 固定截距+随机斜率</a></li>
+  <li><a href="#%E9%9A%8F%E6%9C%BA%E6%95%88%E5%BA%94%E6%A8%A1%E5%9E%8B" id="toc-随机效应模型" class="nav-link" data-scroll-target="#%E9%9A%8F%E6%9C%BA%E6%95%88%E5%BA%94%E6%A8%A1%E5%9E%8B"><span class="header-section-number">19.6</span> 随机效应模型</a></li>
+  <li><a href="#%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B%E5%9B%BA%E5%AE%9A%E6%88%AA%E8%B7%9D-%E5%9B%BA%E5%AE%9A%E6%96%9C%E7%8E%87" id="toc-线性模型固定截距-固定斜率" class="nav-link" data-scroll-target="#%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B%E5%9B%BA%E5%AE%9A%E6%88%AA%E8%B7%9D-%E5%9B%BA%E5%AE%9A%E6%96%9C%E7%8E%87"><span class="header-section-number">19.7</span> 线性模型：固定截距+ 固定斜率</a></li>
+  <li><a href="#%E6%A8%A1%E5%9E%8B%E9%80%89%E6%8B%A9" id="toc-模型选择" class="nav-link" data-scroll-target="#%E6%A8%A1%E5%9E%8B%E9%80%89%E6%8B%A9"><span class="header-section-number">19.8</span> 模型选择</a></li>
+  <li><a href="#%E6%A8%A1%E5%9E%8B%E8%AF%8A%E6%96%AD" id="toc-模型诊断" class="nav-link" data-scroll-target="#%E6%A8%A1%E5%9E%8B%E8%AF%8A%E6%96%AD"><span class="header-section-number">19.9</span> 模型诊断</a></li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./LinearRegression.html">推断统计模型</a></li><li class="breadcrumb-item"><a href="./LME.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">线性混合模型</span></a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./simple_linear_regression.html">推断统计模型</a></li><li class="breadcrumb-item"><a href="./LME.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">线性混合模型</span></a></li></ol></nav><div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">
-<span class="chapter-number">17</span>&nbsp; <span class="chapter-title">线性混合模型</span>
+<span class="chapter-number">19</span>&nbsp; <span class="chapter-title">线性混合模型</span>
 </h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 </div>
 
@@ -424,8 +431,8 @@ Y = \mathbf{X} \beta + \mathbf{Z} \gamma + \epsilon
 <li><p><span class="math inline">\(\gamma\)</span> 是随机效应的回归系数。</p></li>
 <li><p><span class="math inline">\(\epsilon\)</span> 是误差项。</p></li>
 </ul>
-<section id="lme4lmer" class="level2" data-number="17.1"><h2 data-number="17.1" class="anchored" data-anchor-id="lme4lmer">
-<span class="header-section-number">17.1</span> <code>lme4::lmer()</code>
+<section id="lme4lmer" class="level2" data-number="19.1"><h2 data-number="19.1" class="anchored" data-anchor-id="lme4lmer">
+<span class="header-section-number">19.1</span> <code>lme4::lmer()</code>
 </h2>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">lme4</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/lme4/man/lmer.html">lmer</a></span></span>
@@ -509,8 +516,8 @@ lmer (data,formual= DV ~ Fixed\_Factor + (Random\_intercept + Random\_slope | Ra
 <td>NA</td>
 </tr>
 </tbody>
-</table></section><section id="nlmelme" class="level2" data-number="17.2"><h2 data-number="17.2" class="anchored" data-anchor-id="nlmelme">
-<span class="header-section-number">17.2</span> <code>nlme::lme()</code>
+</table></section><section id="nlmelme" class="level2" data-number="19.2"><h2 data-number="19.2" class="anchored" data-anchor-id="nlmelme">
+<span class="header-section-number">19.2</span> <code>nlme::lme()</code>
 </h2>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">nlme</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/nlme/man/nlme.html">nlme</a></span></span>
@@ -525,8 +532,8 @@ lmer (data,formual= DV ~ Fixed\_Factor + (Random\_intercept + Random\_slope | Ra
 <span><span class="co">#&gt; &lt;environment: namespace:nlme&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="随机截距随机斜率" class="level2" data-number="17.3"><h2 data-number="17.3" class="anchored" data-anchor-id="随机截距随机斜率">
-<span class="header-section-number">17.3</span> 随机截距+随机斜率</h2>
+</section><section id="随机截距随机斜率" class="level2" data-number="19.3"><h2 data-number="19.3" class="anchored" data-anchor-id="随机截距随机斜率">
+<span class="header-section-number">19.3</span> 随机截距+随机斜率</h2>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df_long</span> <span class="op">&lt;-</span> <span class="fu">read_delim</span><span class="op">(</span><span class="st">"data/AED/RIKZ.txt"</span><span class="op">)</span></span>
 <span><span class="va">df_long</span><span class="op">$</span><span class="va">Beach</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">df_long</span><span class="op">$</span><span class="va">Beach</span><span class="op">)</span></span>
@@ -823,8 +830,8 @@ lmer (data,formual= DV ~ Fixed\_Factor + (Random\_intercept + Random\_slope | Ra
 <span><span class="co"># confint(lme1,level = 0.95)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="随机截距固定斜率" class="level2" data-number="17.4"><h2 data-number="17.4" class="anchored" data-anchor-id="随机截距固定斜率">
-<span class="header-section-number">17.4</span> 随机截距+固定斜率</h2>
+</section><section id="随机截距固定斜率" class="level2" data-number="19.4"><h2 data-number="19.4" class="anchored" data-anchor-id="随机截距固定斜率">
+<span class="header-section-number">19.4</span> 随机截距+固定斜率</h2>
 <p><span class="math display">\[
 \eta_{(nrow \ \times 1)}=\mathbf{X_{nrow×1}}\beta_{1\times1} +Z_{nrow\times n_{subjects}} \mathbf{\gamma}_{n_{subjects}\times 1}+\epsilon_i
 \]</span></p>
@@ -904,8 +911,8 @@ lmer (data,formual= DV ~ Fixed\_Factor + (Random\_intercept + Random\_slope | Ra
 <span><span class="co">#&gt; Number of Groups: 9</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="固定截距随机斜率" class="level2" data-number="17.5"><h2 data-number="17.5" class="anchored" data-anchor-id="固定截距随机斜率">
-<span class="header-section-number">17.5</span> 固定截距+随机斜率</h2>
+</section><section id="固定截距随机斜率" class="level2" data-number="19.5"><h2 data-number="19.5" class="anchored" data-anchor-id="固定截距随机斜率">
+<span class="header-section-number">19.5</span> 固定截距+随机斜率</h2>
 <p><span class="math display">\[
 \eta_{(nrow \times 1)} = \mathbf{X}_{nrow \times 1} \beta_{1 \times 1} + \mathbf{Z}_{nrow \times n_{subjects}} \mathbf{\gamma}_{n_{subjects} \times 1} + \epsilon_i
 \]</span></p>
@@ -968,8 +975,8 @@ lmer (data,formual= DV ~ Fixed\_Factor + (Random\_intercept + Random\_slope | Ra
 <span><span class="co">#&gt; Number of Groups: 9</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="随机效应模型" class="level2" data-number="17.6"><h2 data-number="17.6" class="anchored" data-anchor-id="随机效应模型">
-<span class="header-section-number">17.6</span> 随机效应模型</h2>
+</section><section id="随机效应模型" class="level2" data-number="19.6"><h2 data-number="19.6" class="anchored" data-anchor-id="随机效应模型">
+<span class="header-section-number">19.6</span> 随机效应模型</h2>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="va">lme4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html">lmer</a></span><span class="op">(</span><span class="va">Richness</span> <span class="op">~</span> <span class="fl">1</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span><span class="op">|</span><span class="va">Beach</span><span class="op">)</span> ,data <span class="op">=</span> <span class="va">df_long</span><span class="op">)</span></span>
@@ -1018,8 +1025,8 @@ lmer (data,formual= DV ~ Fixed\_Factor + (Random\_intercept + Random\_slope | Ra
 <span><span class="co">#&gt; Number of Groups: 9</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="线性模型固定截距-固定斜率" class="level2" data-number="17.7"><h2 data-number="17.7" class="anchored" data-anchor-id="线性模型固定截距-固定斜率">
-<span class="header-section-number">17.7</span> 线性模型：固定截距+ 固定斜率</h2>
+</section><section id="线性模型固定截距-固定斜率" class="level2" data-number="19.7"><h2 data-number="19.7" class="anchored" data-anchor-id="线性模型固定截距-固定斜率">
+<span class="header-section-number">19.7</span> 线性模型：固定截距+ 固定斜率</h2>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">lm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Richness</span> <span class="op">~</span> <span class="fl">1</span> <span class="op">+</span> <span class="va">NAP</span> ,data <span class="op">=</span> <span class="va">df_long</span><span class="op">)</span></span>
 <span><span class="va">lm</span></span>
@@ -1032,8 +1039,8 @@ lmer (data,formual= DV ~ Fixed\_Factor + (Random\_intercept + Random\_slope | Ra
 <span><span class="co">#&gt;       6.686       -2.867</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="模型选择" class="level2" data-number="17.8"><h2 data-number="17.8" class="anchored" data-anchor-id="模型选择">
-<span class="header-section-number">17.8</span> 模型选择</h2>
+</section><section id="模型选择" class="level2" data-number="19.8"><h2 data-number="19.8" class="anchored" data-anchor-id="模型选择">
+<span class="header-section-number">19.8</span> 模型选择</h2>
 <p>限制最大似然法REML</p>
 <ol type="1">
 <li>
@@ -1263,8 +1270,60 @@ lmer (data,formual= DV ~ Fixed\_Factor + (Random\_intercept + Random\_slope | Ra
 </div>
 </div>
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
-<span><span class="co"># p小于0.05,说明全模型与简化后模型存在差异，最终采用lme1,AIC最小</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="co"># p小于0.05,说明全模型与简化后模型存在差异，最终采用lme1,AIC</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+</div>
+</section><section id="模型诊断" class="level2" data-number="19.9"><h2 data-number="19.9" class="anchored" data-anchor-id="模型诊断">
+<span class="header-section-number">19.9</span> 模型诊断</h2>
+<p>sleepstudy</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 拟合线性混合模型</span></span>
+<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">lme1</span></span>
+<span><span class="co"># 1. 残差图</span></span>
+<span><span class="va">residuals</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">resid</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
+<span><span class="va">fitted</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/fitted.values.html">fitted</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
+<span><span class="fu">ggplot</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">fitted</span>, <span class="va">residuals</span><span class="op">)</span>, <span class="fu">aes</span><span class="op">(</span><span class="va">fitted</span>, <span class="va">residuals</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_smooth</span><span class="op">(</span>method <span class="op">=</span> <span class="st">"loess"</span>, se <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">labs</span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Residuals vs Fitted"</span>, x <span class="op">=</span> <span class="st">"Fitted values"</span>, y <span class="op">=</span> <span class="st">"Residuals"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="LME_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co"># 2. QQ图</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqnorm</a></span><span class="op">(</span><span class="va">residuals</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqline</a></span><span class="op">(</span><span class="va">residuals</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="LME_files/figure-html/unnamed-chunk-12-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co"># 3. Cook's 距离</span></span>
+<span><span class="va">cooksd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html">cooks.distance</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">cooksd</span>, type <span class="op">=</span> <span class="st">"h"</span>, main <span class="op">=</span> <span class="st">"Cook's Distance"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="LME_files/figure-html/unnamed-chunk-12-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co"># 4. 随机效应的分布</span></span>
+<span><span class="va">rand_dist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/nlme/man/random.effects.html">ranef</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqnorm</a></span><span class="op">(</span><span class="va">rand_dist</span><span class="op">$</span><span class="va">Beach</span><span class="op">$</span><span class="va">NAP</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqline</a></span><span class="op">(</span><span class="va">rand_dist</span><span class="op">$</span><span class="va">Beach</span><span class="op">$</span><span class="va">NAP</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="LME_files/figure-html/unnamed-chunk-12-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
 </div>
 
 
@@ -1730,235 +1789,265 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./LinearRegression.html" class="pagination-link" aria-label="线性回归">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">线性回归</span></span>
+      <a href="./GLM.html" class="pagination-link" aria-label="广义线性模型">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">广义线性模型</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./GLM.html" class="pagination-link" aria-label="广义线性模型">
-        <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">广义线性模型</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./GEE.html" class="pagination-link" aria-label="广义估计方程">
+        <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">广义估计方程</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb19" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># 线性混合模型</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>线性混合效应模型 （Linear Mixed-effect Model, LMM）用于分析具有固定效应和随机效应的数据结构。它能够处理数据中的组内相关性和个体差异，广泛应用于生态学、心理学等领域的统计分析。如果数据满足正态分布但有组内相关性，使用线性混合模型（LMM）。</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Mixed Effects Models and Extensions in Ecology with R 第5章</span><span class="co">](https://link.springer.com/book/10.1007/978-0-387-87458-6)</span></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>线性混合模型的一般表达形式：</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>Y = \mathbf{X} \beta + \mathbf{Z} \gamma + \epsilon</span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>其中：</span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>$\mathbf{X}$是固定效应自变量矩阵。</span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>$\beta$ 是固定效应的回归系数。</span>
-<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>$\mathbf{Z}$ 是随机效应自变量矩阵。</span>
-<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>$\gamma$ 是随机效应的回归系数。</span>
-<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>$\epsilon$ 是误差项。</span>
-<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a><span class="fu">## `lme4::lmer()`</span></span>
-<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a>lme4<span class="sc">::</span>lmer</span>
-<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a><span class="in">`lmer()`</span> 的表达式如下：</span>
-<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a>lmer (data,formual= DV ~ Fixed<span class="sc">\_</span>Factor + (Random<span class="sc">\_</span>intercept + Random<span class="sc">\_</span>slope | Random<span class="sc">\_</span>Factor))</span>
-<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a>截距中，1表示随机截距，0表示固定截距，默认截距为1。</span>
-<span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-41"><a href="#cb19-41" aria-hidden="true" tabindex="-1"></a>| LME                         | 表达式             | 简写             |</span>
-<span id="cb19-42"><a href="#cb19-42" aria-hidden="true" tabindex="-1"></a>|-----------------------------|--------------------|------------------|</span>
-<span id="cb19-43"><a href="#cb19-43" aria-hidden="true" tabindex="-1"></a>| 随机截距+随机斜率           | y\~x+( 1+x \| id ) | y\~x+( x \| id ) |</span>
-<span id="cb19-44"><a href="#cb19-44" aria-hidden="true" tabindex="-1"></a>| 随机截距+固定斜率           | y\~x+( 1+1 \| id ) | y\~x+( 1 \| id ) |</span>
-<span id="cb19-45"><a href="#cb19-45" aria-hidden="true" tabindex="-1"></a>| 固定截距+随机斜率           | y\~x+( 0+x \| id ) | NA               |</span>
-<span id="cb19-46"><a href="#cb19-46" aria-hidden="true" tabindex="-1"></a>| 线性模型：固定截距+固定斜率 | y\~x               | NA               |</span>
-<span id="cb19-47"><a href="#cb19-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-48"><a href="#cb19-48" aria-hidden="true" tabindex="-1"></a><span class="fu">## `nlme::lme()`</span></span>
-<span id="cb19-49"><a href="#cb19-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-52"><a href="#cb19-52" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb19-53"><a href="#cb19-53" aria-hidden="true" tabindex="-1"></a>nlme<span class="sc">::</span>nlme</span>
-<span id="cb19-54"><a href="#cb19-54" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb19-55"><a href="#cb19-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-56"><a href="#cb19-56" aria-hidden="true" tabindex="-1"></a><span class="fu">## 随机截距+随机斜率</span></span>
-<span id="cb19-57"><a href="#cb19-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-60"><a href="#cb19-60" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb19-61"><a href="#cb19-61" aria-hidden="true" tabindex="-1"></a>df_long <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"data/AED/RIKZ.txt"</span>)</span>
-<span id="cb19-62"><a href="#cb19-62" aria-hidden="true" tabindex="-1"></a>df_long<span class="sc">$</span>Beach <span class="ot">&lt;-</span> <span class="fu">factor</span>(df_long<span class="sc">$</span>Beach)</span>
-<span id="cb19-63"><a href="#cb19-63" aria-hidden="true" tabindex="-1"></a>df_long<span class="sc">$</span>Exposure <span class="ot">&lt;-</span> <span class="fu">factor</span>(df_long<span class="sc">$</span>Exposure)</span>
-<span id="cb19-64"><a href="#cb19-64" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_long)</span>
-<span id="cb19-65"><a href="#cb19-65" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb19-66"><a href="#cb19-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-67"><a href="#cb19-67" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb19-68"><a href="#cb19-68" aria-hidden="true" tabindex="-1"></a>\eta_{(nrow \times 1)} = \mathbf{X}_{nrow \times 1} \beta_{1 \times 1} + \mathbf{Z}_{nrow \times 2n_{subjects}} \mathbf{\gamma}_{2n_{subjects} \times 1} + \epsilon_i</span>
-<span id="cb19-69"><a href="#cb19-69" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb19-70"><a href="#cb19-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-71"><a href="#cb19-71" aria-hidden="true" tabindex="-1"></a>Z有两倍于受试者数量的列，每个受试者的随机截距和随机斜率</span>
-<span id="cb19-72"><a href="#cb19-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-75"><a href="#cb19-75" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb19-76"><a href="#cb19-76" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
-<span id="cb19-77"><a href="#cb19-77" aria-hidden="true" tabindex="-1"></a>lme1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Richness <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> NAP <span class="sc">*</span> Exposure<span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span>NAP <span class="sc">|</span>Beach) ,<span class="at">data =</span> df_long)</span>
-<span id="cb19-78"><a href="#cb19-78" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lme1)</span>
-<span id="cb19-79"><a href="#cb19-79" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(lme1)</span>
-<span id="cb19-80"><a href="#cb19-80" aria-hidden="true" tabindex="-1"></a><span class="fu">BIC</span>(lme1)</span>
-<span id="cb19-81"><a href="#cb19-81" aria-hidden="true" tabindex="-1"></a><span class="fu">logLik</span>(lme1)</span>
-<span id="cb19-82"><a href="#cb19-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-83"><a href="#cb19-83" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span><span class="fu">pt</span>(<span class="sc">-</span><span class="fl">3.914605</span>,<span class="dv">35</span>,<span class="at">lower.tail =</span> F))</span>
-<span id="cb19-84"><a href="#cb19-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-85"><a href="#cb19-85" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nlme)</span>
-<span id="cb19-86"><a href="#cb19-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-87"><a href="#cb19-87" aria-hidden="true" tabindex="-1"></a>nlme1 <span class="ot">&lt;-</span> <span class="fu">lme</span>(Richness <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> NAP <span class="sc">*</span> Exposure,</span>
-<span id="cb19-88"><a href="#cb19-88" aria-hidden="true" tabindex="-1"></a>             <span class="at">random =</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> NAP <span class="sc">|</span> Beach ,</span>
-<span id="cb19-89"><a href="#cb19-89" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> df_long,</span>
-<span id="cb19-90"><a href="#cb19-90" aria-hidden="true" tabindex="-1"></a>             <span class="at">control =</span> <span class="fu">lmeControl</span>(<span class="at">opt =</span> <span class="st">"optim"</span>, <span class="at">msMaxIter =</span> <span class="dv">100</span>, <span class="at">msMaxEval =</span> <span class="dv">5000</span>))</span>
-<span id="cb19-91"><a href="#cb19-91" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(nlme1)</span>
-<span id="cb19-92"><a href="#cb19-92" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb19-93"><a href="#cb19-93" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-94"><a href="#cb19-94" aria-hidden="true" tabindex="-1"></a>这个模型的公式可以分解为：</span>
-<span id="cb19-95"><a href="#cb19-95" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-96"><a href="#cb19-96" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**固定效应部分**：<span class="in">`Richness`</span> 的预测由截距、NAP（数值变量）和 Exposure（分类变量，包含 Exposure10 和 Exposure11）及其交互项构成。</span>
-<span id="cb19-97"><a href="#cb19-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-98"><a href="#cb19-98" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**随机效应部分**：<span class="in">`Beach`</span> 作为随机因子，包含随机截距和随机斜率（NAP）。</span>
-<span id="cb19-99"><a href="#cb19-99" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-102"><a href="#cb19-102" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb19-103"><a href="#cb19-103" aria-hidden="true" tabindex="-1"></a><span class="co"># 标准化模型残差分布</span></span>
-<span id="cb19-104"><a href="#cb19-104" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(<span class="fu">residuals</span>(lme1,<span class="at">type=</span><span class="st">"pearson"</span>,<span class="at">scaled=</span>T))</span>
-<span id="cb19-105"><a href="#cb19-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-106"><a href="#cb19-106" aria-hidden="true" tabindex="-1"></a><span class="co"># 随机因子随机效应和显著性检验</span></span>
-<span id="cb19-107"><a href="#cb19-107" aria-hidden="true" tabindex="-1"></a><span class="fu">ranef</span>(lme1)</span>
-<span id="cb19-108"><a href="#cb19-108" aria-hidden="true" tabindex="-1"></a>lmerTest<span class="sc">::</span><span class="fu">ranova</span>(lme1)</span>
-<span id="cb19-109"><a href="#cb19-109" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-110"><a href="#cb19-110" aria-hidden="true" tabindex="-1"></a><span class="co"># 查看固定效应和显著性检验</span></span>
-<span id="cb19-111"><a href="#cb19-111" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(lme1)</span>
-<span id="cb19-112"><a href="#cb19-112" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lme1)</span>
-<span id="cb19-113"><a href="#cb19-113" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-114"><a href="#cb19-114" aria-hidden="true" tabindex="-1"></a><span class="co">#  查看 类和方法</span></span>
-<span id="cb19-115"><a href="#cb19-115" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(lme1)</span>
-<span id="cb19-116"><a href="#cb19-116" aria-hidden="true" tabindex="-1"></a><span class="co"># methods(class = "lmerMod")</span></span>
-<span id="cb19-117"><a href="#cb19-117" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-118"><a href="#cb19-118" aria-hidden="true" tabindex="-1"></a><span class="co"># confint(lme1,level = 0.95)</span></span>
-<span id="cb19-119"><a href="#cb19-119" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb19-120"><a href="#cb19-120" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-121"><a href="#cb19-121" aria-hidden="true" tabindex="-1"></a><span class="fu">## 随机截距+固定斜率</span></span>
-<span id="cb19-122"><a href="#cb19-122" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-123"><a href="#cb19-123" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb19-124"><a href="#cb19-124" aria-hidden="true" tabindex="-1"></a>\eta_{(nrow \ \times 1)}=\mathbf{X_{nrow×1}}\beta_{1\times1} +Z_{nrow\times n_{subjects}} \mathbf{\gamma}_{n_{subjects}\times 1}+\epsilon_i</span>
-<span id="cb19-125"><a href="#cb19-125" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb19-126"><a href="#cb19-126" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-127"><a href="#cb19-127" aria-hidden="true" tabindex="-1"></a>Z有一倍于受试者数量的列，每个受试者的随机截距。</span>
-<span id="cb19-128"><a href="#cb19-128" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-131"><a href="#cb19-131" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb19-132"><a href="#cb19-132" aria-hidden="true" tabindex="-1"></a>lme2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Richness <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> NAP<span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span>Beach) ,<span class="at">data =</span> df_long)</span>
-<span id="cb19-133"><a href="#cb19-133" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lme2)</span>
-<span id="cb19-134"><a href="#cb19-134" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(lme2)</span>
-<span id="cb19-135"><a href="#cb19-135" aria-hidden="true" tabindex="-1"></a><span class="fu">BIC</span>(lme2)</span>
-<span id="cb19-136"><a href="#cb19-136" aria-hidden="true" tabindex="-1"></a><span class="fu">logLik</span>(lme2)</span>
-<span id="cb19-137"><a href="#cb19-137" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-138"><a href="#cb19-138" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span><span class="fu">pt</span>(<span class="fl">6.007</span>,<span class="dv">35</span>,<span class="at">lower.tail =</span> T))</span>
-<span id="cb19-139"><a href="#cb19-139" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-140"><a href="#cb19-140" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-141"><a href="#cb19-141" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-142"><a href="#cb19-142" aria-hidden="true" tabindex="-1"></a>nlme2 <span class="ot">&lt;-</span> <span class="fu">lme</span>(Richness <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> NAP <span class="sc">*</span> Exposure,<span class="at">random=</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span>Beach ,<span class="at">data =</span> df_long)</span>
-<span id="cb19-143"><a href="#cb19-143" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(nlme2)</span>
-<span id="cb19-144"><a href="#cb19-144" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb19-145"><a href="#cb19-145" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-146"><a href="#cb19-146" aria-hidden="true" tabindex="-1"></a><span class="fu">## 固定截距+随机斜率</span></span>
-<span id="cb19-147"><a href="#cb19-147" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-148"><a href="#cb19-148" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb19-149"><a href="#cb19-149" aria-hidden="true" tabindex="-1"></a>\eta_{(nrow \times 1)} = \mathbf{X}_{nrow \times 1} \beta_{1 \times 1} + \mathbf{Z}_{nrow \times n_{subjects}} \mathbf{\gamma}_{n_{subjects} \times 1} + \epsilon_i</span>
-<span id="cb19-150"><a href="#cb19-150" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb19-151"><a href="#cb19-151" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-152"><a href="#cb19-152" aria-hidden="true" tabindex="-1"></a>Z 有一倍于受试者数量的列，每个受试者的随机斜率。</span>
-<span id="cb19-153"><a href="#cb19-153" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-156"><a href="#cb19-156" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb19-157"><a href="#cb19-157" aria-hidden="true" tabindex="-1"></a>lme3 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Richness <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span>  NAP<span class="sc">+</span> (<span class="dv">0</span> <span class="sc">+</span> NAP <span class="sc">|</span>Beach) ,<span class="at">data =</span> df_long)</span>
-<span id="cb19-158"><a href="#cb19-158" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lme3)</span>
-<span id="cb19-159"><a href="#cb19-159" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-160"><a href="#cb19-160" aria-hidden="true" tabindex="-1"></a>nlme3 <span class="ot">&lt;-</span> <span class="fu">lme</span>(Richness <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> NAP,<span class="at">random=</span> <span class="sc">~</span> <span class="dv">0</span><span class="sc">+</span>NAP <span class="sc">|</span>Beach ,<span class="at">data =</span> df_long)</span>
-<span id="cb19-161"><a href="#cb19-161" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(nlme3)</span>
-<span id="cb19-162"><a href="#cb19-162" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb19-163"><a href="#cb19-163" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-164"><a href="#cb19-164" aria-hidden="true" tabindex="-1"></a><span class="fu">## 随机效应模型</span></span>
-<span id="cb19-165"><a href="#cb19-165" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-168"><a href="#cb19-168" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb19-169"><a href="#cb19-169" aria-hidden="true" tabindex="-1"></a>lme4 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Richness <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>Beach) ,<span class="at">data =</span> df_long)</span>
-<span id="cb19-170"><a href="#cb19-170" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lme4)</span>
-<span id="cb19-171"><a href="#cb19-171" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-172"><a href="#cb19-172" aria-hidden="true" tabindex="-1"></a>nlme4 <span class="ot">&lt;-</span> <span class="fu">lme</span>(Richness <span class="sc">~</span> <span class="dv">1</span> ,<span class="at">random=</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span>Beach ,<span class="at">data =</span> df_long)</span>
-<span id="cb19-173"><a href="#cb19-173" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(nlme4)</span>
-<span id="cb19-174"><a href="#cb19-174" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb19-175"><a href="#cb19-175" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-176"><a href="#cb19-176" aria-hidden="true" tabindex="-1"></a><span class="fu">## 线性模型：固定截距+ 固定斜率</span></span>
-<span id="cb19-177"><a href="#cb19-177" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-180"><a href="#cb19-180" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb19-181"><a href="#cb19-181" aria-hidden="true" tabindex="-1"></a>lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(Richness <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> NAP ,<span class="at">data =</span> df_long)</span>
-<span id="cb19-182"><a href="#cb19-182" aria-hidden="true" tabindex="-1"></a>lm</span>
-<span id="cb19-183"><a href="#cb19-183" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb19-184"><a href="#cb19-184" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-185"><a href="#cb19-185" aria-hidden="true" tabindex="-1"></a><span class="fu">## 模型选择</span></span>
-<span id="cb19-186"><a href="#cb19-186" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-187"><a href="#cb19-187" aria-hidden="true" tabindex="-1"></a>限制最大似然法REML</span>
-<span id="cb19-188"><a href="#cb19-188" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-189"><a href="#cb19-189" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>**赤池信息准则（AIC）**</span>
-<span id="cb19-190"><a href="#cb19-190" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-191"><a href="#cb19-191" aria-hidden="true" tabindex="-1"></a>    $$ kIC=−2log(\mathcal{L})+2k$$</span>
-<span id="cb19-192"><a href="#cb19-192" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-193"><a href="#cb19-193" aria-hidden="true" tabindex="-1"></a>    其中：</span>
-<span id="cb19-194"><a href="#cb19-194" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-195"><a href="#cb19-195" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>$\mathcal{L}$ 是似然函数。</span>
-<span id="cb19-196"><a href="#cb19-196" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-197"><a href="#cb19-197" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>$k$ 是模型参数的数量。</span>
-<span id="cb19-198"><a href="#cb19-198" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-199"><a href="#cb19-199" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>**贝叶斯信息准则（BIC）**</span>
-<span id="cb19-200"><a href="#cb19-200" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-201"><a href="#cb19-201" aria-hidden="true" tabindex="-1"></a>    $$ BIC=−2log(\mathcal{L})+klog(n) $$</span>
-<span id="cb19-202"><a href="#cb19-202" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-203"><a href="#cb19-203" aria-hidden="true" tabindex="-1"></a>    其中：</span>
-<span id="cb19-204"><a href="#cb19-204" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-205"><a href="#cb19-205" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>$n$ 是样本量。</span>
-<span id="cb19-206"><a href="#cb19-206" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-209"><a href="#cb19-209" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb19-210"><a href="#cb19-210" aria-hidden="true" tabindex="-1"></a>plot_lme <span class="ot">&lt;-</span> <span class="cf">function</span>(model, title) {</span>
-<span id="cb19-211"><a href="#cb19-211" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(df_long, <span class="fu">aes</span>(NAP, Richness, <span class="at">group =</span> Beach, <span class="at">color =</span> Beach)) <span class="sc">+</span></span>
-<span id="cb19-212"><a href="#cb19-212" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb19-213"><a href="#cb19-213" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_line</span>(</span>
-<span id="cb19-214"><a href="#cb19-214" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span>  <span class="fu">bind_cols</span>(df_long, <span class="at">.pred =</span> <span class="fu">predict</span>(model, df_long)),</span>
-<span id="cb19-215"><a href="#cb19-215" aria-hidden="true" tabindex="-1"></a>            <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">y =</span> .pred),</span>
-<span id="cb19-216"><a href="#cb19-216" aria-hidden="true" tabindex="-1"></a>            <span class="at">linewidth =</span> <span class="dv">1</span></span>
-<span id="cb19-217"><a href="#cb19-217" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">+</span></span>
-<span id="cb19-218"><a href="#cb19-218" aria-hidden="true" tabindex="-1"></a>        <span class="fu">labs</span>(<span class="at">title =</span> title)<span class="sc">+</span></span>
-<span id="cb19-219"><a href="#cb19-219" aria-hidden="true" tabindex="-1"></a>        <span class="fu">scale_x_continuous</span>(<span class="at">expand =</span> (<span class="at">mult=</span><span class="fu">c</span>(<span class="dv">0</span>,.<span class="dv">1</span>)))<span class="sc">+</span></span>
-<span id="cb19-220"><a href="#cb19-220" aria-hidden="true" tabindex="-1"></a>        <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> (<span class="at">mult=</span><span class="fu">c</span>(<span class="dv">0</span>,.<span class="dv">1</span>)))<span class="sc">+</span></span>
-<span id="cb19-221"><a href="#cb19-221" aria-hidden="true" tabindex="-1"></a>    ggsci<span class="sc">::</span><span class="fu">scale_color_jco</span>() <span class="sc">+</span></span>
-<span id="cb19-222"><a href="#cb19-222" aria-hidden="true" tabindex="-1"></a>        ggpubr<span class="sc">::</span><span class="fu">theme_pubr</span>() <span class="sc">+</span></span>
-<span id="cb19-223"><a href="#cb19-223" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"right"</span>,</span>
-<span id="cb19-224"><a href="#cb19-224" aria-hidden="true" tabindex="-1"></a>              <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> .<span class="dv">5</span>))</span>
-<span id="cb19-225"><a href="#cb19-225" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb19-226"><a href="#cb19-226" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-227"><a href="#cb19-227" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-228"><a href="#cb19-228" aria-hidden="true" tabindex="-1"></a>lme_plot <span class="ot">&lt;-</span> <span class="fu">map2</span>(<span class="fu">list</span>(lme1,lme2,lme3,lm),<span class="fu">list</span>(<span class="st">"随机截距+随机斜率"</span>,<span class="st">"随机截距+固定斜率"</span>,<span class="st">"固定截距+随机斜率"</span>,<span class="st">"固定截距+固定斜率"</span>),plot_lme)</span>
-<span id="cb19-229"><a href="#cb19-229" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-230"><a href="#cb19-230" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-231"><a href="#cb19-231" aria-hidden="true" tabindex="-1"></a>lme_plot</span>
-<span id="cb19-232"><a href="#cb19-232" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb19-233"><a href="#cb19-233" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-236"><a href="#cb19-236" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb19-237"><a href="#cb19-237" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lme1,lme2,lme3)</span>
-<span id="cb19-238"><a href="#cb19-238" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lme1,lme2,lme3,lme4,lm)</span>
-<span id="cb19-239"><a href="#cb19-239" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-240"><a href="#cb19-240" aria-hidden="true" tabindex="-1"></a><span class="co"># p小于0.05,说明全模型与简化后模型存在差异，最终采用lme1,AIC最小</span></span>
-<span id="cb19-241"><a href="#cb19-241" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<div class="sourceCode" id="cb23" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># 线性混合模型</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>线性混合效应模型 （Linear Mixed-effect Model, LMM）用于分析具有固定效应和随机效应的数据结构。它能够处理数据中的组内相关性和个体差异，广泛应用于生态学、心理学等领域的统计分析。如果数据满足正态分布但有组内相关性，使用线性混合模型（LMM）。</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Mixed Effects Models and Extensions in Ecology with R 第5章</span><span class="co">](https://link.springer.com/book/10.1007/978-0-387-87458-6)</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>线性混合模型的一般表达形式：</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>Y = \mathbf{X} \beta + \mathbf{Z} \gamma + \epsilon</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>其中：</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>$\mathbf{X}$是固定效应自变量矩阵。</span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>$\beta$ 是固定效应的回归系数。</span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>$\mathbf{Z}$ 是随机效应自变量矩阵。</span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>$\gamma$ 是随机效应的回归系数。</span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>$\epsilon$ 是误差项。</span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a><span class="fu">## `lme4::lmer()`</span></span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a>lme4<span class="sc">::</span>lmer</span>
+<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a><span class="in">`lmer()`</span> 的表达式如下：</span>
+<span id="cb23-34"><a href="#cb23-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-35"><a href="#cb23-35" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb23-36"><a href="#cb23-36" aria-hidden="true" tabindex="-1"></a>lmer (data,formual= DV ~ Fixed<span class="sc">\_</span>Factor + (Random<span class="sc">\_</span>intercept + Random<span class="sc">\_</span>slope | Random<span class="sc">\_</span>Factor))</span>
+<span id="cb23-37"><a href="#cb23-37" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb23-38"><a href="#cb23-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-39"><a href="#cb23-39" aria-hidden="true" tabindex="-1"></a>截距中，1表示随机截距，0表示固定截距，默认截距为1。</span>
+<span id="cb23-40"><a href="#cb23-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-41"><a href="#cb23-41" aria-hidden="true" tabindex="-1"></a>| LME                         | 表达式             | 简写             |</span>
+<span id="cb23-42"><a href="#cb23-42" aria-hidden="true" tabindex="-1"></a>|-----------------------------|--------------------|------------------|</span>
+<span id="cb23-43"><a href="#cb23-43" aria-hidden="true" tabindex="-1"></a>| 随机截距+随机斜率           | y\~x+( 1+x \| id ) | y\~x+( x \| id ) |</span>
+<span id="cb23-44"><a href="#cb23-44" aria-hidden="true" tabindex="-1"></a>| 随机截距+固定斜率           | y\~x+( 1+1 \| id ) | y\~x+( 1 \| id ) |</span>
+<span id="cb23-45"><a href="#cb23-45" aria-hidden="true" tabindex="-1"></a>| 固定截距+随机斜率           | y\~x+( 0+x \| id ) | NA               |</span>
+<span id="cb23-46"><a href="#cb23-46" aria-hidden="true" tabindex="-1"></a>| 线性模型：固定截距+固定斜率 | y\~x               | NA               |</span>
+<span id="cb23-47"><a href="#cb23-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-48"><a href="#cb23-48" aria-hidden="true" tabindex="-1"></a><span class="fu">## `nlme::lme()`</span></span>
+<span id="cb23-49"><a href="#cb23-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-52"><a href="#cb23-52" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb23-53"><a href="#cb23-53" aria-hidden="true" tabindex="-1"></a>nlme<span class="sc">::</span>nlme</span>
+<span id="cb23-54"><a href="#cb23-54" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-55"><a href="#cb23-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-56"><a href="#cb23-56" aria-hidden="true" tabindex="-1"></a><span class="fu">## 随机截距+随机斜率</span></span>
+<span id="cb23-57"><a href="#cb23-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-60"><a href="#cb23-60" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb23-61"><a href="#cb23-61" aria-hidden="true" tabindex="-1"></a>df_long <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"data/AED/RIKZ.txt"</span>)</span>
+<span id="cb23-62"><a href="#cb23-62" aria-hidden="true" tabindex="-1"></a>df_long<span class="sc">$</span>Beach <span class="ot">&lt;-</span> <span class="fu">factor</span>(df_long<span class="sc">$</span>Beach)</span>
+<span id="cb23-63"><a href="#cb23-63" aria-hidden="true" tabindex="-1"></a>df_long<span class="sc">$</span>Exposure <span class="ot">&lt;-</span> <span class="fu">factor</span>(df_long<span class="sc">$</span>Exposure)</span>
+<span id="cb23-64"><a href="#cb23-64" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_long)</span>
+<span id="cb23-65"><a href="#cb23-65" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-66"><a href="#cb23-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-67"><a href="#cb23-67" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb23-68"><a href="#cb23-68" aria-hidden="true" tabindex="-1"></a>\eta_{(nrow \times 1)} = \mathbf{X}_{nrow \times 1} \beta_{1 \times 1} + \mathbf{Z}_{nrow \times 2n_{subjects}} \mathbf{\gamma}_{2n_{subjects} \times 1} + \epsilon_i</span>
+<span id="cb23-69"><a href="#cb23-69" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb23-70"><a href="#cb23-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-71"><a href="#cb23-71" aria-hidden="true" tabindex="-1"></a>Z有两倍于受试者数量的列，每个受试者的随机截距和随机斜率</span>
+<span id="cb23-72"><a href="#cb23-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-75"><a href="#cb23-75" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb23-76"><a href="#cb23-76" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
+<span id="cb23-77"><a href="#cb23-77" aria-hidden="true" tabindex="-1"></a>lme1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Richness <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> NAP <span class="sc">*</span> Exposure<span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span>NAP <span class="sc">|</span>Beach) ,<span class="at">data =</span> df_long)</span>
+<span id="cb23-78"><a href="#cb23-78" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lme1)</span>
+<span id="cb23-79"><a href="#cb23-79" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(lme1)</span>
+<span id="cb23-80"><a href="#cb23-80" aria-hidden="true" tabindex="-1"></a><span class="fu">BIC</span>(lme1)</span>
+<span id="cb23-81"><a href="#cb23-81" aria-hidden="true" tabindex="-1"></a><span class="fu">logLik</span>(lme1)</span>
+<span id="cb23-82"><a href="#cb23-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-83"><a href="#cb23-83" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span><span class="fu">pt</span>(<span class="sc">-</span><span class="fl">3.914605</span>,<span class="dv">35</span>,<span class="at">lower.tail =</span> F))</span>
+<span id="cb23-84"><a href="#cb23-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-85"><a href="#cb23-85" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nlme)</span>
+<span id="cb23-86"><a href="#cb23-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-87"><a href="#cb23-87" aria-hidden="true" tabindex="-1"></a>nlme1 <span class="ot">&lt;-</span> <span class="fu">lme</span>(Richness <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> NAP <span class="sc">*</span> Exposure,</span>
+<span id="cb23-88"><a href="#cb23-88" aria-hidden="true" tabindex="-1"></a>             <span class="at">random =</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> NAP <span class="sc">|</span> Beach ,</span>
+<span id="cb23-89"><a href="#cb23-89" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> df_long,</span>
+<span id="cb23-90"><a href="#cb23-90" aria-hidden="true" tabindex="-1"></a>             <span class="at">control =</span> <span class="fu">lmeControl</span>(<span class="at">opt =</span> <span class="st">"optim"</span>, <span class="at">msMaxIter =</span> <span class="dv">100</span>, <span class="at">msMaxEval =</span> <span class="dv">5000</span>))</span>
+<span id="cb23-91"><a href="#cb23-91" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(nlme1)</span>
+<span id="cb23-92"><a href="#cb23-92" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-93"><a href="#cb23-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-94"><a href="#cb23-94" aria-hidden="true" tabindex="-1"></a>这个模型的公式可以分解为：</span>
+<span id="cb23-95"><a href="#cb23-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-96"><a href="#cb23-96" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**固定效应部分**：<span class="in">`Richness`</span> 的预测由截距、NAP（数值变量）和 Exposure（分类变量，包含 Exposure10 和 Exposure11）及其交互项构成。</span>
+<span id="cb23-97"><a href="#cb23-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-98"><a href="#cb23-98" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**随机效应部分**：<span class="in">`Beach`</span> 作为随机因子，包含随机截距和随机斜率（NAP）。</span>
+<span id="cb23-99"><a href="#cb23-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-102"><a href="#cb23-102" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb23-103"><a href="#cb23-103" aria-hidden="true" tabindex="-1"></a><span class="co"># 标准化模型残差分布</span></span>
+<span id="cb23-104"><a href="#cb23-104" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(<span class="fu">residuals</span>(lme1,<span class="at">type=</span><span class="st">"pearson"</span>,<span class="at">scaled=</span>T))</span>
+<span id="cb23-105"><a href="#cb23-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-106"><a href="#cb23-106" aria-hidden="true" tabindex="-1"></a><span class="co"># 随机因子随机效应和显著性检验</span></span>
+<span id="cb23-107"><a href="#cb23-107" aria-hidden="true" tabindex="-1"></a><span class="fu">ranef</span>(lme1)</span>
+<span id="cb23-108"><a href="#cb23-108" aria-hidden="true" tabindex="-1"></a>lmerTest<span class="sc">::</span><span class="fu">ranova</span>(lme1)</span>
+<span id="cb23-109"><a href="#cb23-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-110"><a href="#cb23-110" aria-hidden="true" tabindex="-1"></a><span class="co"># 查看固定效应和显著性检验</span></span>
+<span id="cb23-111"><a href="#cb23-111" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(lme1)</span>
+<span id="cb23-112"><a href="#cb23-112" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lme1)</span>
+<span id="cb23-113"><a href="#cb23-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-114"><a href="#cb23-114" aria-hidden="true" tabindex="-1"></a><span class="co">#  查看 类和方法</span></span>
+<span id="cb23-115"><a href="#cb23-115" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(lme1)</span>
+<span id="cb23-116"><a href="#cb23-116" aria-hidden="true" tabindex="-1"></a><span class="co"># methods(class = "lmerMod")</span></span>
+<span id="cb23-117"><a href="#cb23-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-118"><a href="#cb23-118" aria-hidden="true" tabindex="-1"></a><span class="co"># confint(lme1,level = 0.95)</span></span>
+<span id="cb23-119"><a href="#cb23-119" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-120"><a href="#cb23-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-121"><a href="#cb23-121" aria-hidden="true" tabindex="-1"></a><span class="fu">## 随机截距+固定斜率</span></span>
+<span id="cb23-122"><a href="#cb23-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-123"><a href="#cb23-123" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb23-124"><a href="#cb23-124" aria-hidden="true" tabindex="-1"></a>\eta_{(nrow \ \times 1)}=\mathbf{X_{nrow×1}}\beta_{1\times1} +Z_{nrow\times n_{subjects}} \mathbf{\gamma}_{n_{subjects}\times 1}+\epsilon_i</span>
+<span id="cb23-125"><a href="#cb23-125" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb23-126"><a href="#cb23-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-127"><a href="#cb23-127" aria-hidden="true" tabindex="-1"></a>Z有一倍于受试者数量的列，每个受试者的随机截距。</span>
+<span id="cb23-128"><a href="#cb23-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-131"><a href="#cb23-131" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb23-132"><a href="#cb23-132" aria-hidden="true" tabindex="-1"></a>lme2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Richness <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> NAP<span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span>Beach) ,<span class="at">data =</span> df_long)</span>
+<span id="cb23-133"><a href="#cb23-133" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lme2)</span>
+<span id="cb23-134"><a href="#cb23-134" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(lme2)</span>
+<span id="cb23-135"><a href="#cb23-135" aria-hidden="true" tabindex="-1"></a><span class="fu">BIC</span>(lme2)</span>
+<span id="cb23-136"><a href="#cb23-136" aria-hidden="true" tabindex="-1"></a><span class="fu">logLik</span>(lme2)</span>
+<span id="cb23-137"><a href="#cb23-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-138"><a href="#cb23-138" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span><span class="fu">pt</span>(<span class="fl">6.007</span>,<span class="dv">35</span>,<span class="at">lower.tail =</span> T))</span>
+<span id="cb23-139"><a href="#cb23-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-140"><a href="#cb23-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-141"><a href="#cb23-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-142"><a href="#cb23-142" aria-hidden="true" tabindex="-1"></a>nlme2 <span class="ot">&lt;-</span> <span class="fu">lme</span>(Richness <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> NAP <span class="sc">*</span> Exposure,<span class="at">random=</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span>Beach ,<span class="at">data =</span> df_long)</span>
+<span id="cb23-143"><a href="#cb23-143" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(nlme2)</span>
+<span id="cb23-144"><a href="#cb23-144" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-145"><a href="#cb23-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-146"><a href="#cb23-146" aria-hidden="true" tabindex="-1"></a><span class="fu">## 固定截距+随机斜率</span></span>
+<span id="cb23-147"><a href="#cb23-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-148"><a href="#cb23-148" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb23-149"><a href="#cb23-149" aria-hidden="true" tabindex="-1"></a>\eta_{(nrow \times 1)} = \mathbf{X}_{nrow \times 1} \beta_{1 \times 1} + \mathbf{Z}_{nrow \times n_{subjects}} \mathbf{\gamma}_{n_{subjects} \times 1} + \epsilon_i</span>
+<span id="cb23-150"><a href="#cb23-150" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb23-151"><a href="#cb23-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-152"><a href="#cb23-152" aria-hidden="true" tabindex="-1"></a>Z 有一倍于受试者数量的列，每个受试者的随机斜率。</span>
+<span id="cb23-153"><a href="#cb23-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-156"><a href="#cb23-156" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb23-157"><a href="#cb23-157" aria-hidden="true" tabindex="-1"></a>lme3 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Richness <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span>  NAP<span class="sc">+</span> (<span class="dv">0</span> <span class="sc">+</span> NAP <span class="sc">|</span>Beach) ,<span class="at">data =</span> df_long)</span>
+<span id="cb23-158"><a href="#cb23-158" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lme3)</span>
+<span id="cb23-159"><a href="#cb23-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-160"><a href="#cb23-160" aria-hidden="true" tabindex="-1"></a>nlme3 <span class="ot">&lt;-</span> <span class="fu">lme</span>(Richness <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> NAP,<span class="at">random=</span> <span class="sc">~</span> <span class="dv">0</span><span class="sc">+</span>NAP <span class="sc">|</span>Beach ,<span class="at">data =</span> df_long)</span>
+<span id="cb23-161"><a href="#cb23-161" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(nlme3)</span>
+<span id="cb23-162"><a href="#cb23-162" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-163"><a href="#cb23-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-164"><a href="#cb23-164" aria-hidden="true" tabindex="-1"></a><span class="fu">## 随机效应模型</span></span>
+<span id="cb23-165"><a href="#cb23-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-168"><a href="#cb23-168" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb23-169"><a href="#cb23-169" aria-hidden="true" tabindex="-1"></a>lme4 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Richness <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>Beach) ,<span class="at">data =</span> df_long)</span>
+<span id="cb23-170"><a href="#cb23-170" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lme4)</span>
+<span id="cb23-171"><a href="#cb23-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-172"><a href="#cb23-172" aria-hidden="true" tabindex="-1"></a>nlme4 <span class="ot">&lt;-</span> <span class="fu">lme</span>(Richness <span class="sc">~</span> <span class="dv">1</span> ,<span class="at">random=</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span>Beach ,<span class="at">data =</span> df_long)</span>
+<span id="cb23-173"><a href="#cb23-173" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(nlme4)</span>
+<span id="cb23-174"><a href="#cb23-174" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-175"><a href="#cb23-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-176"><a href="#cb23-176" aria-hidden="true" tabindex="-1"></a><span class="fu">## 线性模型：固定截距+ 固定斜率</span></span>
+<span id="cb23-177"><a href="#cb23-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-180"><a href="#cb23-180" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb23-181"><a href="#cb23-181" aria-hidden="true" tabindex="-1"></a>lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(Richness <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> NAP ,<span class="at">data =</span> df_long)</span>
+<span id="cb23-182"><a href="#cb23-182" aria-hidden="true" tabindex="-1"></a>lm</span>
+<span id="cb23-183"><a href="#cb23-183" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-184"><a href="#cb23-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-185"><a href="#cb23-185" aria-hidden="true" tabindex="-1"></a><span class="fu">## 模型选择</span></span>
+<span id="cb23-186"><a href="#cb23-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-187"><a href="#cb23-187" aria-hidden="true" tabindex="-1"></a>限制最大似然法REML</span>
+<span id="cb23-188"><a href="#cb23-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-189"><a href="#cb23-189" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>**赤池信息准则（AIC）**</span>
+<span id="cb23-190"><a href="#cb23-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-191"><a href="#cb23-191" aria-hidden="true" tabindex="-1"></a>    $$ kIC=−2log(\mathcal{L})+2k$$</span>
+<span id="cb23-192"><a href="#cb23-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-193"><a href="#cb23-193" aria-hidden="true" tabindex="-1"></a>    其中：</span>
+<span id="cb23-194"><a href="#cb23-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-195"><a href="#cb23-195" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>$\mathcal{L}$ 是似然函数。</span>
+<span id="cb23-196"><a href="#cb23-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-197"><a href="#cb23-197" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>$k$ 是模型参数的数量。</span>
+<span id="cb23-198"><a href="#cb23-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-199"><a href="#cb23-199" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>**贝叶斯信息准则（BIC）**</span>
+<span id="cb23-200"><a href="#cb23-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-201"><a href="#cb23-201" aria-hidden="true" tabindex="-1"></a>    $$ BIC=−2log(\mathcal{L})+klog(n) $$</span>
+<span id="cb23-202"><a href="#cb23-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-203"><a href="#cb23-203" aria-hidden="true" tabindex="-1"></a>    其中：</span>
+<span id="cb23-204"><a href="#cb23-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-205"><a href="#cb23-205" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>$n$ 是样本量。</span>
+<span id="cb23-206"><a href="#cb23-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-209"><a href="#cb23-209" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb23-210"><a href="#cb23-210" aria-hidden="true" tabindex="-1"></a>plot_lme <span class="ot">&lt;-</span> <span class="cf">function</span>(model, title) {</span>
+<span id="cb23-211"><a href="#cb23-211" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(df_long, <span class="fu">aes</span>(NAP, Richness, <span class="at">group =</span> Beach, <span class="at">color =</span> Beach)) <span class="sc">+</span></span>
+<span id="cb23-212"><a href="#cb23-212" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb23-213"><a href="#cb23-213" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_line</span>(</span>
+<span id="cb23-214"><a href="#cb23-214" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span>  <span class="fu">bind_cols</span>(df_long, <span class="at">.pred =</span> <span class="fu">predict</span>(model, df_long)),</span>
+<span id="cb23-215"><a href="#cb23-215" aria-hidden="true" tabindex="-1"></a>            <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">y =</span> .pred),</span>
+<span id="cb23-216"><a href="#cb23-216" aria-hidden="true" tabindex="-1"></a>            <span class="at">linewidth =</span> <span class="dv">1</span></span>
+<span id="cb23-217"><a href="#cb23-217" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">+</span></span>
+<span id="cb23-218"><a href="#cb23-218" aria-hidden="true" tabindex="-1"></a>        <span class="fu">labs</span>(<span class="at">title =</span> title)<span class="sc">+</span></span>
+<span id="cb23-219"><a href="#cb23-219" aria-hidden="true" tabindex="-1"></a>        <span class="fu">scale_x_continuous</span>(<span class="at">expand =</span> (<span class="at">mult=</span><span class="fu">c</span>(<span class="dv">0</span>,.<span class="dv">1</span>)))<span class="sc">+</span></span>
+<span id="cb23-220"><a href="#cb23-220" aria-hidden="true" tabindex="-1"></a>        <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> (<span class="at">mult=</span><span class="fu">c</span>(<span class="dv">0</span>,.<span class="dv">1</span>)))<span class="sc">+</span></span>
+<span id="cb23-221"><a href="#cb23-221" aria-hidden="true" tabindex="-1"></a>    ggsci<span class="sc">::</span><span class="fu">scale_color_jco</span>() <span class="sc">+</span></span>
+<span id="cb23-222"><a href="#cb23-222" aria-hidden="true" tabindex="-1"></a>        ggpubr<span class="sc">::</span><span class="fu">theme_pubr</span>() <span class="sc">+</span></span>
+<span id="cb23-223"><a href="#cb23-223" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"right"</span>,</span>
+<span id="cb23-224"><a href="#cb23-224" aria-hidden="true" tabindex="-1"></a>              <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> .<span class="dv">5</span>))</span>
+<span id="cb23-225"><a href="#cb23-225" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb23-226"><a href="#cb23-226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-227"><a href="#cb23-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-228"><a href="#cb23-228" aria-hidden="true" tabindex="-1"></a>lme_plot <span class="ot">&lt;-</span> <span class="fu">map2</span>(<span class="fu">list</span>(lme1,lme2,lme3,lm),<span class="fu">list</span>(<span class="st">"随机截距+随机斜率"</span>,<span class="st">"随机截距+固定斜率"</span>,<span class="st">"固定截距+随机斜率"</span>,<span class="st">"固定截距+固定斜率"</span>),plot_lme)</span>
+<span id="cb23-229"><a href="#cb23-229" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-230"><a href="#cb23-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-231"><a href="#cb23-231" aria-hidden="true" tabindex="-1"></a>lme_plot</span>
+<span id="cb23-232"><a href="#cb23-232" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-233"><a href="#cb23-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-236"><a href="#cb23-236" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb23-237"><a href="#cb23-237" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lme1,lme2,lme3)</span>
+<span id="cb23-238"><a href="#cb23-238" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lme1,lme2,lme3,lme4,lm)</span>
+<span id="cb23-239"><a href="#cb23-239" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-240"><a href="#cb23-240" aria-hidden="true" tabindex="-1"></a><span class="co"># p小于0.05,说明全模型与简化后模型存在差异，最终采用lme1,AIC</span></span>
+<span id="cb23-241"><a href="#cb23-241" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-242"><a href="#cb23-242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-243"><a href="#cb23-243" aria-hidden="true" tabindex="-1"></a><span class="fu">## 模型诊断</span></span>
+<span id="cb23-244"><a href="#cb23-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-245"><a href="#cb23-245" aria-hidden="true" tabindex="-1"></a>sleepstudy</span>
+<span id="cb23-246"><a href="#cb23-246" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-249"><a href="#cb23-249" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb23-250"><a href="#cb23-250" aria-hidden="true" tabindex="-1"></a><span class="co"># 拟合线性混合模型</span></span>
+<span id="cb23-251"><a href="#cb23-251" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> lme1</span>
+<span id="cb23-252"><a href="#cb23-252" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. 残差图</span></span>
+<span id="cb23-253"><a href="#cb23-253" aria-hidden="true" tabindex="-1"></a>residuals <span class="ot">&lt;-</span> <span class="fu">resid</span>(model)</span>
+<span id="cb23-254"><a href="#cb23-254" aria-hidden="true" tabindex="-1"></a>fitted <span class="ot">&lt;-</span> <span class="fu">fitted</span>(model)</span>
+<span id="cb23-255"><a href="#cb23-255" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(fitted, residuals), <span class="fu">aes</span>(fitted, residuals)) <span class="sc">+</span></span>
+<span id="cb23-256"><a href="#cb23-256" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb23-257"><a href="#cb23-257" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"loess"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb23-258"><a href="#cb23-258" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Residuals vs Fitted"</span>, <span class="at">x =</span> <span class="st">"Fitted values"</span>, <span class="at">y =</span> <span class="st">"Residuals"</span>)</span>
+<span id="cb23-259"><a href="#cb23-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-260"><a href="#cb23-260" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. QQ图</span></span>
+<span id="cb23-261"><a href="#cb23-261" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(residuals)</span>
+<span id="cb23-262"><a href="#cb23-262" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(residuals)</span>
+<span id="cb23-263"><a href="#cb23-263" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-264"><a href="#cb23-264" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Cook's 距离</span></span>
+<span id="cb23-265"><a href="#cb23-265" aria-hidden="true" tabindex="-1"></a>cooksd <span class="ot">&lt;-</span> <span class="fu">cooks.distance</span>(model)</span>
+<span id="cb23-266"><a href="#cb23-266" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cooksd, <span class="at">type =</span> <span class="st">"h"</span>, <span class="at">main =</span> <span class="st">"Cook's Distance"</span>)</span>
+<span id="cb23-267"><a href="#cb23-267" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-268"><a href="#cb23-268" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. 随机效应的分布</span></span>
+<span id="cb23-269"><a href="#cb23-269" aria-hidden="true" tabindex="-1"></a>rand_dist <span class="ot">&lt;-</span> <span class="fu">ranef</span>(model)</span>
+<span id="cb23-270"><a href="#cb23-270" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-271"><a href="#cb23-271" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(rand_dist<span class="sc">$</span>Beach<span class="sc">$</span>NAP)</span>
+<span id="cb23-272"><a href="#cb23-272" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(rand_dist<span class="sc">$</span>Beach<span class="sc">$</span>NAP)</span>
+<span id="cb23-273"><a href="#cb23-273" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
