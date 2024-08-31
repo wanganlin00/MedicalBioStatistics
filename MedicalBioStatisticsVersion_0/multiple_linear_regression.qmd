@@ -4,7 +4,7 @@ $$
 Y_i=\beta_0+\sum_{i=1}^p \beta_p X_{pi}+\epsilon_i,其中\epsilon_i\sim N(0,\sigma^2)
 $$
 
-**Y**=**βX**+ε
+**Y**=**Xβ**+ε
 
 在矩阵表示法中，因变量是一个向量 Y，每个样本都有一行。自变量组合成一个矩阵X，其中每个特征有一列，另外还有一列 1值用于截距。每列每个示例都有一行。回归系数β和残差ε也是向量。
 
@@ -13,6 +13,10 @@ $$
 $$
 \hat{\mathbf{\beta}}=  (X^TX)^{-1}X^TY
 $$
+
+![](images/clipboard-2956843313.png)
+
+![](images/clipboard-2413549022.png)
 
 ```{r}
 reg <- function(y, x) { 
@@ -30,6 +34,8 @@ reg <- function(y, x) {
 reg(advertising$sales,advertising[c(-1,-5)])
 ```
 
+## 多元回归
+
 ```{r}
 library(tidymodels)
 library(patchwork)
@@ -40,7 +46,7 @@ ad <- advertising %>% select(-1)
 cor(ad)
 ```
 
-## `rms::ols()`
+### `rms::ols()`
 
 ```{r}
 
@@ -52,7 +58,7 @@ car::vif(ols_mlm)
 anova(ols_mlm)
 ```
 
-## `lm()`
+### `lm()`
 
 ```{r}
 # 多元线性回归
@@ -68,12 +74,34 @@ glance(lm_sales_multi)
 
 logLik(lm_sales_multi$fit)
 car::vif(lm_sales_multi$fit)
+
+
+
+
+
+```
+
+### 线性组合
+
+我们经常希望对回归系数的线性组合进行推断，特别是对于多个类别的分类变量。例如，对于分类变量，回归系数表示其中一个组与参考类别之间的平均差异
+
+```{r}
+lm_multiple <- lm(sales~TV+radio+newspaper,data = advertising)
+lm_multiple
+library(multcomp, quietly = T)
+confint(lm_multiple)
+# 在 R 中，我们通过首先指定一个矩阵来执行此计算，该矩阵指定要进行的比较。此处的矩阵必须具有与回归方程中的回归系数相同的列数
+comparison <- matrix(c(0,3,1,1), nrow=1)
+
+lincom <- glht(lm_multiple, linfct = comparison)
+summary(lincom)
+confint(lincom)
 ```
 
 ## 交互项
 
 ```{r}
-lm_interact<- lm_spec %>%  fit(sales ~ TV*radio, data = advertising)
+lm_interact<- lm_spec %>%  fit(sales ~ .+ TV:radio, data = advertising)
 
 lm_interact
 ```
@@ -125,7 +153,7 @@ plot(lm_sales_multi$fit)
 autoplot(lm_sales_multi) #回归诊断图
 ```
 
-#### 线性假设
+### 线性假设
 
 残差图， 成分残差图
 
@@ -134,7 +162,7 @@ plot(lm_sales_multi$fit,1)
 crPlots(lm_sales_multi$fit)
 ```
 
-#### 正态性假设Q-Q图
+### 正态性假设Q-Q图
 
 Standardized Residuals
 
@@ -147,13 +175,13 @@ summary(powerTransform(lm_sales_multi$fit))
 plot(lm_sales_tv$fit,3)
 ```
 
-#### 误差相关性
+### 误差相关性
 
 ```{r}
 durbinWatsonTest(lm_sales_multi$fit)      #结果表明rho=0
 ```
 
-#### 误差项的方差齐性
+### 误差项的方差齐性
 
 ```{r}
 ncvTest(lm_sales_multi$fit)
@@ -169,7 +197,7 @@ tibble(
     geom_smooth()
 ```
 
-#### 异常观测点
+### 异常观测点
 
 ```{r}
 # studentized residual Plot
@@ -211,7 +239,7 @@ avPlots(lm_sales_tv$fit,ask=FALSE,id.method="identity")
 influencePlot(lm_sales_tv$fit,id.method="identity",main="Influence Plot")
 ```
 
-#### 多重共线性
+### 多重共线性
 
 ```{r}
 vif(lm_sales_multi$fit)
@@ -249,6 +277,18 @@ summary(step_both)
 ```
 
 ## 模型选择和优化
+
+![](images/clipboard-3278835564.png)
+
+![](images/clipboard-1523534461.png)
+
+n是观测值的数量，p是模型的参数数（等于回归系数的数量）
+
+![](images/clipboard-4133329383.png)
+
+![](images/clipboard-3792639976.png)
+
+$\mathcal{L}$是模型拟合的最大似然值
 
 ```{r}
 ########################两模型比较

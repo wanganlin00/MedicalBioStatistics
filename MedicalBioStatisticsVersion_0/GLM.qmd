@@ -4,7 +4,7 @@
 
 在广义线性模式中，假设每个资料的观测值 Y 来自某个指数族分布 f 。
 
-## 广义线性模型组件
+## GLM 组件
 
 广义线性模型是对线性模型的扩展，适用于非正态分布的数据，假设观测值之间是独立的，不能处理组内相关性。模型形式为：
 
@@ -60,7 +60,7 @@ library(patchwork)
 library(ggfortify)
 ```
 
-## 高斯线性回归
+## 广义线性回归
 
 高斯线性回归是一种简单的线性回归模型，其中假设响应变量服从正态分布，并且使用恒等连接函数（identity link function）。t-statistic
 
@@ -159,9 +159,9 @@ ggplot(df,aes(default,income,fill=default))+
   geom_boxplot()
 ```
 
-### Binary logistic regression
+### 
 
-#### 为什么不用线性回归
+### 线性回归
 
 ```{r}
 lm_spec<-linear_reg(mode ="regression",engine = "lm" )
@@ -178,7 +178,9 @@ ggplot(df,aes(balance,as.numeric(default)-1))+
 
 ```
 
-#### 逻辑回归
+### 二分类逻辑回归
+
+Binary logistic regression
 
 logit link function
 
@@ -205,7 +207,7 @@ ggplot(df,aes(balance,as.numeric(default)-1))+
 
 ```
 
-#### 自变量含分类变量
+#### 自变量是分类变量
 
 ```{r}
 logit_default_student <- logit_spec %>%fit(default ~ student, data = df)
@@ -239,16 +241,7 @@ augment(logit_multiple, new_data = df) %>%
   accuracy(truth = default, estimate = .pred_class)
 ```
 
-减少弱相关或无关变量
-
-```{r}
-logit_multiple_2<-logit_spec %>% fit(default~balance+student,data=df)
-
-augment(logit_multiple_2, new_data =df) %>%
-  conf_mat(truth = default, estimate = .pred_class) 
-```
-
-#### 预测特定值
+#### 预测
 
 ```{r}
 df_new <- tibble(
@@ -308,6 +301,36 @@ model_summary <- model_summary %>%
 # 打印结果表格
 print(model_summary)
 ```
+
+### 似然比检验
+
+likelihood ratio tests (LRT)
+
+比较两个嵌套模型，log-likelihood (logLL)
+
+![](images/clipboard-317605604.png)
+
+相应的p-value 源自具有  个自由度的 卡方 分布（即模型中测试的参数数量之差）。
+
+
+```{r}
+logit_default_balance
+logit_multiple
+
+
+LRT=2*(logLik(logit_multiple$fit)-logLik(logit_default_balance$fit))
+LRT
+
+pval=1-pchisq(LRT,2)
+pval
+
+out<-anova(logit_default_balance$fit, logit_multiple$fit)
+out
+
+1-pchisq(out$Deviance[2],2)
+```
+
+
 
 ### 有序逻辑回归
 

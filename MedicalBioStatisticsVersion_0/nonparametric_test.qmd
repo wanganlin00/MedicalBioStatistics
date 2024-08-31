@@ -139,9 +139,9 @@ g2rankSum <- sum(rank[121:240])
 
 
 SPSS_威尔科克森W <- min(g1rankSum,g2rankSum)
-
+SPSS_威尔科克森W 
 SPSS_曼惠特尼U <-  SPSS_威尔科克森W -120*121/2
-
+SPSS_曼惠特尼U
 
 wilcox.test(HADS得分 ~ group,data=df,correct=F)
 # SPSS  z统计量
@@ -156,8 +156,17 @@ R有时用较小秩和减去对应 n(n+1)/2，有时用较大秩和减去对应 
 ```{r}
 wilcox.test(HADS得分 ~ group,data=df,exact = F,correct = F)
 
+# SPSS_曼惠特尼U
+g2rankSum-120*121/2
+
+
+# R中W
 g1rankSum-120*121/2
 ```
+
+![](images/clipboard-4012880571.png)
+
+n1\>20
 
 ### Wilcoxon Distribution
 

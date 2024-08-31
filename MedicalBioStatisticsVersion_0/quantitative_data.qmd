@@ -109,21 +109,27 @@ $$
 3.  Skew＜0，负偏态分布，左偏 = 尾部向左延伸；Mode \> Median \> Mean。
 
 ```{r}
-x <- c(1,2,3,5)
-s <- psych::describeBy(x=x,group = NULL)
-s$skew
+x <- c(1,2,3,5,6,10)
 
 skewness <- function(x,na.rm=TRUE){
     if(na.rm) x <- x[!is.na(x)]
     n=length(x)
     μ=mean(x)
     SD=sd(x)
-    sknewness = mean(((x-μ)/SD)^3)
-    return(sknewness=sknewness)
+    
+    return(c(population_sknewness = mean(((x-μ)/SD)^3),
+             sample_sknewness = sum(((x-μ)/SD)^3)*n/(n-1)/(n-2)))
 }
 skewness(x)
 
-e1071::skewness(x)
+
+e1071::skewness(x,type = 2)  # 样本偏度
+e1071::skewness(x,type = 3)  # 总体偏度
+
+e1071::skewness(x,type = 1)   # 无偏偏度
+moments::skewness(x)
+
+
 ```
 
 #### 样本偏度（Sample Skewness）
@@ -159,18 +165,18 @@ $$
 3.  超额峰度＞0，数据分布与正态分布相比较为高尖。
 
 ```{r}
-s$kurtosis
 
 kurtosis<-function(x,na.rm=TRUE){
     if(na.rm) x<-x[!is.na(x)]
     n=length(x)
     μ=mean(x)
     SD=sd(x)
-    kurtosis= mean(((x-μ)/SD)^4)-3
-    return(kurtosis=kurtosis)
+    return(c(population_kurtosis= mean(((x-μ)/SD)^4)-3,
+             sample_kurtosis = sum(((x-μ)/SD)^4)*n*(n+1)/(n-1)/(n-2)/(n-3)-3*(n-1)^2/(n-2)/(n-3)))
 }
 kurtosis(x)
-e1071::kurtosis(x)
+e1071::kurtosis(x,type = 3)# 默认
+e1071::kurtosis(x,type = 2)
 ```
 
 #### 样本峰度（Sample Kurtosis）
@@ -184,7 +190,8 @@ $$
 ## 标准化变换
 
 ```{r}
-scale(mtcars$mpg,center = T,scale = T) %>%  tibble(normalization = .) %>% 
+scale(mtcars$mpg,center = T,scale = T) %>%  
+    tibble(normalization = .) %>% 
     DT::datatable()
 ```
 

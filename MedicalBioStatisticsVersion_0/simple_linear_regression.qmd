@@ -8,16 +8,12 @@ $$
 
 其中， Y 是因变量，X 是自变量矩阵，β 是回归系数，ϵ 是误差项。
 
-一般线性模型中，其自变量全部为固定效应自变量，3点假设：
-
-1.  正态性，因变量y服从正态分布。
-2.  独立性，各例观测值Y~i~ 之间相互独立。
-3.  方差齐性，Y方差相等或 残差e 服从N（0，σ^2^）
+![](images/clipboard-3394376202.png)
 
 ```{r}
 library(tidymodels)
 library(patchwork)
-library(ggfortify)
+library(ggfortify, quietly = T)
 ```
 
 [数据下载网站](https://www.statlearning.com/resources-second-edition)
@@ -51,11 +47,10 @@ lm_spec
 ```{r}
 lm_tv <- lm_spec %>%  fit(sales ~ TV, data = advertising)
 # 模型摘要
-lm_tv
 summary(lm_tv$fit)
 
 # 参数估计值、标准误、统计量、p值
-broom::tidy(lm_tv)
+broom::tidy(lm_tv, conf.int=T)
 # 模型统计信息
 broom::glance(lm_tv) 
 ```
@@ -83,9 +78,14 @@ ggplot(tidy_lm, aes(x = estimate, y = term)) +
 # 预测
 stats::predict(lm_tv, new_data = advertising) %>% 
     head(n = 10)
+
+# 置信区间 平均响应值       取决于方差和样本量     随样本量增加收缩
 predict(lm_tv, new_data = advertising, type = "conf_int") %>% 
     head(n = 10)
 
+# 单个新观测值         主要取决于方差
+predict(lm_tv, new_data = advertising, type = "pred_int") %>% 
+    head(n = 10)
 
 
 # 比较观测值与预测值
@@ -94,7 +94,18 @@ augment(lm_tv, new_data = advertising) %>%
     head(n = 10)
 ```
 
-#### 最小二乘法
+```         
+predict(lm_tv$fit, new_data = advertising, interval = "confidence") %>% 
+    head(n = 10)
+predict(lm_tv$fit, new_data = advertising, interval = "prediction") %>% 
+    head(n = 10)
+```
+
+## 线性回归假设
+
+一般线性模型中，其自变量全部为固定效应自变量，3点假设：
+
+1.  线性度
 
 保证各实测点到回归直线的纵向距离的平方和最小，即使得残差平方和最小。
 
@@ -112,9 +123,15 @@ augment(lm_tv, new_data = advertising) %>%
         intercept = coef(lm_tv$fit)[1],
         slope = coef(lm_tv$fit)[2],
         color = "blue",
-        size = 1
+        linewidth = 1
     )
 ```
+
+2.  同方差性：残差具有常数方差
+
+3.  残差的正态性
+
+4.  观测的独立性：通常通过审查研究设计来调查
 
 ## 模型诊断
 
@@ -124,9 +141,7 @@ autoplot(lm_tv, which = 1:6, ncol = 2, label.size = 3)
 
 ### 残差图
 
-预测值与残差的关系
-
-线性
+预测值与残差的关系，线性度，同方差
 
 ```{r}
 # 检查线性回归模型的残差是否与预测值无关，即残差的分布是否随机。
@@ -151,7 +166,7 @@ tibble(
     ggplot(aes(sample=StandardizedResiduals)) +
     stat_qq(pch=21)+
     stat_qq_line(color="red",lty=2)+
-    labs(x = "Theoretical Quantiles", y = "Standardized residuals")
+    labs(x = "Theoretical Quantiles", y = "Sample quantiles")
 
 ```
 
@@ -180,6 +195,21 @@ tibble(
 ```
 
 ### Cook's距离
+
+![](images/clipboard-3518341286.png)
+
+```{r}
+set.seed(1011)
+x<-rnorm(9)               #random 9 values
+x[10]<-5                  #value far from the others
+y<-rnorm(10,0.5+2*x,1)   #generate y
+
+#plot the data
+lmodel<-lm(y~x)           #fit the model
+plot(x,y)                 #plot the data
+abline(line(x,y))        # add the regression line
+influence.measures(lmodel)   
+```
 
 ```{r}
 plot(lm_tv$fit,4)  
@@ -210,6 +240,26 @@ tibble(
 ```
 
 ### 残差-杠杆值图
+
+![](images/clipboard-4075353060.png)
+
+```{r}
+
+influence(lmodel)$hat     #leverage
+
+
+1/10 + (x-mean(x))^2/(var(x)*9)  #leverage manually computed 
+```
+
+![](images/clipboard-2970344240.png)
+
+```{r}
+influence(lmodel)$coefficients     #DFBETA
+
+dfbeta(lmodel)  
+#computing the DFBETA manually for the 10th observation
+coef(lm(y~x)) - coef(lm(y[-10]~x[-10]))
+```
 
 ```{r}
 plot(lm_tv$fit,5)  
