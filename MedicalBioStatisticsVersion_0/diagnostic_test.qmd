@@ -7,9 +7,7 @@ m<- matrix(c("TP","FN","FP","TN"),nrow = 2,
 print(m)
 ```
 
-## 基本特征
-
-### 灵敏度（Sensitivity）
+## 灵敏度（Sensitivity）
 
 真阳性率：指在所有真实状况为阳性的样本中，被正确识别出阳性的比例。
 
@@ -19,13 +17,13 @@ $$
 
 其中TP 是真阳性的数量，FN 是假阴性的数量。
 
-假阴性率(FNR) /漏诊率
+### 假阴性率(FNR) /漏诊率
 
 $$
 FNR=1-Se
 $$
 
-### 特异度（Specificity）
+## 特异度（Specificity）
 
 真阴性率：指在所有真实状况为阴性的样本中，被正确识别出阴性的比例。
 
@@ -35,7 +33,7 @@ $$
 
 其中 TN 是真阴性的数量，FP 是假阳性的数量。
 
-假阳性率(FPR) /误诊率
+### 假阳性率(FPR) /误诊率
 
 $$ FPR=1-Sp $$
 
@@ -66,7 +64,7 @@ accuracy <- chisq.test(observed_accuracy,correct = F)
 accuracy
 ```
 
-### Youden's Index
+## Youden's Index
 
 $$
 J=Se-FPR =Se+Sp-1,J[1,-1]
@@ -78,9 +76,9 @@ $$
 
 3.  J≤0 表示没有诊断价值
 
-### Likelihood Ratio
+## Likelihood Ratio
 
-正似然比
+### 正似然比
 
 $$
 LR+=\frac{Se}{FPR}=\frac{Se}{1-Sp}
@@ -90,7 +88,7 @@ $$
 
 2.  LR+=1表示诊断无效
 
-负似然比
+### 负似然比
 
 $$
 LR-=\frac{FNR}{Sp}=\frac{1-Sp}{Sp}
@@ -100,7 +98,7 @@ $$
 
 2.  LR-=1表示诊断无效
 
-### 预测值
+## 预测值
 
 ```{r}
 m
@@ -126,7 +124,7 @@ $\chi^2$配对检验
 
 $\chi^2$检验
 
-## 一致性agreement
+## 一致性（agreement）
 
 准确度（Accuracy）：指测试正确地分类（阳性或阴性）的样本占总样本的比例。
 
@@ -172,7 +170,7 @@ print(paste("AUC:", auc_value))
 
 ### AUC
 
-\$ A=P(X\>Y) \$
+**A=P(X\>Y)**
 
 $$
 S(X,Y)=
@@ -183,7 +181,9 @@ S(X,Y)=
 \end{cases}
 $$
 
-\$ \hat A=\frac{1}{n_0n_1}\sum\_1\^{n_1}\sum\_1\^{n_0}S(X,Y) \$
+$$
+\hat A=\frac{1}{n_0n_1}\sum_1^{n1}\sum_1^{n_0}S(X, Y)
+$$
 
 ### 分组AUC的比较
 

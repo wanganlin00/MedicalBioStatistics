@@ -1,1 +1,29 @@
 # 观察性研究设计
+
+<https://ehsanx.github.io/Scientific-Writing-for-Health-Research/>
+
+## **PICOT Framework**
+
+The PICOT framework helps to structure a specific and clear research question by focusing on five key elements:
+
+| Element | Description                                                                           | Example                               |
+|:--------|:--------------------------------------------------------------------------------------|:--------------------------------------|
+| P       | Population of Interest: Who is the target group you are studying?                     | US adults                             |
+| I       | Intervention: What is the main action, treatment, or variable you're looking at?      | Effect of having rheumatoid arthritis |
+| C       | Comparison: Are you comparing the intervention against a control group or usual care? | People without rheumatoid arthritis   |
+| O       | Outcome of Interest: What specifically do you want to measure?                        | Rate of cardiovascular diseases       |
+| T       | Time Frame: Over what time period will your study take place?                         | 1999–2018                             |
+
+## **FINER Criteria**
+
+Once we have formulated your research question with the help of the PICOT elements, we should evaluate it using the FINER criteria:
+
+| Element | Description                                                                             |
+|:--------|:----------------------------------------------------------------------------------------|
+| F       | Feasible: Is it possible to conduct this research with available resources?             |
+| I       | Interesting: Is the research question intriguing to the scientific community?           |
+| N       | Novel: Is the question original and not already thoroughly researched?                  |
+| E       | Ethical: Is the research ethically sound?                                               |
+| R       | Relevant: Is the research currently needed or will it fill a gap in existing knowledge? |
+
+## Statistical Analysis Plan (SAP)

@@ -464,7 +464,7 @@
     "href": "PropensityScore.html#psapsa_shiny",
     "title": "倾向性评分",
     "section": "psa::psa_shiny()",
-    "text": "psa::psa_shiny()\n\nCodepsa::psa_shiny()",
+    "text": "psa::psa_shiny()\n\nShow the codepsa::psa_shiny()",
     "crumbs": [
       "倾向性评分"
     ]
@@ -573,7 +573,7 @@
     "href": "diagnostic_test.html",
     "title": "\n25  诊断性测试\n",
     "section": "",
-    "text": "25.1 基本特征",
+    "text": "25.1 灵敏度（Sensitivity）\n真阳性率：指在所有真实状况为阳性的样本中，被正确识别出阳性的比例。\n\\[\nSe=\\frac{TP}{TP+FN}\n\\]\n其中TP 是真阳性的数量，FN 是假阴性的数量。",
     "crumbs": [
       "研究设计",
       "<span class='chapter-number'>25</span>  <span class='chapter-title'>诊断性测试</span>"
@@ -594,8 +594,8 @@
     "objectID": "diagnostic_test.html#一致性agreement",
     "href": "diagnostic_test.html#一致性agreement",
     "title": "\n25  诊断性测试\n",
-    "section": "\n25.2 一致性agreement",
-    "text": "25.2 一致性agreement\n准确度（Accuracy）：指测试正确地分类（阳性或阴性）的样本占总样本的比例。\n\\[\nAccuracy=\\frac{TP+TN}{N}\n\\]\nkappa 系数\n\\[\n\\kappa =\\frac{Accuracy-[(a+b)(a+c)+(c+d)(b+d)]/N^2}{1-[(a+b)(a+c)+(c+d)(b+d)]/N^2}\n\\]\n\nκ=1表示完全一致\nκ=-1表示完全不一致\nκ=0表示一致性与偶然一致性Pe相同\n\n通常κ＞0.7即可以认为两种诊断方法有较好的一致性",
+    "section": "\n25.6 一致性（agreement）",
+    "text": "25.6 一致性（agreement）\n准确度（Accuracy）：指测试正确地分类（阳性或阴性）的样本占总样本的比例。\n\\[\nAccuracy=\\frac{TP+TN}{N}\n\\]\nkappa 系数\n\\[\n\\kappa =\\frac{Accuracy-[(a+b)(a+c)+(c+d)(b+d)]/N^2}{1-[(a+b)(a+c)+(c+d)(b+d)]/N^2}\n\\]\n\nκ=1表示完全一致\nκ=-1表示完全不一致\nκ=0表示一致性与偶然一致性Pe相同\n\n通常κ＞0.7即可以认为两种诊断方法有较好的一致性",
     "crumbs": [
       "研究设计",
       "<span class='chapter-number'>25</span>  <span class='chapter-title'>诊断性测试</span>"
@@ -605,8 +605,359 @@
     "objectID": "diagnostic_test.html#roc曲线receiver-operating-characteristic-curve",
     "href": "diagnostic_test.html#roc曲线receiver-operating-characteristic-curve",
     "title": "\n25  诊断性测试\n",
-    "section": "\n25.3 ROC曲线（Receiver Operating Characteristic Curve）",
-    "text": "25.3 ROC曲线（Receiver Operating Characteristic Curve）\nROC曲线（Receiver Operating Characteristic Curve）：是一个图形工具，用于展示不同阈值下灵敏度和特异度之间的关系。曲线下面积（AUC）越接近1，表示测试的性能越好。\n\nCodelibrary(pROC)\n\nroc_data &lt;- aSAH %&gt;%\n    dplyr::filter(gender == \"Female\") %&gt;%\n    roc(outcome, s100b)\n\n\n\n# 绘制ROC曲线\nplot(roc_data, print.thres = \"best\", print.thres.pattern = \"Best cutoff: %.2f\", main = \"ROC Curve\")\n\n\n\n\n\n\nCode\n\n# 计算AUC\nauc_value &lt;- auc(roc_data)\nprint(paste(\"AUC:\", auc_value))\n#&gt; [1] \"AUC: 0.72\"\n\n\n\n25.3.1 AUC\n$ A=P(X&gt;Y) $\n\\[\nS(X,Y)=\n\\begin{cases}\n1,\\ \\ \\ \\  X&gt;Y\\\\\n1/2,X=Y\\\\\n0,\\ \\ \\ \\ X&lt;Y\\\\\n\\end{cases}\n\\]\n$ A=_1^{n_1}_1^{n_0}S(X,Y) $\n\n25.3.2 分组AUC的比较\n完全随机设计\n\\[\nZ=\\frac{\\hat A_1-\\hat A_2}{\\sqrt{Var(\\hat A_1)+Var(\\hat A_2)}}\n\\]\n配对样本设计\n\\[\nZ=\\frac{\\hat A_1-\\hat A_2}{\\sqrt{Var(\\hat A_1)+Var(\\hat A_2)-2Cov(\\hat A_1,\\hat A_2)}}\n\\]",
+    "section": "\n25.7 ROC曲线（Receiver Operating Characteristic Curve）",
+    "text": "25.7 ROC曲线（Receiver Operating Characteristic Curve）\nROC曲线（Receiver Operating Characteristic Curve）：是一个图形工具，用于展示不同阈值下灵敏度和特异度之间的关系。曲线下面积（AUC）越接近1，表示测试的性能越好。\n\nShow the codelibrary(pROC)\n\nroc_data &lt;- aSAH %&gt;%\n    dplyr::filter(gender == \"Female\") %&gt;%\n    roc(outcome, s100b)\n\n\n\n# 绘制ROC曲线\nplot(roc_data, print.thres = \"best\", print.thres.pattern = \"Best cutoff: %.2f\", main = \"ROC Curve\")\n\n\n\n\n\n\nShow the code\n\n# 计算AUC\nauc_value &lt;- auc(roc_data)\nprint(paste(\"AUC:\", auc_value))\n#&gt; [1] \"AUC: 0.72\"\n\n\n\n25.7.1 AUC\nA=P(X&gt;Y)\n\\[\nS(X,Y)=\n\\begin{cases}\n1,\\ \\ \\ \\  X&gt;Y\\\\\n1/2,X=Y\\\\\n0,\\ \\ \\ \\ X&lt;Y\\\\\n\\end{cases}\n\\]\n\\[\n\\hat A=\\frac{1}{n_0n_1}\\sum_1^{n1}\\sum_1^{n_0}S(X, Y)\n\\]\n\n25.7.2 分组AUC的比较\n完全随机设计\n\\[\nZ=\\frac{\\hat A_1-\\hat A_2}{\\sqrt{Var(\\hat A_1)+Var(\\hat A_2)}}\n\\]\n配对样本设计\n\\[\nZ=\\frac{\\hat A_1-\\hat A_2}{\\sqrt{Var(\\hat A_1)+Var(\\hat A_2)-2Cov(\\hat A_1,\\hat A_2)}}\n\\]",
+    "crumbs": [
+      "研究设计",
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>诊断性测试</span>"
+    ]
+  },
+  {
+    "objectID": "correlation.html",
+    "href": "correlation.html",
+    "title": "\n15  相关性\n",
+    "section": "",
+    "text": "15.1 分类变量\n如果独立性检验的结果表明两个变量之间不独立，那么如何量化它们之间相关性的强弱?",
+    "crumbs": [
+      "概率论与数理统计",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>相关性</span>"
+    ]
+  },
+  {
+    "objectID": "correlation.html#分类变量",
+    "href": "correlation.html#分类变量",
+    "title": "\n15  相关性\n",
+    "section": "",
+    "text": "15.1.1 Phi 系数、列联系数和 Cramer’s V 系数\n\nvcd 包里的函数 assocstats( )可以用来计算列联表的 Phi 系数、列联系数和 Cramer’s V 系数。其中， Phi 系数只适用于四格表。 　　\n\nCodelibrary(vcd)\nmytable &lt;- table(Arthritis$Sex, Arthritis$Treatment)\nassocstats(mytable)\n#&gt;                      X^2 df P(&gt; X^2)\n#&gt; Likelihood Ratio 0.73748  1  0.39047\n#&gt; Pearson          0.73653  1  0.39078\n#&gt; \n#&gt; Phi-Coefficient   : 0.094 \n#&gt; Contingency Coeff.: 0.093 \n#&gt; Cramer's V        : 0.094\n\n\n\n15.1.2 Kappa 统计量\n对于配对列联表，可以计算一致性指标 Kappa 统计量。 epiDisplay 包里的函数 kap( )可以用于计算一致性的比例以及 Kappa 统计量的值 　　 　　\n\nCodemy.matrix &lt;- matrix(c(11, 2, 12, 33), nrow = 2)\nsum(my.matrix)\n#&gt; [1] 58\nvcd::Kappa(my.matrix)\n#&gt;            value    ASE     z Pr(&gt;|z|)\n#&gt; Unweighted 0.455 0.1153 3.945 7.97e-05\n#&gt; Weighted   0.455 0.1153 3.945 7.97e-05\nepiDisplay::kap(my.matrix)\n#&gt; \n#&gt;  Table for calculation of kappa\n#&gt;    A  B\n#&gt; A 11 12\n#&gt; B  2 33\n#&gt; \n#&gt; Observed agreement = 75.86 % \n#&gt; Expected agreement = 55.71 % \n#&gt; Kappa = 0.455 \n#&gt; Standard error = 0.121 , Z = 3.762 , P value = &lt; 0.001 \n#&gt; \n\n\n　　共 58 个对象，每一对象用两种检测方法检测，其中11 个对象的两种检测结果都为阳性， 33 个对象的两种检测结果都是阴性，所以总一致性为 (11 + 33)/58 ≈ 75.86% 。\n\nCodechisq.test(my.matrix)$expected\n#&gt;          [,1]     [,2]\n#&gt; [1,] 5.155172 17.84483\n#&gt; [2,] 7.844828 27.15517\n\n\n　为了解释期望一致性和 Kappa 值的含义，先计算各个单元格的期望频数。 对角线上的这两个单元格对应的期望频数分别约为5.155172 和27.15517 ，因此期望一致性为 (5.155172+27.15517)/58≈ 55.71% 。期望一致性是假定两种方法的检测结果都是完全随机的情况下的 一致性。也就是说，即使两种检测方法都毫无作用，平均也能达到 55.71% 的一致性。 Kappa 统计量是超出随机的一致性的部分占最大可能超出随机的一致性的比例。在本例中，前者为 75.86% − 55.71% ， 后者为 100% − 55.71% 。 因此， Kappa 值为 (75.86 - 55.71)/(100 - 55.71) ≈ 0.455\n\n15.1.3 马赛克图\n　　马赛克图中的矩形面积正比于多维列联表中单元格的频率 　　\n\nCodemosaicplot(mytable,xlab =\"Sex\",ylab =  \"Treatment\",las = 1)\n\n\n\n\n\n\nCodemosaicplot(my.matrix)",
+    "crumbs": [
+      "概率论与数理统计",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>相关性</span>"
+    ]
+  },
+  {
+    "objectID": "correlation.html#连续变量",
+    "href": "correlation.html#连续变量",
+    "title": "\n15  相关性\n",
+    "section": "\n15.2 连续变量",
+    "text": "15.2 连续变量\n如果两个连续变量不相互独立时，使用协方差（covariance）来描述两个变量的关系。\n协方差（或相关系数）为零，不相关，不存在线性关系，但可能存在非线性关系。\n\nCodedf &lt;- mpg[,c(3,8,9)]\ncov(df)    # 协方差矩阵\n#&gt;           displ      cty       hwy\n#&gt; displ  1.669158 -4.39069 -5.893111\n#&gt; cty   -4.390690 18.11307 24.225432\n#&gt; hwy   -5.893111 24.22543 35.457779\n\n\n\n15.2.0.1 相关系数\n相关系数的取值范围： \\([-1,1]\\)\n\\[\nr(X,Y)=\\frac {\\sum_{i=1}^n (x_i-\\bar x)(y_i-\\bar y)}{\\sqrt{\\sum_{i=1}^n (x_i-\\bar x)^2 \\sum_{i=1}^n (y_i-\\bar y)^2}}\n\\]\n\nCode# Pearson's 积差相关系数 　　一般要求两个连续变量都服从正态分布\ncor(df,use = \"everything\",method=\"pearson\") # default\n#&gt;           displ        cty        hwy\n#&gt; displ  1.000000 -0.7985240 -0.7660200\n#&gt; cty   -0.798524  1.0000000  0.9559159\n#&gt; hwy   -0.766020  0.9559159  1.0000000\n\ncorrelation::correlation(df,method = \"pearson\",p_adjust = \"holm\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nParameter1\nParameter2\nr\nCI\nCI_low\nCI_high\nt\ndf_error\np\nMethod\nn_Obs\n\n\n\ndispl\ncty\n-0.7985240\n0.95\n-0.8406782\n-0.7467508\n-20.20515\n232\n0\nPearson correlation\n234\n\n\ndispl\nhwy\n-0.7660200\n0.95\n-0.8142727\n-0.7072539\n-18.15085\n232\n0\nPearson correlation\n234\n\n\ncty\nhwy\n0.9559159\n0.95\n0.9433129\n0.9657663\n49.58470\n232\n0\nPearson correlation\n234\n\n\n\n\n\nCode\n# Spearman's rank相关系数  　　非参数\ncor(df,method = \"spearman\")\n#&gt;            displ        cty        hwy\n#&gt; displ  1.0000000 -0.8809049 -0.8266576\n#&gt; cty   -0.8809049  1.0000000  0.9542104\n#&gt; hwy   -0.8266576  0.9542104  1.0000000\n\ncorrelation::correlation(df,method = \"spearman\",p_adjust = \"holm\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nParameter1\nParameter2\nrho\nCI\nCI_low\nCI_high\nS\np\nMethod\nn_Obs\n\n\n\ndispl\ncty\n-0.8809049\n0.95\n-0.9073926\n-0.8474471\n4016568.96\n0\nSpearman correlation\n234\n\n\ndispl\nhwy\n-0.8266576\n0.95\n-0.8643401\n-0.7797446\n3900726.77\n0\nSpearman correlation\n234\n\n\ncty\nhwy\n0.9542104\n0.95\n0.9406973\n0.9647003\n97781.21\n0\nSpearman correlation\n234\n\n\n\n\n\nCode\n# Kendall's tau相关系数  　　非参数\ncor(df,method = \"kendall\")\n#&gt;            displ        cty        hwy\n#&gt; displ  1.0000000 -0.7210828 -0.6536974\n#&gt; cty   -0.7210828  1.0000000  0.8628045\n#&gt; hwy   -0.6536974  0.8628045  1.0000000\ncorrelation::correlation(df,method = \"kendall\",p_adjust = \"holm\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nParameter1\nParameter2\ntau\nCI\nCI_low\nCI_high\nz\np\nMethod\nn_Obs\n\n\n\ndispl\ncty\n-0.7210828\n0.95\n-0.7596258\n-0.6774923\n-15.53533\n0\nKendall correlation\n234\n\n\ndispl\nhwy\n-0.6536974\n0.95\n-0.6999287\n-0.6020109\n-14.13933\n0\nKendall correlation\n234\n\n\ncty\nhwy\n0.8628045\n0.95\n0.8392948\n0.8830936\n18.39871\n0\nKendall correlation\n234\n\n\n\n\n\n\n\n15.2.0.2 相关图（correlogram）\n\nCodeggcorrplot::ggcorrplot(\n    corr = cor(df,use = \"everything\",method=\"pearson\") ,\n    lab = T\n)\n\n\n\n\n\n\n\n\n15.2.0.3 显著性检验\n　　零假设为变量之间不相关（即两个总体的相关系数为 0 ） 。函数 cor.test( ) 可用于对相关系数进行显著性检 验。\n统计量\n\\[\nt=\\frac{r\\sqrt{n-2}}{\\sqrt{1-r^2}}\n\\]\n\nCodecor.test(df$displ,df$hwy)\n#&gt; \n#&gt;  Pearson's product-moment correlation\n#&gt; \n#&gt; data:  df$displ and df$hwy\n#&gt; t = -18.151, df = 232, p-value &lt; 2.2e-16\n#&gt; alternative hypothesis: true correlation is not equal to 0\n#&gt; 95 percent confidence interval:\n#&gt;  -0.8142727 -0.7072539\n#&gt; sample estimates:\n#&gt;      cor \n#&gt; -0.76602\n\n\npsych包corr.test() 计算相关系数矩阵和显著性检验\n\nCodepsych::corr.test(df)\n#&gt; Call:psych::corr.test(x = df)\n#&gt; Correlation matrix \n#&gt;       displ   cty   hwy\n#&gt; displ  1.00 -0.80 -0.77\n#&gt; cty   -0.80  1.00  0.96\n#&gt; hwy   -0.77  0.96  1.00\n#&gt; Sample Size \n#&gt; [1] 234\n#&gt; Probability values (Entries above the diagonal are adjusted for multiple tests.) \n#&gt;       displ cty hwy\n#&gt; displ     0   0   0\n#&gt; cty       0   0   0\n#&gt; hwy       0   0   0\n#&gt; \n#&gt;  To see confidence intervals of the correlations, print with the short=FALSE option\n\nprint(psych::corr.test(df), short = FALSE)\n#&gt; Call:psych::corr.test(x = df)\n#&gt; Correlation matrix \n#&gt;       displ   cty   hwy\n#&gt; displ  1.00 -0.80 -0.77\n#&gt; cty   -0.80  1.00  0.96\n#&gt; hwy   -0.77  0.96  1.00\n#&gt; Sample Size \n#&gt; [1] 234\n#&gt; Probability values (Entries above the diagonal are adjusted for multiple tests.) \n#&gt;       displ cty hwy\n#&gt; displ     0   0   0\n#&gt; cty       0   0   0\n#&gt; hwy       0   0   0\n#&gt; \n#&gt;  Confidence intervals based upon normal theory.  To get bootstrapped values, try cor.ci\n#&gt;           raw.lower raw.r raw.upper raw.p lower.adj upper.adj\n#&gt; displ-cty     -0.84 -0.80     -0.75     0     -0.85     -0.74\n#&gt; displ-hwy     -0.81 -0.77     -0.71     0     -0.81     -0.71\n#&gt; cty-hwy        0.94  0.96      0.97     0      0.94      0.97",
+    "crumbs": [
+      "概率论与数理统计",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>相关性</span>"
+    ]
+  },
+  {
+    "objectID": "chi-square_test.html",
+    "href": "chi-square_test.html",
+    "title": "\n13  \\(\\chi^2\\) 检验\n",
+    "section": "",
+    "text": "13.1 卡方分布\n卡方分布可以通过原假设，得到一个统计量来表示期望结果和实际结果之间的偏离程度，进而根据分布，自由度和假设成立的情况，得出观察频率极值的发生概率（比当前统计结果更加极端的概率）。计算方法是对概率分布中的每个频率，用期望频数和实际频数差的平方除以期望频数，最后把所有结果相加。\n\\[ \\chi^2=\\sum \\frac {(O-E)^2} {E} \\]\n得到的统计量结果越大，说明差别越显著，数值越小说明观察和期望的差别越小，当观察频数和期望频数一致是卡方为0。其实就是在比较观测到的比例和期望的比例的关系。\nCodeggplot() + xlim(-10,10) +\n    geom_function(mapping = aes(color=\"normal Distribution\"),\n                  fun = dnorm, args = list(mean = 0, sd = 1),\n                   )+\n    geom_function(mapping = aes(color=\"chi-square Distribution\"),\n                  fun = dchisq, args = list(df = 1 ,ncp=0), \n                 )+\n    scale_color_manual(values = c(\"normal Distribution\" = \"red\",\n                                  \"chi-square Distribution\" = \"blue\"))+\n    labs(color = \"Distribution\")\n卡方分布就可以用来检验某个分类变量各类的出现概率是否等于指定概率，可以检验数据的拟合优度（指定的一组数据与指定分布的吻合度），也可以用来检验两个变量的独立性（两个变量之间是否存在某种关联）。\n在使用卡方检验时，需要的一个参数被称为自由度，指的是独立变量的个数（组数减去限制数）。通常，二项分布已知 \\(\\pi\\) ，泊松分布已知 \\(\\lambda\\) ，正态分布已知 \\(\\mu\\) 和 \\(\\sigma^2\\) 时的自由度是n-1。进行独立性检验时，n行m列联列表的自由度是(n-1) x (m-1)。\nPearson’s \\(\\chi^2\\) 检验 用于检验涉及双向无序多分类变量的概率或比例。",
+    "crumbs": [
+      "概率论与数理统计",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>$\\chi^2$ 检验</span>"
+    ]
+  },
+  {
+    "objectID": "chi-square_test.html#列联表",
+    "href": "chi-square_test.html#列联表",
+    "title": "\n13  \\(\\chi^2\\) 检验\n",
+    "section": "\n13.2 2×2列联表",
+    "text": "13.2 2×2列联表\n独立性：判断两个或多个分类变量之间是否存在关联或取值互不影响，分析联合概率分布是否可以分解为各自概率分布的乘积。\n\n13.2.1 卡方检验\n对于频数表中每个单元格的期望频数都比较大（大于 5）的大样本，correct设为FALSE,不进行连续校正。\n\nCodex &lt;- matrix(c(97,73,7,30),2,dimnames = list(c(\"experiment\",\"control\"),c(\"+\",\"-\")))\nx\n#&gt;             +  -\n#&gt; experiment 97  7\n#&gt; control    73 30\n\n(k1 &lt;- chisq.test(x,correct = F))\n#&gt; \n#&gt;  Pearson's Chi-squared test\n#&gt; \n#&gt; data:  x\n#&gt; X-squared = 17.681, df = 1, p-value = 2.612e-05\n\n# 期望频数列联表\nk1$expected\n#&gt;                   +        -\n#&gt; experiment 85.41063 18.58937\n#&gt; control    84.58937 18.41063\n\nk1$parameter # degrees of freedom\n#&gt; df \n#&gt;  1\n\n\n\n13.2.2 Yate’s 校正\n某些单元格的期望频数接近于或小于 5 时，进行 Yates’ 连续校正以修正卡方统计量提高准确性。\n\nCodex &lt;- matrix(c(1004, 325, 20, 1), 2, \n            dimnames = list(c(\"experiment\", \"control\"), c(\"+\", \"-\")))\nx\n#&gt;               +  -\n#&gt; experiment 1004 20\n#&gt; control     325  1\n\nchisq.test(x,correct = F)$expected\n#&gt;                    +         -\n#&gt; experiment 1008.0711 15.928889\n#&gt; control     320.9289  5.071111\n\n# 校正\n(k2 &lt;- chisq.test(x,correct = T))\n#&gt; \n#&gt;  Pearson's Chi-squared test with Yates' continuity correction\n#&gt; \n#&gt; data:  x\n#&gt; X-squared = 3.3678, df = 1, p-value = 0.06648\n\n\n\n13.2.3 Fisher’s Exact 检验\nFisher 精确概率检验（Fisher’s Exact Test）通常在以下情况中使用：\n\n总样本数 n 小于 40；\n列联表中任何一个单元格的期望频数小于 5。\n\n\nCodex &lt;- matrix(c(7,2,7,17),2,dimnames = list(c(\"A\",\"B\"),c(\"Yes\",\"No\")))\nx\n#&gt;   Yes No\n#&gt; A   7  7\n#&gt; B   2 17\n\n(k5 &lt;- fisher.test(x))\n#&gt; \n#&gt;  Fisher's Exact Test for Count Data\n#&gt; \n#&gt; data:  x\n#&gt; p-value = 0.01914\n#&gt; alternative hypothesis: true odds ratio is not equal to 1\n#&gt; 95 percent confidence interval:\n#&gt;   1.134346 96.442876\n#&gt; sample estimates:\n#&gt; odds ratio \n#&gt;   7.892809\n chisq.test(x)\n#&gt; \n#&gt;  Pearson's Chi-squared test with Yates' continuity correction\n#&gt; \n#&gt; data:  x\n#&gt; X-squared = 4.4985, df = 1, p-value = 0.03393\n\nE &lt;- chisq.test(x)$expected\n\nchisq &lt;- sum((x-E)^2/E)\nchisq \n#&gt; [1] 6.332237\n\np_value_asymptotic &lt;- 1 - pchisq(chisq, df = 1)\n\n\n\n13.2.4 超几何分布\n\n\nCode\ntibble(\n    x = -10:10,\n    y_hyper = dhyper(x, m = 10,n = 7,k = 8),\n) %&gt;% \n    ggplot()+\n    geom_col(aes(x=x,y = y_hyper,color=\"Hypergeometric Distribution\"),fill=NA)+\n    geom_function(aes(color=\"Normal Distribution\"),\n                  fun= dnorm, args = list(mean = 0, sd = 1))+\n    scale_color_manual(values = c(\"Normal Distribution\" = \"red\",\n                                  \"Hypergeometric Distribution\" = \"blue\"))+\n    labs(color = \"Distribution\")",
+    "crumbs": [
+      "概率论与数理统计",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>$\\chi^2$ 检验</span>"
+    ]
+  },
+  {
+    "objectID": "chi-square_test.html#配对四格表",
+    "href": "chi-square_test.html#配对四格表",
+    "title": "\n13  \\(\\chi^2\\) 检验\n",
+    "section": "\n13.3 配对四格表",
+    "text": "13.3 配对四格表\n\n13.3.1 二项分布\n\nCode\ntibble(\n    x = -5:15,\n    y_binom = dbinom(x, size = 10,prob = 0.5),\n) %&gt;% \nggplot()+\n    geom_col(aes(x=x,y=y_binom,color=\"binomal Distribution\"),fill=NA)+\n    geom_function(mapping = aes(color=\"normal Distribution\"),\n                  fun = dnorm, args = list(mean = 5, sd = 1),\n                   )+\n    scale_color_manual(values = c(\"normal Distribution\" = \"red\",\n                                  \"binomal Distribution\" = \"blue\"))+\n    labs(color = \"Distribution\")\n\n\n\n\n\n\n\n\n13.3.2 McNemar’s 检验\n20 &lt; b+c =5 + 34 &lt; 40\n\nCodex &lt;- matrix(c(36,34,5,135),2,dimnames = list(c(\"A+\",\"A-\"),c(\"B+\",\"B-\")))\nx\n#&gt;    B+  B-\n#&gt; A+ 36   5\n#&gt; A- 34 135\n\n(k3 &lt;- mcnemar.test(x,correct = F))\n#&gt; \n#&gt;  McNemar's Chi-squared test\n#&gt; \n#&gt; data:  x\n#&gt; McNemar's chi-squared = 21.564, df = 1, p-value = 3.422e-06\n\n\n# 对于配对四格表，如果样本量较小（不一致的结果的总数小于 40 ） ，则需要进行连续性校正。\n(k4 &lt;- mcnemar.test(x,correct = T))\n#&gt; \n#&gt;  McNemar's Chi-squared test with continuity correction\n#&gt; \n#&gt; data:  x\n#&gt; McNemar's chi-squared = 20.103, df = 1, p-value = 7.34e-06\n\n\n\nCode#　　某实验室分别用免疫荧光法和乳胶凝集法对 58 名疑似系统性红斑狼疮患者血清中抗 核抗体进行测定\nresult&lt;- matrix(c(11, 2, 12, 33), nrow = 2,dimnames = list(c(\"+\",\"-\"),c(\"+\",\"-\")))\nresult\n#&gt;    +  -\n#&gt; + 11 12\n#&gt; -  2 33\n\n#　　对于配对四格表，如果样本量较小（不一致的结果的总数小于 40 ） ，则需要进行连续性校正。\nmcnemar.test(result,correct = TRUE)\n#&gt; \n#&gt;  McNemar's Chi-squared test with continuity correction\n#&gt; \n#&gt; data:  result\n#&gt; McNemar's chi-squared = 5.7857, df = 1, p-value = 0.01616\n\n\n\n13.3.3 精确 McNemar’s 检验\nb+c = 7 + 1 &lt;20\n二项分布B（b+c，0.5），k=min（b，c）\n\\[\nP=\\sum_{i≤k} p_i\n\\]\n\nCodex &lt;- matrix(c(3,1,7,9),2,dimnames = list(c(\"A+\",\"A-\"),c(\"B+\",\"B-\")))\nx\n#&gt;    B+ B-\n#&gt; A+  3  7\n#&gt; A-  1  9\n\nP_two_sided &lt;- 2*sum(dbinom(x=0:1,size = 8,prob = 0.5))\nP_two_sided\n#&gt; [1] 0.0703125",
+    "crumbs": [
+      "概率论与数理统计",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>$\\chi^2$ 检验</span>"
+    ]
+  },
+  {
+    "objectID": "chi-square_test.html#rc列联表",
+    "href": "chi-square_test.html#rc列联表",
+    "title": "\n13  \\(\\chi^2\\) 检验\n",
+    "section": "\n13.4 R×C列联表",
+    "text": "13.4 R×C列联表\n\n13.4.1 卡方检验\n在 R×C 列联表的情况下，如果表中的单元格期望频数满足以下条件：\n\n期望频数 T &lt; 5 的单元格不超过 1/5。\n没有单元格期望频数 T &lt; 1 。\n\n那么可以选择不进行连续校正\n\nCodex &lt;- matrix(c(150,184,198,50,16,2),3,dimnames = list(c(\"A\",\"B\",\"C\"),c(\"Yes\",\"No\")))\nx\n#&gt;   Yes No\n#&gt; A 150 50\n#&gt; B 184 16\n#&gt; C 198  2\n\n(k &lt;- chisq.test(x,correct = F))\n#&gt; \n#&gt;  Pearson's Chi-squared test\n#&gt; \n#&gt; data:  x\n#&gt; X-squared = 60.637, df = 2, p-value = 6.806e-14\n\n\n\nCode(k &lt;- chisq.test(x,correct = T))\n#&gt; \n#&gt;  Pearson's Chi-squared test\n#&gt; \n#&gt; data:  x\n#&gt; X-squared = 60.637, df = 2, p-value = 6.806e-14\nk$expected\n#&gt;        Yes       No\n#&gt; A 177.3333 22.66667\n#&gt; B 177.3333 22.66667\n#&gt; C 177.3333 22.66667\n\n\n\n13.4.2 多重比较\n\\[\n\\alpha'=\\frac {\\alpha}{比较的次数=\\frac{k(k-1)}{2}}\n\\]\n\n13.4.2.1 卡方分割法\n卡方分割法与Bonferroni方法调整p值是两种不同的统计分析方法，主要用于处理多重比较问题。它们的区别如下： 1. 卡方分割法 - 定义：卡方分割法通常用于对卡方检验结果进行后续分析，以确定哪些具体的类别或组之间存在显著差异。该方法基于检验统计量在每对比较中的分布进行分析。 - 应用：常用于发现哪些特定组（行或列）之间存在差异，通常需要进行后续的成对比较。 - 目的：帮助识别在显著性结果中，具体是哪些组之间存在显著差异。\n\n13.4.2.2 Bonferroni方法\n\n定义：Bonferroni方法是一种用于控制多重比较的显著性水平的校正方法。在进行多次假设检验时，原始的显著性水平（例如0.05）会被除以比较次数，从而得出新的显著性水平。\n应用：适用于多个独立检验结果的显著性水平调整，以减少因多重比较导致的假阳性率。\n目的：降低第一类错误的概率（即假阳性），确保在多次检验中保持整体的显著性水平。\n卡方分割法更侧重于分析具体的类别差异，而Bonferroni方法则专注于调整p值以控制错误率。\n如果你已经通过卡方检验发现某些组之间有显著差异，卡方分割法可以帮助你进一步了解哪些组之间有差异。而Bonferroni方法在初步检验前就帮助控制多重比较的问题，确保分析结果的可靠性。 ’\n\n\nCode\n# 创建频率矩阵\ndata &lt;- matrix(c(251, 225,\n                 368, 347,\n                 132, 16,\n                 54, 22,\n                 9, 18,\n                 21, 110,\n                 4, 30,\n                 46, 93), \n               nrow = 8, \n               byrow = TRUE)\n\n# 为矩阵添加行和列名称\nrownames(data) &lt;- c(\"团队\", \"球员\", \"教练\", \"品牌\", \"管理\", \"历史\", \"文化\", \"其他\")\ncolnames(data) &lt;- c(\"Period 1\", \"Period 2\")\n\n# 执行卡方检验\nchi_square_result &lt;- chisq.test(data, correct=T)\n\n# 显示结果\nprint(chi_square_result)\n#&gt; \n#&gt;  Pearson's Chi-squared test\n#&gt; \n#&gt; data:  data\n#&gt; X-squared = 205.38, df = 7, p-value &lt; 2.2e-16\n\n# 提取卡方值，自由度和p值\nchi_square_value &lt;- chi_square_result$statistic\ndegrees_of_freedom &lt;- chi_square_result$parameter\np_value &lt;- chi_square_result$p.value\n\n# 打印结果\ncat(\"卡方值:\", chi_square_value, \"\\n\")\n#&gt; 卡方值: 205.3786\ncat(\"自由度:\", degrees_of_freedom, \"\\n\")\n#&gt; 自由度: 7\ncat(\"显著性水平 (p值):\", p_value, \"\\n\")\n#&gt; 显著性水平 (p值): 8.326236e-41\n\n\n# 进行多重卡方检验\nchi_square_results &lt;- apply(data, 1, function(x) chisq.test(matrix(x, nrow=2)))\n\n# 提取卡方，自由度，p值\n\nX2 &lt;-  sapply(chi_square_results, function(x) x$statistic)\n\np_values &lt;- sapply(chi_square_results, function(x) x$p.value)\n\ndf &lt;- sapply(chi_square_results, function(x) x$parameter)\n\n# 多重比较调整\nadjusted_p_values &lt;- p.adjust(p_values, method = \"bonferroni\")\n\nsignifcance &lt;- case_when(\n    \n    adjusted_p_values&lt;0.001 ~ \"***\",\n    adjusted_p_values&lt;0.01 ~ \"**\",\n    adjusted_p_values&lt;0.05 ~ \"*\",\n    .default = \"ns\"\n    \n)\n    \n    \n    \nresults &lt;- tibble(\n    dimension = rownames(data),\n    chisq_statistic = X2,\n    p_value = p_values,\n    p_adjust = adjusted_p_values,\n    signifcance = signifcance\n)\n\nprint(results)\n#&gt; # A tibble: 8 × 5\n#&gt;   dimension chisq_statistic  p_value p_adjust signifcance\n#&gt;   &lt;chr&gt;               &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;      \n#&gt; 1 团队                1.42  2.33e- 1 1   e+ 0 ns         \n#&gt; 2 球员                0.617 4.32e- 1 1   e+ 0 ns         \n#&gt; 3 教练               90.9   1.50e-21 1.20e-20 ***        \n#&gt; 4 品牌               13.5   2.42e- 4 1.94e- 3 **         \n#&gt; 5 管理                3     8.33e- 2 6.66e- 1 ns         \n#&gt; 6 历史               60.5   7.49e-15 5.99e-14 ***        \n#&gt; 7 文化               19.9   8.24e- 6 6.59e- 5 ***        \n#&gt; 8 其他               15.9   6.71e- 5 5.36e- 4 ***",
+    "crumbs": [
+      "概率论与数理统计",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>$\\chi^2$ 检验</span>"
+    ]
+  },
+  {
+    "objectID": "chi-square_test.html#拟合优度检验",
+    "href": "chi-square_test.html#拟合优度检验",
+    "title": "\n13  \\(\\chi^2\\) 检验\n",
+    "section": "\n13.5 拟合优度检验",
+    "text": "13.5 拟合优度检验\nPearson’s \\(\\chi^2\\) goodness-of-fit test",
+    "crumbs": [
+      "概率论与数理统计",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>$\\chi^2$ 检验</span>"
+    ]
+  },
+  {
+    "objectID": "chi-square_test.html#cochran-mantel-haenszel-chi2-检验",
+    "href": "chi-square_test.html#cochran-mantel-haenszel-chi2-检验",
+    "title": "\n13  \\(\\chi^2\\) 检验\n",
+    "section": "\n13.6 Cochran-Mantel-Haenszel \\(\\chi^2\\) 检验",
+    "text": "13.6 Cochran-Mantel-Haenszel \\(\\chi^2\\) 检验\n又叫行均分检验，常用于按照某个变量进行分层后的检验，用于检验两个有序分类变量是否存在线性相关，但实际上用途很广泛，比如因变量是有序变量的单向有序列联表，也可以用。　　\n两个变量的关联有可能受到第三个变量的影响，因此我们有必要检验两个分类变量在 调整（控制）第三个变量的情况下是否独立。 Cochran-Mantel-Haenszel χ 2 检验常用于探索 变量间的混杂因素。其零假设是：两个分类变量在第三个变量的每一层都是条件独立的。函数 mantelhaen.test( ) 可以用来进行该检验。\n\nCodeRabbits &lt;-\narray(c(0, 0, 6, 5,\n        3, 0, 3, 6,\n        6, 2, 0, 4,\n        5, 6, 1, 0,\n        2, 5, 0, 0),\n      dim = c(2, 2, 5),\n      dimnames = list(\n          Delay = c(\"None\", \"1.5h\"),\n          Response = c(\"Cured\", \"Died\"),\n          Penicillin.Level = c(\"1/8\", \"1/4\", \"1/2\", \"1\", \"4\")))\nRabbits\n#&gt; , , Penicillin.Level = 1/8\n#&gt; \n#&gt;       Response\n#&gt; Delay  Cured Died\n#&gt;   None     0    6\n#&gt;   1.5h     0    5\n#&gt; \n#&gt; , , Penicillin.Level = 1/4\n#&gt; \n#&gt;       Response\n#&gt; Delay  Cured Died\n#&gt;   None     3    3\n#&gt;   1.5h     0    6\n#&gt; \n#&gt; , , Penicillin.Level = 1/2\n#&gt; \n#&gt;       Response\n#&gt; Delay  Cured Died\n#&gt;   None     6    0\n#&gt;   1.5h     2    4\n#&gt; \n#&gt; , , Penicillin.Level = 1\n#&gt; \n#&gt;       Response\n#&gt; Delay  Cured Died\n#&gt;   None     5    1\n#&gt;   1.5h     6    0\n#&gt; \n#&gt; , , Penicillin.Level = 4\n#&gt; \n#&gt;       Response\n#&gt; Delay  Cured Died\n#&gt;   None     2    0\n#&gt;   1.5h     5    0\n\nmantelhaen.test(Rabbits)\n#&gt; \n#&gt;  Mantel-Haenszel chi-squared test with continuity correction\n#&gt; \n#&gt; data:  Rabbits\n#&gt; Mantel-Haenszel X-squared = 3.9286, df = 1, p-value = 0.04747\n#&gt; alternative hypothesis: true common odds ratio is not equal to 1\n#&gt; 95 percent confidence interval:\n#&gt;   1.026713 47.725133\n#&gt; sample estimates:\n#&gt; common odds ratio \n#&gt;                 7",
+    "crumbs": [
+      "概率论与数理统计",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>$\\chi^2$ 检验</span>"
+    ]
+  },
+  {
+    "objectID": "qualitative_data.html",
+    "href": "qualitative_data.html",
+    "title": "\n2  定性数据的统计描述\n",
+    "section": "",
+    "text": "2.0.1 率\n率（rate）表示在一定空间或时间范围内某现象的发生数与可能发生的总数之比，说明某现象出现的频率。\n标准化率（standardized rate）",
+    "crumbs": [
+      "描述性统计学",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>定性数据的统计描述</span>"
+    ]
+  },
+  {
+    "objectID": "qualitative_data.html#构成比",
+    "href": "qualitative_data.html#构成比",
+    "title": "\n2  定性数据的统计描述\n",
+    "section": "\n2.1 构成比",
+    "text": "2.1 构成比\n构成比（proportion）",
+    "crumbs": [
+      "描述性统计学",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>定性数据的统计描述</span>"
+    ]
+  },
+  {
+    "objectID": "qualitative_data.html#相对比",
+    "href": "qualitative_data.html#相对比",
+    "title": "\n2  定性数据的统计描述\n",
+    "section": "\n2.2 相对比",
+    "text": "2.2 相对比\n相对比（relative ratio）是A和B两个有关联指标值之比。\nUsing R for Biomedical Statistics\n\n\n相对危险度 （Relative Risk，RR），是指暴露组人群的发病率与非暴露组人群的发病率之比。RR 用于反映暴露因素与结局事件的关联程度， 其 取值范围为 0 到无穷大。数值为 1 时，表明暴露因素与结局事件无关联；小于 1 时，表 明暴露因素导致结局事件的发生率降低；大于 1 时，表明暴露因素导致结局事件的发生率增加。相对风险适用于前瞻性队列研究。\n\nCodex &lt;- matrix(c(156,9421,1531,14797),nrow=2,byrow=TRUE,\n             dimnames = list(c(\"Exposed\",\"Unexposed\"),c(\"Disease\",\"Control\")))\n\nx\n#&gt;           Disease Control\n#&gt; Exposed       156    9421\n#&gt; Unexposed    1531   14797\n# RR\n156/(156+9421)*(1531+14797)/1531\n#&gt; [1] 0.1737212\nsource(\"function/calcRelativeRisk.R\")\ncalcRelativeRisk(x,alpha=0.05)\n#&gt; [1] \"category = Exposed , relative risk =  0.173721236521721\"\n#&gt; [1] \"category = Exposed ,  95 % confidence interval = [ 0.147624440337197 , 0.204431379720742 ]\"\n\n# OR\n156/9421/(1531/14797)\n#&gt; [1] 0.1600391\nsource(\"function/calcOddsRatio.R\")\ncalcOddsRatio(x,alpha = 0.05)\n#&gt; [1] \"category = Exposed , odds ratio =  0.160039091621751\"\n#&gt; [1] \"category = Exposed ,  95 % confidence interval = [ 0.135460641900536 , 0.189077140693912 ]\"\n\n\n\n\n优势比（Odds Ratio，OR），是指暴露组中病例与非病例人数的比值除以非暴露组中病例与非病例人数的比值。　　OR 的取值范围也为 0 到无穷大。如果 OR 值大于 1 ，说明该暴露因素更 容易导致结果事件发生，或者说该因素是一个危险因素；小于 1 ，则说明该暴露因素更不 容易导致结果事件发生，或者说该因素是一个保护因素。比值比适用于队列研究和病例对照研究。\n\nCodey &lt;- matrix(c(30,24,76,241,82,509),nrow=3,byrow=TRUE,\n            dimnames = list(c(\"Exposure1\",\"Exposure2\",\"Unexposed\"),\n                            c(\"Disease\",\"Control\")))\ny\n#&gt;           Disease Control\n#&gt; Exposure1      30      24\n#&gt; Exposure2      76     241\n#&gt; Unexposed      82     509\ncalcOddsRatio(y, referencerow=3)\n#&gt; [1] \"category = Exposure1 , odds ratio =  7.75914634146342\"\n#&gt; [1] \"category = Exposure1 ,  95 % confidence interval = [ 4.32163714854064 , 13.9309131884372 ]\"\n#&gt; [1] \"category = Exposure2 , odds ratio =  1.95749418075094\"\n#&gt; [1] \"category = Exposure2 ,  95 % confidence interval = [ 1.38263094540732 , 2.77137111707344 ]\"\ncalcRelativeRisk(y, referencerow=3)\n#&gt; [1] \"category = Exposure1 , relative risk =  4.00406504065041\"\n#&gt; [1] \"category = Exposure1 ,  95 % confidence interval = [ 2.93130744422409 , 5.46941498113737 ]\"\n#&gt; [1] \"category = Exposure2 , relative risk =  1.72793721628068\"\n#&gt; [1] \"category = Exposure2 ,  95 % confidence interval = [ 1.30507489771431 , 2.2878127750653 ]\"",
+    "crumbs": [
+      "描述性统计学",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>定性数据的统计描述</span>"
+    ]
+  },
+  {
+    "objectID": "qualitative_data.html#列联表",
+    "href": "qualitative_data.html#列联表",
+    "title": "\n2  定性数据的统计描述\n",
+    "section": "\n2.3 列联表",
+    "text": "2.3 列联表\n\nCodeeg &lt;- matrix(c(156,9421,1531,14797),nrow=2,byrow=TRUE)\ncolnames(eg) &lt;- c(\"Disease\",\"Control\")\nrownames(eg) &lt;- c(\"Exposed\",\"Unexposed\")\nprint(eg)\n#&gt;           Disease Control\n#&gt; Exposed       156    9421\n#&gt; Unexposed    1531   14797\nprop.table(eg)          #各单元格比例\n#&gt;               Disease   Control\n#&gt; Exposed   0.006022003 0.3636750\n#&gt; Unexposed 0.059100560 0.5712025\nprop.table(eg,margin = 1)        #行比例 \n#&gt;              Disease   Control\n#&gt; Exposed   0.01628903 0.9837110\n#&gt; Unexposed 0.09376531 0.9062347",
+    "crumbs": [
+      "描述性统计学",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>定性数据的统计描述</span>"
+    ]
+  },
+  {
+    "objectID": "qualitative_data.html#边际列联表",
+    "href": "qualitative_data.html#边际列联表",
+    "title": "\n2  定性数据的统计描述\n",
+    "section": "\n2.4 边际列联表",
+    "text": "2.4 边际列联表\n\nCode# 边际\nmargin.table(x=eg,margin = 2)      #列和\n#&gt; Disease Control \n#&gt;    1687   24218\naddmargins(eg)          #添加行和、列和\n#&gt;           Disease Control   Sum\n#&gt; Exposed       156    9421  9577\n#&gt; Unexposed    1531   14797 16328\n#&gt; Sum          1687   24218 25905\naddmargins(eg,1)        #添加列和\n#&gt;           Disease Control\n#&gt; Exposed       156    9421\n#&gt; Unexposed    1531   14797\n#&gt; Sum          1687   24218\naddmargins(eg,2)        #添加行和\n#&gt;           Disease Control   Sum\n#&gt; Exposed       156    9421  9577\n#&gt; Unexposed    1531   14797 16328\naddmargins(prop.table(eg,1))\n#&gt;              Disease   Control Sum\n#&gt; Exposed   0.01628903 0.9837110   1\n#&gt; Unexposed 0.09376531 0.9062347   1\n#&gt; Sum       0.11005434 1.8899457   2\n\nftable(eg)   # \"平铺式\"列联表\n#&gt;            Disease Control\n#&gt;                           \n#&gt; Exposed        156    9421\n#&gt; Unexposed     1531   14797",
+    "crumbs": [
+      "描述性统计学",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>定性数据的统计描述</span>"
+    ]
+  },
+  {
+    "objectID": "qualitative_data.html#混淆矩阵",
+    "href": "qualitative_data.html#混淆矩阵",
+    "title": "\n2  定性数据的统计描述\n",
+    "section": "\n2.5 混淆矩阵",
+    "text": "2.5 混淆矩阵",
+    "crumbs": [
+      "描述性统计学",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>定性数据的统计描述</span>"
+    ]
+  },
+  {
+    "objectID": "ANOVA.html",
+    "href": "ANOVA.html",
+    "title": "\n10  方差分析\n",
+    "section": "",
+    "text": "10.1 单因素组间方差分析",
+    "crumbs": [
+      "概率论与数理统计",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>方差分析</span>"
+    ]
+  },
+  {
+    "objectID": "ANOVA.html#单因素组间方差分析",
+    "href": "ANOVA.html#单因素组间方差分析",
+    "title": "\n10  方差分析\n",
+    "section": "",
+    "text": "10.1.1 计算公式\n\n\n\n\n因子A有\\(A_1,A_2,...,A_k\\)共k个水平\ntotal sum of squares\n\\[\nSS_T=\\sum_{j=1}^{k}\\sum_{i=1}^{n_j}X_{ij}^2-\\frac{(\\sum_{j=1}^{k}\\sum_{i=1}^{n_j}X_{ij})^2}{n}=SS_{组间}+SS_{组内}\n\\]\nbetween groups sum of squares \\[\nSS_{组间}=\\sum_{j=1}^{k}\\frac{(\\sum_{i=1}^{n_j}X_{ij})^2}{n_j}-\\frac{(\\sum_{j=1}^{k}\\sum_{i=1}^{n_j}X_{ij})^2}{n}\n\\]\n自由度\\(\\nu=n-1,\\nu_{组间}=k-1,\\nu_{组内}=\\sum_{j=1}^{k}(n_j-1)=n-k\\)\nBetween groups mean square \\(MS_{组间}=\\frac{SS_{组间}}{k-1}\\)\nWithin groups mean square \\(MS_{组内}=\\frac{SS_{组内}}{n-k}\\)\n\\[H_0:\\mu_1=\\mu_2=...=\\mu_k\\]\n\\[\n\\frac{SS_T}{\\sigma^2}\\sim \\chi^2(\\nu),\\nu=n-1\n\\] \\[\n\\frac{SS_{组内}}{\\sigma^2}\\sim \\chi^2(\\nu),\\nu=n-k\n\\] 因此，\n\\[\n\\frac{SS_{组间}}{\\sigma^2}=\\frac{SS_T}{\\sigma^2}-\\frac{SS_{组内}}{\\sigma^2}\\ \\ \\ \\sim \\chi^2(\\nu),\\nu=k-1\n\\]\n检验统计量\n\\[\nF=\\frac{\\frac{SS_{组间}}{(k-1)\\sigma^2}}{\\frac{SS_{组内}}{(n-k)\\sigma^2}}=\\frac{\\frac{SS_{组间}}{k-1}}{\\frac{SS_{组内}}{n-k}}=\\frac{MS_{组间}}{MS_{组内}}\\ \\ \\ \\sim \\chi^2(\\nu),\\nu=k-1\n\\]\n\n\n\n\n\nCodedf &lt;- tibble(\n    low=c(53.5,43.7,46.5,50.3,56.1),\n    medium=c(33.2,30.6,23.9,26.4,35.9),\n    high=c(11.5,21.9,18.6,13.6,9.5)\n)\n\n\n\n10.1.2 手算\n\nCodek &lt;- 3\ndf_sum &lt;- sum(df)\ndf_sum_square &lt;- sum(df^2)\nn &lt;- 15\nC &lt;- df_sum^2/n\n\nSS_T &lt;- df_sum_square-C\nSS_between &lt;- apply(df, 2, function(x) sum(sum(x)^2/length(x))) |&gt; sum()-C\n\nSS_within &lt;- SS_T-SS_between\n\nMS_between &lt;- SS_between/(k-1)\nMS_within &lt;- SS_within/(n-k)\nF_stat &lt;-MS_between/MS_within \n\np_value &lt;- pf(F_stat,2,12,lower.tail = F)\n\n\n\n10.1.3 stats::aov()\n\n\nCodedf_long &lt;- df |&gt; pivot_longer(cols = everything(),\n                              names_to = \"level\",\n                              values_to = \"value\")\ndf_long$level &lt;- factor(df_long$level)\ndf_aov &lt;- aov(value~level,data = df_long)\n\nanova(df_aov)\n\n\n\n\n\nDf\nSum Sq\nMean Sq\nF value\nPr(&gt;F)\n\n\n\nlevel\n2\n3083.668\n1541.83400\n61.24546\n5e-07\n\n\nResiduals\n12\n302.096\n25.17467\nNA\nNA\n\n\n\n\n\n\n\n10.1.4 ez::ezANOVA()\n\n\nCodedf_long &lt;- df_long |&gt; rowid_to_column(var = \"id\") |&gt; \n    relocate(id,.before = 1) |&gt; mutate(id=factor(id))\n\nez::ezANOVA(data = df_long,\n            dv = value,\n            wid = id,\n            between = level,\n            type = 3,\n            detailed = T)\n#&gt; $ANOVA\n#&gt;        Effect DFn DFd       SSn     SSd         F            p p&lt;.05       ges\n#&gt; 1 (Intercept)   1  12 15054.336 302.096 597.99545 1.318663e-11     * 0.9803277\n#&gt; 2       level   2  12  3083.668 302.096  61.24546 5.045797e-07     * 0.9107746\n#&gt; \n#&gt; $`Levene's Test for Homogeneity of Variance`\n#&gt;   DFn DFd        SSn   SSd           F         p p&lt;.05\n#&gt; 1   2  12 0.05733333 92.36 0.003724556 0.9962835\n\n\n\n10.1.5 stats::lm()\n\n\nCodelm_aov &lt;- lm(formula = value ~  level, data = df_long)\nlm_aov\n#&gt; \n#&gt; Call:\n#&gt; lm(formula = value ~ level, data = df_long)\n#&gt; \n#&gt; Coefficients:\n#&gt; (Intercept)     levellow  levelmedium  \n#&gt;       15.02        35.00        14.98\n\nanova(lm_aov)\n\n\n\n\n\nDf\nSum Sq\nMean Sq\nF value\nPr(&gt;F)\n\n\n\nlevel\n2\n3083.668\n1541.83400\n61.24546\n5e-07\n\n\nResiduals\n12\n302.096\n25.17467\nNA\nNA\n\n\n\n\n\nCode\nmodel.matrix(~ level, data = df_long)\n#&gt;    (Intercept) levellow levelmedium\n#&gt; 1            1        1           0\n#&gt; 2            1        0           1\n#&gt; 3            1        0           0\n#&gt; 4            1        1           0\n#&gt; 5            1        0           1\n#&gt; 6            1        0           0\n#&gt; 7            1        1           0\n#&gt; 8            1        0           1\n#&gt; 9            1        0           0\n#&gt; 10           1        1           0\n#&gt; 11           1        0           1\n#&gt; 12           1        0           0\n#&gt; 13           1        1           0\n#&gt; 14           1        0           1\n#&gt; 15           1        0           0\n#&gt; attr(,\"assign\")\n#&gt; [1] 0 1 1\n#&gt; attr(,\"contrasts\")\n#&gt; attr(,\"contrasts\")$level\n#&gt; [1] \"contr.treatment\"\nlm(formula = value ~ 0 + level, data = df_long)\n#&gt; \n#&gt; Call:\n#&gt; lm(formula = value ~ 0 + level, data = df_long)\n#&gt; \n#&gt; Coefficients:\n#&gt;   levelhigh     levellow  levelmedium  \n#&gt;       15.02        50.02        30.00\nmodel.matrix(~ 0 + level, data = df_long)\n#&gt;    levelhigh levellow levelmedium\n#&gt; 1          0        1           0\n#&gt; 2          0        0           1\n#&gt; 3          1        0           0\n#&gt; 4          0        1           0\n#&gt; 5          0        0           1\n#&gt; 6          1        0           0\n#&gt; 7          0        1           0\n#&gt; 8          0        0           1\n#&gt; 9          1        0           0\n#&gt; 10         0        1           0\n#&gt; 11         0        0           1\n#&gt; 12         1        0           0\n#&gt; 13         0        1           0\n#&gt; 14         0        0           1\n#&gt; 15         1        0           0\n#&gt; attr(,\"assign\")\n#&gt; [1] 1 1 1\n#&gt; attr(,\"contrasts\")\n#&gt; attr(,\"contrasts\")$level\n#&gt; [1] \"contr.treatment\"\n\n\n\n10.1.6 事后检验\n成对比较的数量 \\(N=\\frac{k!}{2!(k-2)!},k≥3\\)，导致犯第Ⅰ类错误的概率迅速增加，\\([1-(1-\\alpha)^N]\\)。\n\n10.1.6.1 Tukey’s test\nTukey’s test 也被称为Tukey’s honestly significant difference (Tukey’s HSD) test。\n\nk个均值从大到小排列；\n均值最大的组依次与均值最小，第二小，……，第二大比较；\n均值第二大的组以同样的方式比较；\n以此类推\n在各组样本量相等的情况下，如果在两个均值之间未发现显著差异，则推断这两个均值所包含的任何均值之间不存在显著差异，并且不再检验所包含均值之间的差异。\n\nstudentized range statistic \\(q=\\frac{\\bar X_{max}-\\bar X_{min}}{S_{\\bar X_{max}-\\bar X_{min}}}\\)，其中\\(S_{\\bar X_{max}-\\bar X_{min}}=\\sqrt{\\frac{MS_{组内}}{n}}\\)，\\(n\\)是每一个治疗组的样本量。\n如果各组样本量不等,则\\(S_{\\bar X_{max}-\\bar X_{min}}=\\sqrt{\\frac{MS_{组内}}{2}(\\frac{1}{n_i}+\\frac{1}{n_j})}\\)\n检验统计量\n\\[\nHSD=q_{(k,\\nu_{组内}),1-\\alpha} \\times S_{\\bar X_{max}-\\bar X_{min}},\\nu_{组内}=k(n_j-1)\n\\]\n对于任意i,j且\\(\\bar X_i＞\\bar X_j\\)，如果\\(\\bar X_i-\\bar X_j＞HSD\\)，那么拒绝\\(H_0\\)，说明这两组存在显著差异。\n\\[\nH_0:\\mu_i=\\mu_j(i≠j)\n\\]\n\nCodek_means &lt;- apply(df,2,mean) |&gt; sort(,decreasing = TRUE)\nk_means\n#&gt;    low medium   high \n#&gt;  50.02  30.00  15.02\n\n# 附录q  q(3,12),1-0.05  3(5-1)=12\nq_critical_value &lt;- 3.77\nnj &lt;- 5\nHSD &lt;- q_critical_value*sqrt(MS_within/nj)\n\nk_means\n#&gt;    low medium   high \n#&gt;  50.02  30.00  15.02\ndiff_means &lt;- c()\nnames_diff_means &lt;- c()\n\nfor(i in 1:(length(k_means)-1)){\n    for(j in length(k_means):(i+1)){\n        diff_value &lt;- k_means[i] - k_means[j]\n        diff_means &lt;- c(diff_means, diff_value)\n        names_diff_means &lt;- c(names_diff_means, paste(names(k_means)[i], \"vs.\", names(k_means)[j],sep = \"_\"))\n    }\n}\nnames(diff_means) &lt;- names_diff_means\ndiff_means\n#&gt;    low_vs._high  low_vs._medium medium_vs._high \n#&gt;           35.00           20.02           14.98\n#全为真，3组成对比较都存在显著差异\ndiff_means &gt; HSD \n#&gt;    low_vs._high  low_vs._medium medium_vs._high \n#&gt;            TRUE            TRUE            TRUE\n\n\n\nCodepairwise &lt;- TukeyHSD(df_aov)\npairwise\n#&gt;   Tukey multiple comparisons of means\n#&gt;     95% family-wise confidence level\n#&gt; \n#&gt; Fit: aov(formula = value ~ level, data = df_long)\n#&gt; \n#&gt; $level\n#&gt;               diff        lwr       upr     p adj\n#&gt; low-high     35.00  26.534054  43.46595 0.0000003\n#&gt; medium-high  14.98   6.514054  23.44595 0.0013315\n#&gt; medium-low  -20.02 -28.485946 -11.55405 0.0001069\n\n\n\n10.1.6.2 Dunnett’s test\nDunnett’s test也称为q’-test,是两独立样本t-test的一种修正。Dunnett’s test 假设数据符合正态分布，并且各组的方差相等。 控制对照组（C）与其他每个实验组（T）比较。\n\\(H_0:\\mu_C=\\mu_T\\)\n\\[\nq'=\\frac{\\bar X_T-\\bar X_C}{\\sqrt{MS_{组内}(\\frac{1}{n_T}+\\frac{1}{n_C})}} \\sim q'(\\nu,a) \\ \\ \\nu=\\nu_{组内},a=k\n\\]\n临界值 \\(q'_{(a,\\nu_E),1-\\alpha/2}\\)\n\nCodenT &lt;- nC &lt;- 5 \n\nSE_mean_diff &lt;- sqrt(MS_within*(1/nT+1/nC))\n\nk_means\n#&gt;    low medium   high \n#&gt;  50.02  30.00  15.02\ndiff_means &lt;- c()\nnames_diff_means &lt;- c()\n\n# 以 low 作控制组\nfor(i in 2:length(k_means)){\n        diff_value &lt;- k_means[i] - k_means[1]\n        diff_means &lt;- c(diff_means, diff_value)\n        names_diff_means &lt;- c(names_diff_means, paste(names(k_means)[1], \"vs.\", names(k_means)[i],sep = \"_\"))\n}\nnames(diff_means) &lt;- names_diff_means\ndiff_means\n#&gt; low_vs._medium   low_vs._high \n#&gt;         -20.02         -35.00\n\nq撇_stat &lt;- diff_means/SE_mean_diff\n\n# 附录q'  q'(3,12),1-0.05/2  \nabs(q撇_stat)&gt;2.50  \n#&gt; low_vs._medium   low_vs._high \n#&gt;           TRUE           TRUE\n#全为真，各实验组与控制组均存在显著差异\n\n\n\nCodelibrary(multcomp)\ndunnett_result &lt;- glht(df_aov, linfct =mcp(level =c(\"medium - low = 0\", \"high - low = 0\")))\n\n# 查看 Dunnett's test 结果\nsummary(dunnett_result)\n#&gt; \n#&gt;   Simultaneous Tests for General Linear Hypotheses\n#&gt; \n#&gt; Multiple Comparisons of Means: User-defined Contrasts\n#&gt; \n#&gt; \n#&gt; Fit: aov(formula = value ~ level, data = df_long)\n#&gt; \n#&gt; Linear Hypotheses:\n#&gt;                   Estimate Std. Error t value Pr(&gt;|t|)    \n#&gt; medium - low == 0  -20.020      3.173  -6.309 7.46e-05 ***\n#&gt; high - low == 0    -35.000      3.173 -11.030 2.38e-07 ***\n#&gt; ---\n#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n#&gt; (Adjusted p values reported -- single-step method)\n\n\n\n10.1.6.3 LSD-t test\nleast significant difference t-test\n挑选任意感兴趣的两组进行比较\n\\[\nH_0:\\mu_i=\\mu_j(i≠j)\n\\]\n\\[\nLSD-t=\\frac{\\bar X_i-\\bar X_j}{\\sqrt{MS_{组内}(\\frac{1}{n_i}+\\frac{1}{n_j})}} \\sim t(\\nu) \\ ,\\ \\nu=\\nu_{组内}=n-k,a=k\n\\]\n\nCode# medium high\nLSD &lt;- (k_means[2]-k_means[3])/sqrt(MS_within*(1/5+1/5))\n\n# 附录 t(12,1-0.05/2)=2.719",
+    "crumbs": [
+      "概率论与数理统计",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>方差分析</span>"
+    ]
+  },
+  {
+    "objectID": "ANOVA.html#方差分析假设",
+    "href": "ANOVA.html#方差分析假设",
+    "title": "\n10  方差分析\n",
+    "section": "\n10.2 方差分析假设",
+    "text": "10.2 方差分析假设\nhttps://www.statmethods.net/stats/rdiagnostics.html\n\n10.2.1 独立性\n\n10.2.2 正态性\n\nCode# 异常观测点\n\ncar::outlierTest(df_aov) \n#&gt; No Studentized residuals with Bonferroni p &lt; 0.05\n#&gt; Largest |rstudent|:\n#&gt;   rstudent unadjusted p-value Bonferroni p\n#&gt; 6  1.63682            0.12993           NA\n\n\n\n10.2.2.1 直方图/茎叶图\n\n10.2.2.2 P-P图/Q-Q图\n\n10.2.2.3 偏度和峰度\n\\[\nH_0:总体偏度系数\\gamma_1=0 或者总体峰度系数\\gamma_2=0\n\\]\n\\[\nz_i=\\frac{g_i-0}{\\sigma_{g_i}}  \\ \\ \\ \\ 临界值z_{1-\\alpha/2}\n\\]\n\n10.2.2.4 Shapiro-Wilk检验（小样本）\n\nCodeshapiro.test(df$low)  \n#&gt; \n#&gt;  Shapiro-Wilk normality test\n#&gt; \n#&gt; data:  df$low\n#&gt; W = 0.9718, p-value = 0.8867\nshapiro.test(df$medium)  \n#&gt; \n#&gt;  Shapiro-Wilk normality test\n#&gt; \n#&gt; data:  df$medium\n#&gt; W = 0.96762, p-value = 0.8598\nshapiro.test(df$high)  \n#&gt; \n#&gt;  Shapiro-Wilk normality test\n#&gt; \n#&gt; data:  df$high\n#&gt; W = 0.94361, p-value = 0.6916\n\n# 因为观测太少，也可以同时检验\nshapiro.test(c(df$low,df$medium,df$high))  \n#&gt; \n#&gt;  Shapiro-Wilk normality test\n#&gt; \n#&gt; data:  c(df$low, df$medium, df$high)\n#&gt; W = 0.94559, p-value = 0.4578\n\n\n\n10.2.2.5 Kolmogorov-Smirnov检验（Lilliefors correction 大样本）\n\nCodeks.test(c(df$low,df$medium,df$high),\"pnorm\")\n#&gt; \n#&gt;  Exact one-sample Kolmogorov-Smirnov test\n#&gt; \n#&gt; data:  c(df$low, df$medium, df$high)\n#&gt; D = 1, p-value &lt; 2.2e-16\n#&gt; alternative hypothesis: two-sided\nks.test(rnorm(1000),\"pnorm\")\n#&gt; \n#&gt;  Asymptotic one-sample Kolmogorov-Smirnov test\n#&gt; \n#&gt; data:  rnorm(1000)\n#&gt; D = 0.031901, p-value = 0.2607\n#&gt; alternative hypothesis: two-sided\n\n\n\nCodex &lt;- rnorm(50) \ny &lt;- runif(50) \nks.test(x, y)  # perform ks test\n#&gt; \n#&gt;  Exact two-sample Kolmogorov-Smirnov test\n#&gt; \n#&gt; data:  x and y\n#&gt; D = 0.56, p-value = 1.453e-07\n#&gt; alternative hypothesis: two-sided\n\nx &lt;- rnorm(50)\ny &lt;- rnorm(50)\nks.test(x, y) \n#&gt; \n#&gt;  Exact two-sample Kolmogorov-Smirnov test\n#&gt; \n#&gt; data:  x and y\n#&gt; D = 0.2, p-value = 0.2719\n#&gt; alternative hypothesis: two-sided\n\n\n\n10.2.3 方差齐性\nhttp://www.cookbook-r.com/Statistical_analysis/Homogeneity_of_variance/\n\n10.2.3.1 Bartlett’s test\n数据满足正态性\n比较每一组方差的加权算术均值和几何均值。\n\\[\nH_0:\\sigma_1^2=\\sigma_2^2=...=\\sigma_k^2\n\\] 当样本量\\(n_j\\)≥5时，检验统计量(各组样本量相等)\n\\[\nB=\\frac{(n-1)[kln\\bar S^2-\\sum_{j=1}^{k}lnS_j^2]}{1+\\frac{k+1}{3k(n-1)}} \\sim\\ \\chi^2(\\nu)\\ ,\\nu=k-1\n\\] 其中n是每一组的样本量，\\(S_j^2\\)是某一组的样本方差，\\(\\bar S^2\\)是所有k个组样本方差的平均值。\n当各组样本量不等时，\n\\[\nB=\\frac{\\sum_{j=1}^{k}(n_j-1)ln\\frac{\\bar S^2}{S_j^2}}{1+\\frac{1}{3(k-1)}(\\sum_{j=1}^{k}\\frac {1}{n_j-1}-\\frac{1}{\\sum_{j=1}^{k}(n_j-1)})} \\sim\\ \\chi^2(\\nu)\\ ,\\nu=k-1\n\\] 其中\\(h_j\\)是某一组的样本量，\\(\\bar S^2=(\\sum_{j=1}^{k}(n_j-1)S_j^2)/(\\sum_{j=1}^{k}(n_j-1))\\)是所有k个组样本方差的加权平均值。\n\nCoden1=n2=n3=5\nk=3\nS2 &lt;- apply(df,2,var)\nS2\n#&gt;    low medium   high \n#&gt; 25.372 23.895 26.257\n\nlnS2 &lt;- log(S2)\nlnS2\n#&gt;      low   medium     high \n#&gt; 3.233646 3.173669 3.267933\n\nS2_mean &lt;- (5-1)*(sum(S2))/(3*(5-1))\nS2_mean\n#&gt; [1] 25.17467\n\n\n\nB &lt;- ((5-1)*(3*log(S2_mean)-sum(lnS2)))/(1+(3+1)/(3*3*(5-1)))\nB\n#&gt; [1] 0.008159536\n\n\n\nCodebartlett.test(df)\n#&gt; \n#&gt;  Bartlett test of homogeneity of variances\n#&gt; \n#&gt; data:  df\n#&gt; Bartlett's K-squared = 0.0081595, df = 2, p-value = 0.9959\n\n\n\n10.2.3.2 Levene’s test\n数据不满足正态性\n\nk个随机样本是独立的\n随机变量X是连续的\n\nLevene 变换：\n\\[\nZ_{ij}=|X_{ij}-\\bar X_{.\\ j}|(i=1,2...,n_j;\\ j=1,2,...,k)\n\\]\n\nCodeoptions(digits = 2)\nz_df &lt;- bind_cols(\n    low=df[1]-k_means[1],\n    medium=df[2]-k_means[2],\n    high=df[3]-k_means[3]\n) |&gt; abs()\n    \n\nz_df\n\n\n\n\nlow\nmedium\nhigh\n\n\n\n3.48\n3.2\n3.5\n\n\n6.32\n0.6\n6.9\n\n\n3.52\n6.1\n3.6\n\n\n0.28\n3.6\n1.4\n\n\n6.08\n5.9\n5.5\n\n\n\n\n\n\n检验统计量（基于变换后的F检验）\n\\[\nW=\\frac{MS_{组间}}{MS_{组内}}=\\frac{\\sum_jn_j(\\bar Z_{.j}-\\bar Z_{..})^2/(k-1)}{\\sum_j\\sum_i(Z_{ij}-\\bar Z_{.j})^2/(n-k)}  \\sim F(\\nu_1,\\nu_2)   \\ \\ \\ \\ \\nu_1=k-1,\\nu_2=n-k\n\\]\n\nCodev1=3-1\nv2=15-3\n\n\nz.j_mean &lt;- apply(z_df, 2, mean)\nz.j_mean\n#&gt;    low medium   high \n#&gt;    3.9    3.9    4.2\n\nz_mean &lt;- mean(z.j_mean)\nz_mean \n#&gt; [1] 4\n\noptions(digits = 4)\nW &lt;- 12*sum(5*(z.j_mean-z_mean)^2)/(2*(sum((z_df$low-z.j_mean[1])^2)+sum((z_df$medium-z.j_mean[2])^2)+sum((z_df$high-z.j_mean[3])^2)))\n\nW\n#&gt; [1] 0.0254",
+    "crumbs": [
+      "概率论与数理统计",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>方差分析</span>"
+    ]
+  },
+  {
+    "objectID": "ANOVA.html#welchs-anova-test",
+    "href": "ANOVA.html#welchs-anova-test",
+    "title": "\n10  方差分析\n",
+    "section": "\n10.3 Welch’s ANOVA Test",
+    "text": "10.3 Welch’s ANOVA Test",
+    "crumbs": [
+      "概率论与数理统计",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>方差分析</span>"
+    ]
+  },
+  {
+    "objectID": "ANOVA.html#数据变换",
+    "href": "ANOVA.html#数据变换",
+    "title": "\n10  方差分析\n",
+    "section": "\n10.4 数据变换",
+    "text": "10.4 数据变换\n当方差分析的正态性假设或方差齐性假设不为真时，通常使用(1)数据变换方法；(2)非参数检验方法 比较均值差异\n\n10.4.1 平方根变换\n当每个水平组的方差与均值成比例，尤其是样本来自泊松分布\n\\[\nY=\\sqrt{X}\n\\]\n当数据中有零或非常小的值时，\n\\[\nY=\\sqrt{X+a} \\ \\ \\ \\ a=0.5或0.1\n\\]\n\n10.4.2 对数变换\n当数据方差不齐且每个水平组标准差与均值成比例时\n\\[\nY=\\log{X} \\ \\ \\ \\ base=e或10\n\\]\n当数据中有零或负值时，\n\\[\nY=\\log{(X+a)} \\ \\ \\ \\ a为实数，使得X+a&gt;0\n\\]\n\n10.4.3 反正弦平方根变换\n率，服从二项分布\\(B(n,\\pi)\\)\n\\[\nY=\\arcsin {\\sqrt{\\pi}} \\ \\ \\ \\\n\\]",
+    "crumbs": [
+      "概率论与数理统计",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>方差分析</span>"
+    ]
+  },
+  {
+    "objectID": "rate_proportion_test.html",
+    "href": "rate_proportion_test.html",
+    "title": "\n12  比例检验\n",
+    "section": "",
+    "text": "12.1 单总体\n如果样本比较小，则使用二项分布进行统计. 在R中，对于小样本，采用 binom.test()，对于大样本使用正态分布近似二项分布，利用 prop.test()进行分析。 在单样本比例检验中，我们关心的是具有同种特性的两个群体，在该特性总体中所占有的比例情况。\n\\[\nZ=\\frac{p-\\pi_0}{\\sqrt{\\pi_0(1-\\pi_0)/n}}\\sim N(0,1)\n\\]\nCI：\\(\\bar p \\pm z_{1-\\alpha/2}\\sqrt{\\frac{p(1-p)}{n}}\\)\n对于小样本，可以连续校正\n\\[\nZ_{corr}=\\frac{|p-\\pi_0|-1/(2n)}{\\sqrt{\\pi_0(1-\\pi_0)/n}}\\sim N(0,1)\n\\]\n例如，小鼠中公鼠母鼠各有一半，有100只患有某种疾病，其中有公鼠60只，母鼠40只。想知道是否公鼠患病率比母鼠高。在该问题中成功次数为公鼠患病数60，总次数为100，预期比例为50% ( 公母鼠数量相等)\nShow the codep &lt;- 0.6\npi_0 &lt;- 0.5\nn &lt;- 100\nZ &lt;- (p-pi_0)/sqrt(pi_0*(1-pi_0)/n)\nZ_corr &lt;- (p-pi_0-1/(2*n))/sqrt(pi_0*(1-pi_0)/n)\nShow the code# 示例数据\nsuccesses &lt;- 60\ntotal &lt;- 100\np0 &lt;- 0.5\n\n# 使用 prop.test() 函数进行比例检验\nprop.test(\n    x = successes,\n    n = total,\n    p = p0,\n    alternative = \"greater\",\n    correct = F\n)\n#&gt; \n#&gt;  1-sample proportions test without continuity correction\n#&gt; \n#&gt; data:  successes out of total, null probability p0\n#&gt; X-squared = 4, df = 1, p-value = 0.02275\n#&gt; alternative hypothesis: true p is greater than 0.5\n#&gt; 95 percent confidence interval:\n#&gt;  0.5178095 1.0000000\n#&gt; sample estimates:\n#&gt;   p \n#&gt; 0.6\nShow the codeprop.test(\n    x = successes,\n    n = total,\n    p = p0,\n    alternative = \"greater\",\n    correct = T\n)\n#&gt; \n#&gt;  1-sample proportions test with continuity correction\n#&gt; \n#&gt; data:  successes out of total, null probability p0\n#&gt; X-squared = 3.61, df = 1, p-value = 0.02872\n#&gt; alternative hypothesis: true p is greater than 0.5\n#&gt; 95 percent confidence interval:\n#&gt;  0.5127842 1.0000000\n#&gt; sample estimates:\n#&gt;   p \n#&gt; 0.6",
+    "crumbs": [
+      "概率论与数理统计",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>比例检验</span>"
+    ]
+  },
+  {
+    "objectID": "rate_proportion_test.html#两总体",
+    "href": "rate_proportion_test.html#两总体",
+    "title": "\n12  比例检验\n",
+    "section": "\n12.2 两总体",
+    "text": "12.2 两总体\n当样本量较小时(所有np和n(1-p)都小于5)，通常采用非参数检验 Fisher Exact probability test 进行分析。当样本量较大时，使用近似正态分布z检验来进行预测。\n当\\(n_ip_i(1-p_i)≥5,(i=1,2)\\)时，\\(p_i\\dot\\sim N(\\pi_i,\\frac{\\pi_i(1-\\pi_i)}{n_i})\\)\n\\[\n(p_1-p_2)\\dot\\sim N(\\pi_1-\\pi_2,\\frac{\\pi_1(1-\\pi_1)}{n_1}+\\frac{\\pi_2(1-\\pi_2)}{n_2})\n\\]\n\\(H_0:\\pi_1=\\pi_2\\)\n\\[\nZ=\\frac{(p_1-p_2)-(\\pi_1-\\pi_2)}{S_{p_1-p_2}}=\\frac{p_1-p_2}{\\sqrt{p_C(1-p_C)(\\frac{1}{n_1}+\\frac{1}{n_2})}}\\dot\\sim N(0,1)\n\\]\n其中,合并比例\\(p_C=\\frac{n_1p_1+n_2p_2}{n_1+n_2}\\) 。\n如果我们已知两组具有不同特性(A和B)样本的样本量和这两样本中具有某种共同特性(C)的个体数量(也就是知道了C特性各自群体比例和总体比例)，想要计算具有C特性的个体在A特性群体和B特性群体中的比例是否一样，就需要用到双比例检验。\n例如，男生500人，女生500人，其中喜欢阅读的男生有400人，喜欢阅读的女生有460人。男生喜欢阅读的比例是否比女生高。我们假设男生喜欢阅读的比例比女生高，则备择假设是男生喜欢阅读的比例比女生低。\n\nShow the code# 示例数据\nsuccesses1 &lt;- 400\ntotal1 &lt;- 500\nsuccesses2 &lt;- 460\ntotal2 &lt;- 500\n\n# 使用 prop.test() 函数进行两总体比例检验\nprop.test(x = c(successes1, successes2), n = c(total1, total2), alternative = \"less\")\n#&gt; \n#&gt;  2-sample test for equality of proportions with continuity correction\n#&gt; \n#&gt; data:  c(successes1, successes2) out of c(total1, total2)\n#&gt; X-squared = 28.912, df = 1, p-value = 3.787e-08\n#&gt; alternative hypothesis: less\n#&gt; 95 percent confidence interval:\n#&gt;  -1.0000000 -0.0824468\n#&gt; sample estimates:\n#&gt; prop 1 prop 2 \n#&gt;   0.80   0.92\n\n\n功效分析\n\n\\(1-\\beta\\)\n\\(n1,n_2=kn_1\\)",
+    "crumbs": [
+      "概率论与数理统计",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>比例检验</span>"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "医学与生物统计学",
+    "section": "",
+    "text": "推荐阅读\n\nR语言教程 Ⅶ 统计模型 ——李东风\n统计学习 ISLR\nR语言实战医学统计\nhttps://www.tidymodels.org/\n医学研究中的生存数据建模（4e）\nApplied Propensity Score Analysis with R\nModern Statistics for Modern Biology",
+    "crumbs": [
+      "推荐阅读"
+    ]
+  },
+  {
+    "objectID": "simple_linear_regression.html",
+    "href": "simple_linear_regression.html",
+    "title": "\n16  线性回归\n",
+    "section": "",
+    "text": "16.1 一元线性回归\nlinear regression model：\n\\[\nY_i=\\beta_0+ \\beta_1 X_i+\\epsilon_i,其中\\epsilon_i\\sim N(0,\\sigma^2)\n\\]\nShow the code#linear model specification 线性模型规范\nlm_spec &lt;-linear_reg() %&gt;%\n  set_mode(\"regression\") %&gt;%\n  set_engine(\"lm\")  \nlm_spec\n#&gt; Linear Regression Model Specification (regression)\n#&gt; \n#&gt; Computational engine: lm\nShow the codelm_tv &lt;- lm_spec %&gt;%  fit(sales ~ TV, data = advertising)\n# 模型摘要\nsummary(lm_tv$fit)\n#&gt; \n#&gt; Call:\n#&gt; stats::lm(formula = sales ~ TV, data = data)\n#&gt; \n#&gt; Residuals:\n#&gt;     Min      1Q  Median      3Q     Max \n#&gt; -8.3860 -1.9545 -0.1913  2.0671  7.2124 \n#&gt; \n#&gt; Coefficients:\n#&gt;             Estimate Std. Error t value Pr(&gt;|t|)    \n#&gt; (Intercept) 7.032594   0.457843   15.36   &lt;2e-16 ***\n#&gt; TV          0.047537   0.002691   17.67   &lt;2e-16 ***\n#&gt; ---\n#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n#&gt; \n#&gt; Residual standard error: 3.259 on 198 degrees of freedom\n#&gt; Multiple R-squared:  0.6119, Adjusted R-squared:  0.6099 \n#&gt; F-statistic: 312.1 on 1 and 198 DF,  p-value: &lt; 2.2e-16\n\n# 参数估计值、标准误、统计量、p值\nbroom::tidy(lm_tv, conf.int=T)\n\n\n\n\n\n\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\nconf.low\nconf.high\n\n\n\n(Intercept)\n7.0325935\n0.4578429\n15.36028\n0\n6.1297193\n7.9354678\n\n\nTV\n0.0475366\n0.0026906\n17.66763\n0\n0.0422307\n0.0528426\n\n\n\n\n\nShow the code# 模型统计信息\nbroom::glance(lm_tv) \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nr.squared\nadj.r.squared\nsigma\nstatistic\np.value\ndf\nlogLik\nAIC\nBIC\ndeviance\ndf.residual\nnobs\n\n\n0.6118751\n0.6099148\n3.258656\n312.145\n0\n1\n-519.0457\n1044.091\n1053.986\n2102.531\n198\n200",
+    "crumbs": [
+      "推断统计模型",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>线性回归</span>"
+    ]
+  },
+  {
+    "objectID": "simple_linear_regression.html#一元线性回归",
+    "href": "simple_linear_regression.html#一元线性回归",
+    "title": "\n16  线性回归\n",
+    "section": "",
+    "text": "16.1.1 点须图\n\nShow the code\n# 整理回归模型结果\ntidy_lm &lt;- tidy(lm_tv, conf.int=T) %&gt;% dplyr::filter(term !='(Intercept)' )\n# 绘制点须图\nggplot(tidy_lm, aes(x = estimate, y = term)) +\n  geom_point(size = 2, color = \"black\") + # 绘制点\n  geom_errorbarh(aes(xmin = conf.low, \n                     xmax = conf.high), \n                 height = 0, color = \"black\") + # 绘制误差线\n  geom_vline(xintercept = 0, colour = \"grey50\", linetype = 2) + # 绘制参考线\n  labs(x = NULL, y = NULL) \n\n\n\n\n\n\n\n\n16.1.2 预测\n\nShow the code# 预测\nstats::predict(lm_tv, new_data = advertising) %&gt;% \n    head(n = 10)\n\n\n\n\n.pred\n\n\n\n17.970775\n\n\n9.147974\n\n\n7.850224\n\n\n14.234395\n\n\n15.627218\n\n\n7.446162\n\n\n9.765950\n\n\n12.746498\n\n\n7.441409\n\n\n16.530414\n\n\n\n\n\nShow the code\n# 置信区间 平均响应值       取决于方差和样本量     随样本量增加收缩\npredict(lm_tv, new_data = advertising, type = \"conf_int\") %&gt;% \n    head(n = 10)\n\n\n\n\n.pred_lower\n.pred_upper\n\n\n\n17.337774\n18.603775\n\n\n8.439101\n9.856848\n\n\n7.024932\n8.675515\n\n\n13.779384\n14.689405\n\n\n15.138794\n16.115642\n\n\n6.582865\n8.309460\n\n\n9.108530\n10.423370\n\n\n12.270304\n13.222691\n\n\n6.577660\n8.305157\n\n\n15.996715\n17.064114\n\n\n\n\n\nShow the code\n# 单个新观测值         主要取决于方差\npredict(lm_tv, new_data = advertising, type = \"pred_int\") %&gt;% \n    head(n = 10)\n\n\n\n\n.pred_lower\n.pred_upper\n\n\n\n11.5135459\n24.42800\n\n\n2.6828666\n15.61308\n\n\n1.3713181\n14.32913\n\n\n7.7921786\n20.67661\n\n\n9.1825560\n22.07188\n\n\n0.9623058\n13.93002\n\n\n3.3062822\n16.22562\n\n\n6.3027510\n19.19024\n\n\n0.9574921\n13.92533\n\n\n10.0821628\n22.97867\n\n\n\n\n\nShow the code\n\n# 比较观测值与预测值\naugment(lm_tv, new_data = advertising) %&gt;%\n    select(sales, .pred) %&gt;%\n    head(n = 10)\n\n\n\n\nsales\n.pred\n\n\n\n22.1\n17.970775\n\n\n10.4\n9.147974\n\n\n9.3\n7.850224\n\n\n18.5\n14.234395\n\n\n12.9\n15.627218\n\n\n7.2\n7.446162\n\n\n11.8\n9.765950\n\n\n13.2\n12.746498\n\n\n4.8\n7.441409\n\n\n10.6\n16.530414\n\n\n\n\n\n\npredict(lm_tv$fit, new_data = advertising, interval = \"confidence\") %&gt;% \n    head(n = 10)\npredict(lm_tv$fit, new_data = advertising, interval = \"prediction\") %&gt;% \n    head(n = 10)",
+    "crumbs": [
+      "推断统计模型",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>线性回归</span>"
+    ]
+  },
+  {
+    "objectID": "simple_linear_regression.html#线性回归假设",
+    "href": "simple_linear_regression.html#线性回归假设",
+    "title": "\n16  线性回归\n",
+    "section": "\n16.2 线性回归假设",
+    "text": "16.2 线性回归假设\n一般线性模型中，其自变量全部为固定效应自变量，3点假设：\n\n线性度\n\n保证各实测点到回归直线的纵向距离的平方和最小，即使得残差平方和最小。\n\\[\nQ=\\sum (Y-\\hat Y)^2\n\\]\n\nShow the code# 可视化\naugment(lm_tv, new_data = advertising) %&gt;%\n    ggplot(aes(x = TV)) +\n    geom_linerange(aes(ymin = sales, ymax = .pred)) +\n    geom_point(aes(y = sales), color = \"red\") +\n    geom_abline(\n        intercept = coef(lm_tv$fit)[1],\n        slope = coef(lm_tv$fit)[2],\n        color = \"blue\",\n        linewidth = 1\n    )\n\n\n\n\n\n\n\n\n同方差性：残差具有常数方差\n残差的正态性\n观测的独立性：通常通过审查研究设计来调查",
+    "crumbs": [
+      "推断统计模型",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>线性回归</span>"
+    ]
+  },
+  {
+    "objectID": "simple_linear_regression.html#模型诊断",
+    "href": "simple_linear_regression.html#模型诊断",
+    "title": "\n16  线性回归\n",
+    "section": "\n16.3 模型诊断",
+    "text": "16.3 模型诊断\n\nShow the codeautoplot(lm_tv, which = 1:6, ncol = 2, label.size = 3)\n\n\n\n\n\n\n\n\n16.3.1 残差图\n预测值与残差的关系，线性度，同方差\n\nShow the code# 检查线性回归模型的残差是否与预测值无关，即残差的分布是否随机。\n# 残差应该随机分布在0附近\ntibble(\n    `Fitted values`=fitted(lm_tv$fit),\n    Residuals = residuals(lm_tv$fit)\n) %&gt;% ggplot(aes(x = `Fitted values` , y = Residuals)) +\n  geom_point(pch=21) +\n    geom_smooth(formula = \"y~x\",color=\"red\",lwd=0.5)+\n  geom_hline(yintercept = 0,lty=2) +\n  labs(x = \"Fitted Values\", y = \"Residuals\")\n\n\n\n\n\n\n\n\n16.3.2 Q-Q图\n标准化残差正态性\n\nShow the codetibble(\n       StandardizedResiduals =rstandard(lm_tv$fit) ) %&gt;% \n    ggplot(aes(sample=StandardizedResiduals)) +\n    stat_qq(pch=21)+\n    stat_qq_line(color=\"red\",lty=2)+\n    labs(x = \"Theoretical Quantiles\", y = \"Sample quantiles\")\n\n\n\n\n\n\n\n\n16.3.3 Scale-Location 图\n检查同方差性，如果看到漏斗形（残差随着拟合值增大而增大），则可能存在异方差性问题。\n标准化残差平方根图\n检查残差的正态性，如果看到残差的分布围绕 0 随机散布，没有明显的模式，模型拟合是理想的。\n\nShow the codeplot(lm_tv$fit, which = 3)\n\n\n\n\n\n\n\n\nShow the code# 绘制 Scale-Location 图\ntibble(\n    fitted_values=fitted(lm_tv$fit),\n    StandardizedResiduals = rstudent(lm_tv$fit) ,\n) %&gt;%\n    ggplot(aes(x = fitted_values, y = sqrt(abs(StandardizedResiduals)))) +\n    geom_point(pch=21) +\n    geom_smooth(color=\"red\",lwd=0.5)+\n    labs(title = \"Scale-Location Plot\",x = \"Fitted Values\", y = \"√|Standardized residuals|\")\n\n\n\n\n\n\n\n\n16.3.4 Cook’s距离\n\n\nShow the codeset.seed(1011)\nx&lt;-rnorm(9)               #random 9 values\nx[10]&lt;-5                  #value far from the others\ny&lt;-rnorm(10,0.5+2*x,1)   #generate y\n\n#plot the data\nlmodel&lt;-lm(y~x)           #fit the model\nplot(x,y)                 #plot the data\nabline(line(x,y))        # add the regression line\n\n\n\n\n\n\nShow the codeinfluence.measures(lmodel)   \n#&gt; Influence measures of\n#&gt;   lm(formula = y ~ x) :\n#&gt; \n#&gt;     dfb.1_   dfb.x   dffit cov.r  cook.d   hat inf\n#&gt; 1  -0.0724 -0.0137 -0.0837 1.431 0.00397 0.103    \n#&gt; 2  -0.2607  0.1637 -0.2717 1.388 0.03993 0.157    \n#&gt; 3   0.0822 -0.0555  0.0869 1.554 0.00430 0.169    \n#&gt; 4   0.2679  0.0174  0.2935 1.178 0.04433 0.100    \n#&gt; 5   0.1102  0.0548  0.1490 1.408 0.01238 0.116    \n#&gt; 6  -0.5785  0.1207 -0.5854 0.724 0.13792 0.104    \n#&gt; 7   0.4851 -0.1676  0.4851 0.925 0.10651 0.114    \n#&gt; 8  -0.6059  0.3277 -0.6179 0.848 0.16313 0.139    \n#&gt; 9   0.4957 -0.2572  0.5034 0.996 0.11760 0.135    \n#&gt; 10  0.0157 -1.0428 -1.1090 9.033 0.68380 0.863   *\n\n\n\nShow the codeplot(lm_tv$fit,4)  \n\n\n\n\n\n\n\n\nShow the codethreshold &lt;- 4 / (nrow(advertising)-length(lm_tv$fit$coefficients)-2)\n                  \n                 \ntibble(\n    x = 1:nrow(advertising),\n    cooks_distance = cooks.distance(lm_tv$fit),\n    label = factor(if_else(cooks_distance&gt;threshold,x,NA))\n) %&gt;% \n    ggplot() +\n    geom_segment(aes(\n        x = x,\n        xend = x,\n        y = 0,\n        yend = cooks_distance ,\n    )) +\n    geom_text(aes(\n        x = x,\n        y =cooks_distance ,\n        label =label,\n    ), vjust = -0.2) +\n    labs(x = \"Observation Index\", y = \"Cook's Distance\")\n\n\n\n\n\n\n\n\n16.3.5 残差-杠杆值图\n\n\nShow the code\ninfluence(lmodel)$hat     #leverage\n#&gt;         1         2         3         4         5         6         7         8 \n#&gt; 0.1027407 0.1570337 0.1686229 0.1003533 0.1156210 0.1044403 0.1135604 0.1391403 \n#&gt;         9        10 \n#&gt; 0.1353478 0.8631394\n\n\n1/10 + (x-mean(x))^2/(var(x)*9)  #leverage manually computed \n#&gt;  [1] 0.1027407 0.1570337 0.1686229 0.1003533 0.1156210 0.1044403 0.1135604\n#&gt;  [8] 0.1391403 0.1353478 0.8631394\n\n\n\n\nShow the codeinfluence(lmodel)$coefficients     #DFBETA\n#&gt;     (Intercept)            x\n#&gt; 1  -0.015131790 -0.001678535\n#&gt; 2  -0.053246101  0.019647712\n#&gt; 3   0.017216660 -0.006821716\n#&gt; 4   0.053369207  0.002038393\n#&gt; 5   0.022861311  0.006672433\n#&gt; 6  -0.101915091  0.012493753\n#&gt; 7   0.090627673 -0.018400391\n#&gt; 8  -0.109982670  0.034951829\n#&gt; 9   0.093779788 -0.028593745\n#&gt; 10  0.003248704 -0.126864091\n\ndfbeta(lmodel)  \n#&gt;     (Intercept)            x\n#&gt; 1  -0.015131790 -0.001678535\n#&gt; 2  -0.053246101  0.019647712\n#&gt; 3   0.017216660 -0.006821716\n#&gt; 4   0.053369207  0.002038393\n#&gt; 5   0.022861311  0.006672433\n#&gt; 6  -0.101915091  0.012493753\n#&gt; 7   0.090627673 -0.018400391\n#&gt; 8  -0.109982670  0.034951829\n#&gt; 9   0.093779788 -0.028593745\n#&gt; 10  0.003248704 -0.126864091\n#computing the DFBETA manually for the 10th observation\ncoef(lm(y~x)) - coef(lm(y[-10]~x[-10]))\n#&gt;  (Intercept)            x \n#&gt;  0.003248704 -0.126864091\n\n\n\nShow the codeplot(lm_tv$fit,5)  \n\n\n\n\n\n\n\nhat 统计量\n\nShow the codetibble(\n    x = 1:nrow(advertising),\n    leverage = hatvalues(lm_tv$fit),\n    StandardizedResiduals = rstandard(lm_tv$fit) ,\n    cooks_distance = cooks.distance(lm_tv$fit),\n    label = factor(if_else(cooks_distance&gt;threshold,x,NA))\n) %&gt;%\n    ggplot(aes(x = leverage, y = StandardizedResiduals)) +\n    geom_point(pch=21) +\n    geom_smooth(color=\"red\",lwd=0.5)+\n    scale_x_continuous(limits = c(0, NA)) +\n    geom_vline(xintercept = 0, lty = 2) +\n    geom_hline(yintercept = 0, lty = 2) +\n    ggrepel::geom_text_repel(mapping = aes(label = label))+\n    labs(x = \"Leverage Values\", y = \"Standardized residuals\")\n\n\n\n\n\n\n\n\n16.3.6 Cook‘s距离和杠杆值\n\nShow the codeplot(lm_tv$fit,6)",
+    "crumbs": [
+      "推断统计模型",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>线性回归</span>"
+    ]
+  },
+  {
+    "objectID": "diagnostic_test.html#灵敏度sensitivity",
+    "href": "diagnostic_test.html#灵敏度sensitivity",
+    "title": "\n25  诊断性测试\n",
+    "section": "",
+    "text": "25.1.1 假阴性率(FNR) /漏诊率\n\\[\nFNR=1-Se\n\\]",
+    "crumbs": [
+      "研究设计",
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>诊断性测试</span>"
+    ]
+  },
+  {
+    "objectID": "diagnostic_test.html#特异度specificity",
+    "href": "diagnostic_test.html#特异度specificity",
+    "title": "\n25  诊断性测试\n",
+    "section": "\n25.2 特异度（Specificity）",
+    "text": "25.2 特异度（Specificity）\n真阴性率：指在所有真实状况为阴性的样本中，被正确识别出阴性的比例。\n\\[\nSp=\\frac{TN}{TN+FP}\n\\]\n其中 TN 是真阴性的数量，FP 是假阳性的数量。\n\n25.2.1 假阳性率(FPR) /误诊率\n\\[ FPR=1-Sp \\]\n\n\n\n\n\nShow the code# 构建列联表\nobserved_sensitivity &lt;- matrix(c(28, 11, 37, 2), nrow = 2, byrow = TRUE,\n                   dimnames = list('检验方式' = c('尿糖检验', '血糖检验'),\n                                   '结果' = c('检出阳性', '未检出阳性')))\nobserved_sensitivity\n#&gt;           结果\n#&gt; 检验方式 检出阳性 未检出阳性\n#&gt;   尿糖检验       28         11\n#&gt;   血糖检验       37          2\n# 进行卡方检验\ns &lt;- chisq.test(observed_sensitivity,correct = F)\n\n# 输出结果\ns\n#&gt; \n#&gt;  Pearson's Chi-squared test\n#&gt; \n#&gt; data:  observed_sensitivity\n#&gt; X-squared = 7.4769, df = 1, p-value = 0.006249\n\n\n# 构建列联表\nobserved_accuracy &lt;- matrix(c(29, 11, 38, 2), nrow = 2, byrow = TRUE,\n                            dimnames = list('检验方式' = c('尿糖检验', '血糖检验'),\n                                            '结果' = c('检准', '不准')))\n\n# 进行卡方检验\naccuracy &lt;- chisq.test(observed_accuracy,correct = F)\n\n# 输出结果\naccuracy\n#&gt; \n#&gt;  Pearson's Chi-squared test\n#&gt; \n#&gt; data:  observed_accuracy\n#&gt; X-squared = 7.4397, df = 1, p-value = 0.00638",
+    "crumbs": [
+      "研究设计",
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>诊断性测试</span>"
+    ]
+  },
+  {
+    "objectID": "diagnostic_test.html#youdens-index",
+    "href": "diagnostic_test.html#youdens-index",
+    "title": "\n25  诊断性测试\n",
+    "section": "\n25.3 Youden’s Index",
+    "text": "25.3 Youden’s Index\n\\[\nJ=Se-FPR =Se+Sp-1,J[1,-1]\n\\]\n\nJ 越大诊断有效性越高\nJ=1 表示完美的诊断性能，因为Se，Sp都是1。\nJ≤0 表示没有诊断价值",
+    "crumbs": [
+      "研究设计",
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>诊断性测试</span>"
+    ]
+  },
+  {
+    "objectID": "diagnostic_test.html#likelihood-ratio",
+    "href": "diagnostic_test.html#likelihood-ratio",
+    "title": "\n25  诊断性测试\n",
+    "section": "\n25.4 Likelihood Ratio",
+    "text": "25.4 Likelihood Ratio\n\n25.4.1 正似然比\n\\[\nLR+=\\frac{Se}{FPR}=\\frac{Se}{1-Sp}\n\\]\n\nLR+越大表示患病测出阳性结果的优势越大\nLR+=1表示诊断无效\n\n25.4.2 负似然比\n\\[\nLR-=\\frac{FNR}{Sp}=\\frac{1-Sp}{Sp}\n\\]\n\nLR-越小表示患病测出阴性结果的优势越小\nLR-=1表示诊断无效",
+    "crumbs": [
+      "研究设计",
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>诊断性测试</span>"
+    ]
+  },
+  {
+    "objectID": "diagnostic_test.html#预测值",
+    "href": "diagnostic_test.html#预测值",
+    "title": "\n25  诊断性测试\n",
+    "section": "\n25.5 预测值",
+    "text": "25.5 预测值\n\nShow the codem\n#&gt;        truth\n#&gt; predict +    -   \n#&gt;       + \"TP\" \"FP\"\n#&gt;       - \"FN\" \"TN\"\n\n\n阳性预测值（Positive Predictive Value, PPV）：在所有被测试为阳性的样本中，真正的阳性比例。\n\\[\nPPV=\\frac{TP}{TP+NP}\n\\]\n阴性预测值（Negative Predictive Value, NPV）：在所有被测试为阴性的样本中，真正的阴性比例。\n\\[\nPPV=\\frac{TN}{TN+FN}\n\\]\n配对样本设计\n\\(\\chi^2\\)配对检验\n完全随机设计\n\\(\\chi^2\\)检验",
     "crumbs": [
       "研究设计",
       "<span class='chapter-number'>25</span>  <span class='chapter-title'>诊断性测试</span>"

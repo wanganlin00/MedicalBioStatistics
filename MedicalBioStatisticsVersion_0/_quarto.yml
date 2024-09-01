@@ -39,8 +39,8 @@ book:
       chapters:
         - simple_linear_regression.qmd
         - multiple_linear_regression.qmd
-        - GLM.qmd
         - LME.qmd
+        - GLM.qmd
         - GEE.qmd
 
 
@@ -80,22 +80,36 @@ knitr:
     comment: "#>" 
     collapse: TRUE
     
-crossref: 
-  fig-title: 图
-  fig-prefix: 图
-  tbl-title: 表
-  tbl-prefix: 表
-  
-format: 
-  html: 
-    theme: cosmo
-    css: styles.css
-    df-print: kable
-    code-fold: true
-    code-tools: true
-    code-link: true
-    html-math-method: mathjax
+title-block-banner: "#f0f3f5"
+title-block-banner-color: "black"
+author: 
+  name: "ANLIN"
+  affiliation: "Independant 😀"
+  email: anlinwang00@gmail.com
+  roles: "made the document"
+keywords: "statistics, hypothesis test, regression, GLM, LME, GEE, survival analysis, propensity score"
+date: today
 
+
+
+code-fold: true
+code-link: true
+code-summary: "Show the code"
+
+css: style.css
+include-in-header:  # caption 文本居中
+   - text: |   
+       <style>
+       figcaption {
+         text-align: center;
+       }
+       </style>
+
+format: html
+    # html-math-method: mathjax
+theme:
+  dark: darkly # 深色模式
+  light: flatly
     
 editor: visual
 

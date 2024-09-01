@@ -61,11 +61,7 @@ require(tableone)
 
 ......
 
-## 回归
-
-......
-
-## psa::psa_shiny()
+## `psa::psa_shiny()`
 
 ```{r eval=FALSE}
 psa::psa_shiny()
