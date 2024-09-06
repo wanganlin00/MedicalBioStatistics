@@ -99,7 +99,7 @@ ggplot(sigmoid,aes(x,y))+
     geom_line()
 ```
 
-逻辑回归( logistic regression )的一般数学方程：
+逻辑回归( logistic regression )的一般表达式：
 
 $$
 \pi(Y=k|X=(X_1,X_2,...,X_p)=\frac{e^{\beta_{k0}+\beta_{k1}X_1+\beta_{k2}X_2+...+\beta_{kp}X_p}}{1+\sum_{l=1}^{K-1} e^{\beta_{l0}+\beta_{l1}X_1+\beta_{l2}X_2+...+\beta_{lp}X_p}}

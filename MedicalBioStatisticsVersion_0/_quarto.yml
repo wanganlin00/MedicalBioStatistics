@@ -51,10 +51,12 @@ book:
 
     - part: PropensityScore.qmd
       chapters:
+        - PSM.qmd
         - stratification.qmd
         - matching.qmd
         # - weighting.qmd
-        # - regression.qmd
+        # - covariate_adjustment.qmd
+        
 
     - part: "研究设计"
       chapters: 

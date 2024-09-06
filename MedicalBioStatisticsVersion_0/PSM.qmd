@@ -1,0 +1,443 @@
+## 参考文献
+
+<https://pubmed.ncbi.nlm.nih.gov/34268425/>
+
+## 数据
+
+```{r}
+####################       数据模拟     ################################
+
+# 模拟了吸烟与心血管疾病 （CVD） 之间的关系，其中年龄和性别是潜在的混杂协变量
+
+# CVD 是结果变量（当患者没有 CVD 时，CVD = 0;否则，CVD =1）。
+# 吸烟是一个二进制变量，表示患者是否吸烟。性别（0 = 女性，1 = 男性）和年龄是两个混杂的协变量
+
+
+x.Gender <-rep(0:1,c(400,600))# 400 females and 600 males
+
+set.seed(2020)
+x.Age <-round(abs(rnorm(1000,mean=45,sd=15)))
+
+
+set.seed(123)
+Smoke <- as.numeric(runif(1000)< tps)
+
+z.y<-x.Gender +0.3*x.Age +5*Smoke-20
+y<- exp(z.y)/(1+exp(z.y))
+set.seed(123)
+CVD <- as.numeric(runif(1000)< y)
+
+set.seed(124)
+x.Age.mask <-rbinom(1000, 1,0.2)# Missing completely at random
+x.Age <- ifelse(x.Age.mask==1,NA, x.Age)
+
+
+data <-data.frame(x.Age,x.Gender, Smoke, CVD)
+head(data)
+
+library(tableone)
+tbl1 <- CreateTableOne(vars = c("x.Age","x.Gender","CVD"),
+                       data = data,
+                       factorVars = c("x.Gender","CVD"),
+                       strata = "Smoke",smd = T)
+
+tbl1 <- print(tbl1, showAllLevels = T, smd = T)
+tbl1
+# 吸烟组和非吸烟组之间的年龄和性别协变量存在显著差异
+
+
+
+######################################## 缺失值处理和数据整洁          ################
+
+map_df(data, ~sum(is.na(.x)))
+
+# Gmd 是指基尼均值差
+Hmisc::describe(data)
+
+library(VIM)
+
+set.seed(123)
+data_knnimp <- kNN(data = data, k = 10, weights = "auto", imp_var = F)
+map_df(data_knnimp, ~sum(is.na(.x)))
+
+data<- data_knnimp %>% 
+    mutate(across(-x.Age,as.factor))
+```
+
+## PS估计模型 `distance`
+
+### 逻辑回归
+
+```{r}
+############################      ########################
+library(MatchIt)
+
+glm(formula = Smoke ~ x.Age + x.Gender, family = binomial("logit") ,data = data)
+
+
+m.out <- matchit(formula = Smoke ~ x.Age + x.Gender, data = data)
+m.out$model
+
+# 估计的PS值
+eps <- m.out$distance
+
+# 模拟数据的真实PS值
+z<-(x.Age-45)/15-(x.Age-45)^2/100+2*x.Gender
+
+tps <- exp(z)/(1+exp(z)) # The true PS
+tps_comp <- tps[complete.cases(data)]
+
+smoke_comp <- Smoke[complete.cases(data)] %>% as.factor()
+
+df <- tibble(
+    True = tps_comp,
+    Estimate = eps,  # 估计如此糟糕（就像 sin 函数一样），是因为我们通过二次方程生成 PS
+    smoke= smoke_comp
+)
+df
+
+ggplot(df, aes(True, Estimate, colour = smoke))+
+    geom_point()+
+    geom_abline(intercept = 0,slope = 1,color = "#990000",
+                linetype= "dashed")
+
+
+m.out2 <- matchit(formula = Smoke ~ x.Age + I(x.Age^2) + x.Gender, data = data)
+
+eps2 <- m.out2$distance
+df <- tibble(
+    True = tps_comp,
+    Estimate = eps2,  # 估计如此糟糕（就像 sin 函数一样），是因为我们通过二次方程生成 PS
+    smoke= smoke_comp
+)
+ggplot(df, aes(True, Estimate, colour = smoke))+
+    geom_point()+
+    geom_abline(intercept = 0,slope = 1,color = "#990000",
+                linetype= "dashed")
+
+m.out2$model
+
+
+
+```
+
+### 分类和回归树
+
+```{r}
+########################## ##########
+m.out_rpart <- matchit(formula = Smoke ~ x.Age + x.Gender, data = data,
+                distance = "rpart")
+
+tibble(True = tps_comp,
+       Estimate = m.out_rpart$distance,
+       smoke = smoke_comp) %>%
+    ggplot(aes(True, Estimate, colour = smoke)) +
+    geom_point() +
+    geom_abline(
+        intercept = 0,
+        slope = 1,
+        color = "#990000",
+        linetype = "dashed"
+    )
+
+m.out_rpart2 <- matchit(formula = Smoke ~ x.Age + I(x.Age^2) + x.Gender, data = data,
+                       distance = "rpart")
+
+tibble(True = tps_comp,
+       Estimate = m.out_rpart2$distance,
+       smoke = smoke_comp) %>%
+    ggplot(aes(True, Estimate, colour = smoke)) +
+    geom_point() +
+    geom_abline(
+        intercept = 0,
+        slope = 1,
+        color = "#990000",
+        linetype = "dashed"
+    )
+```
+
+### 随机森林
+
+```{r}
+############################# #################
+
+library(randomForest)
+set.seed(123)
+rf_psm <- randomForest(formula =  Smoke ~ x.Age + I(x.Age^2) + x.Gender, data =data)
+
+rf_psm
+
+
+tibble(True = tps_comp,
+       Estimate = rf_psm$votes[,2],
+       smoke = smoke_comp) %>%
+    ggplot(aes(True, Estimate, colour = smoke)) +
+    geom_point() +
+    geom_abline(
+        intercept = 0,
+        slope = 1,
+        color = "#990000",
+        linetype = "dashed"
+    )
+```
+
+## 距离匹配算法 `method`
+
+![](images/clipboard-2321976132.png)
+
+a caliper width of 0.2 of the standard deviation (SD) of the logit of PS be used
+
+```{r}
+#######  最近邻匹配 （NNM）      ##############
+
+logit_knn_ratio <- matchit(formula = Smoke ~ x.Age + x.Gender, data = data,
+                 method = "nearest", replace = T, ratio = 3)
+
+logit_knn_ratio$match.matrix %>% head()
+
+logit_knn_ratio$discarded %>% sum() # 记录是否有丢弃的患者
+
+
+
+
+##########    最佳匹配 （OM）         #################
+
+
+
+
+###########      遗传匹配 （GM） 是 PSM的扩展     ################
+# 进化搜索算法
+# 当除 PS 之外的其他协变量的所有权重都设置为 0 时，GM 将等效于 PSM。
+
+
+
+
+
+
+
+
+
+
+#################  full matchin  #############3
+```
+
+如果使用最佳匹配，则必须安装 *optmatch* 包，而基因匹配需要 *rgenound* 包。
+
+## 平衡诊断
+
+### SMD 和 VR
+
+**比较治疗组和对照组中协变量的标准化均数差 （SMD） 和方差比 （VR）**
+
+1.  SMD 值为 \<0.1 ，至少\<0.25。
+
+2.  VR 是治疗组和对照组的方差比。接近 1.0 的 VR 表示协变量平衡，而 VR \<0.5 或 \>2.0 被认为“太极端”
+
+```{r}
+summary(m.out, standardize = T)
+#  summary 命令不加选择地计算离散变量和连续变量的 SMD，从而导致离散变量的偏差(被视为连续变量以检查摘要中的smd)
+
+
+
+
+after_match <- match.data(m.out)
+
+# 由 CreateTableOne 函数汇总的匹配数据的基线协变量。
+tbl2 <- CreateTableOne(vars = c("x.Age","x.Gender","CVD"),
+                       data = after_match,
+                       factorVars = c("x.Gender","CVD"),
+                       strata = "Smoke",smd = T)
+# 此函数仅考虑匹配数据，并且均值差值由匹配数据 标准化（除以 SD）。匹配后，匹配数据中的标准差可能会更小，因此 SMD 可能比匹配前更大，尽管平均差值减小
+print(tbl2, showAllLevels = T, smd = T)
+```
+
+更好的方法是使用原始 SD，它由 *cobalt* 包中的 *bal.tab* 函数实现
+
+```{r}
+if(!require(cobalt)) install.packages("cobalt")
+
+bal.tab(m.out, thresholds = c(m = 0.1, v = 2))
+```
+
+### **显著性检验**
+
+有人批评 P 值的增加可能是由于 PSM 后研究人群的样本量减少 。应该使用解释匹配设计的统计数据，例如用于连续结果的配对 t 检验和 1：1 匹配设计中用于二分结果的 McNemar 检验 。这种做法很少在文献中实施或明确说明。
+
+```{r}
+head(after_match)
+```
+
+*Weights* 列是为每个样本提供的权重。这些权重是通过精心设计的规则计算的，以确保匹配的治疗组和对照组的权重相似。可以看出，1 名参与者（编号 7）被多次匹配，导出的数据中的权重为 0.187 。在这种情况下，可以通过使用*`weigts` 包中*带有 *`wtd.t.test()`* 函数的加权 t 检验来执行带有权重的统计
+
+```{r}
+if(!require(weights, quietly = T)) install.packages("weights")
+after_match %>% DT::datatable()
+```
+
+```{r}
+attach(after_match)
+age_trt <- after_match[Smoke== 1, "x.Age"]
+weight_trt <- after_match[Smoke== 1, "weights"]
+
+age_ctrl <- after_match[Smoke== 0, "x.Age"]
+weight_ctrl <- after_match[Smoke== 0, "weights"]
+
+
+wtd.t.test(x = age_ctrl, y = age_trt,
+        weight = weight_ctrl, weighty = weight_trt)
+detach(after_match)
+```
+
+t 检验，则应对协变量值的顺序进行排序
+
+```{r}
+match_trt <- data[rownames(m.out$match.matrix),]
+
+matx <- m.out$match.matrix
+
+dim(matx) <- c(dim(matx)[1]* dim(matx)[2],1)
+
+match_ctrl <- data[matx, ]
+
+t.test(match_ctrl$x.Age, match_trt$x.Age, paired = F)
+```
+
+Kolmogorov-Smirnov （KS） 统计
+
+*cobalt* 包中的函数 *bal.tab* 还提供 KS 检验，该检验比较处理组和对照组之间协变量的分布。唯一的要求是设置 *ks.threshold* 参数。
+
+### **分布可视化**
+
+直方图、分位数-分位数图、累积分布函数 ，love plots
+
+```{r}
+plot(m.out)
+plot(m.out, type= "jitter")
+plot(m.out, type= "hist")
+
+
+bal.plot(m.out,var.name = "x.Age", which = "both",
+         grid = T)
+bal.plot(m.out,var.name = "x.Gender", which = "both",
+         grid = T)
+bal.plot(m.out,var.name = "x.Age", which = "both",
+         grid = T, type = "ecdf")
+
+
+love.plot(bal.tab(m.out, thresholds = c(m = 0.1, v = 2)),
+          grid = T, stars = "raw", 
+          abs = F,stats = "mean.diffs"
+          )
+```
+
+### **拟合优度指标**
+
+c-statistics, or area under the receiver operating characteristic curve (AUROC)
+
+。但是，这些统计数据没有提供关于是否正确指定 PS 型号的信息
+
+### 如果协变量在匹配后仍然不平衡，该怎么办？
+
+1.  更改公式 `formula`，甚至模型 `distance` ， 机器学习
+
+2.  更改匹配方法 `method`，更改更小的卡尺 `caliper = 0.1`，*`pop.size`*`=100` 的 GM 
+
+3.  将 PSM 与精确匹配方法相结合 `exact=c（'x.Gender'）` ， 不推荐
+
+4.  增加样本量
+
+5.  PSM 后基线协变量的残差可以通过匹配、分层、回归调整等常规方法处理
+
+## 非随机试验中的二分类治疗效果
+
+在 Rubin 提出的反事实框架下，对于每个个体，在治疗分配之前有两种潜在结果（在治疗或控制条件下）。一旦患者接受治疗或对照，研究人员就会观察到两种结果中的一种，但另一种结果缺失。在某种程度上，观察性研究中的数据分析就像缺失结果的插值。
+
+Abadie 和 Imbens 提出了一个适合匹配的治疗效果估计量。在匹配数据中，所有协变量在处理组和对照组之间具有相似的分布。这意味着匹配的患者被认为是相似的。使用匹配的对照组的平均结果对治疗组的缺失结果进行插值，反之亦然。假设接受治疗的患者具有平均结果 （A）。在估计 PS 并进行匹配后，我们将对照条件下接受治疗的患者的结局与匹配患者的结局进行插值。如果他们没有接受治疗，他们对结果的期望应该是 B。因此，我们在匹配数据上比较两个平均结果 （A vs. B），以估计对接受治疗的平均治疗效果。
+
+the average treatment effect (ATE) and the average treatment effect on the treated (ATT).
+
+### ATT
+
+*Zelig* 包估计 Monte Carlo 模拟的因果效应,但*Zelig* 包不再维护更新
+
+**Translating Zelig to clarify**
+
+```{r}
+library("clarify")
+after_match <- match.data(m.out)
+
+fit <- glm(CVD ~ Smoke + x.Age + x.Gender, data = after_match,
+           family = binomial(link = "logit"),weights = after_match$weights )
+
+
+set.seed(123)
+sim_coefs <- clarify::sim(fit)
+sim_coefs
+
+est <- sim_ame(sim_coefs, var = "Smoke", subset = Smoke == 1,
+               contrast = "rr" , verbose = F)   # "diff" ,sr, ar
+
+est
+summary(est)
+
+# 绘制 ATT
+plot(est)
+```
+
+```{r}
+ATT_func <- function(fit) {
+  d <- subset(data, Smoke == 1)
+  d$treat <- 1
+  p1 <- mean(predict(fit, newdata = d, type = "response"))
+  d$treat <- 0
+  p0 <- mean(predict(fit, newdata = d, type = "response"))
+  c(`E[Y(0)]` = p0, `E[Y(1)]` = p1, `RR` = p1 / p0)
+}
+
+sim_est <- sim_apply(sim = sim_coefs, ATT_func )
+
+sim_est
+
+summary(sim_est)
+```
+
+### 敏感性分析
+
+#### Rosenbaum 的原始敏感性分析
+
+常用函数 *binarysens* 和 *psens*。前者用于二元结果，后者用于连续或顺序结果。
+
+```{r}
+library(rbounds)
+```
+
+#### E 值
+
+```{r}
+if(!require(EValue)) install.packages("EValue")
+
+evalue(est = RR(0.8), lo = .7, hi = .9)
+```
+
+#### 倾向得分校准 （PSC）
+
+```{r}
+mdl1 <- glm(Smoke ~ x.Age,family = binomial, data = data[1:300,])
+PS_raw <- predict(mdl1, newdata = data[1:300,],type = "response")
+
+mdl2 <- glm(Smoke ~ x.Age,family = binomial, data = data[301:1000,])
+PS2 <- predict(mdl2, newdata = data[301:1000,],type = "response")
+
+mdl3 <- glm(Smoke ~ x.Age + x.Gender,family = binomial, data = data[301:1000,])
+PS3 <- predict(mdl3, newdata = data[301:1000,],type = "response")
+
+data_reg <- data.frame(PS2,PS3)
+
+mdl_calibrated <- lm(PS3 ~ PS2,data = data_reg)
+
+ps_calibrated <- predict(mdl_calibrated, x = PS_raw)
+```
+
+## 多分类或连续治疗
+
+## 时间依赖性协变量
