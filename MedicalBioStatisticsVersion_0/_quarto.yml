@@ -49,15 +49,6 @@ book:
         - SurvivalAnalysis.qmd
         - CoxProportionalHazardsModel.qmd
 
-    - part: PropensityScore.qmd
-      chapters:
-        - PSM.qmd
-        - stratification.qmd
-        - matching.qmd
-        # - weighting.qmd
-        # - covariate_adjustment.qmd
-        
-
     - part: "研究设计"
       chapters: 
         - diagnostic_test.qmd
