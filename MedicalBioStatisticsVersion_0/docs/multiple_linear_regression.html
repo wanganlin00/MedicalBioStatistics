@@ -4,6 +4,9 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.4.555">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="author" content="ANLIN">
+<meta name="dcterms.date" content="2024-09-14">
+<meta name="keywords" content="statistics, hypothesis test, regression, GLM, LME, GEE, survival analysis, propensity score">
 <title>医学与生物统计学 - 17&nbsp; 多元线性回归</title>
 <style>
 code{white-space: pre-wrap;}
@@ -60,17 +63,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./GLM.html" rel="next">
+<link href="./LME.html" rel="next">
 <link href="./simple_linear_regression.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -96,7 +101,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+}</script><style>
+
+      .quarto-title-block .quarto-title-banner h1,
+      .quarto-title-block .quarto-title-banner h2,
+      .quarto-title-block .quarto-title-banner h3,
+      .quarto-title-block .quarto-title-banner h4,
+      .quarto-title-block .quarto-title-banner h5,
+      .quarto-title-block .quarto-title-banner h6
+      {
+        color: black;
+      }
+
+      .quarto-title-block .quarto-title-banner {
+        color: black;
+background: #f0f3f5;
+      }
+</style>
+<style>
+figcaption {
+  text-align: center;
+}
+</style>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
 const typesetMath = (el) => {
   if (window.MathJax) {
     // MathJax Typeset
@@ -121,12 +148,12 @@ const typesetMath = (el) => {
 window.Quarto = {
   typesetMath
 };
-</script><link rel="stylesheet" href="styles.css">
+</script><link rel="stylesheet" href="style.css">
 </head>
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
@@ -137,12 +164,56 @@ window.Quarto = {
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><header id="title-block-header" class="quarto-title-block default page-columns page-full"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./simple_linear_regression.html">推断统计模型</a></li><li class="breadcrumb-item"><a href="./multiple_linear_regression.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">多元线性回归</span></a></li></ol></nav><div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">
+<span class="chapter-number">17</span>&nbsp; <span class="chapter-title">多元线性回归</span>
+</h1>
+                      </div>
+  </div>
+    
+  <div class="quarto-title-meta-author">
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-heading">Affiliation</div>
+    
+      <div class="quarto-title-meta-contents">
+      <p class="author">ANLIN <a href="mailto:anlinwang00@gmail.com" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
+    </div>
+    <div class="quarto-title-meta-contents">
+          <p class="affiliation">
+              Independant 😀
+            </p>
+        </div>
+    </div>
+
+  <div class="quarto-title-meta">
+
+        
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">September 14, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+
+  <div>
+    <div class="keywords">
+      <div class="block-title">Keywords</div>
+      <p>statistics, hypothesis test, regression, GLM, LME, GEE, survival analysis, propensity score</p>
+    </div>
+  </div>
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">医学与生物统计学</a> 
         <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
   <i class="bi"></i>
@@ -299,14 +370,14 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./GLM.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">广义线性模型</span></span></a>
+  <a href="./LME.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">线性混合模型</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./LME.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">线性混合模型</span></span></a>
+  <a href="./GLM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">广义线性模型</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -342,8 +413,8 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./PropensityScore.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">倾向性评分</span></a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">研究设计</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -351,31 +422,8 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./stratification.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">分层（Stratification）</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./matching.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">匹配（Matching）</span></span></a>
-  </div>
-</li>
-      </ul>
-</li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
- <span class="menu-text">研究设计</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./diagnostic_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">诊断性测试</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">诊断性测试</span></span></a>
   </div>
 </li>
       </ul>
@@ -421,24 +469,7 @@ window.Quarto = {
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./simple_linear_regression.html">推断统计模型</a></li><li class="breadcrumb-item"><a href="./multiple_linear_regression.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">多元线性回归</span></a></li></ol></nav><div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">
-<span class="chapter-number">17</span>&nbsp; <span class="chapter-title">多元线性回归</span>
-</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
-</div>
-
-
-
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
-
-
-</header><p><span class="math display">\[
+<main class="content quarto-banner-title-block" id="quarto-document-content"><p><span class="math display">\[
 Y_i=\beta_0+\sum_{i=1}^p \beta_p X_{pi}+\epsilon_i,其中\epsilon_i\sim N(0,\sigma^2)
 \]</span></p>
 <p><strong>Y</strong>=<strong>Xβ</strong>+ε</p>
@@ -450,7 +481,7 @@ Y_i=\beta_0+\sum_{i=1}^p \beta_p X_{pi}+\epsilon_i,其中\epsilon_i\sim N(0,\sig
 <p><img src="images/clipboard-2956843313.png" class="img-fluid"></p>
 <p><img src="images/clipboard-2413549022.png" class="img-fluid"></p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">reg</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">y</span>, <span class="va">x</span><span class="op">)</span> <span class="op">{</span> </span>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">reg</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">y</span>, <span class="va">x</span><span class="op">)</span> <span class="op">{</span> </span>
 <span>    <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> </span>
 <span>    <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span>Intercept <span class="op">=</span> <span class="fl">1</span>, <span class="va">x</span><span class="op">)</span> </span>
 <span>    <span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/solve.html">solve</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">x</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">y</span> </span>
@@ -475,7 +506,7 @@ Y_i=\beta_0+\sum_{i=1}^p \beta_p X_{pi}+\epsilon_i,其中\epsilon_i\sim N(0,\sig
 <section id="多元回归" class="level2" data-number="17.1"><h2 data-number="17.1" class="anchored" data-anchor-id="多元回归">
 <span class="header-section-number">17.1</span> 多元回归</h2>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidymodels.tidymodels.org">tidymodels</a></span><span class="op">)</span></span>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidymodels.tidymodels.org">tidymodels</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/sinhrks/ggfortify">ggfortify</a></span><span class="op">)</span></span>
 <span></span>
@@ -493,7 +524,7 @@ Y_i=\beta_0+\sum_{i=1}^p \beta_p X_{pi}+\epsilon_i,其中\epsilon_i\sim N(0,\sig
 <span class="header-section-number">17.1.1</span> <code>rms::ols()</code>
 </h3>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="va">ols_mlm</span> <span class="op">&lt;-</span> <span class="fu">rms</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rms/man/ols.html">ols</a></span><span class="op">(</span><span class="va">sales</span><span class="op">~</span><span class="va">TV</span><span class="op">+</span><span class="va">radio</span><span class="op">+</span><span class="va">newspaper</span>,data <span class="op">=</span> <span class="va">advertising</span><span class="op">)</span></span>
 <span><span class="va">ols_mlm</span> </span>
 <span><span class="co">#&gt; Linear Regression Model</span></span>
@@ -564,7 +595,7 @@ Y_i=\beta_0+\sum_{i=1}^p \beta_p X_{pi}+\epsilon_i,其中\epsilon_i\sim N(0,\sig
 <span class="header-section-number">17.1.2</span> <code>lm()</code>
 </h3>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 多元线性回归</span></span>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 多元线性回归</span></span>
 <span><span class="va">lm_spec</span> <span class="op">&lt;-</span><span class="fu">linear_reg</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">set_mode</span><span class="op">(</span><span class="st">"regression"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">set_engine</span><span class="op">(</span><span class="st">"lm"</span><span class="op">)</span>  </span>
@@ -639,7 +670,7 @@ Y_i=\beta_0+\sum_{i=1}^p \beta_p X_{pi}+\epsilon_i,其中\epsilon_i\sim N(0,\sig
 </table>
 </div>
 </div>
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">glance</span><span class="op">(</span><span class="va">lm_sales_multi</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">glance</span><span class="op">(</span><span class="va">lm_sales_multi</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
@@ -688,7 +719,7 @@ Y_i=\beta_0+\sum_{i=1}^p \beta_p X_{pi}+\epsilon_i,其中\epsilon_i\sim N(0,\sig
 </table>
 </div>
 </div>
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/logLik.html">logLik</a></span><span class="op">(</span><span class="va">lm_sales_multi</span><span class="op">$</span><span class="va">fit</span><span class="op">)</span></span>
 <span><span class="co">#&gt; 'log Lik.' -386.1811 (df=5)</span></span>
 <span><span class="fu">car</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/vif.html">vif</a></span><span class="op">(</span><span class="va">lm_sales_multi</span><span class="op">$</span><span class="va">fit</span><span class="op">)</span></span>
@@ -700,7 +731,7 @@ Y_i=\beta_0+\sum_{i=1}^p \beta_p X_{pi}+\epsilon_i,其中\epsilon_i\sim N(0,\sig
 <span class="header-section-number">17.1.3</span> 线性组合</h3>
 <p>我们经常希望对回归系数的线性组合进行推断，特别是对于多个类别的分类变量。例如，对于分类变量，回归系数表示其中一个组与参考类别之间的平均差异</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">lm_multiple</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">sales</span><span class="op">~</span><span class="va">TV</span><span class="op">+</span><span class="va">radio</span><span class="op">+</span><span class="va">newspaper</span>,data <span class="op">=</span> <span class="va">advertising</span><span class="op">)</span></span>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">lm_multiple</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">sales</span><span class="op">~</span><span class="va">TV</span><span class="op">+</span><span class="va">radio</span><span class="op">+</span><span class="va">newspaper</span>,data <span class="op">=</span> <span class="va">advertising</span><span class="op">)</span></span>
 <span><span class="va">lm_multiple</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Call:</span></span>
@@ -750,7 +781,7 @@ Y_i=\beta_0+\sum_{i=1}^p \beta_p X_{pi}+\epsilon_i,其中\epsilon_i\sim N(0,\sig
 </section></section><section id="交互项" class="level2" data-number="17.2"><h2 data-number="17.2" class="anchored" data-anchor-id="交互项">
 <span class="header-section-number">17.2</span> 交互项</h2>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">lm_interact</span><span class="op">&lt;-</span> <span class="va">lm_spec</span> <span class="op">%&gt;%</span>  <span class="fu">fit</span><span class="op">(</span><span class="va">sales</span> <span class="op">~</span> <span class="va">.</span><span class="op">+</span> <span class="va">TV</span><span class="op">:</span><span class="va">radio</span>, data <span class="op">=</span> <span class="va">advertising</span><span class="op">)</span></span>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">lm_interact</span><span class="op">&lt;-</span> <span class="va">lm_spec</span> <span class="op">%&gt;%</span>  <span class="fu">fit</span><span class="op">(</span><span class="va">sales</span> <span class="op">~</span> <span class="va">.</span><span class="op">+</span> <span class="va">TV</span><span class="op">:</span><span class="va">radio</span>, data <span class="op">=</span> <span class="va">advertising</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">lm_interact</span></span>
 <span><span class="co">#&gt; parsnip model object</span></span>
@@ -769,7 +800,7 @@ Y_i=\beta_0+\sum_{i=1}^p \beta_p X_{pi}+\epsilon_i,其中\epsilon_i\sim N(0,\sig
 <section id="多项式" class="level3" data-number="17.3.1"><h3 data-number="17.3.1" class="anchored" data-anchor-id="多项式">
 <span class="header-section-number">17.3.1</span> 多项式</h3>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rec_spec_square</span> <span class="op">&lt;-</span> <span class="fu">recipe</span><span class="op">(</span><span class="va">sales</span> <span class="op">~</span> <span class="va">TV</span>, data <span class="op">=</span> <span class="va">advertising</span><span class="op">)</span> <span class="op">%&gt;%</span>  </span>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rec_spec_square</span> <span class="op">&lt;-</span> <span class="fu">recipe</span><span class="op">(</span><span class="va">sales</span> <span class="op">~</span> <span class="va">TV</span>, data <span class="op">=</span> <span class="va">advertising</span><span class="op">)</span> <span class="op">%&gt;%</span>  </span>
 <span>  <span class="fu">step_mutate</span><span class="op">(</span>`TV^2` <span class="op">=</span> <span class="va">TV</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span>  </span>
 <span><span class="va">rec_spec_square</span></span>
 <span></span>
@@ -810,7 +841,7 @@ Y_i=\beta_0+\sum_{i=1}^p \beta_p X_{pi}+\epsilon_i,其中\epsilon_i\sim N(0,\sig
 </section><section id="对数变换" class="level3" data-number="17.3.2"><h3 data-number="17.3.2" class="anchored" data-anchor-id="对数变换">
 <span class="header-section-number">17.3.2</span> 对数变换</h3>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rec_spec_log</span> <span class="op">&lt;-</span> <span class="fu">recipe</span><span class="op">(</span><span class="va">sales</span> <span class="op">~</span> <span class="va">TV</span>, data <span class="op">=</span> <span class="va">advertising</span><span class="op">)</span> <span class="op">%&gt;%</span>  </span>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rec_spec_log</span> <span class="op">&lt;-</span> <span class="fu">recipe</span><span class="op">(</span><span class="va">sales</span> <span class="op">~</span> <span class="va">TV</span>, data <span class="op">=</span> <span class="va">advertising</span><span class="op">)</span> <span class="op">%&gt;%</span>  </span>
 <span>  <span class="fu">step_log</span><span class="op">(</span><span class="va">TV</span><span class="op">)</span>  </span>
 <span></span>
 <span><span class="va">lm_wf_log</span> <span class="op">&lt;-</span> <span class="fu">workflow</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
@@ -851,7 +882,7 @@ Y_i=\beta_0+\sum_{i=1}^p \beta_p X_{pi}+\epsilon_i,其中\epsilon_i\sim N(0,\sig
 <span class="header-section-number">17.4</span> 回归诊断</h2>
 <p><a href="https://www.statmethods.net/stats/rdiagnostics.html" class="uri">https://www.statmethods.net/stats/rdiagnostics.html</a></p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-forge.r-project.org/projects/car/">car</a></span><span class="op">)</span></span>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-forge.r-project.org/projects/car/">car</a></span><span class="op">)</span></span>
 <span><span class="fu">car</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/scatterplotMatrix.html">scatterplotMatrix</a></span><span class="op">(</span><span class="va">ad</span><span class="op">)</span>  <span class="co"># 多重共线性</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
@@ -859,7 +890,7 @@ Y_i=\beta_0+\sum_{i=1}^p \beta_p X_{pi}+\epsilon_i,其中\epsilon_i\sim N(0,\sig
 </figure>
 </div>
 </div>
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/confint.html">confint</a></span><span class="op">(</span><span class="va">lm_sales_multi</span><span class="op">$</span><span class="va">fit</span><span class="op">)</span>  <span class="co"># 95%置信区间</span></span>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/confint.html">confint</a></span><span class="op">(</span><span class="va">lm_sales_multi</span><span class="op">$</span><span class="va">fit</span><span class="op">)</span>  <span class="co"># 95%置信区间</span></span>
 <span><span class="co">#&gt;                   2.5 %     97.5 %</span></span>
 <span><span class="co">#&gt; (Intercept)  2.32376228 3.55401646</span></span>
 <span><span class="co">#&gt; TV           0.04301371 0.04851558</span></span>
@@ -890,7 +921,7 @@ Y_i=\beta_0+\sum_{i=1}^p \beta_p X_{pi}+\epsilon_i,其中\epsilon_i\sim N(0,\sig
 </figure>
 </div>
 </div>
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="va">lm_sales_multi</span><span class="op">)</span> <span class="co">#回归诊断图</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="va">lm_sales_multi</span><span class="op">)</span> <span class="co">#回归诊断图</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
 <figure class="figure"><p><img src="multiple_linear_regression_files/figure-html/unnamed-chunk-9-6.png" class="img-fluid figure-img" width="672"></p>
@@ -902,14 +933,14 @@ Y_i=\beta_0+\sum_{i=1}^p \beta_p X_{pi}+\epsilon_i,其中\epsilon_i\sim N(0,\sig
 <span class="header-section-number">17.4.1</span> 线性假设</h3>
 <p>残差图， 成分残差图</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">lm_sales_multi</span><span class="op">$</span><span class="va">fit</span>,<span class="fl">1</span><span class="op">)</span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">lm_sales_multi</span><span class="op">$</span><span class="va">fit</span>,<span class="fl">1</span><span class="op">)</span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
 <figure class="figure"><p><img src="multiple_linear_regression_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/crPlots.html">crPlots</a></span><span class="op">(</span><span class="va">lm_sales_multi</span><span class="op">$</span><span class="va">fit</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/crPlots.html">crPlots</a></span><span class="op">(</span><span class="va">lm_sales_multi</span><span class="op">$</span><span class="va">fit</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
 <figure class="figure"><p><img src="multiple_linear_regression_files/figure-html/unnamed-chunk-10-2.png" class="img-fluid figure-img" width="672"></p>
@@ -921,14 +952,14 @@ Y_i=\beta_0+\sum_{i=1}^p \beta_p X_{pi}+\epsilon_i,其中\epsilon_i\sim N(0,\sig
 <span class="header-section-number">17.4.2</span> 正态性假设Q-Q图</h3>
 <p>Standardized Residuals</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">lm_sales_multi</span><span class="op">$</span><span class="va">fit</span>,<span class="fl">2</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">lm_sales_multi</span><span class="op">$</span><span class="va">fit</span>,<span class="fl">2</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
 <figure class="figure"><p><img src="multiple_linear_regression_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/powerTransform.html">powerTransform</a></span><span class="op">(</span><span class="va">lm_sales_multi</span><span class="op">$</span><span class="va">fit</span><span class="op">)</span><span class="op">)</span>  </span>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/powerTransform.html">powerTransform</a></span><span class="op">(</span><span class="va">lm_sales_multi</span><span class="op">$</span><span class="va">fit</span><span class="op">)</span><span class="op">)</span>  </span>
 <span><span class="co">#&gt; bcPower Transformation to Normality </span></span>
 <span><span class="co">#&gt;    Est Power Rounded Pwr Wald Lwr Bnd Wald Upr Bnd</span></span>
 <span><span class="co">#&gt; Y1    0.9074           1       0.7569       1.0578</span></span>
@@ -944,7 +975,7 @@ Y_i=\beta_0+\sum_{i=1}^p \beta_p X_{pi}+\epsilon_i,其中\epsilon_i\sim N(0,\sig
 </details>
 </div>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">lm_sales_multi</span><span class="op">$</span><span class="va">fit</span>,<span class="fl">3</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">lm_sales_multi</span><span class="op">$</span><span class="va">fit</span>,<span class="fl">3</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
 <figure class="figure"><p><img src="multiple_linear_regression_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
@@ -955,7 +986,7 @@ Y_i=\beta_0+\sum_{i=1}^p \beta_p X_{pi}+\epsilon_i,其中\epsilon_i\sim N(0,\sig
 </section><section id="误差相关性" class="level3" data-number="17.4.3"><h3 data-number="17.4.3" class="anchored" data-anchor-id="误差相关性">
 <span class="header-section-number">17.4.3</span> 误差相关性</h3>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/durbinWatsonTest.html">durbinWatsonTest</a></span><span class="op">(</span><span class="va">lm_sales_multi</span><span class="op">$</span><span class="va">fit</span><span class="op">)</span>      <span class="co">#结果表明rho=0</span></span>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/durbinWatsonTest.html">durbinWatsonTest</a></span><span class="op">(</span><span class="va">lm_sales_multi</span><span class="op">$</span><span class="va">fit</span><span class="op">)</span>      <span class="co">#结果表明rho=0</span></span>
 <span><span class="co">#&gt;  lag Autocorrelation D-W Statistic p-value</span></span>
 <span><span class="co">#&gt;    1     -0.04687792      2.083648   0.554</span></span>
 <span><span class="co">#&gt;  Alternative hypothesis: rho != 0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -964,7 +995,7 @@ Y_i=\beta_0+\sum_{i=1}^p \beta_p X_{pi}+\epsilon_i,其中\epsilon_i\sim N(0,\sig
 </section><section id="误差项的方差齐性" class="level3" data-number="17.4.4"><h3 data-number="17.4.4" class="anchored" data-anchor-id="误差项的方差齐性">
 <span class="header-section-number">17.4.4</span> 误差项的方差齐性</h3>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/ncvTest.html">ncvTest</a></span><span class="op">(</span><span class="va">lm_sales_multi</span><span class="op">$</span><span class="va">fit</span><span class="op">)</span></span>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/ncvTest.html">ncvTest</a></span><span class="op">(</span><span class="va">lm_sales_multi</span><span class="op">$</span><span class="va">fit</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Non-constant Variance Score Test </span></span>
 <span><span class="co">#&gt; Variance formula: ~ fitted.values </span></span>
 <span><span class="co">#&gt; Chisquare = 5.355982, Df = 1, p = 0.020651</span></span>
@@ -979,7 +1010,7 @@ Y_i=\beta_0+\sum_{i=1}^p \beta_p X_{pi}+\epsilon_i,其中\epsilon_i\sim N(0,\sig
 #&gt; Suggested power transformation:  1.499852</code></pre>
 </div>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">tibble</span><span class="op">(</span></span>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">tibble</span><span class="op">(</span></span>
 <span>    abs_studentized_residuals<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html">rstudent</a></span><span class="op">(</span><span class="va">lm_sales_multi</span><span class="op">$</span><span class="va">fit</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>    fitted_values<span class="op">=</span><span class="va">lm_sales_multi</span><span class="op">$</span><span class="va">fit</span><span class="op">$</span><span class="va">model</span><span class="op">$</span><span class="va">sales</span></span>
 <span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">fitted_values</span>,<span class="va">abs_studentized_residuals</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
@@ -995,7 +1026,7 @@ Y_i=\beta_0+\sum_{i=1}^p \beta_p X_{pi}+\epsilon_i,其中\epsilon_i\sim N(0,\sig
 </section><section id="异常观测点" class="level3" data-number="17.4.5"><h3 data-number="17.4.5" class="anchored" data-anchor-id="异常观测点">
 <span class="header-section-number">17.4.5</span> 异常观测点</h3>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># studentized residual Plot</span></span>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># studentized residual Plot</span></span>
 <span><span class="va">residplot</span><span class="op">&lt;-</span><span class="kw">function</span><span class="op">(</span><span class="va">fit</span>,<span class="va">nbreaks</span><span class="op">=</span><span class="fl">10</span><span class="op">)</span><span class="op">{</span></span>
 <span>  <span class="va">z</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html">rstudent</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">z</span>,breaks<span class="op">=</span><span class="va">nbreaks</span>,freq<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span>     <span class="co">#密度直方图</span></span>
@@ -1015,7 +1046,7 @@ Y_i=\beta_0+\sum_{i=1}^p \beta_p X_{pi}+\epsilon_i,其中\epsilon_i\sim N(0,\sig
 </div>
 </div>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#######################################################################</span></span>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#######################################################################</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-forge.r-project.org/projects/car/">car</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/car/man/outlierTest.html">outlierTest</a></span><span class="op">(</span><span class="va">lm_sales_multi</span><span class="op">$</span><span class="va">fit</span><span class="op">)</span>            <span class="co">#离群点</span></span>
 <span><span class="co">#高杠杆值点</span></span>
@@ -1042,7 +1073,7 @@ Y_i=\beta_0+\sum_{i=1}^p \beta_p X_{pi}+\epsilon_i,其中\epsilon_i\sim N(0,\sig
 </section><section id="多重共线性" class="level3" data-number="17.4.6"><h3 data-number="17.4.6" class="anchored" data-anchor-id="多重共线性">
 <span class="header-section-number">17.4.6</span> 多重共线性</h3>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/vif.html">vif</a></span><span class="op">(</span><span class="va">lm_sales_multi</span><span class="op">$</span><span class="va">fit</span><span class="op">)</span></span>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/vif.html">vif</a></span><span class="op">(</span><span class="va">lm_sales_multi</span><span class="op">$</span><span class="va">fit</span><span class="op">)</span></span>
 <span><span class="co">#&gt;        TV     radio newspaper </span></span>
 <span><span class="co">#&gt;  1.004611  1.144952  1.145187</span></span>
 <span></span>
@@ -1060,7 +1091,7 @@ Y_i=\beta_0+\sum_{i=1}^p \beta_p X_{pi}+\epsilon_i,其中\epsilon_i\sim N(0,\sig
 <li><p><code>direction = "forward"</code>向前</p></li>
 </ul>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">step_full</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">sales</span><span class="op">~</span> <span class="va">.</span> ,data <span class="op">=</span> <span class="va">advertising</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">step_full</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">sales</span><span class="op">~</span> <span class="va">.</span> ,data <span class="op">=</span> <span class="va">advertising</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="va">step_lm_0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">sales</span><span class="op">~</span> <span class="fl">1</span> ,data <span class="op">=</span> <span class="va">advertising</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">step_forward</span> <span class="op">&lt;-</span> <span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/step.html">step</a></span><span class="op">(</span><span class="va">step_lm_0</span>,scope <span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/formula.html">formula</a></span><span class="op">(</span><span class="va">step_full</span><span class="op">)</span>,  </span>
@@ -1209,7 +1240,7 @@ Y_i=\beta_0+\sum_{i=1}^p \beta_p X_{pi}+\epsilon_i,其中\epsilon_i\sim N(0,\sig
 <p><img src="images/clipboard-3792639976.png" class="img-fluid"></p>
 <p><span class="math inline">\(\mathcal{L}\)</span>是模型拟合的最大似然值</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">########################两模型比较</span></span>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">########################两模型比较</span></span>
 <span><span class="va">lm1</span> <span class="op">&lt;-</span> <span class="va">lm_spec</span> <span class="op">%&gt;%</span> <span class="fu">fit</span><span class="op">(</span><span class="va">sales</span><span class="op">~</span><span class="va">TV</span><span class="op">+</span><span class="va">radio</span><span class="op">+</span><span class="va">newspaper</span>,data <span class="op">=</span> <span class="va">advertising</span><span class="op">)</span></span>
 <span><span class="va">lm2</span> <span class="op">&lt;-</span> <span class="va">lm_spec</span> <span class="op">%&gt;%</span> <span class="fu">fit</span><span class="op">(</span><span class="va">sales</span><span class="op">~</span><span class="va">TV</span><span class="op">*</span><span class="va">radio</span><span class="op">*</span><span class="va">newspaper</span>,data <span class="op">=</span> <span class="va">advertising</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
 <span></span>
@@ -1246,7 +1277,7 @@ Y_i=\beta_0+\sum_{i=1}^p \beta_p X_{pi}+\epsilon_i,其中\epsilon_i\sim N(0,\sig
 </table>
 </div>
 </div>
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span></span>
 <span><span class="co">##########################################            AIC </span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/AIC.html">AIC</a></span><span class="op">(</span><span class="va">lm2</span><span class="op">$</span><span class="va">fit</span>,<span class="va">lm1</span><span class="op">$</span><span class="va">fit</span><span class="op">)</span>  <span class="co"># 赤池信息准则  AIC值小的优先选择</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1267,7 +1298,7 @@ Y_i=\beta_0+\sum_{i=1}^p \beta_p X_{pi}+\epsilon_i,其中\epsilon_i\sim N(0,\sig
 </table>
 </div>
 </div>
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#BIC</span></span>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#BIC</span></span>
 <span></span>
 <span></span>
 <span><span class="co">####################################相对重要性##################################</span></span>
@@ -1558,8 +1589,6 @@ Y_i=\beta_0+ \beta_1\times \sin(X_i)+\epsilon_i
 \]</span></p>
 
 
-<!-- -->
-
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -1580,6 +1609,150 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = true;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -1639,57 +1812,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  const viewSource = window.document.getElementById('quarto-view-source') ||
-                     window.document.getElementById('quarto-code-tools-source');
-  if (viewSource) {
-    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
-    viewSource.addEventListener("click", function(e) {
-      if (sourceUrl) {
-        // rstudio viewer pane
-        if (/\bcapabilities=\b/.test(window.location)) {
-          window.open(sourceUrl);
-        } else {
-          window.location.href = sourceUrl;
-        }
-      } else {
-        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
-        modal.show();
-      }
-      return false;
-    });
-  }
-  function toggleCodeHandler(show) {
-    return function(e) {
-      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
-      for (let i=0; i<detailsSrc.length; i++) {
-        const details = detailsSrc[i].parentElement;
-        if (show) {
-          details.open = true;
-        } else {
-          details.removeAttribute("open");
-        }
-      }
-      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
-      const fromCls = show ? "hidden" : "unhidden";
-      const toCls = show ? "unhidden" : "hidden";
-      for (let i=0; i<cellCodeDivs.length; i++) {
-        const codeDiv = cellCodeDivs[i];
-        if (codeDiv.classList.contains(fromCls)) {
-          codeDiv.classList.remove(fromCls);
-          codeDiv.classList.add(toCls);
-        } 
-      }
-      return false;
-    }
-  }
-  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
-  if (hideAllCode) {
-    hideAllCode.addEventListener("click", toggleCodeHandler(false));
-  }
-  const showAllCode = window.document.getElementById("quarto-show-all-code");
-  if (showAllCode) {
-    showAllCode.addEventListener("click", toggleCodeHandler(true));
-  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -2025,374 +2147,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./GLM.html" class="pagination-link" aria-label="广义线性模型">
-        <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">广义线性模型</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./LME.html" class="pagination-link" aria-label="线性混合模型">
+        <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">线性混合模型</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
-</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb30" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># 多元线性回归</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>Y_i=\beta_0+\sum_{i=1}^p \beta_p X_{pi}+\epsilon_i,其中\epsilon_i\sim N(0,\sigma^2)</span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>**Y**=**Xβ**+ε</span>
-<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>在矩阵表示法中，因变量是一个向量 Y，每个样本都有一行。自变量组合成一个矩阵X，其中每个特征有一列，另外还有一列 1值用于截距。每列每个示例都有一行。回归系数β和残差ε也是向量。</span>
-<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>向量β的最佳估计值计算为：</span>
-<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>\hat{\mathbf{\beta}}=  (X^TX)^{-1}X^TY</span>
-<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/clipboard-2956843313.png)</span></span>
-<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/clipboard-2413549022.png)</span></span>
-<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-23"><a href="#cb30-23" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb30-24"><a href="#cb30-24" aria-hidden="true" tabindex="-1"></a>reg <span class="ot">&lt;-</span> <span class="cf">function</span>(y, x) { </span>
-<span id="cb30-25"><a href="#cb30-25" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(x) </span>
-<span id="cb30-26"><a href="#cb30-26" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="at">Intercept =</span> <span class="dv">1</span>, x) </span>
-<span id="cb30-27"><a href="#cb30-27" aria-hidden="true" tabindex="-1"></a>    b <span class="ot">&lt;-</span> <span class="fu">solve</span>(<span class="fu">t</span>(x) <span class="sc">%*%</span> x) <span class="sc">%*%</span> <span class="fu">t</span>(x) <span class="sc">%*%</span> y </span>
-<span id="cb30-28"><a href="#cb30-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">colnames</span>(b) <span class="ot">&lt;-</span> <span class="st">"estimate"</span> </span>
-<span id="cb30-29"><a href="#cb30-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(b) </span>
-<span id="cb30-30"><a href="#cb30-30" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb30-31"><a href="#cb30-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-32"><a href="#cb30-32" aria-hidden="true" tabindex="-1"></a><span class="co"># solve()取矩阵的逆</span></span>
-<span id="cb30-33"><a href="#cb30-33" aria-hidden="true" tabindex="-1"></a><span class="co"># t()用于转置矩阵</span></span>
-<span id="cb30-34"><a href="#cb30-34" aria-hidden="true" tabindex="-1"></a><span class="co"># %*% 将两个矩阵相乘</span></span>
-<span id="cb30-35"><a href="#cb30-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-36"><a href="#cb30-36" aria-hidden="true" tabindex="-1"></a>advertising<span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="st">"data/ISLR/Advertising.csv"</span>)</span>
-<span id="cb30-37"><a href="#cb30-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-38"><a href="#cb30-38" aria-hidden="true" tabindex="-1"></a><span class="fu">reg</span>(advertising<span class="sc">$</span>sales,advertising[<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="sc">-</span><span class="dv">5</span>)])</span>
-<span id="cb30-39"><a href="#cb30-39" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-40"><a href="#cb30-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-41"><a href="#cb30-41" aria-hidden="true" tabindex="-1"></a><span class="fu">## 多元回归</span></span>
-<span id="cb30-42"><a href="#cb30-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-45"><a href="#cb30-45" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb30-46"><a href="#cb30-46" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidymodels)</span>
-<span id="cb30-47"><a href="#cb30-47" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
-<span id="cb30-48"><a href="#cb30-48" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggfortify)</span>
-<span id="cb30-49"><a href="#cb30-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-50"><a href="#cb30-50" aria-hidden="true" tabindex="-1"></a><span class="co"># 检测变量相关关系</span></span>
-<span id="cb30-51"><a href="#cb30-51" aria-hidden="true" tabindex="-1"></a>ad <span class="ot">&lt;-</span> advertising <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span><span class="dv">1</span>)</span>
-<span id="cb30-52"><a href="#cb30-52" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(ad)</span>
-<span id="cb30-53"><a href="#cb30-53" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-54"><a href="#cb30-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-55"><a href="#cb30-55" aria-hidden="true" tabindex="-1"></a><span class="fu">### `rms::ols()`</span></span>
-<span id="cb30-56"><a href="#cb30-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-59"><a href="#cb30-59" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb30-60"><a href="#cb30-60" aria-hidden="true" tabindex="-1"></a>ols_mlm <span class="ot">&lt;-</span> rms<span class="sc">::</span><span class="fu">ols</span>(sales<span class="sc">~</span>TV<span class="sc">+</span>radio<span class="sc">+</span>newspaper,<span class="at">data =</span> advertising)</span>
-<span id="cb30-61"><a href="#cb30-61" aria-hidden="true" tabindex="-1"></a>ols_mlm </span>
-<span id="cb30-62"><a href="#cb30-62" aria-hidden="true" tabindex="-1"></a>texreg<span class="sc">::</span><span class="fu">texreg</span>(ols_mlm)</span>
-<span id="cb30-63"><a href="#cb30-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-64"><a href="#cb30-64" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">vif</span>(ols_mlm)</span>
-<span id="cb30-65"><a href="#cb30-65" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ols_mlm)</span>
-<span id="cb30-66"><a href="#cb30-66" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-67"><a href="#cb30-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-68"><a href="#cb30-68" aria-hidden="true" tabindex="-1"></a><span class="fu">### `lm()`</span></span>
-<span id="cb30-69"><a href="#cb30-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-72"><a href="#cb30-72" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb30-73"><a href="#cb30-73" aria-hidden="true" tabindex="-1"></a><span class="co"># 多元线性回归</span></span>
-<span id="cb30-74"><a href="#cb30-74" aria-hidden="true" tabindex="-1"></a>lm_spec <span class="ot">&lt;-</span><span class="fu">linear_reg</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb30-75"><a href="#cb30-75" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_mode</span>(<span class="st">"regression"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb30-76"><a href="#cb30-76" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_engine</span>(<span class="st">"lm"</span>)  </span>
-<span id="cb30-77"><a href="#cb30-77" aria-hidden="true" tabindex="-1"></a>lm_spec</span>
-<span id="cb30-78"><a href="#cb30-78" aria-hidden="true" tabindex="-1"></a>lm_sales_multi<span class="ot">&lt;-</span> lm_spec <span class="sc">%&gt;%</span> <span class="fu">fit</span>(sales<span class="sc">~</span>TV<span class="sc">+</span>radio<span class="sc">+</span>newspaper,<span class="at">data =</span> advertising)</span>
-<span id="cb30-79"><a href="#cb30-79" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_sales_multi<span class="sc">$</span>fit)</span>
-<span id="cb30-80"><a href="#cb30-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-81"><a href="#cb30-81" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(lm_sales_multi)</span>
-<span id="cb30-82"><a href="#cb30-82" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(lm_sales_multi)</span>
-<span id="cb30-83"><a href="#cb30-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-84"><a href="#cb30-84" aria-hidden="true" tabindex="-1"></a><span class="fu">logLik</span>(lm_sales_multi<span class="sc">$</span>fit)</span>
-<span id="cb30-85"><a href="#cb30-85" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">vif</span>(lm_sales_multi<span class="sc">$</span>fit)</span>
-<span id="cb30-86"><a href="#cb30-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-87"><a href="#cb30-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-88"><a href="#cb30-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-89"><a href="#cb30-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-90"><a href="#cb30-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-91"><a href="#cb30-91" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-92"><a href="#cb30-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-93"><a href="#cb30-93" aria-hidden="true" tabindex="-1"></a><span class="fu">### 线性组合</span></span>
-<span id="cb30-94"><a href="#cb30-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-95"><a href="#cb30-95" aria-hidden="true" tabindex="-1"></a>我们经常希望对回归系数的线性组合进行推断，特别是对于多个类别的分类变量。例如，对于分类变量，回归系数表示其中一个组与参考类别之间的平均差异</span>
-<span id="cb30-96"><a href="#cb30-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-99"><a href="#cb30-99" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb30-100"><a href="#cb30-100" aria-hidden="true" tabindex="-1"></a>lm_multiple <span class="ot">&lt;-</span> <span class="fu">lm</span>(sales<span class="sc">~</span>TV<span class="sc">+</span>radio<span class="sc">+</span>newspaper,<span class="at">data =</span> advertising)</span>
-<span id="cb30-101"><a href="#cb30-101" aria-hidden="true" tabindex="-1"></a>lm_multiple</span>
-<span id="cb30-102"><a href="#cb30-102" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(multcomp, <span class="at">quietly =</span> T)</span>
-<span id="cb30-103"><a href="#cb30-103" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(lm_multiple)</span>
-<span id="cb30-104"><a href="#cb30-104" aria-hidden="true" tabindex="-1"></a><span class="co"># 在 R 中，我们通过首先指定一个矩阵来执行此计算，该矩阵指定要进行的比较。此处的矩阵必须具有与回归方程中的回归系数相同的列数</span></span>
-<span id="cb30-105"><a href="#cb30-105" aria-hidden="true" tabindex="-1"></a>comparison <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="at">nrow=</span><span class="dv">1</span>)</span>
-<span id="cb30-106"><a href="#cb30-106" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-107"><a href="#cb30-107" aria-hidden="true" tabindex="-1"></a>lincom <span class="ot">&lt;-</span> <span class="fu">glht</span>(lm_multiple, <span class="at">linfct =</span> comparison)</span>
-<span id="cb30-108"><a href="#cb30-108" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lincom)</span>
-<span id="cb30-109"><a href="#cb30-109" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(lincom)</span>
-<span id="cb30-110"><a href="#cb30-110" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-111"><a href="#cb30-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-112"><a href="#cb30-112" aria-hidden="true" tabindex="-1"></a><span class="fu">## 交互项</span></span>
-<span id="cb30-113"><a href="#cb30-113" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-116"><a href="#cb30-116" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb30-117"><a href="#cb30-117" aria-hidden="true" tabindex="-1"></a>lm_interact<span class="ot">&lt;-</span> lm_spec <span class="sc">%&gt;%</span>  <span class="fu">fit</span>(sales <span class="sc">~</span> .<span class="sc">+</span> TV<span class="sc">:</span>radio, <span class="at">data =</span> advertising)</span>
-<span id="cb30-118"><a href="#cb30-118" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-119"><a href="#cb30-119" aria-hidden="true" tabindex="-1"></a>lm_interact</span>
-<span id="cb30-120"><a href="#cb30-120" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-121"><a href="#cb30-121" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-122"><a href="#cb30-122" aria-hidden="true" tabindex="-1"></a><span class="fu">## 变换</span></span>
-<span id="cb30-123"><a href="#cb30-123" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-124"><a href="#cb30-124" aria-hidden="true" tabindex="-1"></a><span class="fu">### 多项式</span></span>
-<span id="cb30-125"><a href="#cb30-125" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-128"><a href="#cb30-128" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb30-129"><a href="#cb30-129" aria-hidden="true" tabindex="-1"></a>rec_spec_square <span class="ot">&lt;-</span> <span class="fu">recipe</span>(sales <span class="sc">~</span> TV, <span class="at">data =</span> advertising) <span class="sc">%&gt;%</span>  </span>
-<span id="cb30-130"><a href="#cb30-130" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step_mutate</span>(<span class="st">`</span><span class="at">TV^2</span><span class="st">`</span> <span class="ot">=</span> TV<span class="sc">^</span><span class="dv">2</span>)  </span>
-<span id="cb30-131"><a href="#cb30-131" aria-hidden="true" tabindex="-1"></a>rec_spec_square</span>
-<span id="cb30-132"><a href="#cb30-132" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-133"><a href="#cb30-133" aria-hidden="true" tabindex="-1"></a>lm_wf_square <span class="ot">&lt;-</span> <span class="fu">workflow</span>() <span class="sc">%&gt;%</span>  </span>
-<span id="cb30-134"><a href="#cb30-134" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_model</span>(lm_spec) <span class="sc">%&gt;%</span>  </span>
-<span id="cb30-135"><a href="#cb30-135" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_recipe</span>(rec_spec_square)  </span>
-<span id="cb30-136"><a href="#cb30-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-137"><a href="#cb30-137" aria-hidden="true" tabindex="-1"></a>lm_wf_square <span class="sc">%&gt;%</span></span>
-<span id="cb30-138"><a href="#cb30-138" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit</span>(advertising)</span>
-<span id="cb30-139"><a href="#cb30-139" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-140"><a href="#cb30-140" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(sales <span class="sc">~</span> TV<span class="sc">+</span> <span class="fu">I</span>(TV<span class="sc">^</span><span class="dv">2</span>),<span class="at">data =</span> advertising)</span>
-<span id="cb30-141"><a href="#cb30-141" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-142"><a href="#cb30-142" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-143"><a href="#cb30-143" aria-hidden="true" tabindex="-1"></a><span class="fu">### 对数变换</span></span>
-<span id="cb30-144"><a href="#cb30-144" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-147"><a href="#cb30-147" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb30-148"><a href="#cb30-148" aria-hidden="true" tabindex="-1"></a>rec_spec_log <span class="ot">&lt;-</span> <span class="fu">recipe</span>(sales <span class="sc">~</span> TV, <span class="at">data =</span> advertising) <span class="sc">%&gt;%</span>  </span>
-<span id="cb30-149"><a href="#cb30-149" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step_log</span>(TV)  </span>
-<span id="cb30-150"><a href="#cb30-150" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-151"><a href="#cb30-151" aria-hidden="true" tabindex="-1"></a>lm_wf_log <span class="ot">&lt;-</span> <span class="fu">workflow</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb30-152"><a href="#cb30-152" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_model</span>(lm_spec) <span class="sc">%&gt;%</span>  </span>
-<span id="cb30-153"><a href="#cb30-153" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_recipe</span>(rec_spec_log) </span>
-<span id="cb30-154"><a href="#cb30-154" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-155"><a href="#cb30-155" aria-hidden="true" tabindex="-1"></a>lm_wf_log <span class="sc">%&gt;%</span></span>
-<span id="cb30-156"><a href="#cb30-156" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit</span>(advertising)</span>
-<span id="cb30-157"><a href="#cb30-157" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-158"><a href="#cb30-158" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(sales <span class="sc">~</span> <span class="fu">log</span>(TV),<span class="at">data =</span> advertising)</span>
-<span id="cb30-159"><a href="#cb30-159" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-160"><a href="#cb30-160" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-161"><a href="#cb30-161" aria-hidden="true" tabindex="-1"></a><span class="fu">## 回归诊断</span></span>
-<span id="cb30-162"><a href="#cb30-162" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-163"><a href="#cb30-163" aria-hidden="true" tabindex="-1"></a><span class="ot">&lt;https://www.statmethods.net/stats/rdiagnostics.html&gt;</span></span>
-<span id="cb30-164"><a href="#cb30-164" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-167"><a href="#cb30-167" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb30-168"><a href="#cb30-168" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
-<span id="cb30-169"><a href="#cb30-169" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">scatterplotMatrix</span>(ad)  <span class="co"># 多重共线性</span></span>
-<span id="cb30-170"><a href="#cb30-170" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(lm_sales_multi<span class="sc">$</span>fit)  <span class="co"># 95%置信区间</span></span>
-<span id="cb30-171"><a href="#cb30-171" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lm_sales_multi<span class="sc">$</span>fit)</span>
-<span id="cb30-172"><a href="#cb30-172" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(lm_sales_multi) <span class="co">#回归诊断图</span></span>
-<span id="cb30-173"><a href="#cb30-173" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-174"><a href="#cb30-174" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-175"><a href="#cb30-175" aria-hidden="true" tabindex="-1"></a><span class="fu">### 线性假设</span></span>
-<span id="cb30-176"><a href="#cb30-176" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-177"><a href="#cb30-177" aria-hidden="true" tabindex="-1"></a>残差图， 成分残差图</span>
-<span id="cb30-178"><a href="#cb30-178" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-181"><a href="#cb30-181" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb30-182"><a href="#cb30-182" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lm_sales_multi<span class="sc">$</span>fit,<span class="dv">1</span>)  </span>
-<span id="cb30-183"><a href="#cb30-183" aria-hidden="true" tabindex="-1"></a><span class="fu">crPlots</span>(lm_sales_multi<span class="sc">$</span>fit)</span>
-<span id="cb30-184"><a href="#cb30-184" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-185"><a href="#cb30-185" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-186"><a href="#cb30-186" aria-hidden="true" tabindex="-1"></a><span class="fu">### 正态性假设Q-Q图</span></span>
-<span id="cb30-187"><a href="#cb30-187" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-188"><a href="#cb30-188" aria-hidden="true" tabindex="-1"></a>Standardized Residuals</span>
-<span id="cb30-189"><a href="#cb30-189" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-192"><a href="#cb30-192" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb30-193"><a href="#cb30-193" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lm_sales_multi<span class="sc">$</span>fit,<span class="dv">2</span>) </span>
-<span id="cb30-194"><a href="#cb30-194" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">powerTransform</span>(lm_sales_multi<span class="sc">$</span>fit))  </span>
-<span id="cb30-195"><a href="#cb30-195" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-196"><a href="#cb30-196" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-199"><a href="#cb30-199" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb30-200"><a href="#cb30-200" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lm_sales_multi<span class="sc">$</span>fit,<span class="dv">3</span>)</span>
-<span id="cb30-201"><a href="#cb30-201" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-202"><a href="#cb30-202" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-203"><a href="#cb30-203" aria-hidden="true" tabindex="-1"></a><span class="fu">### 误差相关性</span></span>
-<span id="cb30-204"><a href="#cb30-204" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-207"><a href="#cb30-207" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb30-208"><a href="#cb30-208" aria-hidden="true" tabindex="-1"></a><span class="fu">durbinWatsonTest</span>(lm_sales_multi<span class="sc">$</span>fit)      <span class="co">#结果表明rho=0</span></span>
-<span id="cb30-209"><a href="#cb30-209" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-210"><a href="#cb30-210" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-211"><a href="#cb30-211" aria-hidden="true" tabindex="-1"></a><span class="fu">### 误差项的方差齐性</span></span>
-<span id="cb30-212"><a href="#cb30-212" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-215"><a href="#cb30-215" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb30-216"><a href="#cb30-216" aria-hidden="true" tabindex="-1"></a><span class="fu">ncvTest</span>(lm_sales_multi<span class="sc">$</span>fit)</span>
-<span id="cb30-217"><a href="#cb30-217" aria-hidden="true" tabindex="-1"></a><span class="fu">spreadLevelPlot</span>(lm_sales_multi<span class="sc">$</span>fit)</span>
-<span id="cb30-218"><a href="#cb30-218" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-219"><a href="#cb30-219" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-222"><a href="#cb30-222" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb30-223"><a href="#cb30-223" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
-<span id="cb30-224"><a href="#cb30-224" aria-hidden="true" tabindex="-1"></a>    <span class="at">abs_studentized_residuals=</span><span class="fu">abs</span>(<span class="fu">rstudent</span>(lm_sales_multi<span class="sc">$</span>fit)),</span>
-<span id="cb30-225"><a href="#cb30-225" aria-hidden="true" tabindex="-1"></a>    <span class="at">fitted_values=</span>lm_sales_multi<span class="sc">$</span>fit<span class="sc">$</span>model<span class="sc">$</span>sales</span>
-<span id="cb30-226"><a href="#cb30-226" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(fitted_values,abs_studentized_residuals))<span class="sc">+</span></span>
-<span id="cb30-227"><a href="#cb30-227" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">pch=</span><span class="dv">21</span>)<span class="sc">+</span></span>
-<span id="cb30-228"><a href="#cb30-228" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>()</span>
-<span id="cb30-229"><a href="#cb30-229" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-230"><a href="#cb30-230" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-231"><a href="#cb30-231" aria-hidden="true" tabindex="-1"></a><span class="fu">### 异常观测点</span></span>
-<span id="cb30-232"><a href="#cb30-232" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-235"><a href="#cb30-235" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb30-236"><a href="#cb30-236" aria-hidden="true" tabindex="-1"></a><span class="co"># studentized residual Plot</span></span>
-<span id="cb30-237"><a href="#cb30-237" aria-hidden="true" tabindex="-1"></a>residplot<span class="ot">&lt;-</span><span class="cf">function</span>(fit,<span class="at">nbreaks=</span><span class="dv">10</span>){</span>
-<span id="cb30-238"><a href="#cb30-238" aria-hidden="true" tabindex="-1"></a>  z<span class="ot">&lt;-</span><span class="fu">rstudent</span>(fit)</span>
-<span id="cb30-239"><a href="#cb30-239" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hist</span>(z,<span class="at">breaks=</span>nbreaks,<span class="at">freq=</span><span class="cn">FALSE</span>)     <span class="co">#密度直方图</span></span>
-<span id="cb30-240"><a href="#cb30-240" aria-hidden="true" tabindex="-1"></a>  <span class="fu">title</span>(<span class="at">xlab=</span><span class="st">"Studentized Residual"</span>)</span>
-<span id="cb30-241"><a href="#cb30-241" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rug</span>(z,<span class="at">col=</span><span class="st">"brown"</span>)                    <span class="co">#轴须图</span></span>
-<span id="cb30-242"><a href="#cb30-242" aria-hidden="true" tabindex="-1"></a>  <span class="fu">curve</span>(<span class="fu">dnorm</span>(x,<span class="at">mean=</span><span class="fu">mean</span>(z),<span class="at">sd=</span><span class="fu">sd</span>(z)),<span class="at">add=</span><span class="cn">TRUE</span>,<span class="at">col=</span><span class="st">"blue"</span>,<span class="at">lwd=</span><span class="dv">2</span>) <span class="co">#正态密度曲线</span></span>
-<span id="cb30-243"><a href="#cb30-243" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(<span class="fu">density</span>(z)<span class="sc">$</span>x,<span class="fu">density</span>(z)<span class="sc">$</span>y,<span class="at">col=</span><span class="st">"red"</span>,<span class="at">lwd=</span><span class="dv">2</span>)       <span class="co">#样本密度曲线</span></span>
-<span id="cb30-244"><a href="#cb30-244" aria-hidden="true" tabindex="-1"></a>  <span class="fu">legend</span>(<span class="st">"topright"</span>,<span class="fu">c</span>(<span class="st">"Normal Curve"</span>,<span class="st">"Kernel Density Curve"</span>),<span class="co">#图例</span></span>
-<span id="cb30-245"><a href="#cb30-245" aria-hidden="true" tabindex="-1"></a>  <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">2</span>),<span class="at">pch =</span> <span class="fu">c</span>(<span class="dv">21</span>,<span class="dv">22</span>),<span class="at">col=</span><span class="fu">c</span>(<span class="st">"blue"</span>,<span class="st">"red"</span>),<span class="at">cex=</span>.<span class="dv">7</span>)</span>
-<span id="cb30-246"><a href="#cb30-246" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb30-247"><a href="#cb30-247" aria-hidden="true" tabindex="-1"></a><span class="fu">residplot</span>(lm_sales_multi<span class="sc">$</span>fit)</span>
-<span id="cb30-248"><a href="#cb30-248" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-249"><a href="#cb30-249" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-250"><a href="#cb30-250" aria-hidden="true" tabindex="-1"></a><span class="in">```{r eval=FALSE}</span></span>
-<span id="cb30-251"><a href="#cb30-251" aria-hidden="true" tabindex="-1"></a><span class="in">#######################################################################</span></span>
-<span id="cb30-252"><a href="#cb30-252" aria-hidden="true" tabindex="-1"></a><span class="in">library(car)</span></span>
-<span id="cb30-253"><a href="#cb30-253" aria-hidden="true" tabindex="-1"></a><span class="in">outlierTest(lm_sales_multi$fit)            #离群点</span></span>
-<span id="cb30-254"><a href="#cb30-254" aria-hidden="true" tabindex="-1"></a><span class="in">#高杠杆值点</span></span>
-<span id="cb30-255"><a href="#cb30-255" aria-hidden="true" tabindex="-1"></a><span class="in">hat.plot&lt;-function(fit){</span></span>
-<span id="cb30-256"><a href="#cb30-256" aria-hidden="true" tabindex="-1"></a><span class="in">  p&lt;-length(coefficients(fit)) #模型估计的参数数目（包含截距项）</span></span>
-<span id="cb30-257"><a href="#cb30-257" aria-hidden="true" tabindex="-1"></a><span class="in">  n&lt;-length(fitted(fit))       #样本量</span></span>
-<span id="cb30-258"><a href="#cb30-258" aria-hidden="true" tabindex="-1"></a><span class="in">  plot(hatvalues(fit),main="Index Plot of Hat Values")#帽子值</span></span>
-<span id="cb30-259"><a href="#cb30-259" aria-hidden="true" tabindex="-1"></a><span class="in">  abline(h=c(2,3)*p/n,col="red",lty=2)  #大于帽子均值p/n的2或3倍被认为是高杠杆值</span></span>
-<span id="cb30-260"><a href="#cb30-260" aria-hidden="true" tabindex="-1"></a><span class="in">  identity(1:n,hatvalues(fit),names(hatvalues(fit)))</span></span>
-<span id="cb30-261"><a href="#cb30-261" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb30-262"><a href="#cb30-262" aria-hidden="true" tabindex="-1"></a><span class="in">hat.plot(lm_sales_multi$fit)</span></span>
-<span id="cb30-263"><a href="#cb30-263" aria-hidden="true" tabindex="-1"></a><span class="in">####强影响点</span></span>
-<span id="cb30-264"><a href="#cb30-264" aria-hidden="true" tabindex="-1"></a><span class="in">#Cook's D图形    大于4/(n-k-1)  k为预测变量数目</span></span>
-<span id="cb30-265"><a href="#cb30-265" aria-hidden="true" tabindex="-1"></a><span class="in">cutoff&lt;-4/(nrow(advertising)-length(lm_sales_multi$fit$coefficients)-2)</span></span>
-<span id="cb30-266"><a href="#cb30-266" aria-hidden="true" tabindex="-1"></a><span class="in">{plot(lm_sales_multi$fit,which=4,cook.levels=cutoff)</span></span>
-<span id="cb30-267"><a href="#cb30-267" aria-hidden="true" tabindex="-1"></a><span class="in">abline(h=cutoff,lty=2,col="red")}</span></span>
-<span id="cb30-268"><a href="#cb30-268" aria-hidden="true" tabindex="-1"></a><span class="in">#变量添加图</span></span>
-<span id="cb30-269"><a href="#cb30-269" aria-hidden="true" tabindex="-1"></a><span class="in">avPlots(lm_sales_multi$fit,ask=FALSE,id.method="identity")</span></span>
-<span id="cb30-270"><a href="#cb30-270" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-271"><a href="#cb30-271" aria-hidden="true" tabindex="-1"></a><span class="in">###</span></span>
-<span id="cb30-272"><a href="#cb30-272" aria-hidden="true" tabindex="-1"></a><span class="in">influencePlot(lm_sales_multi$fit,id.method="identity",main="Influence Plot")</span></span>
-<span id="cb30-273"><a href="#cb30-273" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-274"><a href="#cb30-274" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-275"><a href="#cb30-275" aria-hidden="true" tabindex="-1"></a><span class="fu">### 多重共线性</span></span>
-<span id="cb30-276"><a href="#cb30-276" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-279"><a href="#cb30-279" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb30-280"><a href="#cb30-280" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(lm_sales_multi<span class="sc">$</span>fit)</span>
-<span id="cb30-281"><a href="#cb30-281" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-282"><a href="#cb30-282" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">vif</span>(lm_sales_multi<span class="sc">$</span>fit))<span class="sc">&gt;=</span><span class="dv">2</span>       <span class="co">#vif平方根 ≥2 存在</span></span>
-<span id="cb30-283"><a href="#cb30-283" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-284"><a href="#cb30-284" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-285"><a href="#cb30-285" aria-hidden="true" tabindex="-1"></a><span class="fu">## 逐步回归</span></span>
-<span id="cb30-286"><a href="#cb30-286" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-287"><a href="#cb30-287" aria-hidden="true" tabindex="-1"></a>逐步回归是筛选变量，有向前、向后和两个方向同时进行三个方法。</span>
-<span id="cb30-288"><a href="#cb30-288" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-289"><a href="#cb30-289" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`direction = "both"`</span>双向</span>
-<span id="cb30-290"><a href="#cb30-290" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-291"><a href="#cb30-291" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`direction = "backward"`</span>向后</span>
-<span id="cb30-292"><a href="#cb30-292" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-293"><a href="#cb30-293" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`direction = "forward"`</span>向前</span>
-<span id="cb30-294"><a href="#cb30-294" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-297"><a href="#cb30-297" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb30-298"><a href="#cb30-298" aria-hidden="true" tabindex="-1"></a>step_full <span class="ot">&lt;-</span> <span class="fu">lm</span>(sales<span class="sc">~</span> . ,<span class="at">data =</span> advertising[<span class="sc">-</span><span class="dv">1</span>])</span>
-<span id="cb30-299"><a href="#cb30-299" aria-hidden="true" tabindex="-1"></a>step_lm_0 <span class="ot">&lt;-</span> <span class="fu">lm</span>(sales<span class="sc">~</span> <span class="dv">1</span> ,<span class="at">data =</span> advertising[<span class="sc">-</span><span class="dv">1</span>])</span>
-<span id="cb30-300"><a href="#cb30-300" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-301"><a href="#cb30-301" aria-hidden="true" tabindex="-1"></a>step_forward <span class="ot">&lt;-</span> stats<span class="sc">::</span><span class="fu">step</span>(step_lm_0,<span class="at">scope =</span><span class="fu">formula</span>(step_full),  </span>
-<span id="cb30-302"><a href="#cb30-302" aria-hidden="true" tabindex="-1"></a>                            <span class="at">direction =</span> <span class="st">"forward"</span>)</span>
-<span id="cb30-303"><a href="#cb30-303" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(step_forward)</span>
-<span id="cb30-304"><a href="#cb30-304" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-305"><a href="#cb30-305" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-306"><a href="#cb30-306" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-307"><a href="#cb30-307" aria-hidden="true" tabindex="-1"></a>step_backward <span class="ot">&lt;-</span> stats<span class="sc">::</span><span class="fu">step</span>(<span class="at">object =</span> step_full,<span class="co">#scope = formula(step_lm_0) ,</span></span>
-<span id="cb30-308"><a href="#cb30-308" aria-hidden="true" tabindex="-1"></a>                         <span class="at">direction =</span> <span class="st">"backward"</span>)</span>
-<span id="cb30-309"><a href="#cb30-309" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(step_backward )</span>
-<span id="cb30-310"><a href="#cb30-310" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-311"><a href="#cb30-311" aria-hidden="true" tabindex="-1"></a>step_both<span class="ot">&lt;-</span> stats<span class="sc">::</span><span class="fu">step</span>(<span class="at">object =</span> step_lm_0, <span class="at">scope =</span> <span class="fu">formula</span>(step_full) ,</span>
-<span id="cb30-312"><a href="#cb30-312" aria-hidden="true" tabindex="-1"></a>                         <span class="at">direction =</span> <span class="st">"both"</span>)</span>
-<span id="cb30-313"><a href="#cb30-313" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(step_both)</span>
-<span id="cb30-314"><a href="#cb30-314" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-315"><a href="#cb30-315" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-316"><a href="#cb30-316" aria-hidden="true" tabindex="-1"></a><span class="fu">## 模型选择和优化</span></span>
-<span id="cb30-317"><a href="#cb30-317" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-318"><a href="#cb30-318" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/clipboard-3278835564.png)</span></span>
-<span id="cb30-319"><a href="#cb30-319" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-320"><a href="#cb30-320" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/clipboard-1523534461.png)</span></span>
-<span id="cb30-321"><a href="#cb30-321" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-322"><a href="#cb30-322" aria-hidden="true" tabindex="-1"></a>n是观测值的数量，p是模型的参数数（等于回归系数的数量）</span>
-<span id="cb30-323"><a href="#cb30-323" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-324"><a href="#cb30-324" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/clipboard-4133329383.png)</span></span>
-<span id="cb30-325"><a href="#cb30-325" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-326"><a href="#cb30-326" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/clipboard-3792639976.png)</span></span>
-<span id="cb30-327"><a href="#cb30-327" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-328"><a href="#cb30-328" aria-hidden="true" tabindex="-1"></a>$\mathcal{L}$是模型拟合的最大似然值</span>
-<span id="cb30-329"><a href="#cb30-329" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-332"><a href="#cb30-332" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb30-333"><a href="#cb30-333" aria-hidden="true" tabindex="-1"></a><span class="do">########################两模型比较</span></span>
-<span id="cb30-334"><a href="#cb30-334" aria-hidden="true" tabindex="-1"></a>lm1 <span class="ot">&lt;-</span> lm_spec <span class="sc">%&gt;%</span> <span class="fu">fit</span>(sales<span class="sc">~</span>TV<span class="sc">+</span>radio<span class="sc">+</span>newspaper,<span class="at">data =</span> advertising)</span>
-<span id="cb30-335"><a href="#cb30-335" aria-hidden="true" tabindex="-1"></a>lm2 <span class="ot">&lt;-</span> lm_spec <span class="sc">%&gt;%</span> <span class="fu">fit</span>(sales<span class="sc">~</span>TV<span class="sc">*</span>radio<span class="sc">*</span>newspaper,<span class="at">data =</span> advertising[<span class="sc">-</span><span class="dv">1</span>])</span>
-<span id="cb30-336"><a href="#cb30-336" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-337"><a href="#cb30-337" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lm2<span class="sc">$</span>fit,lm1<span class="sc">$</span>fit) <span class="co">#anova() 嵌套模型</span></span>
-<span id="cb30-338"><a href="#cb30-338" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-339"><a href="#cb30-339" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-340"><a href="#cb30-340" aria-hidden="true" tabindex="-1"></a><span class="do">##########################################            AIC </span></span>
-<span id="cb30-341"><a href="#cb30-341" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(lm2<span class="sc">$</span>fit,lm1<span class="sc">$</span>fit)  <span class="co"># 赤池信息准则  AIC值小的优先选择</span></span>
-<span id="cb30-342"><a href="#cb30-342" aria-hidden="true" tabindex="-1"></a><span class="co">#BIC</span></span>
-<span id="cb30-343"><a href="#cb30-343" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-344"><a href="#cb30-344" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-345"><a href="#cb30-345" aria-hidden="true" tabindex="-1"></a><span class="do">####################################相对重要性##################################</span></span>
-<span id="cb30-346"><a href="#cb30-346" aria-hidden="true" tabindex="-1"></a>ad <span class="ot">&lt;-</span> <span class="fu">scale</span>(advertising[<span class="sc">-</span><span class="dv">1</span>])</span>
-<span id="cb30-347"><a href="#cb30-347" aria-hidden="true" tabindex="-1"></a>ad</span>
-<span id="cb30-348"><a href="#cb30-348" aria-hidden="true" tabindex="-1"></a><span class="co">#R平方贡献率  #相对权重 </span></span>
-<span id="cb30-349"><a href="#cb30-349" aria-hidden="true" tabindex="-1"></a>relweights<span class="ot">&lt;-</span><span class="cf">function</span>(fit,...){</span>
-<span id="cb30-350"><a href="#cb30-350" aria-hidden="true" tabindex="-1"></a>  R<span class="ot">&lt;-</span><span class="fu">cor</span>(fit<span class="sc">$</span>model)</span>
-<span id="cb30-351"><a href="#cb30-351" aria-hidden="true" tabindex="-1"></a>  nvar<span class="ot">&lt;-</span><span class="fu">ncol</span>(R)</span>
-<span id="cb30-352"><a href="#cb30-352" aria-hidden="true" tabindex="-1"></a>  rxx<span class="ot">&lt;-</span>R[<span class="dv">2</span><span class="sc">:</span>nvar,<span class="dv">2</span><span class="sc">:</span>nvar]</span>
-<span id="cb30-353"><a href="#cb30-353" aria-hidden="true" tabindex="-1"></a>  rxy<span class="ot">&lt;-</span>R[<span class="dv">2</span><span class="sc">:</span>nvar,<span class="dv">1</span>]</span>
-<span id="cb30-354"><a href="#cb30-354" aria-hidden="true" tabindex="-1"></a>  svd<span class="ot">&lt;-</span><span class="fu">eigen</span>(rxx)</span>
-<span id="cb30-355"><a href="#cb30-355" aria-hidden="true" tabindex="-1"></a>  evec<span class="ot">&lt;-</span>svd<span class="sc">$</span>vectors</span>
-<span id="cb30-356"><a href="#cb30-356" aria-hidden="true" tabindex="-1"></a>  ev<span class="ot">&lt;-</span>svd<span class="sc">$</span>values</span>
-<span id="cb30-357"><a href="#cb30-357" aria-hidden="true" tabindex="-1"></a>  delta<span class="ot">&lt;-</span><span class="fu">diag</span>(<span class="fu">sqrt</span>(ev))</span>
-<span id="cb30-358"><a href="#cb30-358" aria-hidden="true" tabindex="-1"></a>  lambda<span class="ot">&lt;-</span>evec <span class="sc">%*%</span>delta <span class="sc">%*%</span> <span class="fu">t</span>(evec)</span>
-<span id="cb30-359"><a href="#cb30-359" aria-hidden="true" tabindex="-1"></a>  lambdaasq<span class="ot">&lt;-</span>lambda<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb30-360"><a href="#cb30-360" aria-hidden="true" tabindex="-1"></a>  beta<span class="ot">&lt;-</span><span class="fu">solve</span>(lambda) <span class="sc">%*%</span> rxy</span>
-<span id="cb30-361"><a href="#cb30-361" aria-hidden="true" tabindex="-1"></a>  r2<span class="ot">&lt;-</span><span class="fu">colSums</span>(beta<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb30-362"><a href="#cb30-362" aria-hidden="true" tabindex="-1"></a>  rawwgt<span class="ot">&lt;-</span>lambdaasq<span class="sc">%*%</span>beta<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb30-363"><a href="#cb30-363" aria-hidden="true" tabindex="-1"></a>  import<span class="ot">&lt;-</span>(rawwgt<span class="sc">/</span>r2)<span class="sc">*</span><span class="dv">100</span>            <span class="co">#计算相对权重</span></span>
-<span id="cb30-364"><a href="#cb30-364" aria-hidden="true" tabindex="-1"></a>  import<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">Weights=</span>import)  <span class="co">#数据框化</span></span>
-<span id="cb30-365"><a href="#cb30-365" aria-hidden="true" tabindex="-1"></a>  <span class="fu">row.names</span>(import)<span class="ot">&lt;-</span><span class="fu">names</span>(fit<span class="sc">$</span>model[<span class="dv">2</span><span class="sc">:</span>nvar])</span>
-<span id="cb30-366"><a href="#cb30-366" aria-hidden="true" tabindex="-1"></a>  import<span class="ot">&lt;-</span>import[<span class="fu">order</span>(import<span class="sc">$</span>Weights),<span class="dv">1</span>,drop<span class="ot">=</span><span class="cn">FALSE</span>] <span class="co">#升序排序</span></span>
-<span id="cb30-367"><a href="#cb30-367" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dotchart</span>(import<span class="sc">$</span>Weights,<span class="at">labels=</span><span class="fu">row.names</span>(import),   <span class="co">#点图</span></span>
-<span id="cb30-368"><a href="#cb30-368" aria-hidden="true" tabindex="-1"></a>           <span class="at">xlab =</span> <span class="st">"% of R-Square"</span>,<span class="at">pch=</span><span class="dv">19</span>,</span>
-<span id="cb30-369"><a href="#cb30-369" aria-hidden="true" tabindex="-1"></a>           <span class="at">main=</span><span class="st">"Relative Importiance of Predictor Variables "</span>,</span>
-<span id="cb30-370"><a href="#cb30-370" aria-hidden="true" tabindex="-1"></a>           <span class="at">sub=</span><span class="fu">paste</span>(<span class="st">"Total R-Square ="</span>,<span class="fu">round</span>(r2,<span class="at">digits =</span> <span class="dv">3</span>)),</span>
-<span id="cb30-371"><a href="#cb30-371" aria-hidden="true" tabindex="-1"></a>  ...)</span>
-<span id="cb30-372"><a href="#cb30-372" aria-hidden="true" tabindex="-1"></a><span class="fu">return</span>(import)</span>
-<span id="cb30-373"><a href="#cb30-373" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb30-374"><a href="#cb30-374" aria-hidden="true" tabindex="-1"></a><span class="fu">relweights</span>(lm1<span class="sc">$</span>fit,<span class="at">col=</span><span class="st">"blue"</span>)</span>
-<span id="cb30-375"><a href="#cb30-375" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-376"><a href="#cb30-376" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-377"><a href="#cb30-377" aria-hidden="true" tabindex="-1"></a><span class="fu">## 线性可加模型</span></span>
-<span id="cb30-378"><a href="#cb30-378" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-379"><a href="#cb30-379" aria-hidden="true" tabindex="-1"></a>additive model</span>
-<span id="cb30-380"><a href="#cb30-380" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-381"><a href="#cb30-381" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb30-382"><a href="#cb30-382" aria-hidden="true" tabindex="-1"></a>Y_i=\beta_0+ \beta_1 X_i+  \beta_2 X_i^2+\epsilon_i</span>
-<span id="cb30-383"><a href="#cb30-383" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb30-384"><a href="#cb30-384" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-385"><a href="#cb30-385" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb30-386"><a href="#cb30-386" aria-hidden="true" tabindex="-1"></a>Y_i=\beta_0+ \beta_1\times \log(X_i)+\epsilon_i</span>
-<span id="cb30-387"><a href="#cb30-387" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb30-388"><a href="#cb30-388" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-389"><a href="#cb30-389" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb30-390"><a href="#cb30-390" aria-hidden="true" tabindex="-1"></a>Y_i=\beta_0+ \beta_1 (X_i\times W_i)+\epsilon_i</span>
-<span id="cb30-391"><a href="#cb30-391" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb30-392"><a href="#cb30-392" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-393"><a href="#cb30-393" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb30-394"><a href="#cb30-394" aria-hidden="true" tabindex="-1"></a>Y_i=\beta_0+ \beta_1\times \exp(X_i)+\epsilon_i</span>
-<span id="cb30-395"><a href="#cb30-395" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb30-396"><a href="#cb30-396" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-397"><a href="#cb30-397" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb30-398"><a href="#cb30-398" aria-hidden="true" tabindex="-1"></a>Y_i=\beta_0+ \beta_1\times \sin(X_i)+\epsilon_i</span>
-<span id="cb30-399"><a href="#cb30-399" aria-hidden="true" tabindex="-1"></a>$$</span>
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div></div></div></div></div>
+</nav>
 </div> <!-- /content -->
 
 

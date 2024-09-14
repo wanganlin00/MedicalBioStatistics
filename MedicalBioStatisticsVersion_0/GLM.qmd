@@ -341,8 +341,11 @@ ordered_logit <- MASS::polr(PhysActCat_W1 ~ SelfEfficacy_W1, data = acl,
                             method = "logistic")
 ordered_logit %>% summary()
 
+predict(ordered_logit ,acl ,type = "prob") %>% 
+    as_tibble() %>% 
+    DT::datatable()
 
-predict(ordered_logit ,acl ,type = "p") %>% 
+predict(ordered_logit ,acl ,type = "class") %>% 
     as_tibble() %>% 
     DT::datatable()
 ```
@@ -360,7 +363,6 @@ P(X=x;\lambda)=\frac{e^{-\lambda}\lambda ^x}{x!}
 $$
 
 ```{r}
-
 ggplot(tibble(x=0:20,
               y1=dpois(x,lambda = 2),
               y2=dpois(x,lambda = 6),
@@ -438,7 +440,7 @@ BIC(pois_acl$fit)
 
 ## 负二项回归
 
-负二项回归用于处理计数数据且存在过度离散（overdispersion）的问题。
+负二项回归用于处理计数数据且存在过度离散（overdispersion）的问题即当均值不等于方差。
 
 log link function，z-statistic
 
@@ -474,6 +476,8 @@ BIC(nb_acl$fit)
 
 ## 零膨胀模型（zero-inflated）
 
+逻辑回归+以上之一
+
 ## 正则化广义线性模型
 
 Ridge、Lasso
@@ -486,4 +490,5 @@ autoplot(fit)
 
 fit <- glmnet::cv.glmnet(x = QuickStartExample$x, y = QuickStartExample$y)
 autoplot(fit, colour = 'blue')
+
 ```
