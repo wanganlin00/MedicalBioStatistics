@@ -78,3 +78,48 @@ $$  \begin{cases}  \frac{\partial \ln L_p(\beta)}{\partial \beta_1}=0\\ \frac{\p
     $$ \chi^2_{LR}=2\left[ \ln L_p(\beta_k)-\ln L_p(\beta_{k-1}) \right]\sim\chi^2(1) $$
 
     其中分别是包含 k 个和 k-1 个（不包含要检验的第 j 个变量）独立变量的对数局部似然函数
+
+```{r}
+# 加载必要的包
+library(survival)
+library(dplyr)
+library(kableExtra)
+
+# 假设你有一个Cox回归模型的结果
+# 示例数据集：肺癌数据
+data(lung)
+fit <- coxph(Surv(time, status) ~ age + sex + ph.ecog, data = lung)
+
+# 提取结果
+summary_fit <- summary(fit)
+HR <- summary_fit$coef[,2]  # 提取风险比
+lower_CI <- summary_fit$conf.int[,3]  # 提取95%CI的下界
+upper_CI <- summary_fit$conf.int[,4]  # 提取95%CI的上界
+variables <- rownames(summary_fit$coef)  # 提取变量名
+
+# 创建数据框
+results_df <- data.frame(
+  Variable = variables,
+  HR = HR,
+  Lower_CI = lower_CI,
+  Upper_CI = upper_CI
+)
+
+# 自定义误差线显示
+results_df <- results_df %>%
+  mutate(
+    HR_CI = paste0(round(HR, 2), " (", round(Lower_CI, 2), "-", round(Upper_CI, 2), ")"),
+    Error_Line = paste0(
+      round(Lower_CI, 2), " ", 
+      paste(rep("─", 10), collapse = ""),  # 模拟误差线
+      " ", round(Upper_CI, 2)
+    )
+  )
+
+# 绘制表格，包含误差线
+results_df %>%
+  select(Variable, HR_CI, Error_Line) %>%
+  kable() %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
+
+```
