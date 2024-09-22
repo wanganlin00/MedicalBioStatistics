@@ -1,10 +1,15 @@
-# 非参数秩检验
+# 非参数检验
 
 ## 秩
 
 $$
 F(Median)=P(X\le Median)=0.5
 $$
+
+```{r}
+x <- c(1,4,2,2,6,9,5)
+rank(x)
+```
 
 ## 二项分布B(n，0.5)
 
@@ -199,7 +204,7 @@ tibble(
 kruskal.test(weight~group,data = PlantGrowth)
 ```
 
-#### 多重比较
+#### 事后多重比较
 
 ```{r}
 pairwise.wilcox.test(PlantGrowth$weight,PlantGrowth$group,p.adjust.method = "fdr",exact=F)

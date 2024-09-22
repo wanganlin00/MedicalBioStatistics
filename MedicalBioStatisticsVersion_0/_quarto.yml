@@ -27,7 +27,7 @@ book:
         - ANOVA.qmd
         - repeated_measures_ANOVA.qmd
         
-        - rate_proportion_test.qmd
+        - proportion_test.qmd
         - chi-square_test.qmd
         - nonparametric_test.qmd
         

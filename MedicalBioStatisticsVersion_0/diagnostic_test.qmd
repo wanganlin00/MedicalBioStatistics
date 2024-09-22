@@ -1,5 +1,9 @@
 # 诊断性测试
 
+## 混淆矩阵
+
+![](images/confusing_matrix.png){fig-align="center"}
+
 ```{r}
 m<- matrix(c("TP","FN","FP","TN"),nrow = 2,
            dimnames = list(predict=c("+","-"),

@@ -1,6 +1,6 @@
 # 定性数据的统计描述
 
-### 率
+## 率
 
 率（rate）表示在一定空间或时间范围内某现象的发生数与可能发生的总数之比，说明某现象出现的频率。
 
@@ -13,6 +13,8 @@
 ## 相对比
 
 相对比（relative ratio）是A和B两个有关联指标值之比。
+
+### RR
 
 [Using R for Biomedical Statistics](https://a-little-book-of-r-for-biomedical-statistics.readthedocs.io/en/latest/src/biomedicalstats.html)
 
@@ -34,6 +36,8 @@
     calcOddsRatio(x,alpha = 0.05)
     ```
 
+    ### OR
+
 -   优势比（Odds Ratio，OR），是指暴露组中病例与非病例人数的比值除以非暴露组中病例与非病例人数的比值。　　OR 的取值范围也为 0 到无穷大。如果 OR 值大于 1 ，说明该暴露因素更 容易导致结果事件发生，或者说该因素是一个危险因素；小于 1 ，则说明该暴露因素更不 容易导致结果事件发生，或者说该因素是一个保护因素。比值比适用于队列研究和病例对照研究。
 
     ```{r}
@@ -53,7 +57,7 @@ colnames(eg) <- c("Disease","Control")
 rownames(eg) <- c("Exposed","Unexposed")
 print(eg)
 prop.table(eg)          #各单元格比例
-prop.table(eg,margin = 1)        #行比例 
+prop.table(eg,margin = 1)        #行比例和=1
 ```
 
 ## 边际列联表
@@ -69,6 +73,67 @@ addmargins(prop.table(eg,1))
 ftable(eg)   # "平铺式"列联表
 ```
 
-## 混淆矩阵
+## 关联度量
 
-![](images/confusing_matrix.png){fig-align="center"}
+### 卡方系数
+
+```{r}
+chisq.test(eg)
+```
+
+### 列联系数
+
+![](images/clipboard-4252541209.png)
+
+```{r}
+Contingency <- function(x) {
+    chi <- chisq.test(x)
+    unname(sqrt(chi$statistic / (chi$statistic + sum(x))))
+}
+Contingency(eg)
+```
+
+```{r}
+library(DescTools)
+
+ContCoef(eg)
+```
+
+### **Phi and Cramer’s V 系数**
+
+![](images/clipboard-1172472303.png)
+
+```{r}
+# Phi coefficient
+PhiCoef <- function(x){
+    unname(sqrt(chisq.test(x)$statistic / sum(x)))
+}
+
+# Cramer's V coefficient
+V <- function(x) {
+    unname(sqrt(chisq.test(x)$statistic / (sum(x) * (min(dim(x)) - 1))))
+}
+```
+
+```{r}
+PhiCoef(eg) 
+V(eg) 
+```
+
+```{r}
+library(DescTools)
+Phi(eg)
+CramerV(eg)
+```
+
+```{r}
+library(vcd)
+
+assocstats(eg)
+```
+
+## 马赛克图
+
+```{r}
+mosaicplot(eg)
+```

@@ -285,6 +285,52 @@ print(results)
 
 Pearson’s $\chi^2$ goodness-of-fit test
 
+此检验检查观察到的频率分布是否与预期的理论分布匹配，例如均匀分布或任何其他预期分布。此检验扩展了[单比率 Z 检验](https://r-coder.com/prop-test-r/#one-proportion)。
+
+```{r}
+observed <- c(11, 32, 24)    # Observed frequencies
+expected <- c(0.2, 0.5, 0.3) # Expected probabilities (sum up to 1)
+
+# Chi-squared test for goodness of fit (Are the population probabilities equal to 'p'?)
+chisq.test(x = observed, p = expected) 
+
+```
+
+设置`rescale.p = TRUE` 频率将重新缩放以求和为 1
+
+```{r}
+observed <- c(11, 32, 24) # Observed frequencies
+expected <- c(20, 50, 30) # Expected frequencies
+
+# Chi-squared test for goodness of fit with rescaled 'p'
+chisq.test(x = observed, p = expected, rescale.p = TRUE) 
+
+```
+
+如果未指定`p`，则测试将检查比例是否全部相等（均匀分布）
+
+```{r}
+observed <- c(15, 25, 20)
+chisq.test(observed)
+
+chisq.test(observed, p = rep(1/3,3))
+```
+
+## Chi-squared test of homogeneity
+
+此检验比较**单个分类变量**在多个**独立组或总体**中的分布。它确定单个分类变量的频率分布在不同组中是相似还是同质。此检验扩展了[两个比例 Z 检验](https://r-coder.com/prop-test-r/#two-proportion)。
+
+```{r}
+data <- matrix(c(18, 26, 44, 6, 14, 19), nrow = 2, byrow = TRUE)
+colnames(data) <- c("Drug A", "Drug B", "Drug C")
+rownames(data) <- c("Age under 30", "Age over 30")
+chisq.test(data)
+
+data %>% t() %>% chisq.test()
+```
+
+p 值为 0.6967，大于通常的显著性水平，因此没有证据否定年龄组之间分布相等的原假设。
+
 ## Cochran-Mantel-Haenszel $\chi^2$ 检验
 
 又叫行均分检验，常用于按照某个变量进行分层后的检验，**用于检验两个有序分类变量是否存在线性相关**，但实际上用途很广泛，比如因变量是有序变量的单向有序列联表，也可以用。　　
