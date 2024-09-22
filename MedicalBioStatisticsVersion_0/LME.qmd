@@ -24,10 +24,6 @@ $$
 
 ## `lme4::lmer()`
 
-```{r}
-lme4::lmer
-```
-
 `lmer()` 的表达式如下：
 
 $$
@@ -44,10 +40,6 @@ $$
 | 线性模型：固定截距+固定斜率 | y\~x               | NA               |
 
 ## `nlme::lme()`
-
-```{r}
-nlme::nlme
-```
 
 ## 随机截距+随机斜率
 
@@ -73,6 +65,8 @@ BIC(lme1)
 logLik(lme1)
 
 2*(1-pt(-3.914605,35,lower.tail = F))
+library(broom.mixed)
+tidy(lme1)
 
 library(nlme)
 
@@ -81,6 +75,8 @@ nlme1 <- lme(Richness ~ 1 + NAP * Exposure,
              data = df_long,
              control = lmeControl(opt = "optim", msMaxIter = 100, msMaxEval = 5000))
 summary(nlme1)
+
+tidy(nlme1)
 ```
 
 这个模型的公式可以分解为：

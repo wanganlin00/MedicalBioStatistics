@@ -13,7 +13,8 @@ book:
       chapters:
         - quantitative_data.qmd
         - qualitative_data.qmd
-
+        - correlation.qmd
+        
     - part: "概率论与数理统计"
       chapters:
         - probability_theory.qmd
@@ -30,8 +31,7 @@ book:
         - proportion_test.qmd
         - chi-square_test.qmd
         - nonparametric_test.qmd
-        
-        - correlation.qmd
+       
 
     #     - PowerAnalysis.qmd
     #     - Causal_Inference.qmd
@@ -42,7 +42,6 @@ book:
         - LME.qmd
         - GLM.qmd
         - GEE.qmd
-
 
     - part: "生存分析"
       chapters:
