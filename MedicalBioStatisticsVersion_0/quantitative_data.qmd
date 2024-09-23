@@ -88,7 +88,6 @@ mlv(y, method = "mfv")
 # install.packages("multimode")
 ```
 
-
 注意：函数`rstatix::get_mode()` 可能返回多个众数，如果存在多个众数，请检查其处理方式。
 
 ## 离散趋势（dispersion tendency）
@@ -134,6 +133,7 @@ quantile(mtcars$mpg,probs = c(0,0.1,0.25,0.5,0.75,1))
 # 四分位数间距
 IQR(mtcars$mpg)   
 ```
+
 ## 关联度量
 
 ```{r}
@@ -156,7 +156,6 @@ cor(mpg %>% select(displ,cty,hwy), method = "kendall")
 #  Spearman 的 rho 相关系数   Pearson 系数的稳健非参数替代项,数据非正态或具有异常值
 cor(mpg %>% select(displ,cty,hwy), method = "spearman")
 ```
-
 
 ## 分布形态
 

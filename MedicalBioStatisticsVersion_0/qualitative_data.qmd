@@ -47,6 +47,7 @@
     y
     calcOddsRatio(y, referencerow=3)
     calcRelativeRisk(y, referencerow=3)
+
     ```
 
 ## 列联表
