@@ -10,31 +10,7 @@ $$
 
 其中S(t)是累计生存概率或生存率，量化了生存时间大于t的概率。f(x)是密度函数，呈右偏态分布，反映了任意时间点 t 终点事件的瞬时发生率。F(t)=P(T\<t)是f(t)在区间\[0,t\]的累计形式，也称为分布函数或累积函数。
 
-## 风险函数
-
-$$
-\begin{aligned}
-h(t)=&\lim_{\Delta t\to 0}\frac{P(t\le T<t+\Delta t|T\ge t)}{\Delta t}\\
-=&\lim_{\Delta t\to 0}\frac{P(t\le T<t+\Delta t\ \&\ T\ge t)}{\Delta t·P(T\ge t) }\\
-=&\lim_{\Delta t\to 0}\frac{S(t)- S(t+\Delta t)}{\Delta t·S(t)}\\
-=&-\frac{d(\ln S(t))}{dt}
-\end{aligned}
-$$
-
-$$S(t)=e^{-\int_0^t h(u)du} $$
-
-$$
-\begin{aligned}
-h(t)\Delta t=&P(t\le T<t+\Delta t|T\ge t)
-=\frac{P(t\le T<t+\Delta t\ \&\ T\ge t)}{P(T\ge t) }\\
-=&\frac{P(t\le T<t+\Delta t)}{P(T\ge t) }\\
-=&\frac{f(t)\Delta t}{S(t)}
-\end{aligned}
-$$
-
-$f(t)=h(t)S(t)$
-
-## 乘积极限法
+## 乘积极限法(Kaplan-Meier)
 
 product limit method 也称为Kaplan-Meier 法。
 
@@ -46,7 +22,7 @@ $n_1>n_2>n_3>...>n_n$ ,n~i~ d代表在时间点t~i~ 暴露于特定事件风险�
 
 $d_i$ 代表在时间点t~i~ 发生终点事件的数量。（如果没有 tie，d~i~=1或0）
 
-生存率的KM估计计算公式：
+生存率的KM方法估计公式：
 
 $$
 \hat S(t)=\prod_{t_i\le t}\frac{n_i-d_i}{n_i}
@@ -60,41 +36,50 @@ $$ {#eq-KM}
 
 其中$Var\left [\hat S(t)  \right]=\hat S(t)^2\sum_{t_i\le t}\frac{d_i}{n_i(n_i-d_i)}$ (Greenwood method )
 
-```{r}
-df_raw <- tibble(
-    id=1:5,
-    sex=factor(c("Male","Male","Female","Male","Female")),
-    age_years=c(53,62,75,73,61),
-    outcome=c("Loss to follow-up","Death","Death","Relapse","Survival"),
-    time=c("37.5+",44.3,25.3,18.1,"56.7+")
-)
-df <- df_raw |> arrange(time) |> select(id,outcome,time) |> 
-    mutate(
-        d_i=if_else(outcome=="Relapse"|outcome=="Death",1,0),
-        time=parse_number(time),
-    )
-df
+### 示例
 
+<https://biostatsquid.com/easy-survival-analysis-r-tutorial/>
+
+```{r}
 library(survminer)
 library(survival)
+library(ggsurvfit)
+df <- read_csv("data/log-rank-survival.csv")
 
-km_fit<-survfit(Surv(time,d_i)~1,data=df)
-# t_i
-km_fit$time
-# d_i
-km_fit$n.event
+
+surv_obj <- with(df, Surv(Days,status))
+
+surv_fit1 <-survfit(surv_obj ~1,data=df)
+# t_i  =  surv_fit1$time
+# n_i = surv_fit1$n.risk
+
+# d_i = surv_fit1$n.event
+
 # cnesored
-km_fit$n.censor
-# n_i
-km_fit$n.risk
+surv_fit1$n.censor
 
-# 生存率
-km_fit$surv
+# 生存率survival
+surv_fit1$surv
 
-summary(km_fit)
+summary(surv_fit1)
+
+ggsurvfit(surv_fit1, linewidth =1)+
+    add_confidence_interval()+
+    scale_ggsurvfit()+
+    add_risktable() +
+    labs(x = "Days")
 ```
 
-## 单因素分组生存曲线的比较
+```{r}
+# 估计 x-天 的生存率
+
+summary( surv_fit1, times = c(0,30,50))$surv
+
+# 中位生存率 median
+surv_fit1
+```
+
+## 单因素生存曲线的比较
 
 | 检验方法         | 权重          |
 |------------------|---------------|
@@ -107,7 +92,7 @@ $$
 \chi^2=\frac{\left(\sum_jw(t_j)(m_{ij}-e_{ij})\right)^2}{\hat {Var}\left(\sum_jw(t_j)(m_{ij}-e_{ij})\right)}
 $$
 
-### log-rank test
+## log-rank test
 
 1.  H~0~ :两总体的生存曲线是相同的。
 
@@ -140,16 +125,36 @@ $$
     $$
 
 ```{r}
-df <- read_csv("data/log-rank-survival.csv")
 
-# 使用 Kaplan-Meier 方法创建一个Surv对象
-surv_formula <- Surv(Days,status)~treatment
+surv_fit2<-survfit(surv_obj ~ treatment,data=df)
+ggsurvplot(surv_fit2, linewidth =1,
+          data = df,
+          censor.shape = "|", censor.size = 4,
+          pval = T,conf.int = T,risk.table = T,risk.table.col = "strata",
+          legend.labs = c("CON","DPVB","LDRT","LR-DPVB"),
+          risk.table.height = .25,
+          ggtheme = theme_bw()
+            )+
+    labs(x = "Days")
 
-km<-survfit(surv_formula,data=df)
-summary(km)
 
+```
+
+```{r}
 # 执行Log-rank检验
-logrank_test <- survdiff(surv_formula,data = df,subset = T,na.action = "na.omit")
+logrank_test <- survdiff( Surv(Days,status) ~ treatment,data = df)
+logrank_test
 logrank_test$chisq
 logrank_test$pvalue
+```
+
+```{r}
+survdiff( Surv(Days,status) ~ treatment,
+          data = df %>% filter(treatment %in% c("CON", "DPVB")))
+
+survdiff( Surv(Days,status) ~ treatment,
+          data = df %>% filter(treatment %in% c("CON", "LDRT")))
+
+survdiff( Surv(Days,status) ~ treatment,
+          data = df %>% filter(treatment %in% c("CON", "LR_DPVB")))
 ```

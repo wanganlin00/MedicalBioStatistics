@@ -4,9 +4,27 @@ Cox比例风险模型是一种半参数方法
 
 ## 风险函数
 
-$$ 
-\begin{aligned} h(t)=&\lim_{\Delta t\to 0}\frac{P(t\le T<t+\Delta t|T\ge t)}{\Delta t}\\ =&\lim_{\Delta t\to 0}\frac{P(t\le T<t+\Delta t\ \&\ T\ge t)}{\Delta t·P(T\ge t) }\\ =&\lim_{\Delta t\to 0}\frac{S(t)- S(t+\Delta t)}{\Delta t·S(t)}\\ =&-\frac{d(\ln S(t))}{dt} \end{aligned} 
 $$
+\begin{aligned}
+h(t)=&\lim_{\Delta t\to 0}\frac{P(t\le T<t+\Delta t|T\ge t)}{\Delta t}\\
+=&\lim_{\Delta t\to 0}\frac{P(t\le T<t+\Delta t\ \&\ T\ge t)}{\Delta t·P(T\ge t) }\\
+=&\lim_{\Delta t\to 0}\frac{S(t)- S(t+\Delta t)}{\Delta t·S(t)}\\
+=&-\frac{d(\ln S(t))}{dt}
+\end{aligned}
+$$
+
+推导出 $S(t)=e^{-\int_0^t h(u)du}$
+
+$$
+\begin{aligned}
+h(t)\Delta t=&P(t\le T<t+\Delta t|T\ge t)
+=\frac{P(t\le T<t+\Delta t\ \&\ T\ge t)}{P(T\ge t) }\\
+=&\frac{P(t\le T<t+\Delta t)}{P(T\ge t) }\\
+=&\frac{f(t)\Delta t}{S(t)}
+\end{aligned}
+$$
+
+推导出 $f(t)=h(t)S(t)$
 
 ## 风险率
 
@@ -22,34 +40,17 @@ $$ h(t|x_1,x_2,...,x_k)=h_0(t)g(x_1,x_2,...,x_k)=h_0(t)exp(\sum_{j=1}^k\beta_jx_
 
 3.  $β_j$是部分回归系数，表示风险比的比例变化。
 
-## 比例风险假设
-
-（proportional hazards assumption）
-
-$$ \frac{h(t)}{h_0(t)}=exp(\sum_{j=1}^k\beta_jx_j) $$
-
 ## 风险比（hazard ratio）
 
 假设有两个个体，分别具有独立变量，两个个体的风险函数之比称为风险比
 
 $$ HR=\frac{h(t|x_1,x_2,...,x_k)}{h(t|x_1^*,x_2^*,...,x_k^*)}=exp(\sum_{j=1}^k\beta_j(x_j-x_j^*)) $$
 
-```{r}
-df <- read_csv("data/log-rank-survival.csv")
+### 比例风险假设（proportional hazards assumption）
 
+Cox 模型假设任意两组之间的 HR 随时间保持不变
 
-library(survminer)
-library(survival)
-# 使用 Kaplan-Meier 方法创建一个Surv对象
-surv_formula <- Surv(Days,status)~treatment
-
-# 拟合Cox比例风险模型 
-cox_model <- coxph(surv_formula, data = df)  
-# 查看模型结果 
-summary(cox_model)  
-# 检查比例风险假设 
-cox.zph(cox_model)
-```
+$$ \frac{h(t)}{h_0(t)}=exp(\sum_{j=1}^k\beta_jx_j) $$
 
 ### 模型系数的估计
 
@@ -79,47 +80,84 @@ $$  \begin{cases}  \frac{\partial \ln L_p(\beta)}{\partial \beta_1}=0\\ \frac{\p
 
     其中分别是包含 k 个和 k-1 个（不包含要检验的第 j 个变量）独立变量的对数局部似然函数
 
+## 示例
+
 ```{r}
-# 加载必要的包
+library(survminer)
 library(survival)
-library(dplyr)
-library(kableExtra)
+df <- survival::rotterdam
+df <- df %>% mutate(dtime_yrs = dtime/365.25,
+                    status = death)
 
-# 假设你有一个Cox回归模型的结果
-# 示例数据集：肺癌数据
-data(lung)
-fit <- coxph(Surv(time, status) ~ age + sex + ph.ecog, data = lung)
+# 拟合Cox比例风险模型 
+cox_model <- coxph(Surv(dtime_yrs, status) ~ hormon + chemo + size + er + pgr + nodes + meno + grade + age, data = df)
+# 查看模型结果 
+summary(cox_model)  
+```
 
-# 提取结果
-summary_fit <- summary(fit)
-HR <- summary_fit$coef[,2]  # 提取风险比
-lower_CI <- summary_fit$conf.int[,3]  # 提取95%CI的下界
-upper_CI <- summary_fit$conf.int[,4]  # 提取95%CI的上界
-variables <- rownames(summary_fit$coef)  # 提取变量名
+例如，与未接受激素治疗的患者相比，在任何给定时间接受激素治疗患者的结局（死亡）概率为0.9366。换句话说，他们的生存率提高了6.34%。对于每个组，我们比较了该特征的存在（=1）和不存在（=0）。例如，对于激素治疗，我们有2600名患者没有接受激素治疗，而300名患者接受了激素治疗。因此，系数是指接受治疗与不接受治疗的对数风险率的变化，换句话说，“不接受激素治疗”组是我们的参考。
 
-# 创建数据框
-results_df <- data.frame(
-  Variable = variables,
-  HR = HR,
-  Lower_CI = lower_CI,
-  Upper_CI = upper_CI
-)
+在解释 Cox regresison 的结果之前，请验证是否遵循比例风险假设。
 
-# 自定义误差线显示
-results_df <- results_df %>%
-  mutate(
-    HR_CI = paste0(round(HR, 2), " (", round(Lower_CI, 2), "-", round(Upper_CI, 2), ")"),
-    Error_Line = paste0(
-      round(Lower_CI, 2), " ", 
-      paste(rep("─", 10), collapse = ""),  # 模拟误差线
-      " ", round(Upper_CI, 2)
-    )
-  )
+Cox 模型假设任意两组之间的 HR 随时间保持不变。我们可以使用 cox.zph() 非常轻松地对其进行测试。
 
-# 绘制表格，包含误差线
-results_df %>%
-  select(Variable, HR_CI, Error_Line) %>%
-  kable() %>%
-  kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
+```{r}
+test <- survival::cox.zph(cox_model)
+test
+```
 
+基于Schoenfeld residuals 的比例风险假设
+
+```{r}
+# 绘制每个协变量随时间变化的 Schoenfeld 残差
+survminer::ggcoxzph(test, point.size = 0.1)
+```
+
+**如果残差随时间显示清晰的模式，则可能表示违反了比例风险假设。**
+
+**一些有助于解释的提示：**
+
+-   **无模式（常数残差）：如果残差随机分布在零附近，没有明确的趋势或模式，则表明比例风险假设是合理的：）**
+
+-   **线性趋势：残差随时间变化的线性趋势（增加或减少）可能表明违反了比例风险假设。例如，如果残差在一段时间内始终为正或负，则表示存在时间相关效应。**
+
+-   **非线性模式：如果残差表现出非线性模式或特定形状（例如，U 形、V 形），则可能表示偏离比例风险。**
+
+-   **并行度：平行度意味着残差的分布和分布在时间上相对恒定。如果残差随时间变宽或变窄，则可能表明违反了假设。**
+
+```{r}
+
+###  Concordance index
+
+c_index <- function(data, indices) {
+    dat <- data[indices, ]
+    
+    # 使用字符向量构建公式
+    formula_str <- paste("Surv(dtime_yrs, status) ~ hormon + chemo + size + er + pgr + nodes + meno + grade + age")
+    fit <- cph(formula = as.formula(formula_str), 
+               data = dat, x = TRUE, y = TRUE, surv = TRUE)
+    
+    pred <- predict(fit, newdata = dat)
+    
+    # 直接使用 Surv 对象来避免警告
+    C_index <- 1 - rcorrcens(Surv(dat$dtime_yrs, dat$status) ~ pred)[1]
+    
+    return(C_index)
+}
+library(rms)
+c_index(data=df ,indices = 1:nrow(df))
+
+library(boot)
+set.seed(1234)
+boot_c_index <- boot(data = df,statistic = c_index, R = 200)
+boot_c_index 
+
+boot.ci(boot_c_index, conf = 0.95, type = c("norm","basic"))
+
+```
+
+## 森林图
+
+```{r}
+ggforest(cox_model, data = df)
 ```
