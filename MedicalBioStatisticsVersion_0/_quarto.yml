@@ -48,10 +48,11 @@ book:
         - SurvivalAnalysis.qmd
         - CoxProportionalHazardsModel.qmd
 
-    - part: "研究设计"
+    - part: "临床研究设计"
       chapters: 
         - diagnostic_test.qmd
         # - observational_study_design.qmd
+        - RCT.qmd
 
         
 
