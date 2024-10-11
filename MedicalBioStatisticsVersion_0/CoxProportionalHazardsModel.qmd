@@ -128,31 +128,39 @@ survminer::ggcoxzph(test, point.size = 0.1)
 ```{r}
 
 ###  Concordance index
-
-c_index <- function(data, indices) {
+c_index <- function(data, formula, indices) {
     dat <- data[indices, ]
     
-    # 使用字符向量构建公式
-    formula_str <- paste("Surv(dtime_yrs, status) ~ hormon + chemo + size + er + pgr + nodes + meno + grade + age")
-    fit <- cph(formula = as.formula(formula_str), 
-               data = dat, x = TRUE, y = TRUE, surv = TRUE)
+    # 构建回归模型
+    fit <- cph(formula = formula, data = dat, x = TRUE, y = TRUE, surv = TRUE)
     
+    # 进行预测
     pred <- predict(fit, newdata = dat)
     
-    # 直接使用 Surv 对象来避免警告
-    C_index <- 1 - rcorrcens(Surv(dat$dtime_yrs, dat$status) ~ pred)[1]
+    # 计算C-index
+   C_index <- 1 - rcorrcens(Surv(dat[[all.vars(formula)[1]]], 
+                                   dat[[all.vars(formula)[2]]]) ~ pred)[1]
     
     return(C_index)
 }
+
+formula <- Surv(dtime_yrs, status) ~ hormon + chemo + size + er + pgr + nodes + meno + grade + age
 library(rms)
-c_index(data=df ,indices = 1:nrow(df))
+
+c_index(data=df, formula ,indices = 1:nrow(df))
 
 library(boot)
 set.seed(1234)
-boot_c_index <- boot(data = df,statistic = c_index, R = 200)
+boot_c_index <- boot(data = df,statistic = c_index, R = 200,formula = formula)
 boot_c_index 
 
-boot.ci(boot_c_index, conf = 0.95, type = c("norm","basic"))
+plot(boot_c_index)
+boot.ci(boot_c_index, conf = 0.95, type = c("norm","basic","perc"))
+
+boot_c_index$t
+
+quantile(boot_c_index$t,probs = c(.025,.975))
+
 
 ```
 
