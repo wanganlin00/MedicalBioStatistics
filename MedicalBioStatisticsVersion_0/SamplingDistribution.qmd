@@ -19,6 +19,24 @@
 
     统计量的概率分布称为抽样分布。
 
+抽样分布定理（正态总体）
+
+:   [专题五 统计推断基础](https://www.icourse163.org/course/NJU-1463195163)
+
+:   设总体 $X ~ N(μ，σ^2)$，$X_1,X_2,...X_n$ 是来自总体的随机样本，则
+
+    1.  样本均值
+
+    $$ \bar X=\frac{x_1+x_2+...+x_n}{n} \sim  N(μ,\frac{σ^2}{n}) $$
+
+    2.  样本方差 $S^2=\frac{1}{n-1}\sum_{i=1}^n\left( X_i-\bar X \right )^2$
+
+    $$
+    \frac {(n-1)S^2}{\sigma^2}\sim \chi^2(n-1)
+    $$
+
+    3.  样本均值与样本方差独立
+
 ## 均值（mean）的抽样分布
 
 假设 $X_1,X_2,...,X_n$是来自均值为$μ$，有限方差为$σ^2$的总体为 $X$的一组样本量为n的随机样本。
@@ -66,17 +84,19 @@ $$
 
 均值的标准差即标准误 $\sigma _{\bar X} =\frac {\sigma}{\sqrt n}$ 可以用 $S _{\bar X} =\frac {S}{\sqrt n}$ 估计。
 
-### $N(μ,\frac{σ^2}{n})$——大样本量的非正态总体
+### $N(μ,\frac{σ^2}{n})$——非正态大样本总体的渐进性质
 
 中心极限定理（central limit theorem）
 
 :   当样本量n足够大（n≥30）时，即使随机样本并非来自正态分布总体，样本均值$\bar X$ 的抽样分布也会近似服从均值为$\mu$ ，方差为$\sigma^2/n$ 的正态分布，即
 
-    $$ \bar X \dot{\sim}  N(μ,\frac{σ^2}{n}) $$
+    $$ \bar X=\frac{x_1+x_2+...+x_n}{n} \dot{\sim}  N(μ,\frac{σ^2}{n}) $$
+
+    ![](images/clipboard-3101458202.png)
 
 ### t分布——σ^2^ 未知的正态分布
 
-$Z\sim N(0,1)$，$X\sim \chi^2(n)$ 且X与Z相互独立，则称
+构造式定义：若$Z\sim N(0,1)$，$X\sim \chi^2(n)$ 且X与Z相互独立，则称
 
 $$ T=\frac{Z}{\sqrt{X/n}} $$
 
@@ -121,10 +141,10 @@ t_distribution(df=10)|norm()
 
 ### $\chi^2$分布
 
-$Z_i\sim N(0,1)$,且$Z_i$相互独立，则称
+构造式定义：若$Z_i$独立同分布，且 $Z_i\sim N(0,1)$，则
 
 $$
-X=Z_1^2+Z_2^2+...+Z_n^2
+X=Z_1^2+Z_2^2+...+Z_n^2 \sim \chi^2(n)
 $$
 
 为自由度为n的$\chi^2$分布，记为$X\sim \chi^2(n)$
@@ -139,6 +159,8 @@ E(X)=&n\\
 Var(X)=&2n
 \end{aligned}
 $$
+
+![](images/clipboard-281200083.png)
 
 假设 $X_1,X_2,...,X_n$是独立同分布于均值为$μ$，有限方差为$σ^2$的一组样本量为n的随机样本。统计量的分布：
 
@@ -173,11 +195,13 @@ chisq_distribution <- function(df = 1, ...) {
 
 ### F分布
 
-$X\sim \chi^2(n_1)$ ，$Y\sim \chi^2(n_2)$且相互独立，则称
+构造式定义：若$X\sim \chi^2(n_1)$ ，$Y\sim \chi^2(n_2)$且**X**与**Y** 相互独立，则称
 
 $$ F=\frac{X/n1}{Y/n2}$$
 
 为第一个自由度为n1和第二个自由度为n2的$F$分布，记为$F\sim F(n_1,n_2)$
+
+![](images/clipboard-3708872534.png)
 
 如果$X\sim \chi^2(n_1,\delta)$ ，则称F为非中心化的F分布。记为$F\sim F(n_1,n_2;\delta)$ ，称δ为非中心化参数。
 
