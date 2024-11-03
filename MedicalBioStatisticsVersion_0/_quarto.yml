@@ -47,6 +47,7 @@ book:
       chapters:
         - SurvivalAnalysis.qmd
         - CoxProportionalHazardsModel.qmd
+        - CompetingRiskModel.qmd
 
     - part: "临床研究设计"
       chapters: 

@@ -1,0 +1,5 @@
+# 竞争风险模型
+
+<https://ayueme.github.io/R_clinical_model/nomogram-compete-risk.html>
+
+![](images/clipboard-13486516.png){fig-align="center"}
