@@ -260,27 +260,29 @@ SBP_long %>%
 <https://cran.r-project.org/web/packages/afex/vignettes/afex_anova_example.html>
 
 ```{r}
-library("afex")     # needed for ANOVA functions.
-library("emmeans")  # emmeans must now be loaded explicitly for follow-up tests.
-library("multcomp") # for advanced control for multiple testing/Type 1 errors.
-library("ggplot2")  # for customizing plots.
+library("afex")     
+library("emmeans") 
+# aov_car(SBP ~ group + Error(id/time), data = SBP_long)
+# aov_4(SBP ~ group + (time|id), data = SBP_long)
 
-
-
-SBP_aovez <- aov_ez("id", "SBP", SBP_long, between ="group" , 
-       within = c("time"))
+SBP_aovez <- aov_ez(id = "id",
+                    dv =  "SBP",
+                    data =  SBP_long, 
+                    between ="group" , 
+                    within = c("time")
+                    )
 SBP_aovez
 
 SBP_aovez %>% summary()
 
-# aov_car(SBP ~ group + Error(id/time), data = SBP_long)
-# aov_4(SBP ~ group + (time|id), data = SBP_long)
-
-
+# 多变量检验
+summary(SBP_aovez$Anova)
 # 事后检验 不调整与SPSS一样
 
 ## 看各时间点处理组成对比较
-emmeans::emmeans(SBP_aovez , pairwise ~ group|time, adjust = "none")
+emmeans::emmeans(SBP_aovez ,  ~ group|time, adjust = "none") %>% pairs()
+
+
 
 ## 看各处理组时间点成对比较
 emmeans::emmeans(SBP_aovez , pairwise ~ time| group, adjust = "none")
