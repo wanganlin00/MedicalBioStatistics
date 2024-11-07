@@ -20,11 +20,11 @@ $$ 其中，$Y_{ijk}$ 是第i 个组、第j 个时间点或条件下、第k 个�
 
 -   **误差项**： 表示观测值中的随机误差或未解释的变异。
 
-## 假设条件
+## 假设 {style="color:red"}
 
--   独立性假设，即不同受试者之间的观测值是独立的。
+-   独立性，即不同受试者之间的观测值是独立的。
 
--   观测值在每个时间点或条件下的正态分布。
+-   正态性，观测值在每个时间点或条件下的正态分布。
 
 -   各组内的方差齐性（sphericity），即组内相关性结构是已知的，通常假设为复合对称（compound symmetry）。**协方差矩阵的球形检验（W=1）**
 
@@ -36,7 +36,7 @@ $$ 其中，$Y_{ijk}$ 是第i 个组、第j 个时间点或条件下、第k 个�
 
 ## 单因素重复测量方差分析
 
-### 原理公式
+### 公式
 
 $$
 SS_T=\sum_{j=1}^{t}\sum_{i=1}^{n}X_{ij}^2-\frac{(\sum_{j=1}^{t}\sum_{i=1}^{n}X_{ij})^2}{nt}=SS_{受试者间}+SS_{不同时间点}+SS_{E\ \ 随机误差}，\nu_T=nt-1
@@ -61,7 +61,7 @@ F=\frac{MS_{不同时间点}}{MS_E}=\frac{SS_{不同时间点}/(t-1)}{SS_E/((n-1
 $$
 
 ```{r}
-df <- tribble(
+ALT <- tribble(
     ~id,~zero,~ten,~twenty,~thirty,
     1,186,122,134,110,
     2,345,312,268,176,
@@ -74,33 +74,34 @@ df <- tribble(
     9,171,126,130,135,
     10,243,330,95,64,
 )
-df_long <-
-    df |> pivot_longer(cols = -1,
+ALT_long <-
+    ALT |> pivot_longer(cols = -1,
                        names_to = "week",
-                       values_to = "ALT") |> mutate(week = factor(week))
+                       values_to = "ALT") |> 
+    mutate(week = factor(week, levels = c("zero","ten", "twenty", "thirty")))
 
 
 # 假设检验
-shapiro.test(df$zero)
-shapiro.test(df$ten)
-shapiro.test(df$twenty)
-shapiro.test(df$thirty)
-bartlett.test(df[-1])
-    
+ALT_long %>% 
+    group_by(week) %>% 
+    rstatix::shapiro_test(ALT)
+```
+
+```{r}
 # 总变异
-xij_sum <- sum(df_long$ALT)
-xij_square_sum <- sum(df_long$ALT^2)
+xij_sum <- sum(ALT_long$ALT)
+xij_square_sum <- sum(ALT_long$ALT^2)
 C <- xij_sum^2/40
 SS_T <- xij_square_sum-C
 
 # 受试者间  
-xi._sum <- rowSums(df[,-1])
+xi._sum <- rowSums(ALT[,-1])
 xi._sum
 SS_B <- sum(xi._sum^2)/4-C #行和平方和
 MS_B <- SS_B/9
 
 # 不同时间点
-x.j_sum <- colSums(df[,-1])
+x.j_sum <- colSums(ALT[,-1])
 x.j_sum
 SS_W <- sum(x.j_sum^2)/10-C #列和平方和
 MS_W <- SS_W/3
@@ -111,63 +112,48 @@ SS_E <- SS_T-SS_B-SS_W
 MS_E <- SS_E/(9*3)
 
 F_stat <- MS_W/MS_E
+F_stat
 
+v1 = 4-1
+v2 = (4-1)*(10-1)
+
+pf(F_stat, df1 = v1, df2 = v2, lower.tail = F)
+
+cat("F统计量：", F_stat, "\n",
+    "p值：",pf(F_stat, df1 = v1, df2 = v2, lower.tail = F))
 ```
 
-### 线性混合模型`nlme::lme()`
+### `nlme::lme()`
 
 ```{r}
 library(nlme)
-model <- lme(fixed=ALT ~ week, random = ~1| id/week, data = df_long)
-summary(model)
-anova_results <- anova(model)
-anova_results
+ALT_lme <- lme(fixed=ALT ~ week, random = ~1| id/week, data = ALT_long)
+
+ALT_aov <- anova.lme(ALT_lme)
+ALT_aov 
+ALT_aov$`p-value`
 ```
 
-### 事后检验
+[事后检验]{style="color:red"}
+
+```{r}
+#成对比较
+library(emmeans)
+emmeans(ALT_lme, pairwise ~week, adjust = "bonferroni") 
+emmeans(ALT_lme,  ~week) %>% pairs(., adjust = "bonferroni")
+```
 
 ```{r}
 library(multcomp)
-glht_result <-glht(model, linfct = mcp(week =c("ten - zero = 0 ",
+ALT_posthoc <-glht(ALT_lme, linfct = mcp(week =c("zero - ten = 0 ",
                                                "twenty - zero == 0",
                                                "thirty - zero = 0 ")))
-summary(glht_result)
-glht_result
+summary(ALT_posthoc) %>% broom::tidy()
 ```
 
-### 第二个示例
+## 含组间因子的重复测量方差分析
 
-```{r}
-df2 <- tribble(
-    ~Participant,~A1,~A2,~A3,
-    "P1",5	,6	,7,
-    "P2",7	,13	,13,
-    "P3",2	,4	,6,
-    "P4",6	,9	,12
-)
-df2
-```
-
-自由度
-
-```{r}
-df_A <- 3-1
-
-df_P <- 4-1
-
-df_error <- df_A * df_P
-
-
-df_total <- df_A + df_P + df_error
-# 或者
-df_total <- 3*4-1 
-```
-
-均方和
-
-SS~total~ ，SS~A~，SS~P~
-
-## 含组间因子和组内因子的重复测量
+### 公式
 
 $$
 \begin{aligned}
@@ -178,100 +164,35 @@ $$
 
 <https://personality-project.org/r/r.guide/r.anova.html#oneway>
 
-### 第一个案例
+### 案例
 
-```{r}
-df <- read_rds("data/SLAMF6+-PBS.rds")
-
-df %>% 
-    DT::datatable()
-```
-
-```{r}
-#| code-fold: show
-# 2x2 mixed: 独立变量（被试间） : age
-# 独立变量（被试内） : time 依赖变量: value
-# aov_age_time <- aov(value ~ age * time + Error(subject/time),
-#   data = data_long)
-# summary(aov_age_time)
-
-# 两个被试内变量 
-#aov.ww <- aov(y ~ w1*w2 +Error(subject/(w1*w2)), data=data_long) 
-
-# 1个被试间变量，两个被试内变量 
-#aov.bww <- aov(y ~b1*w1*w2 + Error(subject/(w1*w2)) + b1,data=data_long) 
-
-# 两个被试间变量，一个被试内变量
-# aov.bww <- aov(y ~ b1*b2*w1 + Error(subject/(w1)) + b1*b2, data=data_long)
-```
-
-#### `stats::aov()`
-
-```{r}
-# 第一种  有混合效应无法事后检验
-
-aov_1 <- aov(volume ~ method*Days+Error(id/Days),data = df)
-summary(aov_1)
-```
-
-#### `nlme::lme()`
-
-```{r}
-# 第二种 最好
-library(nlme)
-model <- lme(volume ~ method*Days, random = ~1|id/Days, data = df)
-summary(model)
-df_aov <- anova(model)
-df_aov
-
-#成对比较
-library(emmeans)
-method_means <- emmeans(model, ~method)  
-print(method_means)  
-method_comparisons <- pairs(method_means)  
-print(method_comparisons)
-```
-
-#### `afex::aov_*()`
-
-```{r}
-library("afex")     # needed for ANOVA functions.
-library("emmeans")  # emmeans must now be loaded explicitly for follow-up tests.
-library("multcomp") # for advanced control for multiple testing/Type 1 errors.
-library("ggplot2")  # for customizing plots.
-
-
-a1 <- aov_ez(id = "id",dv = "volume", df, between ="method" , within = c("Days"))
-a1
-
-aov_car(volume ~ method + Error(id/Days), data = df)
-aov_4(volume ~ method + (Days|id), data = df)
-
-
-
-# 事后检验
-m1 <- emmeans(a1, ~ method)
-m1
-pairs(m1)
-```
-
-### 第二个案例
-
+孙振球（医学统计学第四版 人卫版，例12-3，P193）
 
 ```{r}
 # 医学统计学 人卫版 第7版
-df <- read_delim("data/麻醉诱导时相.txt")
-df
-df_long <- df |> pivot_longer(cols = starts_with("t"),
+SBP <- read_delim("data/麻醉诱导时相.txt")
+SBP
+```
+
+```{r}
+SBP_long <- SBP |> pivot_longer(cols = starts_with("t"),
                               names_to = "time",
-                              values_to = "BP") |> 
+                              values_to = "SBP") |> 
     mutate(
         id=factor(id),
         group=factor(group),
         time=factor(time)
     )
-df_long %>% 
-    DT::datatable()
+
+SBP_long %>% head()
+```
+
+```{r}
+# 正态性检验
+library(rstatix)
+SBP_long %>% group_by(time,group) %>% 
+    shapiro_test(SBP)
+
 ```
 
 #### `nlme::lme()`
@@ -279,36 +200,62 @@ df_long %>%
 ```{r}
 # 第一种方法
 library(nlme)
-model <- lme(BP ~ group*time, random = ~1 |id/time, data = df_long)
-summary(model)
-df_aov <- anova(model)
-df_aov
+SBP_lme <- lme(SBP ~ group*time, random = ~ 1 |id/time, data = SBP_long)
+# summary(SBP_lme)
+anova(SBP_lme)
+# 看不到球形检验
 
-#成对比较
+
+# 事后检验 成对比较
 library(emmeans)
-method_means <- emmeans(model, ~group)  
-print(method_means)  
-method_comparisons <- pairs(method_means)  
-print(method_comparisons)
+# 如果交互效应不显著
+
+## 时间点事后检验
+SBP_long %>%
+  pairwise_t_test(SBP ~ time, p.adjust.method = "none", detailed = TRUE)
+
+emmeans(SBP_lme,pairwise ~time, adjust = "none")  
+
+## 组间事后检验
+emmeans(SBP_lme,pairwise ~group, adjust = "none")  # 与spss一样
+
+# 此处交互效应显著
+# 1. 简单组别效应 与SPSS一样
+SBP_long %>% group_by(time) %>% anova_test(SBP~group)
+
+# 2. 各时间点处理组成对比较  用的是未调整的p值，没有标准误
+SBP_long %>%
+  group_by(time) %>%
+  pairwise_t_test(SBP ~ group, 
+                  p.adjust.method = "bonferroni", detailed = TRUE)
+
+
+
+
 ```
 
-#### `rstatix::anova_test()`
+#### `rstatix::anova_test()` 看球形检验 W统计量
 
 ```{r}
 library(rstatix)
-a2 <- anova_test(data = df_long,
-           dv = BP,
+aov_SBP <- anova_test(data = SBP_long,
+           dv = SBP,
            wid = id,
            within = time,
-           between = group
+           between = group,
+           type = "3"
            )
 
-a2
+aov_SBP
 
+# 进行事后检验，若交互效应不显著
+
+SBP_long %>%
+  group_by(time) %>%
+  pairwise_t_test(SBP ~ group, p.adjust.method = "bonferroni", detailed = TRUE)
 ```
 
-#### `afex::aov_*()`
-
+#### `afex::aov_*()`看各时间点处理组成对比较和各处理组时间点成对比较
 
 <https://cran.r-project.org/web/packages/afex/vignettes/afex_anova_example.html>
 
@@ -320,26 +267,25 @@ library("ggplot2")  # for customizing plots.
 
 
 
-a3 <- aov_ez("id", "BP", df_long, between ="group" , 
+SBP_aovez <- aov_ez("id", "SBP", SBP_long, between ="group" , 
        within = c("time"))
-a3
+SBP_aovez
+
+SBP_aovez %>% summary()
+
+# aov_car(SBP ~ group + Error(id/time), data = SBP_long)
+# aov_4(SBP ~ group + (time|id), data = SBP_long)
 
 
-aov_car(BP ~ group + Error(id/time), data = df_long)
-aov_4(BP ~ group + (time|id), data = df_long)
+# 事后检验 不调整与SPSS一样
+
+## 看各时间点处理组成对比较
+emmeans::emmeans(SBP_aovez , pairwise ~ group|time, adjust = "none")
+
+## 看各处理组时间点成对比较
+emmeans::emmeans(SBP_aovez , pairwise ~ time| group, adjust = "none")
 
 
-# 事后检验
-m3 <- emmeans(a3, ~ group)
-m3
-pairs(m3)
-summary(as.glht(pairs(m1)), test=adjusted("fdr"))
-p1 <- afex_plot(a3, x = "time",# trace = "BP",
-                panel = "group", error = "none",
-                mapping = c("color", "fill"),
-                data_geom = geom_boxplot, data_arg = list(width = 0.4),
-                point_arg = list(size = 1.5), line_arg = list(size = 1))
-p1
 ```
 
 $$
@@ -377,9 +323,9 @@ $$
 
 ```{r}
 options(digits = 4)
-BP <- c(df$t0,df$t1,df$t2,df$t3,df$t4)
-BP_mean <- mean(BP) 
-SS_total <- sum((BP-BP_mean)^2)
+SBP <- c(SBP$t0,SBP$t1,SBP$t2,SBP$t3,SBP$t4)
+SBP_mean <- mean(SBP) 
+SS_total <- sum((SBP-SBP_mean)^2)
 
 SS_total    
 ```
@@ -393,18 +339,18 @@ $$
 其中，m是受试者数量（15），n~.j~ 是第j 个受试对象的观测值数量，\\bar X~.j~ 是第j 个受试对象的观测值的均值，\\bar X 是所有观测值的均值。
 
 ```{r}
-id_mean <- df |> dplyr::select(c(-1,-2)) |> rowMeans()
+id_mean <- SBP |> dplyr::select(c(-1,-2)) |> rowMeans()
 
 SS_between <- 0
-for (i in 1:nrow(df)) {
-    SS_between <- SS_between + 5*(id_mean[i]-BP_mean)^2
+for (i in 1:nrow(SBP)) {
+    SS_between <- SS_between + 5*(id_mean[i]-SBP_mean)^2
 }
 SS_between
 ```
 
 ```{r}
-group__summary <- df_long |> group_by(group) |> 
-    summarise(n=n(),mean=mean(BP),sum=sum(BP))
+group__summary <- SBP_long |> group_by(group) |> 
+    summarise(n=n(),mean=mean(SBP),sum=sum(SBP))
 group__summary 
 ```
 
@@ -417,9 +363,9 @@ $$
 其中，k为不同处理组的组数，n~k~ 为第 k 处理组观测值的总数，$\bar  X_k$ 为第k 处理组观测值的均数，$\bar X$ 是所有观测值的均值。
 
 ```{r}
-SS_处理 <- 25*( (group__summary$mean[1] - BP_mean )^2 + 
-                       (group__summary$mean[2] - BP_mean )^2 +
-                       (group__summary$mean[3] - BP_mean )^2) 
+SS_处理 <- 25*( (group__summary$mean[1] - SBP_mean )^2 + 
+                       (group__summary$mean[2] - SBP_mean )^2 +
+                       (group__summary$mean[3] - SBP_mean )^2) 
 SS_处理
 ```
 
@@ -450,12 +396,12 @@ $$
 其中，T是时间点的数量，n~t~ 是在时间点t的观测值数量，\\bar X~.t~ 是在时间点 t 的均值。
 
 ```{r}
-t_mean <- df |> dplyr::select(c(-1,-2)) |> colMeans()
+t_mean <- SBP |> dplyr::select(c(-1,-2)) |> colMeans()
 
 SS_time <- 0
 for (i in seq_along(t_mean)) {
     
-    SS_time <- SS_time + 15*(t_mean[i]-BP_mean)^2
+    SS_time <- SS_time + 15*(t_mean[i]-SBP_mean)^2
     
 }
 names(SS_time) <- "SS_time"
@@ -485,11 +431,11 @@ $$
 -   \bar X~. . .~ 是所有观测值的平均值，不考虑处理方法和时间点
 
 ```{r}
-interaction_effect_summary <- df_long |>
+interaction_effect_summary <- SBP_long |>
     summarise(
         #n = n(),
-        mean = mean(BP),
-       # sum = sum(BP),
+        mean = mean(SBP),
+       # sum = sum(SBP),
         .by = c(group , time)
     )
 interaction_effect_mean <- interaction_effect_summary |> pivot_wider(names_from = c("time"),values_from = "mean")
@@ -499,7 +445,7 @@ interaction_effect_mean <- interaction_effect_summary |> pivot_wider(names_from 
 SS_interaction_effect <- 0
 for (i in 1:3) {
     for (j in 1:5) {
-        SS_interaction_effect <- SS_interaction_effect + 5 * (interaction_effect_mean[i, j + 1] -group__summary$mean[i] - t_mean[j] + BP_mean) ^ 2
+        SS_interaction_effect <- SS_interaction_effect + 5 * (interaction_effect_mean[i, j + 1] -group__summary$mean[i] - t_mean[j] + SBP_mean) ^ 2
     }
     
 }
@@ -526,16 +472,8 @@ SS_within_error
 
 球**形度的 Mauchly 检验**用于评估是否满足球形度的假设。使用`rstatix::anova_test()` 时，会自动报告此问题。尽管该方法受到严厉批评，通常无法检测到小样本中的球形偏离，而在大样本中则过度检测到它们，但它仍然是一种常用的方法。
 
-```{r}
-library(tidyverse)
-library(ggpubr)
-library(rstatix)
-```
 
-```{}
-```
-
-### 计算 sphericity 和 Mauchly 检验
+### 计算步骤
 
 具体操作步骤如下：
 
@@ -545,69 +483,28 @@ library(rstatix)
 
 ![](images/clipboard-2447647328.png)
 
-```{r}
-d <- df |> mutate(
-    `t0-t1`=t0-t1,
-    `t0-t2`=t0-t2,
-    `t0-t3`=t0-t3,
-    `t0-t4`=t0-t4,
-    `t1-t2`=t1-t2,
-    `t1-t3`=t1-t3,
-    `t1-t4`=t1-t4,
-    `t2-t3`=t2-t3,
-    `t2-t4`=t2-t4,
-    `t3-t4`=t3-t4,
-) |> select(8:17)
-d
 
-d|> map(var)
- 
-### 单因素
-t <- df |> select(3:7) |> as.matrix()
-t
-
-mauchly.test(lm(t~1),X = ~1)
-
-
-### 双因素
-
-df_split <- df |> group_split(group)
-
-df[1:5,3:7]
-
-df2 <- as.matrix(cbind(df_split[[1]][3:7],df_split[[2]][3:7],df_split[[3]][3:7]))
-times <- ordered(rep(1:5,3))
-group <- factor(rep(c("A","B","C"),each=5))
-
-
-
-
-
-mauchly.test(lm(df2~1),M=~group+times,X=~ times)
-
-```
-
-### 方差分析
+### 案例
 
 #### `rstatix::anova_test()`
 
 ```{r}
 
-a2 <- rstatix::anova_test(data = df_long,
-           dv = BP,
+aov_SBP <- rstatix::anova_test(data = SBP_long,
+           dv = SBP,
            wid = id,
            within = time,
            between = group
            )
 
-a2
+aov_SBP
 ```
 
 输出是一个包含三个表的列表：
 
 1.  方差分析结果显示标有（generalized eta squared，ges）的列上的 p 值和效应大小;效应大小本质上是由于受试者内因素而忽略受试者效应而导致的变异量。
 
-2.  Mauchly Sphericity检验。仅报告具有 \>2 水平的变量或效应，因为球形度必然适用于只有 2 个水平的效应。原假设是组差的方差相等。因此，显著的 p 值 （p \<= 0.05） 表示组差的方差不相等。
+2.  Mauchly Sphericity检验。仅报告具有 \>2 水平的变量或效应，因为球形度必然适用于只有 2 个水平的效应。原假设是组差的方差相等。因此，显著的 p 值 （p \< 0.05） 表示组差的方差不相等。
 
 3.  球度校正结果，以防我们无法维持球形度假设。提供了文献中使用的两种常见校正：Greenhouse-Geisser epsilon （GGe） 和 Huynh-Feldt epsilon （HFe） 及其相应的 p 值
 
@@ -617,8 +514,8 @@ a2
 library(ez)
 
 # 进行重复测量方差分析
-aov_ez <- ezANOVA(data = df_long,
-                   dv = BP,
+aov_ez <- ezANOVA(data = SBP_long,
+                   dv = SBP,
                    wid = id,
                    within = time,
                    between = group,
@@ -635,14 +532,14 @@ print(aov_ez)
 
 ```{r}
 # Display ANOVA table
-a2$ANOVA
+aov_SBP$ANOVA
 ```
 
 -   `F`表示我们正在与 F 分布（F 检验）进行比较; 分别表示 time 和 Error（time） 的自由度; 表示得到的 F 统计量值`(2, 18)81.8`
 
 -   `p`指定 p 值
 
--   `ges`（广义 eta 平方，eta2\[g\]）是效应大小（由于受试者内因素引起的变异量）
+-   `ges`（广义 eta 平方，etaov_SBP\[g\]）是效应大小（由于受试者内因素引起的变异量）
 
 ### **当违反球形度假设时**
 
@@ -652,28 +549,9 @@ a2$ANOVA
 epsilon 提供了球形度被侵犯的程度的度量。值为 1 表示不偏离球形度（组差的所有方差均相等）。违反球形度会导致 epsilon 值低于 1。epsilon 离 1 越远，违规越严重。
 :::
 
-```{r}
-a2$`Sphericity Corrections`
-```
 
 可以看出，即使在球形度校正（p\[GG\] \< 0.001，p\[HF\] \< 0.001）之后，平均自尊得分在不同时间点仍存在统计学差异。
 
 在两种球形度校正方法中，Huynh-Feldt 校正被认为是最不保守的（高估了 epsilon），而 Greenhouse-Geisser 被认为是更保守的（当 epsilon 接近 1 时低估了 epsilon）。
 
 一般建议使用 Greenhouse-Geisser 校正，特别是当 epsilon \< 0.75 时。在 epsilon 大于 0.75 的情况下，一些统计学家建议使用 Huynh-Feldt 校正 （Girden 1992）。
-
-```{r}
-# correction = "auto"
-get_anova_table(a2)
-```
-
-```{r}
-# correction = "GG"
-get_anova_table(a2, correction = "GG")
-```
-
-### post-hoc test
-
-```{r}
-df_long |> pairwise_t_test(BP~time,paired = T,p.adjust.method = "bonferroni")
-```
