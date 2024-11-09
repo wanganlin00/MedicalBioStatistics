@@ -13,8 +13,7 @@ df <- tibble(
     ctrl=c(2,6,13,5,8,9,12,11,8,10,12,14,13,6,7,4),
     trt=c(8,6,8,9,12,12,14,15,16,17,14,12,11,8,10,10)
 )
-df %>% 
-    DT::datatable()
+df
 
 
 
@@ -68,12 +67,17 @@ D'Agostino-Pearson 综合检验 是基于数据的偏度和峰度来评估数据
 在R语言中，可以使用 `moments` 包中的 `agostino.test()` 函数来执行此检验。此检验的原假设是数据来自正态分布，如果检验的p值小于显著性水平（通常是0.05），则可以拒绝原假设，认为数据不服从正态分布。
 
 ```{r}
-moments::agostino.test(df$ctrl)
-moments::agostino.test(df$trt)
-
 # 样本偏度和峰度
 skewness <- moments::skewness(df$ctrl,na.rm = T)
 kurtosis <- moments::kurtosis(df$ctrl,na.rm = T)
+
+# 偏度检验
+moments::agostino.test(df$ctrl)
+
+# 峰度检验
+moments::anscombe.test(df$ctrl)
+
+
 # D'Agostino's K² 检验
 K2 <- length(df$ctrl) * (skewness^2 / 6 + (kurtosis - 3)^2 / 24)
 p_value <- 1 - pchisq(K2, df = 2)

@@ -35,7 +35,7 @@ book:
 
     #     - PowerAnalysis.qmd
     #     - Causal_Inference.qmd
-    - part: "推断统计模型"
+    - part: "统计模型"
       chapters:
         - simple_linear_regression.qmd
         - multiple_linear_regression.qmd
