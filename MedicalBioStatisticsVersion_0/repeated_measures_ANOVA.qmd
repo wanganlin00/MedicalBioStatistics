@@ -223,7 +223,7 @@ emmeans(SBP_lme,pairwise ~group, adjust = "none")  # 与spss一样
 # 1. 简单组别效应 与SPSS一样
 SBP_long %>% group_by(time) %>% anova_test(SBP~group)
 
-# 2. 各时间点处理组成对比较  用的是未调整的p值，没有标准误
+# 2. 各时间点处理组成对比较  用的是未调整的p值，无法观察到标准误
 SBP_long %>%
   group_by(time) %>%
   pairwise_t_test(SBP ~ group, 
