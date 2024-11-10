@@ -1,6 +1,8 @@
 # 抽样分布
 
-统计量（statistic）与抽样分布
+## 统计量（statistic）
+
+statistic
 
 :   假设$\hat\theta=\hat\theta(X_1,X_2,...,X_n)$ 是关于随机样本$X_1,X_2,...,X_n$ 的函数，且不依赖任何未知的总体参数$\theta$ ，则$\hat\theta$ 称为统计量（statistic）。
 
@@ -8,22 +10,17 @@
 
     样本方差 $$S^2=\frac{1}{n-1}\sum_{i=1}^{n} (X_i-\bar X)^2$$
 
-    样本比率
+    样本比率 $$ \hat p=\frac{m}{n} \\ E(\hat p)=p\\Var(\hat p)=\frac{p(1-p)}{n} $$
 
-    $$ \hat p=\frac{m}{n} \\
-    E(\hat p)=p\\
-    Var(\hat p)=\frac{p(1-p)}{n}
-    $$
+因样本的随机性，统计量也是随机变量。
 
-    因样本的随机性，统计量也是随机变量。
+统计量的概率分布称为抽样分布。
 
-    统计量的概率分布称为抽样分布。
+## 抽样分布定理（正态总体）
 
-抽样分布定理（正态总体）
+[专题五 统计推断基础](https://www.icourse163.org/course/NJU-1463195163)
 
-:   [专题五 统计推断基础](https://www.icourse163.org/course/NJU-1463195163)
-
-:   设总体 $X ~ N(μ，σ^2)$，$X_1,X_2,...X_n$ 是来自总体的随机样本，则
+:   设总体 $X \sim N(μ, σ^2)$，$X_1,X_2,...X_n$ 是来自总体的随机样本，则
 
     1.  样本均值
 
@@ -37,11 +34,7 @@
 
     3.  样本均值与样本方差独立
 
-## 均值（mean）的抽样分布
-
-假设 $X_1,X_2,...,X_n$是来自均值为$μ$，有限方差为$σ^2$的总体为 $X$的一组样本量为n的随机样本。
-
-$\bar X$ 的抽样分布是指从总体 $X$中选择的样本量为$n$的所有可能样本的 $\bar x$值（$\bar x=\frac{1}{n}\sum_{i}x_i$）的分布。
+## 样本均值的抽样分布
 
 ```{r}
 # 标准正态分布
@@ -70,7 +63,11 @@ norm <- function(mu = 0, sigma = 1, ...) {
 norm()
 ```
 
-### $N( 0, 1)$——σ^2^ 已知的正态总体
+### 正态总体
+
+假设总体 $X \sim N(μ, σ^2)$，$X_1,X_2,...X_n$ 是来自总体**X**的样本量为n的随机样本。
+
+$\bar X$ 的抽样分布是指从总体 $X$中选择的样本量为$n$的所有可能样本的 $\bar x$值（$\bar x=\frac{1}{n}\sum_{i}x_i$）的分布。
 
 $$
 \bar X \sim N(μ,\frac{σ^2}{n})
@@ -84,7 +81,7 @@ $$
 
 均值的标准差即标准误 $\sigma _{\bar X} =\frac {\sigma}{\sqrt n}$ 可以用 $S _{\bar X} =\frac {S}{\sqrt n}$ 估计。
 
-### $N(μ,\frac{σ^2}{n})$——非正态大样本总体的渐进性质
+### 非正态大样本总体的渐进性质
 
 中心极限定理（central limit theorem）
 
@@ -92,7 +89,36 @@ $$
 
     $$ \bar X=\frac{x_1+x_2+...+x_n}{n} \dot{\sim}  N(μ,\frac{σ^2}{n}) $$
 
-    ![](images/clipboard-3101458202.png)
+    ![](images/clipboard-3101458202.png){width="320"}
+
+```{r}
+# 设置参数
+set.seed(123)         # 固定随机种子
+sample_size <- 30     # 每个样本的大小
+simulations <- 10000  # 模拟的次数
+
+lambda <- 1
+mu <- 1 / lambda                 # 指数分布的理论均值
+sigma <- 1 / lambda              # 指数分布的理论标准差
+
+# 生成样本均值
+original_samples <- replicate(simulations, mean(rexp(n = sample_size, rate = lambda)))
+
+# 标准化样本均值
+standardized_means <- (original_samples - mu) / (sigma / sqrt(sample_size))
+
+standardized_means <- scale(original_samples)
+
+# 绘图
+ggplot(data.frame(standardized_means), aes(x = standardized_means)) +
+  geom_histogram(aes(y = after_stat(density)), bins = 30, color = "black", fill = "skyblue") +
+  stat_function(fun = dnorm, args = list(mean = 0, sd = 1), color = "red", size = 1.2) +
+  labs(title = "中心极限定理验证",
+       x = "标准化样本均值",
+       y = "密度") +
+  theme_minimal()
+
+```
 
 ### t分布——σ^2^ 未知的正态分布
 
@@ -111,6 +137,8 @@ $$\begin{aligned} E(X)=&0,\ \ \ n\ge2 \\ Var(X)=&\frac{n}{n-2},\ \ \ n\ge3 \end{
 统计量的分布：
 
 $$ t=\frac{\bar X-\mu}{S_{\bar X}}=\frac{\bar X-\mu}{S /\sqrt n} \sim t(\nu) $$
+
+均值的标准差即标准误 $\sigma _{\bar X} =\frac {\sigma}{\sqrt n}$ 可以用 $S _{\bar X} =\frac {S}{\sqrt n}$ 估计。
 
 其中自由度（degrees of freedom）$\nu=n-1$ 。当 $\nu \to +\infty 时,t\sim N(0,1)$ 。
 
@@ -137,7 +165,7 @@ library(patchwork)
 t_distribution(df=10)|norm()
 ```
 
-## 方差（variance）的抽样分布
+## 方差的抽样分布
 
 ### $\chi^2$分布
 
@@ -160,9 +188,11 @@ Var(X)=&2n
 \end{aligned}
 $$
 
-![](images/clipboard-281200083.png)
+![](images/clipboard-281200083.png){fig-align="center" width="415"}
 
-假设 $X_1,X_2,...,X_n$是独立同分布于均值为$μ$，有限方差为$σ^2$的一组样本量为n的随机样本。统计量的分布：
+假设 $X_1,X_2,...,X_n$是独立同分布于均值为$μ$，有限方差为$σ^2$的一组样本量为n的随机样本。
+
+统计量的分布：
 
 $$
 \frac {(n-1)S^2}{\sigma^2}\sim \chi^2(\nu)
@@ -201,13 +231,9 @@ $$ F=\frac{X/n1}{Y/n2}$$
 
 为第一个自由度为n1和第二个自由度为n2的$F$分布，记为$F\sim F(n_1,n_2)$
 
-![](images/clipboard-3708872534.png)
+![](images/clipboard-3708872534.png){fig-align="center" width="500"}
 
 如果$X\sim \chi^2(n_1,\delta)$ ，则称F为非中心化的F分布。记为$F\sim F(n_1,n_2;\delta)$ ，称δ为非中心化参数。
-
-卡方分布的数学期望和方差：
-
-$$\begin{aligned} E(X)=&n\\ Var(X)=&2n \end{aligned} $$
 
 ```{r}
 F_distribution <- function(df1 = 1,df2 = 1, ...) {
@@ -232,7 +258,7 @@ F_distribution <- function(df1 = 1,df2 = 1, ...) {
     (F_distribution(3,15)+F_distribution(7,15))+plot_layout(guides = "collect")
 ```
 
-### 比率（rate）抽样分布------分类数据
+## 比率（rate）抽样分布------分类数据
 
 假设 $X\sim B(n,\pi)$ ，一组样本量为n的随机样本。列出样本量为$n$的所有可能随机样本。
 

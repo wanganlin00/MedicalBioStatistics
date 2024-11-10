@@ -195,7 +195,7 @@ $$P(X=k)=p_k=\frac {\lambda ^k}{k!}e^{-\lambda} \ ,\ \ (\lambda > 0;k=0,1,…)$$
 
 方差：$Var(X)=\lambda$
 
-#### 二项分布近似泊松分布
+### 二项分布近似泊松分布
 
 当$n(n≥100)$足够大，$\pi(\pi ≤0.01)$ 足够小，二项分布的均值 $n\pi$ 与方差$n\pi(1-\pi)\approx n\pi$ 近似相等，此时的二项分布近似$\lambda=n\pi$ 的泊松分布。
 

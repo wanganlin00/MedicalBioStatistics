@@ -288,6 +288,8 @@ emmeans::emmeans(SBP_aovez , pairwise ~ time| group, adjust = "none")
 
 ```
 
+### 分部计算
+
 $$
 \begin{aligned}
 SS_总&= SS_{受试对象间}+SS_{受试对象内}  \\
@@ -322,10 +324,12 @@ $$
 其中，n是观测值的总数，Xi 为每个观测值，$\bar X$ 是所有观测值的均值。
 
 ```{r}
-options(digits = 4)
-SBP <- c(SBP$t0,SBP$t1,SBP$t2,SBP$t3,SBP$t4)
-SBP_mean <- mean(SBP) 
-SS_total <- sum((SBP-SBP_mean)^2)
+
+SBP_data <- c(SBP$t0,SBP$t1,SBP$t2,SBP$t3,SBP$t4)
+
+SBP_mean <- mean(SBP_data)
+
+SS_total <- sum((SBP_data-SBP_mean)^2)
 
 SS_total    
 ```
@@ -336,7 +340,7 @@ $$
 SS_{受试对象间}=\sum_{j=1}^m n_{.j}(\bar X_{.j}-\bar X)^2
 $$
 
-其中，m是受试者数量（15），n~.j~ 是第j 个受试对象的观测值数量，\\bar X~.j~ 是第j 个受试对象的观测值的均值，\\bar X 是所有观测值的均值。
+其中，m是受试者数量（15），n~.j~ 是第j 个受试对象的观测值数量，$\bar X.j$是第j 个受试对象的观测值的均值，$\bar X$ 是所有观测值的均值。
 
 ```{r}
 id_mean <- SBP |> dplyr::select(c(-1,-2)) |> rowMeans()
@@ -472,7 +476,6 @@ SS_within_error
 
 球**形度的 Mauchly 检验**用于评估是否满足球形度的假设。使用`rstatix::anova_test()` 时，会自动报告此问题。尽管该方法受到严厉批评，通常无法检测到小样本中的球形偏离，而在大样本中则过度检测到它们，但它仍然是一种常用的方法。
 
-
 ### 计算步骤
 
 具体操作步骤如下：
@@ -482,7 +485,6 @@ SS_within_error
 2.  计算每个组差的方差
 
 ![](images/clipboard-2447647328.png)
-
 
 ### 案例
 
@@ -548,7 +550,6 @@ aov_SBP$ANOVA
 ::: callout-note
 epsilon 提供了球形度被侵犯的程度的度量。值为 1 表示不偏离球形度（组差的所有方差均相等）。违反球形度会导致 epsilon 值低于 1。epsilon 离 1 越远，违规越严重。
 :::
-
 
 可以看出，即使在球形度校正（p\[GG\] \< 0.001，p\[HF\] \< 0.001）之后，平均自尊得分在不同时间点仍存在统计学差异。
 

@@ -32,7 +32,7 @@ $$
 library(ggplot2)
 library(tibble)
 # 标准正态分布
-normal_data <- tibble(x = seq(-5, 5, length.out = 500),
+normal_data <- tibble(x = seq(-5, 5, length.out = 1000),
                       y = dnorm(x, mean = 0, sd = 1))
 
 
