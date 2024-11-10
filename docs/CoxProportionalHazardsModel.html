@@ -60,17 +60,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./PropensityScore.html" rel="next">
+<link href="./CompetingRiskModel.html" rel="next">
 <link href="./SurvivalAnalysis.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -121,7 +123,7 @@ const typesetMath = (el) => {
 window.Quarto = {
   typesetMath
 };
-</script><link rel="stylesheet" href="styles.css">
+</script><link rel="stylesheet" href="style.css">
 </head>
 <body class="nav-sidebar floating">
 
@@ -143,6 +145,7 @@ window.Quarto = {
     <div class="sidebar-title mb-0 py-0">
       <a href="./">医学与生物统计学</a> 
         <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
   <i class="bi"></i>
@@ -185,12 +188,18 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">定性数据的统计描述</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./correlation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">相关性</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
- <span class="menu-text">概率论与数理统计</span></a>
+ <span class="menu-text">统计推断</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -199,79 +208,73 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./probability_theory.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">概率论基础</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">概率论基础</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./SamplingDistribution.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">抽样分布</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">抽样分布</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ParameterEstimation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">参数估计</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">参数估计</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./hypothesis_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">假设检验</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">假设检验</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./normality_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">正态性检验</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">正态性检验</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./variance_homogeneity_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">方差齐性检验</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">方差齐性检验</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./t_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">t 检验</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">t 检验</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ANOVA.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">方差分析</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">方差分析</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./repeated_measures_ANOVA.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">重复测量方差分析</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">重复测量方差分析</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./rate_proportion_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">比例检验</span></span></a>
+  <a href="./proportion_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">比例检验</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chi-square_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title"><span class="math inline">\(\chi^2\)</span> 检验</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title"><span class="math inline">\(\chi^2\)</span> 检验</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./nonparametric_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">非参数秩检验</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./correlation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">相关性</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">非参数检验</span></span></a>
   </div>
 </li>
       </ul>
@@ -279,7 +282,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
- <span class="menu-text">推断统计模型</span></a>
+ <span class="menu-text">统计模型</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -299,14 +302,14 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./GLM.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">广义线性模型</span></span></a>
+  <a href="./LME.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">线性混合模型</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./LME.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">线性混合模型</span></span></a>
+  <a href="./GLM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">广义线性模型</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -338,12 +341,18 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Cox比例风险模型</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./CompetingRiskModel.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">竞争风险模型</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./PropensityScore.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">倾向性评分</span></a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">临床研究设计</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -351,31 +360,14 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./stratification.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">分层（Stratification）</span></span></a>
+  <a href="./diagnostic_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">诊断性测试</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./matching.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">匹配（Matching）</span></span></a>
-  </div>
-</li>
-      </ul>
-</li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
- <span class="menu-text">研究设计</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./diagnostic_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">诊断性测试</span></span></a>
+  <a href="./RCT.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">随机对照试验</span></span></a>
   </div>
 </li>
       </ul>
@@ -390,21 +382,23 @@ window.Quarto = {
   <ul>
 <li><a href="#%E9%A3%8E%E9%99%A9%E5%87%BD%E6%95%B0" id="toc-风险函数" class="nav-link active" data-scroll-target="#%E9%A3%8E%E9%99%A9%E5%87%BD%E6%95%B0"><span class="header-section-number">22.1</span> 风险函数</a></li>
   <li><a href="#%E9%A3%8E%E9%99%A9%E7%8E%87" id="toc-风险率" class="nav-link" data-scroll-target="#%E9%A3%8E%E9%99%A9%E7%8E%87"><span class="header-section-number">22.2</span> 风险率</a></li>
-  <li><a href="#%E6%AF%94%E4%BE%8B%E9%A3%8E%E9%99%A9%E5%81%87%E8%AE%BE" id="toc-比例风险假设" class="nav-link" data-scroll-target="#%E6%AF%94%E4%BE%8B%E9%A3%8E%E9%99%A9%E5%81%87%E8%AE%BE"><span class="header-section-number">22.3</span> 比例风险假设</a></li>
   <li>
-<a href="#%E9%A3%8E%E9%99%A9%E6%AF%94hazard-ratio" id="toc-风险比hazard-ratio" class="nav-link" data-scroll-target="#%E9%A3%8E%E9%99%A9%E6%AF%94hazard-ratio"><span class="header-section-number">22.4</span> 风险比（hazard ratio）</a>
+<a href="#%E9%A3%8E%E9%99%A9%E6%AF%94hazard-ratio" id="toc-风险比hazard-ratio" class="nav-link" data-scroll-target="#%E9%A3%8E%E9%99%A9%E6%AF%94hazard-ratio"><span class="header-section-number">22.3</span> 风险比（hazard ratio）</a>
   <ul>
-<li><a href="#%E6%A8%A1%E5%9E%8B%E7%B3%BB%E6%95%B0%E7%9A%84%E4%BC%B0%E8%AE%A1" id="toc-模型系数的估计" class="nav-link" data-scroll-target="#%E6%A8%A1%E5%9E%8B%E7%B3%BB%E6%95%B0%E7%9A%84%E4%BC%B0%E8%AE%A1"><span class="header-section-number">22.4.1</span> 模型系数的估计</a></li>
-  <li><a href="#%E6%A8%A1%E5%9E%8B%E7%B3%BB%E6%95%B0%E7%9A%84%E5%81%87%E8%AE%BE%E6%A3%80%E9%AA%8C" id="toc-模型系数的假设检验" class="nav-link" data-scroll-target="#%E6%A8%A1%E5%9E%8B%E7%B3%BB%E6%95%B0%E7%9A%84%E5%81%87%E8%AE%BE%E6%A3%80%E9%AA%8C"><span class="header-section-number">22.4.2</span> 模型系数的假设检验</a></li>
+<li><a href="#%E6%AF%94%E4%BE%8B%E9%A3%8E%E9%99%A9%E5%81%87%E8%AE%BEproportional-hazards-assumption" id="toc-比例风险假设proportional-hazards-assumption" class="nav-link" data-scroll-target="#%E6%AF%94%E4%BE%8B%E9%A3%8E%E9%99%A9%E5%81%87%E8%AE%BEproportional-hazards-assumption"><span class="header-section-number">22.3.1</span> 比例风险假设（proportional hazards assumption）</a></li>
+  <li><a href="#%E6%A8%A1%E5%9E%8B%E7%B3%BB%E6%95%B0%E7%9A%84%E4%BC%B0%E8%AE%A1" id="toc-模型系数的估计" class="nav-link" data-scroll-target="#%E6%A8%A1%E5%9E%8B%E7%B3%BB%E6%95%B0%E7%9A%84%E4%BC%B0%E8%AE%A1"><span class="header-section-number">22.3.2</span> 模型系数的估计</a></li>
+  <li><a href="#%E6%A8%A1%E5%9E%8B%E7%B3%BB%E6%95%B0%E7%9A%84%E5%81%87%E8%AE%BE%E6%A3%80%E9%AA%8C" id="toc-模型系数的假设检验" class="nav-link" data-scroll-target="#%E6%A8%A1%E5%9E%8B%E7%B3%BB%E6%95%B0%E7%9A%84%E5%81%87%E8%AE%BE%E6%A3%80%E9%AA%8C"><span class="header-section-number">22.3.3</span> 模型系数的假设检验</a></li>
   </ul>
 </li>
+  <li><a href="#%E7%A4%BA%E4%BE%8B" id="toc-示例" class="nav-link" data-scroll-target="#%E7%A4%BA%E4%BE%8B"><span class="header-section-number">22.4</span> 示例</a></li>
+  <li><a href="#%E6%A3%AE%E6%9E%97%E5%9B%BE" id="toc-森林图" class="nav-link" data-scroll-target="#%E6%A3%AE%E6%9E%97%E5%9B%BE"><span class="header-section-number">22.5</span> 森林图</a></li>
   </ul></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./SurvivalAnalysis.html">生存分析</a></li><li class="breadcrumb-item"><a href="./CoxProportionalHazardsModel.html"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Cox比例风险模型</span></a></li></ol></nav><div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">
+<h1 class="title">
 <span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Cox比例风险模型</span>
-</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+</h1>
 </div>
 
 
@@ -413,6 +407,12 @@ window.Quarto = {
 
     
   
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">November 10, 2024</p>
+    </div>
+  </div>
     
   </div>
   
@@ -422,8 +422,23 @@ window.Quarto = {
 <section id="风险函数" class="level2" data-number="22.1"><h2 data-number="22.1" class="anchored" data-anchor-id="风险函数">
 <span class="header-section-number">22.1</span> 风险函数</h2>
 <p><span class="math display">\[
-\begin{aligned} h(t)=&amp;\lim_{\Delta t\to 0}\frac{P(t\le T&lt;t+\Delta t|T\ge t)}{\Delta t}\\ =&amp;\lim_{\Delta t\to 0}\frac{P(t\le T&lt;t+\Delta t\ \&amp;\ T\ge t)}{\Delta t·P(T\ge t) }\\ =&amp;\lim_{\Delta t\to 0}\frac{S(t)- S(t+\Delta t)}{\Delta t·S(t)}\\ =&amp;-\frac{d(\ln S(t))}{dt} \end{aligned}
+\begin{aligned}
+h(t)=&amp;\lim_{\Delta t\to 0}\frac{P(t\le T&lt;t+\Delta t|T\ge t)}{\Delta t}\\
+=&amp;\lim_{\Delta t\to 0}\frac{P(t\le T&lt;t+\Delta t\ \&amp;\ T\ge t)}{\Delta t·P(T\ge t) }\\
+=&amp;\lim_{\Delta t\to 0}\frac{S(t)- S(t+\Delta t)}{\Delta t·S(t)}\\
+=&amp;-\frac{d(\ln S(t))}{dt}
+\end{aligned}
 \]</span></p>
+<p>推导出 <span class="math inline">\(S(t)=e^{-\int_0^t h(u)du}\)</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+h(t)\Delta t=&amp;P(t\le T&lt;t+\Delta t|T\ge t)
+=\frac{P(t\le T&lt;t+\Delta t\ \&amp;\ T\ge t)}{P(T\ge t) }\\
+=&amp;\frac{P(t\le T&lt;t+\Delta t)}{P(T\ge t) }\\
+=&amp;\frac{f(t)\Delta t}{S(t)}
+\end{aligned}
+\]</span></p>
+<p>推导出 <span class="math inline">\(f(t)=h(t)S(t)\)</span></p>
 </section><section id="风险率" class="level2" data-number="22.2"><h2 data-number="22.2" class="anchored" data-anchor-id="风险率">
 <span class="header-section-number">22.2</span> 风险率</h2>
 <p>对于有风险因子<span class="math inline">\(x_1,x_2,...,x_k\)</span> 的个体在时间 t 的风险率<span class="math inline">\(h(t|x_1,x_2,...,x_k)\)</span></p>
@@ -433,63 +448,22 @@ window.Quarto = {
 <li><p><span class="math inline">\(h0 (t)\)</span>是给定所有风险因子（协变量）为零的随时间变化的<strong>基线风险函数</strong>。</p></li>
 <li><p><span class="math inline">\(g(X)\)</span>是<strong>k个独立风险因子</strong>的集合函数，代表变量的风险效应。</p></li>
 <li><p><span class="math inline">\(β_j\)</span>是部分回归系数，表示风险比的比例变化。</p></li>
-</ol></section><section id="比例风险假设" class="level2" data-number="22.3"><h2 data-number="22.3" class="anchored" data-anchor-id="比例风险假设">
-<span class="header-section-number">22.3</span> 比例风险假设</h2>
-<p>（proportional hazards assumption）</p>
-<p><span class="math display">\[ \frac{h(t)}{h_0(t)}=exp(\sum_{j=1}^k\beta_jx_j) \]</span></p>
-</section><section id="风险比hazard-ratio" class="level2" data-number="22.4"><h2 data-number="22.4" class="anchored" data-anchor-id="风险比hazard-ratio">
-<span class="header-section-number">22.4</span> 风险比（hazard ratio）</h2>
+</ol></section><section id="风险比hazard-ratio" class="level2" data-number="22.3"><h2 data-number="22.3" class="anchored" data-anchor-id="风险比hazard-ratio">
+<span class="header-section-number">22.3</span> 风险比（hazard ratio）</h2>
 <p>假设有两个个体，分别具有独立变量，两个个体的风险函数之比称为风险比</p>
 <p><span class="math display">\[ HR=\frac{h(t|x_1,x_2,...,x_k)}{h(t|x_1^*,x_2^*,...,x_k^*)}=exp(\sum_{j=1}^k\beta_j(x_j-x_j^*)) \]</span></p>
-<div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data/log-rank-survival.csv"</span><span class="op">)</span></span>
-<span></span>
-<span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpkgs.datanovia.com/survminer/index.html">survminer</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/therneau/survival">survival</a></span><span class="op">)</span></span>
-<span><span class="co"># 使用 Kaplan-Meier 方法创建一个Surv对象</span></span>
-<span><span class="va">surv_formula</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html">Surv</a></span><span class="op">(</span><span class="va">Days</span>,<span class="va">status</span><span class="op">)</span><span class="op">~</span><span class="va">treatment</span></span>
-<span></span>
-<span><span class="co"># 拟合Cox比例风险模型 </span></span>
-<span><span class="va">cox_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/coxph.html">coxph</a></span><span class="op">(</span><span class="va">surv_formula</span>, data <span class="op">=</span> <span class="va">df</span><span class="op">)</span>  </span>
-<span><span class="co"># 查看模型结果 </span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">cox_model</span><span class="op">)</span>  </span>
-<span><span class="co">#&gt; Call:</span></span>
-<span><span class="co">#&gt; coxph(formula = surv_formula, data = df)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   n= 56, number of events= 39 </span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;                       coef exp(coef)  se(coef)      z Pr(&gt;|z|)    </span></span>
-<span><span class="co">#&gt; treatmentDPVB    -2.740141  0.064561  0.580664 -4.719 2.37e-06 ***</span></span>
-<span><span class="co">#&gt; treatmentLDRT    -0.383558  0.681432  0.387499 -0.990    0.322    </span></span>
-<span><span class="co">#&gt; treatmentLR_DPVB -4.632850  0.009727  0.878661 -5.273 1.34e-07 ***</span></span>
-<span><span class="co">#&gt; ---</span></span>
-<span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;                  exp(coef) exp(-coef) lower .95 upper .95</span></span>
-<span><span class="co">#&gt; treatmentDPVB     0.064561     15.489  0.020688   0.20148</span></span>
-<span><span class="co">#&gt; treatmentLDRT     0.681432      1.467  0.318848   1.45634</span></span>
-<span><span class="co">#&gt; treatmentLR_DPVB  0.009727    102.807  0.001738   0.05444</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Concordance= 0.822  (se = 0.025 )</span></span>
-<span><span class="co">#&gt; Likelihood ratio test= 61.41  on 3 df,   p=3e-13</span></span>
-<span><span class="co">#&gt; Wald test            = 36.01  on 3 df,   p=7e-08</span></span>
-<span><span class="co">#&gt; Score (logrank) test = 60.47  on 3 df,   p=5e-13</span></span>
-<span><span class="co"># 检查比例风险假设 </span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/cox.zph.html">cox.zph</a></span><span class="op">(</span><span class="va">cox_model</span><span class="op">)</span></span>
-<span><span class="co">#&gt;           chisq df    p</span></span>
-<span><span class="co">#&gt; treatment 0.833  3 0.84</span></span>
-<span><span class="co">#&gt; GLOBAL    0.833  3 0.84</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<section id="模型系数的估计" class="level3" data-number="22.4.1"><h3 data-number="22.4.1" class="anchored" data-anchor-id="模型系数的估计">
-<span class="header-section-number">22.4.1</span> 模型系数的估计</h3>
+<section id="比例风险假设proportional-hazards-assumption" class="level3" data-number="22.3.1"><h3 data-number="22.3.1" class="anchored" data-anchor-id="比例风险假设proportional-hazards-assumption">
+<span class="header-section-number">22.3.1</span> 比例风险假设（proportional hazards assumption）</h3>
+<p>Cox 模型假设任意两组之间的 HR 随时间保持不变</p>
+<p><span class="math display">\[ \frac{h(t)}{h_0(t)}=exp(\sum_{j=1}^k\beta_jx_j) \]</span></p>
+</section><section id="模型系数的估计" class="level3" data-number="22.3.2"><h3 data-number="22.3.2" class="anchored" data-anchor-id="模型系数的估计">
+<span class="header-section-number">22.3.2</span> 模型系数的估计</h3>
 <p>条件死亡概率和局部似然函数方法</p>
 <p><span class="math display">\[ \ln L_p(\beta)=\sum_{i=1}^{d}\left[ \sum_{j=1}^k\beta_jx_{ij}-\ln\sum_{m\in R_i}exp( \sum_{j=1}^k\beta_jx_{mj})         \right] \]</span></p>
 <p>Newton-Raphson iterative method</p>
 <p><span class="math display">\[  \begin{cases}  \frac{\partial \ln L_p(\beta)}{\partial \beta_1}=0\\ \frac{\partial \ln L_p(\beta)}{\partial \beta_2}=0\\ \vdots\\ \frac{\partial \ln L_p(\beta)}{\partial \beta_k}=0\\ \end{cases} \]</span></p>
-</section><section id="模型系数的假设检验" class="level3" data-number="22.4.2"><h3 data-number="22.4.2" class="anchored" data-anchor-id="模型系数的假设检验">
-<span class="header-section-number">22.4.2</span> 模型系数的假设检验</h3>
+</section><section id="模型系数的假设检验" class="level3" data-number="22.3.3"><h3 data-number="22.3.3" class="anchored" data-anchor-id="模型系数的假设检验">
+<span class="header-section-number">22.3.3</span> 模型系数的假设检验</h3>
 <ol type="1">
 <li>
 <p>Wald‘s test</p>
@@ -503,12 +477,380 @@ window.Quarto = {
 <p><span class="math display">\[ \chi^2_{LR}=2\left[ \ln L_p(\beta_k)-\ln L_p(\beta_{k-1}) \right]\sim\chi^2(1) \]</span></p>
 <p>其中分别是包含 k 个和 k-1 个（不包含要检验的第 j 个变量）独立变量的对数局部似然函数</p>
 </li>
-</ol>
+</ol></section></section><section id="示例" class="level2" data-number="22.4"><h2 data-number="22.4" class="anchored" data-anchor-id="示例">
+<span class="header-section-number">22.4</span> 示例</h2>
+<div class="cell">
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpkgs.datanovia.com/survminer/index.html">survminer</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/therneau/survival">survival</a></span><span class="op">)</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">survival</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/survival/man/rotterdam.html">rotterdam</a></span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>dtime_yrs <span class="op">=</span> <span class="va">dtime</span><span class="op">/</span><span class="fl">365.25</span>,</span>
+<span>                    status <span class="op">=</span> <span class="va">death</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># 拟合Cox比例风险模型 </span></span>
+<span><span class="va">cox_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/coxph.html">coxph</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html">Surv</a></span><span class="op">(</span><span class="va">dtime_yrs</span>, <span class="va">status</span><span class="op">)</span> <span class="op">~</span> <span class="va">hormon</span> <span class="op">+</span> <span class="va">chemo</span> <span class="op">+</span> <span class="va">size</span> <span class="op">+</span> <span class="va">er</span> <span class="op">+</span> <span class="va">pgr</span> <span class="op">+</span> <span class="va">nodes</span> <span class="op">+</span> <span class="va">meno</span> <span class="op">+</span> <span class="va">grade</span> <span class="op">+</span> <span class="va">age</span>, data <span class="op">=</span> <span class="va">df</span><span class="op">)</span></span>
+<span><span class="co"># 查看模型结果 </span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">cox_model</span><span class="op">)</span>  </span>
+<span><span class="co">#&gt; Call:</span></span>
+<span><span class="co">#&gt; coxph(formula = Surv(dtime_yrs, status) ~ hormon + chemo + size + </span></span>
+<span><span class="co">#&gt;     er + pgr + nodes + meno + grade + age, data = df)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   n= 2982, number of events= 1272 </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;                 coef  exp(coef)   se(coef)      z Pr(&gt;|z|)    </span></span>
+<span><span class="co">#&gt; hormon    -6.553e-02  9.366e-01  8.840e-02 -0.741 0.458535    </span></span>
+<span><span class="co">#&gt; chemo      5.032e-02  1.052e+00  8.198e-02  0.614 0.539342    </span></span>
+<span><span class="co">#&gt; size20-50  4.425e-01  1.557e+00  6.536e-02  6.771 1.28e-11 ***</span></span>
+<span><span class="co">#&gt; size&gt;50    8.222e-01  2.276e+00  9.142e-02  8.993  &lt; 2e-16 ***</span></span>
+<span><span class="co">#&gt; er        -5.512e-05  9.999e-01  1.107e-04 -0.498 0.618466    </span></span>
+<span><span class="co">#&gt; pgr       -3.676e-04  9.996e-01  1.226e-04 -2.998 0.002720 ** </span></span>
+<span><span class="co">#&gt; nodes      7.295e-02  1.076e+00  4.879e-03 14.953  &lt; 2e-16 ***</span></span>
+<span><span class="co">#&gt; meno       7.046e-02  1.073e+00  1.006e-01  0.701 0.483583    </span></span>
+<span><span class="co">#&gt; grade      3.156e-01  1.371e+00  7.082e-02  4.456 8.33e-06 ***</span></span>
+<span><span class="co">#&gt; age        1.406e-02  1.014e+00  3.830e-03  3.671 0.000242 ***</span></span>
+<span><span class="co">#&gt; ---</span></span>
+<span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;           exp(coef) exp(-coef) lower .95 upper .95</span></span>
+<span><span class="co">#&gt; hormon       0.9366     1.0677    0.7876    1.1137</span></span>
+<span><span class="co">#&gt; chemo        1.0516     0.9509    0.8955    1.2349</span></span>
+<span><span class="co">#&gt; size20-50    1.5567     0.6424    1.3695    1.7694</span></span>
+<span><span class="co">#&gt; size&gt;50      2.2755     0.4395    1.9022    2.7221</span></span>
+<span><span class="co">#&gt; er           0.9999     1.0001    0.9997    1.0002</span></span>
+<span><span class="co">#&gt; pgr          0.9996     1.0004    0.9994    0.9999</span></span>
+<span><span class="co">#&gt; nodes        1.0757     0.9296    1.0654    1.0860</span></span>
+<span><span class="co">#&gt; meno         1.0730     0.9320    0.8810    1.3068</span></span>
+<span><span class="co">#&gt; grade        1.3711     0.7293    1.1934    1.5753</span></span>
+<span><span class="co">#&gt; age          1.0142     0.9860    1.0066    1.0218</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Concordance= 0.693  (se = 0.008 )</span></span>
+<span><span class="co">#&gt; Likelihood ratio test= 524.4  on 10 df,   p=&lt;2e-16</span></span>
+<span><span class="co">#&gt; Wald test            = 609.4  on 10 df,   p=&lt;2e-16</span></span>
+<span><span class="co">#&gt; Score (logrank) test = 688.1  on 10 df,   p=&lt;2e-16</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>例如，与未接受激素治疗的患者相比，在任何给定时间接受激素治疗患者的结局（死亡）概率为0.9366。换句话说，他们的生存率提高了6.34%。对于每个组，我们比较了该特征的存在（=1）和不存在（=0）。例如，对于激素治疗，我们有2600名患者没有接受激素治疗，而300名患者接受了激素治疗。因此，系数是指接受治疗与不接受治疗的对数风险率的变化，换句话说，“不接受激素治疗”组是我们的参考。</p>
+<p>在解释 Cox regresison 的结果之前，请验证是否遵循比例风险假设。</p>
+<p>Cox 模型假设任意两组之间的 HR 随时间保持不变。我们可以使用 cox.zph() 非常轻松地对其进行测试。</p>
+<div class="cell">
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">test</span> <span class="op">&lt;-</span> <span class="fu">survival</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/cox.zph.html">cox.zph</a></span><span class="op">(</span><span class="va">cox_model</span><span class="op">)</span></span>
+<span><span class="va">test</span></span>
+<span><span class="co">#&gt;         chisq df       p</span></span>
+<span><span class="co">#&gt; hormon  0.684  1 0.40818</span></span>
+<span><span class="co">#&gt; chemo   2.100  1 0.14727</span></span>
+<span><span class="co">#&gt; size    5.206  2 0.07405</span></span>
+<span><span class="co">#&gt; er     59.748  1 1.1e-14</span></span>
+<span><span class="co">#&gt; pgr    41.637  1 1.1e-10</span></span>
+<span><span class="co">#&gt; nodes   4.073  1 0.04358</span></span>
+<span><span class="co">#&gt; meno    4.284  1 0.03846</span></span>
+<span><span class="co">#&gt; grade   3.163  1 0.07533</span></span>
+<span><span class="co">#&gt; age    13.954  1 0.00019</span></span>
+<span><span class="co">#&gt; GLOBAL 93.751 10 9.6e-16</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>基于Schoenfeld residuals 的比例风险假设</p>
+<div class="cell">
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 绘制每个协变量随时间变化的 Schoenfeld 残差</span></span>
+<span><span class="fu">survminer</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/survminer/man/ggcoxzph.html">ggcoxzph</a></span><span class="op">(</span><span class="va">test</span>, point.size <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="CoxProportionalHazardsModel_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>如果残差随时间显示清晰的模式，则可能表示违反了比例风险假设。</strong></p>
+<p><strong>一些有助于解释的提示：</strong></p>
+<ul>
+<li><p><strong>无模式（常数残差）：如果残差随机分布在零附近，没有明确的趋势或模式，则表明比例风险假设是合理的：）</strong></p></li>
+<li><p><strong>线性趋势：残差随时间变化的线性趋势（增加或减少）可能表明违反了比例风险假设。例如，如果残差在一段时间内始终为正或负，则表示存在时间相关效应。</strong></p></li>
+<li><p><strong>非线性模式：如果残差表现出非线性模式或特定形状（例如，U 形、V 形），则可能表示偏离比例风险。</strong></p></li>
+<li><p><strong>并行度：平行度意味着残差的分布和分布在时间上相对恒定。如果残差随时间变宽或变窄，则可能表明违反了假设。</strong></p></li>
+</ul>
+<div class="cell">
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co">###  Concordance index</span></span>
+<span><span class="va">c_index</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">formula</span>, <span class="va">indices</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">dat</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">[</span><span class="va">indices</span>, <span class="op">]</span></span>
+<span>    </span>
+<span>    <span class="co"># 构建回归模型</span></span>
+<span>    <span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rms/man/cph.html">cph</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">formula</span>, data <span class="op">=</span> <span class="va">dat</span>, x <span class="op">=</span> <span class="cn">TRUE</span>, y <span class="op">=</span> <span class="cn">TRUE</span>, surv <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span>    </span>
+<span>    <span class="co"># 进行预测</span></span>
+<span>    <span class="va">pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">fit</span>, newdata <span class="op">=</span> <span class="va">dat</span><span class="op">)</span></span>
+<span>    </span>
+<span>    <span class="co"># 计算C-index</span></span>
+<span>   <span class="va">C_index</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/pkg/Hmisc/man/rcorr.cens.html">rcorrcens</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html">Surv</a></span><span class="op">(</span><span class="va">dat</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/allnames.html">all.vars</a></span><span class="op">(</span><span class="va">formula</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">]</span>, </span>
+<span>                                   <span class="va">dat</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/allnames.html">all.vars</a></span><span class="op">(</span><span class="va">formula</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op">~</span> <span class="va">pred</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
+<span>    </span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">C_index</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">formula</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html">Surv</a></span><span class="op">(</span><span class="va">dtime_yrs</span>, <span class="va">status</span><span class="op">)</span> <span class="op">~</span> <span class="va">hormon</span> <span class="op">+</span> <span class="va">chemo</span> <span class="op">+</span> <span class="va">size</span> <span class="op">+</span> <span class="va">er</span> <span class="op">+</span> <span class="va">pgr</span> <span class="op">+</span> <span class="va">nodes</span> <span class="op">+</span> <span class="va">meno</span> <span class="op">+</span> <span class="va">grade</span> <span class="op">+</span> <span class="va">age</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://hbiostat.org/R/rms/">rms</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">c_index</span><span class="op">(</span>data<span class="op">=</span><span class="va">df</span>, <span class="va">formula</span> ,indices <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0.6928361</span></span>
+<span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">boot</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1234</span><span class="op">)</span></span>
+<span><span class="va">boot_c_index</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/boot/man/boot.html">boot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df</span>,statistic <span class="op">=</span> <span class="va">c_index</span>, R <span class="op">=</span> <span class="fl">200</span>,formula <span class="op">=</span> <span class="va">formula</span><span class="op">)</span></span>
+<span><span class="va">boot_c_index</span> </span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ORDINARY NONPARAMETRIC BOOTSTRAP</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Call:</span></span>
+<span><span class="co">#&gt; boot(data = df, statistic = c_index, R = 200, formula = formula)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Bootstrap Statistics :</span></span>
+<span><span class="co">#&gt;      original       bias    std. error</span></span>
+<span><span class="co">#&gt; t1* 0.6928361 0.0009553912 0.007547789</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">boot_c_index</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="CoxProportionalHazardsModel_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/boot/man/boot.ci.html">boot.ci</a></span><span class="op">(</span><span class="va">boot_c_index</span>, conf <span class="op">=</span> <span class="fl">0.95</span>, type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"norm"</span>,<span class="st">"basic"</span>,<span class="st">"perc"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; BOOTSTRAP CONFIDENCE INTERVAL CALCULATIONS</span></span>
+<span><span class="co">#&gt; Based on 200 bootstrap replicates</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; CALL : </span></span>
+<span><span class="co">#&gt; boot.ci(boot.out = boot_c_index, conf = 0.95, type = c("norm", </span></span>
+<span><span class="co">#&gt;     "basic", "perc"))</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Intervals : </span></span>
+<span><span class="co">#&gt; Level      Normal              Basic              Percentile     </span></span>
+<span><span class="co">#&gt; 95%   ( 0.6771,  0.7067 )   ( 0.6773,  0.7061 )   ( 0.6795,  0.7083 )  </span></span>
+<span><span class="co">#&gt; Calculations and Intervals on Original Scale</span></span>
+<span><span class="co">#&gt; Some basic intervals may be unstable</span></span>
+<span><span class="co">#&gt; Some percentile intervals may be unstable</span></span>
+<span></span>
+<span><span class="va">boot_c_index</span><span class="op">$</span><span class="va">t</span></span>
+<span><span class="co">#&gt;             [,1]</span></span>
+<span><span class="co">#&gt;   [1,] 0.6840415</span></span>
+<span><span class="co">#&gt;   [2,] 0.6861004</span></span>
+<span><span class="co">#&gt;   [3,] 0.6922284</span></span>
+<span><span class="co">#&gt;   [4,] 0.6871463</span></span>
+<span><span class="co">#&gt;   [5,] 0.6891063</span></span>
+<span><span class="co">#&gt;   [6,] 0.7070723</span></span>
+<span><span class="co">#&gt;   [7,] 0.6975292</span></span>
+<span><span class="co">#&gt;   [8,] 0.6957405</span></span>
+<span><span class="co">#&gt;   [9,] 0.6889738</span></span>
+<span><span class="co">#&gt;  [10,] 0.6973390</span></span>
+<span><span class="co">#&gt;  [11,] 0.7001275</span></span>
+<span><span class="co">#&gt;  [12,] 0.6994050</span></span>
+<span><span class="co">#&gt;  [13,] 0.6899169</span></span>
+<span><span class="co">#&gt;  [14,] 0.7005129</span></span>
+<span><span class="co">#&gt;  [15,] 0.7063317</span></span>
+<span><span class="co">#&gt;  [16,] 0.6996744</span></span>
+<span><span class="co">#&gt;  [17,] 0.6979745</span></span>
+<span><span class="co">#&gt;  [18,] 0.6925786</span></span>
+<span><span class="co">#&gt;  [19,] 0.6904877</span></span>
+<span><span class="co">#&gt;  [20,] 0.6965846</span></span>
+<span><span class="co">#&gt;  [21,] 0.6958925</span></span>
+<span><span class="co">#&gt;  [22,] 0.6992254</span></span>
+<span><span class="co">#&gt;  [23,] 0.7059247</span></span>
+<span><span class="co">#&gt;  [24,] 0.7043914</span></span>
+<span><span class="co">#&gt;  [25,] 0.6888177</span></span>
+<span><span class="co">#&gt;  [26,] 0.6971457</span></span>
+<span><span class="co">#&gt;  [27,] 0.6929253</span></span>
+<span><span class="co">#&gt;  [28,] 0.6930116</span></span>
+<span><span class="co">#&gt;  [29,] 0.6951884</span></span>
+<span><span class="co">#&gt;  [30,] 0.7057137</span></span>
+<span><span class="co">#&gt;  [31,] 0.6853929</span></span>
+<span><span class="co">#&gt;  [32,] 0.6878291</span></span>
+<span><span class="co">#&gt;  [33,] 0.6924952</span></span>
+<span><span class="co">#&gt;  [34,] 0.6932619</span></span>
+<span><span class="co">#&gt;  [35,] 0.6920361</span></span>
+<span><span class="co">#&gt;  [36,] 0.6907561</span></span>
+<span><span class="co">#&gt;  [37,] 0.6911114</span></span>
+<span><span class="co">#&gt;  [38,] 0.6837897</span></span>
+<span><span class="co">#&gt;  [39,] 0.7038525</span></span>
+<span><span class="co">#&gt;  [40,] 0.7024494</span></span>
+<span><span class="co">#&gt;  [41,] 0.6897124</span></span>
+<span><span class="co">#&gt;  [42,] 0.7054827</span></span>
+<span><span class="co">#&gt;  [43,] 0.7045421</span></span>
+<span><span class="co">#&gt;  [44,] 0.7031605</span></span>
+<span><span class="co">#&gt;  [45,] 0.6902170</span></span>
+<span><span class="co">#&gt;  [46,] 0.6897095</span></span>
+<span><span class="co">#&gt;  [47,] 0.6982245</span></span>
+<span><span class="co">#&gt;  [48,] 0.6882279</span></span>
+<span><span class="co">#&gt;  [49,] 0.6810325</span></span>
+<span><span class="co">#&gt;  [50,] 0.6928143</span></span>
+<span><span class="co">#&gt;  [51,] 0.6940493</span></span>
+<span><span class="co">#&gt;  [52,] 0.7023472</span></span>
+<span><span class="co">#&gt;  [53,] 0.6977338</span></span>
+<span><span class="co">#&gt;  [54,] 0.6816434</span></span>
+<span><span class="co">#&gt;  [55,] 0.6902461</span></span>
+<span><span class="co">#&gt;  [56,] 0.6962076</span></span>
+<span><span class="co">#&gt;  [57,] 0.6930478</span></span>
+<span><span class="co">#&gt;  [58,] 0.6782716</span></span>
+<span><span class="co">#&gt;  [59,] 0.6888177</span></span>
+<span><span class="co">#&gt;  [60,] 0.6932389</span></span>
+<span><span class="co">#&gt;  [61,] 0.6820609</span></span>
+<span><span class="co">#&gt;  [62,] 0.6891455</span></span>
+<span><span class="co">#&gt;  [63,] 0.6965728</span></span>
+<span><span class="co">#&gt;  [64,] 0.7051772</span></span>
+<span><span class="co">#&gt;  [65,] 0.6970262</span></span>
+<span><span class="co">#&gt;  [66,] 0.7051638</span></span>
+<span><span class="co">#&gt;  [67,] 0.6978584</span></span>
+<span><span class="co">#&gt;  [68,] 0.6954607</span></span>
+<span><span class="co">#&gt;  [69,] 0.6913879</span></span>
+<span><span class="co">#&gt;  [70,] 0.6828812</span></span>
+<span><span class="co">#&gt;  [71,] 0.6921640</span></span>
+<span><span class="co">#&gt;  [72,] 0.6932000</span></span>
+<span><span class="co">#&gt;  [73,] 0.7002079</span></span>
+<span><span class="co">#&gt;  [74,] 0.6968225</span></span>
+<span><span class="co">#&gt;  [75,] 0.6997555</span></span>
+<span><span class="co">#&gt;  [76,] 0.6846542</span></span>
+<span><span class="co">#&gt;  [77,] 0.6846691</span></span>
+<span><span class="co">#&gt;  [78,] 0.7068665</span></span>
+<span><span class="co">#&gt;  [79,] 0.6961698</span></span>
+<span><span class="co">#&gt;  [80,] 0.6963645</span></span>
+<span><span class="co">#&gt;  [81,] 0.6933080</span></span>
+<span><span class="co">#&gt;  [82,] 0.6947798</span></span>
+<span><span class="co">#&gt;  [83,] 0.6944429</span></span>
+<span><span class="co">#&gt;  [84,] 0.6928754</span></span>
+<span><span class="co">#&gt;  [85,] 0.6946977</span></span>
+<span><span class="co">#&gt;  [86,] 0.6844625</span></span>
+<span><span class="co">#&gt;  [87,] 0.6993367</span></span>
+<span><span class="co">#&gt;  [88,] 0.7109857</span></span>
+<span><span class="co">#&gt;  [89,] 0.6899890</span></span>
+<span><span class="co">#&gt;  [90,] 0.6856668</span></span>
+<span><span class="co">#&gt;  [91,] 0.6951957</span></span>
+<span><span class="co">#&gt;  [92,] 0.6840721</span></span>
+<span><span class="co">#&gt;  [93,] 0.6919932</span></span>
+<span><span class="co">#&gt;  [94,] 0.6915590</span></span>
+<span><span class="co">#&gt;  [95,] 0.6860581</span></span>
+<span><span class="co">#&gt;  [96,] 0.6802692</span></span>
+<span><span class="co">#&gt;  [97,] 0.6896906</span></span>
+<span><span class="co">#&gt;  [98,] 0.7020619</span></span>
+<span><span class="co">#&gt;  [99,] 0.6938913</span></span>
+<span><span class="co">#&gt; [100,] 0.7052154</span></span>
+<span><span class="co">#&gt; [101,] 0.6868067</span></span>
+<span><span class="co">#&gt; [102,] 0.6925506</span></span>
+<span><span class="co">#&gt; [103,] 0.6875501</span></span>
+<span><span class="co">#&gt; [104,] 0.6997005</span></span>
+<span><span class="co">#&gt; [105,] 0.7097947</span></span>
+<span><span class="co">#&gt; [106,] 0.6950401</span></span>
+<span><span class="co">#&gt; [107,] 0.6887829</span></span>
+<span><span class="co">#&gt; [108,] 0.6825710</span></span>
+<span><span class="co">#&gt; [109,] 0.6914889</span></span>
+<span><span class="co">#&gt; [110,] 0.6869629</span></span>
+<span><span class="co">#&gt; [111,] 0.6910353</span></span>
+<span><span class="co">#&gt; [112,] 0.6850879</span></span>
+<span><span class="co">#&gt; [113,] 0.7083620</span></span>
+<span><span class="co">#&gt; [114,] 0.7060274</span></span>
+<span><span class="co">#&gt; [115,] 0.6890010</span></span>
+<span><span class="co">#&gt; [116,] 0.7033136</span></span>
+<span><span class="co">#&gt; [117,] 0.7045074</span></span>
+<span><span class="co">#&gt; [118,] 0.6968568</span></span>
+<span><span class="co">#&gt; [119,] 0.7020912</span></span>
+<span><span class="co">#&gt; [120,] 0.6924852</span></span>
+<span><span class="co">#&gt; [121,] 0.6938881</span></span>
+<span><span class="co">#&gt; [122,] 0.6974524</span></span>
+<span><span class="co">#&gt; [123,] 0.7089484</span></span>
+<span><span class="co">#&gt; [124,] 0.6941822</span></span>
+<span><span class="co">#&gt; [125,] 0.6880722</span></span>
+<span><span class="co">#&gt; [126,] 0.6964263</span></span>
+<span><span class="co">#&gt; [127,] 0.6950960</span></span>
+<span><span class="co">#&gt; [128,] 0.6922390</span></span>
+<span><span class="co">#&gt; [129,] 0.7138132</span></span>
+<span><span class="co">#&gt; [130,] 0.6951402</span></span>
+<span><span class="co">#&gt; [131,] 0.6775030</span></span>
+<span><span class="co">#&gt; [132,] 0.6782926</span></span>
+<span><span class="co">#&gt; [133,] 0.6832530</span></span>
+<span><span class="co">#&gt; [134,] 0.6896957</span></span>
+<span><span class="co">#&gt; [135,] 0.6904713</span></span>
+<span><span class="co">#&gt; [136,] 0.6950142</span></span>
+<span><span class="co">#&gt; [137,] 0.7022224</span></span>
+<span><span class="co">#&gt; [138,] 0.7063290</span></span>
+<span><span class="co">#&gt; [139,] 0.6871596</span></span>
+<span><span class="co">#&gt; [140,] 0.7035121</span></span>
+<span><span class="co">#&gt; [141,] 0.6842875</span></span>
+<span><span class="co">#&gt; [142,] 0.6830441</span></span>
+<span><span class="co">#&gt; [143,] 0.7038993</span></span>
+<span><span class="co">#&gt; [144,] 0.6972607</span></span>
+<span><span class="co">#&gt; [145,] 0.6899501</span></span>
+<span><span class="co">#&gt; [146,] 0.7055068</span></span>
+<span><span class="co">#&gt; [147,] 0.6936249</span></span>
+<span><span class="co">#&gt; [148,] 0.6920770</span></span>
+<span><span class="co">#&gt; [149,] 0.7045031</span></span>
+<span><span class="co">#&gt; [150,] 0.6985115</span></span>
+<span><span class="co">#&gt; [151,] 0.7020377</span></span>
+<span><span class="co">#&gt; [152,] 0.6894993</span></span>
+<span><span class="co">#&gt; [153,] 0.6864729</span></span>
+<span><span class="co">#&gt; [154,] 0.6890899</span></span>
+<span><span class="co">#&gt; [155,] 0.6860522</span></span>
+<span><span class="co">#&gt; [156,] 0.7002668</span></span>
+<span><span class="co">#&gt; [157,] 0.7009822</span></span>
+<span><span class="co">#&gt; [158,] 0.6844799</span></span>
+<span><span class="co">#&gt; [159,] 0.6981335</span></span>
+<span><span class="co">#&gt; [160,] 0.6831765</span></span>
+<span><span class="co">#&gt; [161,] 0.6866612</span></span>
+<span><span class="co">#&gt; [162,] 0.6837701</span></span>
+<span><span class="co">#&gt; [163,] 0.6952964</span></span>
+<span><span class="co">#&gt; [164,] 0.6928831</span></span>
+<span><span class="co">#&gt; [165,] 0.7031870</span></span>
+<span><span class="co">#&gt; [166,] 0.6984845</span></span>
+<span><span class="co">#&gt; [167,] 0.6928333</span></span>
+<span><span class="co">#&gt; [168,] 0.6821514</span></span>
+<span><span class="co">#&gt; [169,] 0.6815036</span></span>
+<span><span class="co">#&gt; [170,] 0.6834020</span></span>
+<span><span class="co">#&gt; [171,] 0.6973542</span></span>
+<span><span class="co">#&gt; [172,] 0.6860725</span></span>
+<span><span class="co">#&gt; [173,] 0.7000901</span></span>
+<span><span class="co">#&gt; [174,] 0.6877945</span></span>
+<span><span class="co">#&gt; [175,] 0.6954614</span></span>
+<span><span class="co">#&gt; [176,] 0.6961834</span></span>
+<span><span class="co">#&gt; [177,] 0.6854653</span></span>
+<span><span class="co">#&gt; [178,] 0.6795140</span></span>
+<span><span class="co">#&gt; [179,] 0.6983454</span></span>
+<span><span class="co">#&gt; [180,] 0.6847524</span></span>
+<span><span class="co">#&gt; [181,] 0.6978928</span></span>
+<span><span class="co">#&gt; [182,] 0.7032848</span></span>
+<span><span class="co">#&gt; [183,] 0.6799797</span></span>
+<span><span class="co">#&gt; [184,] 0.6947564</span></span>
+<span><span class="co">#&gt; [185,] 0.7014366</span></span>
+<span><span class="co">#&gt; [186,] 0.6993279</span></span>
+<span><span class="co">#&gt; [187,] 0.6962003</span></span>
+<span><span class="co">#&gt; [188,] 0.7002197</span></span>
+<span><span class="co">#&gt; [189,] 0.7059244</span></span>
+<span><span class="co">#&gt; [190,] 0.6784809</span></span>
+<span><span class="co">#&gt; [191,] 0.6935298</span></span>
+<span><span class="co">#&gt; [192,] 0.6826279</span></span>
+<span><span class="co">#&gt; [193,] 0.6945671</span></span>
+<span><span class="co">#&gt; [194,] 0.6955379</span></span>
+<span><span class="co">#&gt; [195,] 0.6898856</span></span>
+<span><span class="co">#&gt; [196,] 0.6906719</span></span>
+<span><span class="co">#&gt; [197,] 0.6881098</span></span>
+<span><span class="co">#&gt; [198,] 0.6929627</span></span>
+<span><span class="co">#&gt; [199,] 0.6880540</span></span>
+<span><span class="co">#&gt; [200,] 0.6990972</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">boot_c_index</span><span class="op">$</span><span class="va">t</span>,probs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.025</span>,<span class="fl">.975</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt;      2.5%     97.5% </span></span>
+<span><span class="co">#&gt; 0.6799681 0.7071046</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section><section id="森林图" class="level2" data-number="22.5"><h2 data-number="22.5" class="anchored" data-anchor-id="森林图">
+<span class="header-section-number">22.5</span> 森林图</h2>
+<div class="cell">
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/survminer/man/ggforest.html">ggforest</a></span><span class="op">(</span><span class="va">cox_model</span>, data <span class="op">=</span> <span class="va">df</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="CoxProportionalHazardsModel_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 
 
-<!-- -->
-
-</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -528,6 +870,150 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = true;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -587,57 +1073,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  const viewSource = window.document.getElementById('quarto-view-source') ||
-                     window.document.getElementById('quarto-code-tools-source');
-  if (viewSource) {
-    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
-    viewSource.addEventListener("click", function(e) {
-      if (sourceUrl) {
-        // rstudio viewer pane
-        if (/\bcapabilities=\b/.test(window.location)) {
-          window.open(sourceUrl);
-        } else {
-          window.location.href = sourceUrl;
-        }
-      } else {
-        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
-        modal.show();
-      }
-      return false;
-    });
-  }
-  function toggleCodeHandler(show) {
-    return function(e) {
-      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
-      for (let i=0; i<detailsSrc.length; i++) {
-        const details = detailsSrc[i].parentElement;
-        if (show) {
-          details.open = true;
-        } else {
-          details.removeAttribute("open");
-        }
-      }
-      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
-      const fromCls = show ? "hidden" : "unhidden";
-      const toCls = show ? "unhidden" : "hidden";
-      for (let i=0; i<cellCodeDivs.length; i++) {
-        const codeDiv = cellCodeDivs[i];
-        if (codeDiv.classList.contains(fromCls)) {
-          codeDiv.classList.remove(fromCls);
-          codeDiv.classList.add(toCls);
-        } 
-      }
-      return false;
-    }
-  }
-  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
-  if (hideAllCode) {
-    hideAllCode.addEventListener("click", toggleCodeHandler(false));
-  }
-  const showAllCode = window.document.getElementById("quarto-show-all-code");
-  if (showAllCode) {
-    showAllCode.addEventListener("click", toggleCodeHandler(true));
-  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -973,93 +1408,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./PropensityScore.html" class="pagination-link" aria-label="倾向性评分">
-        <span class="nav-page-text">倾向性评分</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./CompetingRiskModel.html" class="pagination-link" aria-label="竞争风险模型">
+        <span class="nav-page-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">竞争风险模型</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
-</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb2" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Cox比例风险模型</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>Cox比例风险模型是一种半参数方法</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">## 风险函数</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>$$ </span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>\begin{aligned} h(t)=&amp;\lim_{\Delta t\to 0}\frac{P(t\le T&lt;t+\Delta t|T\ge t)}{\Delta t}<span class="sc">\\</span> =&amp;\lim_{\Delta t\to 0}\frac{P(t\le T&lt;t+\Delta t\ <span class="sc">\&amp;</span>\ T\ge t)}{\Delta t·P(T\ge t) }<span class="sc">\\</span> =&amp;\lim_{\Delta t\to 0}\frac{S(t)- S(t+\Delta t)}{\Delta t·S(t)}<span class="sc">\\</span> =&amp;-\frac{d(\ln S(t))}{dt} \end{aligned} </span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">## 风险率</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>对于有风险因子$x_1,x_2,...,x_k$ 的个体在时间 t 的风险率$h(t|x_1,x_2,...,x_k)$</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>$$ h(t|x_1,x_2,...,x_k)=h_0(t)g(x_1,x_2,...,x_k)=h_0(t)exp(\sum_{j=1}^k\beta_jx_j) $$</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>其中</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>$h0 (t)$是给定所有风险因子（协变量）为零的随时间变化的**基线风险函数**。</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>$g(X)$是**k个独立风险因子**的集合函数，代表变量的风险效应。</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>$β_j$是部分回归系数，表示风险比的比例变化。</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="fu">## 比例风险假设</span></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>（proportional hazards assumption）</span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>$$ \frac{h(t)}{h_0(t)}=exp(\sum_{j=1}^k\beta_jx_j) $$</span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="fu">## 风险比（hazard ratio）</span></span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>假设有两个个体，分别具有独立变量，两个个体的风险函数之比称为风险比</span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>$$ HR=\frac{h(t|x_1,x_2,...,x_k)}{h(t|x_1^*,x_2^*,...,x_k^*)}=exp(\sum_{j=1}^k\beta_j(x_j-x_j^*)) $$</span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/log-rank-survival.csv"</span>)</span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survminer)</span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survival)</span>
-<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a><span class="co"># 使用 Kaplan-Meier 方法创建一个Surv对象</span></span>
-<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>surv_formula <span class="ot">&lt;-</span> <span class="fu">Surv</span>(Days,status)<span class="sc">~</span>treatment</span>
-<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a><span class="co"># 拟合Cox比例风险模型 </span></span>
-<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>cox_model <span class="ot">&lt;-</span> <span class="fu">coxph</span>(surv_formula, <span class="at">data =</span> df)  </span>
-<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a><span class="co"># 查看模型结果 </span></span>
-<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cox_model)  </span>
-<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a><span class="co"># 检查比例风险假设 </span></span>
-<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a><span class="fu">cox.zph</span>(cox_model)</span>
-<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a><span class="fu">### 模型系数的估计</span></span>
-<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>条件死亡概率和局部似然函数方法</span>
-<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>$$ \ln L_p(\beta)=\sum_{i=1}^{d}\left<span class="co">[</span><span class="ot"> \sum_{j=1}^k\beta_jx_{ij}-\ln\sum_{m\in R_i}exp( \sum_{j=1}^k\beta_jx_{mj})         \right</span><span class="co">]</span> $$</span>
-<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>Newton-Raphson iterative method</span>
-<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>$$  \begin{cases}  \frac{\partial \ln L_p(\beta)}{\partial \beta_1}=0<span class="sc">\\</span> \frac{\partial \ln L_p(\beta)}{\partial \beta_2}=0<span class="sc">\\</span> \vdots<span class="sc">\\</span> \frac{\partial \ln L_p(\beta)}{\partial \beta_k}=0<span class="sc">\\</span> \end{cases} $$</span>
-<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a><span class="fu">### 模型系数的假设检验</span></span>
-<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>Wald‘s test</span>
-<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>    检验是否有独立变量需要被消除，统计量$Z=b_j/S_{b_j}$</span>
-<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>    当样本量足够大时，Z服从标准正态分布，Z^2^ 服从自由度为1 的$\chi^2$ 分布</span>
-<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>    $$ \chi^2_W=(b_j/S_{b_j})^2\sim \chi^2(1) $$</span>
-<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>Partial likelihood Ratio test</span>
-<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>    主要用于非显著性变量的消除，新变量的引入和模型的比较。</span>
-<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>    $$ \chi^2_{LR}=2\left[ \ln L_p(\beta_k)-\ln L_p(\beta_{k-1}) \right]\sim\chi^2(1) $$</span>
-<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a>    其中分别是包含 k 个和 k-1 个（不包含要检验的第 j 个变量）独立变量的对数局部似然函数</span>
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div></div></div></div></div>
+</nav>
 </div> <!-- /content -->
 
 

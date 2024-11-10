@@ -27,11 +27,11 @@ $$
 
 ## 一个总体的参数估计
 
-#### 点估计
+### 点估计
 
 假设 $\theta$是总体$X$的一个参数，$\hat\theta=\hat\theta(X_1,X_2,...,X_n)$是代表$\theta$的数值估计的一个统计量。任何可能的$\hat\theta$称为$\theta$的点估计。
 
-##### 无偏性（unbiasedness）
+#### 无偏性（unbiasedness）
 
 如果$E(\hat\theta)=\theta$,就说参数$\theta$的一个估计$\hat\theta$是无偏的。
 
@@ -53,11 +53,11 @@ $$
 E(S^2)=E(\frac{n}{n-1}S_n^2)=\frac{n}{n-1}E(S_n^2)=\frac{n}{n-1}E(\frac {1}{n}\sum_{i=1}^{n}(X_i-\bar X)^2\\=\frac{n}{n-1}\times\frac{n-1}{n}\sigma^2=\sigma^2
 $$ 所以样本方差$S^2$是总体方差$\sigma^2$的一个无偏估计。
 
-##### 最小方差无偏估计（MVUE）
+#### 最小方差无偏估计（MVUE）
 
 $\hat\theta$无偏且最小方差
 
-##### 一致性（consistency）
+#### 一致性（consistency）
 
 对于任意一个$\epsilon＞0$ ，如果 $$\lim_{n\to \infty}P(|\hat\theta_n-\theta|＜\epsilon)=1$$ 那么$\hat\theta_n$是总体参数$\theta$的一个一致估计。
 

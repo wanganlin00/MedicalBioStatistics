@@ -15,7 +15,7 @@ book:
         - qualitative_data.qmd
         - correlation.qmd
         
-    - part: "概率论与数理统计"
+    - part: "统计推断"
       chapters:
         - probability_theory.qmd
         - SamplingDistribution.qmd
@@ -26,16 +26,15 @@ book:
         - variance_homogeneity_test.qmd
         - t_test.qmd
         - ANOVA.qmd
-        - repeated_measures_ANOVA.qmd
+        - repeated_measures_anova.qmd
         
         - proportion_test.qmd
         - chi-square_test.qmd
         - nonparametric_test.qmd
        
-
     #     - PowerAnalysis.qmd
     #     - Causal_Inference.qmd
-    - part: "推断统计模型"
+    - part: "统计模型"
       chapters:
         - simple_linear_regression.qmd
         - multiple_linear_regression.qmd
@@ -73,31 +72,14 @@ knitr:
   opts_chunk: 
     comment: "#>" 
     collapse: TRUE
-    
-title-block-banner: "#f0f3f5"
-title-block-banner-color: "black"
-author: 
-  name: "ANLIN"
-  affiliation: "Independant 😀"
-  email: anlinwang00@gmail.com
-  roles: "made the document"
-keywords: "statistics, hypothesis test, regression, GLM, LME, GEE, survival analysis, propensity score"
-date: today
 
-
+date-modified: today
 
 code-fold: true
 code-link: true
 code-summary: "Show the code"
 
 css: style.css
-include-in-header:  # caption 文本居中
-   - text: |   
-       <style>
-       figcaption {
-         text-align: center;
-       }
-       </style>
 
 format: html
     # html-math-method: mathjax

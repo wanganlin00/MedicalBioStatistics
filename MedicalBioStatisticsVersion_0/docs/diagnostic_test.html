@@ -1,18 +1,10 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
-
-<head>
-
-<meta charset="utf-8" />
-<meta name="generator" content="quarto-1.4.555" />
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-
-<meta name="author" content="ANLIN" />
-<meta name="dcterms.date" content="2024-08-31" />
-<meta name="keywords" content="statistics, hypothesis test, regression, GLM, LME, GEE, survival analysis, propensity score" />
-
-<title>医学与生物统计学 – 25  诊断性测试</title>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.555">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>医学与生物统计学 - 24&nbsp; 诊断性测试</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -61,8 +53,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
-<!-- htmldependencies:E3FAD763 -->
-<script id="quarto-search-options" type="application/json">{
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./RCT.html" rel="next">
+<link href="./CompetingRiskModel.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -88,34 +98,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script>
-<style>
-
-      .quarto-title-block .quarto-title-banner h1,
-      .quarto-title-block .quarto-title-banner h2,
-      .quarto-title-block .quarto-title-banner h3,
-      .quarto-title-block .quarto-title-banner h4,
-      .quarto-title-block .quarto-title-banner h5,
-      .quarto-title-block .quarto-title-banner h6
-      {
-        color: black;
-      }
-
-      .quarto-title-block .quarto-title-banner {
-        color: black;
-background: #f0f3f5;
-      }
-</style>
-<style>
-figcaption {
-  text-align: center;
-}
-</style>
-
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
+}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
 const typesetMath = (el) => {
   if (window.MathJax) {
     // MathJax Typeset
@@ -140,43 +123,27 @@ const typesetMath = (el) => {
 window.Quarto = {
   typesetMath
 };
-</script>
-
-<link rel="stylesheet" href="style.css" />
+</script><link rel="stylesheet" href="style.css">
 </head>
-
-<body>
+<body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn"
-      data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" 
-      aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation"
-      onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <h1 class="quarto-secondary-nav-title no-breadcrumbs"></h1>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" 
-        aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation"
-        onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./diagnostic_test.html">临床研究设计</a></li><li class="breadcrumb-item"><a href="./diagnostic_test.html"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">诊断性测试</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="/">
-      医学与生物统计学
-      </a> 
+      <a href="./">医学与生物统计学</a> 
         <div class="sidebar-tools-main">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
@@ -194,165 +161,165 @@ window.Quarto = {
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="/index.html" class="sidebar-item-text sidebar-link">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">推荐阅读</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="/descriptive_statistics.html" class="sidebar-item-text sidebar-link">
+            <a href="./descriptive_statistics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">描述性统计学</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="/quantitative_data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class='chapter-number'>1</span>  <span class='chapter-title'>定量数据的统计描述</span></span></a>
+  <a href="./quantitative_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">定量数据的统计描述</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="/qualitative_data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class='chapter-number'>2</span>  <span class='chapter-title'>定性数据的统计描述</span></span></a>
+  <a href="./qualitative_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">定性数据的统计描述</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./correlation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">相关性</span></span></a>
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
- <span class="menu-text">概率论与数理统计</span></a>
+ <span class="menu-text">统计推断</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="/probability_theory.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class='chapter-number'>3</span>  <span class='chapter-title'>概率论基础</span></span></a>
+  <a href="./probability_theory.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">概率论基础</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="/SamplingDistribution.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class='chapter-number'>4</span>  <span class='chapter-title'>抽样分布</span></span></a>
+  <a href="./SamplingDistribution.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">抽样分布</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="/ParameterEstimation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class='chapter-number'>5</span>  <span class='chapter-title'>参数估计</span></span></a>
+  <a href="./ParameterEstimation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">参数估计</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="/hypothesis_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class='chapter-number'>6</span>  <span class='chapter-title'>假设检验</span></span></a>
+  <a href="./hypothesis_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">假设检验</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="/normality_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class='chapter-number'>7</span>  <span class='chapter-title'>正态性检验</span></span></a>
+  <a href="./normality_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">正态性检验</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="/variance_homogeneity_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class='chapter-number'>8</span>  <span class='chapter-title'>方差齐性检验</span></span></a>
+  <a href="./variance_homogeneity_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">方差齐性检验</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="/t_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class='chapter-number'>9</span>  <span class='chapter-title'>t 检验</span></span></a>
+  <a href="./t_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">t 检验</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="/ANOVA.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class='chapter-number'>10</span>  <span class='chapter-title'>方差分析</span></span></a>
+  <a href="./ANOVA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">方差分析</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="/repeated_measures_ANOVA.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class='chapter-number'>11</span>  <span class='chapter-title'>重复测量方差分析</span></span></a>
+  <a href="./repeated_measures_ANOVA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">重复测量方差分析</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="/rate_proportion_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class='chapter-number'>12</span>  <span class='chapter-title'>比例检验</span></span></a>
+  <a href="./proportion_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">比例检验</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="/chi-square_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class='chapter-number'>13</span>  <span class='chapter-title'>$\chi^2$ 检验</span></span></a>
+  <a href="./chi-square_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title"><span class="math inline">\(\chi^2\)</span> 检验</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="/nonparametric_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class='chapter-number'>14</span>  <span class='chapter-title'>非参数秩检验</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="/correlation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class='chapter-number'>15</span>  <span class='chapter-title'>相关性</span></span></a>
+  <a href="./nonparametric_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">非参数检验</span></span></a>
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
- <span class="menu-text">推断统计模型</span></a>
+ <span class="menu-text">统计模型</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="/simple_linear_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class='chapter-number'>16</span>  <span class='chapter-title'>线性回归</span></span></a>
+  <a href="./simple_linear_regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">线性回归</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="/multiple_linear_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class='chapter-number'>17</span>  <span class='chapter-title'>多元线性回归</span></span></a>
+  <a href="./multiple_linear_regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">多元线性回归</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="/LME.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class='chapter-number'>18</span>  <span class='chapter-title'>线性混合模型</span></span></a>
+  <a href="./LME.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">线性混合模型</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="/GLM.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class='chapter-number'>19</span>  <span class='chapter-title'>广义线性模型</span></span></a>
+  <a href="./GLM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">广义线性模型</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="/GEE.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class='chapter-number'>20</span>  <span class='chapter-title'>广义估计方程</span></span></a>
+  <a href="./GEE.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">广义估计方程</span></span></a>
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
@@ -361,231 +328,198 @@ window.Quarto = {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="/SurvivalAnalysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class='chapter-number'>21</span>  <span class='chapter-title'>生存分析</span></span></a>
+  <a href="./SurvivalAnalysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">生存分析</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="/CoxProportionalHazardsModel.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class='chapter-number'>22</span>  <span class='chapter-title'>Cox比例风险模型</span></span></a>
+  <a href="./CoxProportionalHazardsModel.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Cox比例风险模型</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./CompetingRiskModel.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">竞争风险模型</span></span></a>
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="/PropensityScore.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">倾向性评分</span></a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">临床研究设计</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="/stratification.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class='chapter-number'>23</span>  <span class='chapter-title'>分层（Stratification）</span></span></a>
+  <a href="./diagnostic_test.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">诊断性测试</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="/matching.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class='chapter-number'>24</span>  <span class='chapter-title'>匹配（Matching）</span></span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
- <span class="menu-text">研究设计</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="/diagnostic_test.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class='chapter-number'>25</span>  <span class='chapter-title'>诊断性测试</span></span></a>
+  <a href="./RCT.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">随机对照试验</span></span></a>
   </div>
 </li>
       </ul>
-  </li>
+</li>
     </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" ></div>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <div id="quarto-toc-target"></div>
-    </div>
-<!-- main -->
-<main class="content" id="quarto-document-content">
-
-
-<header id="title-block-header" class="quarto-title-block default">
-  <div class="quarto-title-banner">
-    <div class="quarto-title column-body">
-      <h1 class="title"><span class="chapter-number">25</span>  <span class="chapter-title">诊断性测试</span></h1>
-                      </div>
-  </div>
-    
-  <div class="quarto-title-meta-author">
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-heading">Affiliation</div>
-    
-      <div class="quarto-title-meta-contents">
-      <p class="author">ANLIN <a href="mailto:anlinwang00@gmail.com" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
-    </div>
-    <div class="quarto-title-meta-contents">
-          <p class="affiliation">
-              Independant 😀
-            </p>
-        </div>
-    </div>
-
-  <div class="quarto-title-meta">
-
-        
-      <div>
-      <div class="quarto-title-meta-heading">Published</div>
-      <div class="quarto-title-meta-contents">
-        <p class="date">August 31, 2024</p>
-      </div>
-    </div>
-    
-      
-    </div>
-    
-
-  <div>
-    <div class="keywords">
-      <div class="block-title">Keywords</div>
-      <p>statistics, hypothesis test, regression, GLM, LME, GEE, survival analysis, propensity score</p>
-    </div>
-  </div>
-  
-  </header>
-
-<nav id="TOC" role="doc-toc">
-    <h2 id="toc-title">Table of contents</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#灵敏度sensitivity" id="toc-灵敏度sensitivity"><span class="header-section-number">25.1</span> 灵敏度（Sensitivity）</a>
+<li><a href="#%E6%B7%B7%E6%B7%86%E7%9F%A9%E9%98%B5" id="toc-混淆矩阵" class="nav-link active" data-scroll-target="#%E6%B7%B7%E6%B7%86%E7%9F%A9%E9%98%B5"><span class="header-section-number">24.1</span> 混淆矩阵</a></li>
+  <li>
+<a href="#%E7%81%B5%E6%95%8F%E5%BA%A6sensitivity" id="toc-灵敏度sensitivity" class="nav-link" data-scroll-target="#%E7%81%B5%E6%95%8F%E5%BA%A6sensitivity"><span class="header-section-number">24.2</span> 灵敏度（Sensitivity）</a>
   <ul>
-  <li><a href="#假阴性率fnr-漏诊率" id="toc-假阴性率fnr-漏诊率"><span class="header-section-number">25.1.1</span> 假阴性率(FNR) /漏诊率</a></li>
-  </ul></li>
-  <li><a href="#特异度specificity" id="toc-特异度specificity"><span class="header-section-number">25.2</span> 特异度（Specificity）</a>
-  <ul>
-  <li><a href="#假阳性率fpr-误诊率" id="toc-假阳性率fpr-误诊率"><span class="header-section-number">25.2.1</span> 假阳性率(FPR) /误诊率</a></li>
-  </ul></li>
-  <li><a href="#youdens-index" id="toc-youdens-index"><span class="header-section-number">25.3</span> Youden’s Index</a></li>
-  <li><a href="#likelihood-ratio" id="toc-likelihood-ratio"><span class="header-section-number">25.4</span> Likelihood Ratio</a>
-  <ul>
-  <li><a href="#正似然比" id="toc-正似然比"><span class="header-section-number">25.4.1</span> 正似然比</a></li>
-  <li><a href="#负似然比" id="toc-负似然比"><span class="header-section-number">25.4.2</span> 负似然比</a></li>
-  </ul></li>
-  <li><a href="#预测值" id="toc-预测值"><span class="header-section-number">25.5</span> 预测值</a></li>
-  <li><a href="#一致性agreement" id="toc-一致性agreement"><span class="header-section-number">25.6</span> 一致性（agreement）</a></li>
-  <li><a href="#roc曲线receiver-operating-characteristic-curve" id="toc-roc曲线receiver-operating-characteristic-curve"><span class="header-section-number">25.7</span> ROC曲线（Receiver Operating Characteristic Curve）</a>
-  <ul>
-  <li><a href="#auc" id="toc-auc"><span class="header-section-number">25.7.1</span> AUC</a></li>
-  <li><a href="#分组auc的比较" id="toc-分组auc的比较"><span class="header-section-number">25.7.2</span> 分组AUC的比较</a></li>
-  </ul></li>
+<li><a href="#%E5%81%87%E9%98%B4%E6%80%A7%E7%8E%87fnr-%E6%BC%8F%E8%AF%8A%E7%8E%87" id="toc-假阴性率fnr-漏诊率" class="nav-link" data-scroll-target="#%E5%81%87%E9%98%B4%E6%80%A7%E7%8E%87fnr-%E6%BC%8F%E8%AF%8A%E7%8E%87"><span class="header-section-number">24.2.1</span> 假阴性率(FNR) /漏诊率</a></li>
   </ul>
-</nav>
+</li>
+  <li>
+<a href="#%E7%89%B9%E5%BC%82%E5%BA%A6specificity" id="toc-特异度specificity" class="nav-link" data-scroll-target="#%E7%89%B9%E5%BC%82%E5%BA%A6specificity"><span class="header-section-number">24.3</span> 特异度（Specificity）</a>
+  <ul>
+<li><a href="#%E5%81%87%E9%98%B3%E6%80%A7%E7%8E%87fpr-%E8%AF%AF%E8%AF%8A%E7%8E%87" id="toc-假阳性率fpr-误诊率" class="nav-link" data-scroll-target="#%E5%81%87%E9%98%B3%E6%80%A7%E7%8E%87fpr-%E8%AF%AF%E8%AF%8A%E7%8E%87"><span class="header-section-number">24.3.1</span> 假阳性率(FPR) /误诊率</a></li>
+  </ul>
+</li>
+  <li><a href="#youdens-index" id="toc-youdens-index" class="nav-link" data-scroll-target="#youdens-index"><span class="header-section-number">24.4</span> Youden’s Index</a></li>
+  <li>
+<a href="#likelihood-ratio" id="toc-likelihood-ratio" class="nav-link" data-scroll-target="#likelihood-ratio"><span class="header-section-number">24.5</span> Likelihood Ratio</a>
+  <ul>
+<li><a href="#%E6%AD%A3%E4%BC%BC%E7%84%B6%E6%AF%94" id="toc-正似然比" class="nav-link" data-scroll-target="#%E6%AD%A3%E4%BC%BC%E7%84%B6%E6%AF%94"><span class="header-section-number">24.5.1</span> 正似然比</a></li>
+  <li><a href="#%E8%B4%9F%E4%BC%BC%E7%84%B6%E6%AF%94" id="toc-负似然比" class="nav-link" data-scroll-target="#%E8%B4%9F%E4%BC%BC%E7%84%B6%E6%AF%94"><span class="header-section-number">24.5.2</span> 负似然比</a></li>
+  </ul>
+</li>
+  <li><a href="#%E9%A2%84%E6%B5%8B%E5%80%BC" id="toc-预测值" class="nav-link" data-scroll-target="#%E9%A2%84%E6%B5%8B%E5%80%BC"><span class="header-section-number">24.6</span> 预测值</a></li>
+  <li><a href="#%E4%B8%80%E8%87%B4%E6%80%A7agreement" id="toc-一致性agreement" class="nav-link" data-scroll-target="#%E4%B8%80%E8%87%B4%E6%80%A7agreement"><span class="header-section-number">24.7</span> 一致性（agreement）</a></li>
+  <li>
+<a href="#roc%E6%9B%B2%E7%BA%BFreceiver-operating-characteristic-curve" id="toc-roc曲线receiver-operating-characteristic-curve" class="nav-link" data-scroll-target="#roc%E6%9B%B2%E7%BA%BFreceiver-operating-characteristic-curve"><span class="header-section-number">24.8</span> ROC曲线（Receiver Operating Characteristic Curve）</a>
+  <ul>
+<li><a href="#auc" id="toc-auc" class="nav-link" data-scroll-target="#auc"><span class="header-section-number">24.8.1</span> AUC</a></li>
+  <li><a href="#%E5%88%86%E7%BB%84auc%E7%9A%84%E6%AF%94%E8%BE%83" id="toc-分组auc的比较" class="nav-link" data-scroll-target="#%E5%88%86%E7%BB%84auc%E7%9A%84%E6%AF%94%E8%BE%83"><span class="header-section-number">24.8.2</span> 分组AUC的比较</a></li>
+  </ul>
+</li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./diagnostic_test.html">临床研究设计</a></li><li class="breadcrumb-item"><a href="./diagnostic_test.html"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">诊断性测试</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title">
+<span class="chapter-number">24</span>&nbsp; <span class="chapter-title">诊断性测试</span>
+</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">November 10, 2024</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+
+</header><section id="混淆矩阵" class="level2" data-number="24.1"><h2 data-number="24.1" class="anchored" data-anchor-id="混淆矩阵">
+<span class="header-section-number">24.1</span> 混淆矩阵</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="images/confusing_matrix.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
 <div class="cell">
-<details class="code-fold">
-<summary>Show the code</summary>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>m<span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="st">&quot;TP&quot;</span>,<span class="st">&quot;FN&quot;</span>,<span class="st">&quot;FP&quot;</span>,<span class="st">&quot;TN&quot;</span>),<span class="at">nrow =</span> <span class="dv">2</span>,</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">dimnames =</span> <span class="fu">list</span>(<span class="at">predict=</span><span class="fu">c</span>(<span class="st">&quot;+&quot;</span>,<span class="st">&quot;-&quot;</span>),</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">truth=</span><span class="fu">c</span>(<span class="st">&quot;+&quot;</span>,<span class="st">&quot;-&quot;</span>)))</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(m)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;        truth</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; predict +    -   </span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;       + &quot;TP&quot; &quot;FP&quot;</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;       - &quot;FN&quot; &quot;TN&quot;</span></span></code></pre></div>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">m</span><span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"TP"</span>,<span class="st">"FN"</span>,<span class="st">"FP"</span>,<span class="st">"TN"</span><span class="op">)</span>,nrow <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>           dimnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>predict<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"+"</span>,<span class="st">"-"</span><span class="op">)</span>,</span>
+<span>                           truth<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"+"</span>,<span class="st">"-"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span></span>
+<span><span class="co">#&gt;        truth</span></span>
+<span><span class="co">#&gt; predict +    -   </span></span>
+<span><span class="co">#&gt;       + "TP" "FP"</span></span>
+<span><span class="co">#&gt;       - "FN" "TN"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<section id="灵敏度sensitivity" class="level2" data-number="25.1">
-<h2 data-number="25.1"><span class="header-section-number">25.1</span> 灵敏度（Sensitivity）</h2>
+</section><section id="灵敏度sensitivity" class="level2" data-number="24.2"><h2 data-number="24.2" class="anchored" data-anchor-id="灵敏度sensitivity">
+<span class="header-section-number">24.2</span> 灵敏度（Sensitivity）</h2>
 <p>真阳性率：指在所有真实状况为阳性的样本中，被正确识别出阳性的比例。</p>
 <p><span class="math display">\[
 Se=\frac{TP}{TP+FN}
 \]</span></p>
 <p>其中TP 是真阳性的数量，FN 是假阴性的数量。</p>
-<section id="假阴性率fnr-漏诊率" class="level3" data-number="25.1.1">
-<h3 data-number="25.1.1"><span class="header-section-number">25.1.1</span> 假阴性率(FNR) /漏诊率</h3>
+<section id="假阴性率fnr-漏诊率" class="level3" data-number="24.2.1"><h3 data-number="24.2.1" class="anchored" data-anchor-id="假阴性率fnr-漏诊率">
+<span class="header-section-number">24.2.1</span> 假阴性率(FNR) /漏诊率</h3>
 <p><span class="math display">\[
 FNR=1-Se
 \]</span></p>
-</section>
-</section>
-<section id="特异度specificity" class="level2" data-number="25.2">
-<h2 data-number="25.2"><span class="header-section-number">25.2</span> 特异度（Specificity）</h2>
+</section></section><section id="特异度specificity" class="level2" data-number="24.3"><h2 data-number="24.3" class="anchored" data-anchor-id="特异度specificity">
+<span class="header-section-number">24.3</span> 特异度（Specificity）</h2>
 <p>真阴性率：指在所有真实状况为阴性的样本中，被正确识别出阴性的比例。</p>
 <p><span class="math display">\[
 Sp=\frac{TN}{TN+FP}
 \]</span></p>
 <p>其中 TN 是真阴性的数量，FP 是假阳性的数量。</p>
-<section id="假阳性率fpr-误诊率" class="level3" data-number="25.2.1">
-<h3 data-number="25.2.1"><span class="header-section-number">25.2.1</span> 假阳性率(FPR) /误诊率</h3>
+<section id="假阳性率fpr-误诊率" class="level3" data-number="24.3.1"><h3 data-number="24.3.1" class="anchored" data-anchor-id="假阳性率fpr-误诊率">
+<span class="header-section-number">24.3.1</span> 假阳性率(FPR) /误诊率</h3>
 <p><span class="math display">\[ FPR=1-Sp \]</span></p>
 <div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img src="images/clipboard-4129364148.png" class="img-fluid quarto-figure quarto-figure-center" /></p>
+<figure class="figure"><p><img src="images/clipboard-4129364148.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 <div class="cell">
-<details class="code-fold">
-<summary>Show the code</summary>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 构建列联表</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>observed_sensitivity <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">28</span>, <span class="dv">11</span>, <span class="dv">37</span>, <span class="dv">2</span>), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">dimnames =</span> <span class="fu">list</span>(<span class="st">&#39;检验方式&#39;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&#39;尿糖检验&#39;</span>, <span class="st">&#39;血糖检验&#39;</span>),</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                                   <span class="st">&#39;结果&#39;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&#39;检出阳性&#39;</span>, <span class="st">&#39;未检出阳性&#39;</span>)))</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>observed_sensitivity</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;           结果</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 检验方式 检出阳性 未检出阳性</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   尿糖检验       28         11</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   血糖检验       37          2</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 进行卡方检验</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(observed_sensitivity,<span class="at">correct =</span> F)</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 输出结果</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>s</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Pearson&#39;s Chi-squared test</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; data:  observed_sensitivity</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; X-squared = 7.4769, df = 1, p-value = 0.006249</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="co"># 构建列联表</span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>observed_accuracy <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">29</span>, <span class="dv">11</span>, <span class="dv">38</span>, <span class="dv">2</span>), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>                            <span class="at">dimnames =</span> <span class="fu">list</span>(<span class="st">&#39;检验方式&#39;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&#39;尿糖检验&#39;</span>, <span class="st">&#39;血糖检验&#39;</span>),</span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>                                            <span class="st">&#39;结果&#39;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&#39;检准&#39;</span>, <span class="st">&#39;不准&#39;</span>)))</span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="co"># 进行卡方检验</span></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>accuracy <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(observed_accuracy,<span class="at">correct =</span> F)</span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="co"># 输出结果</span></span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>accuracy</span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Pearson&#39;s Chi-squared test</span></span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; data:  observed_accuracy</span></span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; X-squared = 7.4397, df = 1, p-value = 0.00638</span></span></code></pre></div>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 构建列联表</span></span>
+<span><span class="va">observed_sensitivity</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">28</span>, <span class="fl">11</span>, <span class="fl">37</span>, <span class="fl">2</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">2</span>, byrow <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                   dimnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">'检验方式'</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'尿糖检验'</span>, <span class="st">'血糖检验'</span><span class="op">)</span>,</span>
+<span>                                   <span class="st">'结果'</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'检出阳性'</span>, <span class="st">'未检出阳性'</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">observed_sensitivity</span></span>
+<span><span class="co">#&gt;           结果</span></span>
+<span><span class="co">#&gt; 检验方式 检出阳性 未检出阳性</span></span>
+<span><span class="co">#&gt;   尿糖检验       28         11</span></span>
+<span><span class="co">#&gt;   血糖检验       37          2</span></span>
+<span><span class="co"># 进行卡方检验</span></span>
+<span><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/chisq.test.html">chisq.test</a></span><span class="op">(</span><span class="va">observed_sensitivity</span>,correct <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># 输出结果</span></span>
+<span><span class="va">s</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  Pearson's Chi-squared test</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; data:  observed_sensitivity</span></span>
+<span><span class="co">#&gt; X-squared = 7.4769, df = 1, p-value = 0.006249</span></span>
+<span></span>
+<span></span>
+<span><span class="co"># 构建列联表</span></span>
+<span><span class="va">observed_accuracy</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">29</span>, <span class="fl">11</span>, <span class="fl">38</span>, <span class="fl">2</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">2</span>, byrow <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                            dimnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">'检验方式'</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'尿糖检验'</span>, <span class="st">'血糖检验'</span><span class="op">)</span>,</span>
+<span>                                            <span class="st">'结果'</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'检准'</span>, <span class="st">'不准'</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># 进行卡方检验</span></span>
+<span><span class="va">accuracy</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/chisq.test.html">chisq.test</a></span><span class="op">(</span><span class="va">observed_accuracy</span>,correct <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># 输出结果</span></span>
+<span><span class="va">accuracy</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  Pearson's Chi-squared test</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; data:  observed_accuracy</span></span>
+<span><span class="co">#&gt; X-squared = 7.4397, df = 1, p-value = 0.00638</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section>
-</section>
-<section id="youdens-index" class="level2" data-number="25.3">
-<h2 data-number="25.3"><span class="header-section-number">25.3</span> Youden’s Index</h2>
+</section></section><section id="youdens-index" class="level2" data-number="24.4"><h2 data-number="24.4" class="anchored" data-anchor-id="youdens-index">
+<span class="header-section-number">24.4</span> Youden’s Index</h2>
 <p><span class="math display">\[
 J=Se-FPR =Se+Sp-1,J[1,-1]
 \]</span></p>
@@ -593,41 +527,32 @@ J=Se-FPR =Se+Sp-1,J[1,-1]
 <li><p>J 越大诊断有效性越高</p></li>
 <li><p>J=1 表示完美的诊断性能，因为Se，Sp都是1。</p></li>
 <li><p>J≤0 表示没有诊断价值</p></li>
-</ol>
-</section>
-<section id="likelihood-ratio" class="level2" data-number="25.4">
-<h2 data-number="25.4"><span class="header-section-number">25.4</span> Likelihood Ratio</h2>
-<section id="正似然比" class="level3" data-number="25.4.1">
-<h3 data-number="25.4.1"><span class="header-section-number">25.4.1</span> 正似然比</h3>
+</ol></section><section id="likelihood-ratio" class="level2" data-number="24.5"><h2 data-number="24.5" class="anchored" data-anchor-id="likelihood-ratio">
+<span class="header-section-number">24.5</span> Likelihood Ratio</h2>
+<section id="正似然比" class="level3" data-number="24.5.1"><h3 data-number="24.5.1" class="anchored" data-anchor-id="正似然比">
+<span class="header-section-number">24.5.1</span> 正似然比</h3>
 <p><span class="math display">\[
 LR+=\frac{Se}{FPR}=\frac{Se}{1-Sp}
 \]</span></p>
 <ol type="1">
 <li><p>LR+越大表示患病测出阳性结果的优势越大</p></li>
 <li><p>LR+=1表示诊断无效</p></li>
-</ol>
-</section>
-<section id="负似然比" class="level3" data-number="25.4.2">
-<h3 data-number="25.4.2"><span class="header-section-number">25.4.2</span> 负似然比</h3>
+</ol></section><section id="负似然比" class="level3" data-number="24.5.2"><h3 data-number="24.5.2" class="anchored" data-anchor-id="负似然比">
+<span class="header-section-number">24.5.2</span> 负似然比</h3>
 <p><span class="math display">\[
 LR-=\frac{FNR}{Sp}=\frac{1-Sp}{Sp}
 \]</span></p>
 <ol type="1">
 <li><p>LR-越小表示患病测出阴性结果的优势越小</p></li>
 <li><p>LR-=1表示诊断无效</p></li>
-</ol>
-</section>
-</section>
-<section id="预测值" class="level2" data-number="25.5">
-<h2 data-number="25.5"><span class="header-section-number">25.5</span> 预测值</h2>
+</ol></section></section><section id="预测值" class="level2" data-number="24.6"><h2 data-number="24.6" class="anchored" data-anchor-id="预测值">
+<span class="header-section-number">24.6</span> 预测值</h2>
 <div class="cell">
-<details class="code-fold">
-<summary>Show the code</summary>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>m</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;        truth</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; predict +    -   </span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;       + &quot;TP&quot; &quot;FP&quot;</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;       - &quot;FN&quot; &quot;TN&quot;</span></span></code></pre></div>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">m</span></span>
+<span><span class="co">#&gt;        truth</span></span>
+<span><span class="co">#&gt; predict +    -   </span></span>
+<span><span class="co">#&gt;       + "TP" "FP"</span></span>
+<span><span class="co">#&gt;       - "FN" "TN"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>阳性预测值（Positive Predictive Value, PPV）：在所有被测试为阳性的样本中，真正的阳性比例。</p>
@@ -642,9 +567,8 @@ PPV=\frac{TN}{TN+FN}
 <p><span class="math inline">\(\chi^2\)</span>配对检验</p>
 <p>完全随机设计</p>
 <p><span class="math inline">\(\chi^2\)</span>检验</p>
-</section>
-<section id="一致性agreement" class="level2" data-number="25.6">
-<h2 data-number="25.6"><span class="header-section-number">25.6</span> 一致性（agreement）</h2>
+</section><section id="一致性agreement" class="level2" data-number="24.7"><h2 data-number="24.7" class="anchored" data-anchor-id="一致性agreement">
+<span class="header-section-number">24.7</span> 一致性（agreement）</h2>
 <p>准确度（Accuracy）：指测试正确地分类（阳性或阴性）的样本占总样本的比例。</p>
 <p><span class="math display">\[
 Accuracy=\frac{TP+TN}{N}
@@ -659,43 +583,36 @@ Accuracy=\frac{TP+TN}{N}
 <li><p>κ=0表示一致性与偶然一致性P<sub>e</sub>相同</p></li>
 </ol>
 <p>通常κ＞0.7即可以认为两种诊断方法有较好的一致性</p>
-</section>
-<section id="roc曲线receiver-operating-characteristic-curve" class="level2" data-number="25.7">
-<h2 data-number="25.7"><span class="header-section-number">25.7</span> ROC曲线（Receiver Operating Characteristic Curve）</h2>
+</section><section id="roc曲线receiver-operating-characteristic-curve" class="level2" data-number="24.8"><h2 data-number="24.8" class="anchored" data-anchor-id="roc曲线receiver-operating-characteristic-curve">
+<span class="header-section-number">24.8</span> ROC曲线（Receiver Operating Characteristic Curve）</h2>
 <p>ROC曲线（Receiver Operating Characteristic Curve）：是一个图形工具，用于展示不同阈值下灵敏度和特异度之间的关系。曲线下面积（AUC）越接近1，表示测试的性能越好。</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Show the code</summary>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pROC)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>roc_data <span class="ot">&lt;-</span> aSAH <span class="sc">%&gt;%</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(gender <span class="sc">==</span> <span class="st">&quot;Female&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">roc</span>(outcome, s100b)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 绘制ROC曲线</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(roc_data, <span class="at">print.thres =</span> <span class="st">&quot;best&quot;</span>, <span class="at">print.thres.pattern =</span> <span class="st">&quot;Best cutoff: %.2f&quot;</span>, <span class="at">main =</span> <span class="st">&quot;ROC Curve&quot;</span>)</span></code></pre></div>
-</details>
-<div class="cell-output-display">
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://xrobin.github.io/pROC/">pROC</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">roc_data</span> <span class="op">&lt;-</span> <span class="va">aSAH</span> <span class="op">%&gt;%</span></span>
+<span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">gender</span> <span class="op">==</span> <span class="st">"Female"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/pROC/man/roc.html">roc</a></span><span class="op">(</span><span class="va">outcome</span>, <span class="va">s100b</span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span></span>
+<span><span class="co"># 绘制ROC曲线</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">roc_data</span>, print.thres <span class="op">=</span> <span class="st">"best"</span>, print.thres.pattern <span class="op">=</span> <span class="st">"Best cutoff: %.2f"</span>, main <span class="op">=</span> <span class="st">"ROC Curve"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
 <div>
-<figure>
-<p><img src="diagnostic_test_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672" /></p>
+<figure class="figure"><p><img src="diagnostic_test_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Show the code</summary>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 计算AUC</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>auc_value <span class="ot">&lt;-</span> <span class="fu">auc</span>(roc_data)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;AUC:&quot;</span>, auc_value))</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;AUC: 0.72&quot;</span></span></code></pre></div>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span></span>
+<span><span class="co"># 计算AUC</span></span>
+<span><span class="va">auc_value</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/pROC/man/auc.html">auc</a></span><span class="op">(</span><span class="va">roc_data</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"AUC:"</span>, <span class="va">auc_value</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "AUC: 0.72"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<section id="auc" class="level3" data-number="25.7.1">
-<h3 data-number="25.7.1"><span class="header-section-number">25.7.1</span> AUC</h3>
+<section id="auc" class="level3" data-number="24.8.1"><h3 data-number="24.8.1" class="anchored" data-anchor-id="auc">
+<span class="header-section-number">24.8.1</span> AUC</h3>
 <p><strong>A=P(X&gt;Y)</strong></p>
 <p><span class="math display">\[
 S(X,Y)=
@@ -708,9 +625,8 @@ S(X,Y)=
 <p><span class="math display">\[
 \hat A=\frac{1}{n_0n_1}\sum_1^{n1}\sum_1^{n_0}S(X, Y)
 \]</span></p>
-</section>
-<section id="分组auc的比较" class="level3" data-number="25.7.2">
-<h3 data-number="25.7.2"><span class="header-section-number">25.7.2</span> 分组AUC的比较</h3>
+</section><section id="分组auc的比较" class="level3" data-number="24.8.2"><h3 data-number="24.8.2" class="anchored" data-anchor-id="分组auc的比较">
+<span class="header-section-number">24.8.2</span> 分组AUC的比较</h3>
 <p>完全随机设计</p>
 <p><span class="math display">\[
 Z=\frac{\hat A_1-\hat A_2}{\sqrt{Var(\hat A_1)+Var(\hat A_2)}}
@@ -719,17 +635,9 @@ Z=\frac{\hat A_1-\hat A_2}{\sqrt{Var(\hat A_1)+Var(\hat A_2)}}
 <p><span class="math display">\[
 Z=\frac{\hat A_1-\hat A_2}{\sqrt{Var(\hat A_1)+Var(\hat A_2)-2Cov(\hat A_1,\hat A_2)}}
 \]</span></p>
-<div id="quarto-navigation-envelope" class="hidden">
-<p><span class="hidden" data-render-id="quarto-int-sidebar-title">医学与生物统计学</span> <span class="hidden" data-render-id="quarto-int-navbar-title">医学与生物统计学</span> <span class="hidden" data-render-id="quarto-int-prev"><span class="chapter-number">24</span>  <span class="chapter-title">匹配（Matching）</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/index.html推荐阅读">推荐阅读</span> <span class="hidden" data-render-id="quarto-int-sidebar:quarto-sidebar-section-1">描述性统计学</span> <span class="hidden" data-render-id="quarto-int-sidebar:/quantitative_data.html&lt;span-class=&#39;chapter-number&#39;&gt;1&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;定量数据的统计描述&lt;/span&gt;"><span class="chapter-number">1</span>  <span class="chapter-title">定量数据的统计描述</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/qualitative_data.html&lt;span-class=&#39;chapter-number&#39;&gt;2&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;定性数据的统计描述&lt;/span&gt;"><span class="chapter-number">2</span>  <span class="chapter-title">定性数据的统计描述</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:quarto-sidebar-section-2">概率论与数理统计</span> <span class="hidden" data-render-id="quarto-int-sidebar:/probability_theory.html&lt;span-class=&#39;chapter-number&#39;&gt;3&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;概率论基础&lt;/span&gt;"><span class="chapter-number">3</span>  <span class="chapter-title">概率论基础</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/SamplingDistribution.html&lt;span-class=&#39;chapter-number&#39;&gt;4&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;抽样分布&lt;/span&gt;"><span class="chapter-number">4</span>  <span class="chapter-title">抽样分布</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/ParameterEstimation.html&lt;span-class=&#39;chapter-number&#39;&gt;5&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;参数估计&lt;/span&gt;"><span class="chapter-number">5</span>  <span class="chapter-title">参数估计</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/hypothesis_test.html&lt;span-class=&#39;chapter-number&#39;&gt;6&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;假设检验&lt;/span&gt;"><span class="chapter-number">6</span>  <span class="chapter-title">假设检验</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/normality_test.html&lt;span-class=&#39;chapter-number&#39;&gt;7&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;正态性检验&lt;/span&gt;"><span class="chapter-number">7</span>  <span class="chapter-title">正态性检验</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/variance_homogeneity_test.html&lt;span-class=&#39;chapter-number&#39;&gt;8&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;方差齐性检验&lt;/span&gt;"><span class="chapter-number">8</span>  <span class="chapter-title">方差齐性检验</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/t_test.html&lt;span-class=&#39;chapter-number&#39;&gt;9&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;t-检验&lt;/span&gt;"><span class="chapter-number">9</span>  <span class="chapter-title">t 检验</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/ANOVA.html&lt;span-class=&#39;chapter-number&#39;&gt;10&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;方差分析&lt;/span&gt;"><span class="chapter-number">10</span>  <span class="chapter-title">方差分析</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/repeated_measures_ANOVA.html&lt;span-class=&#39;chapter-number&#39;&gt;11&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;重复测量方差分析&lt;/span&gt;"><span class="chapter-number">11</span>  <span class="chapter-title">重复测量方差分析</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/rate_proportion_test.html&lt;span-class=&#39;chapter-number&#39;&gt;12&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;比例检验&lt;/span&gt;"><span class="chapter-number">12</span>  <span class="chapter-title">比例检验</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/chi-square_test.html&lt;span-class=&#39;chapter-number&#39;&gt;13&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;$\chi^2$-检验&lt;/span&gt;"><span class="chapter-number">13</span>  <span class="chapter-title"><span class="math inline">\(\chi^2\)</span> 检验</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/nonparametric_test.html&lt;span-class=&#39;chapter-number&#39;&gt;14&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;非参数秩检验&lt;/span&gt;"><span class="chapter-number">14</span>  <span class="chapter-title">非参数秩检验</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/correlation.html&lt;span-class=&#39;chapter-number&#39;&gt;15&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;相关性&lt;/span&gt;"><span class="chapter-number">15</span>  <span class="chapter-title">相关性</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:quarto-sidebar-section-3">推断统计模型</span> <span class="hidden" data-render-id="quarto-int-sidebar:/simple_linear_regression.html&lt;span-class=&#39;chapter-number&#39;&gt;16&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;线性回归&lt;/span&gt;"><span class="chapter-number">16</span>  <span class="chapter-title">线性回归</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/multiple_linear_regression.html&lt;span-class=&#39;chapter-number&#39;&gt;17&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;多元线性回归&lt;/span&gt;"><span class="chapter-number">17</span>  <span class="chapter-title">多元线性回归</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/LME.html&lt;span-class=&#39;chapter-number&#39;&gt;18&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;线性混合模型&lt;/span&gt;"><span class="chapter-number">18</span>  <span class="chapter-title">线性混合模型</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/GLM.html&lt;span-class=&#39;chapter-number&#39;&gt;19&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;广义线性模型&lt;/span&gt;"><span class="chapter-number">19</span>  <span class="chapter-title">广义线性模型</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/GEE.html&lt;span-class=&#39;chapter-number&#39;&gt;20&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;广义估计方程&lt;/span&gt;"><span class="chapter-number">20</span>  <span class="chapter-title">广义估计方程</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:quarto-sidebar-section-4">生存分析</span> <span class="hidden" data-render-id="quarto-int-sidebar:/SurvivalAnalysis.html&lt;span-class=&#39;chapter-number&#39;&gt;21&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;生存分析&lt;/span&gt;"><span class="chapter-number">21</span>  <span class="chapter-title">生存分析</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/CoxProportionalHazardsModel.html&lt;span-class=&#39;chapter-number&#39;&gt;22&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Cox比例风险模型&lt;/span&gt;"><span class="chapter-number">22</span>  <span class="chapter-title">Cox比例风险模型</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:quarto-sidebar-section-5">倾向性评分</span> <span class="hidden" data-render-id="quarto-int-sidebar:/stratification.html&lt;span-class=&#39;chapter-number&#39;&gt;23&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;分层（Stratification）&lt;/span&gt;"><span class="chapter-number">23</span>  <span class="chapter-title">分层（Stratification）</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/matching.html&lt;span-class=&#39;chapter-number&#39;&gt;24&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;匹配（Matching）&lt;/span&gt;"><span class="chapter-number">24</span>  <span class="chapter-title">匹配（Matching）</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:quarto-sidebar-section-6">研究设计</span> <span class="hidden" data-render-id="quarto-int-sidebar:/diagnostic_test.html&lt;span-class=&#39;chapter-number&#39;&gt;25&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;诊断性测试&lt;/span&gt;"><span class="chapter-number">25</span>  <span class="chapter-title">诊断性测试</span></span> <span class="hidden" data-render-id="quarto-breadcrumbs-研究设计">研究设计</span> <span class="hidden" data-render-id="quarto-breadcrumbs-&lt;span-class=&#39;chapter-number&#39;&gt;25&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;诊断性测试&lt;/span&gt;"><span class="chapter-number">25</span>  <span class="chapter-title">诊断性测试</span></span></p>
-</div>
-<div id="quarto-meta-markdown" class="hidden">
-<p><span class="hidden" data-render-id="quarto-metatitle">医学与生物统计学 - <span class="chapter-number">25</span>  <span class="chapter-title">诊断性测试</span></span> <span class="hidden" data-render-id="quarto-twittercardtitle">医学与生物统计学 - <span class="chapter-number">25</span>  <span class="chapter-title">诊断性测试</span></span> <span class="hidden" data-render-id="quarto-ogcardtitle">医学与生物统计学 - <span class="chapter-number">25</span>  <span class="chapter-title">诊断性测试</span></span> <span class="hidden" data-render-id="quarto-metasitename">医学与生物统计学</span> <span class="hidden" data-render-id="quarto-twittercarddesc"></span> <span class="hidden" data-render-id="quarto-ogcardddesc"></span></p>
-</div>
-</section>
-</section>
 
-</main> <!-- /main -->
-<script id = "quarto-html-after-body" type="application/javascript">
+
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -1281,18 +1189,19 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
-      <a  href="/matching.html" class="pagination-link" aria-label="匹配（Matching）">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class='chapter-number'>24</span>  <span class='chapter-title'>匹配（Matching）</span></span>
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./CompetingRiskModel.html" class="pagination-link" aria-label="竞争风险模型">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">竞争风险模型</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./RCT.html" class="pagination-link" aria-label="随机对照试验">
+        <span class="nav-page-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">随机对照试验</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
 
-</body>
 
-</html>
+
+</body></html>

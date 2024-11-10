@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.4.555">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>医学与生物统计学 - 10&nbsp; 方差分析</title>
+<title>医学与生物统计学 - 11&nbsp; 方差分析</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -67,10 +67,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -121,7 +123,7 @@ const typesetMath = (el) => {
 window.Quarto = {
   typesetMath
 };
-</script><link rel="stylesheet" href="styles.css">
+</script><link rel="stylesheet" href="style.css">
 </head>
 <body class="nav-sidebar floating">
 
@@ -130,7 +132,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./probability_theory.html">概率论与数理统计</a></li><li class="breadcrumb-item"><a href="./ANOVA.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">方差分析</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./probability_theory.html">概率论与数理统计</a></li><li class="breadcrumb-item"><a href="./ANOVA.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">方差分析</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -143,6 +145,7 @@ window.Quarto = {
     <div class="sidebar-title mb-0 py-0">
       <a href="./">医学与生物统计学</a> 
         <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
   <i class="bi"></i>
@@ -185,6 +188,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">定性数据的统计描述</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./correlation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">相关性</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -199,79 +208,73 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./probability_theory.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">概率论基础</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">概率论基础</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./SamplingDistribution.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">抽样分布</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">抽样分布</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ParameterEstimation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">参数估计</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">参数估计</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./hypothesis_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">假设检验</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">假设检验</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./normality_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">正态性检验</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">正态性检验</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./variance_homogeneity_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">方差齐性检验</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">方差齐性检验</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./t_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">t 检验</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">t 检验</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ANOVA.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">方差分析</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">方差分析</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./repeated_measures_ANOVA.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">重复测量方差分析</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">重复测量方差分析</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./rate_proportion_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">比例检验</span></span></a>
+  <a href="./proportion_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">比例检验</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chi-square_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title"><span class="math inline">\(\chi^2\)</span> 检验</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title"><span class="math inline">\(\chi^2\)</span> 检验</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./nonparametric_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">非参数秩检验</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./correlation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">相关性</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">非参数检验</span></span></a>
   </div>
 </li>
       </ul>
@@ -279,7 +282,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
- <span class="menu-text">推断统计模型</span></a>
+ <span class="menu-text">统计模型</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -299,14 +302,14 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./GLM.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">广义线性模型</span></span></a>
+  <a href="./LME.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">线性混合模型</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./LME.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">线性混合模型</span></span></a>
+  <a href="./GLM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">广义线性模型</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -338,12 +341,18 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Cox比例风险模型</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./CompetingRiskModel.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">竞争风险模型</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./PropensityScore.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">倾向性评分</span></a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">临床研究设计</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -351,31 +360,14 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./stratification.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">分层（Stratification）</span></span></a>
+  <a href="./diagnostic_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">诊断性测试</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./matching.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">匹配（Matching）</span></span></a>
-  </div>
-</li>
-      </ul>
-</li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
- <span class="menu-text">研究设计</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./diagnostic_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">诊断性测试</span></span></a>
+  <a href="./RCT.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">随机对照试验</span></span></a>
   </div>
 </li>
       </ul>
@@ -389,62 +381,62 @@ window.Quarto = {
    
   <ul>
 <li>
-<a href="#%E5%8D%95%E5%9B%A0%E7%B4%A0%E7%BB%84%E9%97%B4%E6%96%B9%E5%B7%AE%E5%88%86%E6%9E%90" id="toc-单因素组间方差分析" class="nav-link active" data-scroll-target="#%E5%8D%95%E5%9B%A0%E7%B4%A0%E7%BB%84%E9%97%B4%E6%96%B9%E5%B7%AE%E5%88%86%E6%9E%90"><span class="header-section-number">10.1</span> 单因素组间方差分析</a>
+<a href="#%E5%8D%95%E5%9B%A0%E7%B4%A0%E7%BB%84%E9%97%B4%E6%96%B9%E5%B7%AE%E5%88%86%E6%9E%90" id="toc-单因素组间方差分析" class="nav-link active" data-scroll-target="#%E5%8D%95%E5%9B%A0%E7%B4%A0%E7%BB%84%E9%97%B4%E6%96%B9%E5%B7%AE%E5%88%86%E6%9E%90"><span class="header-section-number">11.1</span> 单因素组间方差分析</a>
   <ul>
-<li><a href="#%E8%AE%A1%E7%AE%97%E5%85%AC%E5%BC%8F" id="toc-计算公式" class="nav-link" data-scroll-target="#%E8%AE%A1%E7%AE%97%E5%85%AC%E5%BC%8F"><span class="header-section-number">10.1.1</span> 计算公式</a></li>
-  <li><a href="#%E6%89%8B%E7%AE%97" id="toc-手算" class="nav-link" data-scroll-target="#%E6%89%8B%E7%AE%97"><span class="header-section-number">10.1.2</span> 手算</a></li>
-  <li><a href="#statsaov" id="toc-statsaov" class="nav-link" data-scroll-target="#statsaov"><span class="header-section-number">10.1.3</span> <code>stats::aov()</code></a></li>
-  <li><a href="#ezezanova" id="toc-ezezanova" class="nav-link" data-scroll-target="#ezezanova"><span class="header-section-number">10.1.4</span> <code>ez::ezANOVA()</code></a></li>
-  <li><a href="#statslm" id="toc-statslm" class="nav-link" data-scroll-target="#statslm"><span class="header-section-number">10.1.5</span> <code>stats::lm()</code></a></li>
+<li><a href="#%E8%AE%A1%E7%AE%97%E5%85%AC%E5%BC%8F" id="toc-计算公式" class="nav-link" data-scroll-target="#%E8%AE%A1%E7%AE%97%E5%85%AC%E5%BC%8F"><span class="header-section-number">11.1.1</span> 计算公式</a></li>
+  <li><a href="#%E6%89%8B%E7%AE%97" id="toc-手算" class="nav-link" data-scroll-target="#%E6%89%8B%E7%AE%97"><span class="header-section-number">11.1.2</span> 手算</a></li>
+  <li><a href="#statsaov" id="toc-statsaov" class="nav-link" data-scroll-target="#statsaov"><span class="header-section-number">11.1.3</span> <code>stats::aov()</code></a></li>
+  <li><a href="#ezezanova" id="toc-ezezanova" class="nav-link" data-scroll-target="#ezezanova"><span class="header-section-number">11.1.4</span> <code>ez::ezANOVA()</code></a></li>
+  <li><a href="#statslm" id="toc-statslm" class="nav-link" data-scroll-target="#statslm"><span class="header-section-number">11.1.5</span> <code>stats::lm()</code></a></li>
   <li>
-<a href="#%E4%BA%8B%E5%90%8E%E6%A3%80%E9%AA%8C" id="toc-事后检验" class="nav-link" data-scroll-target="#%E4%BA%8B%E5%90%8E%E6%A3%80%E9%AA%8C"><span class="header-section-number">10.1.6</span> 事后检验</a>
+<a href="#%E4%BA%8B%E5%90%8E%E6%A3%80%E9%AA%8C" id="toc-事后检验" class="nav-link" data-scroll-target="#%E4%BA%8B%E5%90%8E%E6%A3%80%E9%AA%8C"><span class="header-section-number">11.1.6</span> 事后检验</a>
   <ul class="collapse">
-<li><a href="#tukeys-test" id="toc-tukeys-test" class="nav-link" data-scroll-target="#tukeys-test"><span class="header-section-number">10.1.6.1</span> Tukey’s test</a></li>
-  <li><a href="#dunnetts-test" id="toc-dunnetts-test" class="nav-link" data-scroll-target="#dunnetts-test"><span class="header-section-number">10.1.6.2</span> Dunnett’s test</a></li>
-  <li><a href="#lsd-t-test" id="toc-lsd-t-test" class="nav-link" data-scroll-target="#lsd-t-test"><span class="header-section-number">10.1.6.3</span> LSD-t test</a></li>
+<li><a href="#tukeys-test" id="toc-tukeys-test" class="nav-link" data-scroll-target="#tukeys-test"><span class="header-section-number">11.1.6.1</span> Tukey’s test</a></li>
+  <li><a href="#dunnetts-test" id="toc-dunnetts-test" class="nav-link" data-scroll-target="#dunnetts-test"><span class="header-section-number">11.1.6.2</span> Dunnett’s test</a></li>
+  <li><a href="#lsd-t-test" id="toc-lsd-t-test" class="nav-link" data-scroll-target="#lsd-t-test"><span class="header-section-number">11.1.6.3</span> LSD-t test</a></li>
   </ul>
 </li>
   </ul>
 </li>
   <li>
-<a href="#%E6%96%B9%E5%B7%AE%E5%88%86%E6%9E%90%E5%81%87%E8%AE%BE" id="toc-方差分析假设" class="nav-link" data-scroll-target="#%E6%96%B9%E5%B7%AE%E5%88%86%E6%9E%90%E5%81%87%E8%AE%BE"><span class="header-section-number">10.2</span> 方差分析假设</a>
+<a href="#%E6%96%B9%E5%B7%AE%E5%88%86%E6%9E%90%E5%81%87%E8%AE%BE" id="toc-方差分析假设" class="nav-link" data-scroll-target="#%E6%96%B9%E5%B7%AE%E5%88%86%E6%9E%90%E5%81%87%E8%AE%BE"><span class="header-section-number">11.2</span> 方差分析假设</a>
   <ul>
-<li><a href="#%E7%8B%AC%E7%AB%8B%E6%80%A7" id="toc-独立性" class="nav-link" data-scroll-target="#%E7%8B%AC%E7%AB%8B%E6%80%A7"><span class="header-section-number">10.2.1</span> 独立性</a></li>
+<li><a href="#%E7%8B%AC%E7%AB%8B%E6%80%A7" id="toc-独立性" class="nav-link" data-scroll-target="#%E7%8B%AC%E7%AB%8B%E6%80%A7"><span class="header-section-number">11.2.1</span> 独立性</a></li>
   <li>
-<a href="#%E6%AD%A3%E6%80%81%E6%80%A7" id="toc-正态性" class="nav-link" data-scroll-target="#%E6%AD%A3%E6%80%81%E6%80%A7"><span class="header-section-number">10.2.2</span> 正态性</a>
+<a href="#%E6%AD%A3%E6%80%81%E6%80%A7" id="toc-正态性" class="nav-link" data-scroll-target="#%E6%AD%A3%E6%80%81%E6%80%A7"><span class="header-section-number">11.2.2</span> 正态性</a>
   <ul class="collapse">
-<li><a href="#%E7%9B%B4%E6%96%B9%E5%9B%BE%E8%8C%8E%E5%8F%B6%E5%9B%BE" id="toc-直方图茎叶图" class="nav-link" data-scroll-target="#%E7%9B%B4%E6%96%B9%E5%9B%BE%E8%8C%8E%E5%8F%B6%E5%9B%BE"><span class="header-section-number">10.2.2.1</span> 直方图/茎叶图</a></li>
-  <li><a href="#p-p%E5%9B%BEq-q%E5%9B%BE" id="toc-p-p图q-q图" class="nav-link" data-scroll-target="#p-p%E5%9B%BEq-q%E5%9B%BE"><span class="header-section-number">10.2.2.2</span> P-P图/Q-Q图</a></li>
-  <li><a href="#%E5%81%8F%E5%BA%A6%E5%92%8C%E5%B3%B0%E5%BA%A6" id="toc-偏度和峰度" class="nav-link" data-scroll-target="#%E5%81%8F%E5%BA%A6%E5%92%8C%E5%B3%B0%E5%BA%A6"><span class="header-section-number">10.2.2.3</span> 偏度和峰度</a></li>
-  <li><a href="#shapiro-wilk%E6%A3%80%E9%AA%8C%E5%B0%8F%E6%A0%B7%E6%9C%AC" id="toc-shapiro-wilk检验小样本" class="nav-link" data-scroll-target="#shapiro-wilk%E6%A3%80%E9%AA%8C%E5%B0%8F%E6%A0%B7%E6%9C%AC"><span class="header-section-number">10.2.2.4</span> Shapiro-Wilk检验（小样本）</a></li>
-  <li><a href="#kolmogorov-smirnov%E6%A3%80%E9%AA%8Clilliefors-correction-%E5%A4%A7%E6%A0%B7%E6%9C%AC" id="toc-kolmogorov-smirnov检验lilliefors-correction-大样本" class="nav-link" data-scroll-target="#kolmogorov-smirnov%E6%A3%80%E9%AA%8Clilliefors-correction-%E5%A4%A7%E6%A0%B7%E6%9C%AC"><span class="header-section-number">10.2.2.5</span> Kolmogorov-Smirnov检验（Lilliefors correction 大样本）</a></li>
+<li><a href="#%E7%9B%B4%E6%96%B9%E5%9B%BE%E8%8C%8E%E5%8F%B6%E5%9B%BE" id="toc-直方图茎叶图" class="nav-link" data-scroll-target="#%E7%9B%B4%E6%96%B9%E5%9B%BE%E8%8C%8E%E5%8F%B6%E5%9B%BE"><span class="header-section-number">11.2.2.1</span> 直方图/茎叶图</a></li>
+  <li><a href="#p-p%E5%9B%BEq-q%E5%9B%BE" id="toc-p-p图q-q图" class="nav-link" data-scroll-target="#p-p%E5%9B%BEq-q%E5%9B%BE"><span class="header-section-number">11.2.2.2</span> P-P图/Q-Q图</a></li>
+  <li><a href="#%E5%81%8F%E5%BA%A6%E5%92%8C%E5%B3%B0%E5%BA%A6" id="toc-偏度和峰度" class="nav-link" data-scroll-target="#%E5%81%8F%E5%BA%A6%E5%92%8C%E5%B3%B0%E5%BA%A6"><span class="header-section-number">11.2.2.3</span> 偏度和峰度</a></li>
+  <li><a href="#shapiro-wilk%E6%A3%80%E9%AA%8C%E5%B0%8F%E6%A0%B7%E6%9C%AC" id="toc-shapiro-wilk检验小样本" class="nav-link" data-scroll-target="#shapiro-wilk%E6%A3%80%E9%AA%8C%E5%B0%8F%E6%A0%B7%E6%9C%AC"><span class="header-section-number">11.2.2.4</span> Shapiro-Wilk检验（小样本）</a></li>
+  <li><a href="#kolmogorov-smirnov%E6%A3%80%E9%AA%8Clilliefors-correction-%E5%A4%A7%E6%A0%B7%E6%9C%AC" id="toc-kolmogorov-smirnov检验lilliefors-correction-大样本" class="nav-link" data-scroll-target="#kolmogorov-smirnov%E6%A3%80%E9%AA%8Clilliefors-correction-%E5%A4%A7%E6%A0%B7%E6%9C%AC"><span class="header-section-number">11.2.2.5</span> Kolmogorov-Smirnov检验（Lilliefors correction 大样本）</a></li>
   </ul>
 </li>
   <li>
-<a href="#%E6%96%B9%E5%B7%AE%E9%BD%90%E6%80%A7" id="toc-方差齐性" class="nav-link" data-scroll-target="#%E6%96%B9%E5%B7%AE%E9%BD%90%E6%80%A7"><span class="header-section-number">10.2.3</span> 方差齐性</a>
+<a href="#%E6%96%B9%E5%B7%AE%E9%BD%90%E6%80%A7" id="toc-方差齐性" class="nav-link" data-scroll-target="#%E6%96%B9%E5%B7%AE%E9%BD%90%E6%80%A7"><span class="header-section-number">11.2.3</span> 方差齐性</a>
   <ul class="collapse">
-<li><a href="#bartletts-test" id="toc-bartletts-test" class="nav-link" data-scroll-target="#bartletts-test"><span class="header-section-number">10.2.3.1</span> Bartlett’s test</a></li>
-  <li><a href="#levenes-test" id="toc-levenes-test" class="nav-link" data-scroll-target="#levenes-test"><span class="header-section-number">10.2.3.2</span> Levene’s test</a></li>
+<li><a href="#bartletts-test" id="toc-bartletts-test" class="nav-link" data-scroll-target="#bartletts-test"><span class="header-section-number">11.2.3.1</span> Bartlett’s test</a></li>
+  <li><a href="#levenes-test" id="toc-levenes-test" class="nav-link" data-scroll-target="#levenes-test"><span class="header-section-number">11.2.3.2</span> Levene’s test</a></li>
   </ul>
 </li>
   </ul>
 </li>
-  <li><a href="#welchs-anova-test" id="toc-welchs-anova-test" class="nav-link" data-scroll-target="#welchs-anova-test"><span class="header-section-number">10.3</span> Welch’s ANOVA Test</a></li>
+  <li><a href="#welchs-anova-test" id="toc-welchs-anova-test" class="nav-link" data-scroll-target="#welchs-anova-test"><span class="header-section-number">11.3</span> Welch’s ANOVA Test</a></li>
   <li>
-<a href="#%E6%95%B0%E6%8D%AE%E5%8F%98%E6%8D%A2" id="toc-数据变换" class="nav-link" data-scroll-target="#%E6%95%B0%E6%8D%AE%E5%8F%98%E6%8D%A2"><span class="header-section-number">10.4</span> 数据变换</a>
+<a href="#%E6%95%B0%E6%8D%AE%E5%8F%98%E6%8D%A2" id="toc-数据变换" class="nav-link" data-scroll-target="#%E6%95%B0%E6%8D%AE%E5%8F%98%E6%8D%A2"><span class="header-section-number">11.4</span> 数据变换</a>
   <ul>
-<li><a href="#%E5%B9%B3%E6%96%B9%E6%A0%B9%E5%8F%98%E6%8D%A2" id="toc-平方根变换" class="nav-link" data-scroll-target="#%E5%B9%B3%E6%96%B9%E6%A0%B9%E5%8F%98%E6%8D%A2"><span class="header-section-number">10.4.1</span> 平方根变换</a></li>
-  <li><a href="#%E5%AF%B9%E6%95%B0%E5%8F%98%E6%8D%A2" id="toc-对数变换" class="nav-link" data-scroll-target="#%E5%AF%B9%E6%95%B0%E5%8F%98%E6%8D%A2"><span class="header-section-number">10.4.2</span> 对数变换</a></li>
-  <li><a href="#%E5%8F%8D%E6%AD%A3%E5%BC%A6%E5%B9%B3%E6%96%B9%E6%A0%B9%E5%8F%98%E6%8D%A2" id="toc-反正弦平方根变换" class="nav-link" data-scroll-target="#%E5%8F%8D%E6%AD%A3%E5%BC%A6%E5%B9%B3%E6%96%B9%E6%A0%B9%E5%8F%98%E6%8D%A2"><span class="header-section-number">10.4.3</span> 反正弦平方根变换</a></li>
+<li><a href="#%E5%B9%B3%E6%96%B9%E6%A0%B9%E5%8F%98%E6%8D%A2" id="toc-平方根变换" class="nav-link" data-scroll-target="#%E5%B9%B3%E6%96%B9%E6%A0%B9%E5%8F%98%E6%8D%A2"><span class="header-section-number">11.4.1</span> 平方根变换</a></li>
+  <li><a href="#%E5%AF%B9%E6%95%B0%E5%8F%98%E6%8D%A2" id="toc-对数变换" class="nav-link" data-scroll-target="#%E5%AF%B9%E6%95%B0%E5%8F%98%E6%8D%A2"><span class="header-section-number">11.4.2</span> 对数变换</a></li>
+  <li><a href="#%E5%8F%8D%E6%AD%A3%E5%BC%A6%E5%B9%B3%E6%96%B9%E6%A0%B9%E5%8F%98%E6%8D%A2" id="toc-反正弦平方根变换" class="nav-link" data-scroll-target="#%E5%8F%8D%E6%AD%A3%E5%BC%A6%E5%B9%B3%E6%96%B9%E6%A0%B9%E5%8F%98%E6%8D%A2"><span class="header-section-number">11.4.3</span> 反正弦平方根变换</a></li>
   </ul>
 </li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./probability_theory.html">概率论与数理统计</a></li><li class="breadcrumb-item"><a href="./ANOVA.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">方差分析</span></a></li></ol></nav><div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">
-<span class="chapter-number">10</span>&nbsp; <span class="chapter-title">方差分析</span>
-</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./probability_theory.html">概率论与数理统计</a></li><li class="breadcrumb-item"><a href="./ANOVA.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">方差分析</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title">
+<span class="chapter-number">11</span>&nbsp; <span class="chapter-title">方差分析</span>
+</h1>
 </div>
 
 
@@ -453,6 +445,12 @@ window.Quarto = {
 
     
   
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">November 10, 2024</p>
+    </div>
+  </div>
     
   </div>
   
@@ -464,10 +462,10 @@ window.Quarto = {
 <li><p>正态性 <code><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test()</a></code></p></li>
 <li><p>方差齐性 正态 <code><a href="https://rdrr.io/r/stats/bartlett.test.html">bartlett.test()</a></code>，非正态<code>Levene's test</code></p></li>
 </ol>
-<section id="单因素组间方差分析" class="level2" data-number="10.1"><h2 data-number="10.1" class="anchored" data-anchor-id="单因素组间方差分析">
-<span class="header-section-number">10.1</span> 单因素组间方差分析</h2>
-<section id="计算公式" class="level3" data-number="10.1.1"><h3 data-number="10.1.1" class="anchored" data-anchor-id="计算公式">
-<span class="header-section-number">10.1.1</span> 计算公式</h3>
+<section id="单因素组间方差分析" class="level2" data-number="11.1"><h2 data-number="11.1" class="anchored" data-anchor-id="单因素组间方差分析">
+<span class="header-section-number">11.1</span> 单因素组间方差分析</h2>
+<section id="计算公式" class="level3" data-number="11.1.1"><h3 data-number="11.1.1" class="anchored" data-anchor-id="计算公式">
+<span class="header-section-number">11.1.1</span> 计算公式</h3>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="images/one-way_ANOVA.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
 </figure>
@@ -501,17 +499,17 @@ F=\frac{\frac{SS_{组间}}{(k-1)\sigma^2}}{\frac{SS_{组内}}{(n-k)\sigma^2}}=\f
 </figure>
 </div>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span></span>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span></span>
 <span>    low<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">53.5</span>,<span class="fl">43.7</span>,<span class="fl">46.5</span>,<span class="fl">50.3</span>,<span class="fl">56.1</span><span class="op">)</span>,</span>
 <span>    medium<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">33.2</span>,<span class="fl">30.6</span>,<span class="fl">23.9</span>,<span class="fl">26.4</span>,<span class="fl">35.9</span><span class="op">)</span>,</span>
 <span>    high<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">11.5</span>,<span class="fl">21.9</span>,<span class="fl">18.6</span>,<span class="fl">13.6</span>,<span class="fl">9.5</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="手算" class="level3" data-number="10.1.2"><h3 data-number="10.1.2" class="anchored" data-anchor-id="手算">
-<span class="header-section-number">10.1.2</span> 手算</h3>
+</section><section id="手算" class="level3" data-number="11.1.2"><h3 data-number="11.1.2" class="anchored" data-anchor-id="手算">
+<span class="header-section-number">11.1.2</span> 手算</h3>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">k</span> <span class="op">&lt;-</span> <span class="fl">3</span></span>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">k</span> <span class="op">&lt;-</span> <span class="fl">3</span></span>
 <span><span class="va">df_sum</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
 <span><span class="va">df_sum_square</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">df</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span>
 <span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">15</span></span>
@@ -529,11 +527,11 @@ F=\frac{\frac{SS_{组间}}{(k-1)\sigma^2}}{\frac{SS_{组内}}{(n-k)\sigma^2}}=\f
 <span><span class="va">p_value</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Fdist.html">pf</a></span><span class="op">(</span><span class="va">F_stat</span>,<span class="fl">2</span>,<span class="fl">12</span>,lower.tail <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="statsaov" class="level3" data-number="10.1.3"><h3 data-number="10.1.3" class="anchored" data-anchor-id="statsaov">
-<span class="header-section-number">10.1.3</span> <code>stats::aov()</code>
+</section><section id="statsaov" class="level3" data-number="11.1.3"><h3 data-number="11.1.3" class="anchored" data-anchor-id="statsaov">
+<span class="header-section-number">11.1.3</span> <code>stats::aov()</code>
 </h3>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df_long</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">|&gt;</span> <span class="fu">pivot_longer</span><span class="op">(</span>cols <span class="op">=</span> <span class="fu">everything</span><span class="op">(</span><span class="op">)</span>,</span>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df_long</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">|&gt;</span> <span class="fu">pivot_longer</span><span class="op">(</span>cols <span class="op">=</span> <span class="fu">everything</span><span class="op">(</span><span class="op">)</span>,</span>
 <span>                              names_to <span class="op">=</span> <span class="st">"level"</span>,</span>
 <span>                              values_to <span class="op">=</span> <span class="st">"value"</span><span class="op">)</span></span>
 <span><span class="va">df_long</span><span class="op">$</span><span class="va">level</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">df_long</span><span class="op">$</span><span class="va">level</span><span class="op">)</span></span>
@@ -573,11 +571,11 @@ F=\frac{\frac{SS_{组间}}{(k-1)\sigma^2}}{\frac{SS_{组内}}{(n-k)\sigma^2}}=\f
 </div>
 </div>
 </div>
-</section><section id="ezezanova" class="level3" data-number="10.1.4"><h3 data-number="10.1.4" class="anchored" data-anchor-id="ezezanova">
-<span class="header-section-number">10.1.4</span> <code>ez::ezANOVA()</code>
+</section><section id="ezezanova" class="level3" data-number="11.1.4"><h3 data-number="11.1.4" class="anchored" data-anchor-id="ezezanova">
+<span class="header-section-number">11.1.4</span> <code>ez::ezANOVA()</code>
 </h3>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df_long</span> <span class="op">&lt;-</span> <span class="va">df_long</span> <span class="op">|&gt;</span> <span class="fu">rowid_to_column</span><span class="op">(</span>var <span class="op">=</span> <span class="st">"id"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df_long</span> <span class="op">&lt;-</span> <span class="va">df_long</span> <span class="op">|&gt;</span> <span class="fu">rowid_to_column</span><span class="op">(</span>var <span class="op">=</span> <span class="st">"id"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>    <span class="fu">relocate</span><span class="op">(</span><span class="va">id</span>,.before <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">mutate</span><span class="op">(</span>id<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">id</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">ez</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ez/man/ezANOVA.html">ezANOVA</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_long</span>,</span>
@@ -596,11 +594,11 @@ F=\frac{\frac{SS_{组间}}{(k-1)\sigma^2}}{\frac{SS_{组内}}{(n-k)\sigma^2}}=\f
 <span><span class="co">#&gt; 1   2  12 0.05733333 92.36 0.003724556 0.9962835</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="statslm" class="level3" data-number="10.1.5"><h3 data-number="10.1.5" class="anchored" data-anchor-id="statslm">
-<span class="header-section-number">10.1.5</span> <code>stats::lm()</code>
+</section><section id="statslm" class="level3" data-number="11.1.5"><h3 data-number="11.1.5" class="anchored" data-anchor-id="statslm">
+<span class="header-section-number">11.1.5</span> <code>stats::lm()</code>
 </h3>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">lm_aov</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">value</span> <span class="op">~</span>  <span class="va">level</span>, data <span class="op">=</span> <span class="va">df_long</span><span class="op">)</span></span>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">lm_aov</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">value</span> <span class="op">~</span>  <span class="va">level</span>, data <span class="op">=</span> <span class="va">df_long</span><span class="op">)</span></span>
 <span><span class="va">lm_aov</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Call:</span></span>
@@ -643,7 +641,7 @@ F=\frac{\frac{SS_{组间}}{(k-1)\sigma^2}}{\frac{SS_{组内}}{(n-k)\sigma^2}}=\f
 </table>
 </div>
 </div>
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/model.matrix.html">model.matrix</a></span><span class="op">(</span><span class="op">~</span> <span class="va">level</span>, data <span class="op">=</span> <span class="va">df_long</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    (Intercept) levellow levelmedium</span></span>
 <span><span class="co">#&gt; 1            1        1           0</span></span>
@@ -698,11 +696,11 @@ F=\frac{\frac{SS_{组间}}{(k-1)\sigma^2}}{\frac{SS_{组内}}{(n-k)\sigma^2}}=\f
 <span><span class="co">#&gt; [1] "contr.treatment"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="事后检验" class="level3" data-number="10.1.6"><h3 data-number="10.1.6" class="anchored" data-anchor-id="事后检验">
-<span class="header-section-number">10.1.6</span> 事后检验</h3>
+</section><section id="事后检验" class="level3" data-number="11.1.6"><h3 data-number="11.1.6" class="anchored" data-anchor-id="事后检验">
+<span class="header-section-number">11.1.6</span> 事后检验</h3>
 <p>成对比较的数量 <span class="math inline">\(N=\frac{k!}{2!(k-2)!},k≥3\)</span>，导致犯第Ⅰ类错误的概率迅速增加，<span class="math inline">\([1-(1-\alpha)^N]\)</span>。</p>
-<section id="tukeys-test" class="level4" data-number="10.1.6.1"><h4 data-number="10.1.6.1" class="anchored" data-anchor-id="tukeys-test">
-<span class="header-section-number">10.1.6.1</span> Tukey’s test</h4>
+<section id="tukeys-test" class="level4" data-number="11.1.6.1"><h4 data-number="11.1.6.1" class="anchored" data-anchor-id="tukeys-test">
+<span class="header-section-number">11.1.6.1</span> Tukey’s test</h4>
 <p>Tukey’s test 也被称为Tukey’s honestly significant difference (Tukey’s HSD) test。</p>
 <ol type="1">
 <li>k个均值从大到小排列；</li>
@@ -722,7 +720,7 @@ HSD=q_{(k,\nu_{组内}),1-\alpha} \times S_{\bar X_{max}-\bar X_{min}},\nu_{组�
 H_0:\mu_i=\mu_j(i≠j)
 \]</span></p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">k_means</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">df</span>,<span class="fl">2</span>,<span class="va">mean</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span>,decreasing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">k_means</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">df</span>,<span class="fl">2</span>,<span class="va">mean</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span>,decreasing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">k_means</span></span>
 <span><span class="co">#&gt;    low medium   high </span></span>
 <span><span class="co">#&gt;  50.02  30.00  15.02</span></span>
@@ -756,7 +754,7 @@ H_0:\mu_i=\mu_j(i≠j)
 </details>
 </div>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">pairwise</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/TukeyHSD.html">TukeyHSD</a></span><span class="op">(</span><span class="va">df_aov</span><span class="op">)</span></span>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">pairwise</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/TukeyHSD.html">TukeyHSD</a></span><span class="op">(</span><span class="va">df_aov</span><span class="op">)</span></span>
 <span><span class="va">pairwise</span></span>
 <span><span class="co">#&gt;   Tukey multiple comparisons of means</span></span>
 <span><span class="co">#&gt;     95% family-wise confidence level</span></span>
@@ -770,8 +768,8 @@ H_0:\mu_i=\mu_j(i≠j)
 <span><span class="co">#&gt; medium-low  -20.02 -28.485946 -11.55405 0.0001069</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="dunnetts-test" class="level4" data-number="10.1.6.2"><h4 data-number="10.1.6.2" class="anchored" data-anchor-id="dunnetts-test">
-<span class="header-section-number">10.1.6.2</span> Dunnett’s test</h4>
+</section><section id="dunnetts-test" class="level4" data-number="11.1.6.2"><h4 data-number="11.1.6.2" class="anchored" data-anchor-id="dunnetts-test">
+<span class="header-section-number">11.1.6.2</span> Dunnett’s test</h4>
 <p><em>Dunnett’s test</em>也称为<em>q’</em>-test,是两独立样本t-test的一种修正。Dunnett’s test 假设数据符合正态分布，并且各组的方差相等。 控制对照组（C）与其他每个实验组（T）比较。</p>
 <p><span class="math inline">\(H_0:\mu_C=\mu_T\)</span></p>
 <p><span class="math display">\[
@@ -779,7 +777,7 @@ q'=\frac{\bar X_T-\bar X_C}{\sqrt{MS_{组内}(\frac{1}{n_T}+\frac{1}{n_C})}} \si
 \]</span></p>
 <p>临界值 <span class="math inline">\(q'_{(a,\nu_E),1-\alpha/2}\)</span></p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">nT</span> <span class="op">&lt;-</span> <span class="va">nC</span> <span class="op">&lt;-</span> <span class="fl">5</span> </span>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">nT</span> <span class="op">&lt;-</span> <span class="va">nC</span> <span class="op">&lt;-</span> <span class="fl">5</span> </span>
 <span></span>
 <span><span class="va">SE_mean_diff</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">MS_within</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="va">nT</span><span class="op">+</span><span class="fl">1</span><span class="op">/</span><span class="va">nC</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
@@ -810,7 +808,7 @@ q'=\frac{\bar X_T-\bar X_C}{\sqrt{MS_{组内}(\frac{1}{n_T}+\frac{1}{n_C})}} \si
 </details>
 </div>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://multcomp.R-forge.R-project.org">multcomp</a></span><span class="op">)</span></span>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://multcomp.R-forge.R-project.org">multcomp</a></span><span class="op">)</span></span>
 <span><span class="va">dunnett_result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/multcomp/man/glht.html">glht</a></span><span class="op">(</span><span class="va">df_aov</span>, linfct <span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/multcomp/man/glht.html">mcp</a></span><span class="op">(</span>level <span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"medium - low = 0"</span>, <span class="st">"high - low = 0"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># 查看 Dunnett's test 结果</span></span>
@@ -832,8 +830,8 @@ q'=\frac{\bar X_T-\bar X_C}{\sqrt{MS_{组内}(\frac{1}{n_T}+\frac{1}{n_C})}} \si
 <span><span class="co">#&gt; (Adjusted p values reported -- single-step method)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="lsd-t-test" class="level4" data-number="10.1.6.3"><h4 data-number="10.1.6.3" class="anchored" data-anchor-id="lsd-t-test">
-<span class="header-section-number">10.1.6.3</span> LSD-t test</h4>
+</section><section id="lsd-t-test" class="level4" data-number="11.1.6.3"><h4 data-number="11.1.6.3" class="anchored" data-anchor-id="lsd-t-test">
+<span class="header-section-number">11.1.6.3</span> LSD-t test</h4>
 <p>least significant difference t-test</p>
 <p>挑选任意感兴趣的两组进行比较</p>
 <p><span class="math display">\[
@@ -843,21 +841,21 @@ H_0:\mu_i=\mu_j(i≠j)
 LSD-t=\frac{\bar X_i-\bar X_j}{\sqrt{MS_{组内}(\frac{1}{n_i}+\frac{1}{n_j})}} \sim t(\nu) \ ,\ \nu=\nu_{组内}=n-k,a=k
 \]</span></p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># medium high</span></span>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># medium high</span></span>
 <span><span class="va">LSD</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">k_means</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">-</span><span class="va">k_means</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">MS_within</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="fl">5</span><span class="op">+</span><span class="fl">1</span><span class="op">/</span><span class="fl">5</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># 附录 t(12,1-0.05/2)=2.719</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section></section></section><section id="方差分析假设" class="level2" data-number="10.2"><h2 data-number="10.2" class="anchored" data-anchor-id="方差分析假设">
-<span class="header-section-number">10.2</span> 方差分析假设</h2>
+</section></section></section><section id="方差分析假设" class="level2" data-number="11.2"><h2 data-number="11.2" class="anchored" data-anchor-id="方差分析假设">
+<span class="header-section-number">11.2</span> 方差分析假设</h2>
 <p><a href="https://www.statmethods.net/stats/rdiagnostics.html" class="uri">https://www.statmethods.net/stats/rdiagnostics.html</a></p>
-<section id="独立性" class="level3" data-number="10.2.1"><h3 data-number="10.2.1" class="anchored" data-anchor-id="独立性">
-<span class="header-section-number">10.2.1</span> 独立性</h3>
-</section><section id="正态性" class="level3" data-number="10.2.2"><h3 data-number="10.2.2" class="anchored" data-anchor-id="正态性">
-<span class="header-section-number">10.2.2</span> 正态性</h3>
+<section id="独立性" class="level3" data-number="11.2.1"><h3 data-number="11.2.1" class="anchored" data-anchor-id="独立性">
+<span class="header-section-number">11.2.1</span> 独立性</h3>
+</section><section id="正态性" class="level3" data-number="11.2.2"><h3 data-number="11.2.2" class="anchored" data-anchor-id="正态性">
+<span class="header-section-number">11.2.2</span> 正态性</h3>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 异常观测点</span></span>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 异常观测点</span></span>
 <span></span>
 <span><span class="fu">car</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/outlierTest.html">outlierTest</a></span><span class="op">(</span><span class="va">df_aov</span><span class="op">)</span> </span>
 <span><span class="co">#&gt; No Studentized residuals with Bonferroni p &lt; 0.05</span></span>
@@ -866,22 +864,22 @@ LSD-t=\frac{\bar X_i-\bar X_j}{\sqrt{MS_{组内}(\frac{1}{n_i}+\frac{1}{n_j})}} 
 <span><span class="co">#&gt; 6  1.63682            0.12993           NA</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<section id="直方图茎叶图" class="level4" data-number="10.2.2.1"><h4 data-number="10.2.2.1" class="anchored" data-anchor-id="直方图茎叶图">
-<span class="header-section-number">10.2.2.1</span> 直方图/茎叶图</h4>
-</section><section id="p-p图q-q图" class="level4" data-number="10.2.2.2"><h4 data-number="10.2.2.2" class="anchored" data-anchor-id="p-p图q-q图">
-<span class="header-section-number">10.2.2.2</span> P-P图/Q-Q图</h4>
-</section><section id="偏度和峰度" class="level4" data-number="10.2.2.3"><h4 data-number="10.2.2.3" class="anchored" data-anchor-id="偏度和峰度">
-<span class="header-section-number">10.2.2.3</span> 偏度和峰度</h4>
+<section id="直方图茎叶图" class="level4" data-number="11.2.2.1"><h4 data-number="11.2.2.1" class="anchored" data-anchor-id="直方图茎叶图">
+<span class="header-section-number">11.2.2.1</span> 直方图/茎叶图</h4>
+</section><section id="p-p图q-q图" class="level4" data-number="11.2.2.2"><h4 data-number="11.2.2.2" class="anchored" data-anchor-id="p-p图q-q图">
+<span class="header-section-number">11.2.2.2</span> P-P图/Q-Q图</h4>
+</section><section id="偏度和峰度" class="level4" data-number="11.2.2.3"><h4 data-number="11.2.2.3" class="anchored" data-anchor-id="偏度和峰度">
+<span class="header-section-number">11.2.2.3</span> 偏度和峰度</h4>
 <p><span class="math display">\[
 H_0:总体偏度系数\gamma_1=0 或者总体峰度系数\gamma_2=0
 \]</span></p>
 <p><span class="math display">\[
 z_i=\frac{g_i-0}{\sigma_{g_i}}  \ \ \ \ 临界值z_{1-\alpha/2}
 \]</span></p>
-</section><section id="shapiro-wilk检验小样本" class="level4" data-number="10.2.2.4"><h4 data-number="10.2.2.4" class="anchored" data-anchor-id="shapiro-wilk检验小样本">
-<span class="header-section-number">10.2.2.4</span> Shapiro-Wilk检验（小样本）</h4>
+</section><section id="shapiro-wilk检验小样本" class="level4" data-number="11.2.2.4"><h4 data-number="11.2.2.4" class="anchored" data-anchor-id="shapiro-wilk检验小样本">
+<span class="header-section-number">11.2.2.4</span> Shapiro-Wilk检验（小样本）</h4>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">low</span><span class="op">)</span>  </span>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">low</span><span class="op">)</span>  </span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  Shapiro-Wilk normality test</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -909,10 +907,10 @@ z_i=\frac{g_i-0}{\sigma_{g_i}}  \ \ \ \ 临界值z_{1-\alpha/2}
 <span><span class="co">#&gt; W = 0.94559, p-value = 0.4578</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="kolmogorov-smirnov检验lilliefors-correction-大样本" class="level4" data-number="10.2.2.5"><h4 data-number="10.2.2.5" class="anchored" data-anchor-id="kolmogorov-smirnov检验lilliefors-correction-大样本">
-<span class="header-section-number">10.2.2.5</span> Kolmogorov-Smirnov检验（Lilliefors correction 大样本）</h4>
+</section><section id="kolmogorov-smirnov检验lilliefors-correction-大样本" class="level4" data-number="11.2.2.5"><h4 data-number="11.2.2.5" class="anchored" data-anchor-id="kolmogorov-smirnov检验lilliefors-correction-大样本">
+<span class="header-section-number">11.2.2.5</span> Kolmogorov-Smirnov检验（Lilliefors correction 大样本）</h4>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/ks.test.html">ks.test</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">low</span>,<span class="va">df</span><span class="op">$</span><span class="va">medium</span>,<span class="va">df</span><span class="op">$</span><span class="va">high</span><span class="op">)</span>,<span class="st">"pnorm"</span><span class="op">)</span></span>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/ks.test.html">ks.test</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">low</span>,<span class="va">df</span><span class="op">$</span><span class="va">medium</span>,<span class="va">df</span><span class="op">$</span><span class="va">high</span><span class="op">)</span>,<span class="st">"pnorm"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  Exact one-sample Kolmogorov-Smirnov test</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -929,7 +927,7 @@ z_i=\frac{g_i-0}{\sigma_{g_i}}  \ \ \ \ 临界值z_{1-\alpha/2}
 </details>
 </div>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span> </span>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span> </span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span> </span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/ks.test.html">ks.test</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span>  <span class="co"># perform ks test</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -950,11 +948,11 @@ z_i=\frac{g_i-0}{\sigma_{g_i}}  \ \ \ \ 临界值z_{1-\alpha/2}
 <span><span class="co">#&gt; alternative hypothesis: two-sided</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section></section><section id="方差齐性" class="level3" data-number="10.2.3"><h3 data-number="10.2.3" class="anchored" data-anchor-id="方差齐性">
-<span class="header-section-number">10.2.3</span> 方差齐性</h3>
+</section></section><section id="方差齐性" class="level3" data-number="11.2.3"><h3 data-number="11.2.3" class="anchored" data-anchor-id="方差齐性">
+<span class="header-section-number">11.2.3</span> 方差齐性</h3>
 <p><a href="http://www.cookbook-r.com/Statistical_analysis/Homogeneity_of_variance/" class="uri">http://www.cookbook-r.com/Statistical_analysis/Homogeneity_of_variance/</a></p>
-<section id="bartletts-test" class="level4" data-number="10.2.3.1"><h4 data-number="10.2.3.1" class="anchored" data-anchor-id="bartletts-test">
-<span class="header-section-number">10.2.3.1</span> Bartlett’s test</h4>
+<section id="bartletts-test" class="level4" data-number="11.2.3.1"><h4 data-number="11.2.3.1" class="anchored" data-anchor-id="bartletts-test">
+<span class="header-section-number">11.2.3.1</span> Bartlett’s test</h4>
 <p>数据满足正态性</p>
 <p>比较每一组方差的加权算术均值和几何均值。</p>
 <p><span class="math display">\[
@@ -968,7 +966,7 @@ B=\frac{(n-1)[kln\bar S^2-\sum_{j=1}^{k}lnS_j^2]}{1+\frac{k+1}{3k(n-1)}} \sim\ \
 B=\frac{\sum_{j=1}^{k}(n_j-1)ln\frac{\bar S^2}{S_j^2}}{1+\frac{1}{3(k-1)}(\sum_{j=1}^{k}\frac {1}{n_j-1}-\frac{1}{\sum_{j=1}^{k}(n_j-1)})} \sim\ \chi^2(\nu)\ ,\nu=k-1
 \]</span> 其中<span class="math inline">\(h_j\)</span>是某一组的样本量，<span class="math inline">\(\bar S^2=(\sum_{j=1}^{k}(n_j-1)S_j^2)/(\sum_{j=1}^{k}(n_j-1))\)</span>是所有k个组样本方差的加权平均值。</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n1</span><span class="op">=</span><span class="va">n2</span><span class="op">=</span><span class="va">n3</span><span class="op">=</span><span class="fl">5</span></span>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n1</span><span class="op">=</span><span class="va">n2</span><span class="op">=</span><span class="va">n3</span><span class="op">=</span><span class="fl">5</span></span>
 <span><span class="va">k</span><span class="op">=</span><span class="fl">3</span></span>
 <span><span class="va">S2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">df</span>,<span class="fl">2</span>,<span class="va">var</span><span class="op">)</span></span>
 <span><span class="va">S2</span></span>
@@ -992,7 +990,7 @@ B=\frac{\sum_{j=1}^{k}(n_j-1)ln\frac{\bar S^2}{S_j^2}}{1+\frac{1}{3(k-1)}(\sum_{
 </details>
 </div>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/bartlett.test.html">bartlett.test</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/bartlett.test.html">bartlett.test</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  Bartlett test of homogeneity of variances</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -1000,8 +998,8 @@ B=\frac{\sum_{j=1}^{k}(n_j-1)ln\frac{\bar S^2}{S_j^2}}{1+\frac{1}{3(k-1)}(\sum_{
 <span><span class="co">#&gt; Bartlett's K-squared = 0.0081595, df = 2, p-value = 0.9959</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="levenes-test" class="level4" data-number="10.2.3.2"><h4 data-number="10.2.3.2" class="anchored" data-anchor-id="levenes-test">
-<span class="header-section-number">10.2.3.2</span> Levene’s test</h4>
+</section><section id="levenes-test" class="level4" data-number="11.2.3.2"><h4 data-number="11.2.3.2" class="anchored" data-anchor-id="levenes-test">
+<span class="header-section-number">11.2.3.2</span> Levene’s test</h4>
 <p>数据不满足正态性</p>
 <ol type="1">
 <li>k个随机样本是独立的</li>
@@ -1012,7 +1010,7 @@ B=\frac{\sum_{j=1}^{k}(n_j-1)ln\frac{\bar S^2}{S_j^2}}{1+\frac{1}{3(k-1)}(\sum_{
 Z_{ij}=|X_{ij}-\bar X_{.\ j}|(i=1,2...,n_j;\ j=1,2,...,k)
 \]</span></p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="va">z_df</span> <span class="op">&lt;-</span> <span class="fu">bind_cols</span><span class="op">(</span></span>
 <span>    low<span class="op">=</span><span class="va">df</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">-</span><span class="va">k_means</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,</span>
 <span>    medium<span class="op">=</span><span class="va">df</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">-</span><span class="va">k_means</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>,</span>
@@ -1065,7 +1063,7 @@ Z_{ij}=|X_{ij}-\bar X_{.\ j}|(i=1,2...,n_j;\ j=1,2,...,k)
 W=\frac{MS_{组间}}{MS_{组内}}=\frac{\sum_jn_j(\bar Z_{.j}-\bar Z_{..})^2/(k-1)}{\sum_j\sum_i(Z_{ij}-\bar Z_{.j})^2/(n-k)}  \sim F(\nu_1,\nu_2)   \ \ \ \ \nu_1=k-1,\nu_2=n-k
 \]</span></p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">v1</span><span class="op">=</span><span class="fl">3</span><span class="op">-</span><span class="fl">1</span></span>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">v1</span><span class="op">=</span><span class="fl">3</span><span class="op">-</span><span class="fl">1</span></span>
 <span><span class="va">v2</span><span class="op">=</span><span class="fl">15</span><span class="op">-</span><span class="fl">3</span></span>
 <span></span>
 <span></span>
@@ -1085,14 +1083,14 @@ W=\frac{MS_{组间}}{MS_{组内}}=\frac{\sum_jn_j(\bar Z_{.j}-\bar Z_{..})^2/(k-
 <span><span class="co">#&gt; [1] 0.0254</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section></section></section><section id="welchs-anova-test" class="level2" data-number="10.3"><h2 data-number="10.3" class="anchored" data-anchor-id="welchs-anova-test">
-<span class="header-section-number">10.3</span> Welch’s ANOVA Test</h2>
+</section></section></section><section id="welchs-anova-test" class="level2" data-number="11.3"><h2 data-number="11.3" class="anchored" data-anchor-id="welchs-anova-test">
+<span class="header-section-number">11.3</span> Welch’s ANOVA Test</h2>
 <p><img src="images/clipboard-1694958347.png" class="img-fluid"></p>
-</section><section id="数据变换" class="level2" data-number="10.4"><h2 data-number="10.4" class="anchored" data-anchor-id="数据变换">
-<span class="header-section-number">10.4</span> 数据变换</h2>
+</section><section id="数据变换" class="level2" data-number="11.4"><h2 data-number="11.4" class="anchored" data-anchor-id="数据变换">
+<span class="header-section-number">11.4</span> 数据变换</h2>
 <p>当方差分析的正态性假设或方差齐性假设不为真时，通常使用(1)数据变换方法；(2)非参数检验方法 比较均值差异</p>
-<section id="平方根变换" class="level3" data-number="10.4.1"><h3 data-number="10.4.1" class="anchored" data-anchor-id="平方根变换">
-<span class="header-section-number">10.4.1</span> 平方根变换</h3>
+<section id="平方根变换" class="level3" data-number="11.4.1"><h3 data-number="11.4.1" class="anchored" data-anchor-id="平方根变换">
+<span class="header-section-number">11.4.1</span> 平方根变换</h3>
 <p>当每个水平组的方差与均值成比例，尤其是样本来自泊松分布</p>
 <p><span class="math display">\[
 Y=\sqrt{X}
@@ -1101,8 +1099,8 @@ Y=\sqrt{X}
 <p><span class="math display">\[
 Y=\sqrt{X+a} \ \ \ \ a=0.5或0.1
 \]</span></p>
-</section><section id="对数变换" class="level3" data-number="10.4.2"><h3 data-number="10.4.2" class="anchored" data-anchor-id="对数变换">
-<span class="header-section-number">10.4.2</span> 对数变换</h3>
+</section><section id="对数变换" class="level3" data-number="11.4.2"><h3 data-number="11.4.2" class="anchored" data-anchor-id="对数变换">
+<span class="header-section-number">11.4.2</span> 对数变换</h3>
 <p>当数据方差不齐且每个水平组标准差与均值成比例时</p>
 <p><span class="math display">\[
 Y=\log{X} \ \ \ \ base=e或10
@@ -1111,15 +1109,13 @@ Y=\log{X} \ \ \ \ base=e或10
 <p><span class="math display">\[
 Y=\log{(X+a)} \ \ \ \ a为实数，使得X+a&gt;0
 \]</span></p>
-</section><section id="反正弦平方根变换" class="level3" data-number="10.4.3"><h3 data-number="10.4.3" class="anchored" data-anchor-id="反正弦平方根变换">
-<span class="header-section-number">10.4.3</span> 反正弦平方根变换</h3>
+</section><section id="反正弦平方根变换" class="level3" data-number="11.4.3"><h3 data-number="11.4.3" class="anchored" data-anchor-id="反正弦平方根变换">
+<span class="header-section-number">11.4.3</span> 反正弦平方根变换</h3>
 <p>率，服从二项分布<span class="math inline">\(B(n,\pi)\)</span></p>
 <p><span class="math display">\[
 Y=\arcsin {\sqrt{\pi}} \ \ \ \
 \]</span></p>
 
-
-<!-- -->
 
 </section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -1141,6 +1137,150 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = true;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -1200,57 +1340,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  const viewSource = window.document.getElementById('quarto-view-source') ||
-                     window.document.getElementById('quarto-code-tools-source');
-  if (viewSource) {
-    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
-    viewSource.addEventListener("click", function(e) {
-      if (sourceUrl) {
-        // rstudio viewer pane
-        if (/\bcapabilities=\b/.test(window.location)) {
-          window.open(sourceUrl);
-        } else {
-          window.location.href = sourceUrl;
-        }
-      } else {
-        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
-        modal.show();
-      }
-      return false;
-    });
-  }
-  function toggleCodeHandler(show) {
-    return function(e) {
-      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
-      for (let i=0; i<detailsSrc.length; i++) {
-        const details = detailsSrc[i].parentElement;
-        if (show) {
-          details.open = true;
-        } else {
-          details.removeAttribute("open");
-        }
-      }
-      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
-      const fromCls = show ? "hidden" : "unhidden";
-      const toCls = show ? "unhidden" : "hidden";
-      for (let i=0; i<cellCodeDivs.length; i++) {
-        const codeDiv = cellCodeDivs[i];
-        if (codeDiv.classList.contains(fromCls)) {
-          codeDiv.classList.remove(fromCls);
-          codeDiv.classList.add(toCls);
-        } 
-      }
-      return false;
-    }
-  }
-  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
-  if (hideAllCode) {
-    hideAllCode.addEventListener("click", toggleCodeHandler(false));
-  }
-  const showAllCode = window.document.getElementById("quarto-show-all-code");
-  if (showAllCode) {
-    showAllCode.addEventListener("click", toggleCodeHandler(true));
-  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -1582,464 +1671,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./t_test.html" class="pagination-link" aria-label="t 检验">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">t 检验</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">t 检验</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./repeated_measures_ANOVA.html" class="pagination-link" aria-label="重复测量方差分析">
-        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">重复测量方差分析</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">重复测量方差分析</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
-</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb20" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># 方差分析</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>方差分析的假设</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>独立性</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>正态性 <span class="in">`shapiro.test()`</span></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>方差齐性 正态 <span class="in">`bartlett.test()`</span>，非正态<span class="in">`Levene's test`</span></span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="fu">## 单因素组间方差分析</span></span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="fu">### 计算公式</span></span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/one-way_ANOVA.png)</span>{fig-align="center" width="80%"}</span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>因子A有$A_1,A_2,...,A_k$共k个水平</span>
-<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>total sum of squares</span>
-<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>SS_T=\sum_{j=1}^{k}\sum_{i=1}^{n_j}X_{ij}^2-\frac{(\sum_{j=1}^{k}\sum_{i=1}^{n_j}X_{ij})^2}{n}=SS_{组间}+SS_{组内}</span>
-<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>between groups sum of squares $$</span>
-<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>SS_{组间}=\sum_{j=1}^{k}\frac{(\sum_{i=1}^{n_j}X_{ij})^2}{n_j}-\frac{(\sum_{j=1}^{k}\sum_{i=1}^{n_j}X_{ij})^2}{n}</span>
-<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>自由度$\nu=n-1,\nu_{组间}=k-1,\nu_{组内}=\sum_{j=1}^{k}(n_j-1)=n-k$</span>
-<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a>Between groups mean square $MS_{组间}=\frac{SS_{组间}}{k-1}$</span>
-<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a>Within groups mean square $MS_{组内}=\frac{SS_{组内}}{n-k}$</span>
-<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a>$$H_0:\mu_1=\mu_2=...=\mu_k$$</span>
-<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a>\frac{SS_T}{\sigma^2}\sim \chi^2(\nu),\nu=n-1</span>
-<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a>$$ $$</span>
-<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a>\frac{SS_{组内}}{\sigma^2}\sim \chi^2(\nu),\nu=n-k</span>
-<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a>$$ 因此，</span>
-<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb20-44"><a href="#cb20-44" aria-hidden="true" tabindex="-1"></a>\frac{SS_{组间}}{\sigma^2}=\frac{SS_T}{\sigma^2}-\frac{SS_{组内}}{\sigma^2}\ \ \ \sim \chi^2(\nu),\nu=k-1</span>
-<span id="cb20-45"><a href="#cb20-45" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb20-46"><a href="#cb20-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-47"><a href="#cb20-47" aria-hidden="true" tabindex="-1"></a>检验统计量</span>
-<span id="cb20-48"><a href="#cb20-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-49"><a href="#cb20-49" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb20-50"><a href="#cb20-50" aria-hidden="true" tabindex="-1"></a>F=\frac{\frac{SS_{组间}}{(k-1)\sigma^2}}{\frac{SS_{组内}}{(n-k)\sigma^2}}=\frac{\frac{SS_{组间}}{k-1}}{\frac{SS_{组内}}{n-k}}=\frac{MS_{组间}}{MS_{组内}}\ \ \ \sim \chi^2(\nu),\nu=k-1</span>
-<span id="cb20-51"><a href="#cb20-51" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb20-52"><a href="#cb20-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-53"><a href="#cb20-53" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/ANOVA_example.png)</span>{fig-align="center" width="60%"}</span>
-<span id="cb20-54"><a href="#cb20-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-57"><a href="#cb20-57" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-58"><a href="#cb20-58" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb20-59"><a href="#cb20-59" aria-hidden="true" tabindex="-1"></a>    <span class="at">low=</span><span class="fu">c</span>(<span class="fl">53.5</span>,<span class="fl">43.7</span>,<span class="fl">46.5</span>,<span class="fl">50.3</span>,<span class="fl">56.1</span>),</span>
-<span id="cb20-60"><a href="#cb20-60" aria-hidden="true" tabindex="-1"></a>    <span class="at">medium=</span><span class="fu">c</span>(<span class="fl">33.2</span>,<span class="fl">30.6</span>,<span class="fl">23.9</span>,<span class="fl">26.4</span>,<span class="fl">35.9</span>),</span>
-<span id="cb20-61"><a href="#cb20-61" aria-hidden="true" tabindex="-1"></a>    <span class="at">high=</span><span class="fu">c</span>(<span class="fl">11.5</span>,<span class="fl">21.9</span>,<span class="fl">18.6</span>,<span class="fl">13.6</span>,<span class="fl">9.5</span>)</span>
-<span id="cb20-62"><a href="#cb20-62" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb20-63"><a href="#cb20-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-64"><a href="#cb20-64" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-65"><a href="#cb20-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-66"><a href="#cb20-66" aria-hidden="true" tabindex="-1"></a><span class="fu">### 手算</span></span>
-<span id="cb20-67"><a href="#cb20-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-70"><a href="#cb20-70" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-71"><a href="#cb20-71" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb20-72"><a href="#cb20-72" aria-hidden="true" tabindex="-1"></a>df_sum <span class="ot">&lt;-</span> <span class="fu">sum</span>(df)</span>
-<span id="cb20-73"><a href="#cb20-73" aria-hidden="true" tabindex="-1"></a>df_sum_square <span class="ot">&lt;-</span> <span class="fu">sum</span>(df<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb20-74"><a href="#cb20-74" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">15</span></span>
-<span id="cb20-75"><a href="#cb20-75" aria-hidden="true" tabindex="-1"></a>C <span class="ot">&lt;-</span> df_sum<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>n</span>
-<span id="cb20-76"><a href="#cb20-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-77"><a href="#cb20-77" aria-hidden="true" tabindex="-1"></a>SS_T <span class="ot">&lt;-</span> df_sum_square<span class="sc">-</span>C</span>
-<span id="cb20-78"><a href="#cb20-78" aria-hidden="true" tabindex="-1"></a>SS_between <span class="ot">&lt;-</span> <span class="fu">apply</span>(df, <span class="dv">2</span>, <span class="cf">function</span>(x) <span class="fu">sum</span>(<span class="fu">sum</span>(x)<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span><span class="fu">length</span>(x))) <span class="sc">|&gt;</span> <span class="fu">sum</span>()<span class="sc">-</span>C</span>
-<span id="cb20-79"><a href="#cb20-79" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-80"><a href="#cb20-80" aria-hidden="true" tabindex="-1"></a>SS_within <span class="ot">&lt;-</span> SS_T<span class="sc">-</span>SS_between</span>
-<span id="cb20-81"><a href="#cb20-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-82"><a href="#cb20-82" aria-hidden="true" tabindex="-1"></a>MS_between <span class="ot">&lt;-</span> SS_between<span class="sc">/</span>(k<span class="dv">-1</span>)</span>
-<span id="cb20-83"><a href="#cb20-83" aria-hidden="true" tabindex="-1"></a>MS_within <span class="ot">&lt;-</span> SS_within<span class="sc">/</span>(n<span class="sc">-</span>k)</span>
-<span id="cb20-84"><a href="#cb20-84" aria-hidden="true" tabindex="-1"></a>F_stat <span class="ot">&lt;-</span>MS_between<span class="sc">/</span>MS_within </span>
-<span id="cb20-85"><a href="#cb20-85" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-86"><a href="#cb20-86" aria-hidden="true" tabindex="-1"></a>p_value <span class="ot">&lt;-</span> <span class="fu">pf</span>(F_stat,<span class="dv">2</span>,<span class="dv">12</span>,<span class="at">lower.tail =</span> F)</span>
-<span id="cb20-87"><a href="#cb20-87" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-88"><a href="#cb20-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-89"><a href="#cb20-89" aria-hidden="true" tabindex="-1"></a><span class="fu">### `stats::aov()`</span></span>
-<span id="cb20-90"><a href="#cb20-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-93"><a href="#cb20-93" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-94"><a href="#cb20-94" aria-hidden="true" tabindex="-1"></a>df_long <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span> <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">everything</span>(),</span>
-<span id="cb20-95"><a href="#cb20-95" aria-hidden="true" tabindex="-1"></a>                              <span class="at">names_to =</span> <span class="st">"level"</span>,</span>
-<span id="cb20-96"><a href="#cb20-96" aria-hidden="true" tabindex="-1"></a>                              <span class="at">values_to =</span> <span class="st">"value"</span>)</span>
-<span id="cb20-97"><a href="#cb20-97" aria-hidden="true" tabindex="-1"></a>df_long<span class="sc">$</span>level <span class="ot">&lt;-</span> <span class="fu">factor</span>(df_long<span class="sc">$</span>level)</span>
-<span id="cb20-98"><a href="#cb20-98" aria-hidden="true" tabindex="-1"></a>df_aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(value<span class="sc">~</span>level,<span class="at">data =</span> df_long)</span>
-<span id="cb20-99"><a href="#cb20-99" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-100"><a href="#cb20-100" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(df_aov)</span>
-<span id="cb20-101"><a href="#cb20-101" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-102"><a href="#cb20-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-103"><a href="#cb20-103" aria-hidden="true" tabindex="-1"></a><span class="fu">### `ez::ezANOVA()`</span></span>
-<span id="cb20-104"><a href="#cb20-104" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-107"><a href="#cb20-107" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-108"><a href="#cb20-108" aria-hidden="true" tabindex="-1"></a>df_long <span class="ot">&lt;-</span> df_long <span class="sc">|&gt;</span> <span class="fu">rowid_to_column</span>(<span class="at">var =</span> <span class="st">"id"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb20-109"><a href="#cb20-109" aria-hidden="true" tabindex="-1"></a>    <span class="fu">relocate</span>(id,<span class="at">.before =</span> <span class="dv">1</span>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">id=</span><span class="fu">factor</span>(id))</span>
-<span id="cb20-110"><a href="#cb20-110" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-111"><a href="#cb20-111" aria-hidden="true" tabindex="-1"></a>ez<span class="sc">::</span><span class="fu">ezANOVA</span>(<span class="at">data =</span> df_long,</span>
-<span id="cb20-112"><a href="#cb20-112" aria-hidden="true" tabindex="-1"></a>            <span class="at">dv =</span> value,</span>
-<span id="cb20-113"><a href="#cb20-113" aria-hidden="true" tabindex="-1"></a>            <span class="at">wid =</span> id,</span>
-<span id="cb20-114"><a href="#cb20-114" aria-hidden="true" tabindex="-1"></a>            <span class="at">between =</span> level,</span>
-<span id="cb20-115"><a href="#cb20-115" aria-hidden="true" tabindex="-1"></a>            <span class="at">type =</span> <span class="dv">3</span>,</span>
-<span id="cb20-116"><a href="#cb20-116" aria-hidden="true" tabindex="-1"></a>            <span class="at">detailed =</span> T)</span>
-<span id="cb20-117"><a href="#cb20-117" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-118"><a href="#cb20-118" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-119"><a href="#cb20-119" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-120"><a href="#cb20-120" aria-hidden="true" tabindex="-1"></a><span class="fu">### `stats::lm()`</span></span>
-<span id="cb20-121"><a href="#cb20-121" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-124"><a href="#cb20-124" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-125"><a href="#cb20-125" aria-hidden="true" tabindex="-1"></a>lm_aov <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> value <span class="sc">~</span>  level, <span class="at">data =</span> df_long)</span>
-<span id="cb20-126"><a href="#cb20-126" aria-hidden="true" tabindex="-1"></a>lm_aov</span>
-<span id="cb20-127"><a href="#cb20-127" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-128"><a href="#cb20-128" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lm_aov)</span>
-<span id="cb20-129"><a href="#cb20-129" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-130"><a href="#cb20-130" aria-hidden="true" tabindex="-1"></a><span class="fu">model.matrix</span>(<span class="sc">~</span> level, <span class="at">data =</span> df_long)</span>
-<span id="cb20-131"><a href="#cb20-131" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(<span class="at">formula =</span> value <span class="sc">~</span> <span class="dv">0</span> <span class="sc">+</span> level, <span class="at">data =</span> df_long)</span>
-<span id="cb20-132"><a href="#cb20-132" aria-hidden="true" tabindex="-1"></a><span class="fu">model.matrix</span>(<span class="sc">~</span> <span class="dv">0</span> <span class="sc">+</span> level, <span class="at">data =</span> df_long)</span>
-<span id="cb20-133"><a href="#cb20-133" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-134"><a href="#cb20-134" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-135"><a href="#cb20-135" aria-hidden="true" tabindex="-1"></a><span class="fu">### 事后检验</span></span>
-<span id="cb20-136"><a href="#cb20-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-137"><a href="#cb20-137" aria-hidden="true" tabindex="-1"></a>成对比较的数量 $N=\frac{k!}{2!(k-2)!},k≥3$，导致犯第Ⅰ类错误的概率迅速增加，$<span class="co">[</span><span class="ot">1-(1-\alpha)^N</span><span class="co">]</span>$。</span>
-<span id="cb20-138"><a href="#cb20-138" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-139"><a href="#cb20-139" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Tukey's test</span></span>
-<span id="cb20-140"><a href="#cb20-140" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-141"><a href="#cb20-141" aria-hidden="true" tabindex="-1"></a>Tukey's test 也被称为Tukey's honestly significant difference (Tukey's HSD) test。</span>
-<span id="cb20-142"><a href="#cb20-142" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-143"><a href="#cb20-143" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>k个均值从大到小排列；</span>
-<span id="cb20-144"><a href="#cb20-144" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>均值最大的组依次与均值最小，第二小，......，第二大比较；</span>
-<span id="cb20-145"><a href="#cb20-145" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>均值第二大的组以同样的方式比较；</span>
-<span id="cb20-146"><a href="#cb20-146" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>以此类推</span>
-<span id="cb20-147"><a href="#cb20-147" aria-hidden="true" tabindex="-1"></a><span class="ss">5.  </span>在各组样本量相等的情况下，如果在两个均值之间未发现显著差异，则推断这两个均值所包含的任何均值之间不存在显著差异，并且不再检验所包含均值之间的差异。</span>
-<span id="cb20-148"><a href="#cb20-148" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-149"><a href="#cb20-149" aria-hidden="true" tabindex="-1"></a>studentized range statistic $q=\frac{\bar X_{max}-\bar X_{min}}{S_{\bar X_{max}-\bar X_{min}}}$，其中$S_{\bar X_{max}-\bar X_{min}}=\sqrt{\frac{MS_{组内}}{n}}$，$n$是每一个治疗组的样本量。</span>
-<span id="cb20-150"><a href="#cb20-150" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-151"><a href="#cb20-151" aria-hidden="true" tabindex="-1"></a>如果各组样本量不等,则$S_{\bar X_{max}-\bar X_{min}}=\sqrt{\frac{MS_{组内}}{2}(\frac{1}{n_i}+\frac{1}{n_j})}$</span>
-<span id="cb20-152"><a href="#cb20-152" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-153"><a href="#cb20-153" aria-hidden="true" tabindex="-1"></a>检验统计量</span>
-<span id="cb20-154"><a href="#cb20-154" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-155"><a href="#cb20-155" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb20-156"><a href="#cb20-156" aria-hidden="true" tabindex="-1"></a>HSD=q_{(k,\nu_{组内}),1-\alpha} \times S_{\bar X_{max}-\bar X_{min}},\nu_{组内}=k(n_j-1)</span>
-<span id="cb20-157"><a href="#cb20-157" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb20-158"><a href="#cb20-158" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-159"><a href="#cb20-159" aria-hidden="true" tabindex="-1"></a>对于任意i,j且$\bar X_i＞\bar X_j$，如果$\bar X_i-\bar X_j＞HSD$，那么拒绝$H_0$，说明这两组存在显著差异。</span>
-<span id="cb20-160"><a href="#cb20-160" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-161"><a href="#cb20-161" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb20-162"><a href="#cb20-162" aria-hidden="true" tabindex="-1"></a>H_0:\mu_i=\mu_j(i≠j)</span>
-<span id="cb20-163"><a href="#cb20-163" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb20-164"><a href="#cb20-164" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-167"><a href="#cb20-167" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-168"><a href="#cb20-168" aria-hidden="true" tabindex="-1"></a>k_means <span class="ot">&lt;-</span> <span class="fu">apply</span>(df,<span class="dv">2</span>,mean) <span class="sc">|&gt;</span> <span class="fu">sort</span>(,<span class="at">decreasing =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb20-169"><a href="#cb20-169" aria-hidden="true" tabindex="-1"></a>k_means</span>
-<span id="cb20-170"><a href="#cb20-170" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-171"><a href="#cb20-171" aria-hidden="true" tabindex="-1"></a><span class="co"># 附录q  q(3,12),1-0.05  3(5-1)=12</span></span>
-<span id="cb20-172"><a href="#cb20-172" aria-hidden="true" tabindex="-1"></a>q_critical_value <span class="ot">&lt;-</span> <span class="fl">3.77</span></span>
-<span id="cb20-173"><a href="#cb20-173" aria-hidden="true" tabindex="-1"></a>nj <span class="ot">&lt;-</span> <span class="dv">5</span></span>
-<span id="cb20-174"><a href="#cb20-174" aria-hidden="true" tabindex="-1"></a>HSD <span class="ot">&lt;-</span> q_critical_value<span class="sc">*</span><span class="fu">sqrt</span>(MS_within<span class="sc">/</span>nj)</span>
-<span id="cb20-175"><a href="#cb20-175" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-176"><a href="#cb20-176" aria-hidden="true" tabindex="-1"></a>k_means</span>
-<span id="cb20-177"><a href="#cb20-177" aria-hidden="true" tabindex="-1"></a>diff_means <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
-<span id="cb20-178"><a href="#cb20-178" aria-hidden="true" tabindex="-1"></a>names_diff_means <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
-<span id="cb20-179"><a href="#cb20-179" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-180"><a href="#cb20-180" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(<span class="fu">length</span>(k_means)<span class="sc">-</span><span class="dv">1</span>)){</span>
-<span id="cb20-181"><a href="#cb20-181" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span>(j <span class="cf">in</span> <span class="fu">length</span>(k_means)<span class="sc">:</span>(i<span class="sc">+</span><span class="dv">1</span>)){</span>
-<span id="cb20-182"><a href="#cb20-182" aria-hidden="true" tabindex="-1"></a>        diff_value <span class="ot">&lt;-</span> k_means[i] <span class="sc">-</span> k_means[j]</span>
-<span id="cb20-183"><a href="#cb20-183" aria-hidden="true" tabindex="-1"></a>        diff_means <span class="ot">&lt;-</span> <span class="fu">c</span>(diff_means, diff_value)</span>
-<span id="cb20-184"><a href="#cb20-184" aria-hidden="true" tabindex="-1"></a>        names_diff_means <span class="ot">&lt;-</span> <span class="fu">c</span>(names_diff_means, <span class="fu">paste</span>(<span class="fu">names</span>(k_means)[i], <span class="st">"vs."</span>, <span class="fu">names</span>(k_means)[j],<span class="at">sep =</span> <span class="st">"_"</span>))</span>
-<span id="cb20-185"><a href="#cb20-185" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb20-186"><a href="#cb20-186" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb20-187"><a href="#cb20-187" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(diff_means) <span class="ot">&lt;-</span> names_diff_means</span>
-<span id="cb20-188"><a href="#cb20-188" aria-hidden="true" tabindex="-1"></a>diff_means</span>
-<span id="cb20-189"><a href="#cb20-189" aria-hidden="true" tabindex="-1"></a><span class="co">#全为真，3组成对比较都存在显著差异</span></span>
-<span id="cb20-190"><a href="#cb20-190" aria-hidden="true" tabindex="-1"></a>diff_means <span class="sc">&gt;</span> HSD </span>
-<span id="cb20-191"><a href="#cb20-191" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-192"><a href="#cb20-192" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-193"><a href="#cb20-193" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-196"><a href="#cb20-196" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-197"><a href="#cb20-197" aria-hidden="true" tabindex="-1"></a>pairwise <span class="ot">&lt;-</span> <span class="fu">TukeyHSD</span>(df_aov)</span>
-<span id="cb20-198"><a href="#cb20-198" aria-hidden="true" tabindex="-1"></a>pairwise</span>
-<span id="cb20-199"><a href="#cb20-199" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-200"><a href="#cb20-200" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-201"><a href="#cb20-201" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-202"><a href="#cb20-202" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Dunnett's test</span></span>
-<span id="cb20-203"><a href="#cb20-203" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-204"><a href="#cb20-204" aria-hidden="true" tabindex="-1"></a>*Dunnett's test*也称为*q'*-test,是两独立样本t-test的一种修正。Dunnett's test 假设数据符合正态分布，并且各组的方差相等。 控制对照组（C）与其他每个实验组（T）比较。</span>
-<span id="cb20-205"><a href="#cb20-205" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-206"><a href="#cb20-206" aria-hidden="true" tabindex="-1"></a>$H_0:\mu_C=\mu_T$</span>
-<span id="cb20-207"><a href="#cb20-207" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-208"><a href="#cb20-208" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb20-209"><a href="#cb20-209" aria-hidden="true" tabindex="-1"></a>q'=\frac{\bar X_T-\bar X_C}{\sqrt{MS_{组内}(\frac{1}{n_T}+\frac{1}{n_C})}} \sim q'(\nu,a) \ \ \nu=\nu_{组内},a=k</span>
-<span id="cb20-210"><a href="#cb20-210" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb20-211"><a href="#cb20-211" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-212"><a href="#cb20-212" aria-hidden="true" tabindex="-1"></a>临界值 $q'_{(a,\nu_E),1-\alpha/2}$</span>
-<span id="cb20-213"><a href="#cb20-213" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-216"><a href="#cb20-216" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-217"><a href="#cb20-217" aria-hidden="true" tabindex="-1"></a>nT <span class="ot">&lt;-</span> nC <span class="ot">&lt;-</span> <span class="dv">5</span> </span>
-<span id="cb20-218"><a href="#cb20-218" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-219"><a href="#cb20-219" aria-hidden="true" tabindex="-1"></a>SE_mean_diff <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(MS_within<span class="sc">*</span>(<span class="dv">1</span><span class="sc">/</span>nT<span class="sc">+</span><span class="dv">1</span><span class="sc">/</span>nC))</span>
-<span id="cb20-220"><a href="#cb20-220" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-221"><a href="#cb20-221" aria-hidden="true" tabindex="-1"></a>k_means</span>
-<span id="cb20-222"><a href="#cb20-222" aria-hidden="true" tabindex="-1"></a>diff_means <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
-<span id="cb20-223"><a href="#cb20-223" aria-hidden="true" tabindex="-1"></a>names_diff_means <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
-<span id="cb20-224"><a href="#cb20-224" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-225"><a href="#cb20-225" aria-hidden="true" tabindex="-1"></a><span class="co"># 以 low 作控制组</span></span>
-<span id="cb20-226"><a href="#cb20-226" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span><span class="fu">length</span>(k_means)){</span>
-<span id="cb20-227"><a href="#cb20-227" aria-hidden="true" tabindex="-1"></a>        diff_value <span class="ot">&lt;-</span> k_means[i] <span class="sc">-</span> k_means[<span class="dv">1</span>]</span>
-<span id="cb20-228"><a href="#cb20-228" aria-hidden="true" tabindex="-1"></a>        diff_means <span class="ot">&lt;-</span> <span class="fu">c</span>(diff_means, diff_value)</span>
-<span id="cb20-229"><a href="#cb20-229" aria-hidden="true" tabindex="-1"></a>        names_diff_means <span class="ot">&lt;-</span> <span class="fu">c</span>(names_diff_means, <span class="fu">paste</span>(<span class="fu">names</span>(k_means)[<span class="dv">1</span>], <span class="st">"vs."</span>, <span class="fu">names</span>(k_means)[i],<span class="at">sep =</span> <span class="st">"_"</span>))</span>
-<span id="cb20-230"><a href="#cb20-230" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb20-231"><a href="#cb20-231" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(diff_means) <span class="ot">&lt;-</span> names_diff_means</span>
-<span id="cb20-232"><a href="#cb20-232" aria-hidden="true" tabindex="-1"></a>diff_means</span>
-<span id="cb20-233"><a href="#cb20-233" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-234"><a href="#cb20-234" aria-hidden="true" tabindex="-1"></a>q撇_stat <span class="ot">&lt;-</span> diff_means<span class="sc">/</span>SE_mean_diff</span>
-<span id="cb20-235"><a href="#cb20-235" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-236"><a href="#cb20-236" aria-hidden="true" tabindex="-1"></a><span class="co"># 附录q'  q'(3,12),1-0.05/2  </span></span>
-<span id="cb20-237"><a href="#cb20-237" aria-hidden="true" tabindex="-1"></a><span class="fu">abs</span>(q撇_stat)<span class="sc">&gt;</span><span class="fl">2.50</span>  </span>
-<span id="cb20-238"><a href="#cb20-238" aria-hidden="true" tabindex="-1"></a><span class="co">#全为真，各实验组与控制组均存在显著差异</span></span>
-<span id="cb20-239"><a href="#cb20-239" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-240"><a href="#cb20-240" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-243"><a href="#cb20-243" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-244"><a href="#cb20-244" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(multcomp)</span>
-<span id="cb20-245"><a href="#cb20-245" aria-hidden="true" tabindex="-1"></a>dunnett_result <span class="ot">&lt;-</span> <span class="fu">glht</span>(df_aov, <span class="at">linfct =</span><span class="fu">mcp</span>(<span class="at">level =</span><span class="fu">c</span>(<span class="st">"medium - low = 0"</span>, <span class="st">"high - low = 0"</span>)))</span>
-<span id="cb20-246"><a href="#cb20-246" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-247"><a href="#cb20-247" aria-hidden="true" tabindex="-1"></a><span class="co"># 查看 Dunnett's test 结果</span></span>
-<span id="cb20-248"><a href="#cb20-248" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(dunnett_result)</span>
-<span id="cb20-249"><a href="#cb20-249" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-250"><a href="#cb20-250" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-251"><a href="#cb20-251" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-252"><a href="#cb20-252" aria-hidden="true" tabindex="-1"></a><span class="fu">#### LSD-t test</span></span>
-<span id="cb20-253"><a href="#cb20-253" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-254"><a href="#cb20-254" aria-hidden="true" tabindex="-1"></a>least significant difference t-test</span>
-<span id="cb20-255"><a href="#cb20-255" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-256"><a href="#cb20-256" aria-hidden="true" tabindex="-1"></a>挑选任意感兴趣的两组进行比较</span>
-<span id="cb20-257"><a href="#cb20-257" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-258"><a href="#cb20-258" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb20-259"><a href="#cb20-259" aria-hidden="true" tabindex="-1"></a>H_0:\mu_i=\mu_j(i≠j)</span>
-<span id="cb20-260"><a href="#cb20-260" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb20-261"><a href="#cb20-261" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-262"><a href="#cb20-262" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb20-263"><a href="#cb20-263" aria-hidden="true" tabindex="-1"></a>LSD-t=\frac{\bar X_i-\bar X_j}{\sqrt{MS_{组内}(\frac{1}{n_i}+\frac{1}{n_j})}} \sim t(\nu) \ ,\ \nu=\nu_{组内}=n-k,a=k</span>
-<span id="cb20-264"><a href="#cb20-264" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb20-265"><a href="#cb20-265" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-268"><a href="#cb20-268" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-269"><a href="#cb20-269" aria-hidden="true" tabindex="-1"></a><span class="co"># medium high</span></span>
-<span id="cb20-270"><a href="#cb20-270" aria-hidden="true" tabindex="-1"></a>LSD <span class="ot">&lt;-</span> (k_means[<span class="dv">2</span>]<span class="sc">-</span>k_means[<span class="dv">3</span>])<span class="sc">/</span><span class="fu">sqrt</span>(MS_within<span class="sc">*</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">5</span><span class="sc">+</span><span class="dv">1</span><span class="sc">/</span><span class="dv">5</span>))</span>
-<span id="cb20-271"><a href="#cb20-271" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-272"><a href="#cb20-272" aria-hidden="true" tabindex="-1"></a><span class="co"># 附录 t(12,1-0.05/2)=2.719</span></span>
-<span id="cb20-273"><a href="#cb20-273" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-274"><a href="#cb20-274" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-275"><a href="#cb20-275" aria-hidden="true" tabindex="-1"></a><span class="fu">## 方差分析假设</span></span>
-<span id="cb20-276"><a href="#cb20-276" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-277"><a href="#cb20-277" aria-hidden="true" tabindex="-1"></a><span class="ot">&lt;https://www.statmethods.net/stats/rdiagnostics.html&gt;</span></span>
-<span id="cb20-278"><a href="#cb20-278" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-279"><a href="#cb20-279" aria-hidden="true" tabindex="-1"></a><span class="fu">### 独立性</span></span>
-<span id="cb20-280"><a href="#cb20-280" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-281"><a href="#cb20-281" aria-hidden="true" tabindex="-1"></a><span class="fu">### 正态性</span></span>
-<span id="cb20-282"><a href="#cb20-282" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-285"><a href="#cb20-285" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-286"><a href="#cb20-286" aria-hidden="true" tabindex="-1"></a><span class="co"># 异常观测点</span></span>
-<span id="cb20-287"><a href="#cb20-287" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-288"><a href="#cb20-288" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">outlierTest</span>(df_aov) </span>
-<span id="cb20-289"><a href="#cb20-289" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-290"><a href="#cb20-290" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-291"><a href="#cb20-291" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 直方图/茎叶图</span></span>
-<span id="cb20-292"><a href="#cb20-292" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-293"><a href="#cb20-293" aria-hidden="true" tabindex="-1"></a><span class="fu">#### P-P图/Q-Q图</span></span>
-<span id="cb20-294"><a href="#cb20-294" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-295"><a href="#cb20-295" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 偏度和峰度</span></span>
-<span id="cb20-296"><a href="#cb20-296" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-297"><a href="#cb20-297" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb20-298"><a href="#cb20-298" aria-hidden="true" tabindex="-1"></a>H_0:总体偏度系数\gamma_1=0 或者总体峰度系数\gamma_2=0</span>
-<span id="cb20-299"><a href="#cb20-299" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb20-300"><a href="#cb20-300" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-301"><a href="#cb20-301" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb20-302"><a href="#cb20-302" aria-hidden="true" tabindex="-1"></a>z_i=\frac{g_i-0}{\sigma_{g_i}}  \ \ \ \ 临界值z_{1-\alpha/2}</span>
-<span id="cb20-303"><a href="#cb20-303" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb20-304"><a href="#cb20-304" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-305"><a href="#cb20-305" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Shapiro-Wilk检验（小样本）</span></span>
-<span id="cb20-306"><a href="#cb20-306" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-309"><a href="#cb20-309" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-310"><a href="#cb20-310" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(df<span class="sc">$</span>low)  </span>
-<span id="cb20-311"><a href="#cb20-311" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(df<span class="sc">$</span>medium)  </span>
-<span id="cb20-312"><a href="#cb20-312" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(df<span class="sc">$</span>high)  </span>
-<span id="cb20-313"><a href="#cb20-313" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-314"><a href="#cb20-314" aria-hidden="true" tabindex="-1"></a><span class="co"># 因为观测太少，也可以同时检验</span></span>
-<span id="cb20-315"><a href="#cb20-315" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(<span class="fu">c</span>(df<span class="sc">$</span>low,df<span class="sc">$</span>medium,df<span class="sc">$</span>high))  </span>
-<span id="cb20-316"><a href="#cb20-316" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-317"><a href="#cb20-317" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-318"><a href="#cb20-318" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Kolmogorov-Smirnov检验（Lilliefors correction 大样本）</span></span>
-<span id="cb20-319"><a href="#cb20-319" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-322"><a href="#cb20-322" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-323"><a href="#cb20-323" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(<span class="fu">c</span>(df<span class="sc">$</span>low,df<span class="sc">$</span>medium,df<span class="sc">$</span>high),<span class="st">"pnorm"</span>)</span>
-<span id="cb20-324"><a href="#cb20-324" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(<span class="fu">rnorm</span>(<span class="dv">1000</span>),<span class="st">"pnorm"</span>)</span>
-<span id="cb20-325"><a href="#cb20-325" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-326"><a href="#cb20-326" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-329"><a href="#cb20-329" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-330"><a href="#cb20-330" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">50</span>) </span>
-<span id="cb20-331"><a href="#cb20-331" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">50</span>) </span>
-<span id="cb20-332"><a href="#cb20-332" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(x, y)  <span class="co"># perform ks test</span></span>
-<span id="cb20-333"><a href="#cb20-333" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-334"><a href="#cb20-334" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">50</span>)</span>
-<span id="cb20-335"><a href="#cb20-335" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">50</span>)</span>
-<span id="cb20-336"><a href="#cb20-336" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(x, y) </span>
-<span id="cb20-337"><a href="#cb20-337" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-338"><a href="#cb20-338" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-339"><a href="#cb20-339" aria-hidden="true" tabindex="-1"></a><span class="fu">### 方差齐性</span></span>
-<span id="cb20-340"><a href="#cb20-340" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-341"><a href="#cb20-341" aria-hidden="true" tabindex="-1"></a><span class="ot">&lt;http://www.cookbook-r.com/Statistical_analysis/Homogeneity_of_variance/&gt;</span></span>
-<span id="cb20-342"><a href="#cb20-342" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-343"><a href="#cb20-343" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Bartlett's test</span></span>
-<span id="cb20-344"><a href="#cb20-344" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-345"><a href="#cb20-345" aria-hidden="true" tabindex="-1"></a>数据满足正态性</span>
-<span id="cb20-346"><a href="#cb20-346" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-347"><a href="#cb20-347" aria-hidden="true" tabindex="-1"></a>比较每一组方差的加权算术均值和几何均值。</span>
-<span id="cb20-348"><a href="#cb20-348" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-349"><a href="#cb20-349" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb20-350"><a href="#cb20-350" aria-hidden="true" tabindex="-1"></a>H_0:\sigma_1^2=\sigma_2^2=...=\sigma_k^2</span>
-<span id="cb20-351"><a href="#cb20-351" aria-hidden="true" tabindex="-1"></a>$$ 当样本量$n_j$≥5时，检验统计量(各组样本量相等)</span>
-<span id="cb20-352"><a href="#cb20-352" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-353"><a href="#cb20-353" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb20-354"><a href="#cb20-354" aria-hidden="true" tabindex="-1"></a>B=\frac{(n-1)<span class="co">[</span><span class="ot">kln\bar S^2-\sum_{j=1}^{k}lnS_j^2</span><span class="co">]</span>}{1+\frac{k+1}{3k(n-1)}} \sim\ \chi^2(\nu)\ ,\nu=k-1</span>
-<span id="cb20-355"><a href="#cb20-355" aria-hidden="true" tabindex="-1"></a>$$ 其中n是每一组的样本量，$S_j^2$是某一组的样本方差，$\bar S^2$是所有k个组样本方差的平均值。</span>
-<span id="cb20-356"><a href="#cb20-356" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-357"><a href="#cb20-357" aria-hidden="true" tabindex="-1"></a>当各组样本量不等时，</span>
-<span id="cb20-358"><a href="#cb20-358" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-359"><a href="#cb20-359" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb20-360"><a href="#cb20-360" aria-hidden="true" tabindex="-1"></a>B=\frac{\sum_{j=1}^{k}(n_j-1)ln\frac{\bar S^2}{S_j^2}}{1+\frac{1}{3(k-1)}(\sum_{j=1}^{k}\frac {1}{n_j-1}-\frac{1}{\sum_{j=1}^{k}(n_j-1)})} \sim\ \chi^2(\nu)\ ,\nu=k-1</span>
-<span id="cb20-361"><a href="#cb20-361" aria-hidden="true" tabindex="-1"></a>$$ 其中$h_j$是某一组的样本量，$\bar S^2=(\sum_{j=1}^{k}(n_j-1)S_j^2)/(\sum_{j=1}^{k}(n_j-1))$是所有k个组样本方差的加权平均值。</span>
-<span id="cb20-362"><a href="#cb20-362" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-365"><a href="#cb20-365" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-366"><a href="#cb20-366" aria-hidden="true" tabindex="-1"></a>n1<span class="ot">=</span>n2<span class="ot">=</span>n3<span class="ot">=</span><span class="dv">5</span></span>
-<span id="cb20-367"><a href="#cb20-367" aria-hidden="true" tabindex="-1"></a>k<span class="ot">=</span><span class="dv">3</span></span>
-<span id="cb20-368"><a href="#cb20-368" aria-hidden="true" tabindex="-1"></a>S2 <span class="ot">&lt;-</span> <span class="fu">apply</span>(df,<span class="dv">2</span>,var)</span>
-<span id="cb20-369"><a href="#cb20-369" aria-hidden="true" tabindex="-1"></a>S2</span>
-<span id="cb20-370"><a href="#cb20-370" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-371"><a href="#cb20-371" aria-hidden="true" tabindex="-1"></a>lnS2 <span class="ot">&lt;-</span> <span class="fu">log</span>(S2)</span>
-<span id="cb20-372"><a href="#cb20-372" aria-hidden="true" tabindex="-1"></a>lnS2</span>
-<span id="cb20-373"><a href="#cb20-373" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-374"><a href="#cb20-374" aria-hidden="true" tabindex="-1"></a>S2_mean <span class="ot">&lt;-</span> (<span class="dv">5-1</span>)<span class="sc">*</span>(<span class="fu">sum</span>(S2))<span class="sc">/</span>(<span class="dv">3</span><span class="sc">*</span>(<span class="dv">5-1</span>))</span>
-<span id="cb20-375"><a href="#cb20-375" aria-hidden="true" tabindex="-1"></a>S2_mean</span>
-<span id="cb20-376"><a href="#cb20-376" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-377"><a href="#cb20-377" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-378"><a href="#cb20-378" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-379"><a href="#cb20-379" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> ((<span class="dv">5-1</span>)<span class="sc">*</span>(<span class="dv">3</span><span class="sc">*</span><span class="fu">log</span>(S2_mean)<span class="sc">-</span><span class="fu">sum</span>(lnS2)))<span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span>(<span class="dv">3</span><span class="sc">+</span><span class="dv">1</span>)<span class="sc">/</span>(<span class="dv">3</span><span class="sc">*</span><span class="dv">3</span><span class="sc">*</span>(<span class="dv">5-1</span>)))</span>
-<span id="cb20-380"><a href="#cb20-380" aria-hidden="true" tabindex="-1"></a>B</span>
-<span id="cb20-381"><a href="#cb20-381" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-382"><a href="#cb20-382" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-385"><a href="#cb20-385" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-386"><a href="#cb20-386" aria-hidden="true" tabindex="-1"></a><span class="fu">bartlett.test</span>(df)</span>
-<span id="cb20-387"><a href="#cb20-387" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-388"><a href="#cb20-388" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-389"><a href="#cb20-389" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Levene's test</span></span>
-<span id="cb20-390"><a href="#cb20-390" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-391"><a href="#cb20-391" aria-hidden="true" tabindex="-1"></a>数据不满足正态性</span>
-<span id="cb20-392"><a href="#cb20-392" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-393"><a href="#cb20-393" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>k个随机样本是独立的</span>
-<span id="cb20-394"><a href="#cb20-394" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>随机变量X是连续的</span>
-<span id="cb20-395"><a href="#cb20-395" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-396"><a href="#cb20-396" aria-hidden="true" tabindex="-1"></a>Levene 变换：</span>
-<span id="cb20-397"><a href="#cb20-397" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-398"><a href="#cb20-398" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb20-399"><a href="#cb20-399" aria-hidden="true" tabindex="-1"></a>Z_{ij}=|X_{ij}-\bar X_{.\ j}|(i=1,2...,n_j;\ j=1,2,...,k)</span>
-<span id="cb20-400"><a href="#cb20-400" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb20-401"><a href="#cb20-401" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-404"><a href="#cb20-404" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-405"><a href="#cb20-405" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span>
-<span id="cb20-406"><a href="#cb20-406" aria-hidden="true" tabindex="-1"></a>z_df <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(</span>
-<span id="cb20-407"><a href="#cb20-407" aria-hidden="true" tabindex="-1"></a>    <span class="at">low=</span>df[<span class="dv">1</span>]<span class="sc">-</span>k_means[<span class="dv">1</span>],</span>
-<span id="cb20-408"><a href="#cb20-408" aria-hidden="true" tabindex="-1"></a>    <span class="at">medium=</span>df[<span class="dv">2</span>]<span class="sc">-</span>k_means[<span class="dv">2</span>],</span>
-<span id="cb20-409"><a href="#cb20-409" aria-hidden="true" tabindex="-1"></a>    <span class="at">high=</span>df[<span class="dv">3</span>]<span class="sc">-</span>k_means[<span class="dv">3</span>]</span>
-<span id="cb20-410"><a href="#cb20-410" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span> <span class="fu">abs</span>()</span>
-<span id="cb20-411"><a href="#cb20-411" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb20-412"><a href="#cb20-412" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-413"><a href="#cb20-413" aria-hidden="true" tabindex="-1"></a>z_df</span>
-<span id="cb20-414"><a href="#cb20-414" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-415"><a href="#cb20-415" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-416"><a href="#cb20-416" aria-hidden="true" tabindex="-1"></a>检验统计量（基于变换后的F检验）</span>
-<span id="cb20-417"><a href="#cb20-417" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-418"><a href="#cb20-418" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb20-419"><a href="#cb20-419" aria-hidden="true" tabindex="-1"></a>W=\frac{MS_{组间}}{MS_{组内}}=\frac{\sum_jn_j(\bar Z_{.j}-\bar Z_{..})^2/(k-1)}{\sum_j\sum_i(Z_{ij}-\bar Z_{.j})^2/(n-k)}  \sim F(\nu_1,\nu_2)   \ \ \ \ \nu_1=k-1,\nu_2=n-k</span>
-<span id="cb20-420"><a href="#cb20-420" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb20-421"><a href="#cb20-421" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-424"><a href="#cb20-424" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-425"><a href="#cb20-425" aria-hidden="true" tabindex="-1"></a>v1<span class="ot">=</span><span class="dv">3-1</span></span>
-<span id="cb20-426"><a href="#cb20-426" aria-hidden="true" tabindex="-1"></a>v2<span class="ot">=</span><span class="dv">15-3</span></span>
-<span id="cb20-427"><a href="#cb20-427" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-428"><a href="#cb20-428" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-429"><a href="#cb20-429" aria-hidden="true" tabindex="-1"></a>z.j_mean <span class="ot">&lt;-</span> <span class="fu">apply</span>(z_df, <span class="dv">2</span>, mean)</span>
-<span id="cb20-430"><a href="#cb20-430" aria-hidden="true" tabindex="-1"></a>z.j_mean</span>
-<span id="cb20-431"><a href="#cb20-431" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-432"><a href="#cb20-432" aria-hidden="true" tabindex="-1"></a>z_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(z.j_mean)</span>
-<span id="cb20-433"><a href="#cb20-433" aria-hidden="true" tabindex="-1"></a>z_mean </span>
-<span id="cb20-434"><a href="#cb20-434" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-435"><a href="#cb20-435" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">digits =</span> <span class="dv">4</span>)</span>
-<span id="cb20-436"><a href="#cb20-436" aria-hidden="true" tabindex="-1"></a>W <span class="ot">&lt;-</span> <span class="dv">12</span><span class="sc">*</span><span class="fu">sum</span>(<span class="dv">5</span><span class="sc">*</span>(z.j_mean<span class="sc">-</span>z_mean)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span>(<span class="fu">sum</span>((z_df<span class="sc">$</span>low<span class="sc">-</span>z.j_mean[<span class="dv">1</span>])<span class="sc">^</span><span class="dv">2</span>)<span class="sc">+</span><span class="fu">sum</span>((z_df<span class="sc">$</span>medium<span class="sc">-</span>z.j_mean[<span class="dv">2</span>])<span class="sc">^</span><span class="dv">2</span>)<span class="sc">+</span><span class="fu">sum</span>((z_df<span class="sc">$</span>high<span class="sc">-</span>z.j_mean[<span class="dv">3</span>])<span class="sc">^</span><span class="dv">2</span>)))</span>
-<span id="cb20-437"><a href="#cb20-437" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-438"><a href="#cb20-438" aria-hidden="true" tabindex="-1"></a>W</span>
-<span id="cb20-439"><a href="#cb20-439" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-440"><a href="#cb20-440" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-441"><a href="#cb20-441" aria-hidden="true" tabindex="-1"></a><span class="fu">## Welch’s ANOVA Test</span></span>
-<span id="cb20-442"><a href="#cb20-442" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-443"><a href="#cb20-443" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/clipboard-1694958347.png)</span></span>
-<span id="cb20-444"><a href="#cb20-444" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-445"><a href="#cb20-445" aria-hidden="true" tabindex="-1"></a><span class="fu">## 数据变换</span></span>
-<span id="cb20-446"><a href="#cb20-446" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-447"><a href="#cb20-447" aria-hidden="true" tabindex="-1"></a>当方差分析的正态性假设或方差齐性假设不为真时，通常使用(1)数据变换方法；(2)非参数检验方法 比较均值差异</span>
-<span id="cb20-448"><a href="#cb20-448" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-449"><a href="#cb20-449" aria-hidden="true" tabindex="-1"></a><span class="fu">### 平方根变换</span></span>
-<span id="cb20-450"><a href="#cb20-450" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-451"><a href="#cb20-451" aria-hidden="true" tabindex="-1"></a>当每个水平组的方差与均值成比例，尤其是样本来自泊松分布</span>
-<span id="cb20-452"><a href="#cb20-452" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-453"><a href="#cb20-453" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb20-454"><a href="#cb20-454" aria-hidden="true" tabindex="-1"></a>Y=\sqrt{X}</span>
-<span id="cb20-455"><a href="#cb20-455" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb20-456"><a href="#cb20-456" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-457"><a href="#cb20-457" aria-hidden="true" tabindex="-1"></a>当数据中有零或非常小的值时，</span>
-<span id="cb20-458"><a href="#cb20-458" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-459"><a href="#cb20-459" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb20-460"><a href="#cb20-460" aria-hidden="true" tabindex="-1"></a>Y=\sqrt{X+a} \ \ \ \ a=0.5或0.1 </span>
-<span id="cb20-461"><a href="#cb20-461" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb20-462"><a href="#cb20-462" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-463"><a href="#cb20-463" aria-hidden="true" tabindex="-1"></a><span class="fu">### 对数变换</span></span>
-<span id="cb20-464"><a href="#cb20-464" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-465"><a href="#cb20-465" aria-hidden="true" tabindex="-1"></a>当数据方差不齐且每个水平组标准差与均值成比例时</span>
-<span id="cb20-466"><a href="#cb20-466" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-467"><a href="#cb20-467" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb20-468"><a href="#cb20-468" aria-hidden="true" tabindex="-1"></a>Y=\log{X} \ \ \ \ base=e或10 </span>
-<span id="cb20-469"><a href="#cb20-469" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb20-470"><a href="#cb20-470" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-471"><a href="#cb20-471" aria-hidden="true" tabindex="-1"></a>当数据中有零或负值时，</span>
-<span id="cb20-472"><a href="#cb20-472" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-473"><a href="#cb20-473" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb20-474"><a href="#cb20-474" aria-hidden="true" tabindex="-1"></a>Y=\log{(X+a)} \ \ \ \ a为实数，使得X+a&gt;0</span>
-<span id="cb20-475"><a href="#cb20-475" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb20-476"><a href="#cb20-476" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-477"><a href="#cb20-477" aria-hidden="true" tabindex="-1"></a><span class="fu">### 反正弦平方根变换</span></span>
-<span id="cb20-478"><a href="#cb20-478" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-479"><a href="#cb20-479" aria-hidden="true" tabindex="-1"></a>率，服从二项分布$B(n,\pi)$</span>
-<span id="cb20-480"><a href="#cb20-480" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-481"><a href="#cb20-481" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb20-482"><a href="#cb20-482" aria-hidden="true" tabindex="-1"></a>Y=\arcsin {\sqrt{\pi}} \ \ \ \</span>
-<span id="cb20-483"><a href="#cb20-483" aria-hidden="true" tabindex="-1"></a>$$</span>
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div></div></div></div></div>
+</nav>
 </div> <!-- /content -->
 
 

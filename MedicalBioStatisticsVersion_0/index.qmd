@@ -2,14 +2,6 @@
 
 -   [R语言教程 Ⅶ 统计模型 ——李东风](https://www.math.pku.edu.cn/teachers/lidf/docs/Rbook/html/_Rbook/)
 
--   [统计学习 ISLR](https://www.statlearning.com/)
-
 -   [R语言实战医学统计](https://ayueme.github.io/R_medical_stat/)
 
--   <https://www.tidymodels.org/>
-
 -   [医学研究中的生存数据建模（4e）](https://bookdown.org/wangzhen/survival/)
-
--   [Applied Propensity Score Analysis with R](https://psa.bryer.org/index.html)
-
--   [Modern Statistics for Modern Biology](https://www.huber.embl.de/msmb/)
