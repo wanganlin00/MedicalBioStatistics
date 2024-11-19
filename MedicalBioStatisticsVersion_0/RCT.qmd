@@ -186,7 +186,9 @@ raw_data %>% select(contains("id"))
 
 ## 对照
 
-安慰剂（placebo）
+空白对照
+安慰剂（placebo）对照
+阳性对照
 
 ## 重复
 
