@@ -1,0 +1,1740 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.32">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>14&nbsp; 线性混合效应模型 – 医学与生物统计学</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./GLM.html" rel="next">
+<link href="./multiple_linear_regression.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-2486e1f0a3ee9ee1fc393803a1361cdb.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-6561bbde787c299e21493071c8edc6ff.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-69a30c073420f475066ff0fd08b8a642.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script><link rel="stylesheet" href="style.css">
+</head>
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./simple_linear_regression.html">统计模型</a></li><li class="breadcrumb-item"><a href="./LMM.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">线性混合效应模型</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">医学与生物统计学</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">前言</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./descriptive_statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">描述性统计学</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./quantitative_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">定量数据的统计描述</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./qualitative_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">定性数据的统计描述</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./correlation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">相关性</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./hypothesis_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">假设检验</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./normality_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">正态性检验</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./variance_homogeneity_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">方差齐性检验</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./t_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">t 检验</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ANOVA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">方差分析</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./repeated_measures_anova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">重复测量方差分析</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./proportion_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">比例检验</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chi-square_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title"><span class="math inline">\(\chi^2\)</span> 检验</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./nonparametric_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">非参数检验</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">统计模型</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./simple_linear_regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">线性回归</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./multiple_linear_regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">多元线性回归</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./LMM.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">线性混合效应模型</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./GLM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">广义线性模型</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./GEE.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">广义估计方程</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">生存分析</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./SurvivalAnalysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">生存分析</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./CoxProportionalHazardsModel.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Cox比例风险模型</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./CompetingRiskModel.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">竞争风险模型</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">临床研究设计</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./diagnostic_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">诊断性测试</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./RCT.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">随机对照试验</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#lme4lmer" id="toc-lme4lmer" class="nav-link active" data-scroll-target="#lme4lmer"><span class="header-section-number">14.1</span> <code>lme4::lmer()</code></a></li>
+  <li><a href="#%E9%9A%8F%E6%9C%BA%E6%88%AA%E8%B7%9D%E9%9A%8F%E6%9C%BA%E6%96%9C%E7%8E%87" id="toc-随机截距随机斜率" class="nav-link" data-scroll-target="#%E9%9A%8F%E6%9C%BA%E6%88%AA%E8%B7%9D%E9%9A%8F%E6%9C%BA%E6%96%9C%E7%8E%87"><span class="header-section-number">14.2</span> 随机截距+随机斜率</a></li>
+  <li><a href="#%E9%9A%8F%E6%9C%BA%E6%88%AA%E8%B7%9D%E5%9B%BA%E5%AE%9A%E6%96%9C%E7%8E%87" id="toc-随机截距固定斜率" class="nav-link" data-scroll-target="#%E9%9A%8F%E6%9C%BA%E6%88%AA%E8%B7%9D%E5%9B%BA%E5%AE%9A%E6%96%9C%E7%8E%87"><span class="header-section-number">14.3</span> 随机截距+固定斜率</a></li>
+  <li><a href="#%E5%9B%BA%E5%AE%9A%E6%88%AA%E8%B7%9D%E9%9A%8F%E6%9C%BA%E6%96%9C%E7%8E%87" id="toc-固定截距随机斜率" class="nav-link" data-scroll-target="#%E5%9B%BA%E5%AE%9A%E6%88%AA%E8%B7%9D%E9%9A%8F%E6%9C%BA%E6%96%9C%E7%8E%87"><span class="header-section-number">14.4</span> 固定截距+随机斜率</a></li>
+  <li><a href="#%E9%9A%8F%E6%9C%BA%E6%95%88%E5%BA%94%E6%A8%A1%E5%9E%8B" id="toc-随机效应模型" class="nav-link" data-scroll-target="#%E9%9A%8F%E6%9C%BA%E6%95%88%E5%BA%94%E6%A8%A1%E5%9E%8B"><span class="header-section-number">14.5</span> 随机效应模型</a></li>
+  <li><a href="#%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B%E5%9B%BA%E5%AE%9A%E6%88%AA%E8%B7%9D-%E5%9B%BA%E5%AE%9A%E6%96%9C%E7%8E%87" id="toc-线性模型固定截距-固定斜率" class="nav-link" data-scroll-target="#%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B%E5%9B%BA%E5%AE%9A%E6%88%AA%E8%B7%9D-%E5%9B%BA%E5%AE%9A%E6%96%9C%E7%8E%87"><span class="header-section-number">14.6</span> 线性模型：固定截距+ 固定斜率</a></li>
+  <li><a href="#%E6%A8%A1%E5%9E%8B%E9%80%89%E6%8B%A9" id="toc-模型选择" class="nav-link" data-scroll-target="#%E6%A8%A1%E5%9E%8B%E9%80%89%E6%8B%A9"><span class="header-section-number">14.7</span> 模型选择</a></li>
+  <li><a href="#%E6%A8%A1%E5%9E%8B%E8%AF%8A%E6%96%AD" id="toc-模型诊断" class="nav-link" data-scroll-target="#%E6%A8%A1%E5%9E%8B%E8%AF%8A%E6%96%AD"><span class="header-section-number">14.8</span> 模型诊断</a></li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./simple_linear_regression.html">统计模型</a></li><li class="breadcrumb-item"><a href="./LMM.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">线性混合效应模型</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title">
+<span class="chapter-number">14</span>&nbsp; <span class="chapter-title">线性混合效应模型</span>
+</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">November 20, 2024</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+
+</header><p>线性混合效应模型 （Linear Mixed-effect Model，LMM）用于分析具有固定效应和随机效应的数据结构。 它能够处理数据中的个体异质性和组内相关性。如果数据满足正态分布但有组内相关性，使用线性混合效应模型。</p>
+<p>LMM可以采用多种相关性假设：</p>
+<ul>
+<li><p>unstructured</p></li>
+<li><p>homogeneous toeplitz</p></li>
+<li><p>auto-regression AR(1)</p></li>
+<li><p>homogeneous auto-regression ARH(1)</p></li>
+<li><p>compound symmetry</p></li>
+<li><p>homogeneous compound symmetry</p></li>
+</ul>
+<p>对于连续数据，mixed model repeated measures（MMRM）</p>
+<p>对于分类数据或计数数据，generalized linear mixed-effects model(GLMM)</p>
+<p><a href="https://link.springer.com/book/10.1007/978-0-387-87458-6">Mixed Effects Models and Extensions in Ecology with R 第5章</a></p>
+<p>线性混合模型的一般表达形式：</p>
+<p><span class="math display">\[
+Y = \mathbf{X} \beta + \mathbf{Z} \gamma + \epsilon
+\]</span></p>
+<p>其中：</p>
+<ul>
+<li><p><span class="math inline">\(\mathbf{X}\)</span>是固定效应自变量矩阵。</p></li>
+<li><p><span class="math inline">\(\beta\)</span> 是固定效应的回归系数。</p></li>
+<li><p><span class="math inline">\(\mathbf{Z}\)</span> 是随机效应自变量矩阵。</p></li>
+<li><p><span class="math inline">\(\gamma\)</span> 是随机效应的回归系数。</p></li>
+<li><p><span class="math inline">\(\epsilon\)</span> 是误差项。</p></li>
+</ul>
+<p>固定效应是感兴趣的自变量，表示所有个体都相同的效应</p>
+<p>随机效应：随机截距表示不同个体的基线差异，随机斜率表示不同个体对自变量的响应差异。</p>
+<section id="lme4lmer" class="level2" data-number="14.1"><h2 data-number="14.1" class="anchored" data-anchor-id="lme4lmer">
+<span class="header-section-number">14.1</span> <code>lme4::lmer()</code>
+</h2>
+<p><code><a href="https://rdrr.io/pkg/lmerTest/man/lmer.html">lmer()</a></code> 的表达式如下：</p>
+<p><span class="math display">\[
+lmer (data,formual= DV \sim Fixed\_Factor + \\ (Random\_intercept + Random\_slope | Random\_Factor)+\\(Random\_intercept + Random\_slope | Random\_Factor)+...
+\\)
+\]</span></p>
+<p>截距中，1表示随机截距，0表示固定截距，默认截距为1。</p>
+<table class="caption-top table">
+<thead><tr class="header">
+<th>LME</th>
+<th>表达式</th>
+<th>简写</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>随机截距+随机斜率</td>
+<td>y~x+( 1+x | id )</td>
+<td>y~x+( x | id )</td>
+</tr>
+<tr class="even">
+<td>随机截距+固定斜率</td>
+<td>y~x+( 1+1 | id )</td>
+<td>y~x+( 1 | id )</td>
+</tr>
+<tr class="odd">
+<td>固定截距+随机斜率</td>
+<td>y~x+( 0+x | id )</td>
+<td>NA</td>
+</tr>
+<tr class="even">
+<td>线性模型：固定截距+固定斜率</td>
+<td>y~x</td>
+<td>NA</td>
+</tr>
+</tbody>
+</table>
+<div class="cell">
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rikz</span> <span class="op">&lt;-</span> <span class="fu">read_delim</span><span class="op">(</span><span class="st">"data/AED/RIKZ.txt"</span><span class="op">)</span></span>
+<span><span class="va">rikz</span> <span class="op">&lt;-</span> <span class="va">rikz</span> <span class="op">%&gt;%</span> </span>
+<span>    <span class="fu">mutate</span><span class="op">(</span></span>
+<span>        Beach <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">Beach</span><span class="op">)</span>,</span>
+<span>        Exposure <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">Exposure</span><span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">rikz</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 6 × 5</span></span>
+<span><span class="co">#&gt;   Sample Richness Exposure    NAP Beach</span></span>
+<span><span class="co">#&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;fct&gt;     &lt;dbl&gt; &lt;fct&gt;</span></span>
+<span><span class="co">#&gt; 1      1       11 10        0.045 1    </span></span>
+<span><span class="co">#&gt; 2      2       10 10       -1.04  1    </span></span>
+<span><span class="co">#&gt; 3      3       13 10       -1.34  1    </span></span>
+<span><span class="co">#&gt; 4      4       11 10        0.616 1    </span></span>
+<span><span class="co">#&gt; 5      5       10 10       -0.684 1    </span></span>
+<span><span class="co">#&gt; 6      6        8 8         1.19  2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section><section id="随机截距随机斜率" class="level2" data-number="14.2"><h2 data-number="14.2" class="anchored" data-anchor-id="随机截距随机斜率">
+<span class="header-section-number">14.2</span> 随机截距+随机斜率</h2>
+<p><span class="math display">\[
+\eta_{(nrow \times 1)} = \mathbf{X}_{nrow \times 1} \beta_{1 \times 1} + \mathbf{Z}_{nrow \times 2n_{subjects}} \mathbf{\gamma}_{2n_{subjects} \times 1} + \epsilon_i
+\]</span></p>
+<p>Z有两倍于受试者数量的列，每个受试者的随机截距和随机斜率</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/runehaubo/lmerTestR">lmerTest</a></span><span class="op">)</span></span>
+<span><span class="fu">conflicted</span><span class="fu">::</span><span class="fu"><a href="https://conflicted.r-lib.org/reference/conflicts_prefer.html">conflicts_prefer</a></span><span class="op">(</span><span class="fu">lmerTest</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/lmerTest/man/lmer.html">lmer</a></span><span class="op">)</span></span>
+<span><span class="va">lme1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lmerTest/man/lmer.html">lmer</a></span><span class="op">(</span><span class="va">Richness</span> <span class="op">~</span> <span class="fl">1</span> <span class="op">+</span> <span class="va">NAP</span> <span class="op">+</span> <span class="va">Exposure</span><span class="op">+</span> <span class="va">NAP</span><span class="op">:</span><span class="va">Exposure</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">+</span> <span class="va">NAP</span> <span class="op">|</span><span class="va">Beach</span><span class="op">)</span> ,data <span class="op">=</span> <span class="va">rikz</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">lme1</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Linear mixed model fit by REML. t-tests use Satterthwaite's method [</span></span>
+<span><span class="co">#&gt; lmerModLmerTest]</span></span>
+<span><span class="co">#&gt; Formula: Richness ~ 1 + NAP + Exposure + NAP:Exposure + (1 + NAP | Beach)</span></span>
+<span><span class="co">#&gt;    Data: rikz</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; REML criterion at convergence: 207.2</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Scaled residuals: </span></span>
+<span><span class="co">#&gt;      Min       1Q   Median       3Q      Max </span></span>
+<span><span class="co">#&gt; -1.92384 -0.36066 -0.13343  0.09819  2.84228 </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Random effects:</span></span>
+<span><span class="co">#&gt;  Groups   Name        Variance Std.Dev. Corr </span></span>
+<span><span class="co">#&gt;  Beach    (Intercept) 3.758    1.938         </span></span>
+<span><span class="co">#&gt;           NAP         2.837    1.684    -1.00</span></span>
+<span><span class="co">#&gt;  Residual             6.535    2.556         </span></span>
+<span><span class="co">#&gt; Number of obs: 45, groups:  Beach, 9</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Fixed effects:</span></span>
+<span><span class="co">#&gt;                Estimate Std. Error      df t value Pr(&gt;|t|)   </span></span>
+<span><span class="co">#&gt; (Intercept)     13.3457     2.2784  5.0864   5.858  0.00194 **</span></span>
+<span><span class="co">#&gt; NAP             -4.1753     2.1243  5.7080  -1.965  0.09942 . </span></span>
+<span><span class="co">#&gt; Exposure10      -5.3273     2.5556  5.1415  -2.085  0.09000 . </span></span>
+<span><span class="co">#&gt; Exposure11      -9.7660     2.5653  5.1903  -3.807  0.01169 * </span></span>
+<span><span class="co">#&gt; NAP:Exposure10   0.1646     2.3621  5.5602   0.070  0.94688   </span></span>
+<span><span class="co">#&gt; NAP:Exposure11   2.7273     2.3715  5.6329   1.150  0.29661   </span></span>
+<span><span class="co">#&gt; ---</span></span>
+<span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Correlation of Fixed Effects:</span></span>
+<span><span class="co">#&gt;             (Intr) NAP    Exps10 Exps11 NAP:E10</span></span>
+<span><span class="co">#&gt; NAP         -0.770                             </span></span>
+<span><span class="co">#&gt; Exposure10  -0.892  0.686                      </span></span>
+<span><span class="co">#&gt; Exposure11  -0.888  0.683  0.792               </span></span>
+<span><span class="co">#&gt; NAP:Expsr10  0.692 -0.899 -0.775 -0.615        </span></span>
+<span><span class="co">#&gt; NAP:Expsr11  0.689 -0.896 -0.615 -0.779  0.806 </span></span>
+<span><span class="co">#&gt; optimizer (nloptwrap) convergence code: 0 (OK)</span></span>
+<span><span class="co">#&gt; boundary (singular) fit: see help('isSingular')</span></span>
+<span></span>
+<span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">lme1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="LMM_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/AIC.html">AIC</a></span><span class="op">(</span><span class="va">lme1</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 227.1558</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/AIC.html">BIC</a></span><span class="op">(</span><span class="va">lme1</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 245.2224</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/logLik.html">logLik</a></span><span class="op">(</span><span class="va">lme1</span><span class="op">)</span></span>
+<span><span class="co">#&gt; 'log Lik.' -103.5779 (df=10)</span></span>
+<span></span>
+<span><span class="co"># library(broom.mixed)</span></span>
+<span><span class="co"># tidy(lme1)</span></span>
+<span></span>
+<span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://svn.r-project.org/R-packages/trunk/nlme/">nlme</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/nlme/man/lme.html">lme</a></span><span class="op">(</span><span class="va">Richness</span> <span class="op">~</span> <span class="fl">1</span> <span class="op">+</span> <span class="va">NAP</span> <span class="op">*</span> <span class="va">Exposure</span>,</span>
+<span>             random <span class="op">=</span> <span class="op">~</span> <span class="fl">1</span> <span class="op">+</span> <span class="va">NAP</span> <span class="op">|</span> <span class="va">Beach</span> ,</span>
+<span>             data <span class="op">=</span> <span class="va">rikz</span>,</span>
+<span>             control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/nlme/man/lmeControl.html">lmeControl</a></span><span class="op">(</span>opt <span class="op">=</span> <span class="st">"optim"</span>, </span>
+<span>                                  msMaxIter <span class="op">=</span> <span class="fl">1000</span>, </span>
+<span>                                  msMaxEval <span class="op">=</span> <span class="fl">5000</span><span class="op">)</span></span>
+<span>    <span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Linear mixed-effects model fit by REML</span></span>
+<span><span class="co">#&gt;   Data: rikz </span></span>
+<span><span class="co">#&gt;        AIC      BIC    logLik</span></span>
+<span><span class="co">#&gt;   227.2046 243.8402 -103.6023</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Random effects:</span></span>
+<span><span class="co">#&gt;  Formula: ~1 + NAP | Beach</span></span>
+<span><span class="co">#&gt;  Structure: General positive-definite, Log-Cholesky parametrization</span></span>
+<span><span class="co">#&gt;             StdDev   Corr  </span></span>
+<span><span class="co">#&gt; (Intercept) 1.939709 (Intr)</span></span>
+<span><span class="co">#&gt; NAP         1.689580 -0.996</span></span>
+<span><span class="co">#&gt; Residual    2.554676       </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Fixed effects:  Richness ~ 1 + NAP * Exposure </span></span>
+<span><span class="co">#&gt;                    Value Std.Error DF   t-value p-value</span></span>
+<span><span class="co">#&gt; (Intercept)    13.345694  2.278989 33  5.855970  0.0000</span></span>
+<span><span class="co">#&gt; NAP            -4.175271  2.128084 33 -1.961986  0.0582</span></span>
+<span><span class="co">#&gt; Exposure10     -5.323695  2.556406  6 -2.082492  0.0825</span></span>
+<span><span class="co">#&gt; Exposure11     -9.765613  2.566035  6 -3.805720  0.0089</span></span>
+<span><span class="co">#&gt; NAP:Exposure10  0.167146  2.366467 33  0.070631  0.9441</span></span>
+<span><span class="co">#&gt; NAP:Exposure11  2.726865  2.375786 33  1.147774  0.2593</span></span>
+<span><span class="co">#&gt;  Correlation: </span></span>
+<span><span class="co">#&gt;                (Intr) NAP    Exps10 Exps11 NAP:E10</span></span>
+<span><span class="co">#&gt; NAP            -0.767                             </span></span>
+<span><span class="co">#&gt; Exposure10     -0.891  0.684                      </span></span>
+<span><span class="co">#&gt; Exposure11     -0.888  0.682  0.792               </span></span>
+<span><span class="co">#&gt; NAP:Exposure10  0.690 -0.899 -0.772 -0.613        </span></span>
+<span><span class="co">#&gt; NAP:Exposure11  0.687 -0.896 -0.613 -0.777  0.806 </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Standardized Within-Group Residuals:</span></span>
+<span><span class="co">#&gt;        Min         Q1        Med         Q3        Max </span></span>
+<span><span class="co">#&gt; -1.9251786 -0.3608959 -0.1327685  0.0992999  2.8420571 </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Number of Observations: 45</span></span>
+<span><span class="co">#&gt; Number of Groups: 9</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>这个模型的公式可以分解为：</p>
+<ul>
+<li><p>REML 限制性最大似然准则 <code>207.2</code>，评估模型的拟合优度</p></li>
+<li><p><code>Scaled residuals</code></p></li>
+<li><p><strong>随机效应部分</strong>：<code>Beach</code> 作为随机效应的分组变量，包含随机截距和随机斜率（NAP），相关性为 -1，说明随机截距和随机斜率之间呈现完全负相关关系。</p></li>
+<li><p><strong>固定效应部分</strong>：<code>Richness</code> 的预测由截距、NAP（数值变量）和 Exposure（分类变量，包含 Exposure10 和 Exposure11）及其交互项构成。</p></li>
+<li><p>固定效应的相关性矩阵</p></li>
+</ul>
+<div class="cell">
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 标准化模型残差分布</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">residuals</a></span><span class="op">(</span><span class="va">lme1</span>,type<span class="op">=</span><span class="st">"pearson"</span>,scaled<span class="op">=</span><span class="cn">T</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt;         0%        25%        50%        75%       100% </span></span>
+<span><span class="co">#&gt; -1.9238372 -0.3606612 -0.1334336  0.0981939  2.8422803</span></span>
+<span><span class="co"># 查看固定效应和显著性检验</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/nlme/man/fixed.effects.html">fixef</a></span><span class="op">(</span><span class="va">lme1</span><span class="op">)</span>   </span>
+<span><span class="co">#&gt;    (Intercept)            NAP     Exposure10     Exposure11 NAP:Exposure10 </span></span>
+<span><span class="co">#&gt;     13.3456944     -4.1752712     -5.3272654     -9.7660482      0.1646123 </span></span>
+<span><span class="co">#&gt; NAP:Exposure11 </span></span>
+<span><span class="co">#&gt;      2.7273068</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">lme1</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Type III Analysis of Variance Table with Satterthwaite's method</span></span>
+<span><span class="co">#&gt;               Sum Sq Mean Sq NumDF  DenDF F value  Pr(&gt;F)  </span></span>
+<span><span class="co">#&gt; NAP           90.646  90.646     1 5.5230 13.8711 0.01139 *</span></span>
+<span><span class="co">#&gt; Exposure     109.852  54.926     2 5.2975  8.4051 0.02273 *</span></span>
+<span><span class="co">#&gt; NAP:Exposure  22.308  11.154     2 5.3880  1.7068 0.26657  </span></span>
+<span><span class="co">#&gt; ---</span></span>
+<span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span></span>
+<span></span>
+<span><span class="co"># 随机效应：随机截距和随机斜率  # 每个组的随机截距表示该组的平均值与模型整体平均值（截距）的差异</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/nlme/man/random.effects.html">ranef</a></span><span class="op">(</span><span class="va">lme1</span><span class="op">)</span> </span>
+<span><span class="co">#&gt; $Beach</span></span>
+<span><span class="co">#&gt;     (Intercept)           NAP</span></span>
+<span><span class="co">#&gt; 1 -4.274356e-02  3.713708e-02</span></span>
+<span><span class="co">#&gt; 2 -2.709479e-14  2.354089e-14</span></span>
+<span><span class="co">#&gt; 3  3.819348e-03 -3.318381e-03</span></span>
+<span><span class="co">#&gt; 4 -2.741786e-01  2.382158e-01</span></span>
+<span><span class="co">#&gt; 5  3.269522e+00 -2.840673e+00</span></span>
+<span><span class="co">#&gt; 6  2.736093e-01 -2.377212e-01</span></span>
+<span><span class="co">#&gt; 7 -3.250033e-03  2.823741e-03</span></span>
+<span><span class="co">#&gt; 8 -2.148947e+00  1.867079e+00</span></span>
+<span><span class="co">#&gt; 9 -1.077831e+00  9.364564e-01</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; with conditional variances for "Beach"</span></span>
+<span><span class="co"># 随机效应的显著性检验</span></span>
+<span><span class="fu">lmerTest</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lmerTest/man/ranova.html">ranova</a></span><span class="op">(</span><span class="va">lme1</span><span class="op">)</span></span>
+<span><span class="co">#&gt; ANOVA-like table for random-effects: Single term deletions</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Model:</span></span>
+<span><span class="co">#&gt; Richness ~ NAP + Exposure + (1 + NAP | Beach) + NAP:Exposure</span></span>
+<span><span class="co">#&gt;                          npar  logLik    AIC    LRT Df Pr(&gt;Chisq)</span></span>
+<span><span class="co">#&gt; &lt;none&gt;                     10 -103.58 227.16                     </span></span>
+<span><span class="co">#&gt; NAP in (1 + NAP | Beach)    8 -105.67 227.35 4.1935  2     0.1229</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/nlme/man/random.effects.html">ranef</a></span><span class="op">(</span><span class="va">lme1</span><span class="op">)</span><span class="op">$</span><span class="va">Beach</span><span class="op">)</span></span>
+<span><span class="co">#&gt;             (Intercept) NAP</span></span>
+<span><span class="co">#&gt; (Intercept)           1  -1</span></span>
+<span><span class="co">#&gt; NAP                  -1   1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">e</span> <span class="op">&lt;-</span> <span class="fu">glmm.hp</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/glmm.hp/man/glmm.hp.html">glmm.hp</a></span><span class="op">(</span><span class="va">lme1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/save.html">save</a></span><span class="op">(</span><span class="va">e</span>,file <span class="op">=</span> <span class="st">"data/glmm.hp.Rdata"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># $r.squaredGLMM</span></span>
+<span><span class="co">#            R2m       R2c</span></span>
+<span><span class="co"># [1,] 0.6279508 0.7811086</span></span>
+<span><span class="co"># </span></span>
+<span><span class="co"># $hierarchical.partitioning</span></span>
+<span><span class="co">#              Unique Average.share Individual I.perc(%)</span></span>
+<span><span class="co"># 1            0.0000        0.0657     0.0657     10.46</span></span>
+<span><span class="co"># NAP          0.0000        0.0867     0.0867     13.81</span></span>
+<span><span class="co"># Exposure     0.2987        0.0135     0.3122     49.71</span></span>
+<span><span class="co"># NAP:Exposure 0.0884        0.0750     0.1634     26.02</span></span>
+<span><span class="co"># </span></span>
+<span><span class="co"># $variables</span></span>
+<span><span class="co"># [1] "1"            "NAP"          "Exposure"     "NAP:Exposure"</span></span>
+<span><span class="co"># </span></span>
+<span><span class="co"># $type</span></span>
+<span><span class="co"># [1] "hierarchical.partitioning"</span></span>
+<span><span class="co"># </span></span>
+<span><span class="co"># attr(,"class")</span></span>
+<span><span class="co"># [1] "glmmhp"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"data/glmm.hp.Rdata"</span><span class="op">)</span></span>
+<span><span class="va">e</span></span>
+<span><span class="co">#&gt; $r.squaredGLMM</span></span>
+<span><span class="co">#&gt;            R2m       R2c</span></span>
+<span><span class="co">#&gt; [1,] 0.6279508 0.7811086</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $hierarchical.partitioning</span></span>
+<span><span class="co">#&gt;              Unique Average.share Individual I.perc(%)</span></span>
+<span><span class="co">#&gt; 1            0.0000        0.0657     0.0657     10.46</span></span>
+<span><span class="co">#&gt; NAP          0.0000        0.0867     0.0867     13.81</span></span>
+<span><span class="co">#&gt; Exposure     0.2987        0.0135     0.3122     49.71</span></span>
+<span><span class="co">#&gt; NAP:Exposure 0.0884        0.0750     0.1634     26.02</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $variables</span></span>
+<span><span class="co">#&gt; [1] "1"            "NAP"          "Exposure"     "NAP:Exposure"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $type</span></span>
+<span><span class="co">#&gt; [1] "hierarchical.partitioning"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; attr(,"class")</span></span>
+<span><span class="co">#&gt; [1] "glmmhp"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p><strong><code>$r.squaredGLMM</code></strong></p>
+<ul>
+<li>
+<p>这里呈现了两个衡量模型拟合优度的指标，<code>R2m</code> 和 <code>R2c</code>，分别对应不同的广义决定系数计算方式。</p>
+<ul>
+<li><p><code>R2m</code> 的值为 <code>0.6279508</code>，表示固定效应变量解释了大约62.80%的响应变量的方差</p></li>
+<li><p><code>R2c</code> 的值为 <code>0.7811086</code>，表示固定效应和随机效应共同解释了大约78.11%的响应变量的方差</p></li>
+</ul>
+</li>
+</ul>
+<p><strong><code>$hierarchical.partitioning</code></strong></p>
+<ul>
+<li><p><strong>“Unique” 列</strong>：展示了各变量独自解释的方差比例</p></li>
+<li><p><strong>“Average.share” 列</strong>：变量与其他变量所有组合的方差解释比例</p></li>
+<li><p><strong>“Individual” 列</strong>：<strong>“Unique”和“Average.share”的和，即变量的总贡献</strong></p></li>
+<li><p><strong>“I.perc (%)” 列</strong>：每个变量的相对重要性程度。</p></li>
+</ul>
+<p><strong><code>$variables</code></strong></p>
+<ul>
+<li>简单列出了模型中涉及的变量名称，这里有 <code>"1"</code>（代表整体截距）、<code>"NAP"</code>、<code>"Exposure"</code> 以及它们的交互项 <code>"NAP:Exposure"</code>，明确了模型在分析中考虑的因素构成。</li>
+</ul>
+<p><strong><code>$type</code></strong></p>
+<ul>
+<li>指出了当前分析结果呈现的类型是 <code>"hierarchical.partitioning"</code>，说明后续如果进一步拓展分析或者对比不同模型等操作时，可以清楚知道这部分结果对应的分析类别。</li>
+</ul>
+<div class="cell">
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">e</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="images/glmm.hp_individual.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
+</figure>
+</div>
+</section><section id="随机截距固定斜率" class="level2" data-number="14.3"><h2 data-number="14.3" class="anchored" data-anchor-id="随机截距固定斜率">
+<span class="header-section-number">14.3</span> 随机截距+固定斜率</h2>
+<p><span class="math display">\[
+\eta_{(nrow \ \times 1)}=\mathbf{X_{nrow×1}}\beta_{1\times1} +Z_{nrow\times n_{subjects}} \mathbf{\gamma}_{n_{subjects}\times 1}+\epsilon_i
+\]</span></p>
+<p>Z有一倍于受试者数量的列，每个受试者的随机截距。</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">lme2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lmerTest/man/lmer.html">lmer</a></span><span class="op">(</span><span class="va">Richness</span> <span class="op">~</span> <span class="fl">1</span> <span class="op">+</span> <span class="va">NAP</span> <span class="op">*</span> <span class="va">Exposure</span><span class="op">+</span> <span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="fl">1</span> <span class="op">|</span><span class="va">Beach</span><span class="op">)</span> ,data <span class="op">=</span> <span class="va">rikz</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">lme2</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Linear mixed model fit by REML. t-tests use Satterthwaite's method [</span></span>
+<span><span class="co">#&gt; lmerModLmerTest]</span></span>
+<span><span class="co">#&gt; Formula: Richness ~ 1 + NAP * Exposure + (1 + 1 | Beach)</span></span>
+<span><span class="co">#&gt;    Data: rikz</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; REML criterion at convergence: 211.3</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Scaled residuals: </span></span>
+<span><span class="co">#&gt;     Min      1Q  Median      3Q     Max </span></span>
+<span><span class="co">#&gt; -1.5653 -0.4387 -0.1165  0.1783  4.1098 </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Random effects:</span></span>
+<span><span class="co">#&gt;  Groups   Name        Variance Std.Dev.</span></span>
+<span><span class="co">#&gt;  Beach    (Intercept) 0.2641   0.5139  </span></span>
+<span><span class="co">#&gt;  Residual             8.8316   2.9718  </span></span>
+<span><span class="co">#&gt; Number of obs: 45, groups:  Beach, 9</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Fixed effects:</span></span>
+<span><span class="co">#&gt;                Estimate Std. Error      df t value Pr(&gt;|t|)    </span></span>
+<span><span class="co">#&gt; (Intercept)     13.3457     1.4836  6.5050   8.996 6.63e-05 ***</span></span>
+<span><span class="co">#&gt; NAP             -4.1753     1.5051 33.0857  -2.774 0.009030 ** </span></span>
+<span><span class="co">#&gt; Exposure10      -5.5450     1.6577  6.4545  -3.345 0.013909 *  </span></span>
+<span><span class="co">#&gt; Exposure11      -9.7306     1.6705  6.6476  -5.825 0.000781 ***</span></span>
+<span><span class="co">#&gt; NAP:Exposure10   0.6717     1.6439 34.9341   0.409 0.685306    </span></span>
+<span><span class="co">#&gt; NAP:Exposure11   2.6888     1.6567 34.2669   1.623 0.113766    </span></span>
+<span><span class="co">#&gt; ---</span></span>
+<span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Correlation of Fixed Effects:</span></span>
+<span><span class="co">#&gt;             (Intr) NAP    Exps10 Exps11 NAP:E10</span></span>
+<span><span class="co">#&gt; NAP         -0.278                             </span></span>
+<span><span class="co">#&gt; Exposure10  -0.895  0.249                      </span></span>
+<span><span class="co">#&gt; Exposure11  -0.888  0.247  0.795               </span></span>
+<span><span class="co">#&gt; NAP:Expsr10  0.255 -0.916 -0.276 -0.226        </span></span>
+<span><span class="co">#&gt; NAP:Expsr11  0.253 -0.908 -0.226 -0.296  0.832</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/AIC.html">AIC</a></span><span class="op">(</span><span class="va">lme2</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 227.3493</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/AIC.html">BIC</a></span><span class="op">(</span><span class="va">lme2</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 241.8026</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/logLik.html">logLik</a></span><span class="op">(</span><span class="va">lme2</span><span class="op">)</span></span>
+<span><span class="co">#&gt; 'log Lik.' -105.6747 (df=8)</span></span>
+<span></span>
+<span><span class="fl">2</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">pt</a></span><span class="op">(</span><span class="fl">6.007</span>,<span class="fl">35</span>,lower.tail <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 7.558855e-07</span></span>
+<span></span>
+<span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/nlme/man/lme.html">lme</a></span><span class="op">(</span><span class="va">Richness</span> <span class="op">~</span> <span class="fl">1</span> <span class="op">+</span> <span class="va">NAP</span> <span class="op">*</span> <span class="va">Exposure</span>,random<span class="op">=</span> <span class="op">~</span> <span class="fl">1</span><span class="op">+</span><span class="fl">1</span> <span class="op">|</span><span class="va">Beach</span> ,data <span class="op">=</span> <span class="va">rikz</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Linear mixed-effects model fit by REML</span></span>
+<span><span class="co">#&gt;   Data: rikz </span></span>
+<span><span class="co">#&gt;        AIC      BIC    logLik</span></span>
+<span><span class="co">#&gt;   227.3493 240.6578 -105.6747</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Random effects:</span></span>
+<span><span class="co">#&gt;  Formula: ~1 + 1 | Beach</span></span>
+<span><span class="co">#&gt;         (Intercept) Residual</span></span>
+<span><span class="co">#&gt; StdDev:   0.5138683 2.971793</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Fixed effects:  Richness ~ 1 + NAP * Exposure </span></span>
+<span><span class="co">#&gt;                    Value Std.Error DF   t-value p-value</span></span>
+<span><span class="co">#&gt; (Intercept)    13.345694  1.483557 33  8.995739  0.0000</span></span>
+<span><span class="co">#&gt; NAP            -4.175271  1.505110 33 -2.774063  0.0090</span></span>
+<span><span class="co">#&gt; Exposure10     -5.544983  1.657659  6 -3.345069  0.0155</span></span>
+<span><span class="co">#&gt; Exposure11     -9.730595  1.670518  6 -5.824898  0.0011</span></span>
+<span><span class="co">#&gt; NAP:Exposure10  0.671731  1.643864 33  0.408629  0.6855</span></span>
+<span><span class="co">#&gt; NAP:Exposure11  2.688806  1.656743 33  1.622947  0.1141</span></span>
+<span><span class="co">#&gt;  Correlation: </span></span>
+<span><span class="co">#&gt;                (Intr) NAP    Exps10 Exps11 NAP:E10</span></span>
+<span><span class="co">#&gt; NAP            -0.278                             </span></span>
+<span><span class="co">#&gt; Exposure10     -0.895  0.249                      </span></span>
+<span><span class="co">#&gt; Exposure11     -0.888  0.247  0.795               </span></span>
+<span><span class="co">#&gt; NAP:Exposure10  0.255 -0.916 -0.276 -0.226        </span></span>
+<span><span class="co">#&gt; NAP:Exposure11  0.253 -0.908 -0.226 -0.296  0.832 </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Standardized Within-Group Residuals:</span></span>
+<span><span class="co">#&gt;        Min         Q1        Med         Q3        Max </span></span>
+<span><span class="co">#&gt; -1.5652904 -0.4386841 -0.1164805  0.1783113  4.1098230 </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Number of Observations: 45</span></span>
+<span><span class="co">#&gt; Number of Groups: 9</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section><section id="固定截距随机斜率" class="level2" data-number="14.4"><h2 data-number="14.4" class="anchored" data-anchor-id="固定截距随机斜率">
+<span class="header-section-number">14.4</span> 固定截距+随机斜率</h2>
+<p><span class="math display">\[
+\eta_{(nrow \times 1)} = \mathbf{X}_{nrow \times 1} \beta_{1 \times 1} + \mathbf{Z}_{nrow \times n_{subjects}} \mathbf{\gamma}_{n_{subjects} \times 1} + \epsilon_i
+\]</span></p>
+<p>Z 有一倍于受试者数量的列，每个受试者的随机斜率。</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">lme3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lmerTest/man/lmer.html">lmer</a></span><span class="op">(</span><span class="va">Richness</span> <span class="op">~</span> <span class="fl">1</span> <span class="op">+</span>  <span class="va">NAP</span> <span class="op">*</span> <span class="va">Exposure</span> <span class="op">+</span> <span class="op">(</span><span class="fl">0</span> <span class="op">+</span> <span class="va">NAP</span> <span class="op">|</span><span class="va">Beach</span><span class="op">)</span> ,data <span class="op">=</span> <span class="va">rikz</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">lme3</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Linear mixed model fit by REML. t-tests use Satterthwaite's method [</span></span>
+<span><span class="co">#&gt; lmerModLmerTest]</span></span>
+<span><span class="co">#&gt; Formula: Richness ~ 1 + NAP * Exposure + (0 + NAP | Beach)</span></span>
+<span><span class="co">#&gt;    Data: rikz</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; REML criterion at convergence: 211.4</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Scaled residuals: </span></span>
+<span><span class="co">#&gt;     Min      1Q  Median      3Q     Max </span></span>
+<span><span class="co">#&gt; -1.6048 -0.4448 -0.1226  0.2322  4.1284 </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Random effects:</span></span>
+<span><span class="co">#&gt;  Groups   Name Variance Std.Dev.</span></span>
+<span><span class="co">#&gt;  Beach    NAP  0.000    0.000   </span></span>
+<span><span class="co">#&gt;  Residual      9.024    3.004   </span></span>
+<span><span class="co">#&gt; Number of obs: 45, groups:  Beach, 9</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Fixed effects:</span></span>
+<span><span class="co">#&gt;                Estimate Std. Error      df t value Pr(&gt;|t|)    </span></span>
+<span><span class="co">#&gt; (Intercept)     13.3457     1.4068 39.0000   9.486 1.11e-11 ***</span></span>
+<span><span class="co">#&gt; NAP             -4.1753     1.5214 39.0000  -2.744  0.00912 ** </span></span>
+<span><span class="co">#&gt; Exposure10      -5.5318     1.5715 39.0000  -3.520  0.00111 ** </span></span>
+<span><span class="co">#&gt; Exposure11      -9.7284     1.5852 39.0000  -6.137 3.34e-07 ***</span></span>
+<span><span class="co">#&gt; NAP:Exposure10   0.6278     1.6583 39.0000   0.379  0.70703    </span></span>
+<span><span class="co">#&gt; NAP:Exposure11   2.6835     1.6725 39.0000   1.604  0.11668    </span></span>
+<span><span class="co">#&gt; ---</span></span>
+<span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Correlation of Fixed Effects:</span></span>
+<span><span class="co">#&gt;             (Intr) NAP    Exps10 Exps11 NAP:E10</span></span>
+<span><span class="co">#&gt; NAP         -0.297                             </span></span>
+<span><span class="co">#&gt; Exposure10  -0.895  0.266                      </span></span>
+<span><span class="co">#&gt; Exposure11  -0.887  0.263  0.794               </span></span>
+<span><span class="co">#&gt; NAP:Expsr10  0.272 -0.917 -0.294 -0.242        </span></span>
+<span><span class="co">#&gt; NAP:Expsr11  0.270 -0.910 -0.242 -0.315  0.835 </span></span>
+<span><span class="co">#&gt; optimizer (nloptwrap) convergence code: 0 (OK)</span></span>
+<span><span class="co">#&gt; boundary (singular) fit: see help('isSingular')</span></span>
+<span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/nlme/man/lme.html">lme</a></span><span class="op">(</span><span class="va">Richness</span> <span class="op">~</span> <span class="fl">1</span> <span class="op">+</span> <span class="va">NAP</span> <span class="op">*</span> <span class="va">Exposure</span>,random<span class="op">=</span> <span class="op">~</span> <span class="fl">0</span><span class="op">+</span><span class="va">NAP</span> <span class="op">|</span><span class="va">Beach</span> ,data <span class="op">=</span> <span class="va">rikz</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Linear mixed-effects model fit by REML</span></span>
+<span><span class="co">#&gt;   Data: rikz </span></span>
+<span><span class="co">#&gt;        AIC      BIC    logLik</span></span>
+<span><span class="co">#&gt;   227.3962 240.7047 -105.6981</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Random effects:</span></span>
+<span><span class="co">#&gt;  Formula: ~0 + NAP | Beach</span></span>
+<span><span class="co">#&gt;                  NAP Residual</span></span>
+<span><span class="co">#&gt; StdDev: 0.0001223769 3.004042</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Fixed effects:  Richness ~ 1 + NAP * Exposure </span></span>
+<span><span class="co">#&gt;                    Value Std.Error DF   t-value p-value</span></span>
+<span><span class="co">#&gt; (Intercept)    13.345694  1.406821 33  9.486418  0.0000</span></span>
+<span><span class="co">#&gt; NAP            -4.175271  1.521443 33 -2.744283  0.0097</span></span>
+<span><span class="co">#&gt; Exposure10     -5.531822  1.571461  6 -3.520178  0.0125</span></span>
+<span><span class="co">#&gt; Exposure11     -9.728394  1.585241  6 -6.136854  0.0009</span></span>
+<span><span class="co">#&gt; NAP:Exposure10  0.627847  1.658269 33  0.378616  0.7074</span></span>
+<span><span class="co">#&gt; NAP:Exposure11  2.683487  1.672531 33  1.604447  0.1181</span></span>
+<span><span class="co">#&gt;  Correlation: </span></span>
+<span><span class="co">#&gt;                (Intr) NAP    Exps10 Exps11 NAP:E10</span></span>
+<span><span class="co">#&gt; NAP            -0.297                             </span></span>
+<span><span class="co">#&gt; Exposure10     -0.895  0.266                      </span></span>
+<span><span class="co">#&gt; Exposure11     -0.887  0.263  0.794               </span></span>
+<span><span class="co">#&gt; NAP:Exposure10  0.272 -0.917 -0.294 -0.242        </span></span>
+<span><span class="co">#&gt; NAP:Exposure11  0.270 -0.910 -0.242 -0.315  0.835 </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Standardized Within-Group Residuals:</span></span>
+<span><span class="co">#&gt;        Min         Q1        Med         Q3        Max </span></span>
+<span><span class="co">#&gt; -1.6048271 -0.4448474 -0.1225590  0.2321686  4.1283628 </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Number of Observations: 45</span></span>
+<span><span class="co">#&gt; Number of Groups: 9</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section><section id="随机效应模型" class="level2" data-number="14.5"><h2 data-number="14.5" class="anchored" data-anchor-id="随机效应模型">
+<span class="header-section-number">14.5</span> 随机效应模型</h2>
+<div class="cell">
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="va">lme4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lmerTest/man/lmer.html">lmer</a></span><span class="op">(</span><span class="va">Richness</span> <span class="op">~</span> <span class="fl">1</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="va">NAP</span><span class="op">|</span><span class="va">Beach</span><span class="op">)</span> ,data <span class="op">=</span> <span class="va">rikz</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">lme4</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Linear mixed model fit by REML. t-tests use Satterthwaite's method [</span></span>
+<span><span class="co">#&gt; lmerModLmerTest]</span></span>
+<span><span class="co">#&gt; Formula: Richness ~ 1 + (1 + NAP | Beach)</span></span>
+<span><span class="co">#&gt;    Data: rikz</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; REML criterion at convergence: 242.9</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Scaled residuals: </span></span>
+<span><span class="co">#&gt;     Min      1Q  Median      3Q     Max </span></span>
+<span><span class="co">#&gt; -2.1607 -0.4415 -0.1999  0.2065  2.6133 </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Random effects:</span></span>
+<span><span class="co">#&gt;  Groups   Name        Variance Std.Dev. Corr </span></span>
+<span><span class="co">#&gt;  Beach    (Intercept) 28.173   5.308         </span></span>
+<span><span class="co">#&gt;           NAP         11.292   3.360    -0.95</span></span>
+<span><span class="co">#&gt;  Residual              6.697   2.588         </span></span>
+<span><span class="co">#&gt; Number of obs: 45, groups:  Beach, 9</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Fixed effects:</span></span>
+<span><span class="co">#&gt;             Estimate Std. Error     df t value Pr(&gt;|t|)  </span></span>
+<span><span class="co">#&gt; (Intercept)   2.8023     0.8218 3.7478    3.41   0.0299 *</span></span>
+<span><span class="co">#&gt; ---</span></span>
+<span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/nlme/man/random.effects.html">ranef</a></span><span class="op">(</span><span class="va">lme4</span><span class="op">)</span></span>
+<span><span class="co">#&gt; $Beach</span></span>
+<span><span class="co">#&gt;   (Intercept)        NAP</span></span>
+<span><span class="co">#&gt; 1   6.0112287 -2.8605659</span></span>
+<span><span class="co">#&gt; 2   9.7420133 -5.0379262</span></span>
+<span><span class="co">#&gt; 3   0.8792316 -0.9838634</span></span>
+<span><span class="co">#&gt; 4   0.3721784 -0.7548668</span></span>
+<span><span class="co">#&gt; 5   9.1546337 -6.7668418</span></span>
+<span><span class="co">#&gt; 6   1.5719076 -1.1861532</span></span>
+<span><span class="co">#&gt; 7   0.4484228 -0.7999673</span></span>
+<span><span class="co">#&gt; 8   2.1690889 -1.6492031</span></span>
+<span><span class="co">#&gt; 9   3.3610981 -2.4639704</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; with conditional variances for "Beach"</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/nlme/man/lme.html">lme</a></span><span class="op">(</span><span class="va">Richness</span> <span class="op">~</span> <span class="fl">1</span> ,random<span class="op">=</span> <span class="op">~</span> <span class="fl">1</span><span class="op">+</span><span class="va">NAP</span> <span class="op">|</span><span class="va">Beach</span> ,data <span class="op">=</span> <span class="va">rikz</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Linear mixed-effects model fit by REML</span></span>
+<span><span class="co">#&gt;   Data: rikz </span></span>
+<span><span class="co">#&gt;       AIC      BIC    logLik</span></span>
+<span><span class="co">#&gt;   252.935 261.8559 -121.4675</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Random effects:</span></span>
+<span><span class="co">#&gt;  Formula: ~1 + NAP | Beach</span></span>
+<span><span class="co">#&gt;  Structure: General positive-definite, Log-Cholesky parametrization</span></span>
+<span><span class="co">#&gt;             StdDev   Corr  </span></span>
+<span><span class="co">#&gt; (Intercept) 5.307778 (Intr)</span></span>
+<span><span class="co">#&gt; NAP         3.360427 -0.948</span></span>
+<span><span class="co">#&gt; Residual    2.587870       </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Fixed effects:  Richness ~ 1 </span></span>
+<span><span class="co">#&gt;                Value Std.Error DF  t-value p-value</span></span>
+<span><span class="co">#&gt; (Intercept) 2.802324 0.8217849 36 3.410046  0.0016</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Standardized Within-Group Residuals:</span></span>
+<span><span class="co">#&gt;        Min         Q1        Med         Q3        Max </span></span>
+<span><span class="co">#&gt; -2.1606764 -0.4415215 -0.1998751  0.2064870  2.6133376 </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Number of Observations: 45</span></span>
+<span><span class="co">#&gt; Number of Groups: 9</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section><section id="线性模型固定截距-固定斜率" class="level2" data-number="14.6"><h2 data-number="14.6" class="anchored" data-anchor-id="线性模型固定截距-固定斜率">
+<span class="header-section-number">14.6</span> 线性模型：固定截距+ 固定斜率</h2>
+<div class="cell">
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">lm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Richness</span> <span class="op">~</span> <span class="fl">1</span> <span class="op">+</span> <span class="va">NAP</span> <span class="op">*</span> <span class="va">Exposure</span> ,data <span class="op">=</span> <span class="va">rikz</span><span class="op">)</span></span>
+<span><span class="va">lm</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Call:</span></span>
+<span><span class="co">#&gt; lm(formula = Richness ~ 1 + NAP * Exposure, data = rikz)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Coefficients:</span></span>
+<span><span class="co">#&gt;    (Intercept)             NAP      Exposure10      Exposure11  NAP:Exposure10  </span></span>
+<span><span class="co">#&gt;        13.3457         -4.1753         -5.5318         -9.7284          0.6278  </span></span>
+<span><span class="co">#&gt; NAP:Exposure11  </span></span>
+<span><span class="co">#&gt;         2.6835</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section><section id="模型选择" class="level2" data-number="14.7"><h2 data-number="14.7" class="anchored" data-anchor-id="模型选择">
+<span class="header-section-number">14.7</span> 模型选择</h2>
+<p>限制最大似然法REML</p>
+<ol type="1">
+<li>
+<p><strong>赤池信息准则（AIC）</strong></p>
+<p><span class="math display">\[ kIC=−2log(\mathcal{L})+2k\]</span></p>
+<p>其中：</p>
+<ul>
+<li><p><span class="math inline">\(\mathcal{L}\)</span> 是似然函数。</p></li>
+<li><p><span class="math inline">\(k\)</span> 是模型参数的数量。</p></li>
+</ul>
+</li>
+<li>
+<p><strong>贝叶斯信息准则（BIC）</strong></p>
+<p><span class="math display">\[ BIC=−2log(\mathcal{L})+klog(n) \]</span></p>
+<p>其中：</p>
+<ul>
+<li>
+<span class="math inline">\(n\)</span> 是样本量。</li>
+</ul>
+</li>
+</ol>
+<div class="cell">
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="va">plot_lme</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">model</span>, <span class="va">title</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="fu">ggplot</span><span class="op">(</span><span class="va">rikz</span>, <span class="fu">aes</span><span class="op">(</span><span class="va">NAP</span>, <span class="va">Richness</span>, group <span class="op">=</span> <span class="va">Beach</span>, color <span class="op">=</span> <span class="va">Beach</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>        <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>        <span class="fu">geom_line</span><span class="op">(</span></span>
+<span>            data <span class="op">=</span>  <span class="fu">bind_cols</span><span class="op">(</span><span class="va">rikz</span>, .pred <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">model</span>, <span class="va">rikz</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>            mapping <span class="op">=</span> <span class="fu">aes</span><span class="op">(</span>y <span class="op">=</span> <span class="va">.pred</span><span class="op">)</span>,</span>
+<span>            linewidth <span class="op">=</span> <span class="fl">1</span></span>
+<span>        <span class="op">)</span> <span class="op">+</span></span>
+<span>        <span class="fu">labs</span><span class="op">(</span>title <span class="op">=</span> <span class="va">title</span><span class="op">)</span><span class="op">+</span></span>
+<span>        <span class="fu">scale_x_continuous</span><span class="op">(</span>expand <span class="op">=</span> <span class="op">(</span><span class="va">mult</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">.1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>        <span class="fu">scale_y_continuous</span><span class="op">(</span>expand <span class="op">=</span> <span class="op">(</span><span class="va">mult</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">.1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>    <span class="fu">ggsci</span><span class="fu">::</span><span class="fu"><a href="https://nanx.me/ggsci/reference/scale_jco.html">scale_color_jco</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>        <span class="fu">ggpubr</span><span class="fu">::</span><span class="fu"><a href="https://rpkgs.datanovia.com/ggpubr/reference/theme_pubr.html">theme_pubr</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>        <span class="fu">theme</span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"right"</span>,</span>
+<span>              plot.title <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>hjust <span class="op">=</span> <span class="fl">.5</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span></span>
+<span><span class="va">lme_plot</span> <span class="op">&lt;-</span> <span class="fu">map2</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">lme1</span>,<span class="va">lme2</span>,<span class="va">lme3</span>, <span class="va">lme4</span>,<span class="va">lm</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"随机截距+随机斜率"</span>,<span class="st">"随机截距+固定斜率"</span>,<span class="st">"固定截距+随机斜率"</span>,<span class="st">"随机效应"</span>,<span class="st">"固定效应"</span><span class="op">)</span>,<span class="va">plot_lme</span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span><span class="va">lme_plot</span></span>
+<span><span class="co">#&gt; [[1]]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="LMM_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<pre><code>#&gt; 
+#&gt; [[2]]</code></pre>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="LMM_files/figure-html/unnamed-chunk-11-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<pre><code>#&gt; 
+#&gt; [[3]]</code></pre>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="LMM_files/figure-html/unnamed-chunk-11-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<pre><code>#&gt; 
+#&gt; [[4]]</code></pre>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="LMM_files/figure-html/unnamed-chunk-11-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<pre><code>#&gt; 
+#&gt; [[5]]</code></pre>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="LMM_files/figure-html/unnamed-chunk-11-5.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">lme1</span>,<span class="va">lme2</span>,<span class="va">lme3</span>,<span class="va">lme4</span>,<span class="va">lm</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Data: rikz</span></span>
+<span><span class="co">#&gt; Models:</span></span>
+<span><span class="co">#&gt; lme4: Richness ~ 1 + (1 + NAP | Beach)</span></span>
+<span><span class="co">#&gt; lm: Richness ~ 1 + NAP * Exposure</span></span>
+<span><span class="co">#&gt; lme2: Richness ~ 1 + NAP * Exposure + (1 + 1 | Beach)</span></span>
+<span><span class="co">#&gt; lme3: Richness ~ 1 + NAP * Exposure + (0 + NAP | Beach)</span></span>
+<span><span class="co">#&gt; lme1: Richness ~ 1 + NAP + Exposure + NAP:Exposure + (1 + NAP | Beach)</span></span>
+<span><span class="co">#&gt;      npar    AIC    BIC  logLik deviance   Chisq Df Pr(&gt;Chisq)    </span></span>
+<span><span class="co">#&gt; lme4    5 254.24 263.27 -122.12   244.24                          </span></span>
+<span><span class="co">#&gt; lm      7 234.26 246.91 -110.13   220.26 23.9789  2  6.209e-06 ***</span></span>
+<span><span class="co">#&gt; lme2    8 236.26 250.71 -110.13   220.26  0.0000  1     1.0000    </span></span>
+<span><span class="co">#&gt; lme3    8 236.26 250.71 -110.13   220.26  0.0000  0               </span></span>
+<span><span class="co">#&gt; lme1   10 238.20 256.27 -109.10   218.20  2.0619  2     0.3567    </span></span>
+<span><span class="co">#&gt; ---</span></span>
+<span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span></span>
+<span><span class="co"># p小于0.05,说明全模型与简化后模型存在差异，最终采用lme1,AIC</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section><section id="模型诊断" class="level2" data-number="14.8"><h2 data-number="14.8" class="anchored" data-anchor-id="模型诊断">
+<span class="header-section-number">14.8</span> 模型诊断</h2>
+<p>sleepstudy</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 拟合线性混合模型</span></span>
+<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">lme1</span></span>
+<span><span class="co"># 1. 残差图</span></span>
+<span><span class="va">residuals</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">resid</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
+<span><span class="va">fitted</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/fitted.values.html">fitted</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
+<span><span class="fu">ggplot</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">fitted</span>, <span class="va">residuals</span><span class="op">)</span>, <span class="fu">aes</span><span class="op">(</span><span class="va">fitted</span>, <span class="va">residuals</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_smooth</span><span class="op">(</span>method <span class="op">=</span> <span class="st">"loess"</span>, se <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">labs</span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Residuals vs Fitted"</span>, x <span class="op">=</span> <span class="st">"Fitted values"</span>, y <span class="op">=</span> <span class="st">"Residuals"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="LMM_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co"># 2. QQ图</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqnorm</a></span><span class="op">(</span><span class="va">residuals</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqline</a></span><span class="op">(</span><span class="va">residuals</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="LMM_files/figure-html/unnamed-chunk-13-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co"># 3. Cook's 距离</span></span>
+<span><span class="va">cooksd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html">cooks.distance</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">cooksd</span>, type <span class="op">=</span> <span class="st">"h"</span>, main <span class="op">=</span> <span class="st">"Cook's Distance"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="LMM_files/figure-html/unnamed-chunk-13-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co"># 4. 随机效应的分布</span></span>
+<span><span class="va">rand_dist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/nlme/man/random.effects.html">ranef</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqnorm</a></span><span class="op">(</span><span class="va">rand_dist</span><span class="op">$</span><span class="va">Beach</span><span class="op">$</span><span class="va">NAP</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqline</a></span><span class="op">(</span><span class="va">rand_dist</span><span class="op">$</span><span class="va">Beach</span><span class="op">$</span><span class="va">NAP</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="LMM_files/figure-html/unnamed-chunk-13-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+
+
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = true;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./multiple_linear_regression.html" class="pagination-link" aria-label="多元线性回归">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">多元线性回归</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./GLM.html" class="pagination-link" aria-label="广义线性模型">
+        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">广义线性模型</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

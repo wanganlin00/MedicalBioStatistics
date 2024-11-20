@@ -278,8 +278,8 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./LME.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">线性混合模型</span></span></a>
+  <a href="./LMM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">线性混合效应模型</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -356,13 +356,13 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#%E6%95%B0%E6%8D%AE%E9%9B%86%E5%A4%84%E7%90%86" id="toc-数据集处理" class="nav-link active" data-scroll-target="#%E6%95%B0%E6%8D%AE%E9%9B%86%E5%A4%84%E7%90%86"><span class="header-section-number">16.1</span> 数据集处理</a></li>
-  <li><a href="#glm-%E8%BF%9E%E6%8E%A5%E5%87%BD%E6%95%B0" id="toc-glm-连接函数" class="nav-link" data-scroll-target="#glm-%E8%BF%9E%E6%8E%A5%E5%87%BD%E6%95%B0"><span class="header-section-number">16.2</span> GLM 连接函数</a></li>
-  <li><a href="#%E6%96%B9%E5%B7%AE" id="toc-方差" class="nav-link" data-scroll-target="#%E6%96%B9%E5%B7%AE"><span class="header-section-number">16.3</span> 方差</a></li>
-  <li><a href="#%E7%9B%B8%E5%85%B3%E6%80%A7%E7%BB%93%E6%9E%84" id="toc-相关性结构" class="nav-link" data-scroll-target="#%E7%9B%B8%E5%85%B3%E6%80%A7%E7%BB%93%E6%9E%84"><span class="header-section-number">16.4</span> 相关性结构</a></li>
-  <li><a href="#gee" id="toc-gee" class="nav-link" data-scroll-target="#gee"><span class="header-section-number">16.5</span> GEE</a></li>
-  <li><a href="#gee-1" id="toc-gee-1" class="nav-link" data-scroll-target="#gee-1"><span class="header-section-number">16.6</span> <code>gee</code></a></li>
-  <li><a href="#geepack" id="toc-geepack" class="nav-link" data-scroll-target="#geepack"><span class="header-section-number">16.7</span> <code>geepack</code></a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E9%9B%86%E4%B8%8B%E8%BD%BD" id="toc-数据集下载" class="nav-link active" data-scroll-target="#%E6%95%B0%E6%8D%AE%E9%9B%86%E4%B8%8B%E8%BD%BD"><span class="header-section-number">16.1</span> 数据集下载</a></li>
+  <li><a href="#gee" id="toc-gee" class="nav-link" data-scroll-target="#gee"><span class="header-section-number">16.2</span> <code>gee</code></a></li>
+  <li><a href="#geepack" id="toc-geepack" class="nav-link" data-scroll-target="#geepack"><span class="header-section-number">16.3</span> <code>geepack</code></a></li>
+  <li><a href="#glm-%E8%BF%9E%E6%8E%A5%E5%87%BD%E6%95%B0" id="toc-glm-连接函数" class="nav-link" data-scroll-target="#glm-%E8%BF%9E%E6%8E%A5%E5%87%BD%E6%95%B0"><span class="header-section-number">16.4</span> GLM 连接函数</a></li>
+  <li><a href="#%E6%96%B9%E5%B7%AE" id="toc-方差" class="nav-link" data-scroll-target="#%E6%96%B9%E5%B7%AE"><span class="header-section-number">16.5</span> 方差</a></li>
+  <li><a href="#%E7%9B%B8%E5%85%B3%E6%80%A7%E7%BB%93%E6%9E%84" id="toc-相关性结构" class="nav-link" data-scroll-target="#%E7%9B%B8%E5%85%B3%E6%80%A7%E7%BB%93%E6%9E%84"><span class="header-section-number">16.6</span> 相关性结构</a></li>
+  <li><a href="#gee-1" id="toc-gee-1" class="nav-link" data-scroll-target="#gee-1"><span class="header-section-number">16.7</span> GEE</a></li>
   </ul></nav>
     </div>
 <!-- main -->
@@ -392,8 +392,8 @@ window.Quarto = {
 </header><p><a href="https://link.springer.com/book/10.1007/978-0-387-87458-6">Mixed Effects Models and Extensions in Ecology with R 第12章</a></p>
 <p>广义估计方程（Generalized Estimating Equations，GEE）是一种用于分析重复测量或相关数据的统计方法。 GEE的核心思想是通过建立一个<code>广义线性模型</code>来估计一组总体均值参数，同时考虑数据的相关性结构和缺失数据，而不依赖于特定的分布假设，从而使其适用于多种数据类型，包括二项分布、正态分布、负二项分布。</p>
 <p>广义估计方程用于处理具有组内相关性的非正态分布数据。模型形式类似于广义线性模型，但使用了估计方程来考虑组内相关性。</p>
-<section id="数据集处理" class="level2" data-number="16.1"><h2 data-number="16.1" class="anchored" data-anchor-id="数据集处理">
-<span class="header-section-number">16.1</span> 数据集处理</h2>
+<section id="数据集下载" class="level2" data-number="16.1"><h2 data-number="16.1" class="anchored" data-anchor-id="数据集下载">
+<span class="header-section-number">16.1</span> 数据集下载</h2>
 <p><a href="https://github.com/romunov/AED">数据集 Analyzing ecological data</a></p>
 <div class="cell">
 <details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rfb</span> <span class="op">&lt;-</span> <span class="fu">read_delim</span><span class="op">(</span><span class="st">"data/AED/RiceFieldBirds.txt"</span><span class="op">)</span></span>
@@ -437,101 +437,12 @@ window.Quarto = {
 <span>    <span class="op">)</span> <span class="op">-&gt;</span> <span class="va">de</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="glm-连接函数" class="level2" data-number="16.2"><h2 data-number="16.2" class="anchored" data-anchor-id="glm-连接函数">
-<span class="header-section-number">16.2</span> GLM 连接函数</h2>
-<p>GLM的形式如下：</p>
-<p><span class="math display">\[ g(\mu_{ij})=\beta_0+\beta_1x_{ij_1}+\beta_2x_{ij_2}+...+\beta_px_{ij_p} \]</span></p>
-<p>其中，<code>g()</code> 是一个连接函数，用于将自变量的线性组合与因变量的均值联系起来。常见的连接函数包括恒等连接函数（identity）、logistic连接函数（logit）、逆正弦连接函数（inverse sine）函数等。<code>i</code> 表示观测对象的索引，<code>j</code> 表示时间点或相关性结构的索引，<code>uij</code> 表示因变量的均值，<code>β</code> 表示待估计的系数，<code>Xij</code> 表示自变量。</p>
-<p><span class="math display">\[
-\eta = \beta  \mathbf{X}+ \alpha
-\]</span></p>
-<p><span class="math display">\[
-E(y)=g^{-1}(\eta)
-\]</span></p>
-<p>对于计数数据：</p>
-<p><span class="math display">\[
-E(y)=e^{\eta}=e^{\beta \mathbf{X} +\alpha}, 此时g(\mu)=\ln(\mu)=\mathbf{X}\beta
-\]</span></p>
-<div class="cell">
-<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rfb_glm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">richness</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/offset.html">offset</a></span><span class="op">(</span><span class="va">log_AREA</span><span class="op">)</span> <span class="op">+</span><span class="va">SPTREAT</span> <span class="op">+</span> <span class="va">DEPTH</span> <span class="op">+</span><span class="va">DEPTH2</span>,</span>
-<span>            family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html">quasipoisson</a></span><span class="op">(</span>link <span class="op">=</span> <span class="st">"log"</span><span class="op">)</span>,</span>
-<span>            data <span class="op">=</span> <span class="va">rfb</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">owls_glm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span></span>
-<span>    <span class="va">NCalls</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/offset.html">offset</a></span><span class="op">(</span><span class="va">log_broodsize</span><span class="op">)</span> <span class="op">+</span> <span class="va">SexParent</span> <span class="op">*</span> <span class="va">FoodTreatment</span> <span class="op">+</span> <span class="va">SexParent</span> <span class="op">*</span></span>
-<span>        <span class="va">ArrivalTime</span>,</span>
-<span>    family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html">poisson</a></span><span class="op">(</span>link <span class="op">=</span> <span class="st">"log"</span><span class="op">)</span>,</span>
-<span>    data <span class="op">=</span> <span class="va">owls</span></span>
-<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<p>对于二分类数据：</p>
-<p><span class="math display">\[
-E(y)=\frac{e^{\beta \mathbf{X} +\alpha}}{1+e^{\beta\mathbf{X}+\alpha}}, 此时g(\mu)=\ln(\frac{\mu}{1-\mu})=logit(\mu)
-\]</span></p>
-<div class="cell">
-<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">de_glm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">Ecervi_binary</span> <span class="op">~</span> <span class="va">Length_center</span> <span class="op">*</span><span class="va">Sex</span>,</span>
-<span>              family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html">binomial</a></span><span class="op">(</span>link <span class="op">=</span> <span class="st">"logit"</span><span class="op">)</span>,</span>
-<span>              data <span class="op">=</span> <span class="va">de</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">de_glm</span><span class="op">)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Call:</span></span>
-<span><span class="co">#&gt; glm(formula = Ecervi_binary ~ Length_center * Sex, family = binomial(link = "logit"), </span></span>
-<span><span class="co">#&gt;     data = de)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Coefficients:</span></span>
-<span><span class="co">#&gt;                    Estimate Std. Error z value Pr(&gt;|z|)    </span></span>
-<span><span class="co">#&gt; (Intercept)        0.652409   0.109602   5.953 2.64e-09 ***</span></span>
-<span><span class="co">#&gt; Length_center      0.025112   0.005576   4.504 6.68e-06 ***</span></span>
-<span><span class="co">#&gt; Sex2               0.163873   0.174235   0.941   0.3469    </span></span>
-<span><span class="co">#&gt; Length_center:Sex2 0.020109   0.009722   2.068   0.0386 *  </span></span>
-<span><span class="co">#&gt; ---</span></span>
-<span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; (Dispersion parameter for binomial family taken to be 1)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     Null deviance: 1073.1  on 825  degrees of freedom</span></span>
-<span><span class="co">#&gt; Residual deviance: 1003.7  on 822  degrees of freedom</span></span>
-<span><span class="co">#&gt; AIC: 1011.7</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Number of Fisher Scoring iterations: 4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-</section><section id="方差" class="level2" data-number="16.3"><h2 data-number="16.3" class="anchored" data-anchor-id="方差">
-<span class="header-section-number">16.3</span> 方差</h2>
-<p><span class="math display">\[
-var(Y_{is}|X_{is})=\Phi × \nu(\mu_{is})
-\]</span></p>
-<p>其中，Φ 是scale parameter （overdispersion），v() 是方差函数。</p>
-</section><section id="相关性结构" class="level2" data-number="16.4"><h2 data-number="16.4" class="anchored" data-anchor-id="相关性结构">
-<span class="header-section-number">16.4</span> 相关性结构</h2>
-<p>R(α)</p>
-<ol type="1">
-<li><p>非结构化相关：cor(Y<sub>is</sub>,Y<sub>it</sub>)=α<sub>st</sub></p></li>
-<li><p>自回归相关：cor(Y<sub>is</sub>,Y<sub>it</sub>)=α<sup>|s-t|</sup></p></li>
-<li><p>exchangeable 等相关：cor(Y<sub>is</sub>,Y<sub>it</sub>)=α</p></li>
-<li><p>independence，独立，cor(Y<sub>is</sub>,Y<sub>it</sub>)=<strong>I</strong></p></li>
-<li>
-</li></ol></section><section id="gee" class="level2" data-number="16.5"><h2 data-number="16.5" class="anchored" data-anchor-id="gee">
-<span class="header-section-number">16.5</span> GEE</h2>
-<p>GLM的期望和方差：</p>
-<p><span class="math display">\[ E(Y_{ij})=b'(\theta_{ij})\\ Var(Y_{ij})=b''(\theta_{ij})\ \Phi \]</span></p>
-<p>假定潜在的随机成分V<sub>i</sub> ：</p>
-<p><span class="math display">\[
-V_i=A_i^{1/2}R(\alpha)A_i^{1/2}\ \Phi
-\]</span></p>
-<p>其中，<code>Ai =diag（b''(θi1)，...，b''(θij)）</code> 。</p>
-<p>GEE的形式如下：</p>
-<p><span class="math display">\[
-U(\beta)=\sum_{i=1}^{n} D'_iV_i^{-1}(y_i-\mu_i)=0
-\]</span></p>
-<p>其中，$U(β) $是一个包含待估计参数的函数，quasi-deviance <span class="math inline">\(D'_i = \left(\frac{\partial \mu_i}{\partial \beta}\right)'\)</span>，<span class="math inline">\(V_i\)</span> 是方差-协方差矩阵，<span class="math inline">\(R(\alpha)\)</span> 是相关性结构矩阵，y 是观测数据，μ 是模型的均值预测值。采用迭代重复加权最小二乘法（iteratively reweighted least squares ，IWLS)），偏微分方程估计参数。</p>
-</section><section id="gee-1" class="level2" data-number="16.6"><h2 data-number="16.6" class="anchored" data-anchor-id="gee-1">
-<span class="header-section-number">16.6</span> <code>gee</code>
+</section><section id="gee" class="level2" data-number="16.2"><h2 data-number="16.2" class="anchored" data-anchor-id="gee">
+<span class="header-section-number">16.2</span> <code>gee</code>
 </h2>
 <p><a href="https://www.statsmodels.org/stable//gee.html" class="uri">https://www.statsmodels.org/stable//gee.html</a></p>
 <div class="cell">
-<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://svn.r-project.org/R-packages/trunk/nlme/">nlme</a></span><span class="op">)</span></span>
 <span><span class="va">Oxboys</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">18</span><span class="op">)</span></span>
@@ -560,7 +471,7 @@ U(\beta)=\sum_{i=1}^{n} D'_iV_i^{-1}(y_i-\mu_i)=0
 </details>
 </div>
 <div class="cell">
-<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">gee</span><span class="op">)</span></span>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">gee</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">g1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/gee/man/gee.html">gee</a></span><span class="op">(</span><span class="va">height</span><span class="op">~</span><span class="va">age</span>,data <span class="op">=</span> <span class="va">df_long</span> ,id <span class="op">=</span> <span class="va">Subject</span>,corstr <span class="op">=</span> <span class="st">"AR-M"</span>,Mv <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="co">#&gt; (Intercept)         age </span></span>
@@ -692,11 +603,11 @@ U(\beta)=\sum_{i=1}^{n} D'_iV_i^{-1}(y_i-\mu_i)=0
 <span><span class="co">#&gt; [4,] 0.3933815 0.3933815 0.3933815 1.0000000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="geepack" class="level2" data-number="16.7"><h2 data-number="16.7" class="anchored" data-anchor-id="geepack">
-<span class="header-section-number">16.7</span> <code>geepack</code>
+</section><section id="geepack" class="level2" data-number="16.3"><h2 data-number="16.3" class="anchored" data-anchor-id="geepack">
+<span class="header-section-number">16.3</span> <code>geepack</code>
 </h2>
 <div class="cell">
-<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">geepack</span><span class="op">)</span></span>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">geepack</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">rfb_gee</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/geepack/man/geeglm.html">geeglm</a></span><span class="op">(</span><span class="va">richness</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/offset.html">offset</a></span><span class="op">(</span><span class="va">log_AREA</span><span class="op">)</span> <span class="op">+</span><span class="va">SPTREAT</span> <span class="op">+</span> <span class="va">DEPTH</span> <span class="op">+</span><span class="va">DEPTH2</span>,</span>
 <span>            family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html">poisson</a></span><span class="op">(</span>link <span class="op">=</span> <span class="st">"log"</span><span class="op">)</span>,</span>
@@ -756,7 +667,7 @@ cor(Y_{is},Y_{it})=0.422^{|s-t|}
 \]</span></p>
 <p>作业相关矩阵 <code>corstr</code> ，比较QIC，一般越小越好。</p>
 <div class="cell">
-<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/geepack/man/QIC.html">QIC</a></span><span class="op">(</span><span class="va">rfb_gee</span><span class="op">)</span></span>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/geepack/man/QIC.html">QIC</a></span><span class="op">(</span><span class="va">rfb_gee</span><span class="op">)</span></span>
 <span><span class="co">#&gt;       QIC      QICu Quasi Lik       CIC    params      QICC </span></span>
 <span><span class="co">#&gt;  -467.536  -471.921   239.961     6.193     4.000  -455.536</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/geepack/man/QIC.html">QIC</a></span><span class="op">(</span><span class="va">rfb_gee2</span><span class="op">)</span></span>
@@ -764,6 +675,94 @@ cor(Y_{is},Y_{it})=0.422^{|s-t|}
 <span><span class="co">#&gt;  -451.065  -457.436   230.718     5.185     2.000  -447.637</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+</section><section id="glm-连接函数" class="level2" data-number="16.4"><h2 data-number="16.4" class="anchored" data-anchor-id="glm-连接函数">
+<span class="header-section-number">16.4</span> GLM 连接函数</h2>
+<p>GLM的形式如下：</p>
+<p><span class="math display">\[ g(\mu_{ij})=\beta_0+\beta_1x_{ij_1}+\beta_2x_{ij_2}+...+\beta_px_{ij_p} \]</span></p>
+<p>其中，<code>g()</code> 是一个连接函数，用于将自变量的线性组合与因变量的均值联系起来。常见的连接函数包括恒等连接函数（identity）、logistic连接函数（logit）、逆正弦连接函数（inverse sine）函数等。<code>i</code> 表示观测对象的索引，<code>j</code> 表示时间点或相关性结构的索引，<code>uij</code> 表示因变量的均值，<code>β</code> 表示待估计的系数，<code>Xij</code> 表示自变量。</p>
+<p><span class="math display">\[
+\eta = \beta  \mathbf{X}+ \alpha
+\]</span></p>
+<p><span class="math display">\[
+E(y)=g^{-1}(\eta)
+\]</span></p>
+<p>对于计数数据：</p>
+<p><span class="math display">\[
+E(y)=e^{\eta}=e^{\beta \mathbf{X} +\alpha}, 此时g(\mu)=\ln(\mu)=\mathbf{X}\beta
+\]</span></p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rfb_glm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">richness</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/offset.html">offset</a></span><span class="op">(</span><span class="va">log_AREA</span><span class="op">)</span> <span class="op">+</span><span class="va">SPTREAT</span> <span class="op">+</span> <span class="va">DEPTH</span> <span class="op">+</span><span class="va">DEPTH2</span>,</span>
+<span>            family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html">quasipoisson</a></span><span class="op">(</span>link <span class="op">=</span> <span class="st">"log"</span><span class="op">)</span>,</span>
+<span>            data <span class="op">=</span> <span class="va">rfb</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">owls_glm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span></span>
+<span>    <span class="va">NCalls</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/offset.html">offset</a></span><span class="op">(</span><span class="va">log_broodsize</span><span class="op">)</span> <span class="op">+</span> <span class="va">SexParent</span> <span class="op">*</span> <span class="va">FoodTreatment</span> <span class="op">+</span> <span class="va">SexParent</span> <span class="op">*</span></span>
+<span>        <span class="va">ArrivalTime</span>,</span>
+<span>    family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html">poisson</a></span><span class="op">(</span>link <span class="op">=</span> <span class="st">"log"</span><span class="op">)</span>,</span>
+<span>    data <span class="op">=</span> <span class="va">owls</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>对于二分类数据：</p>
+<p><span class="math display">\[
+E(y)=\frac{e^{\beta \mathbf{X} +\alpha}}{1+e^{\beta\mathbf{X}+\alpha}}, 此时g(\mu)=\ln(\frac{\mu}{1-\mu})=logit(\mu)
+\]</span></p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">de_glm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">Ecervi_binary</span> <span class="op">~</span> <span class="va">Length_center</span> <span class="op">*</span><span class="va">Sex</span>,</span>
+<span>              family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html">binomial</a></span><span class="op">(</span>link <span class="op">=</span> <span class="st">"logit"</span><span class="op">)</span>,</span>
+<span>              data <span class="op">=</span> <span class="va">de</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">de_glm</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Call:</span></span>
+<span><span class="co">#&gt; glm(formula = Ecervi_binary ~ Length_center * Sex, family = binomial(link = "logit"), </span></span>
+<span><span class="co">#&gt;     data = de)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Coefficients:</span></span>
+<span><span class="co">#&gt;                    Estimate Std. Error z value Pr(&gt;|z|)    </span></span>
+<span><span class="co">#&gt; (Intercept)         0.65241    0.10960    5.95  2.6e-09 ***</span></span>
+<span><span class="co">#&gt; Length_center       0.02511    0.00558    4.50  6.7e-06 ***</span></span>
+<span><span class="co">#&gt; Sex2                0.16387    0.17423    0.94    0.347    </span></span>
+<span><span class="co">#&gt; Length_center:Sex2  0.02011    0.00972    2.07    0.039 *  </span></span>
+<span><span class="co">#&gt; ---</span></span>
+<span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; (Dispersion parameter for binomial family taken to be 1)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     Null deviance: 1073.1  on 825  degrees of freedom</span></span>
+<span><span class="co">#&gt; Residual deviance: 1003.7  on 822  degrees of freedom</span></span>
+<span><span class="co">#&gt; AIC: 1012</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Number of Fisher Scoring iterations: 4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section><section id="方差" class="level2" data-number="16.5"><h2 data-number="16.5" class="anchored" data-anchor-id="方差">
+<span class="header-section-number">16.5</span> 方差</h2>
+<p><span class="math display">\[
+var(Y_{is}|X_{is})=\Phi × \nu(\mu_{is})
+\]</span></p>
+<p>其中，Φ 是scale parameter （overdispersion），v() 是方差函数。</p>
+</section><section id="相关性结构" class="level2" data-number="16.6"><h2 data-number="16.6" class="anchored" data-anchor-id="相关性结构">
+<span class="header-section-number">16.6</span> 相关性结构</h2>
+<p>R(α) （working correlation）</p>
+<ol type="1">
+<li><p>非结构化相关：cor(Y<sub>is</sub>,Y<sub>it</sub>)=α<sub>st</sub></p></li>
+<li><p>自回归相关：cor(Y<sub>is</sub>,Y<sub>it</sub>)=α<sup>|s-t|</sup></p></li>
+<li><p>exchangeable 等相关：cor(Y<sub>is</sub>,Y<sub>it</sub>)=α</p></li>
+<li><p>independence，独立，cor(Y<sub>is</sub>,Y<sub>it</sub>)=<strong>I</strong></p></li>
+</ol></section><section id="gee-1" class="level2" data-number="16.7"><h2 data-number="16.7" class="anchored" data-anchor-id="gee-1">
+<span class="header-section-number">16.7</span> GEE</h2>
+<p>GLM的期望和方差：</p>
+<p><span class="math display">\[ E(Y_{ij})=b'(\theta_{ij})\\ Var(Y_{ij})=b''(\theta_{ij})\ \Phi \]</span></p>
+<p>假定潜在的随机成分V<sub>i</sub> ：</p>
+<p><span class="math display">\[
+V_i=A_i^{1/2}R(\alpha)A_i^{1/2}\ \Phi
+\]</span></p>
+<p>其中，<code>Ai =diag（b''(θi1)，...，b''(θij)）</code> 。</p>
+<p>GEE的形式如下：</p>
+<p><span class="math display">\[
+U(\beta)=\sum_{i=1}^{n} D'_iV_i^{-1}(y_i-\mu_i)=0
+\]</span></p>
+<p>其中，$U(β) $是一个包含待估计参数的函数，quasi-deviance <span class="math inline">\(D'_i = \left(\frac{\partial \mu_i}{\partial \beta}\right)'\)</span>，<span class="math inline">\(V_i\)</span> 是方差-协方差矩阵，<span class="math inline">\(R(\alpha)\)</span> 是相关性结构矩阵，y 是观测数据，μ 是模型的均值预测值。采用迭代重复加权最小二乘法（iteratively reweighted least squares ，IWLS)），偏微分方程估计参数。</p>
 
 
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">

@@ -37,7 +37,7 @@ book:
       chapters:
         - simple_linear_regression.qmd
         - multiple_linear_regression.qmd
-        - LME.qmd
+        - LMM.qmd
         - GLM.qmd
         - GEE.qmd
 

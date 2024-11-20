@@ -6,7 +6,7 @@
 
 广义估计方程用于处理具有组内相关性的非正态分布数据。模型形式类似于广义线性模型，但使用了估计方程来考虑组内相关性。
 
-## 数据集处理
+## 数据集下载
 
 [数据集 Analyzing ecological data](https://github.com/romunov/AED)
 
@@ -46,99 +46,6 @@ de |>
         Length_center = scale(Length, center = T , scale = F),
     ) -> de
 ```
-
-## GLM 连接函数
-
-GLM的形式如下：
-
-$$ g(\mu_{ij})=\beta_0+\beta_1x_{ij_1}+\beta_2x_{ij_2}+...+\beta_px_{ij_p} $$
-
-其中，`g()` 是一个连接函数，用于将自变量的线性组合与因变量的均值联系起来。常见的连接函数包括恒等连接函数（identity）、logistic连接函数（logit）、逆正弦连接函数（inverse sine）函数等。`i` 表示观测对象的索引，`j` 表示时间点或相关性结构的索引，`uij` 表示因变量的均值，`β` 表示待估计的系数，`Xij` 表示自变量。
-
-$$
-\eta = \beta  \mathbf{X}+ \alpha
-$$
-
-$$
-E(y)=g^{-1}(\eta)
-$$
-
-对于计数数据：
-
-$$
-E(y)=e^{\eta}=e^{\beta \mathbf{X} +\alpha}, 此时g(\mu)=\ln(\mu)=\mathbf{X}\beta
-$$
-
-```{r}
-rfb_glm <- glm(richness ~ offset(log_AREA) +SPTREAT + DEPTH +DEPTH2,
-            family = quasipoisson(link = "log"),
-            data = rfb)
-
-owls_glm <- glm(
-    NCalls ~ offset(log_broodsize) + SexParent * FoodTreatment + SexParent *
-        ArrivalTime,
-    family = poisson(link = "log"),
-    data = owls
-)
-
-```
-
-对于二分类数据：
-
-$$
-E(y)=\frac{e^{\beta \mathbf{X} +\alpha}}{1+e^{\beta\mathbf{X}+\alpha}}, 此时g(\mu)=\ln(\frac{\mu}{1-\mu})=logit(\mu)
-$$
-
-```{r}
-de_glm <- glm(Ecervi_binary ~ Length_center *Sex,
-              family = binomial(link = "logit"),
-              data = de)
-summary(de_glm)
-```
-
-## 方差
-
-$$
-var(Y_{is}|X_{is})=\Phi × \nu(\mu_{is})
-$$
-
-其中，Φ 是scale parameter （overdispersion），v() 是方差函数。
-
-## 相关性结构
-
-R(α)
-
-1.  非结构化相关：cor(Y~is~,Y~it~)=α~st~
-
-2.  自回归相关：cor(Y~is~,Y~it~)=α^\|s-t\|^
-
-3.  exchangeable 等相关：cor(Y~is~,Y~it~)=α
-
-4.  independence，独立，cor(Y~is~,Y~it~)=**I**
-
-5.  
-
-## GEE
-
-GLM的期望和方差：
-
-$$ E(Y_{ij})=b'(\theta_{ij})\\ Var(Y_{ij})=b''(\theta_{ij})\ \Phi $$
-
-假定潜在的随机成分V~i~ ：
-
-$$
-V_i=A_i^{1/2}R(\alpha)A_i^{1/2}\ \Phi
-$$
-
-其中，`Ai =diag（b''(θi1)，...，b''(θij)）` 。
-
-GEE的形式如下：
-
-$$
-U(\beta)=\sum_{i=1}^{n} D'_iV_i^{-1}(y_i-\mu_i)=0
-$$
-
-其中，\$U(β) \$是一个包含待估计参数的函数，quasi-deviance $D'_i = \left(\frac{\partial \mu_i}{\partial \beta}\right)'$，$V_i$ 是方差-协方差矩阵，$R(\alpha)$ 是相关性结构矩阵，y 是观测数据，μ 是模型的均值预测值。采用迭代重复加权最小二乘法（iteratively reweighted least squares ，IWLS)），偏微分方程估计参数。
 
 ## `gee`
 
@@ -200,3 +107,94 @@ $$
 QIC(rfb_gee)
 QIC(rfb_gee2)
 ```
+
+## GLM 连接函数
+
+GLM的形式如下：
+
+$$ g(\mu_{ij})=\beta_0+\beta_1x_{ij_1}+\beta_2x_{ij_2}+...+\beta_px_{ij_p} $$
+
+其中，`g()` 是一个连接函数，用于将自变量的线性组合与因变量的均值联系起来。常见的连接函数包括恒等连接函数（identity）、logistic连接函数（logit）、逆正弦连接函数（inverse sine）函数等。`i` 表示观测对象的索引，`j` 表示时间点或相关性结构的索引，`uij` 表示因变量的均值，`β` 表示待估计的系数，`Xij` 表示自变量。
+
+$$
+\eta = \beta  \mathbf{X}+ \alpha
+$$
+
+$$
+E(y)=g^{-1}(\eta)
+$$
+
+对于计数数据：
+
+$$
+E(y)=e^{\eta}=e^{\beta \mathbf{X} +\alpha}, 此时g(\mu)=\ln(\mu)=\mathbf{X}\beta
+$$
+
+```{r}
+rfb_glm <- glm(richness ~ offset(log_AREA) +SPTREAT + DEPTH +DEPTH2,
+            family = quasipoisson(link = "log"),
+            data = rfb)
+
+owls_glm <- glm(
+    NCalls ~ offset(log_broodsize) + SexParent * FoodTreatment + SexParent *
+        ArrivalTime,
+    family = poisson(link = "log"),
+    data = owls
+)
+
+```
+
+对于二分类数据：
+
+$$
+E(y)=\frac{e^{\beta \mathbf{X} +\alpha}}{1+e^{\beta\mathbf{X}+\alpha}}, 此时g(\mu)=\ln(\frac{\mu}{1-\mu})=logit(\mu)
+$$
+
+```{r}
+de_glm <- glm(Ecervi_binary ~ Length_center *Sex,
+              family = binomial(link = "logit"),
+              data = de)
+summary(de_glm)
+```
+
+## 方差
+
+$$
+var(Y_{is}|X_{is})=\Phi × \nu(\mu_{is})
+$$
+
+其中，Φ 是scale parameter （overdispersion），v() 是方差函数。
+
+## 相关性结构
+
+R(α) （working correlation）
+
+1.  非结构化相关：cor(Y~is~,Y~it~)=α~st~
+
+2.  自回归相关：cor(Y~is~,Y~it~)=α^\|s-t\|^
+
+3.  exchangeable 等相关：cor(Y~is~,Y~it~)=α
+
+4.  independence，独立，cor(Y~is~,Y~it~)=**I**
+
+## GEE
+
+GLM的期望和方差：
+
+$$ E(Y_{ij})=b'(\theta_{ij})\\ Var(Y_{ij})=b''(\theta_{ij})\ \Phi $$
+
+假定潜在的随机成分V~i~ ：
+
+$$
+V_i=A_i^{1/2}R(\alpha)A_i^{1/2}\ \Phi
+$$
+
+其中，`Ai =diag（b''(θi1)，...，b''(θij)）` 。
+
+GEE的形式如下：
+
+$$
+U(\beta)=\sum_{i=1}^{n} D'_iV_i^{-1}(y_i-\mu_i)=0
+$$
+
+其中，\$U(β) \$是一个包含待估计参数的函数，quasi-deviance $D'_i = \left(\frac{\partial \mu_i}{\partial \beta}\right)'$，$V_i$ 是方差-协方差矩阵，$R(\alpha)$ 是相关性结构矩阵，y 是观测数据，μ 是模型的均值预测值。采用迭代重复加权最小二乘法（iteratively reweighted least squares ，IWLS)），偏微分方程估计参数。

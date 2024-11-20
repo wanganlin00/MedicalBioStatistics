@@ -13,7 +13,7 @@
 ```{r eval=FALSE}
 pkgs <- c("psych", "modeest", "moments", "DescTools", "vcd",
           "epiDisplay", "correlation", "ggcorrplot","nortest",
-          "HH","coin","ggfortify", "rms","broom.mixed","glmnet", 
+          "HH","coin","ggfortify", "rms","broom.mixed","glmm.hp","glmnet", 
           "poissonreg","gee", "geepack","survminer","ggsurvfit",
           "pROC","randomizeR","blockrand"
           )
