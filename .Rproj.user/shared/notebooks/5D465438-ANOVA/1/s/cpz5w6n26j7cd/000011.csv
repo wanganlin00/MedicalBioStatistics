@@ -1,0 +1,6 @@
+"0","df_long <- df |> pivot_longer(cols = starts_with(""t""),"
+"0","                              names_to = ""time"","
+"0","                              values_to = ""BP"")"
+"0","induced_method__summary <- df_long |> group_by(induced_method) |> "
+"0","    summarise(n=n(),mean=mean(BP),sum=sum(BP))"
+"0","induced_method__summary "

@@ -1,0 +1,3 @@
+"0","ggplot() + xlim(-10,10) +"
+"0","    geom_function(fun = dnorm, args = list(mean = 0, sd = 1), color=""red"")"
+"0",""

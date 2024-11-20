@@ -65,7 +65,7 @@ $$
 ```{r}
 library(tidyverse)
 library(patchwork)
-df <- read_csv("data/ISLR/Default.csv")
+df <- read_csv("data/Default.csv")
 
 df <- df %>% 
     mutate(across(1:2, ~ factor(.x,levels = c("No","Yes"),labels = c(0,1))
@@ -333,7 +333,8 @@ $$
 $$
 
 ```{r}
-acl <- read_rds("data/icpsr/advanced_acl_data.rds")
+# 数据集 icpsr
+acl <- read_rds("data/advanced_acl_data.rds")
 acl$PhysActCat_W1 <- factor(acl$PhysActCat_W1,ordered = T)
 str(acl$PhysActCat_W1)
 
@@ -376,7 +377,7 @@ ggplot(tibble(x=0:20,
 
 ```{r}
 library(poissonreg)
-df2 <- read_csv("data/ISLR/Bikeshare.csv")
+df2 <- read_csv("data/Bikeshare.csv")
 ```
 
 ```{r}

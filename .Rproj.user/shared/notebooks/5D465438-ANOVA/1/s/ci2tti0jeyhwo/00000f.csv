@@ -1,0 +1,10 @@
+"0","id_mean <- df |> select(c(-1,-2)) |> rowMeans()"
+"2","Error in (function (cond)  : 
+  error in evaluating the argument 'x' in selecting a method for function 'rowMeans': [38;5;255m[90m[conflicted][38;5;255m [1mselect[22m found in 2 packages.
+Either pick the one you want with `::`:
+[36m•[38;5;255m [34mMASS[38;5;255m::select
+[36m•[38;5;255m [34mrstatix[38;5;255m::select
+Or declare a preference with `conflicts_prefer()`:
+[36m•[38;5;255m ]8;;ide:run:conflicted::conflicts_prefer(MASS::select)conflicts_prefer(MASS::select)]8;;
+[36m•[38;5;255m ]8;;ide:run:conflicted::conflicts_prefer(rstatix::select)conflicts_prefer(rstatix::select)]8;;[39m
+"

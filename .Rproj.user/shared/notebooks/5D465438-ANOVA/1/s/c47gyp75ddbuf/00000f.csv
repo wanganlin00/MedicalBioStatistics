@@ -1,0 +1,8 @@
+"0","SS_处理 <- 25*( (induced_method__summary$mean[1] - BP_mean )^2 + "
+"0","                       (induced_method__summary$mean[2] - BP_mean )^2 +"
+"0","                       (induced_method__summary$mean[3] - BP_mean )^2) "
+"0","SS_处理"
+"1","[1]"
+"1"," 912.24"
+"1","
+"

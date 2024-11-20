@@ -145,9 +145,10 @@ $$
 <https://www.statsmodels.org/stable//gee.html>
 
 ```{r}
-data(epil,package = "MASS")
-Oxboys |> head(n=18)
 
+
+library(nlme)
+Oxboys |> head(n=18)
 
 df_long <- Oxboys
 ```
@@ -160,6 +161,7 @@ g1
 summary(g1)
 
 
+data(epil,package = "MASS")
 gee1 <- gee(y ~ age + trt + base,id=subject,data = epil,family = poisson,corstr ="exchangeable" )
 summary(gee1)
 ```
@@ -197,25 +199,4 @@ $$
 ```{r}
 QIC(rfb_gee)
 QIC(rfb_gee2)
-```
-
-### 示例
-
-```{r}
-df <- read_delim("data/麻醉诱导时相.txt")
-df_long <- df |> pivot_longer(
-    cols = starts_with("t"),
-    names_to = "time",
-    values_to = "SBP"
-)
-
-
-```
-
-```{r}
-g3 <- geeglm(SBP~ group * time,data = df_long ,id = id,corstr = "ar1")
-
-g3
-summary(g3)
-QIC(g3)
 ```

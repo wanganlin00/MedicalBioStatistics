@@ -1,0 +1,1 @@
+{"frames":[{"func":"sprintf(\"A single percent sign here： %.\")","file":"","line_number":0,"end_line_number":0,"character_number":0,"end_character_number":0}],"message":"Error in sprintf(\"A single percent sign here： %.\") : \n  unrecognised format specification '%.'\n"}

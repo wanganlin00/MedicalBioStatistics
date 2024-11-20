@@ -1,7 +1,26 @@
-# 推荐阅读 {.unnumbered style="color:red"}
+# 前言 {.unnumbered}
 
--   [R语言教程 Ⅶ 统计模型 ——李东风](https://www.math.pku.edu.cn/teachers/lidf/docs/Rbook/html/_Rbook/)
+## 推荐阅读
 
 -   [R语言实战医学统计](https://ayueme.github.io/R_medical_stat/)
 
+-   [R语言教程 Ⅶ 统计模型 ——李东风](https://www.math.pku.edu.cn/teachers/lidf/docs/Rbook/html/_Rbook/)
+
 -   [医学研究中的生存数据建模（4e）](https://bookdown.org/wangzhen/survival/)
+
+## 前提条件
+
+```{r eval=FALSE}
+pkgs <- c("psych", "modeest", "moments", "DescTools", "vcd",
+          "epiDisplay", "correlation", "ggcorrplot","nortest",
+          "HH","coin","ggfortify", "rms","broom.mixed","glmnet", 
+          "poissonreg","gee", "geepack","survminer","ggsurvfit",
+          "pROC","randomizeR","blockrand"
+          )
+
+for (pkg in pkgs) {
+    if (!require(pkg, character.only = TRUE)) {
+        install.packages(pkg)
+    }
+}
+```

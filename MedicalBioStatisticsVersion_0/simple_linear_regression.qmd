@@ -19,7 +19,7 @@ library(ggfortify, quietly = T)
 [数据下载网站](https://www.statlearning.com/resources-second-edition)
 
 ```{r}
-advertising<-read_csv("data/ISLR/Advertising.csv")
+advertising<-read_csv("data/Advertising.csv")
 p_sales<-function(x){
   ggplot(advertising,aes({{x}},sales))+
            geom_point(shape=21,color="red")+

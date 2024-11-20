@@ -1,0 +1,4 @@
+"0","preds %>%"
+"0","  group_by(model) %>%"
+"0","  roc_curve(Direction, .pred_Down) %>%"
+"0","  autoplot()"

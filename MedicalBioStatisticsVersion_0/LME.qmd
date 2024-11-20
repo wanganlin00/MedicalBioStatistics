@@ -27,7 +27,7 @@ $$
 `lmer()` 的表达式如下：
 
 $$
-lmer (data,formual= DV ~ Fixed\_Factor + (Random\_intercept + Random\_slope | Random\_Factor))
+lmer (data,formual= DV \sim Fixed\_Factor + (Random\_intercept + Random\_slope | Random\_Factor))
 $$
 
 截距中，1表示随机截距，0表示固定截距，默认截距为1。
@@ -58,7 +58,7 @@ Z有两倍于受试者数量的列，每个受试者的随机截距和随机斜�
 
 ```{r}
 library(lme4)
-lme1 <- lmer(Richness ~ 1 + NAP * Exposure+ (1 +NAP |Beach) ,data = df_long)
+lme1 <- lmer(Richness ~ 1 + NAP * Exposure+ (1 + NAP |Beach) ,data = df_long)
 summary(lme1)
 AIC(lme1)
 BIC(lme1)

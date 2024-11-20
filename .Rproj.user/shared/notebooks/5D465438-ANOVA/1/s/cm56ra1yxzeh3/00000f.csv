@@ -1,0 +1,14 @@
+"0","# 医学统计学 人卫版 第7版"
+"0","df <- read_delim(""data/麻醉诱导时相.txt"")"
+"1","[1mRows: [22m[34m15[39m [1mColumns: [22m[34m7[39m
+"
+"1","[36m──[39m [1mColumn specification[22m [36m─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────[39m
+[1mDelimiter:[22m ""\t""
+[31mchr[39m (1): induced_method
+[32mdbl[39m (6): id, t0, t1, t2, t3, t4
+"
+"1","
+[36mℹ[39m Use `spec()` to retrieve the full column specification for this data.
+[36mℹ[39m Specify the column types or set `show_col_types = FALSE` to quiet this message.
+"
+"0","df"

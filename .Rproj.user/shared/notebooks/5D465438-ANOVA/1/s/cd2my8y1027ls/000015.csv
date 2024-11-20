@@ -1,0 +1,131 @@
+"0",""
+"0","library(multcomp)"
+"2","Loading required package: mvtnorm
+"
+"2","Loading required package: survival
+"
+"2","Loading required package: TH.data
+"
+"2","Loading required package: MASS
+"
+"2","
+Attaching package: ‘MASS’
+
+"
+"2","The following object is masked from ‘package:rstatix’:
+
+    select
+
+"
+"2","The following object is masked from ‘package:dplyr’:
+
+    select
+
+"
+"2","
+Attaching package: ‘TH.data’
+
+"
+"2","The following object is masked from ‘package:MASS’:
+
+    geyser
+
+"
+"0","glht_result <-glht(model, linfct = mcp(week =c(""ten - zero = 0 "","
+"0","                                               ""twenty - zero == 0"","
+"0","                                               ""thirty - zero = 0 "")))"
+"0","summary(glht_result)"
+"1","
+	"
+"1"," "
+"1","Simultaneous Tests for General Linear Hypotheses
+
+"
+"1","Multiple Comparisons of Means:"
+"1"," "
+"1","User-defined"
+"1"," "
+"1","Contrasts
+
+
+"
+"1","Fit: "
+"1","lme.formula(fixed = ALT ~ week, data = df_long, random = ~1 | 
+"
+"1","    id/week)
+"
+"1","
+"
+"1","Linear Hypotheses:
+"
+"1","                  "
+"1"," Estimate"
+"1"," Std. Error"
+"1"," z value"
+"1"," Pr(>|z|)"
+"1","    "
+"1","
+ten - zero == 0   "
+"1","   -40.30"
+"1","      24.88"
+"1","  -1.620"
+"1","    0.248"
+"1","    "
+"1","
+twenty - zero == 0"
+"1","  -100.90"
+"1","      24.88"
+"1","  -4.055"
+"1","   <0.001"
+"1"," ***"
+"1","
+thirty - zero == 0"
+"1","  -130.20"
+"1","      24.88"
+"1","  -5.233"
+"1","   <0.001"
+"1"," ***"
+"1","
+"
+"1","---
+Signif. codes:  "
+"1",""
+"1","0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1"
+"1","
+"
+"1","(Adjusted p values reported -- single-step method)"
+"1","
+
+"
+"0","glht_result"
+"1","
+	"
+"1"," "
+"1","General Linear Hypotheses
+
+"
+"1","Multiple Comparisons of Means:"
+"1"," "
+"1","User-defined"
+"1"," "
+"1","Contrasts
+
+
+"
+"1","Linear Hypotheses:
+"
+"1","                  "
+"1"," Estimate"
+"1","
+ten - zero == 0   "
+"1","    -40.3"
+"1","
+twenty - zero == 0"
+"1","   -100.9"
+"1","
+thirty - zero == 0"
+"1","   -130.2"
+"1","
+"
+"1","
+"

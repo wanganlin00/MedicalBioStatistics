@@ -1,0 +1,67 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "R数据科学与编程"
+  reader-mode: true
+  chapters:
+    - index.qmd
+    
+    - part: "Data Science"
+      chapters: 
+        - type_class.qmd
+        - I-O.qmd
+        - useful_function.qmd
+        - base_graphics.qmd
+        - ggplot2_graphics.qmd
+        - ggplot2_extensions.qmd
+        - custom_functions.qmd
+        - Dynamic_report_syntax_format.qmd
+
+    - part: "R <---> Python"
+      chapters: 
+        - R-Python.qmd
+
+    - part: "Programming"
+      chapters: 
+        - control_structure.qmd
+        - functions.qmd
+        - environments.qmd
+        - exception_handling.qmd
+        - efficient.qmd
+        - functionals.qmd
+        - object_oriented_programming.qmd
+
+
+execute:
+  cache: true
+  message: false 
+  warning: false  #阻止消息或警告出现在完成的文件中
+  
+# eval: false  阻止对代码进行评估。（显然，如果不运行代码，则不会生成任何结果）
+# include: false  运行代码，但不会在最终文档中显示代码或结果。
+# echo: false  阻止代码，但不会阻止结果出现在完成的文件中
+toc: true
+toc-depth: 4
+number-sections: true
+number-depth: 4
+
+code-fold: true
+code-tools: true
+code-link: true
+
+knitr:
+  opts_chunk: 
+    comment: "#>" 
+    collapse: TRUE
+    
+format: 
+  html: 
+    theme: cosmo
+    df-print: kable
+    fig-format: svg
+editor: visual
+
+
+

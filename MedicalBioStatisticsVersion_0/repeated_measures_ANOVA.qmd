@@ -170,7 +170,7 @@ $$
 
 ```{r}
 # 医学统计学 人卫版 第7版
-SBP <- read_delim("data/麻醉诱导时相.txt")
+SBP <- read_tsv("data/麻醉诱导时相.tsv")
 SBP
 ```
 

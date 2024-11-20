@@ -1,0 +1,21 @@
+"0","#linear model specification 线性模型规范"
+"0","lm_spec <-linear_reg() |>"
+"0","  set_mode(""regression"") |>"
+"0","  set_engine(""lm"")  "
+"0","lm_spec"
+"1","Linear Regression"
+"1",""
+"1"," Model Specification ("
+"1",""
+"1","regression"
+"1",""
+"1",")
+
+"
+"1","Computational engine:"
+"1"," "
+"1","lm"
+"1"," "
+"1","
+
+"

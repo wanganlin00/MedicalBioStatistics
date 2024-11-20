@@ -2,9 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.555">
+<meta name="generator" content="quarto-1.6.32">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>医学与生物统计学 - 8&nbsp; 正态性检验</title>
+<title>4&nbsp; 正态性检验 – 医学与生物统计学</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,7 +30,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -67,11 +67,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-2486e1f0a3ee9ee1fc393803a1361cdb.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-6561bbde787c299e21493071c8edc6ff.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-69a30c073420f475066ff0fd08b8a642.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -98,7 +98,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+}</script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
 const typesetMath = (el) => {
   if (window.MathJax) {
     // MathJax Typeset
@@ -129,13 +129,13 @@ window.Quarto = {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./probability_theory.html">概率论与数理统计</a></li><li class="breadcrumb-item"><a href="./normality_test.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">正态性检验</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./hypothesis_test.html">假设检验</a></li><li class="breadcrumb-item"><a href="./normality_test.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">正态性检验</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -164,14 +164,14 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">推荐阅读</span></a>
+ <span class="menu-text">前言</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./descriptive_statistics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">描述性统计学</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -198,92 +198,68 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
- <span class="menu-text">概率论与数理统计</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <a href="./hypothesis_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">假设检验</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./probability_theory.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">概率论基础</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./SamplingDistribution.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">抽样分布</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./ParameterEstimation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">参数估计</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./hypothesis_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">假设检验</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./normality_test.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">正态性检验</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">正态性检验</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./variance_homogeneity_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">方差齐性检验</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">方差齐性检验</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./t_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">t 检验</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">t 检验</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ANOVA.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">方差分析</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">方差分析</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./repeated_measures_ANOVA.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">重复测量方差分析</span></span></a>
+  <a href="./repeated_measures_anova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">重复测量方差分析</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./proportion_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">比例检验</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">比例检验</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chi-square_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title"><span class="math inline">\(\chi^2\)</span> 检验</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title"><span class="math inline">\(\chi^2\)</span> 检验</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./nonparametric_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">非参数检验</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">非参数检验</span></span></a>
   </div>
 </li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
  <span class="menu-text">统计模型</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -291,40 +267,40 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./simple_linear_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">线性回归</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">线性回归</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./multiple_linear_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">多元线性回归</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">多元线性回归</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./LME.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">线性混合模型</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">线性混合模型</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./GLM.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">广义线性模型</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">广义线性模型</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./GEE.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">广义估计方程</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">广义估计方程</span></span></a>
   </div>
 </li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
  <span class="menu-text">生存分析</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -332,28 +308,28 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./SurvivalAnalysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">生存分析</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">生存分析</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./CoxProportionalHazardsModel.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Cox比例风险模型</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Cox比例风险模型</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./CompetingRiskModel.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">竞争风险模型</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">竞争风险模型</span></span></a>
   </div>
 </li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
  <span class="menu-text">临床研究设计</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -361,13 +337,13 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./diagnostic_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">诊断性测试</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">诊断性测试</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./RCT.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">随机对照试验</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">随机对照试验</span></span></a>
   </div>
 </li>
       </ul>
@@ -377,54 +353,54 @@ window.Quarto = {
 </nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99"><h2 id="toc-title">Table of contents</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
 <li>
-<a href="#%E6%8F%8F%E8%BF%B0%E6%80%A7%E7%BB%9F%E8%AE%A1%E6%96%B9%E6%B3%95" id="toc-描述性统计方法" class="nav-link active" data-scroll-target="#%E6%8F%8F%E8%BF%B0%E6%80%A7%E7%BB%9F%E8%AE%A1%E6%96%B9%E6%B3%95"><span class="header-section-number">8.1</span> 描述性统计方法</a>
+<a href="#%E6%8F%8F%E8%BF%B0%E6%80%A7%E7%BB%9F%E8%AE%A1%E6%96%B9%E6%B3%95" id="toc-描述性统计方法" class="nav-link active" data-scroll-target="#%E6%8F%8F%E8%BF%B0%E6%80%A7%E7%BB%9F%E8%AE%A1%E6%96%B9%E6%B3%95"><span class="header-section-number">4.1</span> 描述性统计方法</a>
   <ul>
-<li><a href="#%E5%AF%86%E5%BA%A6%E5%9B%BE" id="toc-密度图" class="nav-link" data-scroll-target="#%E5%AF%86%E5%BA%A6%E5%9B%BE"><span class="header-section-number">8.1.1</span> 密度图</a></li>
-  <li><a href="#q-q%E5%9B%BE" id="toc-q-q图" class="nav-link" data-scroll-target="#q-q%E5%9B%BE"><span class="header-section-number">8.1.2</span> Q-Q图</a></li>
+<li><a href="#%E5%AF%86%E5%BA%A6%E5%9B%BE" id="toc-密度图" class="nav-link" data-scroll-target="#%E5%AF%86%E5%BA%A6%E5%9B%BE"><span class="header-section-number">4.1.1</span> 密度图</a></li>
+  <li><a href="#q-q%E5%9B%BE" id="toc-q-q图" class="nav-link" data-scroll-target="#q-q%E5%9B%BE"><span class="header-section-number">4.1.2</span> Q-Q图</a></li>
   </ul>
 </li>
   <li>
-<a href="#%E5%9F%BA%E4%BA%8E%E5%8D%A1%E6%96%B9%E5%88%86%E5%B8%83" id="toc-基于卡方分布" class="nav-link" data-scroll-target="#%E5%9F%BA%E4%BA%8E%E5%8D%A1%E6%96%B9%E5%88%86%E5%B8%83"><span class="header-section-number">8.2</span> 基于卡方分布</a>
+<a href="#%E5%9F%BA%E4%BA%8E%E5%8D%A1%E6%96%B9%E5%88%86%E5%B8%83" id="toc-基于卡方分布" class="nav-link" data-scroll-target="#%E5%9F%BA%E4%BA%8E%E5%8D%A1%E6%96%B9%E5%88%86%E5%B8%83"><span class="header-section-number">4.2</span> 基于卡方分布</a>
   <ul>
-<li><a href="#dagostino-pearson-omnibus-test" id="toc-dagostino-pearson-omnibus-test" class="nav-link" data-scroll-target="#dagostino-pearson-omnibus-test"><span class="header-section-number">8.2.1</span> D’Agostino-Pearson Omnibus Test</a></li>
-  <li><a href="#jarque-bera-%E6%AD%A3%E6%80%81%E6%80%A7%E6%A3%80%E9%AA%8C" id="toc-jarque-bera-正态性检验" class="nav-link" data-scroll-target="#jarque-bera-%E6%AD%A3%E6%80%81%E6%80%A7%E6%A3%80%E9%AA%8C"><span class="header-section-number">8.2.2</span> Jarque-Bera 正态性检验</a></li>
-  <li><a href="#pearsons-x2-test" id="toc-pearsons-x2-test" class="nav-link" data-scroll-target="#pearsons-x2-test"><span class="header-section-number">8.2.3</span> Pearson’s X2 test</a></li>
+<li><a href="#dagostino-pearson-omnibus-test" id="toc-dagostino-pearson-omnibus-test" class="nav-link" data-scroll-target="#dagostino-pearson-omnibus-test"><span class="header-section-number">4.2.1</span> D’Agostino-Pearson Omnibus Test</a></li>
+  <li><a href="#jarque-bera-%E6%AD%A3%E6%80%81%E6%80%A7%E6%A3%80%E9%AA%8C" id="toc-jarque-bera-正态性检验" class="nav-link" data-scroll-target="#jarque-bera-%E6%AD%A3%E6%80%81%E6%80%A7%E6%A3%80%E9%AA%8C"><span class="header-section-number">4.2.2</span> Jarque-Bera 正态性检验</a></li>
+  <li><a href="#pearsons-x2-test" id="toc-pearsons-x2-test" class="nav-link" data-scroll-target="#pearsons-x2-test"><span class="header-section-number">4.2.3</span> Pearson’s X2 test</a></li>
   </ul>
 </li>
   <li>
-<a href="#%E5%9F%BA%E4%BA%8E%E5%9B%9E%E5%BD%92%E5%92%8C%E7%9B%B8%E5%85%B3" id="toc-基于回归和相关" class="nav-link" data-scroll-target="#%E5%9F%BA%E4%BA%8E%E5%9B%9E%E5%BD%92%E5%92%8C%E7%9B%B8%E5%85%B3"><span class="header-section-number">8.3</span> 基于回归和相关</a>
+<a href="#%E5%9F%BA%E4%BA%8E%E5%9B%9E%E5%BD%92%E5%92%8C%E7%9B%B8%E5%85%B3" id="toc-基于回归和相关" class="nav-link" data-scroll-target="#%E5%9F%BA%E4%BA%8E%E5%9B%9E%E5%BD%92%E5%92%8C%E7%9B%B8%E5%85%B3"><span class="header-section-number">4.3</span> 基于回归和相关</a>
   <ul>
-<li><a href="#shapiro-wilks-test" id="toc-shapiro-wilks-test" class="nav-link" data-scroll-target="#shapiro-wilks-test"><span class="header-section-number">8.3.1</span> Shapiro-Wilk’s test</a></li>
+<li><a href="#shapiro-wilks-test" id="toc-shapiro-wilks-test" class="nav-link" data-scroll-target="#shapiro-wilks-test"><span class="header-section-number">4.3.1</span> Shapiro-Wilk’s test</a></li>
   </ul>
 </li>
   <li>
-<a href="#%E5%9F%BA%E4%BA%8E%E7%BB%8F%E9%AA%8C%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0empirical-distribution-function" id="toc-基于经验分布函数empirical-distribution-function" class="nav-link" data-scroll-target="#%E5%9F%BA%E4%BA%8E%E7%BB%8F%E9%AA%8C%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0empirical-distribution-function"><span class="header-section-number">8.4</span> 基于经验分布函数（empirical distribution function）</a>
+<a href="#%E5%9F%BA%E4%BA%8E%E7%BB%8F%E9%AA%8C%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0empirical-distribution-function" id="toc-基于经验分布函数empirical-distribution-function" class="nav-link" data-scroll-target="#%E5%9F%BA%E4%BA%8E%E7%BB%8F%E9%AA%8C%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0empirical-distribution-function"><span class="header-section-number">4.4</span> 基于经验分布函数（empirical distribution function）</a>
   <ul>
-<li><a href="#kolmogorov-smirnov-k-s-test" id="toc-kolmogorov-smirnov-k-s-test" class="nav-link" data-scroll-target="#kolmogorov-smirnov-k-s-test"><span class="header-section-number">8.4.1</span> Kolmogorov-Smirnov (K-S) test</a></li>
-  <li><a href="#lilliefors-test" id="toc-lilliefors-test" class="nav-link" data-scroll-target="#lilliefors-test"><span class="header-section-number">8.4.2</span> Lilliefors test</a></li>
-  <li><a href="#anderson-darling-test" id="toc-anderson-darling-test" class="nav-link" data-scroll-target="#anderson-darling-test"><span class="header-section-number">8.4.3</span> Anderson-Darling test</a></li>
+<li><a href="#kolmogorov-smirnov-k-s-test" id="toc-kolmogorov-smirnov-k-s-test" class="nav-link" data-scroll-target="#kolmogorov-smirnov-k-s-test"><span class="header-section-number">4.4.1</span> Kolmogorov-Smirnov (K-S) test</a></li>
+  <li><a href="#lilliefors-test" id="toc-lilliefors-test" class="nav-link" data-scroll-target="#lilliefors-test"><span class="header-section-number">4.4.2</span> Lilliefors test</a></li>
+  <li><a href="#anderson-darling-test" id="toc-anderson-darling-test" class="nav-link" data-scroll-target="#anderson-darling-test"><span class="header-section-number">4.4.3</span> Anderson-Darling test</a></li>
   </ul>
 </li>
   <li>
-<a href="#%E6%95%B0%E6%8D%AE%E5%8F%98%E6%8D%A2" id="toc-数据变换" class="nav-link" data-scroll-target="#%E6%95%B0%E6%8D%AE%E5%8F%98%E6%8D%A2"><span class="header-section-number">8.5</span> 数据变换</a>
+<a href="#%E6%95%B0%E6%8D%AE%E5%8F%98%E6%8D%A2" id="toc-数据变换" class="nav-link" data-scroll-target="#%E6%95%B0%E6%8D%AE%E5%8F%98%E6%8D%A2"><span class="header-section-number">4.5</span> 数据变换</a>
   <ul>
-<li><a href="#%E4%B8%AD%E5%BA%A6%E5%81%8F%E5%BA%A6-%E5%B9%B3%E6%96%B9%E6%A0%B9%E5%8F%98%E6%8D%A2" id="toc-中度偏度-平方根变换" class="nav-link" data-scroll-target="#%E4%B8%AD%E5%BA%A6%E5%81%8F%E5%BA%A6-%E5%B9%B3%E6%96%B9%E6%A0%B9%E5%8F%98%E6%8D%A2"><span class="header-section-number">8.5.1</span> 中度偏度-平方根变换</a></li>
-  <li><a href="#%E6%9B%B4%E5%81%8F%E6%80%81-%E5%AF%B9%E6%95%B0%E5%8F%98%E6%8D%A2" id="toc-更偏态-对数变换" class="nav-link" data-scroll-target="#%E6%9B%B4%E5%81%8F%E6%80%81-%E5%AF%B9%E6%95%B0%E5%8F%98%E6%8D%A2"><span class="header-section-number">8.5.2</span> 更偏态-对数变换</a></li>
-  <li><a href="#%E9%9D%9E%E5%B8%B8%E5%81%8F%E6%80%81-%E5%80%92%E6%95%B0" id="toc-非常偏态-倒数" class="nav-link" data-scroll-target="#%E9%9D%9E%E5%B8%B8%E5%81%8F%E6%80%81-%E5%80%92%E6%95%B0"><span class="header-section-number">8.5.3</span> 非常偏态-倒数</a></li>
-  <li><a href="#%E7%BA%BF%E6%80%A7%E5%BA%A6%E5%92%8C%E5%BC%82%E6%96%B9%E5%B7%AE%E6%80%A7" id="toc-线性度和异方差性" class="nav-link" data-scroll-target="#%E7%BA%BF%E6%80%A7%E5%BA%A6%E5%92%8C%E5%BC%82%E6%96%B9%E5%B7%AE%E6%80%A7"><span class="header-section-number">8.5.4</span> 线性度和异方差性</a></li>
-  <li><a href="#box-cox-%E5%B9%82%E6%AC%A1%E5%8F%98%E6%8D%A2" id="toc-box-cox-幂次变换" class="nav-link" data-scroll-target="#box-cox-%E5%B9%82%E6%AC%A1%E5%8F%98%E6%8D%A2"><span class="header-section-number">8.5.5</span> Box-Cox 幂次变换</a></li>
+<li><a href="#%E4%B8%AD%E5%BA%A6%E5%81%8F%E5%BA%A6-%E5%B9%B3%E6%96%B9%E6%A0%B9%E5%8F%98%E6%8D%A2" id="toc-中度偏度-平方根变换" class="nav-link" data-scroll-target="#%E4%B8%AD%E5%BA%A6%E5%81%8F%E5%BA%A6-%E5%B9%B3%E6%96%B9%E6%A0%B9%E5%8F%98%E6%8D%A2"><span class="header-section-number">4.5.1</span> 中度偏度-平方根变换</a></li>
+  <li><a href="#%E6%9B%B4%E5%81%8F%E6%80%81-%E5%AF%B9%E6%95%B0%E5%8F%98%E6%8D%A2" id="toc-更偏态-对数变换" class="nav-link" data-scroll-target="#%E6%9B%B4%E5%81%8F%E6%80%81-%E5%AF%B9%E6%95%B0%E5%8F%98%E6%8D%A2"><span class="header-section-number">4.5.2</span> 更偏态-对数变换</a></li>
+  <li><a href="#%E9%9D%9E%E5%B8%B8%E5%81%8F%E6%80%81-%E5%80%92%E6%95%B0" id="toc-非常偏态-倒数" class="nav-link" data-scroll-target="#%E9%9D%9E%E5%B8%B8%E5%81%8F%E6%80%81-%E5%80%92%E6%95%B0"><span class="header-section-number">4.5.3</span> 非常偏态-倒数</a></li>
+  <li><a href="#%E7%BA%BF%E6%80%A7%E5%BA%A6%E5%92%8C%E5%BC%82%E6%96%B9%E5%B7%AE%E6%80%A7" id="toc-线性度和异方差性" class="nav-link" data-scroll-target="#%E7%BA%BF%E6%80%A7%E5%BA%A6%E5%92%8C%E5%BC%82%E6%96%B9%E5%B7%AE%E6%80%A7"><span class="header-section-number">4.5.4</span> 线性度和异方差性</a></li>
+  <li><a href="#box-cox-%E5%B9%82%E6%AC%A1%E5%8F%98%E6%8D%A2" id="toc-box-cox-幂次变换" class="nav-link" data-scroll-target="#box-cox-%E5%B9%82%E6%AC%A1%E5%8F%98%E6%8D%A2"><span class="header-section-number">4.5.5</span> Box-Cox 幂次变换</a></li>
   </ul>
 </li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./probability_theory.html">概率论与数理统计</a></li><li class="breadcrumb-item"><a href="./normality_test.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">正态性检验</span></a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./hypothesis_test.html">假设检验</a></li><li class="breadcrumb-item"><a href="./normality_test.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">正态性检验</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title">
-<span class="chapter-number">8</span>&nbsp; <span class="chapter-title">正态性检验</span>
+<span class="chapter-number">4</span>&nbsp; <span class="chapter-title">正态性检验</span>
 </h1>
 </div>
 
@@ -437,7 +413,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">November 10, 2024</p>
+      <p class="date-modified">November 20, 2024</p>
     </div>
   </div>
     
@@ -447,13 +423,13 @@ window.Quarto = {
 
 </header><p><a href="https://www.datanovia.com/en/courses/statistical-tests-and-assumptions/">统计检验与假设</a></p>
 <div class="cell">
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpkgs.datanovia.com/ggpubr/">ggpubr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpkgs.datanovia.com/rstatix/">rstatix</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
 <span>    ctrl<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">6</span>,<span class="fl">13</span>,<span class="fl">5</span>,<span class="fl">8</span>,<span class="fl">9</span>,<span class="fl">12</span>,<span class="fl">11</span>,<span class="fl">8</span>,<span class="fl">10</span>,<span class="fl">12</span>,<span class="fl">14</span>,<span class="fl">13</span>,<span class="fl">6</span>,<span class="fl">7</span>,<span class="fl">4</span><span class="op">)</span>,</span>
 <span>    trt<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">8</span>,<span class="fl">6</span>,<span class="fl">8</span>,<span class="fl">9</span>,<span class="fl">12</span>,<span class="fl">12</span>,<span class="fl">14</span>,<span class="fl">15</span>,<span class="fl">16</span>,<span class="fl">17</span>,<span class="fl">14</span>,<span class="fl">12</span>,<span class="fl">11</span>,<span class="fl">8</span>,<span class="fl">10</span>,<span class="fl">10</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
@@ -479,13 +455,13 @@ window.Quarto = {
 <span><span class="co">#&gt; 16     4    10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<section id="描述性统计方法" class="level2" data-number="8.1"><h2 data-number="8.1" class="anchored" data-anchor-id="描述性统计方法">
-<span class="header-section-number">8.1</span> 描述性统计方法</h2>
-<section id="密度图" class="level3" data-number="8.1.1"><h3 data-number="8.1.1" class="anchored" data-anchor-id="密度图">
-<span class="header-section-number">8.1.1</span> 密度图</h3>
+<section id="描述性统计方法" class="level2" data-number="4.1"><h2 data-number="4.1" class="anchored" data-anchor-id="描述性统计方法">
+<span class="header-section-number">4.1</span> 描述性统计方法</h2>
+<section id="密度图" class="level3" data-number="4.1.1"><h3 data-number="4.1.1" class="anchored" data-anchor-id="密度图">
+<span class="header-section-number">4.1.1</span> 密度图</h3>
 <p>密度图提供了关于分布是否为钟形的视觉判断</p>
 <div class="cell">
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rpkgs.datanovia.com/ggpubr/reference/ggdensity.html">ggdensity</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ctrl</span>, fill <span class="op">=</span> <span class="st">"lightgray"</span><span class="op">)</span> <span class="op">+</span></span>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rpkgs.datanovia.com/ggpubr/reference/ggdensity.html">ggdensity</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ctrl</span>, fill <span class="op">=</span> <span class="st">"lightgray"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>   <span class="co">#  stat_overlay_normal_density(color = "red", linetype = "dashed")+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/lims.html">xlim</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ctrl</span><span class="op">)</span> <span class="op">-</span> <span class="fl">3</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ctrl</span><span class="op">)</span>, </span>
 <span>           <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ctrl</span><span class="op">)</span> <span class="op">+</span> <span class="fl">3</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ctrl</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -496,11 +472,11 @@ window.Quarto = {
 </div>
 </div>
 </div>
-</section><section id="q-q图" class="level3" data-number="8.1.2"><h3 data-number="8.1.2" class="anchored" data-anchor-id="q-q图">
-<span class="header-section-number">8.1.2</span> Q-Q图</h3>
+</section><section id="q-q图" class="level3" data-number="4.1.2"><h3 data-number="4.1.2" class="anchored" data-anchor-id="q-q图">
+<span class="header-section-number">4.1.2</span> Q-Q图</h3>
 <p>Q-Q图（或分位数-分位数图）绘制给定样本与正态分布之间的相关性。还绘制了一条 45 度参考线。在 QQ 图中，每个观测值都绘制为一个点。如果数据是正常的，则点应形成一条直线。</p>
 <div class="cell">
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rpkgs.datanovia.com/ggpubr/reference/ggqqplot.html">ggqqplot</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ctrl</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rpkgs.datanovia.com/ggpubr/reference/ggqqplot.html">ggqqplot</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ctrl</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
 <figure class="figure"><p><img src="normality_test_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
@@ -509,7 +485,7 @@ window.Quarto = {
 </div>
 </div>
 <div class="cell">
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">norm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">1000</span>,<span class="fl">10</span>,<span class="fl">3</span><span class="op">)</span></span>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">norm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">1000</span>,<span class="fl">10</span>,<span class="fl">3</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rpkgs.datanovia.com/ggpubr/reference/ggqqplot.html">ggqqplot</a></span><span class="op">(</span><span class="va">norm</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
@@ -517,7 +493,7 @@ window.Quarto = {
 </figure>
 </div>
 </div>
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">unif</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">1000</span>,<span class="fl">5</span>,<span class="fl">15</span><span class="op">)</span></span>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">unif</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">1000</span>,<span class="fl">5</span>,<span class="fl">15</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rpkgs.datanovia.com/ggpubr/reference/ggqqplot.html">ggqqplot</a></span><span class="op">(</span><span class="va">unif</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
@@ -525,7 +501,7 @@ window.Quarto = {
 </figure>
 </div>
 </div>
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="va">exp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span><span class="op">(</span><span class="fl">1000</span>,<span class="fl">1</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rpkgs.datanovia.com/ggpubr/reference/ggqqplot.html">ggqqplot</a></span><span class="op">(</span><span class="va">exp</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
@@ -535,10 +511,10 @@ window.Quarto = {
 </div>
 </div>
 </div>
-</section></section><section id="基于卡方分布" class="level2" data-number="8.2"><h2 data-number="8.2" class="anchored" data-anchor-id="基于卡方分布">
-<span class="header-section-number">8.2</span> 基于卡方分布</h2>
-<section id="dagostino-pearson-omnibus-test" class="level3" data-number="8.2.1"><h3 data-number="8.2.1" class="anchored" data-anchor-id="dagostino-pearson-omnibus-test">
-<span class="header-section-number">8.2.1</span> D’Agostino-Pearson Omnibus Test</h3>
+</section></section><section id="基于卡方分布" class="level2" data-number="4.2"><h2 data-number="4.2" class="anchored" data-anchor-id="基于卡方分布">
+<span class="header-section-number">4.2</span> 基于卡方分布</h2>
+<section id="dagostino-pearson-omnibus-test" class="level3" data-number="4.2.1"><h3 data-number="4.2.1" class="anchored" data-anchor-id="dagostino-pearson-omnibus-test">
+<span class="header-section-number">4.2.1</span> D’Agostino-Pearson Omnibus Test</h3>
 <p><a href="https://real-statistics.com/tests-normality-and-symmetry/statistical-tests-normality-symmetry/dagostino-pearson-test/">D’Agostino-Pearson test</a></p>
 <p>D’Agostino-Pearson 综合检验 是基于数据的偏度和峰度来评估数据是否接近正态分布的。</p>
 <p><img src="images/clipboard-3873541098.png" class="img-fluid"></p>
@@ -549,7 +525,7 @@ window.Quarto = {
 </div>
 <p>在R语言中，可以使用 <code>moments</code> 包中的 <code><a href="https://rdrr.io/pkg/moments/man/agostino.test.html">agostino.test()</a></code> 函数来执行此检验。此检验的原假设是数据来自正态分布，如果检验的p值小于显著性水平（通常是0.05），则可以拒绝原假设，认为数据不服从正态分布。</p>
 <div class="cell">
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 样本偏度和峰度</span></span>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 样本偏度和峰度</span></span>
 <span><span class="va">skewness</span> <span class="op">&lt;-</span> <span class="fu">moments</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/moments/man/skewness.html">skewness</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ctrl</span>,na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
 <span><span class="va">kurtosis</span> <span class="op">&lt;-</span> <span class="fu">moments</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/moments/man/kurtosis.html">kurtosis</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ctrl</span>,na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
 <span></span>
@@ -582,15 +558,15 @@ window.Quarto = {
 <span><span class="co">#&gt; [1] 0.6620809</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="jarque-bera-正态性检验" class="level3" data-number="8.2.2"><h3 data-number="8.2.2" class="anchored" data-anchor-id="jarque-bera-正态性检验">
-<span class="header-section-number">8.2.2</span> Jarque-Bera 正态性检验</h3>
+</section><section id="jarque-bera-正态性检验" class="level3" data-number="4.2.2"><h3 data-number="4.2.2" class="anchored" data-anchor-id="jarque-bera-正态性检验">
+<span class="header-section-number">4.2.2</span> Jarque-Bera 正态性检验</h3>
 <p>Jarque-Bera检验也是一种基于样本偏度和峰度的正态性检验方法。</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="images/jarque-bera正态性检验.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 <div class="cell">
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va">tseries</span><span class="op">)</span><span class="op">)</span><span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'tseries'</span><span class="op">)</span><span class="op">}</span></span>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va">tseries</span><span class="op">)</span><span class="op">)</span><span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'tseries'</span><span class="op">)</span><span class="op">}</span></span>
 <span><span class="fu">tseries</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tseries/man/jarque.bera.test.html">jarque.bera.test</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ctrl</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  Jarque Bera Test</span></span>
@@ -605,10 +581,10 @@ window.Quarto = {
 <span><span class="co">#&gt; X-squared = 0.69681, df = 2, p-value = 0.7058</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="pearsons-x2-test" class="level3" data-number="8.2.3"><h3 data-number="8.2.3" class="anchored" data-anchor-id="pearsons-x2-test">
-<span class="header-section-number">8.2.3</span> Pearson’s X2 test</h3>
+</section><section id="pearsons-x2-test" class="level3" data-number="4.2.3"><h3 data-number="4.2.3" class="anchored" data-anchor-id="pearsons-x2-test">
+<span class="header-section-number">4.2.3</span> Pearson’s X2 test</h3>
 <div class="cell">
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span></span>
 <span><span class="fu">nortest</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/nortest/man/pearson.test.html">pearson.test</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ctrl</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -624,10 +600,10 @@ window.Quarto = {
 <span><span class="co">#&gt; P = 3.25, p-value = 0.5169</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section></section><section id="基于回归和相关" class="level2" data-number="8.3"><h2 data-number="8.3" class="anchored" data-anchor-id="基于回归和相关">
-<span class="header-section-number">8.3</span> 基于回归和相关</h2>
-<section id="shapiro-wilks-test" class="level3" data-number="8.3.1"><h3 data-number="8.3.1" class="anchored" data-anchor-id="shapiro-wilks-test">
-<span class="header-section-number">8.3.1</span> Shapiro-Wilk’s test</h3>
+</section></section><section id="基于回归和相关" class="level2" data-number="4.3"><h2 data-number="4.3" class="anchored" data-anchor-id="基于回归和相关">
+<span class="header-section-number">4.3</span> 基于回归和相关</h2>
+<section id="shapiro-wilks-test" class="level3" data-number="4.3.1"><h3 data-number="4.3.1" class="anchored" data-anchor-id="shapiro-wilks-test">
+<span class="header-section-number">4.3.1</span> Shapiro-Wilk’s test</h3>
 <p>Shapiro-Wilk检验而是将数据的实际SD与根据数据的QQ图斜率计算的SD进行比较，并计算其比率。如果数据从高斯分布中采样，则两个值将相似，因此比率将接近1.0，而比率与1相差很大则表明为非正态分布。如果每个值均唯一，则Shapiro-Wilk检验非常有效，但如果几个值均相同，则不那么有效。推荐样本量 7~2000。</p>
 <p>这些检验的原假设是“样本分布是正态的”。如果检验显著，则分布为非正态分布。Shapiro-Wilk 方法被广泛推荐用于正态性检验，它提供了比 K-S 更好的功率。 它基于数据与相应的正常分数之间的相关性。</p>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -644,142 +620,59 @@ Note
 </div>
 </div>
 <div class="cell">
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html">map_df</a></span><span class="op">(</span><span class="va">df</span>,<span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"statistic"</span>,<span class="st">"p.value"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
-<div class="kable-table">
-<table class="caption-top table table-sm table-striped small">
-<thead><tr class="header">
-<th style="text-align: right;">statistic</th>
-<th style="text-align: right;">p.value</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: right;">0.9607632</td>
-<td style="text-align: right;">0.6756693</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">0.9655983</td>
-<td style="text-align: right;">0.7632600</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/shapiro_test.html">shapiro_test</a></span><span class="op">(</span><span class="va">ctrl</span>,<span class="va">trt</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
-<div class="kable-table">
-<table class="caption-top table table-sm table-striped small">
-<thead><tr class="header">
-<th style="text-align: left;">variable</th>
-<th style="text-align: right;">statistic</th>
-<th style="text-align: right;">p</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">ctrl</td>
-<td style="text-align: right;">0.9607632</td>
-<td style="text-align: right;">0.6756693</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">trt</td>
-<td style="text-align: right;">0.9655983</td>
-<td style="text-align: right;">0.7632600</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html">map_df</a></span><span class="op">(</span><span class="va">df</span>,<span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"statistic"</span>,<span class="st">"p.value"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 2 × 2</span></span>
+<span><span class="co">#&gt;   statistic p.value</span></span>
+<span><span class="co">#&gt;       &lt;dbl&gt;   &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1     0.961   0.676</span></span>
+<span><span class="co">#&gt; 2     0.966   0.763</span></span>
+<span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/shapiro_test.html">shapiro_test</a></span><span class="op">(</span><span class="va">ctrl</span>,<span class="va">trt</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 2 × 3</span></span>
+<span><span class="co">#&gt;   variable statistic     p</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1 ctrl         0.961 0.676</span></span>
+<span><span class="co">#&gt; 2 trt          0.966 0.763</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="cell">
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ToothGrowth</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ToothGrowth</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">dose</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/shapiro_test.html">shapiro_test</a></span><span class="op">(</span><span class="va">len</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
-<div class="kable-table">
-<table class="caption-top table table-sm table-striped small">
-<thead><tr class="header">
-<th style="text-align: right;">dose</th>
-<th style="text-align: left;">variable</th>
-<th style="text-align: right;">statistic</th>
-<th style="text-align: right;">p</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: right;">0.5</td>
-<td style="text-align: left;">len</td>
-<td style="text-align: right;">0.9406451</td>
-<td style="text-align: right;">0.2466015</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">1.0</td>
-<td style="text-align: left;">len</td>
-<td style="text-align: right;">0.9313431</td>
-<td style="text-align: right;">0.1638821</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">2.0</td>
-<td style="text-align: left;">len</td>
-<td style="text-align: right;">0.9777535</td>
-<td style="text-align: right;">0.9019115</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/shapiro_test.html">shapiro_test</a></span><span class="op">(</span><span class="va">len</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 3 × 4</span></span>
+<span><span class="co">#&gt;    dose variable statistic     p</span></span>
+<span><span class="co">#&gt;   &lt;dbl&gt; &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1   0.5 len          0.941 0.247</span></span>
+<span><span class="co">#&gt; 2   1   len          0.931 0.164</span></span>
+<span><span class="co">#&gt; 3   2   len          0.978 0.902</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="cell">
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Shapiro Wilk normality test for two variables</span></span>
-<span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/shapiro_test.html">shapiro_test</a></span><span class="op">(</span><span class="va">Sepal.Length</span>, <span class="va">Petal.Width</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
-<div class="kable-table">
-<table class="caption-top table table-sm table-striped small">
-<thead><tr class="header">
-<th style="text-align: left;">variable</th>
-<th style="text-align: right;">statistic</th>
-<th style="text-align: right;">p</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Petal.Width</td>
-<td style="text-align: right;">0.9018349</td>
-<td style="text-align: right;">0.0000000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Sepal.Length</td>
-<td style="text-align: right;">0.9760903</td>
-<td style="text-align: right;">0.0101812</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Shapiro Wilk normality test for two variables</span></span>
+<span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/shapiro_test.html">shapiro_test</a></span><span class="op">(</span><span class="va">Sepal.Length</span>, <span class="va">Petal.Width</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 2 × 3</span></span>
+<span><span class="co">#&gt;   variable     statistic            p</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;            &lt;dbl&gt;        &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1 Petal.Width      0.902 0.0000000168</span></span>
+<span><span class="co">#&gt; 2 Sepal.Length     0.976 0.0102</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="cell">
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Multivariate normality test</span></span>
-<span><span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/shapiro_test.html">mshapiro_test</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
-<div class="kable-table">
-<table class="caption-top table table-sm table-striped small">
-<thead><tr class="header">
-<th style="text-align: right;">statistic</th>
-<th style="text-align: right;">p.value</th>
-</tr></thead>
-<tbody><tr class="odd">
-<td style="text-align: right;">0.9908412</td>
-<td style="text-align: right;">0.4426676</td>
-</tr></tbody>
-</table>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Multivariate normality test</span></span>
+<span><span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/shapiro_test.html">mshapiro_test</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 1 × 2</span></span>
+<span><span class="co">#&gt;   statistic p.value</span></span>
+<span><span class="co">#&gt;       &lt;dbl&gt;   &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1     0.991   0.443</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
-</div>
-</div>
-</section></section><section id="基于经验分布函数empirical-distribution-function" class="level2" data-number="8.4"><h2 data-number="8.4" class="anchored" data-anchor-id="基于经验分布函数empirical-distribution-function">
-<span class="header-section-number">8.4</span> 基于经验分布函数（empirical distribution function）</h2>
-<section id="kolmogorov-smirnov-k-s-test" class="level3" data-number="8.4.1"><h3 data-number="8.4.1" class="anchored" data-anchor-id="kolmogorov-smirnov-k-s-test">
-<span class="header-section-number">8.4.1</span> Kolmogorov-Smirnov (K-S) test</h3>
+</section></section><section id="基于经验分布函数empirical-distribution-function" class="level2" data-number="4.4"><h2 data-number="4.4" class="anchored" data-anchor-id="基于经验分布函数empirical-distribution-function">
+<span class="header-section-number">4.4</span> 基于经验分布函数（empirical distribution function）</h2>
+<section id="kolmogorov-smirnov-k-s-test" class="level3" data-number="4.4.1"><h3 data-number="4.4.1" class="anchored" data-anchor-id="kolmogorov-smirnov-k-s-test">
+<span class="header-section-number">4.4.1</span> Kolmogorov-Smirnov (K-S) test</h3>
 <p>Kolmogorov-Smirnov检验（K-S检验），这是一种非参数检验方法，用于比较一个样本的累积分布函数（CDF）与某个理论CDF的差异。需要指定总体的均值和方差</p>
 <p>不建议使用Kolmogorov-Smirnov检验。但在大样本（&gt;2000）实用</p>
 <div class="cell">
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/ks.test.html">ks.test</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ctrl</span>,<span class="st">"pnorm"</span>,mean<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ctrl</span><span class="op">)</span>,sd<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ctrl</span><span class="op">)</span><span class="op">)</span></span>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/ks.test.html">ks.test</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ctrl</span>,<span class="st">"pnorm"</span>,mean<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ctrl</span><span class="op">)</span>,sd<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ctrl</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning in ks.test.default(df$ctrl, "pnorm", mean = mean(df$ctrl), sd =</span></span>
 <span><span class="co">#&gt; sd(df$ctrl)): ties should not be present for the one-sample Kolmogorov-Smirnov</span></span>
 <span><span class="co">#&gt; test</span></span>
@@ -792,11 +685,11 @@ Note
 </details>
 </div>
 <p>在执行单样本Kolmogorov-Smirnov检验时，数据中不应该存在“ties”，即不应该有重复的数值。如果存在重复的数值，它会影响检验的有效性，因为K-S检验对数据中的“ties”敏感。此时，可以考虑使用其他对“ties”不敏感的检验方法，例如Shapiro-Wilk检验或Lilliefors检验。</p>
-</section><section id="lilliefors-test" class="level3" data-number="8.4.2"><h3 data-number="8.4.2" class="anchored" data-anchor-id="lilliefors-test">
-<span class="header-section-number">8.4.2</span> Lilliefors test</h3>
+</section><section id="lilliefors-test" class="level3" data-number="4.4.2"><h3 data-number="4.4.2" class="anchored" data-anchor-id="lilliefors-test">
+<span class="header-section-number">4.4.2</span> Lilliefors test</h3>
 <p><strong>Lilliefors test</strong> 是一个修改版的K-S检验，它使用样本均值和标准差来标准化数据，然后与标准正态分布进行比较</p>
 <div class="cell">
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">nortest</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/nortest/man/lillie.test.html">lillie.test</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ctrl</span><span class="op">)</span></span>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">nortest</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/nortest/man/lillie.test.html">lillie.test</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ctrl</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  Lilliefors (Kolmogorov-Smirnov) normality test</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -810,11 +703,11 @@ Note
 <span><span class="co">#&gt; D = 0.11011, p-value = 0.87</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="anderson-darling-test" class="level3" data-number="8.4.3"><h3 data-number="8.4.3" class="anchored" data-anchor-id="anderson-darling-test">
-<span class="header-section-number">8.4.3</span> Anderson-Darling test</h3>
+</section><section id="anderson-darling-test" class="level3" data-number="4.4.3"><h3 data-number="4.4.3" class="anchored" data-anchor-id="anderson-darling-test">
+<span class="header-section-number">4.4.3</span> Anderson-Darling test</h3>
 <p>Anderson-Darling test 是基于累积分布函数（CDF）的比较，通过计算观测值与理论分布之间的差异程度来评估数据的拟合程度。在R语言中，可以使用 <code>nortest</code> 包中的 <code>ad.test()</code> 函数来执行此检验291011。此检验的原假设同样是数据服从正态分布，如果p值小于显著性水平，则拒绝原假设，认为数据不服从正态分布。对尾部敏感，适用于中等样本量的数据</p>
 <div class="cell">
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">nortest</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/nortest/man/ad.test.html">ad.test</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ctrl</span><span class="op">)</span></span>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">nortest</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/nortest/man/ad.test.html">ad.test</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ctrl</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  Anderson-Darling normality test</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -828,12 +721,12 @@ Note
 <span><span class="co">#&gt; A = 0.24294, p-value = 0.7233</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section></section><section id="数据变换" class="level2" data-number="8.5"><h2 data-number="8.5" class="anchored" data-anchor-id="数据变换">
-<span class="header-section-number">8.5</span> 数据变换</h2>
-<section id="中度偏度-平方根变换" class="level3" data-number="8.5.1"><h3 data-number="8.5.1" class="anchored" data-anchor-id="中度偏度-平方根变换">
-<span class="header-section-number">8.5.1</span> 中度偏度-平方根变换</h3>
+</section></section><section id="数据变换" class="level2" data-number="4.5"><h2 data-number="4.5" class="anchored" data-anchor-id="数据变换">
+<span class="header-section-number">4.5</span> 数据变换</h2>
+<section id="中度偏度-平方根变换" class="level3" data-number="4.5.1"><h3 data-number="4.5.1" class="anchored" data-anchor-id="中度偏度-平方根变换">
+<span class="header-section-number">4.5.1</span> 中度偏度-平方根变换</h3>
 <div class="cell">
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.r-project.org">moments</a></span><span class="op">)</span></span>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.r-project.org">moments</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/moments/man/skewness.html">skewness</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0.3117531</span></span>
 <span><span class="fu">e1071</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/e1071/man/skewness.html">skewness</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -843,160 +736,40 @@ Note
 <ul>
 <li><p><code>sqrt(x)</code>对于正偏态数据，</p></li>
 <li><p><code>sqrt(max(x+1) - x)</code>对于负偏态数据</p></li>
-</ul></section><section id="更偏态-对数变换" class="level3" data-number="8.5.2"><h3 data-number="8.5.2" class="anchored" data-anchor-id="更偏态-对数变换">
-<span class="header-section-number">8.5.2</span> 更偏态-对数变换</h3>
+</ul></section><section id="更偏态-对数变换" class="level3" data-number="4.5.2"><h3 data-number="4.5.2" class="anchored" data-anchor-id="更偏态-对数变换">
+<span class="header-section-number">4.5.2</span> 更偏态-对数变换</h3>
 <ul>
 <li><p><code>log10(x)</code>对于正偏态数据，</p></li>
 <li><p><code>log10(max(x+1) - x)</code>对于负偏态数据</p></li>
-</ul></section><section id="非常偏态-倒数" class="level3" data-number="8.5.3"><h3 data-number="8.5.3" class="anchored" data-anchor-id="非常偏态-倒数">
-<span class="header-section-number">8.5.3</span> 非常偏态-倒数</h3>
+</ul></section><section id="非常偏态-倒数" class="level3" data-number="4.5.3"><h3 data-number="4.5.3" class="anchored" data-anchor-id="非常偏态-倒数">
+<span class="header-section-number">4.5.3</span> 非常偏态-倒数</h3>
 <ul>
 <li><p><code>1/x</code>对于正偏态数据</p></li>
 <li><p><code>1/(max(x+1) - x)</code>对于负偏态数据</p></li>
-</ul></section><section id="线性度和异方差性" class="level3" data-number="8.5.4"><h3 data-number="8.5.4" class="anchored" data-anchor-id="线性度和异方差性">
-<span class="header-section-number">8.5.4</span> 线性度和异方差性</h3>
+</ul></section><section id="线性度和异方差性" class="level3" data-number="4.5.4"><h3 data-number="4.5.4" class="anchored" data-anchor-id="线性度和异方差性">
+<span class="header-section-number">4.5.4</span> 线性度和异方差性</h3>
 <p>Linearity and heteroscedasticity</p>
 <ul>
 <li><p>首先，在因变量随着自变量值的增加而开始更快地增加的情况下尝试<code>log</code> 变换</p></li>
 <li><p>如果数据与此相反（因变量值随着自变量值的增加而减少得更快）可以考虑<code>square</code>变换</p></li>
 </ul>
 <div class="cell">
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpkgs.datanovia.com/ggpubr/">ggpubr</a></span><span class="op">)</span></span>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpkgs.datanovia.com/ggpubr/">ggpubr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.r-project.org">moments</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"USJudgeRatings"</span><span class="op">)</span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">USJudgeRatings</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
-<div class="kable-table">
-<table class="caption-top table table-sm table-striped small">
-<colgroup>
-<col style="width: 20%">
-<col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 6%">
-</colgroup>
-<thead><tr class="header">
-<th style="text-align: left;"></th>
-<th style="text-align: right;">CONT</th>
-<th style="text-align: right;">INTG</th>
-<th style="text-align: right;">DMNR</th>
-<th style="text-align: right;">DILG</th>
-<th style="text-align: right;">CFMG</th>
-<th style="text-align: right;">DECI</th>
-<th style="text-align: right;">PREP</th>
-<th style="text-align: right;">FAMI</th>
-<th style="text-align: right;">ORAL</th>
-<th style="text-align: right;">WRIT</th>
-<th style="text-align: right;">PHYS</th>
-<th style="text-align: right;">RTEN</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">AARONSON,L.H.</td>
-<td style="text-align: right;">5.7</td>
-<td style="text-align: right;">7.9</td>
-<td style="text-align: right;">7.7</td>
-<td style="text-align: right;">7.3</td>
-<td style="text-align: right;">7.1</td>
-<td style="text-align: right;">7.4</td>
-<td style="text-align: right;">7.1</td>
-<td style="text-align: right;">7.1</td>
-<td style="text-align: right;">7.1</td>
-<td style="text-align: right;">7.0</td>
-<td style="text-align: right;">8.3</td>
-<td style="text-align: right;">7.8</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">ALEXANDER,J.M.</td>
-<td style="text-align: right;">6.8</td>
-<td style="text-align: right;">8.9</td>
-<td style="text-align: right;">8.8</td>
-<td style="text-align: right;">8.5</td>
-<td style="text-align: right;">7.8</td>
-<td style="text-align: right;">8.1</td>
-<td style="text-align: right;">8.0</td>
-<td style="text-align: right;">8.0</td>
-<td style="text-align: right;">7.8</td>
-<td style="text-align: right;">7.9</td>
-<td style="text-align: right;">8.5</td>
-<td style="text-align: right;">8.7</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">ARMENTANO,A.J.</td>
-<td style="text-align: right;">7.2</td>
-<td style="text-align: right;">8.1</td>
-<td style="text-align: right;">7.8</td>
-<td style="text-align: right;">7.8</td>
-<td style="text-align: right;">7.5</td>
-<td style="text-align: right;">7.6</td>
-<td style="text-align: right;">7.5</td>
-<td style="text-align: right;">7.5</td>
-<td style="text-align: right;">7.3</td>
-<td style="text-align: right;">7.4</td>
-<td style="text-align: right;">7.9</td>
-<td style="text-align: right;">7.8</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">BERDON,R.I.</td>
-<td style="text-align: right;">6.8</td>
-<td style="text-align: right;">8.8</td>
-<td style="text-align: right;">8.5</td>
-<td style="text-align: right;">8.8</td>
-<td style="text-align: right;">8.3</td>
-<td style="text-align: right;">8.5</td>
-<td style="text-align: right;">8.7</td>
-<td style="text-align: right;">8.7</td>
-<td style="text-align: right;">8.4</td>
-<td style="text-align: right;">8.5</td>
-<td style="text-align: right;">8.8</td>
-<td style="text-align: right;">8.7</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">BRACKEN,J.J.</td>
-<td style="text-align: right;">7.3</td>
-<td style="text-align: right;">6.4</td>
-<td style="text-align: right;">4.3</td>
-<td style="text-align: right;">6.5</td>
-<td style="text-align: right;">6.0</td>
-<td style="text-align: right;">6.2</td>
-<td style="text-align: right;">5.7</td>
-<td style="text-align: right;">5.7</td>
-<td style="text-align: right;">5.1</td>
-<td style="text-align: right;">5.3</td>
-<td style="text-align: right;">5.5</td>
-<td style="text-align: right;">4.8</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">BURNS,E.B.</td>
-<td style="text-align: right;">6.2</td>
-<td style="text-align: right;">8.8</td>
-<td style="text-align: right;">8.7</td>
-<td style="text-align: right;">8.5</td>
-<td style="text-align: right;">7.9</td>
-<td style="text-align: right;">8.0</td>
-<td style="text-align: right;">8.1</td>
-<td style="text-align: right;">8.0</td>
-<td style="text-align: right;">8.0</td>
-<td style="text-align: right;">8.0</td>
-<td style="text-align: right;">8.6</td>
-<td style="text-align: right;">8.6</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
+<span><span class="co">#&gt;                CONT INTG DMNR DILG CFMG DECI PREP FAMI ORAL WRIT PHYS RTEN</span></span>
+<span><span class="co">#&gt; AARONSON,L.H.   5.7  7.9  7.7  7.3  7.1  7.4  7.1  7.1  7.1  7.0  8.3  7.8</span></span>
+<span><span class="co">#&gt; ALEXANDER,J.M.  6.8  8.9  8.8  8.5  7.8  8.1  8.0  8.0  7.8  7.9  8.5  8.7</span></span>
+<span><span class="co">#&gt; ARMENTANO,A.J.  7.2  8.1  7.8  7.8  7.5  7.6  7.5  7.5  7.3  7.4  7.9  7.8</span></span>
+<span><span class="co">#&gt; BERDON,R.I.     6.8  8.8  8.5  8.8  8.3  8.5  8.7  8.7  8.4  8.5  8.8  8.7</span></span>
+<span><span class="co">#&gt; BRACKEN,J.J.    7.3  6.4  4.3  6.5  6.0  6.2  5.7  5.7  5.1  5.3  5.5  4.8</span></span>
+<span><span class="co">#&gt; BURNS,E.B.      6.2  8.8  8.7  8.5  7.9  8.0  8.1  8.0  8.0  8.0  8.6  8.6</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="cell">
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Distribution of CONT variable</span></span>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Distribution of CONT variable</span></span>
 <span><span class="fu"><a href="https://rpkgs.datanovia.com/ggpubr/reference/ggdensity.html">ggdensity</a></span><span class="op">(</span><span class="va">df</span>, x <span class="op">=</span> <span class="st">"CONT"</span>, fill <span class="op">=</span> <span class="st">"lightgray"</span>, title <span class="op">=</span> <span class="st">"CONT"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">12</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://rpkgs.datanovia.com/ggpubr/reference/stat_overlay_normal_density.html">stat_overlay_normal_density</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"red"</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1006,7 +779,7 @@ Note
 </figure>
 </div>
 </div>
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="co"># Distribution of PHYS variable</span></span>
 <span><span class="fu"><a href="https://rpkgs.datanovia.com/ggpubr/reference/ggdensity.html">ggdensity</a></span><span class="op">(</span><span class="va">df</span>, x <span class="op">=</span> <span class="st">"PHYS"</span>, fill <span class="op">=</span> <span class="st">"lightgray"</span>, title <span class="op">=</span> <span class="st">"PHYS"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">12</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -1019,16 +792,16 @@ Note
 </div>
 </div>
 <div class="cell">
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/moments/man/skewness.html">skewness</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">CONT</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/moments/man/skewness.html">skewness</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">CONT</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 1.085972</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/moments/man/skewness.html">skewness</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">PHYS</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] -1.558215</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="box-cox-幂次变换" class="level3" data-number="8.5.5"><h3 data-number="8.5.5" class="anchored" data-anchor-id="box-cox-幂次变换">
-<span class="header-section-number">8.5.5</span> Box-Cox 幂次变换</h3>
+</section><section id="box-cox-幂次变换" class="level3" data-number="4.5.5"><h3 data-number="4.5.5" class="anchored" data-anchor-id="box-cox-幂次变换">
+<span class="header-section-number">4.5.5</span> Box-Cox 幂次变换</h3>
 <div class="cell">
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">bc</span> <span class="op">&lt;-</span> <span class="fu">car</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/powerTransform.html">powerTransform</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">bc</span> <span class="op">&lt;-</span> <span class="fu">car</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/powerTransform.html">powerTransform</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">bc</span></span>
 <span><span class="co">#&gt; Estimated transformation parameters </span></span>
@@ -1243,18 +1016,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -1286,7 +1048,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -1294,7 +1078,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
@@ -1618,12 +1402,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./hypothesis_test.html" class="pagination-link" aria-label="假设检验">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">假设检验</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">假设检验</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./variance_homogeneity_test.html" class="pagination-link" aria-label="方差齐性检验">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">方差齐性检验</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">方差齐性检验</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

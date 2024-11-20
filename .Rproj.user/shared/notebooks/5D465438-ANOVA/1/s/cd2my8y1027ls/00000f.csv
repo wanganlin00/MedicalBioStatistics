@@ -1,0 +1,12 @@
+"0","library(nlme)"
+"0","model <- lme(fixed=ALT ~ week, random = ~1| id/week, data = df_long)"
+"0","summary(model)"
+"1","Linear mixed-effects model fit by "
+"1","REML
+"
+"1","  Data:"
+"1"," "
+"1","df_long"
+"1"," "
+"1","
+"

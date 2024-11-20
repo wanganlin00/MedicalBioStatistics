@@ -130,11 +130,12 @@ $$
 曼-惠特尼U统计量= 威尔科克森W(较小秩和)-\frac{n_{T_{min}}(n_{T_{min}}+1)}{2}
 $$
 
-#### Z 统计量 coin::wilcox_test()
+#### Z 统计量 `coin::wilcox_test()`
 
 ```{r}
 library(coin)
-df <- read_excel("data/coin：：wilcox_test .xlsx") %>% mutate(group=as.factor(group))
+df <- read_excel("data/coin-wilcox_test.xlsx") %>% 
+    mutate(group=as.factor(group))
 df
 
 rank <- rank(df$HADS得分)
@@ -266,5 +267,4 @@ result <- cor.test(x, y, method = "spearman")
 
 # 输出检验结果
 print(result)
-
 ```

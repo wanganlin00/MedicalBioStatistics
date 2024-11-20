@@ -31,7 +31,7 @@ reg <- function(y, x) {
 # t()用于转置矩阵
 # %*% 将两个矩阵相乘
 
-advertising<-read_csv("data/ISLR/Advertising.csv")
+advertising<-read_csv("data/Advertising.csv")
 
 reg(advertising$sales,advertising[c(-1,-5)])
 ```
@@ -42,6 +42,7 @@ reg(advertising$sales,advertising[c(-1,-5)])
 library(tidymodels)
 library(patchwork)
 library(ggfortify)
+library(rms)
 
 # 检测变量相关关系
 ad <- advertising %>% select(-1)
@@ -52,94 +53,66 @@ cor(ad)
 
 ```{r}
 
-ols_mlm <- rms::ols(sales~TV+radio+newspaper,data = advertising)
-ols_mlm 
-texreg::texreg(ols_mlm)
+mlm_ols <- rms::ols(sales~ TV+radio+newspaper,data = advertising)
+mlm_ols 
+# texreg::texreg(mlm_ols)
 
-car::vif(ols_mlm)
-anova(ols_mlm)
+car::vif(mlm_ols)
+anova(mlm_ols)
 ```
 
 ### `lm()`
 
 ```{r}
-# 多元线性回归
-lm_spec <-linear_reg() %>%
-  set_mode("regression") %>%
-  set_engine("lm")  
-lm_spec
-lm_sales_multi<- lm_spec %>% fit(sales~TV+radio+newspaper,data = advertising)
-summary(lm_sales_multi$fit)
+mlm_lm<- lm(sales~TV+radio+newspaper,data = advertising)
+summary(mlm_lm)
 
-tidy(lm_sales_multi)
-glance(lm_sales_multi)
+broom::tidy(mlm_lm)
+broom::glance(mlm_lm)
 
-logLik(lm_sales_multi$fit)
-car::vif(lm_sales_multi$fit)
+logLik(mlm_lm)
+car::vif(mlm_lm)
 
 
 
 
 
 ```
+
+## 变换
 
 ### 线性组合
 
 我们经常希望对回归系数的线性组合进行推断，特别是对于多个类别的分类变量。例如，对于分类变量，回归系数表示其中一个组与参考类别之间的平均差异
 
 ```{r}
-lm_multiple <- lm(sales~TV+radio+newspaper,data = advertising)
-lm_multiple
 library(multcomp, quietly = T)
-confint(lm_multiple)
+confint(mlm_lm)
 # 在 R 中，我们通过首先指定一个矩阵来执行此计算，该矩阵指定要进行的比较。此处的矩阵必须具有与回归方程中的回归系数相同的列数
 comparison <- matrix(c(0,3,1,1), nrow=1)
 
-lincom <- glht(lm_multiple, linfct = comparison)
+lincom <- glht(mlm_lm, linfct = comparison)
 summary(lincom)
 confint(lincom)
 ```
 
-## 交互项
+### 交互项
 
 ```{r}
-lm_interact<- lm_spec %>%  fit(sales ~ .+ TV:radio, data = advertising)
+lm_interact<- lm(sales ~ .+ TV:radio, data = advertising)
 
 lm_interact
 ```
 
-## 变换
-
 ### 多项式
 
 ```{r}
-rec_spec_square <- recipe(sales ~ TV, data = advertising) %>%  
-  step_mutate(`TV^2` = TV^2)  
-rec_spec_square
-
-lm_wf_square <- workflow() %>%  
-  add_model(lm_spec) %>%  
-  add_recipe(rec_spec_square)  
-
-lm_wf_square %>%
-  fit(advertising)
-
 lm(sales ~ TV+ I(TV^2),data = advertising)
 ```
 
 ### 对数变换
 
 ```{r}
-rec_spec_log <- recipe(sales ~ TV, data = advertising) %>%  
-  step_log(TV)  
-
-lm_wf_log <- workflow() %>% 
-  add_model(lm_spec) %>%  
-  add_recipe(rec_spec_log) 
-
-lm_wf_log %>%
-  fit(advertising)
-
 lm(sales ~ log(TV),data = advertising)
 ```
 
@@ -150,9 +123,9 @@ lm(sales ~ log(TV),data = advertising)
 ```{r}
 library(car)
 car::scatterplotMatrix(ad)  # 多重共线性
-confint(lm_sales_multi$fit)  # 95%置信区间
-plot(lm_sales_multi$fit)
-autoplot(lm_sales_multi) #回归诊断图
+confint(mlm_lm)  # 95%置信区间
+plot(mlm_lm)
+autoplot(mlm_lm) #回归诊断图
 ```
 
 ### 线性假设
@@ -160,8 +133,8 @@ autoplot(lm_sales_multi) #回归诊断图
 残差图， 成分残差图
 
 ```{r}
-plot(lm_sales_multi$fit,1)  
-crPlots(lm_sales_multi$fit)
+plot(mlm_lm,1)  
+crPlots(mlm_lm)
 ```
 
 ### 正态性假设Q-Q图
@@ -169,31 +142,31 @@ crPlots(lm_sales_multi$fit)
 Standardized Residuals
 
 ```{r}
-plot(lm_sales_multi$fit,2) 
-summary(powerTransform(lm_sales_multi$fit))  
+plot(mlm_lm,2) 
+summary(powerTransform(mlm_lm))  
 ```
 
 ```{r}
-plot(lm_sales_multi$fit,3)
+plot(mlm_lm,3)
 ```
 
 ### 误差相关性
 
 ```{r}
-durbinWatsonTest(lm_sales_multi$fit)      #结果表明rho=0
+durbinWatsonTest(mlm_lm)      #结果表明rho=0
 ```
 
 ### 误差项的方差齐性
 
 ```{r}
-ncvTest(lm_sales_multi$fit)
-spreadLevelPlot(lm_sales_multi$fit)
+ncvTest(mlm_lm)
+spreadLevelPlot(mlm_lm)
 ```
 
 ```{r}
 tibble(
-    abs_studentized_residuals=abs(rstudent(lm_sales_multi$fit)),
-    fitted_values=lm_sales_multi$fit$model$sales
+    abs_studentized_residuals=abs(rstudent(mlm_lm)),
+    fitted_values=mlm_lm$model$sales
 ) %>% ggplot(aes(fitted_values,abs_studentized_residuals))+
     geom_point(pch=21)+
     geom_smooth()
@@ -213,13 +186,13 @@ residplot<-function(fit,nbreaks=10){
   legend("topright",c("Normal Curve","Kernel Density Curve"),#图例
   lty = c(3,2),pch = c(21,22),col=c("blue","red"),cex=.7)
 }
-residplot(lm_sales_multi$fit)
+residplot(mlm_lm)
 ```
 
 ```{r eval=FALSE}
 #######################################################################
 library(car)
-outlierTest(lm_sales_multi$fit)            #离群点
+outlierTest(mlm_lm)            #离群点
 #高杠杆值点
 hat.plot<-function(fit){
   p<-length(coefficients(fit)) #模型估计的参数数目（包含截距项）
@@ -228,25 +201,25 @@ hat.plot<-function(fit){
   abline(h=c(2,3)*p/n,col="red",lty=2)  #大于帽子均值p/n的2或3倍被认为是高杠杆值
   identity(1:n,hatvalues(fit),names(hatvalues(fit)))
 }
-hat.plot(lm_sales_multi$fit)
+hat.plot(mlm_lm)
 ####强影响点
 #Cook's D图形    大于4/(n-k-1)  k为预测变量数目
-cutoff<-4/(nrow(advertising)-length(lm_sales_multi$fit$coefficients)-2)
-{plot(lm_sales_multi$fit,which=4,cook.levels=cutoff)
+cutoff<-4/(nrow(advertising)-length(mlm_lm$coefficients)-2)
+{plot(mlm_lm,which=4,cook.levels=cutoff)
 abline(h=cutoff,lty=2,col="red")}
 #变量添加图
-avPlots(lm_sales_multi$fit,ask=FALSE,id.method="identity")
+avPlots(mlm_lm,ask=FALSE,id.method="identity")
 
 ###
-influencePlot(lm_sales_multi$fit,id.method="identity",main="Influence Plot")
+influencePlot(mlm_lm,id.method="identity",main="Influence Plot")
 ```
 
 ### 多重共线性
 
 ```{r}
-vif(lm_sales_multi$fit)
+car::vif(mlm_lm)
 
-sqrt(vif(lm_sales_multi$fit))>=2       #vif平方根 ≥2 存在
+sqrt(car::vif(mlm_lm))>=2       #vif平方根 ≥2 存在
 ```
 
 ## 逐步回归
@@ -294,14 +267,14 @@ $\mathcal{L}$是模型拟合的最大似然值
 
 ```{r}
 ########################两模型比较
-lm1 <- lm_spec %>% fit(sales~TV+radio+newspaper,data = advertising)
-lm2 <- lm_spec %>% fit(sales~TV*radio*newspaper,data = advertising[-1])
+lm1 <- lm(sales~TV+radio+newspaper,data = advertising)
+lm2 <- lm(sales~TV*radio*newspaper,data = advertising)
 
-anova(lm2$fit,lm1$fit) #anova() 嵌套模型
+anova(lm2,lm1) #anova() 嵌套模型
 
 
 ##########################################            AIC 
-AIC(lm2$fit,lm1$fit)  # 赤池信息准则  AIC值小的优先选择
+AIC(lm2,lm1)  # 赤池信息准则  AIC值小的优先选择
 #BIC
 
 
@@ -334,7 +307,7 @@ relweights<-function(fit,...){
   ...)
 return(import)
 }
-relweights(lm1$fit,col="blue")
+relweights(lm1,col="blue")
 ```
 
 ## 线性可加模型

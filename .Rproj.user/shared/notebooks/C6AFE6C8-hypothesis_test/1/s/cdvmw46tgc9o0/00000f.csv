@@ -1,0 +1,10 @@
+"0","# 输出结果
+cat(""95% Confidence Interval:"", CI_lower, ""to"", CI_upper)
+"
+"1","95% Confidence Interval:"
+"1"," "
+"1","57.20275"
+"1"," "
+"1","to"
+"1"," "
+"1","71.6044"
