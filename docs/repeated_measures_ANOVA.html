@@ -278,8 +278,8 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./LME.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">线性混合模型</span></span></a>
+  <a href="./LMM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">线性混合效应模型</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -445,6 +445,7 @@ Y_{ijk}=\mu +\alpha_i +\beta_j +(\alpha\beta)_{ij}+S_k+(\beta S)_{jk}+\epsilon_{
 <ul>
 <li><p>独立性，即不同受试者之间的观测值是独立的。</p></li>
 <li><p>正态性，观测值在每个时间点或条件下的正态分布。</p></li>
+<li><p>同一受试者的重复测量之间的相关性一致性。</p></li>
 <li><p>各组内的方差齐性（sphericity），即组内相关性结构是已知的，通常假设为复合对称（compound symmetry）。<strong>协方差矩阵的球形检验（W=1）</strong></p></li>
 </ul>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -625,8 +626,8 @@ F=\frac{MS_{不同时间点}}{MS_E}=\frac{SS_{不同时间点}/(t-1)}{SS_E/((n-1
 <span><span class="co">#&gt;   term  contrast      null.value estimate std.error statistic adj.p.value</span></span>
 <span><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;              &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;</span></span>
 <span><span class="co">#&gt; 1 week  zero - ten             0     40.3      24.9      1.62 0.248      </span></span>
-<span><span class="co">#&gt; 2 week  twenty - zero          0   -101.       24.9     -4.06 0.000136   </span></span>
-<span><span class="co">#&gt; 3 week  thirty - zero          0   -130.       24.9     -5.23 0.000000482</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="co">#&gt; 2 week  twenty - zero          0   -101.       24.9     -4.06 0.000167   </span></span>
+<span><span class="co">#&gt; 3 week  thirty - zero          0   -130.       24.9     -5.23 0.000000418</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section></section><section id="含组间因子的重复测量方差分析" class="level2" data-number="8.3"><h2 data-number="8.3" class="anchored" data-anchor-id="含组间因子的重复测量方差分析">
