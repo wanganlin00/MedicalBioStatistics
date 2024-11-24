@@ -11,11 +11,11 @@
 ## 前提条件
 
 ```{r eval=FALSE}
-pkgs <- c("psych", "modeest", "moments", "DescTools", "vcd",
-          "epiDisplay", "correlation", "ggcorrplot","nortest",
+pkgs <- c("easystats","psych", "modeest", "moments", "DescTools", "vcd",
+          "epiDisplay", "ggcorrplot","nortest",
           "HH","coin","ggfortify", "rms","broom.mixed","glmm.hp","glmnet", 
-          "poissonreg","gee", "geepack","survminer","ggsurvfit",
-          "pROC","randomizeR","blockrand"
+          "poissonreg","gee", "geepack","survminer","ggsurvfit","pROC",
+          "randomizeR","blockrand"
           )
 
 for (pkg in pkgs) {
@@ -23,4 +23,5 @@ for (pkg in pkgs) {
         install.packages(pkg)
     }
 }
+
 ```
