@@ -43,7 +43,7 @@ $$ {#eq-KM}
 ```{r}
 library(survminer)
 library(survival)
-library(ggsurvfit)
+# library(ggsurvfit)
 df <- read_csv("data/log-rank-survival.csv")
 
 
