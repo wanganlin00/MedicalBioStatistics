@@ -211,7 +211,7 @@ kruskal.test(weight~group,data = PlantGrowth)
 pairwise.wilcox.test(PlantGrowth$weight,PlantGrowth$group,p.adjust.method = "fdr",exact=F)
 ```
 
-### 相关 Friedman 检验
+## 相关 Friedman 检验
 
 用于比较三个或更多相关样本的中位数是否相等。
 
