@@ -5,3 +5,5 @@
 -   [R语言教程 Ⅶ 统计模型 ——李东风](https://www.math.pku.edu.cn/teachers/lidf/docs/Rbook/html/_Rbook/)
 
 -   [医学研究中的生存数据建模（4e）](https://bookdown.org/wangzhen/survival/)
+
+-   [Framework for Easy Statistical Modeling, Visualization, and Reporting • easystats](https://easystats.github.io/easystats/)

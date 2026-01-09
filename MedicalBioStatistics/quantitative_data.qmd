@@ -12,18 +12,6 @@
 
 -   频率 (Relative Frequency)： $Relative\ Frequency = \frac{count}{n} \times 100\%$
 
-```{r}
-library(ggplot2)
-library(tibble)
-library(dplyr)
-ggplot(data = mtcars, aes(x = mpg)) +
-    geom_histogram(color = "black", bins = 10)
-
-ggplot(data = mtcars, aes(x = mpg)) +
-    geom_histogram(color = "black", binwidth = diff(range(mtcars$mpg)) / 9)
-
-```
-
 ## 集中趋势（central tendency）
 
 总体方差除以 n
@@ -31,59 +19,20 @@ ggplot(data = mtcars, aes(x = mpg)) +
 样本方差除以（n-1），R 计算的是样本方差
 
 ```{r}
-x <- c(1,2:9,11)
 
-#算术均值
+x <- 1:19
+
+
+#算术均值  sum/n
 mean(x)
 sum(x)/length(x)
-
 
 # 截尾均值   10%，则只有 80% 的中心数据将用于计算平均值。
 mean(x,trim = 0.1)
 
-
-
-# 加权平均值
-z <- c(5, 7, 8)
-
-# 权重（和为1）
-wts <- c(0.2, 0.2, 0.6)
-
-weighted.mean(z, w = wts) 
-
-sum(z * wts)
-
-
-
-# 几何平均值
-w <- c(10, 20, 15, 40)
-
-# Geometric mean
-exp(mean(log(w)))
-psych::geometric.mean(w)
-
-```
-
-```{r}
-#中位数
-data <- c(126, 52, 133, 104, 115, 67, 57, 83, 53, 105, 100)
-median(data)
-
-data2 <- c(126, 52, 133, 104, 115, 67, 57, 83, 53, 105)
-median(data2)
-```
-
-```{r}
-# install.packages("modeest")
-library(modeest)
-
-set.seed(1234)
-x2 <- rnorm(1000)
-mlv(x2, method = "meanshift")
-
+# 众数
 y <- c(3, 5, 3, 3, 5, 6, 5)
 rstatix::get_mode(y)
-modeest::mlv(y, method = "mfv")
 ```
 
 注意：函数`rstatix::get_mode()` 可能返回多个众数，如果存在多个众数，请检查其处理方式。
@@ -92,17 +41,17 @@ modeest::mlv(y, method = "mfv")
 
 ```{r}
 # 值域
-range(mtcars$mpg)  
+range(x)  
 # 极差 or 全距
-diff(range(mtcars$mpg) )  
-
-
-# 方差 variance
-var(mtcars$mpg)       
+diff(range(x))  
 
 # 标准差 standard deviation
-sd(mtcars$mpg)       
-
+sd(x)    
+# 方差 variance
+var(x)       
+# 绝对中位差 median absolute deviation
+mad(x,constant = 1.4826)
+median(abs(x-median(x)))*1.4826
 
 # 变异系数 Coefficient of Variation
 CV <- function(x, na.rm = TRUE) {  
@@ -110,14 +59,7 @@ CV <- function(x, na.rm = TRUE) {
     CV = sd(x) / abs(mean(x)) * 100
     sprintf("%.8f%%", CV)
 }
-CV(mtcars$mpg)
-
-
-# 绝对中位差 median absolute deviation
-mad(mtcars$mpg,constant = 1.4826)
-median(abs(mtcars$mpg-median(mtcars$mpg)))
-median(abs(mtcars$mpg-median(mtcars$mpg)))*1.4826
-
+CV(x)
 ```
 
 说明：`mad()` 计算时乘以比例因子 `constant = 1.4826` 以实现渐进正态一致性。
@@ -126,33 +68,10 @@ median(abs(mtcars$mpg-median(mtcars$mpg)))*1.4826
 
 ```{r}
 # 分位数
-quantile(mtcars$mpg,probs = c(0,0.1,0.25,0.5,0.75,1))    
+quantile(x,probs = c(0,0.1,0.25,0.5,0.75,1))    
 
 # 四分位数间距
-IQR(mtcars$mpg)   
-```
-
-## 关联度量
-
-```{r}
-# 协方差系数
-
-cov(mpg %>% select(displ,cty,hwy))
-
-
-
-cov(mpg %>% select(displ,cty,hwy)) %>% cov2cor()
-
-# Pearson 相关系数
-cor(mpg %>% select(displ,cty,hwy))
-
-
-# Kendall 的 tau 相关系数 适用于有序数据或非正态分布数据，因为它基于值的排名或顺序，而不是实际值。
-cor(mpg %>% select(displ,cty,hwy), method = "kendall")
-
-
-#  Spearman 的 rho 相关系数   Pearson 系数的稳健非参数替代项,数据非正态或具有异常值
-cor(mpg %>% select(displ,cty,hwy), method = "spearman")
+IQR(x)   
 ```
 
 ## 分布形态
@@ -180,8 +99,6 @@ $$
 3.  Skew＜0，负偏态分布，左偏 = 尾部向左延伸；Mode \> Median \> Mean。
 
 ```{r}
-x <- c(1,2,3,5,6,10)
-
 skewness <- function(x,na.rm=TRUE){
     if(na.rm) x <- x[!is.na(x)]
     n=length(x)
@@ -197,10 +114,10 @@ skewness(x)
 e1071::skewness(x,type = 2)  # 样本偏度
 e1071::skewness(x,type = 3)  # 总体偏度
 
-e1071::skewness(x,type = 1)   # 无偏偏度
+
+# 无偏偏度
+e1071::skewness(x,type = 1)   
 moments::skewness(x)
-
-
 ```
 
 #### 样本偏度（Sample Skewness）
@@ -246,8 +163,8 @@ kurtosis<-function(x,na.rm=TRUE){
              sample_kurtosis = sum(((x-μ)/SD)^4)*n*(n+1)/(n-1)/(n-2)/(n-3)-3*(n-1)^2/(n-2)/(n-3)))
 }
 kurtosis(x)
-e1071::kurtosis(x,type = 3)# 默认
-e1071::kurtosis(x,type = 2)
+e1071::kurtosis(x,type = 3)# 默认 总体峰度
+e1071::kurtosis(x,type = 2) # 样本偏度
 ```
 
 #### 样本峰度（Sample Kurtosis）
@@ -258,20 +175,11 @@ $$
 
 ![](images/sample_kurtosis_SE.png){fig-align="center"}
 
-## 标准化变换
-
-```{r}
-scale(mtcars$mpg,center = T,scale = T) %>%  
-    tibble(normalization = .) %>% 
-    DT::datatable()
-```
-
 ## 统计摘要
 
 ```{r}
 summary(mtcars$mpg)
+report::report(mtcars$mpg) |> as.data.frame()
 rstatix::get_summary_stats(mtcars,mpg,type = "full")
-
-
 psych::describeBy(mtcars$mpg,group =NULL)
 ```

@@ -10,45 +10,28 @@ $$
 
 ![](images/clipboard-3394376202.png)
 
+## 一元简单线性回归
+
+linear regression model：
+
+$$ Y_i=\beta_0+ \beta_1 X_i+\epsilon_i,其中\epsilon_i\sim N(0,\sigma^2) $$
+
 ```{r}
-library(tidymodels)
 library(readr)
 library(patchwork)
 library(ggfortify)
+advertising<-read_csv("data/Advertising.csv")
 ```
 
 [数据下载网站](https://www.statlearning.com/resources-second-edition)
 
 ```{r}
-advertising<-read_csv("data/Advertising.csv")
-p_sales<-function(x){
-  ggplot(advertising,aes({{x}},sales))+
-           geom_point(shape=21,color="red")+
-           geom_smooth(formula = 'y ~ x',method = "lm",se=FALSE)
-}
-p_sales(TV)|p_sales(radio)|p_sales(newspaper)
-```
-
-## 一元线性回归
-
-linear regression model：
-
-$$
-Y_i=\beta_0+ \beta_1 X_i+\epsilon_i,其中\epsilon_i\sim N(0,\sigma^2)
-$$
-
-```{r}
-#linear model specification 线性模型规范
-lm_spec <-linear_reg() %>%
-  set_mode("regression") %>%
-  set_engine("lm")  
-lm_spec
-```
-
-```{r}
-lm_tv <- lm_spec %>%  fit(sales ~ TV, data = advertising)
+lm_tv <- lm(sales ~ TV, data = advertising)
 # 模型摘要
-summary(lm_tv$fit)
+summary(lm_tv)
+
+parameters::model_parameters(lm_tv)
+performance::performance(lm_tv)
 
 # 参数估计值、标准误、统计量、p值
 broom::tidy(lm_tv, conf.int=T)
@@ -65,7 +48,7 @@ tidy_lm <- tidy(lm_tv, conf.int=T) %>% dplyr::filter(term !='(Intercept)' )
 # 绘制点须图
 ggplot(tidy_lm, aes(x = estimate, y = term)) +
   geom_point(size = 2, color = "black") + # 绘制点
-  geom_errorbarh(aes(xmin = conf.low, 
+  geom_errorbar(aes(xmin = conf.low, 
                      xmax = conf.high), 
                  height = 0, color = "black") + # 绘制误差线
   geom_vline(xintercept = 0, colour = "grey50", linetype = 2) + # 绘制参考线

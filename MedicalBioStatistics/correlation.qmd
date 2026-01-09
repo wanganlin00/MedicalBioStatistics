@@ -14,7 +14,7 @@ library(easystats)
 
 如果两个连续变量不相互独立时，使用协方差（covariance）来描述两个变量的关系。
 
-协方差（或相关系数）为零，不相关，说明不存在线性关系，但可能存在非线性关系。
+协方差（或相关系数）为零，即不相关，说明不存在线性关系，但可能存在非线性关系。
 
 ```{r}
 df <- iris[1:4]
@@ -23,7 +23,9 @@ df <- iris[1:4]
 cov(df)    
 ```
 
-#### 相关系数
+#### 相关类型
+
+[Correlation Types • correlation](https://easystats.github.io/correlation/articles/types.html)
 
 相关系数的取值范围： $[-1,1]$
 
@@ -76,19 +78,82 @@ print(psych::corr.test(df), short = FALSE)
 
 ## 分类变量
 
-　　如果独立性检验的结果表明两个变量之间不独立，那么如何量化它们之间相关性的强弱?
+### 列联表
 
-### 列联系数、Phi 系数和 Cramer's V 系数
+```{r}
+eg <- matrix(c(156,9421,1531,14797),nrow=2,byrow=TRUE)
+colnames(eg) <- c("Disease","Control")
+rownames(eg) <- c("Exposed","Unexposed")
+print(eg)
+prop.table(eg)          #各单元格比例
+prop.table(eg,margin = 1)        #行比例和=1
+```
+
+### 边际列联表
+
+```{r}
+# 边际
+margin.table(x=eg,margin = 2)      #列和
+addmargins(eg)          #添加行和、列和
+addmargins(eg,1)        #添加列和
+addmargins(eg,2)        #添加行和
+addmargins(prop.table(eg,1))
+
+ftable(eg)   # "平铺式"列联表
+```
+
+### 关联度量
 
 *vcd* 包里的函数 `assocstats( )`可以用来计算列联表的 **Phi 系数**、**列联系数**和 **Cramer's V 系数**。其中， Phi 系数只适用于四格表。 　　
 
 ```{r}
-library(vcd)
-mytable <- table(Arthritis$Sex, Arthritis$Treatment)
-assocstats(mytable)
+vcd::assocstats(eg)
 ```
 
-### Kappa 统计量
+### 列联系数
+
+![](images/clipboard-4252541209.png)
+
+```{r}
+Contingency <- function(x) {
+    chi <- chisq.test(x)
+    unname(sqrt(chi$statistic / (chi$statistic + sum(x))))
+}
+Contingency(eg)
+```
+
+```{r}
+DescTools::ContCoef(eg)
+```
+
+### **Phi 系数**
+
+![](images/clipboard-1172472303.png)
+
+```{r}
+# Phi coefficient
+PhiCoef <- function(x){
+    unname(sqrt(chisq.test(x)$statistic / sum(x)))
+}
+
+PhiCoef(eg) 
+
+DescTools::Phi(eg)
+
+```
+
+### **Cramer’s V 系数**
+
+```{r}
+# Cramer's V coefficient
+V <- function(x) {
+    unname(sqrt(chisq.test(x)$statistic / (sum(x) * (min(dim(x)) - 1))))
+}
+V(eg) 
+DescTools::CramerV(eg)
+```
+
+### **配对列联表：**Kappa 统计量
 
 对于**配对列联表**，可以计算一致性指标 Kappa 统计量。 epiDisplay 包里的函数 kap( )可以用于计算一致性的比例以及 Kappa 统计量的值 　　 　　
 
@@ -107,11 +172,4 @@ chisq.test(my.matrix)$expected
 
 　为了解释期望一致性和 Kappa 值的含义，先计算各个单元格的期望频数。 对角线上的这两个单元格对应的期望频数分别约为5.155172 和27.15517 ，因此期望一致性为 (5.155172+27.15517)/58≈ 55.71% 。期望一致性是假定两种方法的检测结果都是完全随机的情况下的 一致性。也就是说，即使两种检测方法都毫无作用，平均也能达到 55.71% 的一致性。 Kappa 统计量是超出随机的一致性的部分占最大可能超出随机的一致性的比例。在本例中，前者为 75.86% − 55.71% ， 后者为 100% − 55.71% 。 因此， Kappa 值为 (75.86 - 55.71)/(100 - 55.71) ≈ 0.455
 
-### 马赛克图
-
-　　马赛克图中的矩形面积正比于多维列联表中单元格的频率 　　
-
-```{r}
-mosaicplot(mytable,main ="马塞克图" ,
-           xlab ="Sex",ylab =  "Treatment",las = 1)
-```
+　
