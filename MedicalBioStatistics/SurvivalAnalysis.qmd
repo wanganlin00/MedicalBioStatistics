@@ -43,7 +43,8 @@ $$ {#eq-KM}
 ```{r}
 library(survminer)
 library(survival)
-# library(ggsurvfit)
+library(readr)
+library(ggsurvfit)
 df <- read_csv("data/log-rank-survival.csv")
 
 
@@ -149,12 +150,14 @@ logrank_test$pvalue
 ```
 
 ```{r}
-survdiff( Surv(Days,status) ~ treatment,
-          data = df %>% filter(treatment %in% c("CON", "DPVB")))
+
 
 survdiff( Surv(Days,status) ~ treatment,
-          data = df %>% filter(treatment %in% c("CON", "LDRT")))
+          data = df |> dplyr::filter(treatment %in% c("CON", "DPVB")))
 
 survdiff( Surv(Days,status) ~ treatment,
-          data = df %>% filter(treatment %in% c("CON", "LR_DPVB")))
+          data = df |> dplyr::filter(treatment %in% c("CON", "LDRT")))
+
+survdiff( Surv(Days,status) ~ treatment,
+          data = df |> dplyr::filter(treatment %in% c("CON", "LR_DPVB")))
 ```

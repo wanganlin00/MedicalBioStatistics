@@ -12,8 +12,9 @@ $$
 
 ```{r}
 library(tidymodels)
+library(readr)
 library(patchwork)
-library(ggfortify, quietly = T)
+library(ggfortify)
 ```
 
 [数据下载网站](https://www.statlearning.com/resources-second-edition)
@@ -101,11 +102,13 @@ predict(lm_tv$fit, new_data = advertising, interval = "prediction") %>%
     head(n = 10)
 ```
 
-## 线性回归假设
+## 模型假设
 
-一般线性模型中，其自变量全部为固定效应自变量，3点假设：
+一般线性模型中，其自变量全部为固定效应自变量，4点假设：
 
-1.  线性度
+1.  因变量 Y 为连续型数值变量
+
+2.  线性
 
 保证各实测点到回归直线的纵向距离的平方和最小，即使得残差平方和最小。
 
@@ -127,11 +130,11 @@ augment(lm_tv, new_data = advertising) %>%
     )
 ```
 
-2.  同方差性：残差具有常数方差
+2.  残差的正态性 $\epsilon\sim N(0,\sigma^2)$
 
-3.  残差的正态性
+3.  方差齐性 $Var(ε_i ​ )=σ^2$
 
-4.  观测的独立性：通常通过审查研究设计来调查
+4.  残差的独立性
 
 ## 模型诊断
 

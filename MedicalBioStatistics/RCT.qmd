@@ -2,11 +2,7 @@
 
 <https://www.equator-network.org/>
 
-## 随机
-
-```{r}
-if(!require(randomizeR)) install.packages("randomizeR")
-```
+## 随机化
 
 ### 简单/完全随机化
 
@@ -14,14 +10,15 @@ if(!require(randomizeR)) install.packages("randomizeR")
 
 ```{r}
 #| label: "tbl-盲底文件"
+library(tidyverse)
 
 # 假设需要 100 个样本,分为 4 个组
 raw_data <- tibble(
     include_order = 1:100
 )
 
-set.seed(20241011)
-raw_data %>%
+set.seed(20241011)  
+raw_data |>
   mutate(简单assigned_group = sample(1:4, size = 100, replace = TRUE),
          区组BRassigned_group = sample(rep(1:4, each=25))
          ) -> raw_data
@@ -66,7 +63,7 @@ blockrand_data
 
 
 # 检查区组分布
-blockrand_data %>% group_by(block.id) %>% 
+blockrand_data |> group_by(block.id) |> 
     summarise(
     groups = paste(sort(unique(treatment)), collapse = ","),
     n = n()
@@ -152,7 +149,7 @@ library(randomizeR)
 
 ```{r}
 #| label: "tbl-给研究实施者提供"
-raw_data %>% 
+raw_data |> 
     mutate(
         blind_id = 1001:1100,
         drug_id = 1001:1100,
@@ -160,7 +157,7 @@ raw_data %>%
 raw_data 
 
 # 给研究实施者提供
-raw_data %>% select(contains("id"))
+raw_data |> select(contains("id"))
 ```
 
 2.  同时，分发的药品包装上也有与设盲编码一一对应的编码。

@@ -1,4 +1,4 @@
-# 多元线性回归
+# 多重线性回归
 
 $$
 Y_i=\beta_0+\sum_{i=1}^p \beta_p X_{pi}+\epsilon_i,其中\epsilon_i\sim N(0,\sigma^2)
@@ -30,13 +30,13 @@ reg <- function(y, x) {
 # solve()取矩阵的逆
 # t()用于转置矩阵
 # %*% 将两个矩阵相乘
-
+library(readr)
 advertising<-read_csv("data/Advertising.csv")
 
 reg(advertising$sales,advertising[c(-1,-5)])
 ```
 
-## 多元回归
+## 多重线性模型
 
 ```{r}
 library(tidymodels)
@@ -116,7 +116,7 @@ lm(sales ~ TV+ I(TV^2),data = advertising)
 lm(sales ~ log(TV),data = advertising)
 ```
 
-## 回归诊断
+## 模型假设
 
 <https://www.statmethods.net/stats/rdiagnostics.html>
 

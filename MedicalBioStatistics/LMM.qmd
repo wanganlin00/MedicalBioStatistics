@@ -1,32 +1,10 @@
 # 线性混合效应模型
 
-线性混合效应模型 （Linear Mixed-effect Model，LMM）用于分析具有固定效应和随机效应的数据结构。 它能够处理数据中的个体异质性和组内相关性。如果数据满足正态分布但有组内相关性，使用线性混合效应模型。
-
-LMM可以采用多种相关性假设：
-
--   unstructured
-
--   homogeneous toeplitz
-
--   auto-regression AR(1)
-
--   homogeneous auto-regression ARH(1)
-
--   compound symmetry
-
--   homogeneous compound symmetry
-
-对于连续数据，mixed model repeated measures（MMRM）
-
-对于分类数据或计数数据，generalized linear mixed-effects model(GLMM)
-
-[Mixed Effects Models and Extensions in Ecology with R 第5章](https://link.springer.com/book/10.1007/978-0-387-87458-6)
+线性混合效应模型 （Linear Mixed-effect Model，LMM）用于分析具有固定效应和随机效应的数据结构。 它能够处理数据中的个体异质性和组内相关性。如果**数据满足正态分布但有组内相关性**，使用线性混合效应模型。
 
 线性混合模型的一般表达形式：
 
-$$
-Y = \mathbf{X} \beta + \mathbf{Z} \gamma + \epsilon
-$$
+$$ Y = \mathbf{X} \beta + \mathbf{Z} \gamma + \epsilon $$
 
 其中：
 
@@ -43,6 +21,44 @@ $$
 固定效应是感兴趣的自变量，表示所有个体都相同的效应
 
 随机效应：随机截距表示不同个体的基线差异，随机斜率表示不同个体对自变量的响应差异。
+
+## 模型假设Cov(γ,X)=0
+
+1.  因变量 Y 为连续型数值变量
+
+2.  线性
+
+3.  残差的正态性 $\epsilon\sim N(0,\sigma^2 I)$
+
+4.  方差齐性 $Var(ε_i ​ )=σ^2$
+
+随机效应假设
+
+1.  随机效应与「所有固定效应自变量」之间相互独立 $Cov(γ,X)=0$
+
+2.  随机效应 ( γ ) 服从均值为 0 的多元正态分布 $γ∼N(0,Σ_γ ​ )$
+
+3.  随机效应 ( γ ) 与残差 ( ε ) 之间相互独立 $Cov(γ,ε)=0$
+
+随机效应的方差-协方差矩阵$Σ_γ$ ​，残差的方差矩阵 $σ^2I$的结构相关性特征：
+
+-   unstructured
+
+-   compound symmetry
+
+-   auto-regression AR(1)
+
+-   homogeneous toeplitz
+
+-   homogeneous auto-regression ARH(1)
+
+-   homogeneous compound symmetry
+
+对于连续数据，mixed model repeated measures（MMRM）
+
+对于分类数据或计数数据，generalized linear mixed-effects model(GLMM)
+
+[Mixed Effects Models and Extensions in Ecology with R 第5章](https://link.springer.com/book/10.1007/978-0-387-87458-6)
 
 ## `lme4::lmer()`
 
@@ -63,8 +79,11 @@ $$
 | 线性模型：固定截距+固定斜率 | y\~x               | NA               |
 
 ```{r}
-rikz <- read_delim("data/AED/RIKZ.txt")
-rikz <- rikz %>% 
+library(readr)
+library(dplyr)
+
+rikz <- read_tsv("data/AED/RIKZ.txt")
+rikz <- rikz |> 
     mutate(
         Beach = factor(Beach),
         Exposure = factor(Exposure)
@@ -105,7 +124,7 @@ lme(Richness ~ 1 + NAP * Exposure,
              control = lmeControl(opt = "optim", 
                                   msMaxIter = 1000, 
                                   msMaxEval = 5000)
-    ) %>% 
+    ) |> 
     summary()
 ```
 
@@ -220,7 +239,7 @@ logLik(lme2)
 
 
 
-lme(Richness ~ 1 + NAP * Exposure,random= ~ 1+1 |Beach ,data = rikz) %>% 
+lme(Richness ~ 1 + NAP * Exposure,random= ~ 1+1 |Beach ,data = rikz) |> 
     summary()
 ```
 
@@ -237,7 +256,7 @@ lme3 <- lmer(Richness ~ 1 +  NAP * Exposure + (0 + NAP |Beach) ,data = rikz)
 summary(lme3)
 
 
-lme(Richness ~ 1 + NAP * Exposure,random= ~ 0+NAP |Beach ,data = rikz) %>% 
+lme(Richness ~ 1 + NAP * Exposure,random= ~ 0+NAP |Beach ,data = rikz) |> 
     summary()
 
 ```
@@ -251,7 +270,7 @@ summary(lme4)
 
 ranef(lme4)
 
-lme(Richness ~ 1 ,random= ~ 1+NAP |Beach ,data = rikz) %>% 
+lme(Richness ~ 1 ,random= ~ 1+NAP |Beach ,data = rikz) |> 
     summary()
 ```
 
@@ -303,7 +322,8 @@ plot_lme <- function(model, title) {
               plot.title = element_text(hjust = .5))
 }
 
-
+library(purrr)
+library(ggplot2)
 lme_plot <- map2(list(lme1,lme2,lme3, lme4,lm),list("随机截距+随机斜率","随机截距+固定斜率","固定截距+随机斜率","随机效应","固定效应"),plot_lme)
 
 

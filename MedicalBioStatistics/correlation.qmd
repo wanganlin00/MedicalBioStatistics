@@ -47,8 +47,8 @@ correlation(df,method = "kendall",p_adjust = "holm")
 ```{r}
 library(see)
 
-correlation(df,method = "pearson",p_adjust = "holm") %>%
-  summary(redundant = TRUE) %>%
+correlation(df,method = "pearson",p_adjust = "holm") |>
+  summary(redundant = TRUE) |>  
   plot()
 ```
 

@@ -13,11 +13,15 @@ rank(x)
 
 ## 二项分布B(n，0.5)
 
-```{r warning=FALSE}
+```{r}
+library(ggplot2)
+library(tibble)
+library(dplyr)
+library(readxl)
 tibble(
     x = -5:15,
     y_binom = dbinom(x, size = 10,prob = 0.5),
-) %>% 
+) |> 
 ggplot()+
     geom_col(aes(x=x,y=y_binom,color="binomal Distribution"),fill=NA)+
     geom_function(mapping = aes(color="normal Distribution"),
@@ -111,8 +115,8 @@ x <- c(17, 12, 13, 16, 9, 19, 21, 12, 18, 17)
 y <- c(10, 6, 15, 9, 8, 11, 8, 16, 13, 7, 5, 14)
 wilcox.test(x, y, correct = F)
 
-rank(c(x,y))[1:10] %>% sum()
-rank(c(x,y))[11:22] %>% sum()
+rank(c(x,y))[1:10] |> sum()
+rank(c(x,y))[11:22] |> sum()
 
 156.5-10*11/2
 
@@ -134,7 +138,7 @@ $$
 
 ```{r}
 library(coin)
-df <- read_excel("data/coin-wilcox_test.xlsx") %>% 
+df <- read_excel("data/coin-wilcox_test.xlsx") |> 
     mutate(group=as.factor(group))
 df
 
@@ -181,7 +185,7 @@ n1\>20
 tibble(
     x = 0:100,
     y =dwilcox(x,m = 7,n = 9)
-) %>% 
+) |> 
     ggplot() +
     geom_col(aes(x,y),fill="lightblue",color="black")+
     ggtitle("Wilcoxon Distribution")

@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 book:
-  title: "医学与生物统计学"
+  title: "医学与生物统计学应用"
   reader-mode: true
   
   chapters:
@@ -32,8 +32,8 @@ book:
         - nonparametric_test.qmd
        
     #     - PowerAnalysis.qmd
-    #     - Causal_Inference.qmd
-    - part: "统计模型"
+
+    - part: "线性模型"
       chapters:
         - simple_linear_regression.qmd
         - multiple_linear_regression.qmd
@@ -46,7 +46,7 @@ book:
         - SurvivalAnalysis.qmd
         - CoxProportionalHazardsModel.qmd
         - CompetingRiskModel.qmd
-
+    # - part: Causal_Inference.qmd
     - part: "临床研究设计"
       chapters: 
         - diagnostic_test.qmd

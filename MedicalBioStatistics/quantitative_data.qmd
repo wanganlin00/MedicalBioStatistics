@@ -15,6 +15,7 @@
 ```{r}
 library(ggplot2)
 library(tibble)
+library(dplyr)
 ggplot(data = mtcars, aes(x = mpg)) +
     geom_histogram(color = "black", bins = 10)
 
@@ -82,10 +83,7 @@ mlv(x2, method = "meanshift")
 
 y <- c(3, 5, 3, 3, 5, 6, 5)
 rstatix::get_mode(y)
-mlv(y, method = "mfv")
-
-
-# install.packages("multimode")
+modeest::mlv(y, method = "mfv")
 ```
 
 注意：函数`rstatix::get_mode()` 可能返回多个众数，如果存在多个众数，请检查其处理方式。

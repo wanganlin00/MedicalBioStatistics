@@ -12,7 +12,7 @@ $$
 g(E(Y))=\mathbf{X} \beta
 $$
 
-1.  线性预测子：
+1.  线性预测器（Linear Predictor）：
 
 $$
 \eta = \mathbf{X} \beta
@@ -318,7 +318,8 @@ iris_pred_glmnet <- predict(
 ```
 
 ```{r}
-mn_spec <- multinom_reg(mode = "classification", engine = "glmnet" ,penalty = tune())
+mn_spec <- multinom_reg(mode = "classification", engine = "glmnet" ,
+                        penalty = 0)
 
 iris_mnlogit <- mn_spec %>% 
     fit(Species ~ ., data = iris)
