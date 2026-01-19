@@ -1,5 +1,7 @@
 # 广义线性模型
 
+https://bookdown.org/ks6017/GLM_bookdown3/
+
 在统计学上，[广义线性模型](https://zh.wikipedia.org/zh-cn/%E5%BB%A3%E7%BE%A9%E7%B7%9A%E6%80%A7%E6%A8%A1%E5%9E%8B)（generalized linear model， GLM）是一种应用灵活的线性回归模型。该模型允许因变量的误差分布有除了正态分布之外的其它分布。此模型假设实验者所测量的随机变量的分布函数与实验中系统性效应（即非随机的效应）可经由一链接函数（link function）建立可解释其相关性的函数。
 
 在广义线性模式中，假设每个资料的观测值 Y 来自某个指数族分布 f 。

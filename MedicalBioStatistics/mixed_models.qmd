@@ -1,5 +1,7 @@
 # 线性混合效应模型
 
+https://m-clark.github.io/mixed-models-with-R/
+
 线性混合效应模型 （Linear Mixed-effect Model，LMM）用于分析具有固定效应和随机效应的数据结构。 它能够处理数据中的个体异质性和组内相关性。如果**数据满足正态分布但有组内相关性**，使用线性混合效应模型。
 
 线性混合模型的一般表达形式：

@@ -37,9 +37,10 @@ book:
       chapters:
         - simple_linear_regression.qmd
         - multiple_linear_regression.qmd
-        - LMM.qmd
         - GLM.qmd
         - GEE.qmd
+        - mixed_models.qmd
+        - multilevel_models.qmd
 
     - part: "生存分析"
       chapters:

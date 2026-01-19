@@ -1,0 +1,12 @@
+# 多级模型
+
+brms: An R package for Bayesian multilevel models using Stan 
+
+https://bookdown.org/content/ef0b28f7-8bdf-4ba7-ae2c-bc2b1f012283/
+
+
+
+零模型（Null Model）仅包含随机截距，无任何自变量，组内相关系数（ICC）
+
+ICC>0.1：存在明显的组内相关性，必须用多层模型；
+ICC≈0：组内相关性可忽略，可用普通线性回归 / 重复测量方差分析。
