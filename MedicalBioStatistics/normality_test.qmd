@@ -2,13 +2,15 @@
 
 [统计检验与假设](https://www.datanovia.com/en/courses/statistical-tests-and-assumptions/)
 
+https://real-statistics.com/tests-normality-and-symmetry/
+
 ```{r}
 library(tidyverse)
 library(ggpubr)
 library(rstatix)
 df <- tibble(
-    ctrl=c(2,6,13,5,8,9,12,11,8,10,12,14,13,6,7,4),
-    trt=c(8,6,8,9,12,12,14,15,16,17,14,12,11,8,10,10)
+    ctrl=c(2,6,13,5,8,9,12,11,8,10,12,14,13,6,7,4,13,5,8,9),
+    trt=c(8,6,8,9,12,12,14,15,16,17,14,12,11,8,10,10,14,15,16,17)
 )
 df
 ```
@@ -105,7 +107,9 @@ nortest::ad.test(df$trt)
 
 [D'Agostino-Pearson test](https://real-statistics.com/tests-normality-and-symmetry/statistical-tests-normality-symmetry/dagostino-pearson-test/)
 
-D'Agostino-Pearson 综合检验 是基于数据的偏度和峰度来评估数据是否接近正态分布的。
+https://statskingdom.com/dagostino-pearson-test-calculator.html
+
+D'Agostino-Pearson 综合检验 是基于数据的偏度和峰度来评估数据是否接近正态分布的。n≥20
 
 ![](images/clipboard-3873541098.png)
 
@@ -133,6 +137,11 @@ p_value <- 1 - pchisq(K2, df = 2)
 
 K2
 p_value
+```
+
+```{r}
+library(fBasics)
+dagoTest(df$ctrl)
 ```
 
 ### Jarque-Bera 正态性检验
