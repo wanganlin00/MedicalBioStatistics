@@ -1,5 +1,7 @@
 # 非参数检验
 
+非参数检验是不依赖总体分布类型、不估计总体参数的一类假设检验方法。适用于不满足正态性假设的资料或有序分类资料（等级资料）
+
 ## 秩
 
 $$
@@ -34,7 +36,7 @@ ggplot()+
 
 ## 单样本 Wilcoxon Signed-Rank exact test
 
-如果样本数据没有通过正态分布检验就要采用单样本wilcoxon符号秩检验进行计算。使用该检验需要满足的条件是样本值均匀地分布在均值两侧。
+如果样本数据不满足正态性检验就要采用单样本wilcoxon符号秩检验进行计算。使用该检验需要满足的条件是样本值均匀地分布在均值两侧。
 
 ```{r}
 set.seed(123)
@@ -44,7 +46,7 @@ shapiro.test(x)
 wilcox.test(x, mu=7) 
 ```
 
-## 双样本
+## 两样本
 
 ### 配对 Wilcoxon's signed-rank test
 
@@ -77,7 +79,9 @@ wilcox.test(df$low[-1],df$high[-1],exact = T,paired = T)
 
 ### 独立 Wilcoxon's Rank-Sum 检验 (Mann-Whitney U 检验)
 
-当两个样本不满足正态分布时，使用Wilcoxon秩和检验进行非参数检验
+当两个连续样本不满足正态分布时，使用Wilcoxon秩和检验进行非参数检验
+
+有序等级资料1. 整理等级频数表2. 确定秩次与平均秩次3. 计算两组秩和4. 计算U值5. 计算Z值与P值
 
 用于比较两个独立样本的中位数是否相等。
 
@@ -215,7 +219,7 @@ kruskal.test(weight~group,data = PlantGrowth)
 pairwise.wilcox.test(PlantGrowth$weight,PlantGrowth$group,p.adjust.method = "fdr",exact=F)
 ```
 
-## 相关 Friedman 检验
+## 重复测量 Friedman 检验
 
 用于比较三个或更多相关样本的中位数是否相等。
 
