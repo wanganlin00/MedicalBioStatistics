@@ -24,7 +24,7 @@ book:
         - variance_homogeneity_test.qmd
         
         - t_test.qmd
-        - ANOVA.qmd
+        - one_way_ANOVA.qmd
         - repeated_measures_anova.qmd
         
         - proportion_test.qmd

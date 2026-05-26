@@ -1,8 +1,12 @@
 # 线性混合效应模型
 
-https://m-clark.github.io/mixed-models-with-R/
+线性混合效应模型 （Linear Mixed-effect Model，LMM），研究资料通常需要满足三个基本条件：①给定解释变量的条件下，响应变量为服从正态分布的定量变量；②解释变量和响应变量呈线性关系；③给定解释 变量的条件下，个体（类）内响应变量不独立，呈某种相关（或方差协方差）结构
 
-线性混合效应模型 （Linear Mixed-effect Model，LMM）用于分析具有固定效应和随机效应的数据结构。 它能够处理数据中的个体异质性和组内相关性。如果**数据满足正态分布但有组内相关性**，使用线性混合效应模型。
+<https://m-clark.github.io/mixed-models-with-R/>
+
+[Mixed Effects Models and Extensions in Ecology with R 第5章](https://link.springer.com/book/10.1007/978-0-387-87458-6)
+
+## 一般线性混合效应模型
 
 线性混合模型的一般表达形式：
 
@@ -10,57 +14,43 @@ $$ Y = \mathbf{X} \beta + \mathbf{Z} \gamma + \epsilon $$
 
 其中：
 
--   $\mathbf{X}$是固定效应自变量矩阵。
+-   $\mathbf{X}\beta$ 同一般线性模型，称为固定效应（fixed effect）部分；其中 X 为解释变量的设计矩阵，可包含定性变量和定量变量，也可包含变量间的交互效应项或二次项等； β 为固定效应参数向量，反映 Ｘ 对响应变量 Ｙ 的影响大小。固定效应是感兴趣的自变量，表示所有个体都相同的效应
 
--   $\beta$ 是固定效应的回归系数。
+-   $\mathbf{Z}\gamma$ 为随机效应（random effect）部分， Ｚ 为随机效应的设计矩阵， γ 为相应的随机效应参数向量。随机效应：随机截距表示不同个体的基线差异，随机斜率表示不同个体对自变量的响应差异。随机效应参数向量 γ 服从多元正态分布，均向量为０，方差协方差矩阵为 Ｇ，并假设 Ｇ 可满足任意的协方差结构。
 
--   $\mathbf{Z}$ 是随机效应自变量矩阵。
-
--   $\gamma$ 是随机效应的回归系数。
+-   响应变量 Ｙ 服从多元正态分布，均向量为 Ｅ（Ｙ） ＝ ｘβ ，方差协方差阵为 Var(Ｙ) ＝ ＺＧＺ′ ＋ Ｒ。当 Ｒ ＝ σ２Ｉ 且 Ｚ ＝ ０ 时，线性混合效应模型则退化为普通的一 般线性模型。
 
 -   $\epsilon$ 是误差项。
 
-固定效应是感兴趣的自变量，表示所有个体都相同的效应
+## 常见的协方差结构
 
-随机效应：随机截距表示不同个体的基线差异，随机斜率表示不同个体对自变量的响应差异。
+[高级医学统计学 第13章 线性混合效应模型](https://book.sciencereading.cn/shop/book/Booksimple/onlineRead.do?id=B17792CBC7A4D446CA15AC0E4D33C445F000&bookPageNum=273)
 
-## 模型假设Cov(γ,X)=0
+1.  球性结构（sphericity structure）：即矩阵主对角线元素为效应的方差 σ２， 非对角线元素为 ０
 
-1.  因变量 Y 为连续型数值变量
+2.  方差分量结构（variance components structure，VC）
 
-2.  线性
+3.  复合对称结构（compound symmetry structure，CS）
 
-3.  残差的正态性 $\epsilon\sim N(0,\sigma^2 I)$
+4.  无结构（unstructured structure）
 
-4.  方差齐性 $Var(ε_i ​ )=σ^2$
+5.  一阶自回归结构【first-order autoregressive structure, AR(1)】
 
-随机效应假设
+6.  Toeplitz 结构(TOEP)
 
-1.  随机效应与「所有固定效应自变量」之间相互独立 $Cov(γ,X)=0$
-
-2.  随机效应 ( γ ) 服从均值为 0 的多元正态分布 $γ∼N(0,Σ_γ ​ )$
-
-3.  随机效应 ( γ ) 与残差 ( ε ) 之间相互独立 $Cov(γ,ε)=0$
-
-随机效应的方差-协方差矩阵$Σ_γ$ ​，残差的方差矩阵 $σ^2I$的结构相关性特征：
-
--   unstructured
-
--   compound symmetry
-
--   auto-regression AR(1)
-
--   homogeneous toeplitz
-
--   homogeneous auto-regression ARH(1)
-
--   homogeneous compound symmetry
+## 重复测量混合模型
 
 对于连续数据，mixed model repeated measures（MMRM）
 
-对于分类数据或计数数据，generalized linear mixed-effects model(GLMM)
+对于重复测量资料，令 $Ｙ_i＝ （Ｙ_{i1}，…，Ｙ_{it{_i}}）′$ 表示第 $ｉ（ｉ ＝ １，２，…，ｎ）$个个 体的 $t_i$ 次响应向量。对重复测量数据一般的线性混合模型可以表示为
 
-[Mixed Effects Models and Extensions in Ecology with R 第5章](https://link.springer.com/book/10.1007/978-0-387-87458-6)
+$$
+Ｙ_i＝ X_iβ ＋ Ｚ_iγ_i＋ ε_i
+$$
+
+ｘｉ 是第 ｉ 个个体的 ｔｉ × ｐ 维模型设计矩阵， β 是 ｐ × １ 维的回归系数向量， Ｚｉ 是 ｔｉ × ｑ 维随机效应的设计矩阵， γｉ 是第 ｉ 个个体的 ｑ × １ 维随机效应向量，且 εｉ 是 ｔｉ × １ 维个体内误 差向量
+
+对于分类数据或计数数据，generalized linear mixed-effects model(GLMM)
 
 ## `lme4::lmer()`
 

@@ -46,9 +46,7 @@ shapiro.test(x)
 wilcox.test(x, mu=7) 
 ```
 
-## 两样本
-
-### 配对 Wilcoxon's signed-rank test
+## 两样本配对 Wilcoxon's signed-rank test
 
 $$
 T_++T_-=\frac{n(n+1)}{2},n为非零配对差值的数量
@@ -77,7 +75,7 @@ wilcox.test(df$low[-1],df$high[-1],exact = T,paired = T)
 
 ```
 
-### 独立 Wilcoxon's Rank-Sum 检验 (Mann-Whitney U 检验)
+## 两样本独立 Wilcoxon's Rank-Sum 检验 (Mann-Whitney U 检验)
 
 当两个连续样本不满足正态分布时，使用Wilcoxon秩和检验进行非参数检验
 
@@ -195,9 +193,7 @@ tibble(
     ggtitle("Wilcoxon Distribution")
 ```
 
-## 多样本
-
-### 独立 Kruskal-Wallis 检验
+## 多样本独立 Kruskal-Wallis rank sum检验
 
 用于比较三个或更多独立样本的中位数是否相等。
 
@@ -219,7 +215,7 @@ kruskal.test(weight~group,data = PlantGrowth)
 pairwise.wilcox.test(PlantGrowth$weight,PlantGrowth$group,p.adjust.method = "fdr",exact=F)
 ```
 
-## 重复测量 Friedman 检验
+## 重复测量 Friedman rank sum检验
 
 用于比较三个或更多相关样本的中位数是否相等。
 
@@ -244,26 +240,9 @@ print(result)
 
 ```
 
-## Kendall's Tau 检验
-
-用途：用于检验两个变量之间的相关性。
-
-```{r}
-# 假设有两个变量 x 和 y
-x <- c(14, 17, 20, 23, 25)
-y <- c(15, 18, 21, 24, 26)
-
-# 使用 cor.test() 函数进行 Kendall's Tau 检验
-result <- cor.test(x, y, method = "kendall")
-
-# 输出检验结果
-print(result)
-
-```
-
 ## Spearman's Rank Correlation 检验
 
-用途：用于检验两个变量之间的相关性，适用于数据非线性关系。
+用途：用于检验两个等级变量之间的相关性。
 
 ```{r}
 # 假设有两个变量 x 和 y

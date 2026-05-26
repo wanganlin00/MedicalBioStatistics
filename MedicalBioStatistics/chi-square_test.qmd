@@ -1,6 +1,10 @@
 # $\chi^2$ 检验
 
-## 卡方分布
+## 2×2列联表
+
+独立性：判断两个或多个分类变量之间是否存在关联或取值互不影响，分析联合概率分布是否可以分解为各自概率分布的乘积。
+
+### 卡方分布
 
 卡方分布可以通过原假设，得到一个统计量来表示期望结果和实际结果之间的偏离程度，进而根据分布，自由度和假设成立的情况，得出观察频率极值的发生概率（比当前统计结果更加极端的概率）。计算方法是对概率分布中的每个频率，用期望频数和实际频数差的平方除以期望频数，最后把所有结果相加。
 
@@ -25,13 +29,7 @@ ggplot() + xlim(-10,10) +
 
 在使用卡方检验时，需要的一个参数被称为自由度，指的是独立变量的个数（组数减去限制数）。通常，二项分布已知 $\pi$ ，泊松分布已知 $\lambda$ ，正态分布已知 $\mu$ 和 $\sigma^2$ 时的自由度是n-1。进行独立性检验时，n行m列联列表的自由度是(n-1) x (m-1)。
 
-Pearson’s $\chi^2$ 检验 用于检验涉及**双向无序多分类变量**的概率或比例。
-
-## 2×2列联表
-
-独立性：判断两个或多个分类变量之间是否存在关联或取值互不影响，分析联合概率分布是否可以分解为各自概率分布的乘积。
-
-### 卡方检验
+Pearson’s $\chi^2$ 检验 用于检验涉及**双向无序多分类变量**的概率或比例。 \### 卡方检验
 
 对于频数表中每个单元格的期望频数都比较大（大于 5）的大样本，`correct`设为`FALSE`,不进行连续校正。
 
@@ -64,6 +62,23 @@ chisq.test(x,correct = F)$expected
 
 ### Fisher's Exact 检验
 
+超几何分布
+
+```{r warning=FALSE}
+
+tibble(
+    x = -10:10,
+    y_hyper = dhyper(x, m = 10,n = 7,k = 8),
+) |>
+    ggplot()+
+    geom_col(aes(x=x,y = y_hyper,color="Hypergeometric Distribution"),fill=NA)+
+    geom_function(aes(color="Normal Distribution"),
+                  fun= dnorm, args = list(mean = 0, sd = 1))+
+    scale_color_manual(values = c("Normal Distribution" = "red",
+                                  "Hypergeometric Distribution" = "blue"))+
+    labs(color = "Distribution")  
+```
+
 Fisher 精确概率检验（Fisher's Exact Test）通常在以下情况中使用：
 
 1.  总样本数 n 小于 40；
@@ -71,36 +86,15 @@ Fisher 精确概率检验（Fisher's Exact Test）通常在以下情况中使用
 2.  列联表中任何一个单元格的期望频数小于 5。
 
 ```{r}
-x <- matrix(c(7,2,7,17),2,dimnames = list(c("A","B"),c("Yes","No")))
+# SAS 中的 Fisher 精确检验示例 政党偏好
+x <- matrix(c(8,4,4,9),nrow = 2,dimnames = list(c("女性","男性"),c("民主党人","共和党人")))
 x
 
 (k5 <- fisher.test(x))
- chisq.test(x)
-
-E <- chisq.test(x)$expected
-
-chisq <- sum((x-E)^2/E)
-chisq 
-
-p_value_asymptotic <- 1 - pchisq(chisq, df = 1)
+ chisq.test(x,correct = T)
 ```
 
-### **超几何分布**
-
-```{r warning=FALSE}
-
-tibble(
-    x = -10:10,
-    y_hyper = dhyper(x, m = 10,n = 7,k = 8),
-) %>% 
-    ggplot()+
-    geom_col(aes(x=x,y = y_hyper,color="Hypergeometric Distribution"),fill=NA)+
-    geom_function(aes(color="Normal Distribution"),
-                  fun= dnorm, args = list(mean = 0, sd = 1))+
-    scale_color_manual(values = c("Normal Distribution" = "red",
-                                  "Hypergeometric Distribution" = "blue"))+
-    labs(color = "Distribution")
-```
+![](images/SASFisher_exact_test.png){fig-align="center" width="50%"}
 
 ## 配对四格表
 
@@ -111,7 +105,7 @@ tibble(
 tibble(
     x = -5:15,
     y_binom = dbinom(x, size = 10,prob = 0.5),
-) %>% 
+) |>
 ggplot()+
     geom_col(aes(x=x,y=y_binom,color="binomal Distribution"),fill=NA)+
     geom_function(mapping = aes(color="normal Distribution"),
@@ -326,7 +320,7 @@ colnames(data) <- c("Drug A", "Drug B", "Drug C")
 rownames(data) <- c("Age under 30", "Age over 30")
 chisq.test(data)
 
-data %>% t() %>% chisq.test()
+data |>t() |>chisq.test()
 ```
 
 p 值为 0.6967，大于通常的显著性水平，因此没有证据否定年龄组之间分布相等的原假设。
