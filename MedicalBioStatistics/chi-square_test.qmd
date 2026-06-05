@@ -13,6 +13,7 @@ $$ \chi^2=\sum \frac {(O-E)^2} {E} $$
 得到的统计量结果越大，说明差别越显著，数值越小说明观察和期望的差别越小，当观察频数和期望频数一致是卡方为0。其实就是在比较观测到的比例和期望的比例的关系。
 
 ```{r}
+library(tidyverse)
 ggplot() + xlim(-10,10) +
     geom_function(mapping = aes(color="normal Distribution"),
                   fun = dnorm, args = list(mean = 0, sd = 1),

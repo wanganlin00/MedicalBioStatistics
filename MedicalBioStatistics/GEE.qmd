@@ -13,6 +13,7 @@ GEE的核心思想是通过建立一个`广义线性模型`来估计一组总体
 [数据集 Analyzing ecological data](https://github.com/romunov/AED)
 
 ```{r}
+library(tidyverse)
 rfb <- read_delim("data/AED/RiceFieldBirds.txt")
 rfb$richness <- rowSums(rfb[, 8:56] > 0)
 rfb |> mutate(

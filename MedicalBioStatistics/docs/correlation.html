@@ -361,7 +361,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./hypothesis_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">假设检验</span></a>
+ <span class="menu-text">统计检验</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -387,7 +387,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ANOVA.html" class="sidebar-item-text sidebar-link">
+  <a href="./one_way_ANOVA.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">方差分析</span></span></a>
   </div>
 </li>
@@ -420,7 +420,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">统计模型</span></a>
+ <span class="menu-text">线性模型</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -429,31 +429,37 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./simple_linear_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">线性回归</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">简单线性回归</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./multiple_linear_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">多元线性回归</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./LMM.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">线性混合效应模型</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">多重线性回归</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./GLM.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">广义线性模型</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">广义线性模型</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./GEE.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">广义估计方程</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">广义估计方程</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./mixed_models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">线性混合效应模型</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./multilevel_models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">多级模型</span></span></a>
   </div>
 </li>
       </ul>
@@ -470,19 +476,19 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./SurvivalAnalysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">生存分析</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">生存分析</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./CoxProportionalHazardsModel.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Cox比例风险模型</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Cox比例风险模型</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./CompetingRiskModel.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">竞争风险模型</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">竞争风险模型</span></span></a>
   </div>
 </li>
       </ul>
@@ -499,13 +505,13 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./diagnostic_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">诊断性测试</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">诊断性测试</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./RCT.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">随机对照试验</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">随机对照试验</span></span></a>
   </div>
 </li>
       </ul>
@@ -521,7 +527,7 @@ window.Quarto = {
 <li>
 <a href="#%E8%BF%9E%E7%BB%AD%E5%8F%98%E9%87%8F" id="toc-连续变量" class="nav-link active" data-scroll-target="#%E8%BF%9E%E7%BB%AD%E5%8F%98%E9%87%8F"><span class="header-section-number">3.1</span> 连续变量</a>
   <ul>
-<li><a href="#%E7%9B%B8%E5%85%B3%E7%B3%BB%E6%95%B0" id="toc-相关系数" class="nav-link" data-scroll-target="#%E7%9B%B8%E5%85%B3%E7%B3%BB%E6%95%B0"><span class="header-section-number">3.1.0.1</span> 相关系数</a></li>
+<li><a href="#%E7%9B%B8%E5%85%B3%E7%B1%BB%E5%9E%8B" id="toc-相关类型" class="nav-link" data-scroll-target="#%E7%9B%B8%E5%85%B3%E7%B1%BB%E5%9E%8B"><span class="header-section-number">3.1.0.1</span> 相关类型</a></li>
   <li><a href="#%E7%9B%B8%E5%85%B3%E5%9B%BEcorrelogram" id="toc-相关图correlogram" class="nav-link" data-scroll-target="#%E7%9B%B8%E5%85%B3%E5%9B%BEcorrelogram"><span class="header-section-number">3.1.0.2</span> 相关图（correlogram）</a></li>
   <li><a href="#%E6%98%BE%E8%91%97%E6%80%A7%E6%A3%80%E9%AA%8C" id="toc-显著性检验" class="nav-link" data-scroll-target="#%E6%98%BE%E8%91%97%E6%80%A7%E6%A3%80%E9%AA%8C"><span class="header-section-number">3.1.0.3</span> 显著性检验</a></li>
   </ul>
@@ -529,9 +535,13 @@ window.Quarto = {
   <li>
 <a href="#%E5%88%86%E7%B1%BB%E5%8F%98%E9%87%8F" id="toc-分类变量" class="nav-link" data-scroll-target="#%E5%88%86%E7%B1%BB%E5%8F%98%E9%87%8F"><span class="header-section-number">3.2</span> 分类变量</a>
   <ul>
-<li><a href="#%E5%88%97%E8%81%94%E7%B3%BB%E6%95%B0phi-%E7%B3%BB%E6%95%B0%E5%92%8C-cramers-v-%E7%B3%BB%E6%95%B0" id="toc-列联系数phi-系数和-cramers-v-系数" class="nav-link" data-scroll-target="#%E5%88%97%E8%81%94%E7%B3%BB%E6%95%B0phi-%E7%B3%BB%E6%95%B0%E5%92%8C-cramers-v-%E7%B3%BB%E6%95%B0"><span class="header-section-number">3.2.1</span> 列联系数、Phi 系数和 Cramer’s V 系数</a></li>
-  <li><a href="#kappa-%E7%BB%9F%E8%AE%A1%E9%87%8F" id="toc-kappa-统计量" class="nav-link" data-scroll-target="#kappa-%E7%BB%9F%E8%AE%A1%E9%87%8F"><span class="header-section-number">3.2.2</span> Kappa 统计量</a></li>
-  <li><a href="#%E9%A9%AC%E8%B5%9B%E5%85%8B%E5%9B%BE" id="toc-马赛克图" class="nav-link" data-scroll-target="#%E9%A9%AC%E8%B5%9B%E5%85%8B%E5%9B%BE"><span class="header-section-number">3.2.3</span> 马赛克图</a></li>
+<li><a href="#%E5%88%97%E8%81%94%E8%A1%A8" id="toc-列联表" class="nav-link" data-scroll-target="#%E5%88%97%E8%81%94%E8%A1%A8"><span class="header-section-number">3.2.1</span> 列联表</a></li>
+  <li><a href="#%E8%BE%B9%E9%99%85%E5%88%97%E8%81%94%E8%A1%A8" id="toc-边际列联表" class="nav-link" data-scroll-target="#%E8%BE%B9%E9%99%85%E5%88%97%E8%81%94%E8%A1%A8"><span class="header-section-number">3.2.2</span> 边际列联表</a></li>
+  <li><a href="#%E5%85%B3%E8%81%94%E5%BA%A6%E9%87%8F" id="toc-关联度量" class="nav-link" data-scroll-target="#%E5%85%B3%E8%81%94%E5%BA%A6%E9%87%8F"><span class="header-section-number">3.2.3</span> 关联度量</a></li>
+  <li><a href="#%E5%88%97%E8%81%94%E7%B3%BB%E6%95%B0" id="toc-列联系数" class="nav-link" data-scroll-target="#%E5%88%97%E8%81%94%E7%B3%BB%E6%95%B0"><span class="header-section-number">3.2.4</span> 列联系数</a></li>
+  <li><a href="#phi-%E7%B3%BB%E6%95%B0" id="toc-phi-系数" class="nav-link" data-scroll-target="#phi-%E7%B3%BB%E6%95%B0"><span class="header-section-number">3.2.5</span> <strong>Phi 系数</strong></a></li>
+  <li><a href="#cramers-v-%E7%B3%BB%E6%95%B0" id="toc-cramers-v-系数" class="nav-link" data-scroll-target="#cramers-v-%E7%B3%BB%E6%95%B0"><span class="header-section-number">3.2.6</span> <strong>Cramer’s V 系数</strong></a></li>
+  <li><a href="#%E9%85%8D%E5%AF%B9%E5%88%97%E8%81%94%E8%A1%A8kappa-%E7%BB%9F%E8%AE%A1%E9%87%8F" id="toc-配对列联表kappa-统计量" class="nav-link" data-scroll-target="#%E9%85%8D%E5%AF%B9%E5%88%97%E8%81%94%E8%A1%A8kappa-%E7%BB%9F%E8%AE%A1%E9%87%8F"><span class="header-section-number">3.2.7</span> <strong>配对列联表：</strong>Kappa 统计量</a></li>
   </ul>
 </li>
   </ul></nav>
@@ -552,7 +562,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">January 9, 2026</p>
+      <p class="date-modified">June 5, 2026</p>
     </div>
   </div>
     
@@ -570,7 +580,7 @@ window.Quarto = {
 <section id="连续变量" class="level2" data-number="3.1"><h2 data-number="3.1" class="anchored" data-anchor-id="连续变量">
 <span class="header-section-number">3.1</span> 连续变量</h2>
 <p>如果两个连续变量不相互独立时，使用协方差（covariance）来描述两个变量的关系。</p>
-<p>协方差（或相关系数）为零，不相关，说明不存在线性关系，但可能存在非线性关系。</p>
+<p>协方差（或相关系数）为零，即不相关，说明不存在线性关系，但可能存在非线性关系。</p>
 <div class="cell">
 <details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">iris</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span></span>
 <span></span>
@@ -583,8 +593,9 @@ window.Quarto = {
 <span><span class="co">#&gt; Petal.Width     0.5162707  -0.1216394    1.2956094   0.5810063</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<section id="相关系数" class="level4" data-number="3.1.0.1"><h4 data-number="3.1.0.1" class="anchored" data-anchor-id="相关系数">
-<span class="header-section-number">3.1.0.1</span> 相关系数</h4>
+<section id="相关类型" class="level4" data-number="3.1.0.1"><h4 data-number="3.1.0.1" class="anchored" data-anchor-id="相关类型">
+<span class="header-section-number">3.1.0.1</span> 相关类型</h4>
+<p><a href="https://easystats.github.io/correlation/articles/types.html">Correlation Types • correlation</a></p>
 <p>相关系数的取值范围： <span class="math inline">\([-1,1]\)</span></p>
 <p><span class="math display">\[
 r(X,Y)=\frac {\sum_{i=1}^n (x_i-\bar x)(y_i-\bar y)}{\sqrt{\sum_{i=1}^n (x_i-\bar x)^2 \sum_{i=1}^n (y_i-\bar y)^2}}
@@ -720,28 +731,127 @@ t=\frac{r\sqrt{n-2}}{\sqrt{1-r^2}}
 </div>
 </section></section><section id="分类变量" class="level2" data-number="3.2"><h2 data-number="3.2" class="anchored" data-anchor-id="分类变量">
 <span class="header-section-number">3.2</span> 分类变量</h2>
-<p>　　如果独立性检验的结果表明两个变量之间不独立，那么如何量化它们之间相关性的强弱?</p>
-<section id="列联系数phi-系数和-cramers-v-系数" class="level3" data-number="3.2.1"><h3 data-number="3.2.1" class="anchored" data-anchor-id="列联系数phi-系数和-cramers-v-系数">
-<span class="header-section-number">3.2.1</span> 列联系数、Phi 系数和 Cramer’s V 系数</h3>
-<p><em>vcd</em> 包里的函数 <code><a href="https://rdrr.io/pkg/vcd/man/assocstats.html">assocstats( )</a></code>可以用来计算列联表的 <strong>Phi 系数</strong>、<strong>列联系数</strong>和 <strong>Cramer’s V 系数</strong>。其中， Phi 系数只适用于四格表。 　　</p>
+<section id="列联表" class="level3" data-number="3.2.1"><h3 data-number="3.2.1" class="anchored" data-anchor-id="列联表">
+<span class="header-section-number">3.2.1</span> 列联表</h3>
 <div class="cell">
-<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">vcd</span><span class="op">)</span></span>
-<span><span class="va">mytable</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">Arthritis</span><span class="op">$</span><span class="va">Sex</span>, <span class="va">Arthritis</span><span class="op">$</span><span class="va">Treatment</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/assocstats.html">assocstats</a></span><span class="op">(</span><span class="va">mytable</span><span class="op">)</span></span>
-<span><span class="co">#&gt;                      X^2 df P(&gt; X^2)</span></span>
-<span><span class="co">#&gt; Likelihood Ratio 0.73748  1  0.39047</span></span>
-<span><span class="co">#&gt; Pearson          0.73653  1  0.39078</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Phi-Coefficient   : 0.094 </span></span>
-<span><span class="co">#&gt; Contingency Coeff.: 0.093 </span></span>
-<span><span class="co">#&gt; Cramer's V        : 0.094</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">eg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">156</span>,<span class="fl">9421</span>,<span class="fl">1531</span>,<span class="fl">14797</span><span class="op">)</span>,nrow<span class="op">=</span><span class="fl">2</span>,byrow<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">eg</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Disease"</span>,<span class="st">"Control"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">eg</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Exposed"</span>,<span class="st">"Unexposed"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">eg</span><span class="op">)</span></span>
+<span><span class="co">#&gt;           Disease Control</span></span>
+<span><span class="co">#&gt; Exposed       156    9421</span></span>
+<span><span class="co">#&gt; Unexposed    1531   14797</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/proportions.html">prop.table</a></span><span class="op">(</span><span class="va">eg</span><span class="op">)</span>          <span class="co">#各单元格比例</span></span>
+<span><span class="co">#&gt;               Disease   Control</span></span>
+<span><span class="co">#&gt; Exposed   0.006022003 0.3636750</span></span>
+<span><span class="co">#&gt; Unexposed 0.059100560 0.5712025</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/proportions.html">prop.table</a></span><span class="op">(</span><span class="va">eg</span>,margin <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>        <span class="co">#行比例和=1</span></span>
+<span><span class="co">#&gt;              Disease   Control</span></span>
+<span><span class="co">#&gt; Exposed   0.01628903 0.9837110</span></span>
+<span><span class="co">#&gt; Unexposed 0.09376531 0.9062347</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="kappa-统计量" class="level3" data-number="3.2.2"><h3 data-number="3.2.2" class="anchored" data-anchor-id="kappa-统计量">
-<span class="header-section-number">3.2.2</span> Kappa 统计量</h3>
+</section><section id="边际列联表" class="level3" data-number="3.2.2"><h3 data-number="3.2.2" class="anchored" data-anchor-id="边际列联表">
+<span class="header-section-number">3.2.2</span> 边际列联表</h3>
+<div class="cell">
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 边际</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/marginSums.html">margin.table</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">eg</span>,margin <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>      <span class="co">#列和</span></span>
+<span><span class="co">#&gt; Disease Control </span></span>
+<span><span class="co">#&gt;    1687   24218</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/addmargins.html">addmargins</a></span><span class="op">(</span><span class="va">eg</span><span class="op">)</span>          <span class="co">#添加行和、列和</span></span>
+<span><span class="co">#&gt;           Disease Control   Sum</span></span>
+<span><span class="co">#&gt; Exposed       156    9421  9577</span></span>
+<span><span class="co">#&gt; Unexposed    1531   14797 16328</span></span>
+<span><span class="co">#&gt; Sum          1687   24218 25905</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/addmargins.html">addmargins</a></span><span class="op">(</span><span class="va">eg</span>,<span class="fl">1</span><span class="op">)</span>        <span class="co">#添加列和</span></span>
+<span><span class="co">#&gt;           Disease Control</span></span>
+<span><span class="co">#&gt; Exposed       156    9421</span></span>
+<span><span class="co">#&gt; Unexposed    1531   14797</span></span>
+<span><span class="co">#&gt; Sum          1687   24218</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/addmargins.html">addmargins</a></span><span class="op">(</span><span class="va">eg</span>,<span class="fl">2</span><span class="op">)</span>        <span class="co">#添加行和</span></span>
+<span><span class="co">#&gt;           Disease Control   Sum</span></span>
+<span><span class="co">#&gt; Exposed       156    9421  9577</span></span>
+<span><span class="co">#&gt; Unexposed    1531   14797 16328</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/addmargins.html">addmargins</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/proportions.html">prop.table</a></span><span class="op">(</span><span class="va">eg</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt;              Disease   Control Sum</span></span>
+<span><span class="co">#&gt; Exposed   0.01628903 0.9837110   1</span></span>
+<span><span class="co">#&gt; Unexposed 0.09376531 0.9062347   1</span></span>
+<span><span class="co">#&gt; Sum       0.11005434 1.8899457   2</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/ftable.html">ftable</a></span><span class="op">(</span><span class="va">eg</span><span class="op">)</span>   <span class="co"># "平铺式"列联表</span></span>
+<span><span class="co">#&gt;            Disease Control</span></span>
+<span><span class="co">#&gt;                           </span></span>
+<span><span class="co">#&gt; Exposed        156    9421</span></span>
+<span><span class="co">#&gt; Unexposed     1531   14797</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section><section id="关联度量" class="level3" data-number="3.2.3"><h3 data-number="3.2.3" class="anchored" data-anchor-id="关联度量">
+<span class="header-section-number">3.2.3</span> 关联度量</h3>
+<p><em>vcd</em> 包里的函数 <code>assocstats( )</code>可以用来计算列联表的 <strong>Phi 系数</strong>、<strong>列联系数</strong>和 <strong>Cramer’s V 系数</strong>。其中， Phi 系数只适用于四格表。 　　</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">vcd</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/assocstats.html">assocstats</a></span><span class="op">(</span><span class="va">eg</span><span class="op">)</span></span>
+<span><span class="co">#&gt;                     X^2 df P(&gt; X^2)</span></span>
+<span><span class="co">#&gt; Likelihood Ratio 722.30  1        0</span></span>
+<span><span class="co">#&gt; Pearson          595.16  1        0</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Phi-Coefficient   : 0.152 </span></span>
+<span><span class="co">#&gt; Contingency Coeff.: 0.15 </span></span>
+<span><span class="co">#&gt; Cramer's V        : 0.152</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section><section id="列联系数" class="level3" data-number="3.2.4"><h3 data-number="3.2.4" class="anchored" data-anchor-id="列联系数">
+<span class="header-section-number">3.2.4</span> 列联系数</h3>
+<p><img src="images/clipboard-4252541209.png" class="img-fluid"></p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">Contingency</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">chi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/chisq.test.html">chisq.test</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/unname.html">unname</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">chi</span><span class="op">$</span><span class="va">statistic</span> <span class="op">/</span> <span class="op">(</span><span class="va">chi</span><span class="op">$</span><span class="va">statistic</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="fu">Contingency</span><span class="op">(</span><span class="va">eg</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0.1497052</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">DescTools</span><span class="fu">::</span><span class="fu"><a href="https://andrisignorell.github.io/DescTools/reference/CramerV.html">ContCoef</a></span><span class="op">(</span><span class="va">eg</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0.1498618</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section><section id="phi-系数" class="level3" data-number="3.2.5"><h3 data-number="3.2.5" class="anchored" data-anchor-id="phi-系数">
+<span class="header-section-number">3.2.5</span> <strong>Phi 系数</strong>
+</h3>
+<p><img src="images/clipboard-1172472303.png" class="img-fluid"></p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Phi coefficient</span></span>
+<span><span class="va">PhiCoef</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/unname.html">unname</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/chisq.test.html">chisq.test</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">$</span><span class="va">statistic</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="fu">PhiCoef</span><span class="op">(</span><span class="va">eg</span><span class="op">)</span> </span>
+<span><span class="co">#&gt; [1] 0.1514115</span></span>
+<span></span>
+<span><span class="fu">DescTools</span><span class="fu">::</span><span class="fu"><a href="https://andrisignorell.github.io/DescTools/reference/CramerV.html">Phi</a></span><span class="op">(</span><span class="va">eg</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0.1515735</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section><section id="cramers-v-系数" class="level3" data-number="3.2.6"><h3 data-number="3.2.6" class="anchored" data-anchor-id="cramers-v-系数">
+<span class="header-section-number">3.2.6</span> <strong>Cramer’s V 系数</strong>
+</h3>
+<div class="cell">
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Cramer's V coefficient</span></span>
+<span><span class="va">V</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/unname.html">unname</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/chisq.test.html">chisq.test</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">$</span><span class="va">statistic</span> <span class="op">/</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">*</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="fu">V</span><span class="op">(</span><span class="va">eg</span><span class="op">)</span> </span>
+<span><span class="co">#&gt; [1] 0.1514115</span></span>
+<span><span class="fu">DescTools</span><span class="fu">::</span><span class="fu"><a href="https://andrisignorell.github.io/DescTools/reference/CramerV.html">CramerV</a></span><span class="op">(</span><span class="va">eg</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0.1515735</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section><section id="配对列联表kappa-统计量" class="level3" data-number="3.2.7"><h3 data-number="3.2.7" class="anchored" data-anchor-id="配对列联表kappa-统计量">
+<span class="header-section-number">3.2.7</span> <strong>配对列联表：</strong>Kappa 统计量</h3>
 <p>对于<strong>配对列联表</strong>，可以计算一致性指标 Kappa 统计量。 epiDisplay 包里的函数 kap( )可以用于计算一致性的比例以及 Kappa 统计量的值 　　 　　</p>
 <div class="cell">
-<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">my.matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">11</span>, <span class="fl">2</span>, <span class="fl">12</span>, <span class="fl">33</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">my.matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">11</span>, <span class="fl">2</span>, <span class="fl">12</span>, <span class="fl">33</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">my.matrix</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 58</span></span>
 <span><span class="fu">vcd</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/Kappa.html">Kappa</a></span><span class="op">(</span><span class="va">my.matrix</span><span class="op">)</span></span>
@@ -764,26 +874,14 @@ t=\frac{r\sqrt{n-2}}{\sqrt{1-r^2}}
 </div>
 <p>　　共 58 个对象，每一对象用两种检测方法检测，其中11 个对象的两种检测结果都为阳性， 33 个对象的两种检测结果都是阴性，所以总一致性为 (11 + 33)/58 ≈ 75.86% 。</p>
 <div class="cell">
-<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/chisq.test.html">chisq.test</a></span><span class="op">(</span><span class="va">my.matrix</span><span class="op">)</span><span class="op">$</span><span class="va">expected</span></span>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/chisq.test.html">chisq.test</a></span><span class="op">(</span><span class="va">my.matrix</span><span class="op">)</span><span class="op">$</span><span class="va">expected</span></span>
 <span><span class="co">#&gt;          [,1]     [,2]</span></span>
 <span><span class="co">#&gt; [1,] 5.155172 17.84483</span></span>
 <span><span class="co">#&gt; [2,] 7.844828 27.15517</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>　为了解释期望一致性和 Kappa 值的含义，先计算各个单元格的期望频数。 对角线上的这两个单元格对应的期望频数分别约为5.155172 和27.15517 ，因此期望一致性为 (5.155172+27.15517)/58≈ 55.71% 。期望一致性是假定两种方法的检测结果都是完全随机的情况下的 一致性。也就是说，即使两种检测方法都毫无作用，平均也能达到 55.71% 的一致性。 Kappa 统计量是超出随机的一致性的部分占最大可能超出随机的一致性的比例。在本例中，前者为 75.86% − 55.71% ， 后者为 100% − 55.71% 。 因此， Kappa 值为 (75.86 - 55.71)/(100 - 55.71) ≈ 0.455</p>
-</section><section id="马赛克图" class="level3" data-number="3.2.3"><h3 data-number="3.2.3" class="anchored" data-anchor-id="马赛克图">
-<span class="header-section-number">3.2.3</span> 马赛克图</h3>
-<p>　　马赛克图中的矩形面积正比于多维列联表中单元格的频率 　　</p>
-<div class="cell">
-<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/mosaicplot.html">mosaicplot</a></span><span class="op">(</span><span class="va">mytable</span>,main <span class="op">=</span><span class="st">"马塞克图"</span> ,</span>
-<span>           xlab <span class="op">=</span><span class="st">"Sex"</span>,ylab <span class="op">=</span>  <span class="st">"Treatment"</span>,las <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="correlation_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
+<p>　</p>
 
 
 </section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
@@ -1203,8 +1301,8 @@ t=\frac{r\sqrt{n-2}}{\sqrt{1-r^2}}
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./hypothesis_test.html" class="pagination-link" aria-label="假设检验">
-        <span class="nav-page-text">假设检验</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./hypothesis_test.html" class="pagination-link" aria-label="统计检验">
+        <span class="nav-page-text">统计检验</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

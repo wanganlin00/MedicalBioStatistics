@@ -23,6 +23,7 @@
 -   **配对样本t检验** (Paired samples t-test): 用于比较同一组受试者在两个不同条件下的均值差异。
 
 ```{r}
+library(tidyverse)
 ggplot() + xlim(-10,10) +
     geom_function(mapping = aes(color="normal Distribution"),
                   fun = dnorm, args = list(mean = 0, sd = 1),

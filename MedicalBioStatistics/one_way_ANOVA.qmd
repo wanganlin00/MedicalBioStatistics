@@ -1,12 +1,6 @@
-# 方差分析
+# 单因素组间方差分析
 
-## 数据来源
-
-> 2017.临床研究中的统计分析和图形表达实例详解 第2版
-
-## 单因素组间方差分析
-
-### 计算公式
+## 计算框架
 
 ![](images/one-way_ANOVA.png){fig-align="center" width="50%"}
 
@@ -46,8 +40,13 @@ $$
 F=\frac{\frac{SS_{组间}}{(k-1)\sigma^2}}{\frac{SS_{组内}}{(n-k)\sigma^2}}=\frac{\frac{SS_{组间}}{k-1}}{\frac{SS_{组内}}{n-k}}=\frac{MS_{组间}}{MS_{组内}}\ \ \ \sim \chi^2(\nu),\nu=k-1
 $$
 
+## 数据来源
+
+> 2017.临床研究中的统计分析和图形表达实例详解 第2版
+
 ```{r}
 # 宽格式数据框（和原表格一致）
+library(tidyverse)
 df_wide <- data.frame(
   normal = c(332.96, 297.64, 312.57, 295.47, 284.25, 307.97, 292.12, 244.61, 261.46, 286.46, 322.49, 282.42),
   middle = c(253.21, 235.87, 269.30, 258.90, 254.39, 200.87, 227.79, 237.05, 216.85, 238.03, 238.19, 243.49),
@@ -57,6 +56,8 @@ df_long <- df_wide |> pivot_longer(cols = everything(),
                               names_to = "level",
                               values_to = "value")
 ```
+
+## R实现
 
 ### `stats::aov()`
 
@@ -96,7 +97,7 @@ ez::ezANOVA(data = df_long,
 
 ```
 
-## 假设
+## 前提假设
 
 <https://www.statmethods.net/stats/rdiagnostics.html>
 

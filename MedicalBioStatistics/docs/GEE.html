@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.7.32">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>16&nbsp; 广义估计方程 – 医学与生物统计学应用</title>
+<title>15&nbsp; 广义估计方程 – 医学与生物统计学应用</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -61,7 +61,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./SurvivalAnalysis.html" rel="next">
+<link href="./mixed_models.html" rel="next">
 <link href="./GLM.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -294,7 +294,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./simple_linear_regression.html">统计模型</a></li><li class="breadcrumb-item"><a href="./GEE.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">广义估计方程</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./simple_linear_regression.html">线性模型</a></li><li class="breadcrumb-item"><a href="./GEE.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">广义估计方程</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -361,7 +361,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./hypothesis_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">假设检验</span></a>
+ <span class="menu-text">统计检验</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -387,8 +387,8 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ANOVA.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">方差分析</span></span></a>
+  <a href="./one_way_ANOVA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">单因素组间方差分析</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -420,7 +420,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">统计模型</span></a>
+ <span class="menu-text">线性模型</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -429,31 +429,37 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./simple_linear_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">线性回归</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">简单线性回归</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./multiple_linear_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">多元线性回归</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./LMM.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">线性混合效应模型</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">多重线性回归</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./GLM.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">广义线性模型</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">广义线性模型</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./GEE.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">广义估计方程</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">广义估计方程</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./mixed_models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">线性混合效应模型</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./multilevel_models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">多级模型</span></span></a>
   </div>
 </li>
       </ul>
@@ -470,19 +476,19 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./SurvivalAnalysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">生存分析</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">生存分析</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./CoxProportionalHazardsModel.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Cox比例风险模型</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Cox比例风险模型</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./CompetingRiskModel.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">竞争风险模型</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">竞争风险模型</span></span></a>
   </div>
 </li>
       </ul>
@@ -499,13 +505,13 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./diagnostic_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">诊断性测试</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">诊断性测试</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./RCT.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">随机对照试验</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">随机对照试验</span></span></a>
   </div>
 </li>
       </ul>
@@ -518,19 +524,19 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#%E6%95%B0%E6%8D%AE%E9%9B%86%E4%B8%8B%E8%BD%BD" id="toc-数据集下载" class="nav-link active" data-scroll-target="#%E6%95%B0%E6%8D%AE%E9%9B%86%E4%B8%8B%E8%BD%BD"><span class="header-section-number">16.1</span> 数据集下载</a></li>
-  <li><a href="#gee" id="toc-gee" class="nav-link" data-scroll-target="#gee"><span class="header-section-number">16.2</span> <code>gee</code></a></li>
-  <li><a href="#geepack" id="toc-geepack" class="nav-link" data-scroll-target="#geepack"><span class="header-section-number">16.3</span> <code>geepack</code></a></li>
-  <li><a href="#glm-%E8%BF%9E%E6%8E%A5%E5%87%BD%E6%95%B0" id="toc-glm-连接函数" class="nav-link" data-scroll-target="#glm-%E8%BF%9E%E6%8E%A5%E5%87%BD%E6%95%B0"><span class="header-section-number">16.4</span> GLM 连接函数</a></li>
-  <li><a href="#%E6%96%B9%E5%B7%AE" id="toc-方差" class="nav-link" data-scroll-target="#%E6%96%B9%E5%B7%AE"><span class="header-section-number">16.5</span> 方差</a></li>
-  <li><a href="#%E7%9B%B8%E5%85%B3%E6%80%A7%E7%BB%93%E6%9E%84" id="toc-相关性结构" class="nav-link" data-scroll-target="#%E7%9B%B8%E5%85%B3%E6%80%A7%E7%BB%93%E6%9E%84"><span class="header-section-number">16.6</span> 相关性结构</a></li>
-  <li><a href="#gee-1" id="toc-gee-1" class="nav-link" data-scroll-target="#gee-1"><span class="header-section-number">16.7</span> GEE</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E9%9B%86%E4%B8%8B%E8%BD%BD" id="toc-数据集下载" class="nav-link active" data-scroll-target="#%E6%95%B0%E6%8D%AE%E9%9B%86%E4%B8%8B%E8%BD%BD"><span class="header-section-number">15.1</span> 数据集下载</a></li>
+  <li><a href="#gee" id="toc-gee" class="nav-link" data-scroll-target="#gee"><span class="header-section-number">15.2</span> <code>gee</code></a></li>
+  <li><a href="#geepack" id="toc-geepack" class="nav-link" data-scroll-target="#geepack"><span class="header-section-number">15.3</span> <code>geepack</code></a></li>
+  <li><a href="#glm-%E8%BF%9E%E6%8E%A5%E5%87%BD%E6%95%B0" id="toc-glm-连接函数" class="nav-link" data-scroll-target="#glm-%E8%BF%9E%E6%8E%A5%E5%87%BD%E6%95%B0"><span class="header-section-number">15.4</span> GLM 连接函数</a></li>
+  <li><a href="#%E6%96%B9%E5%B7%AE" id="toc-方差" class="nav-link" data-scroll-target="#%E6%96%B9%E5%B7%AE"><span class="header-section-number">15.5</span> 方差</a></li>
+  <li><a href="#%E7%9B%B8%E5%85%B3%E6%80%A7%E7%BB%93%E6%9E%84" id="toc-相关性结构" class="nav-link" data-scroll-target="#%E7%9B%B8%E5%85%B3%E6%80%A7%E7%BB%93%E6%9E%84"><span class="header-section-number">15.6</span> 相关性结构</a></li>
+  <li><a href="#gee-1" id="toc-gee-1" class="nav-link" data-scroll-target="#gee-1"><span class="header-section-number">15.7</span> GEE</a></li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./simple_linear_regression.html">统计模型</a></li><li class="breadcrumb-item"><a href="./GEE.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">广义估计方程</span></a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./simple_linear_regression.html">线性模型</a></li><li class="breadcrumb-item"><a href="./GEE.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">广义估计方程</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title">
-<span class="chapter-number">16</span>&nbsp; <span class="chapter-title">广义估计方程</span>
+<span class="chapter-number">15</span>&nbsp; <span class="chapter-title">广义估计方程</span>
 </h1>
 </div>
 
@@ -543,7 +549,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">January 9, 2026</p>
+      <p class="date-modified">June 5, 2026</p>
     </div>
   </div>
     
@@ -552,15 +558,17 @@ window.Quarto = {
 
 
 </header><p><a href="https://link.springer.com/book/10.1007/978-0-387-87458-6">Mixed Effects Models and Extensions in Ecology with R 第12章</a></p>
-<p>广义估计方程（Generalized Estimating Equations，GEE）是一种用于分析重复测量或相关数据的统计方法。 GEE的核心思想是通过建立一个<code>广义线性模型</code>来估计一组总体均值参数，同时考虑数据的相关性结构和缺失数据，而不依赖于特定的分布假设，从而使其适用于多种数据类型，包括二项分布、正态分布、负二项分布。</p>
-<p>广义估计方程用于处理具有组内相关性的非正态分布数据。模型形式类似于广义线性模型，但使用了估计方程来考虑组内相关性。</p>
-<section id="数据集下载" class="level2" data-number="16.1"><h2 data-number="16.1" class="anchored" data-anchor-id="数据集下载">
-<span class="header-section-number">16.1</span> 数据集下载</h2>
+<p>离散型重复测量资料则更加复杂，当观测值是二分类或多分类时，正态性假设已不再合适。对于观测值为分类变量的情形，通常可采用广义线性模型来进行分析。但由于重复测量资料的组内相关性，一般的广义线性模型也难以处理这一问题。于是,1986 年 Liang &amp;Zeger 改进了广义线性模型,提出了广义估计方程( generalized estimating equations,GEE),用于重复测量资料的分析</p>
+<p>GEE的核心思想是通过建立一个<code>广义线性模型</code>来估计一组总体均值参数，同时考虑数据的相关性结构和缺失数据，而不依赖于特定的分布假设，从而使其适用于多种数据类型，包括二项分布、正态分布、负二项分布。</p>
+<p><a href="https://book.sciencereading.cn/shop/book/Booksimple/onlineRead.do?id=B17792CBC7A4D446CA15AC0E4D33C445F000&amp;bookPageNum=335">高级医学统计学 16.3 广义估计方程模型</a></p>
+<section id="数据集下载" class="level2" data-number="15.1"><h2 data-number="15.1" class="anchored" data-anchor-id="数据集下载">
+<span class="header-section-number">15.1</span> 数据集下载</h2>
 <p><a href="https://github.com/romunov/AED">数据集 Analyzing ecological data</a></p>
 <div class="cell">
-<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rfb</span> <span class="op">&lt;-</span> <span class="fu">read_delim</span><span class="op">(</span><span class="st">"data/AED/RiceFieldBirds.txt"</span><span class="op">)</span></span>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="va">rfb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_delim</a></span><span class="op">(</span><span class="st">"data/AED/RiceFieldBirds.txt"</span><span class="op">)</span></span>
 <span><span class="va">rfb</span><span class="op">$</span><span class="va">richness</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">rfb</span><span class="op">[</span>, <span class="fl">8</span><span class="op">:</span><span class="fl">56</span><span class="op">]</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span></span>
-<span><span class="va">rfb</span> <span class="op">|&gt;</span> <span class="fu">mutate</span><span class="op">(</span></span>
+<span><span class="va">rfb</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
 <span>    FIELD <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">FIELD</span><span class="op">)</span>,</span>
 <span>    SPTREAT <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">SPTREAT</span><span class="op">)</span>,</span>
 <span>    log_AREA <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">rfb</span><span class="op">$</span><span class="va">AREA</span><span class="op">)</span>,</span>
@@ -569,10 +577,10 @@ window.Quarto = {
 <span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">rfb</span></span>
 <span></span>
 <span></span>
-<span><span class="fu">ggplot</span><span class="op">(</span><span class="va">rfb</span>, <span class="fu">aes</span><span class="op">(</span><span class="va">Time</span>, <span class="va">richness</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu">geom_point</span><span class="op">(</span>pch <span class="op">=</span> <span class="fl">21</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu">geom_smooth</span><span class="op">(</span>method <span class="op">=</span> <span class="st">"loess"</span>, se <span class="op">=</span> <span class="cn">F</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu">facet_wrap</span><span class="op">(</span><span class="fu">vars</span><span class="op">(</span><span class="va">FIELD</span><span class="op">)</span>, labeller <span class="op">=</span> <span class="st">"label_both"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">rfb</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">Time</span>, <span class="va">richness</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>pch <span class="op">=</span> <span class="fl">21</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"loess"</span>, se <span class="op">=</span> <span class="cn">F</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/vars.html">vars</a></span><span class="op">(</span><span class="va">FIELD</span><span class="op">)</span>, labeller <span class="op">=</span> <span class="st">"label_both"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
 <figure class="figure"><p><img src="GEE_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
@@ -581,26 +589,26 @@ window.Quarto = {
 </div>
 </div>
 <div class="cell">
-<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">owls</span> <span class="op">&lt;-</span> <span class="fu">read_delim</span><span class="op">(</span><span class="st">"data/AED/Owls.txt"</span><span class="op">)</span></span>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">owls</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_delim</a></span><span class="op">(</span><span class="st">"data/AED/Owls.txt"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">owls</span> <span class="op">|&gt;</span></span>
-<span>    <span class="fu">mutate</span><span class="op">(</span>NCalls <span class="op">=</span> <span class="va">SiblingNegotiation</span>, log_broodsize <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">BroodSize</span><span class="op">)</span>, <span class="op">)</span> <span class="op">-&gt;</span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>NCalls <span class="op">=</span> <span class="va">SiblingNegotiation</span>, log_broodsize <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">BroodSize</span><span class="op">)</span>, <span class="op">)</span> <span class="op">-&gt;</span></span>
 <span>    <span class="va">owls</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
-<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">de</span> <span class="op">&lt;-</span> <span class="fu">read_delim</span><span class="op">(</span><span class="st">"data/AED/DeerEcervi.txt"</span><span class="op">)</span></span>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">de</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_delim</a></span><span class="op">(</span><span class="st">"data/AED/DeerEcervi.txt"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">de</span> <span class="op">|&gt;</span></span>
-<span>    <span class="fu">mutate</span><span class="op">(</span></span>
-<span>        Ecervi_binary <span class="op">=</span> <span class="fu">if_else</span><span class="op">(</span><span class="va">Ecervi</span> <span class="op">&gt;</span> <span class="fl">0</span>, <span class="fl">1</span>, <span class="va">Ecervi</span><span class="op">)</span>,</span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>        Ecervi_binary <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">Ecervi</span> <span class="op">&gt;</span> <span class="fl">0</span>, <span class="fl">1</span>, <span class="va">Ecervi</span><span class="op">)</span>,</span>
 <span>        Sex <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">Sex</span><span class="op">)</span>,</span>
 <span>        Length_center <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/scale.html">scale</a></span><span class="op">(</span><span class="va">Length</span>, center <span class="op">=</span> <span class="cn">T</span> , scale <span class="op">=</span> <span class="cn">F</span><span class="op">)</span>,</span>
 <span>    <span class="op">)</span> <span class="op">-&gt;</span> <span class="va">de</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="gee" class="level2" data-number="16.2"><h2 data-number="16.2" class="anchored" data-anchor-id="gee">
-<span class="header-section-number">16.2</span> <code>gee</code>
+</section><section id="gee" class="level2" data-number="15.2"><h2 data-number="15.2" class="anchored" data-anchor-id="gee">
+<span class="header-section-number">15.2</span> <code>gee</code>
 </h2>
 <p><a href="https://www.statsmodels.org/stable//gee.html" class="uri">https://www.statsmodels.org/stable//gee.html</a></p>
 <div class="cell">
@@ -727,7 +735,7 @@ window.Quarto = {
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">epil</span>,package <span class="op">=</span> <span class="st">"MASS"</span><span class="op">)</span></span>
 <span><span class="va">gee1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/gee/man/gee.html">gee</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="va">age</span> <span class="op">+</span> <span class="va">trt</span> <span class="op">+</span> <span class="va">base</span>,id<span class="op">=</span><span class="va">subject</span>,data <span class="op">=</span> <span class="va">epil</span>,family <span class="op">=</span> <span class="va">poisson</span>,corstr <span class="op">=</span><span class="st">"exchangeable"</span> <span class="op">)</span></span>
 <span><span class="co">#&gt;  (Intercept)          age trtprogabide         base </span></span>
-<span><span class="co">#&gt;   0.57304359   0.02234757  -0.15188049   0.02263524</span></span>
+<span><span class="co">#&gt;   0.56253157   0.02274013  -0.15270095   0.02265174</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">gee1</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  GEE:  GENERALIZED LINEAR MODELS FOR DEPENDENT DATA</span></span>
@@ -744,29 +752,29 @@ window.Quarto = {
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Summary of Residuals:</span></span>
 <span><span class="co">#&gt;        Min         1Q     Median         3Q        Max </span></span>
-<span><span class="co">#&gt; -15.742906  -3.318756  -1.186874   1.295122  63.957902 </span></span>
+<span><span class="co">#&gt; -15.895799  -3.341317  -1.195079   1.318402  63.931712 </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Coefficients:</span></span>
-<span><span class="co">#&gt;                 Estimate  Naive S.E.   Naive z Robust S.E.   Robust z</span></span>
-<span><span class="co">#&gt; (Intercept)   0.57304359 0.451797966  1.268362 0.360726141  1.5885835</span></span>
-<span><span class="co">#&gt; age           0.02234757 0.013412798  1.666138 0.011400956  1.9601489</span></span>
-<span><span class="co">#&gt; trtprogabide -0.15188049 0.159304397 -0.953398 0.171051111 -0.8879246</span></span>
-<span><span class="co">#&gt; base          0.02263524 0.001696439 13.342795 0.001226748 18.4514092</span></span>
+<span><span class="co">#&gt;                 Estimate Naive S.E.   Naive z Robust S.E.   Robust z</span></span>
+<span><span class="co">#&gt; (Intercept)   0.56253157 0.45219954  1.243990 0.365148155  1.5405571</span></span>
+<span><span class="co">#&gt; age           0.02274013 0.01341735  1.694830 0.011580405  1.9636736</span></span>
+<span><span class="co">#&gt; trtprogabide -0.15270095 0.15939823 -0.957984 0.171108915 -0.8924196</span></span>
+<span><span class="co">#&gt; base          0.02265174 0.00169818 13.338830 0.001235664 18.3316325</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Estimated Scale Parameter:  5.087384</span></span>
+<span><span class="co">#&gt; Estimated Scale Parameter:  5.089608</span></span>
 <span><span class="co">#&gt; Number of Iterations:  1</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Working Correlation</span></span>
 <span><span class="co">#&gt;           [,1]      [,2]      [,3]      [,4]</span></span>
-<span><span class="co">#&gt; [1,] 1.0000000 0.3933815 0.3933815 0.3933815</span></span>
-<span><span class="co">#&gt; [2,] 0.3933815 1.0000000 0.3933815 0.3933815</span></span>
-<span><span class="co">#&gt; [3,] 0.3933815 0.3933815 1.0000000 0.3933815</span></span>
-<span><span class="co">#&gt; [4,] 0.3933815 0.3933815 0.3933815 1.0000000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="co">#&gt; [1,] 1.0000000 0.3948033 0.3948033 0.3948033</span></span>
+<span><span class="co">#&gt; [2,] 0.3948033 1.0000000 0.3948033 0.3948033</span></span>
+<span><span class="co">#&gt; [3,] 0.3948033 0.3948033 1.0000000 0.3948033</span></span>
+<span><span class="co">#&gt; [4,] 0.3948033 0.3948033 0.3948033 1.0000000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="geepack" class="level2" data-number="16.3"><h2 data-number="16.3" class="anchored" data-anchor-id="geepack">
-<span class="header-section-number">16.3</span> <code>geepack</code>
+</section><section id="geepack" class="level2" data-number="15.3"><h2 data-number="15.3" class="anchored" data-anchor-id="geepack">
+<span class="header-section-number">15.3</span> <code>geepack</code>
 </h2>
 <div class="cell">
 <details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">geepack</span><span class="op">)</span></span>
@@ -837,8 +845,8 @@ cor(Y_{is},Y_{it})=0.422^{|s-t|}
 <span><span class="co">#&gt;  -451.065  -457.436   230.718     5.185     2.000  -447.637</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="glm-连接函数" class="level2" data-number="16.4"><h2 data-number="16.4" class="anchored" data-anchor-id="glm-连接函数">
-<span class="header-section-number">16.4</span> GLM 连接函数</h2>
+</section><section id="glm-连接函数" class="level2" data-number="15.4"><h2 data-number="15.4" class="anchored" data-anchor-id="glm-连接函数">
+<span class="header-section-number">15.4</span> GLM 连接函数</h2>
 <p>GLM的形式如下：</p>
 <p><span class="math display">\[ g(\mu_{ij})=\beta_0+\beta_1x_{ij_1}+\beta_2x_{ij_2}+...+\beta_px_{ij_p} \]</span></p>
 <p>其中，<code>g()</code> 是一个连接函数，用于将自变量的线性组合与因变量的均值联系起来。常见的连接函数包括恒等连接函数（identity）、logistic连接函数（logit）、逆正弦连接函数（inverse sine）函数等。<code>i</code> 表示观测对象的索引，<code>j</code> 表示时间点或相关性结构的索引，<code>uij</code> 表示因变量的均值，<code>β</code> 表示待估计的系数，<code>Xij</code> 表示自变量。</p>
@@ -897,22 +905,23 @@ E(y)=\frac{e^{\beta \mathbf{X} +\alpha}}{1+e^{\beta\mathbf{X}+\alpha}}, 此时g(
 <span><span class="co">#&gt; Number of Fisher Scoring iterations: 4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="方差" class="level2" data-number="16.5"><h2 data-number="16.5" class="anchored" data-anchor-id="方差">
-<span class="header-section-number">16.5</span> 方差</h2>
+</section><section id="方差" class="level2" data-number="15.5"><h2 data-number="15.5" class="anchored" data-anchor-id="方差">
+<span class="header-section-number">15.5</span> 方差</h2>
 <p><span class="math display">\[
 var(Y_{is}|X_{is})=\Phi × \nu(\mu_{is})
 \]</span></p>
 <p>其中，Φ 是scale parameter （overdispersion），v() 是方差函数。</p>
-</section><section id="相关性结构" class="level2" data-number="16.6"><h2 data-number="16.6" class="anchored" data-anchor-id="相关性结构">
-<span class="header-section-number">16.6</span> 相关性结构</h2>
+</section><section id="相关性结构" class="level2" data-number="15.6"><h2 data-number="15.6" class="anchored" data-anchor-id="相关性结构">
+<span class="header-section-number">15.6</span> 相关性结构</h2>
 <p>R(α) （working correlation）</p>
 <ol type="1">
-<li><p>非结构化相关：cor(Y<sub>is</sub>,Y<sub>it</sub>)=α<sub>st</sub></p></li>
-<li><p>自回归相关：cor(Y<sub>is</sub>,Y<sub>it</sub>)=α<sup>|s-t|</sup></p></li>
+<li><p>无结构相关：cor(Y<sub>is</sub>,Y<sub>it</sub>)=α<sub>st</sub></p></li>
+<li><p>一阶自相关：cor(Y<sub>is</sub>,Y<sub>it</sub>)=α<sup>|s-t|</sup></p></li>
 <li><p>exchangeable 等相关：cor(Y<sub>is</sub>,Y<sub>it</sub>)=α</p></li>
 <li><p>independence，独立，cor(Y<sub>is</sub>,Y<sub>it</sub>)=<strong>I</strong></p></li>
-</ol></section><section id="gee-1" class="level2" data-number="16.7"><h2 data-number="16.7" class="anchored" data-anchor-id="gee-1">
-<span class="header-section-number">16.7</span> GEE</h2>
+<li><p>相邻相关</p></li>
+</ol></section><section id="gee-1" class="level2" data-number="15.7"><h2 data-number="15.7" class="anchored" data-anchor-id="gee-1">
+<span class="header-section-number">15.7</span> GEE</h2>
 <p>GLM的期望和方差：</p>
 <p><span class="math display">\[ E(Y_{ij})=b'(\theta_{ij})\\ Var(Y_{ij})=b''(\theta_{ij})\ \Phi \]</span></p>
 <p>假定潜在的随机成分V<sub>i</sub> ：</p>
@@ -1340,12 +1349,12 @@ U(\beta)=\sum_{i=1}^{n} D'_iV_i^{-1}(y_i-\mu_i)=0
   });
   </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./GLM.html" class="pagination-link" aria-label="广义线性模型">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">广义线性模型</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">广义线性模型</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./SurvivalAnalysis.html" class="pagination-link" aria-label="生存分析">
-        <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">生存分析</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./mixed_models.html" class="pagination-link" aria-label="线性混合效应模型">
+        <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">线性混合效应模型</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

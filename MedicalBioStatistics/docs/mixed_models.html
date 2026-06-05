@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.7.32">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>14&nbsp; 线性混合效应模型 – 医学与生物统计学应用</title>
+<title>16&nbsp; 线性混合效应模型 – 医学与生物统计学应用</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -61,8 +61,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./GLM.html" rel="next">
-<link href="./multiple_linear_regression.html" rel="prev">
+<link href="./multilevel_models.html" rel="next">
+<link href="./GEE.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -294,7 +294,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./simple_linear_regression.html">线性模型</a></li><li class="breadcrumb-item"><a href="./LMM.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">线性混合效应模型</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./simple_linear_regression.html">线性模型</a></li><li class="breadcrumb-item"><a href="./mixed_models.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">线性混合效应模型</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -361,7 +361,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./hypothesis_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">假设检验</span></a>
+ <span class="menu-text">统计检验</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -387,8 +387,8 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ANOVA.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">方差分析</span></span></a>
+  <a href="./one_way_ANOVA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">单因素组间方差分析</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -429,7 +429,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./simple_linear_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">线性回归</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">简单线性回归</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -440,20 +440,26 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./LMM.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">线性混合效应模型</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./GLM.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">广义线性模型</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">广义线性模型</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./GEE.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">广义估计方程</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">广义估计方程</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./mixed_models.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">线性混合效应模型</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./multilevel_models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">多级模型</span></span></a>
   </div>
 </li>
       </ul>
@@ -470,19 +476,19 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./SurvivalAnalysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">生存分析</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">生存分析</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./CoxProportionalHazardsModel.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Cox比例风险模型</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Cox比例风险模型</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./CompetingRiskModel.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">竞争风险模型</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">竞争风险模型</span></span></a>
   </div>
 </li>
       </ul>
@@ -499,13 +505,13 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./diagnostic_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">诊断性测试</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">诊断性测试</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./RCT.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">随机对照试验</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">随机对照试验</span></span></a>
   </div>
 </li>
       </ul>
@@ -518,21 +524,23 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#%E6%A8%A1%E5%9E%8B%E5%81%87%E8%AE%BEcov%CE%B3x0" id="toc-模型假设covγx0" class="nav-link active" data-scroll-target="#%E6%A8%A1%E5%9E%8B%E5%81%87%E8%AE%BEcov%CE%B3x0"><span class="header-section-number">14.1</span> 模型假设Cov(γ,X)=0</a></li>
-  <li><a href="#lme4lmer" id="toc-lme4lmer" class="nav-link" data-scroll-target="#lme4lmer"><span class="header-section-number">14.2</span> <code>lme4::lmer()</code></a></li>
-  <li><a href="#%E9%9A%8F%E6%9C%BA%E6%88%AA%E8%B7%9D%E9%9A%8F%E6%9C%BA%E6%96%9C%E7%8E%87" id="toc-随机截距随机斜率" class="nav-link" data-scroll-target="#%E9%9A%8F%E6%9C%BA%E6%88%AA%E8%B7%9D%E9%9A%8F%E6%9C%BA%E6%96%9C%E7%8E%87"><span class="header-section-number">14.3</span> 随机截距+随机斜率</a></li>
-  <li><a href="#%E9%9A%8F%E6%9C%BA%E6%88%AA%E8%B7%9D%E5%9B%BA%E5%AE%9A%E6%96%9C%E7%8E%87" id="toc-随机截距固定斜率" class="nav-link" data-scroll-target="#%E9%9A%8F%E6%9C%BA%E6%88%AA%E8%B7%9D%E5%9B%BA%E5%AE%9A%E6%96%9C%E7%8E%87"><span class="header-section-number">14.4</span> 随机截距+固定斜率</a></li>
-  <li><a href="#%E5%9B%BA%E5%AE%9A%E6%88%AA%E8%B7%9D%E9%9A%8F%E6%9C%BA%E6%96%9C%E7%8E%87" id="toc-固定截距随机斜率" class="nav-link" data-scroll-target="#%E5%9B%BA%E5%AE%9A%E6%88%AA%E8%B7%9D%E9%9A%8F%E6%9C%BA%E6%96%9C%E7%8E%87"><span class="header-section-number">14.5</span> 固定截距+随机斜率</a></li>
-  <li><a href="#%E9%9A%8F%E6%9C%BA%E6%95%88%E5%BA%94%E6%A8%A1%E5%9E%8B" id="toc-随机效应模型" class="nav-link" data-scroll-target="#%E9%9A%8F%E6%9C%BA%E6%95%88%E5%BA%94%E6%A8%A1%E5%9E%8B"><span class="header-section-number">14.6</span> 随机效应模型</a></li>
-  <li><a href="#%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B%E5%9B%BA%E5%AE%9A%E6%88%AA%E8%B7%9D-%E5%9B%BA%E5%AE%9A%E6%96%9C%E7%8E%87" id="toc-线性模型固定截距-固定斜率" class="nav-link" data-scroll-target="#%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B%E5%9B%BA%E5%AE%9A%E6%88%AA%E8%B7%9D-%E5%9B%BA%E5%AE%9A%E6%96%9C%E7%8E%87"><span class="header-section-number">14.7</span> 线性模型：固定截距+ 固定斜率</a></li>
-  <li><a href="#%E6%A8%A1%E5%9E%8B%E9%80%89%E6%8B%A9" id="toc-模型选择" class="nav-link" data-scroll-target="#%E6%A8%A1%E5%9E%8B%E9%80%89%E6%8B%A9"><span class="header-section-number">14.8</span> 模型选择</a></li>
-  <li><a href="#%E6%A8%A1%E5%9E%8B%E8%AF%8A%E6%96%AD" id="toc-模型诊断" class="nav-link" data-scroll-target="#%E6%A8%A1%E5%9E%8B%E8%AF%8A%E6%96%AD"><span class="header-section-number">14.9</span> 模型诊断</a></li>
+<li><a href="#%E4%B8%80%E8%88%AC%E7%BA%BF%E6%80%A7%E6%B7%B7%E5%90%88%E6%95%88%E5%BA%94%E6%A8%A1%E5%9E%8B" id="toc-一般线性混合效应模型" class="nav-link active" data-scroll-target="#%E4%B8%80%E8%88%AC%E7%BA%BF%E6%80%A7%E6%B7%B7%E5%90%88%E6%95%88%E5%BA%94%E6%A8%A1%E5%9E%8B"><span class="header-section-number">16.1</span> 一般线性混合效应模型</a></li>
+  <li><a href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E5%8D%8F%E6%96%B9%E5%B7%AE%E7%BB%93%E6%9E%84" id="toc-常见的协方差结构" class="nav-link" data-scroll-target="#%E5%B8%B8%E8%A7%81%E7%9A%84%E5%8D%8F%E6%96%B9%E5%B7%AE%E7%BB%93%E6%9E%84"><span class="header-section-number">16.2</span> 常见的协方差结构</a></li>
+  <li><a href="#%E9%87%8D%E5%A4%8D%E6%B5%8B%E9%87%8F%E6%B7%B7%E5%90%88%E6%A8%A1%E5%9E%8B" id="toc-重复测量混合模型" class="nav-link" data-scroll-target="#%E9%87%8D%E5%A4%8D%E6%B5%8B%E9%87%8F%E6%B7%B7%E5%90%88%E6%A8%A1%E5%9E%8B"><span class="header-section-number">16.3</span> 重复测量混合模型</a></li>
+  <li><a href="#lme4lmer" id="toc-lme4lmer" class="nav-link" data-scroll-target="#lme4lmer"><span class="header-section-number">16.4</span> <code>lme4::lmer()</code></a></li>
+  <li><a href="#%E9%9A%8F%E6%9C%BA%E6%88%AA%E8%B7%9D%E9%9A%8F%E6%9C%BA%E6%96%9C%E7%8E%87" id="toc-随机截距随机斜率" class="nav-link" data-scroll-target="#%E9%9A%8F%E6%9C%BA%E6%88%AA%E8%B7%9D%E9%9A%8F%E6%9C%BA%E6%96%9C%E7%8E%87"><span class="header-section-number">16.5</span> 随机截距+随机斜率</a></li>
+  <li><a href="#%E9%9A%8F%E6%9C%BA%E6%88%AA%E8%B7%9D%E5%9B%BA%E5%AE%9A%E6%96%9C%E7%8E%87" id="toc-随机截距固定斜率" class="nav-link" data-scroll-target="#%E9%9A%8F%E6%9C%BA%E6%88%AA%E8%B7%9D%E5%9B%BA%E5%AE%9A%E6%96%9C%E7%8E%87"><span class="header-section-number">16.6</span> 随机截距+固定斜率</a></li>
+  <li><a href="#%E5%9B%BA%E5%AE%9A%E6%88%AA%E8%B7%9D%E9%9A%8F%E6%9C%BA%E6%96%9C%E7%8E%87" id="toc-固定截距随机斜率" class="nav-link" data-scroll-target="#%E5%9B%BA%E5%AE%9A%E6%88%AA%E8%B7%9D%E9%9A%8F%E6%9C%BA%E6%96%9C%E7%8E%87"><span class="header-section-number">16.7</span> 固定截距+随机斜率</a></li>
+  <li><a href="#%E9%9A%8F%E6%9C%BA%E6%95%88%E5%BA%94%E6%A8%A1%E5%9E%8B" id="toc-随机效应模型" class="nav-link" data-scroll-target="#%E9%9A%8F%E6%9C%BA%E6%95%88%E5%BA%94%E6%A8%A1%E5%9E%8B"><span class="header-section-number">16.8</span> 随机效应模型</a></li>
+  <li><a href="#%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B%E5%9B%BA%E5%AE%9A%E6%88%AA%E8%B7%9D-%E5%9B%BA%E5%AE%9A%E6%96%9C%E7%8E%87" id="toc-线性模型固定截距-固定斜率" class="nav-link" data-scroll-target="#%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B%E5%9B%BA%E5%AE%9A%E6%88%AA%E8%B7%9D-%E5%9B%BA%E5%AE%9A%E6%96%9C%E7%8E%87"><span class="header-section-number">16.9</span> 线性模型：固定截距+ 固定斜率</a></li>
+  <li><a href="#%E6%A8%A1%E5%9E%8B%E9%80%89%E6%8B%A9" id="toc-模型选择" class="nav-link" data-scroll-target="#%E6%A8%A1%E5%9E%8B%E9%80%89%E6%8B%A9"><span class="header-section-number">16.10</span> 模型选择</a></li>
+  <li><a href="#%E6%A8%A1%E5%9E%8B%E8%AF%8A%E6%96%AD" id="toc-模型诊断" class="nav-link" data-scroll-target="#%E6%A8%A1%E5%9E%8B%E8%AF%8A%E6%96%AD"><span class="header-section-number">16.11</span> 模型诊断</a></li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./simple_linear_regression.html">线性模型</a></li><li class="breadcrumb-item"><a href="./LMM.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">线性混合效应模型</span></a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./simple_linear_regression.html">线性模型</a></li><li class="breadcrumb-item"><a href="./mixed_models.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">线性混合效应模型</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title">
-<span class="chapter-number">14</span>&nbsp; <span class="chapter-title">线性混合效应模型</span>
+<span class="chapter-number">16</span>&nbsp; <span class="chapter-title">线性混合效应模型</span>
 </h1>
 </div>
 
@@ -545,7 +553,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">January 9, 2026</p>
+      <p class="date-modified">June 5, 2026</p>
     </div>
   </div>
     
@@ -553,47 +561,40 @@ window.Quarto = {
   
 
 
-</header><p>线性混合效应模型 （Linear Mixed-effect Model，LMM）用于分析具有固定效应和随机效应的数据结构。 它能够处理数据中的个体异质性和组内相关性。如果<strong>数据满足正态分布但有组内相关性</strong>，使用线性混合效应模型。</p>
+</header><p>线性混合效应模型 （Linear Mixed-effect Model，LMM），研究资料通常需要满足三个基本条件：①给定解释变量的条件下，响应变量为服从正态分布的定量变量；②解释变量和响应变量呈线性关系；③给定解释 变量的条件下，个体（类）内响应变量不独立，呈某种相关（或方差协方差）结构</p>
+<p><a href="https://m-clark.github.io/mixed-models-with-R/" class="uri">https://m-clark.github.io/mixed-models-with-R/</a></p>
+<p><a href="https://link.springer.com/book/10.1007/978-0-387-87458-6">Mixed Effects Models and Extensions in Ecology with R 第5章</a></p>
+<section id="一般线性混合效应模型" class="level2" data-number="16.1"><h2 data-number="16.1" class="anchored" data-anchor-id="一般线性混合效应模型">
+<span class="header-section-number">16.1</span> 一般线性混合效应模型</h2>
 <p>线性混合模型的一般表达形式：</p>
 <p><span class="math display">\[ Y = \mathbf{X} \beta + \mathbf{Z} \gamma + \epsilon \]</span></p>
 <p>其中：</p>
 <ul>
-<li><p><span class="math inline">\(\mathbf{X}\)</span>是固定效应自变量矩阵。</p></li>
-<li><p><span class="math inline">\(\beta\)</span> 是固定效应的回归系数。</p></li>
-<li><p><span class="math inline">\(\mathbf{Z}\)</span> 是随机效应自变量矩阵。</p></li>
-<li><p><span class="math inline">\(\gamma\)</span> 是随机效应的回归系数。</p></li>
+<li><p><span class="math inline">\(\mathbf{X}\beta\)</span> 同一般线性模型，称为固定效应（fixed effect）部分；其中 X 为解释变量的设计矩阵，可包含定性变量和定量变量，也可包含变量间的交互效应项或二次项等； β 为固定效应参数向量，反映 Ｘ 对响应变量 Ｙ 的影响大小。固定效应是感兴趣的自变量，表示所有个体都相同的效应</p></li>
+<li><p><span class="math inline">\(\mathbf{Z}\gamma\)</span> 为随机效应（random effect）部分， Ｚ 为随机效应的设计矩阵， γ 为相应的随机效应参数向量。随机效应：随机截距表示不同个体的基线差异，随机斜率表示不同个体对自变量的响应差异。随机效应参数向量 γ 服从多元正态分布，均向量为０，方差协方差矩阵为 Ｇ，并假设 Ｇ 可满足任意的协方差结构。</p></li>
+<li><p>响应变量 Ｙ 服从多元正态分布，均向量为 Ｅ（Ｙ） ＝ ｘβ ，方差协方差阵为 Var(Ｙ) ＝ ＺＧＺ′ ＋ Ｒ。当 Ｒ ＝ σ２Ｉ 且 Ｚ ＝ ０ 时，线性混合效应模型则退化为普通的一 般线性模型。</p></li>
 <li><p><span class="math inline">\(\epsilon\)</span> 是误差项。</p></li>
-</ul>
-<p>固定效应是感兴趣的自变量，表示所有个体都相同的效应</p>
-<p>随机效应：随机截距表示不同个体的基线差异，随机斜率表示不同个体对自变量的响应差异。</p>
-<section id="模型假设covγx0" class="level2" data-number="14.1"><h2 data-number="14.1" class="anchored" data-anchor-id="模型假设covγx0">
-<span class="header-section-number">14.1</span> 模型假设Cov(γ,X)=0</h2>
+</ul></section><section id="常见的协方差结构" class="level2" data-number="16.2"><h2 data-number="16.2" class="anchored" data-anchor-id="常见的协方差结构">
+<span class="header-section-number">16.2</span> 常见的协方差结构</h2>
+<p><a href="https://book.sciencereading.cn/shop/book/Booksimple/onlineRead.do?id=B17792CBC7A4D446CA15AC0E4D33C445F000&amp;bookPageNum=273">高级医学统计学 第13章 线性混合效应模型</a></p>
 <ol type="1">
-<li><p>因变量 Y 为连续型数值变量</p></li>
-<li><p>线性</p></li>
-<li><p>残差的正态性 <span class="math inline">\(\epsilon\sim N(0,\sigma^2 I)\)</span></p></li>
-<li><p>方差齐性 <span class="math inline">\(Var(ε_i ​ )=σ^2\)</span></p></li>
-</ol>
-<p>随机效应假设</p>
-<ol type="1">
-<li><p>随机效应与「所有固定效应自变量」之间相互独立 <span class="math inline">\(Cov(γ,X)=0\)</span></p></li>
-<li><p>随机效应 ( γ ) 服从均值为 0 的多元正态分布 <span class="math inline">\(γ∼N(0,Σ_γ ​ )\)</span></p></li>
-<li><p>随机效应 ( γ ) 与残差 ( ε ) 之间相互独立 <span class="math inline">\(Cov(γ,ε)=0\)</span></p></li>
-</ol>
-<p>随机效应的方差-协方差矩阵<span class="math inline">\(Σ_γ\)</span> ​，残差的方差矩阵 <span class="math inline">\(σ^2I\)</span>的结构相关性特征：</p>
-<ul>
-<li><p>unstructured</p></li>
-<li><p>compound symmetry</p></li>
-<li><p>auto-regression AR(1)</p></li>
-<li><p>homogeneous toeplitz</p></li>
-<li><p>homogeneous auto-regression ARH(1)</p></li>
-<li><p>homogeneous compound symmetry</p></li>
-</ul>
+<li><p>球性结构（sphericity structure）：即矩阵主对角线元素为效应的方差 σ２， 非对角线元素为 ０</p></li>
+<li><p>方差分量结构（variance components structure，VC）</p></li>
+<li><p>复合对称结构（compound symmetry structure，CS）</p></li>
+<li><p>无结构（unstructured structure）</p></li>
+<li><p>一阶自回归结构【first-order autoregressive structure, AR(1)】</p></li>
+<li><p>Toeplitz 结构(TOEP)</p></li>
+</ol></section><section id="重复测量混合模型" class="level2" data-number="16.3"><h2 data-number="16.3" class="anchored" data-anchor-id="重复测量混合模型">
+<span class="header-section-number">16.3</span> 重复测量混合模型</h2>
 <p>对于连续数据，mixed model repeated measures（MMRM）</p>
+<p>对于重复测量资料，令 <span class="math inline">\(Ｙ_i＝ （Ｙ_{i1}，…，Ｙ_{it{_i}}）′\)</span> 表示第 <span class="math inline">\(ｉ（ｉ ＝ １，２，…，ｎ）\)</span>个个 体的 <span class="math inline">\(t_i\)</span> 次响应向量。对重复测量数据一般的线性混合模型可以表示为</p>
+<p><span class="math display">\[
+Ｙ_i＝ X_iβ ＋ Ｚ_iγ_i＋ ε_i
+\]</span></p>
+<p>ｘｉ 是第 ｉ 个个体的 ｔｉ × ｐ 维模型设计矩阵， β 是 ｐ × １ 维的回归系数向量， Ｚｉ 是 ｔｉ × ｑ 维随机效应的设计矩阵， γｉ 是第 ｉ 个个体的 ｑ × １ 维随机效应向量，且 εｉ 是 ｔｉ × １ 维个体内误 差向量</p>
 <p>对于分类数据或计数数据，generalized linear mixed-effects model(GLMM)</p>
-<p><a href="https://link.springer.com/book/10.1007/978-0-387-87458-6">Mixed Effects Models and Extensions in Ecology with R 第5章</a></p>
-</section><section id="lme4lmer" class="level2" data-number="14.2"><h2 data-number="14.2" class="anchored" data-anchor-id="lme4lmer">
-<span class="header-section-number">14.2</span> <code>lme4::lmer()</code>
+</section><section id="lme4lmer" class="level2" data-number="16.4"><h2 data-number="16.4" class="anchored" data-anchor-id="lme4lmer">
+<span class="header-section-number">16.4</span> <code>lme4::lmer()</code>
 </h2>
 <p><code><a href="https://rdrr.io/pkg/lmerTest/man/lmer.html">lmer()</a></code> 的表达式如下：</p>
 <p><span class="math display">\[
@@ -652,8 +653,8 @@ lmer (data,formual= DV \sim Fixed\_Factor + \\ (Random\_intercept + Random\_slop
 <span><span class="co">#&gt; 6      6        8 8         1.19  2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="随机截距随机斜率" class="level2" data-number="14.3"><h2 data-number="14.3" class="anchored" data-anchor-id="随机截距随机斜率">
-<span class="header-section-number">14.3</span> 随机截距+随机斜率</h2>
+</section><section id="随机截距随机斜率" class="level2" data-number="16.5"><h2 data-number="16.5" class="anchored" data-anchor-id="随机截距随机斜率">
+<span class="header-section-number">16.5</span> 随机截距+随机斜率</h2>
 <p><span class="math display">\[
 \eta_{(nrow \times 1)} = \mathbf{X}_{nrow \times 1} \beta_{1 \times 1} + \mathbf{Z}_{nrow \times 2n_{subjects}} \mathbf{\gamma}_{2n_{subjects} \times 1} + \epsilon_i
 \]</span></p>
@@ -707,7 +708,7 @@ lmer (data,formual= DV \sim Fixed\_Factor + \\ (Random\_intercept + Random\_slop
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">lme1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="LMM_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="mixed_models_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -911,8 +912,8 @@ lmer (data,formual= DV \sim Fixed\_Factor + \\ (Random\_intercept + Random\_slop
 <figure class="figure"><p><img src="images/glmm.hp_individual.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
 </figure>
 </div>
-</section><section id="随机截距固定斜率" class="level2" data-number="14.4"><h2 data-number="14.4" class="anchored" data-anchor-id="随机截距固定斜率">
-<span class="header-section-number">14.4</span> 随机截距+固定斜率</h2>
+</section><section id="随机截距固定斜率" class="level2" data-number="16.6"><h2 data-number="16.6" class="anchored" data-anchor-id="随机截距固定斜率">
+<span class="header-section-number">16.6</span> 随机截距+固定斜率</h2>
 <p><span class="math display">\[
 \eta_{(nrow \ \times 1)}=\mathbf{X_{nrow×1}}\beta_{1\times1} +Z_{nrow\times n_{subjects}} \mathbf{\gamma}_{n_{subjects}\times 1}+\epsilon_i
 \]</span></p>
@@ -1003,8 +1004,8 @@ lmer (data,formual= DV \sim Fixed\_Factor + \\ (Random\_intercept + Random\_slop
 <span><span class="co">#&gt; Number of Groups: 9</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="固定截距随机斜率" class="level2" data-number="14.5"><h2 data-number="14.5" class="anchored" data-anchor-id="固定截距随机斜率">
-<span class="header-section-number">14.5</span> 固定截距+随机斜率</h2>
+</section><section id="固定截距随机斜率" class="level2" data-number="16.7"><h2 data-number="16.7" class="anchored" data-anchor-id="固定截距随机斜率">
+<span class="header-section-number">16.7</span> 固定截距+随机斜率</h2>
 <p><span class="math display">\[
 \eta_{(nrow \times 1)} = \mathbf{X}_{nrow \times 1} \beta_{1 \times 1} + \mathbf{Z}_{nrow \times n_{subjects}} \mathbf{\gamma}_{n_{subjects} \times 1} + \epsilon_i
 \]</span></p>
@@ -1087,8 +1088,8 @@ lmer (data,formual= DV \sim Fixed\_Factor + \\ (Random\_intercept + Random\_slop
 <span><span class="co">#&gt; Number of Groups: 9</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="随机效应模型" class="level2" data-number="14.6"><h2 data-number="14.6" class="anchored" data-anchor-id="随机效应模型">
-<span class="header-section-number">14.6</span> 随机效应模型</h2>
+</section><section id="随机效应模型" class="level2" data-number="16.8"><h2 data-number="16.8" class="anchored" data-anchor-id="随机效应模型">
+<span class="header-section-number">16.8</span> 随机效应模型</h2>
 <div class="cell">
 <details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="va">lme4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lmerTest/man/lmer.html">lmer</a></span><span class="op">(</span><span class="va">Richness</span> <span class="op">~</span> <span class="fl">1</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="va">NAP</span><span class="op">|</span><span class="va">Beach</span><span class="op">)</span> ,data <span class="op">=</span> <span class="va">rikz</span><span class="op">)</span></span>
@@ -1159,8 +1160,8 @@ lmer (data,formual= DV \sim Fixed\_Factor + \\ (Random\_intercept + Random\_slop
 <span><span class="co">#&gt; Number of Groups: 9</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="线性模型固定截距-固定斜率" class="level2" data-number="14.7"><h2 data-number="14.7" class="anchored" data-anchor-id="线性模型固定截距-固定斜率">
-<span class="header-section-number">14.7</span> 线性模型：固定截距+ 固定斜率</h2>
+</section><section id="线性模型固定截距-固定斜率" class="level2" data-number="16.9"><h2 data-number="16.9" class="anchored" data-anchor-id="线性模型固定截距-固定斜率">
+<span class="header-section-number">16.9</span> 线性模型：固定截距+ 固定斜率</h2>
 <div class="cell">
 <details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">lm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Richness</span> <span class="op">~</span> <span class="fl">1</span> <span class="op">+</span> <span class="va">NAP</span> <span class="op">*</span> <span class="va">Exposure</span> ,data <span class="op">=</span> <span class="va">rikz</span><span class="op">)</span></span>
 <span><span class="va">lm</span></span>
@@ -1175,8 +1176,8 @@ lmer (data,formual= DV \sim Fixed\_Factor + \\ (Random\_intercept + Random\_slop
 <span><span class="co">#&gt;         2.6835</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="模型选择" class="level2" data-number="14.8"><h2 data-number="14.8" class="anchored" data-anchor-id="模型选择">
-<span class="header-section-number">14.8</span> 模型选择</h2>
+</section><section id="模型选择" class="level2" data-number="16.10"><h2 data-number="16.10" class="anchored" data-anchor-id="模型选择">
+<span class="header-section-number">16.10</span> 模型选择</h2>
 <p>限制最大似然法REML</p>
 <ol type="1">
 <li>
@@ -1226,7 +1227,7 @@ lmer (data,formual= DV \sim Fixed\_Factor + \\ (Random\_intercept + Random\_slop
 <span><span class="co">#&gt; [[1]]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="LMM_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="mixed_models_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1234,7 +1235,7 @@ lmer (data,formual= DV \sim Fixed\_Factor + \\ (Random\_intercept + Random\_slop
 #&gt; [[2]]</code></pre>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="LMM_files/figure-html/unnamed-chunk-11-2.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="mixed_models_files/figure-html/unnamed-chunk-11-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1242,7 +1243,7 @@ lmer (data,formual= DV \sim Fixed\_Factor + \\ (Random\_intercept + Random\_slop
 #&gt; [[3]]</code></pre>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="LMM_files/figure-html/unnamed-chunk-11-3.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="mixed_models_files/figure-html/unnamed-chunk-11-3.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1250,7 +1251,7 @@ lmer (data,formual= DV \sim Fixed\_Factor + \\ (Random\_intercept + Random\_slop
 #&gt; [[4]]</code></pre>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="LMM_files/figure-html/unnamed-chunk-11-4.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="mixed_models_files/figure-html/unnamed-chunk-11-4.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1258,7 +1259,7 @@ lmer (data,formual= DV \sim Fixed\_Factor + \\ (Random\_intercept + Random\_slop
 #&gt; [[5]]</code></pre>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="LMM_files/figure-html/unnamed-chunk-11-5.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="mixed_models_files/figure-html/unnamed-chunk-11-5.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1284,8 +1285,8 @@ lmer (data,formual= DV \sim Fixed\_Factor + \\ (Random\_intercept + Random\_slop
 <span><span class="co"># p小于0.05,说明全模型与简化后模型存在差异，最终采用lme1,AIC</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="模型诊断" class="level2" data-number="14.9"><h2 data-number="14.9" class="anchored" data-anchor-id="模型诊断">
-<span class="header-section-number">14.9</span> 模型诊断</h2>
+</section><section id="模型诊断" class="level2" data-number="16.11"><h2 data-number="16.11" class="anchored" data-anchor-id="模型诊断">
+<span class="header-section-number">16.11</span> 模型诊断</h2>
 <p>sleepstudy</p>
 <div class="cell">
 <details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 拟合线性混合模型</span></span>
@@ -1299,7 +1300,7 @@ lmer (data,formual= DV \sim Fixed\_Factor + \\ (Random\_intercept + Random\_slop
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Residuals vs Fitted"</span>, x <span class="op">=</span> <span class="st">"Fitted values"</span>, y <span class="op">=</span> <span class="st">"Residuals"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="LMM_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="mixed_models_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1309,7 +1310,7 @@ lmer (data,formual= DV \sim Fixed\_Factor + \\ (Random\_intercept + Random\_slop
 <span><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqline</a></span><span class="op">(</span><span class="va">residuals</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="LMM_files/figure-html/unnamed-chunk-13-2.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="mixed_models_files/figure-html/unnamed-chunk-13-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1319,7 +1320,7 @@ lmer (data,formual= DV \sim Fixed\_Factor + \\ (Random\_intercept + Random\_slop
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">cooksd</span>, type <span class="op">=</span> <span class="st">"h"</span>, main <span class="op">=</span> <span class="st">"Cook's Distance"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="LMM_files/figure-html/unnamed-chunk-13-3.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="mixed_models_files/figure-html/unnamed-chunk-13-3.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1331,7 +1332,7 @@ lmer (data,formual= DV \sim Fixed\_Factor + \\ (Random\_intercept + Random\_slop
 <span><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqline</a></span><span class="op">(</span><span class="va">rand_dist</span><span class="op">$</span><span class="va">Beach</span><span class="op">$</span><span class="va">NAP</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="LMM_files/figure-html/unnamed-chunk-13-4.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="mixed_models_files/figure-html/unnamed-chunk-13-4.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1750,13 +1751,13 @@ lmer (data,formual= DV \sim Fixed\_Factor + \\ (Random\_intercept + Random\_slop
     }
   });
   </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./multiple_linear_regression.html" class="pagination-link" aria-label="多重线性回归">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">多重线性回归</span></span>
+      <a href="./GEE.html" class="pagination-link" aria-label="广义估计方程">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">广义估计方程</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./GLM.html" class="pagination-link" aria-label="广义线性模型">
-        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">广义线性模型</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./multilevel_models.html" class="pagination-link" aria-label="多级模型">
+        <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">多级模型</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

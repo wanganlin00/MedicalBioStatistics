@@ -16,6 +16,8 @@ $$ Y_i=\beta_0+ \beta_1 X_i+\epsilon_i,其中\epsilon_i\sim N(0,\sigma^2) $$
 library(readr)
 library(patchwork)
 library(ggfortify)
+library(tidyverse)
+library(broom)
 advertising<-read_csv("data/Advertising.csv")
 ```
 
@@ -40,7 +42,7 @@ broom::glance(lm_tv)
 ```{r}
 
 # 整理回归模型结果
-tidy_lm <- tidy(lm_tv, conf.int=T) %>% dplyr::filter(term !='(Intercept)' )
+tidy_lm <- tidy(lm_tv, conf.int=T) |>  dplyr::filter(term !='(Intercept)' )
 # 绘制点须图
 ggplot(tidy_lm, aes(x = estimate, y = term)) +
   geom_point(size = 2, color = "black") + # 绘制点
@@ -56,28 +58,27 @@ ggplot(tidy_lm, aes(x = estimate, y = term)) +
 
 ```{r}
 # 预测
-stats::predict(lm_tv, new_data = advertising) %>% 
+stats::predict(lm_tv, new_data = advertising) |>  
     head(n = 10)
 
 # 置信区间 平均响应值       取决于方差和样本量     随样本量增加收缩
-predict(lm_tv, new_data = advertising, type = "conf_int") %>% 
+predict(lm_tv, new_data = advertising, type = "terms") |>  
     head(n = 10)
 
 # 单个新观测值         主要取决于方差
-predict(lm_tv, new_data = advertising, type = "pred_int") %>% 
+predict(lm_tv, new_data = advertising, type = "terms") |>  
     head(n = 10)
 
 
 # 比较观测值与预测值
-augment(lm_tv, new_data = advertising) %>%
-    select(sales, .pred) %>%
+augment(lm_tv, new_data = advertising) |> 
     head(n = 10)
 ```
 
 ```         
-predict(lm_tv$fit, new_data = advertising, interval = "confidence") %>% 
+predict(lm_tv, new_data = advertising, interval = "confidence") |>  
     head(n = 10)
-predict(lm_tv$fit, new_data = advertising, interval = "prediction") %>% 
+predict(lm_tv, new_data = advertising, interval = "prediction") |>  
     head(n = 10)
 ```
 
@@ -97,13 +98,13 @@ $$
 
 ```{r}
 # 可视化
-augment(lm_tv, new_data = advertising) %>%
-    ggplot(aes(x = TV)) +
-    geom_linerange(aes(ymin = sales, ymax = .pred)) +
-    geom_point(aes(y = sales), color = "red") +
+augment(lm_tv, new_data = advertising) |> 
+    ggplot(aes(x = TV,y = sales)) +
+    geom_linerange(aes(ymin = sales, ymax = .fitted)) +
+    geom_point(, color = "red") +
     geom_abline(
-        intercept = coef(lm_tv$fit)[1],
-        slope = coef(lm_tv$fit)[2],
+        intercept =7.03259,
+        slope =  0.04754,
         color = "blue",
         linewidth = 1
     )
@@ -129,9 +130,9 @@ autoplot(lm_tv, which = 1:6, ncol = 2, label.size = 3)
 # 检查线性回归模型的残差是否与预测值无关，即残差的分布是否随机。
 # 残差应该随机分布在0附近
 tibble(
-    `Fitted values`=fitted(lm_tv$fit),
-    Residuals = residuals(lm_tv$fit)
-) %>% ggplot(aes(x = `Fitted values` , y = Residuals)) +
+    `Fitted values`=fitted(lm_tv),
+    Residuals = residuals(lm_tv)
+) |>  ggplot(aes(x = `Fitted values` , y = Residuals)) +
   geom_point(pch=21) +
     geom_smooth(formula = "y~x",color="red",lwd=0.5)+
   geom_hline(yintercept = 0,lty=2) +
@@ -144,7 +145,7 @@ tibble(
 
 ```{r}
 tibble(
-       StandardizedResiduals =rstandard(lm_tv$fit) ) %>% 
+       StandardizedResiduals =rstandard(lm_tv) ) |>  
     ggplot(aes(sample=StandardizedResiduals)) +
     stat_qq(pch=21)+
     stat_qq_line(color="red",lty=2)+
@@ -161,15 +162,15 @@ tibble(
 检查残差的正态性，如果看到残差的分布围绕 0 随机散布，没有明显的模式，模型拟合是理想的。
 
 ```{r}
-plot(lm_tv$fit, which = 3)
+plot(lm_tv, which = 3)
 ```
 
 ```{r}
 # 绘制 Scale-Location 图
 tibble(
-    fitted_values=fitted(lm_tv$fit),
-    StandardizedResiduals = rstudent(lm_tv$fit) ,
-) %>%
+    fitted_values=fitted(lm_tv),
+    StandardizedResiduals = rstudent(lm_tv) ,
+) |> 
     ggplot(aes(x = fitted_values, y = sqrt(abs(StandardizedResiduals)))) +
     geom_point(pch=21) +
     geom_smooth(color="red",lwd=0.5)+
@@ -194,18 +195,18 @@ influence.measures(lmodel)
 ```
 
 ```{r}
-plot(lm_tv$fit,4)  
+plot(lm_tv,4)  
 ```
 
 ```{r}
-threshold <- 4 / (nrow(advertising)-length(lm_tv$fit$coefficients)-2)
+threshold <- 4 / (nrow(advertising)-length(lm_tv$coefficients)-2)
                   
                  
 tibble(
     x = 1:nrow(advertising),
-    cooks_distance = cooks.distance(lm_tv$fit),
+    cooks_distance = cooks.distance(lm_tv),
     label = factor(if_else(cooks_distance>threshold,x,NA))
-) %>% 
+) |>  
     ggplot() +
     geom_segment(aes(
         x = x,
@@ -244,7 +245,7 @@ coef(lm(y~x)) - coef(lm(y[-10]~x[-10]))
 ```
 
 ```{r}
-plot(lm_tv$fit,5)  
+plot(lm_tv,5)  
 ```
 
 hat 统计量
@@ -252,11 +253,11 @@ hat 统计量
 ```{r}
 tibble(
     x = 1:nrow(advertising),
-    leverage = hatvalues(lm_tv$fit),
-    StandardizedResiduals = rstandard(lm_tv$fit) ,
-    cooks_distance = cooks.distance(lm_tv$fit),
+    leverage = hatvalues(lm_tv),
+    StandardizedResiduals = rstandard(lm_tv) ,
+    cooks_distance = cooks.distance(lm_tv),
     label = factor(if_else(cooks_distance>threshold,x,NA))
-) %>%
+) |> 
     ggplot(aes(x = leverage, y = StandardizedResiduals)) +
     geom_point(pch=21) +
     geom_smooth(color="red",lwd=0.5)+
@@ -273,5 +274,5 @@ tibble(
 ### Cook‘s距离和杠杆值
 
 ```{r}
-plot(lm_tv$fit,6)  
+plot(lm_tv,6)  
 ```

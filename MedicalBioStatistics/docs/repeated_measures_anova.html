@@ -62,7 +62,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./proportion_test.html" rel="next">
-<link href="./ANOVA.html" rel="prev">
+<link href="./one_way_ANOVA.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -294,7 +294,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./hypothesis_test.html">假设检验</a></li><li class="breadcrumb-item"><a href="./repeated_measures_anova.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">重复测量方差分析</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./hypothesis_test.html">统计检验</a></li><li class="breadcrumb-item"><a href="./repeated_measures_anova.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">重复测量方差分析</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -361,7 +361,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./hypothesis_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">假设检验</span></a>
+ <span class="menu-text">统计检验</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -387,8 +387,8 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ANOVA.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">方差分析</span></span></a>
+  <a href="./one_way_ANOVA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">单因素组间方差分析</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -420,7 +420,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">统计模型</span></a>
+ <span class="menu-text">线性模型</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -429,31 +429,37 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./simple_linear_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">线性回归</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">简单线性回归</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./multiple_linear_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">多元线性回归</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./LMM.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">线性混合效应模型</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">多重线性回归</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./GLM.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">广义线性模型</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">广义线性模型</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./GEE.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">广义估计方程</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">广义估计方程</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./mixed_models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">线性混合效应模型</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./multilevel_models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">多级模型</span></span></a>
   </div>
 </li>
       </ul>
@@ -470,19 +476,19 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./SurvivalAnalysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">生存分析</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">生存分析</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./CoxProportionalHazardsModel.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Cox比例风险模型</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Cox比例风险模型</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./CompetingRiskModel.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">竞争风险模型</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">竞争风险模型</span></span></a>
   </div>
 </li>
       </ul>
@@ -499,13 +505,13 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./diagnostic_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">诊断性测试</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">诊断性测试</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./RCT.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">随机对照试验</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">随机对照试验</span></span></a>
   </div>
 </li>
       </ul>
@@ -518,42 +524,41 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#%E5%81%87%E8%AE%BE" id="toc-假设" class="nav-link active" data-scroll-target="#%E5%81%87%E8%AE%BE"><span class="header-section-number">8.1</span> 假设</a></li>
-  <li>
-<a href="#%E5%8D%95%E5%9B%A0%E7%B4%A0%E9%87%8D%E5%A4%8D%E6%B5%8B%E9%87%8F%E6%96%B9%E5%B7%AE%E5%88%86%E6%9E%90" id="toc-单因素重复测量方差分析" class="nav-link" data-scroll-target="#%E5%8D%95%E5%9B%A0%E7%B4%A0%E9%87%8D%E5%A4%8D%E6%B5%8B%E9%87%8F%E6%96%B9%E5%B7%AE%E5%88%86%E6%9E%90"><span class="header-section-number">8.2</span> 单因素重复测量方差分析</a>
+<li>
+<a href="#%E5%8D%95%E5%8F%98%E9%87%8F%E5%8D%95%E7%BB%84%E9%87%8D%E5%A4%8D%E6%B5%8B%E9%87%8F%E6%96%B9%E5%B7%AE%E5%88%86%E6%9E%90" id="toc-单变量单组重复测量方差分析" class="nav-link active" data-scroll-target="#%E5%8D%95%E5%8F%98%E9%87%8F%E5%8D%95%E7%BB%84%E9%87%8D%E5%A4%8D%E6%B5%8B%E9%87%8F%E6%96%B9%E5%B7%AE%E5%88%86%E6%9E%90"><span class="header-section-number">8.1</span> 单变量单组重复测量方差分析</a>
   <ul>
-<li><a href="#%E5%85%AC%E5%BC%8F" id="toc-公式" class="nav-link" data-scroll-target="#%E5%85%AC%E5%BC%8F"><span class="header-section-number">8.2.1</span> 公式</a></li>
-  <li><a href="#nlmelme" id="toc-nlmelme" class="nav-link" data-scroll-target="#nlmelme"><span class="header-section-number">8.2.2</span> <code>nlme::lme()</code></a></li>
+<li><a href="#nlmelme" id="toc-nlmelme" class="nav-link" data-scroll-target="#nlmelme"><span class="header-section-number">8.1.1</span> <code>nlme::lme()</code></a></li>
+  <li><a href="#%E4%BA%8B%E5%90%8E%E6%A3%80%E9%AA%8C" id="toc-事后检验" class="nav-link" data-scroll-target="#%E4%BA%8B%E5%90%8E%E6%A3%80%E9%AA%8C"><span class="header-section-number">8.1.2</span> <span style="color:red">事后检验</span></a></li>
   </ul>
 </li>
   <li>
-<a href="#%E5%90%AB%E7%BB%84%E9%97%B4%E5%9B%A0%E5%AD%90%E7%9A%84%E9%87%8D%E5%A4%8D%E6%B5%8B%E9%87%8F%E6%96%B9%E5%B7%AE%E5%88%86%E6%9E%90" id="toc-含组间因子的重复测量方差分析" class="nav-link" data-scroll-target="#%E5%90%AB%E7%BB%84%E9%97%B4%E5%9B%A0%E5%AD%90%E7%9A%84%E9%87%8D%E5%A4%8D%E6%B5%8B%E9%87%8F%E6%96%B9%E5%B7%AE%E5%88%86%E6%9E%90"><span class="header-section-number">8.3</span> 含组间因子的重复测量方差分析</a>
+<a href="#%E5%8D%95%E5%8F%98%E9%87%8F%E5%A4%9A%E7%BB%84%E9%87%8D%E5%A4%8D%E6%B5%8B%E9%87%8F%E6%96%B9%E5%B7%AE%E5%88%86%E6%9E%90" id="toc-单变量多组重复测量方差分析" class="nav-link" data-scroll-target="#%E5%8D%95%E5%8F%98%E9%87%8F%E5%A4%9A%E7%BB%84%E9%87%8D%E5%A4%8D%E6%B5%8B%E9%87%8F%E6%96%B9%E5%B7%AE%E5%88%86%E6%9E%90"><span class="header-section-number">8.2</span> 单变量多组重复测量方差分析</a>
   <ul>
-<li><a href="#%E5%85%AC%E5%BC%8F-1" id="toc-公式-1" class="nav-link" data-scroll-target="#%E5%85%AC%E5%BC%8F-1"><span class="header-section-number">8.3.1</span> 公式</a></li>
-  <li>
-<a href="#%E6%A1%88%E4%BE%8B" id="toc-案例" class="nav-link" data-scroll-target="#%E6%A1%88%E4%BE%8B"><span class="header-section-number">8.3.2</span> 案例</a>
+<li>
+<a href="#%E6%95%B0%E6%8D%AE%E6%9D%A5%E6%BA%90" id="toc-数据来源" class="nav-link" data-scroll-target="#%E6%95%B0%E6%8D%AE%E6%9D%A5%E6%BA%90"><span class="header-section-number">8.2.1</span> 数据来源</a>
   <ul class="collapse">
-<li><a href="#nlmelme-1" id="toc-nlmelme-1" class="nav-link" data-scroll-target="#nlmelme-1"><span class="header-section-number">8.3.2.1</span> <code>nlme::lme()</code></a></li>
-  <li><a href="#rstatixanova_test-%E7%9C%8B%E7%90%83%E5%BD%A2%E6%A3%80%E9%AA%8C-w%E7%BB%9F%E8%AE%A1%E9%87%8F" id="toc-rstatixanova_test-看球形检验-w统计量" class="nav-link" data-scroll-target="#rstatixanova_test-%E7%9C%8B%E7%90%83%E5%BD%A2%E6%A3%80%E9%AA%8C-w%E7%BB%9F%E8%AE%A1%E9%87%8F"><span class="header-section-number">8.3.2.2</span> <code>rstatix::anova_test()</code> 看球形检验 W统计量</a></li>
-  <li><a href="#afexaov_%E7%9C%8B%E5%90%84%E6%97%B6%E9%97%B4%E7%82%B9%E5%A4%84%E7%90%86%E7%BB%84%E6%88%90%E5%AF%B9%E6%AF%94%E8%BE%83%E5%92%8C%E5%90%84%E5%A4%84%E7%90%86%E7%BB%84%E6%97%B6%E9%97%B4%E7%82%B9%E6%88%90%E5%AF%B9%E6%AF%94%E8%BE%83" id="toc-afexaov_看各时间点处理组成对比较和各处理组时间点成对比较" class="nav-link" data-scroll-target="#afexaov_%E7%9C%8B%E5%90%84%E6%97%B6%E9%97%B4%E7%82%B9%E5%A4%84%E7%90%86%E7%BB%84%E6%88%90%E5%AF%B9%E6%AF%94%E8%BE%83%E5%92%8C%E5%90%84%E5%A4%84%E7%90%86%E7%BB%84%E6%97%B6%E9%97%B4%E7%82%B9%E6%88%90%E5%AF%B9%E6%AF%94%E8%BE%83"><span class="header-section-number">8.3.2.3</span> <code>afex::aov_*()</code>看各时间点处理组成对比较和各处理组时间点成对比较</a></li>
+<li><a href="#nlmelme-1" id="toc-nlmelme-1" class="nav-link" data-scroll-target="#nlmelme-1"><span class="header-section-number">8.2.1.1</span> <code>nlme::lme()</code></a></li>
+  <li><a href="#rstatixanova_test-%E7%9C%8B%E7%90%83%E5%BD%A2%E6%A3%80%E9%AA%8C-w%E7%BB%9F%E8%AE%A1%E9%87%8F" id="toc-rstatixanova_test-看球形检验-w统计量" class="nav-link" data-scroll-target="#rstatixanova_test-%E7%9C%8B%E7%90%83%E5%BD%A2%E6%A3%80%E9%AA%8C-w%E7%BB%9F%E8%AE%A1%E9%87%8F"><span class="header-section-number">8.2.1.2</span> <code>rstatix::anova_test()</code> 看球形检验 W统计量</a></li>
+  <li><a href="#afexaov_%E7%9C%8B%E5%90%84%E6%97%B6%E9%97%B4%E7%82%B9%E5%A4%84%E7%90%86%E7%BB%84%E6%88%90%E5%AF%B9%E6%AF%94%E8%BE%83%E5%92%8C%E5%90%84%E5%A4%84%E7%90%86%E7%BB%84%E6%97%B6%E9%97%B4%E7%82%B9%E6%88%90%E5%AF%B9%E6%AF%94%E8%BE%83" id="toc-afexaov_看各时间点处理组成对比较和各处理组时间点成对比较" class="nav-link" data-scroll-target="#afexaov_%E7%9C%8B%E5%90%84%E6%97%B6%E9%97%B4%E7%82%B9%E5%A4%84%E7%90%86%E7%BB%84%E6%88%90%E5%AF%B9%E6%AF%94%E8%BE%83%E5%92%8C%E5%90%84%E5%A4%84%E7%90%86%E7%BB%84%E6%97%B6%E9%97%B4%E7%82%B9%E6%88%90%E5%AF%B9%E6%AF%94%E8%BE%83"><span class="header-section-number">8.2.1.3</span> <code>afex::aov_*()</code>看各时间点处理组成对比较和各处理组时间点成对比较</a></li>
   </ul>
 </li>
   <li>
-<a href="#%E5%88%86%E9%83%A8%E8%AE%A1%E7%AE%97" id="toc-分部计算" class="nav-link" data-scroll-target="#%E5%88%86%E9%83%A8%E8%AE%A1%E7%AE%97"><span class="header-section-number">8.3.3</span> 分部计算</a>
+<a href="#%E5%88%86%E9%83%A8%E8%AE%A1%E7%AE%97" id="toc-分部计算" class="nav-link" data-scroll-target="#%E5%88%86%E9%83%A8%E8%AE%A1%E7%AE%97"><span class="header-section-number">8.2.2</span> 分部计算</a>
   <ul class="collapse">
-<li><a href="#ss%E6%80%BB" id="toc-ss总" class="nav-link" data-scroll-target="#ss%E6%80%BB"><span class="header-section-number">8.3.3.1</span> SS<sub>总</sub></a></li>
-  <li><a href="#ss%E5%8F%97%E8%AF%95%E5%AF%B9%E8%B1%A1%E9%97%B4" id="toc-ss受试对象间" class="nav-link" data-scroll-target="#ss%E5%8F%97%E8%AF%95%E5%AF%B9%E8%B1%A1%E9%97%B4"><span class="header-section-number">8.3.3.2</span> SS<sub>受试对象间</sub></a></li>
-  <li><a href="#ss%E5%8F%97%E8%AF%95%E5%AF%B9%E8%B1%A1%E5%86%85" id="toc-ss受试对象内" class="nav-link" data-scroll-target="#ss%E5%8F%97%E8%AF%95%E5%AF%B9%E8%B1%A1%E5%86%85"><span class="header-section-number">8.3.3.3</span> SS<sub>受试对象内</sub></a></li>
+<li><a href="#ss%E6%80%BB" id="toc-ss总" class="nav-link" data-scroll-target="#ss%E6%80%BB"><span class="header-section-number">8.2.2.1</span> SS<sub>总</sub></a></li>
+  <li><a href="#ss%E5%8F%97%E8%AF%95%E5%AF%B9%E8%B1%A1%E9%97%B4" id="toc-ss受试对象间" class="nav-link" data-scroll-target="#ss%E5%8F%97%E8%AF%95%E5%AF%B9%E8%B1%A1%E9%97%B4"><span class="header-section-number">8.2.2.2</span> SS<sub>受试对象间</sub></a></li>
+  <li><a href="#ss%E5%8F%97%E8%AF%95%E5%AF%B9%E8%B1%A1%E5%86%85" id="toc-ss受试对象内" class="nav-link" data-scroll-target="#ss%E5%8F%97%E8%AF%95%E5%AF%B9%E8%B1%A1%E5%86%85"><span class="header-section-number">8.2.2.3</span> SS<sub>受试对象内</sub></a></li>
   </ul>
 </li>
   </ul>
 </li>
+  <li><a href="#%E5%89%8D%E6%8F%90%E5%81%87%E8%AE%BE" id="toc-前提假设" class="nav-link" data-scroll-target="#%E5%89%8D%E6%8F%90%E5%81%87%E8%AE%BE"><span class="header-section-number">8.3</span> 前提假设</a></li>
   <li>
 <a href="#%E7%90%83%E5%BD%A2%E5%BA%A6%E6%A3%80%E9%AA%8C-sphericity" id="toc-球形度检验-sphericity" class="nav-link" data-scroll-target="#%E7%90%83%E5%BD%A2%E5%BA%A6%E6%A3%80%E9%AA%8C-sphericity"><span class="header-section-number">8.4</span> 球形度检验 sphericity</a>
   <ul>
 <li><a href="#%E8%AE%A1%E7%AE%97%E6%AD%A5%E9%AA%A4" id="toc-计算步骤" class="nav-link" data-scroll-target="#%E8%AE%A1%E7%AE%97%E6%AD%A5%E9%AA%A4"><span class="header-section-number">8.4.1</span> 计算步骤</a></li>
   <li>
-<a href="#%E6%A1%88%E4%BE%8B-1" id="toc-案例-1" class="nav-link" data-scroll-target="#%E6%A1%88%E4%BE%8B-1"><span class="header-section-number">8.4.2</span> 案例</a>
+<a href="#%E6%A1%88%E4%BE%8B" id="toc-案例" class="nav-link" data-scroll-target="#%E6%A1%88%E4%BE%8B"><span class="header-section-number">8.4.2</span> 案例</a>
   <ul class="collapse">
 <li><a href="#rstatixanova_test" id="toc-rstatixanova_test" class="nav-link" data-scroll-target="#rstatixanova_test"><span class="header-section-number">8.4.2.1</span> <code>rstatix::anova_test()</code></a></li>
   <li><a href="#ezezanova" id="toc-ezezanova" class="nav-link" data-scroll-target="#ezezanova"><span class="header-section-number">8.4.2.2</span> <code>ez::ezANOVA()</code></a></li>
@@ -563,10 +568,11 @@ window.Quarto = {
   <li><a href="#%E5%BD%93%E8%BF%9D%E5%8F%8D%E7%90%83%E5%BD%A2%E5%BA%A6%E5%81%87%E8%AE%BE%E6%97%B6" id="toc-当违反球形度假设时" class="nav-link" data-scroll-target="#%E5%BD%93%E8%BF%9D%E5%8F%8D%E7%90%83%E5%BD%A2%E5%BA%A6%E5%81%87%E8%AE%BE%E6%97%B6"><span class="header-section-number">8.4.4</span> <strong>当违反球形度假设时</strong></a></li>
   </ul>
 </li>
+  <li><a href="#%E5%A4%9A%E5%8F%98%E9%87%8F%E6%96%B9%E5%B7%AE%E5%88%86%E6%9E%90multivariate-analysis-of-variance-manova" id="toc-多变量方差分析multivariate-analysis-of-variance-manova" class="nav-link" data-scroll-target="#%E5%A4%9A%E5%8F%98%E9%87%8F%E6%96%B9%E5%B7%AE%E5%88%86%E6%9E%90multivariate-analysis-of-variance-manova"><span class="header-section-number">8.5</span> 多变量方差分析(multivariate analysis of variance MANOVA)</a></li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./hypothesis_test.html">假设检验</a></li><li class="breadcrumb-item"><a href="./repeated_measures_anova.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">重复测量方差分析</span></a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./hypothesis_test.html">统计检验</a></li><li class="breadcrumb-item"><a href="./repeated_measures_anova.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">重复测量方差分析</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title">
 <span class="chapter-number">8</span>&nbsp; <span class="chapter-title">重复测量方差分析</span>
 </h1>
@@ -581,7 +587,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">January 9, 2026</p>
+      <p class="date-modified">June 5, 2026</p>
     </div>
   </div>
     
@@ -589,7 +595,9 @@ window.Quarto = {
   
 
 
-</header><p>重复测量方差分析用于分析重复测量数据中组间和组内自变量对因变量的影响。模型形式为：</p>
+</header><p>连续型的重复测量资料通常采用方差分析（<strong>Repeated-Measures Analysis of Variance</strong>）的方法</p>
+<p><a href="https://book.sciencereading.cn/shop/book/Booksimple/onlineRead.do?id=B17792CBC7A4D446CA15AC0E4D33C445F000&amp;bookPageNum=331">高级医学统计学 16.2 纵向（重复测量）资料的方差分析</a></p>
+<p>重复测量方差分析用于分析重复测量数据中组间和组内自变量对因变量的影响。模型形式为：</p>
 <p><span class="math display">\[
 Y_{ijk}=\mu +\alpha_i +\beta_j +(\alpha\beta)_{ij}+S_k+(\beta S)_{jk}+\epsilon_{ijk}
 \]</span> 其中，<span class="math inline">\(Y_{ijk}\)</span> 是第i 个组、第j 个时间点或条件下、第k 个受试者的测量值，<span class="math inline">\(\alpha_i\)</span> 是组间效应，<span class="math inline">\(\beta_j\)</span> 时间效应或条件效应，<span class="math inline">\((\alpha\beta)_{ij}\)</span> 是组效应与时间效应的交互效应，<span class="math inline">\(S_k\)</span> 是第 k 个受试者的效应（通常被视为随机效应），<span class="math inline">\((\beta S)_{jk}\)</span> 是时间效应与受试者效应的交互作用（也通常被视为随机效应）， <span class="math inline">\(\epsilon_{ijk}\)</span> 是误差项。</p>
@@ -602,34 +610,12 @@ Y_{ijk}=\mu +\alpha_i +\beta_j +(\alpha\beta)_{ij}+S_k+(\beta S)_{jk}+\epsilon_{
 <li><p><strong>时间效应与受试者效应的交互作用</strong>： 反映个体在不同时间点或条件下的反应差异，通常作为随机效应处理。</p></li>
 <li><p><strong>误差项</strong>： 表示观测值中的随机误差或未解释的变异。</p></li>
 </ul>
-<section id="假设" class="level2" style="color:red" data-number="8.1"><h2 style="color:red" data-number="8.1" class="anchored" data-anchor-id="假设">
-<span class="header-section-number">8.1</span> 假设</h2>
-<ul>
-<li><p>独立性，即不同受试者之间的观测值是独立的。</p></li>
-<li><p>正态性，观测值在每个时间点或条件下的正态分布。</p></li>
-<li><p>同一受试者的重复测量之间的相关性一致性。</p></li>
-<li><p>各组内的方差齐性（sphericity），即组内相关性结构是已知的，通常假设为复合对称（compound symmetry）。<strong>协方差矩阵的球形检验（W=1）</strong></p></li>
-</ul>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<section id="单变量单组重复测量方差分析" class="level2" data-number="8.1"><h2 data-number="8.1" class="anchored" data-anchor-id="单变量单组重复测量方差分析">
+<span class="header-section-number">8.1</span> 单变量单组重复测量方差分析</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="images/单组重复测量资料的方差分析表.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
 </div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<ul>
-<li><p><strong>复合对称假设</strong>：RM-ANOVA假设误差项具有复合对称性，即组内相关性和方差齐性。如果复合对称假设不成立，结果可能不准确，可以使用更为灵活的线性混合模型（LMM）或广义估计方程（GEE）进行分析。</p></li>
-<li><p><strong>检验方法</strong>：RM-ANOVA的主要检验方法包括F检验，用于检验组效应、时间效应和交互作用是否显著。</p></li>
-</ul>
-</div>
-</div>
-</section><section id="单因素重复测量方差分析" class="level2" data-number="8.2"><h2 data-number="8.2" class="anchored" data-anchor-id="单因素重复测量方差分析">
-<span class="header-section-number">8.2</span> 单因素重复测量方差分析</h2>
-<section id="公式" class="level3" data-number="8.2.1"><h3 data-number="8.2.1" class="anchored" data-anchor-id="公式">
-<span class="header-section-number">8.2.1</span> 公式</h3>
 <p><span class="math display">\[
 SS_T=\sum_{j=1}^{t}\sum_{i=1}^{n}X_{ij}^2-\frac{(\sum_{j=1}^{t}\sum_{i=1}^{n}X_{ij})^2}{nt}=SS_{受试者间}+SS_{不同时间点}+SS_{E\ \ 随机误差}，\nu_T=nt-1
 \]</span></p>
@@ -647,7 +633,8 @@ SS_E=SS_T-SS_{受试者间}-SS_{不同时间点}，\nu_E=(n-1)(t-1)
 F=\frac{MS_{不同时间点}}{MS_E}=\frac{SS_{不同时间点}/(t-1)}{SS_E/((n-1)(t-1))}
 \]</span></p>
 <div class="cell">
-<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ALT</span> <span class="op">&lt;-</span> <span class="fu">tribble</span><span class="op">(</span></span>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="va">ALT</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span><span class="op">(</span></span>
 <span>    <span class="op">~</span><span class="va">id</span>,<span class="op">~</span><span class="va">zero</span>,<span class="op">~</span><span class="va">ten</span>,<span class="op">~</span><span class="va">twenty</span>,<span class="op">~</span><span class="va">thirty</span>,</span>
 <span>    <span class="fl">1</span>,<span class="fl">186</span>,<span class="fl">122</span>,<span class="fl">134</span>,<span class="fl">110</span>,</span>
 <span>    <span class="fl">2</span>,<span class="fl">345</span>,<span class="fl">312</span>,<span class="fl">268</span>,<span class="fl">176</span>,</span>
@@ -661,15 +648,15 @@ F=\frac{MS_{不同时间点}}{MS_E}=\frac{SS_{不同时间点}/(t-1)}{SS_E/((n-1
 <span>    <span class="fl">10</span>,<span class="fl">243</span>,<span class="fl">330</span>,<span class="fl">95</span>,<span class="fl">64</span>,</span>
 <span><span class="op">)</span></span>
 <span><span class="va">ALT_long</span> <span class="op">&lt;-</span></span>
-<span>    <span class="va">ALT</span> <span class="op">|&gt;</span> <span class="fu">pivot_longer</span><span class="op">(</span>cols <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>,</span>
+<span>    <span class="va">ALT</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>,</span>
 <span>                       names_to <span class="op">=</span> <span class="st">"week"</span>,</span>
 <span>                       values_to <span class="op">=</span> <span class="st">"ALT"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>    <span class="fu">mutate</span><span class="op">(</span>week <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">week</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"zero"</span>,<span class="st">"ten"</span>, <span class="st">"twenty"</span>, <span class="st">"thirty"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>week <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">week</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"zero"</span>,<span class="st">"ten"</span>, <span class="st">"twenty"</span>, <span class="st">"thirty"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span></span>
 <span><span class="co"># 假设检验</span></span>
-<span><span class="va">ALT_long</span> <span class="op">%&gt;%</span> </span>
-<span>    <span class="fu">group_by</span><span class="op">(</span><span class="va">week</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span><span class="va">ALT_long</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">week</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>    <span class="fu">rstatix</span><span class="fu">::</span><span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/shapiro_test.html">shapiro_test</a></span><span class="op">(</span><span class="va">ALT</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 4 × 4</span></span>
 <span><span class="co">#&gt;   week   variable statistic      p</span></span>
@@ -723,8 +710,8 @@ F=\frac{MS_{不同时间点}}{MS_E}=\frac{SS_{不同时间点}/(t-1)}{SS_E/((n-1
 <span><span class="co">#&gt;  p值： 6.170758e-05</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="nlmelme" class="level3" data-number="8.2.2"><h3 data-number="8.2.2" class="anchored" data-anchor-id="nlmelme">
-<span class="header-section-number">8.2.2</span> <code>nlme::lme()</code>
+<section id="nlmelme" class="level3" data-number="8.1.1"><h3 data-number="8.1.1" class="anchored" data-anchor-id="nlmelme">
+<span class="header-section-number">8.1.1</span> <code>nlme::lme()</code>
 </h3>
 <div class="cell">
 <details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://svn.r-project.org/R-packages/trunk/nlme/">nlme</a></span><span class="op">)</span></span>
@@ -739,7 +726,9 @@ F=\frac{MS_{不同时间点}}{MS_E}=\frac{SS_{不同时间点}/(t-1)}{SS_E/((n-1
 <span><span class="co">#&gt; [1] 1.569667e-08 6.170758e-05</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p><span style="color:red">事后检验</span></p>
+</section><section id="事后检验" class="level3" data-number="8.1.2"><h3 data-number="8.1.2" class="anchored" data-anchor-id="事后检验">
+<span class="header-section-number">8.1.2</span> <span style="color:red">事后检验</span>
+</h3>
 <div class="cell">
 <details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#成对比较</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rvlenth.github.io/emmeans/">emmeans</a></span><span class="op">)</span></span>
@@ -765,7 +754,7 @@ F=\frac{MS_{不同时间点}}{MS_E}=\frac{SS_{不同时间点}/(t-1)}{SS_E/((n-1
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Degrees-of-freedom method: containment </span></span>
 <span><span class="co">#&gt; P value adjustment: bonferroni method for 6 tests</span></span>
-<span><span class="fu"><a href="https://rvlenth.github.io/emmeans/reference/emmeans.html">emmeans</a></span><span class="op">(</span><span class="va">ALT_lme</span>,  <span class="op">~</span><span class="va">week</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/graphics/pairs.html">pairs</a></span><span class="op">(</span><span class="va">.</span>, adjust <span class="op">=</span> <span class="st">"bonferroni"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rvlenth.github.io/emmeans/reference/emmeans.html">emmeans</a></span><span class="op">(</span><span class="va">ALT_lme</span>,  <span class="op">~</span><span class="va">week</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/graphics/pairs.html">pairs</a></span><span class="op">(</span><span class="va">.</span>, adjust <span class="op">=</span> <span class="st">"bonferroni"</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  contrast        estimate   SE df t.ratio p.value</span></span>
 <span><span class="co">#&gt;  zero - ten          40.3 24.9 27   1.620  0.7014</span></span>
 <span><span class="co">#&gt;  zero - twenty      100.9 24.9 27   4.055  0.0023</span></span>
@@ -783,19 +772,21 @@ F=\frac{MS_{不同时间点}}{MS_E}=\frac{SS_{不同时间点}/(t-1)}{SS_E/((n-1
 <span><span class="va">ALT_posthoc</span> <span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/multcomp/man/glht.html">glht</a></span><span class="op">(</span><span class="va">ALT_lme</span>, linfct <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/multcomp/man/glht.html">mcp</a></span><span class="op">(</span>week <span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"zero - ten = 0 "</span>,</span>
 <span>                                               <span class="st">"twenty - zero == 0"</span>,</span>
 <span>                                               <span class="st">"thirty - zero = 0 "</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">ALT_posthoc</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">ALT_posthoc</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 3 × 7</span></span>
 <span><span class="co">#&gt;   term  contrast      null.value estimate std.error statistic adj.p.value</span></span>
 <span><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;              &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;</span></span>
 <span><span class="co">#&gt; 1 week  zero - ten             0     40.3      24.9      1.62 0.248      </span></span>
-<span><span class="co">#&gt; 2 week  twenty - zero          0   -101.       24.9     -4.06 0.000167   </span></span>
-<span><span class="co">#&gt; 3 week  thirty - zero          0   -130.       24.9     -5.23 0.000000418</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="co">#&gt; 2 week  twenty - zero          0   -101.       24.9     -4.06 0.000179   </span></span>
+<span><span class="co">#&gt; 3 week  thirty - zero          0   -130.       24.9     -5.23 0.000000376</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section></section><section id="含组间因子的重复测量方差分析" class="level2" data-number="8.3"><h2 data-number="8.3" class="anchored" data-anchor-id="含组间因子的重复测量方差分析">
-<span class="header-section-number">8.3</span> 含组间因子的重复测量方差分析</h2>
-<section id="公式-1" class="level3" data-number="8.3.1"><h3 data-number="8.3.1" class="anchored" data-anchor-id="公式-1">
-<span class="header-section-number">8.3.1</span> 公式</h3>
+</section></section><section id="单变量多组重复测量方差分析" class="level2" data-number="8.2"><h2 data-number="8.2" class="anchored" data-anchor-id="单变量多组重复测量方差分析">
+<span class="header-section-number">8.2</span> 单变量多组重复测量方差分析</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="images/多组重复测量资料的方差分析表.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
 <p><span class="math display">\[
 \begin{aligned}
 SS_总&amp;= SS_{受试对象间}+SS_{受试对象内}  \\
@@ -803,12 +794,13 @@ SS_总&amp;= SS_{受试对象间}+SS_{受试对象内}  \\
 \end{aligned}
 \]</span></p>
 <p><a href="https://personality-project.org/r/r.guide/r.anova.html#oneway" class="uri">https://personality-project.org/r/r.guide/r.anova.html#oneway</a></p>
-</section><section id="案例" class="level3" data-number="8.3.2"><h3 data-number="8.3.2" class="anchored" data-anchor-id="案例">
-<span class="header-section-number">8.3.2</span> 案例</h3>
+<section id="数据来源" class="level3" data-number="8.2.1"><h3 data-number="8.2.1" class="anchored" data-anchor-id="数据来源">
+<span class="header-section-number">8.2.1</span> 数据来源</h3>
 <p>孙振球（医学统计学第四版 人卫版，例12-3，P193）</p>
 <div class="cell">
 <details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 医学统计学 人卫版 第7版</span></span>
-<span><span class="va">SBP</span> <span class="op">&lt;-</span> <span class="fu">read_tsv</span><span class="op">(</span><span class="st">"data/麻醉诱导时相.tsv"</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="va">SBP</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_tsv</a></span><span class="op">(</span><span class="st">"data/麻醉诱导时相.tsv"</span><span class="op">)</span></span>
 <span><span class="va">SBP</span></span>
 <span><span class="co">#&gt; # A tibble: 15 × 7</span></span>
 <span><span class="co">#&gt;       id group    t0    t1    t2    t3    t4</span></span>
@@ -831,16 +823,16 @@ SS_总&amp;= SS_{受试对象间}+SS_{受试对象内}  \\
 </details>
 </div>
 <div class="cell">
-<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">SBP_long</span> <span class="op">&lt;-</span> <span class="va">SBP</span> <span class="op">|&gt;</span> <span class="fu">pivot_longer</span><span class="op">(</span>cols <span class="op">=</span> <span class="fu">starts_with</span><span class="op">(</span><span class="st">"t"</span><span class="op">)</span>,</span>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">SBP_long</span> <span class="op">&lt;-</span> <span class="va">SBP</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">"t"</span><span class="op">)</span>,</span>
 <span>                              names_to <span class="op">=</span> <span class="st">"time"</span>,</span>
 <span>                              values_to <span class="op">=</span> <span class="st">"SBP"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>    <span class="fu">mutate</span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
 <span>        id<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">id</span><span class="op">)</span>,</span>
 <span>        group<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">group</span><span class="op">)</span>,</span>
 <span>        time<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">time</span><span class="op">)</span></span>
 <span>    <span class="op">)</span></span>
 <span></span>
-<span><span class="va">SBP_long</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">SBP_long</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 6 × 4</span></span>
 <span><span class="co">#&gt;   id    group time    SBP</span></span>
 <span><span class="co">#&gt;   &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;dbl&gt;</span></span>
@@ -877,8 +869,8 @@ SS_总&amp;= SS_{受试对象间}+SS_{受试对象内}  \\
 <span><span class="co">#&gt; 15 C     t4    SBP          0.984 0.955</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<section id="nlmelme-1" class="level4" data-number="8.3.2.1"><h4 data-number="8.3.2.1" class="anchored" data-anchor-id="nlmelme-1">
-<span class="header-section-number">8.3.2.1</span> <code>nlme::lme()</code>
+<section id="nlmelme-1" class="level4" data-number="8.2.1.1"><h4 data-number="8.2.1.1" class="anchored" data-anchor-id="nlmelme-1">
+<span class="header-section-number">8.2.1.1</span> <code>nlme::lme()</code>
 </h4>
 <div class="cell">
 <details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 第一种方法</span></span>
@@ -1003,8 +995,8 @@ SS_总&amp;= SS_{受试对象间}+SS_{受试对象内}  \\
 <span><span class="co">#&gt; # ℹ 1 more variable: p.adj.signif &lt;chr&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="rstatixanova_test-看球形检验-w统计量" class="level4" data-number="8.3.2.2"><h4 data-number="8.3.2.2" class="anchored" data-anchor-id="rstatixanova_test-看球形检验-w统计量">
-<span class="header-section-number">8.3.2.2</span> <code>rstatix::anova_test()</code> 看球形检验 W统计量</h4>
+</section><section id="rstatixanova_test-看球形检验-w统计量" class="level4" data-number="8.2.1.2"><h4 data-number="8.2.1.2" class="anchored" data-anchor-id="rstatixanova_test-看球形检验-w统计量">
+<span class="header-section-number">8.2.1.2</span> <code>rstatix::anova_test()</code> 看球形检验 W统计量</h4>
 <div class="cell">
 <details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpkgs.datanovia.com/rstatix/">rstatix</a></span><span class="op">)</span></span>
 <span><span class="va">aov_SBP</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/anova_test.html">anova_test</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">SBP_long</span>,</span>
@@ -1063,8 +1055,8 @@ SS_总&amp;= SS_{受试对象间}+SS_{受试对象内}  \\
 <span><span class="co">#&gt; # ℹ 1 more variable: p.adj.signif &lt;chr&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="afexaov_看各时间点处理组成对比较和各处理组时间点成对比较" class="level4" data-number="8.3.2.3"><h4 data-number="8.3.2.3" class="anchored" data-anchor-id="afexaov_看各时间点处理组成对比较和各处理组时间点成对比较">
-<span class="header-section-number">8.3.2.3</span> <code>afex::aov_*()</code>看各时间点处理组成对比较和各处理组时间点成对比较</h4>
+</section><section id="afexaov_看各时间点处理组成对比较和各处理组时间点成对比较" class="level4" data-number="8.2.1.3"><h4 data-number="8.2.1.3" class="anchored" data-anchor-id="afexaov_看各时间点处理组成对比较和各处理组时间点成对比较">
+<span class="header-section-number">8.2.1.3</span> <code>afex::aov_*()</code>看各时间点处理组成对比较和各处理组时间点成对比较</h4>
 <p><a href="https://cran.r-project.org/web/packages/afex/vignettes/afex_anova_example.html" class="uri">https://cran.r-project.org/web/packages/afex/vignettes/afex_anova_example.html</a></p>
 <div class="cell">
 <details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://afex.singmann.science/">"afex"</a></span><span class="op">)</span>     </span>
@@ -1373,8 +1365,8 @@ SS_总&amp;= SS_{受试对象间}+SS_{受试对象内}  \\
 <span><span class="co">#&gt;  t3 - t4      12.0 1.630 12   7.348  &lt;.0001</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section></section><section id="分部计算" class="level3" data-number="8.3.3"><h3 data-number="8.3.3" class="anchored" data-anchor-id="分部计算">
-<span class="header-section-number">8.3.3</span> 分部计算</h3>
+</section></section><section id="分部计算" class="level3" data-number="8.2.2"><h3 data-number="8.2.2" class="anchored" data-anchor-id="分部计算">
+<span class="header-section-number">8.2.2</span> 分部计算</h3>
 <p><span class="math display">\[
 \begin{aligned}
 SS_总&amp;= SS_{受试对象间}+SS_{受试对象内}  \\
@@ -1481,8 +1473,8 @@ SS_总&amp;= SS_{受试对象间}+SS_{受试对象内}  \\
 </tr>
 </tbody>
 </table>
-<section id="ss总" class="level4" data-number="8.3.3.1"><h4 data-number="8.3.3.1" class="anchored" data-anchor-id="ss总">
-<span class="header-section-number">8.3.3.1</span> SS<sub>总</sub>
+<section id="ss总" class="level4" data-number="8.2.2.1"><h4 data-number="8.2.2.1" class="anchored" data-anchor-id="ss总">
+<span class="header-section-number">8.2.2.1</span> SS<sub>总</sub>
 </h4>
 <p><span class="math display">\[
 SS_总=\sum_i^n{（X_i-\bar X）^2}
@@ -1500,8 +1492,8 @@ SS_总=\sum_i^n{（X_i-\bar X）^2}
 <span><span class="co">#&gt; [1] 5295.92</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="ss受试对象间" class="level4" data-number="8.3.3.2"><h4 data-number="8.3.3.2" class="anchored" data-anchor-id="ss受试对象间">
-<span class="header-section-number">8.3.3.2</span> SS<sub>受试对象间</sub>
+</section><section id="ss受试对象间" class="level4" data-number="8.2.2.2"><h4 data-number="8.2.2.2" class="anchored" data-anchor-id="ss受试对象间">
+<span class="header-section-number">8.2.2.2</span> SS<sub>受试对象间</sub>
 </h4>
 <p><span class="math display">\[
 SS_{受试对象间}=\sum_{j=1}^m n_{.j}(\bar X_{.j}-\bar X)^2
@@ -1520,7 +1512,7 @@ SS_{受试对象间}=\sum_{j=1}^m n_{.j}(\bar X_{.j}-\bar X)^2
 </div>
 <div class="cell">
 <details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">group__summary</span> <span class="op">&lt;-</span> <span class="va">SBP_long</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">group</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>    <span class="fu">summarise</span><span class="op">(</span>n<span class="op">=</span><span class="fu">n</span><span class="op">(</span><span class="op">)</span>,mean<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">SBP</span><span class="op">)</span>,sum<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">SBP</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>n<span class="op">=</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span>,mean<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">SBP</span><span class="op">)</span>,sum<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">SBP</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">group__summary</span> </span>
 <span><span class="co">#&gt; # A tibble: 3 × 4</span></span>
 <span><span class="co">#&gt;   group     n  mean   sum</span></span>
@@ -1551,8 +1543,8 @@ SS_{处理}= \sum_i^k n_k (\bar X_k - \bar X)^2
 <span><span class="co">#&gt; [1] 946.48</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section></section><section id="ss受试对象内" class="level4" data-number="8.3.3.3"><h4 data-number="8.3.3.3" class="anchored" data-anchor-id="ss受试对象内">
-<span class="header-section-number">8.3.3.3</span> SS<sub>受试对象内</sub>
+</section></section><section id="ss受试对象内" class="level4" data-number="8.2.2.3"><h4 data-number="8.2.2.3" class="anchored" data-anchor-id="ss受试对象内">
+<span class="header-section-number">8.2.2.3</span> SS<sub>受试对象内</sub>
 </h4>
 <p><span class="math display">\[
 SS_{受试对象内}=SS_总-SS_{受试对象间}
@@ -1601,13 +1593,13 @@ SS_{处理与时间交互}=\sum_{i=1}^{k}\sum_{j=1}^{T}n_{ij}\left (\bar X_{ij.}
 </ul>
 <div class="cell">
 <details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">interaction_effect_summary</span> <span class="op">&lt;-</span> <span class="va">SBP_long</span> <span class="op">|&gt;</span></span>
-<span>    <span class="fu">summarise</span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span></span>
 <span>        <span class="co">#n = n(),</span></span>
 <span>        mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">SBP</span><span class="op">)</span>,</span>
 <span>       <span class="co"># sum = sum(SBP),</span></span>
 <span>        .by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">group</span> , <span class="va">time</span><span class="op">)</span></span>
 <span>    <span class="op">)</span></span>
-<span><span class="va">interaction_effect_mean</span> <span class="op">&lt;-</span> <span class="va">interaction_effect_summary</span> <span class="op">|&gt;</span> <span class="fu">pivot_wider</span><span class="op">(</span>names_from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"time"</span><span class="op">)</span>,values_from <span class="op">=</span> <span class="st">"mean"</span><span class="op">)</span></span>
+<span><span class="va">interaction_effect_mean</span> <span class="op">&lt;-</span> <span class="va">interaction_effect_summary</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"time"</span><span class="op">)</span>,values_from <span class="op">=</span> <span class="st">"mean"</span><span class="op">)</span></span>
 <span></span>
 <span></span>
 <span></span>
@@ -1633,7 +1625,30 @@ SS_{处理与时间交互}=\sum_{i=1}^{k}\sum_{j=1}^{T}n_{ij}\left (\bar X_{ij.}
 <span><span class="co">#&gt; 1          263.12</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section></section></section></section><section id="球形度检验-sphericity" class="level2" data-number="8.4"><h2 data-number="8.4" class="anchored" data-anchor-id="球形度检验-sphericity">
+</section></section></section></section><section id="前提假设" class="level2" style="color:red" data-number="8.3"><h2 style="color:red" data-number="8.3" class="anchored" data-anchor-id="前提假设">
+<span class="header-section-number">8.3</span> 前提假设</h2>
+<ul>
+<li><p>正态性，处理因素各处理水平的个体之间相互独立，其总体均数服从正态分布</p></li>
+<li><p>方差齐性，相互比较的各处理水平的总体方差相等</p></li>
+<li><p>各时间点组成的协方差阵具有球形性(sphericity)特征，可采用 Mauchkly 法进行检验（<strong>W=1）</strong></p></li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><p><strong>复合对称假设</strong>：RM-ANOVA假设误差项具有复合对称性，即组内相关性和方差齐性。如果复合对称假设不成立，结果可能不准确，可以使用更为灵活的线性混合模型（LMM）或广义估计方程（GEE）进行分析。</p></li>
+<li><p><strong>检验方法</strong>：RM-ANOVA的主要检验方法包括F检验，用于检验组效应、时间效应和交互作用是否显著。</p></li>
+</ul>
+</div>
+</div>
+</section><section id="球形度检验-sphericity" class="level2" data-number="8.4"><h2 data-number="8.4" class="anchored" data-anchor-id="球形度检验-sphericity">
 <span class="header-section-number">8.4</span> 球形度检验 sphericity</h2>
 <p><em>重复测量方差</em>分析假设相关条件（或组水平）的所有组合之间的差异方差相等。这被称为<strong>球形度假设</strong>。</p>
 <p><a href="https://www.datanovia.com/en/lessons/mauchlys-test-of-sphericity-in-r/">R中球形度检验</a></p>
@@ -1648,7 +1663,7 @@ SS_{处理与时间交互}=\sum_{i=1}^{k}\sum_{j=1}^{T}n_{ij}\left (\bar X_{ij.}
 <li><p>计算每个组差的方差</p></li>
 </ol>
 <p><img src="images/clipboard-2447647328.png" class="img-fluid"></p>
-</section><section id="案例-1" class="level3" data-number="8.4.2"><h3 data-number="8.4.2" class="anchored" data-anchor-id="案例-1">
+</section><section id="案例" class="level3" data-number="8.4.2"><h3 data-number="8.4.2" class="anchored" data-anchor-id="案例">
 <span class="header-section-number">8.4.2</span> 案例</h3>
 <section id="rstatixanova_test" class="level4" data-number="8.4.2.1"><h4 data-number="8.4.2.1" class="anchored" data-anchor-id="rstatixanova_test">
 <span class="header-section-number">8.4.2.1</span> <code>rstatix::anova_test()</code>
@@ -1766,9 +1781,11 @@ Note
 <p>可以看出，即使在球形度校正（p[GG] &lt; 0.001，p[HF] &lt; 0.001）之后，平均自尊得分在不同时间点仍存在统计学差异。</p>
 <p>在两种球形度校正方法中，Huynh-Feldt 校正被认为是最不保守的（高估了 epsilon），而 Greenhouse-Geisser 被认为是更保守的（当 epsilon 接近 1 时低估了 epsilon）。</p>
 <p>一般建议使用 Greenhouse-Geisser 校正，特别是当 epsilon &lt; 0.75 时。在 epsilon 大于 0.75 的情况下，一些统计学家建议使用 Huynh-Feldt 校正 （Girden 1992）。</p>
+</section></section><section id="多变量方差分析multivariate-analysis-of-variance-manova" class="level2" data-number="8.5"><h2 data-number="8.5" class="anchored" data-anchor-id="多变量方差分析multivariate-analysis-of-variance-manova">
+<span class="header-section-number">8.5</span> 多变量方差分析(multivariate analysis of variance MANOVA)</h2>
 
 
-</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
     if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -2180,8 +2197,8 @@ Note
     }
   });
   </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./ANOVA.html" class="pagination-link" aria-label="方差分析">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">方差分析</span></span>
+      <a href="./one_way_ANOVA.html" class="pagination-link" aria-label="单因素组间方差分析">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">单因素组间方差分析</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

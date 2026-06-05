@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.7.32">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>12&nbsp; 线性回归 – 医学与生物统计学应用</title>
+<title>12&nbsp; 简单线性回归 – 医学与生物统计学应用</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -294,7 +294,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./simple_linear_regression.html">线性模型</a></li><li class="breadcrumb-item"><a href="./simple_linear_regression.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">线性回归</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./simple_linear_regression.html">线性模型</a></li><li class="breadcrumb-item"><a href="./simple_linear_regression.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">简单线性回归</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -361,7 +361,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./hypothesis_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">假设检验</span></a>
+ <span class="menu-text">统计检验</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -387,8 +387,8 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ANOVA.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">方差分析</span></span></a>
+  <a href="./one_way_ANOVA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">单因素组间方差分析</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -429,7 +429,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./simple_linear_regression.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">线性回归</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">简单线性回归</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -440,20 +440,26 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./LMM.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">线性混合效应模型</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./GLM.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">广义线性模型</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">广义线性模型</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./GEE.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">广义估计方程</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">广义估计方程</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./mixed_models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">线性混合效应模型</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./multilevel_models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">多级模型</span></span></a>
   </div>
 </li>
       </ul>
@@ -470,19 +476,19 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./SurvivalAnalysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">生存分析</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">生存分析</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./CoxProportionalHazardsModel.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Cox比例风险模型</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Cox比例风险模型</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./CompetingRiskModel.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">竞争风险模型</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">竞争风险模型</span></span></a>
   </div>
 </li>
       </ul>
@@ -499,13 +505,13 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./diagnostic_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">诊断性测试</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">诊断性测试</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./RCT.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">随机对照试验</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">随机对照试验</span></span></a>
   </div>
 </li>
       </ul>
@@ -519,7 +525,7 @@ window.Quarto = {
    
   <ul>
 <li>
-<a href="#%E4%B8%80%E5%85%83%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92" id="toc-一元线性回归" class="nav-link active" data-scroll-target="#%E4%B8%80%E5%85%83%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92"><span class="header-section-number">12.1</span> 一元线性回归</a>
+<a href="#%E6%A8%A1%E5%9E%8B%E8%A1%A8%E8%BE%BE" id="toc-模型表达" class="nav-link active" data-scroll-target="#%E6%A8%A1%E5%9E%8B%E8%A1%A8%E8%BE%BE"><span class="header-section-number">12.1</span> 模型表达</a>
   <ul>
 <li><a href="#%E7%82%B9%E9%A1%BB%E5%9B%BE" id="toc-点须图" class="nav-link" data-scroll-target="#%E7%82%B9%E9%A1%BB%E5%9B%BE"><span class="header-section-number">12.1.1</span> 点须图</a></li>
   <li><a href="#%E9%A2%84%E6%B5%8B" id="toc-预测" class="nav-link" data-scroll-target="#%E9%A2%84%E6%B5%8B"><span class="header-section-number">12.1.2</span> 预测</a></li>
@@ -540,9 +546,9 @@ window.Quarto = {
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./simple_linear_regression.html">线性模型</a></li><li class="breadcrumb-item"><a href="./simple_linear_regression.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">线性回归</span></a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./simple_linear_regression.html">线性模型</a></li><li class="breadcrumb-item"><a href="./simple_linear_regression.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">简单线性回归</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title">
-<span class="chapter-number">12</span>&nbsp; <span class="chapter-title">线性回归</span>
+<span class="chapter-number">12</span>&nbsp; <span class="chapter-title">简单线性回归</span>
 </h1>
 </div>
 
@@ -555,7 +561,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">January 9, 2026</p>
+      <p class="date-modified">June 5, 2026</p>
     </div>
   </div>
     
@@ -563,59 +569,31 @@ window.Quarto = {
   
 
 
-</header><p>线性模型用于解释一个连续因变量和一个或多个自变量之间的线性关系。模型形式一般为：</p>
+</header><section id="模型表达" class="level2" data-number="12.1"><h2 data-number="12.1" class="anchored" data-anchor-id="模型表达">
+<span class="header-section-number">12.1</span> 模型表达</h2>
+<p>简单线性回归用于解释一个数值变量（因变量）和一个自变量之间的线性关系。模型形式一般为：</p>
 <p><span class="math display">\[
 Y=X\beta + \epsilon
 \]</span></p>
 <p>其中， Y 是因变量，X 是自变量矩阵，β 是回归系数，ϵ 是误差项。</p>
-<p><img src="images/clipboard-3394376202.png" class="img-fluid"></p>
+<p><span class="math display">\[ Y_i=\beta_0+ \beta_1 X_i+\epsilon_i,其中\epsilon_i\sim N(0,\sigma^2) \]</span></p>
 <div class="cell">
-<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidymodels.tidymodels.org">tidymodels</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org">readr</a></span><span class="op">)</span></span>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org">readr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/sinhrks/ggfortify">ggfortify</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/sinhrks/ggfortify">ggfortify</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://broom.tidymodels.org/">broom</a></span><span class="op">)</span></span>
+<span><span class="va">advertising</span><span class="op">&lt;-</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/Advertising.csv"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p><a href="https://www.statlearning.com/resources-second-edition">数据下载网站</a></p>
 <div class="cell">
-<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">advertising</span><span class="op">&lt;-</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/Advertising.csv"</span><span class="op">)</span></span>
-<span><span class="va">p_sales</span><span class="op">&lt;-</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">advertising</span>,<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="op">{</span><span class="op">{</span><span class="va">x</span><span class="op">}</span><span class="op">}</span>,<span class="va">sales</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
-<span>           <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>shape<span class="op">=</span><span class="fl">21</span>,color<span class="op">=</span><span class="st">"red"</span><span class="op">)</span><span class="op">+</span></span>
-<span>           <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="st">'y ~ x'</span>,method <span class="op">=</span> <span class="st">"lm"</span>,se<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="op">}</span></span>
-<span><span class="fu">p_sales</span><span class="op">(</span><span class="va">TV</span><span class="op">)</span><span class="op">|</span><span class="fu">p_sales</span><span class="op">(</span><span class="va">radio</span><span class="op">)</span><span class="op">|</span><span class="fu">p_sales</span><span class="op">(</span><span class="va">newspaper</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="simple_linear_regression_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<section id="一元线性回归" class="level2" data-number="12.1"><h2 data-number="12.1" class="anchored" data-anchor-id="一元线性回归">
-<span class="header-section-number">12.1</span> 一元线性回归</h2>
-<p>linear regression model：</p>
-<p><span class="math display">\[
-Y_i=\beta_0+ \beta_1 X_i+\epsilon_i,其中\epsilon_i\sim N(0,\sigma^2)
-\]</span></p>
-<div class="cell">
-<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#linear model specification 线性模型规范</span></span>
-<span><span class="va">lm_spec</span> <span class="op">&lt;-</span><span class="fu">linear_reg</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">set_mode</span><span class="op">(</span><span class="st">"regression"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">set_engine</span><span class="op">(</span><span class="st">"lm"</span><span class="op">)</span>  </span>
-<span><span class="va">lm_spec</span></span>
-<span><span class="co">#&gt; Linear Regression Model Specification (regression)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Computational engine: lm</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell">
-<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">lm_tv</span> <span class="op">&lt;-</span> <span class="va">lm_spec</span> <span class="op">%&gt;%</span>  <span class="fu">fit</span><span class="op">(</span><span class="va">sales</span> <span class="op">~</span> <span class="va">TV</span>, data <span class="op">=</span> <span class="va">advertising</span><span class="op">)</span></span>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">lm_tv</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">sales</span> <span class="op">~</span> <span class="va">TV</span>, data <span class="op">=</span> <span class="va">advertising</span><span class="op">)</span></span>
 <span><span class="co"># 模型摘要</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">lm_tv</span><span class="op">$</span><span class="va">fit</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">lm_tv</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Call:</span></span>
-<span><span class="co">#&gt; stats::lm(formula = sales ~ TV, data = data)</span></span>
+<span><span class="co">#&gt; lm(formula = sales ~ TV, data = advertising)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Residuals:</span></span>
 <span><span class="co">#&gt;     Min      1Q  Median      3Q     Max </span></span>
@@ -631,6 +609,18 @@ Y_i=\beta_0+ \beta_1 X_i+\epsilon_i,其中\epsilon_i\sim N(0,\sigma^2)
 <span><span class="co">#&gt; Residual standard error: 3.259 on 198 degrees of freedom</span></span>
 <span><span class="co">#&gt; Multiple R-squared:  0.6119, Adjusted R-squared:  0.6099 </span></span>
 <span><span class="co">#&gt; F-statistic: 312.1 on 1 and 198 DF,  p-value: &lt; 2.2e-16</span></span>
+<span></span>
+<span><span class="fu">parameters</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/parameters/reference/model_parameters.html">model_parameters</a></span><span class="op">(</span><span class="va">lm_tv</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Parameter   | Coefficient |       SE |       95% CI | t(198) |      p</span></span>
+<span><span class="co">#&gt; ---------------------------------------------------------------------</span></span>
+<span><span class="co">#&gt; (Intercept) |        7.03 |     0.46 | [6.13, 7.94] |  15.36 | &lt; .001</span></span>
+<span><span class="co">#&gt; TV          |        0.05 | 2.69e-03 | [0.04, 0.05] |  17.67 | &lt; .001</span></span>
+<span><span class="fu">performance</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/performance/reference/model_performance.html">performance</a></span><span class="op">(</span><span class="va">lm_tv</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # Indices of model performance</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; AIC    |   AICc |    BIC |    R2 | R2 (adj.) |  RMSE | Sigma</span></span>
+<span><span class="co">#&gt; ------------------------------------------------------------</span></span>
+<span><span class="co">#&gt; 1044.1 | 1044.2 | 1054.0 | 0.612 |     0.610 | 3.242 | 3.259</span></span>
 <span></span>
 <span><span class="co"># 参数估计值、标准误、统计量、p值</span></span>
 <span><span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="va">lm_tv</span>, conf.int<span class="op">=</span><span class="cn">T</span><span class="op">)</span></span>
@@ -651,20 +641,20 @@ Y_i=\beta_0+ \beta_1 X_i+\epsilon_i,其中\epsilon_i\sim N(0,\sigma^2)
 <section id="点须图" class="level3" data-number="12.1.1"><h3 data-number="12.1.1" class="anchored" data-anchor-id="点须图">
 <span class="header-section-number">12.1.1</span> 点须图</h3>
 <div class="cell">
-<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="co"># 整理回归模型结果</span></span>
-<span><span class="va">tidy_lm</span> <span class="op">&lt;-</span> <span class="fu">tidy</span><span class="op">(</span><span class="va">lm_tv</span>, conf.int<span class="op">=</span><span class="cn">T</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">term</span> <span class="op">!=</span><span class="st">'(Intercept)'</span> <span class="op">)</span></span>
+<span><span class="va">tidy_lm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="va">lm_tv</span>, conf.int<span class="op">=</span><span class="cn">T</span><span class="op">)</span> <span class="op">|&gt;</span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">term</span> <span class="op">!=</span><span class="st">'(Intercept)'</span> <span class="op">)</span></span>
 <span><span class="co"># 绘制点须图</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">tidy_lm</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">estimate</span>, y <span class="op">=</span> <span class="va">term</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2</span>, color <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op">+</span> <span class="co"># 绘制点</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html">geom_errorbarh</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>xmin <span class="op">=</span> <span class="va">conf.low</span>, </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html">geom_errorbar</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>xmin <span class="op">=</span> <span class="va">conf.low</span>, </span>
 <span>                     xmax <span class="op">=</span> <span class="va">conf.high</span><span class="op">)</span>, </span>
 <span>                 height <span class="op">=</span> <span class="fl">0</span>, color <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op">+</span> <span class="co"># 绘制误差线</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">0</span>, colour <span class="op">=</span> <span class="st">"grey50"</span>, linetype <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span> <span class="co"># 绘制参考线</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="cn">NULL</span>, y <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="simple_linear_regression_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="simple_linear_regression_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -672,80 +662,66 @@ Y_i=\beta_0+ \beta_1 X_i+\epsilon_i,其中\epsilon_i\sim N(0,\sigma^2)
 </section><section id="预测" class="level3" data-number="12.1.2"><h3 data-number="12.1.2" class="anchored" data-anchor-id="预测">
 <span class="header-section-number">12.1.2</span> 预测</h3>
 <div class="cell">
-<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 预测</span></span>
-<span><span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">lm_tv</span>, new_data <span class="op">=</span> <span class="va">advertising</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 预测</span></span>
+<span><span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">lm_tv</span>, new_data <span class="op">=</span> <span class="va">advertising</span><span class="op">)</span> <span class="op">|&gt;</span>  </span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 10 × 1</span></span>
-<span><span class="co">#&gt;    .pred</span></span>
-<span><span class="co">#&gt;    &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt;  1 18.0 </span></span>
-<span><span class="co">#&gt;  2  9.15</span></span>
-<span><span class="co">#&gt;  3  7.85</span></span>
-<span><span class="co">#&gt;  4 14.2 </span></span>
-<span><span class="co">#&gt;  5 15.6 </span></span>
-<span><span class="co">#&gt;  6  7.45</span></span>
-<span><span class="co">#&gt;  7  9.77</span></span>
-<span><span class="co">#&gt;  8 12.7 </span></span>
-<span><span class="co">#&gt;  9  7.44</span></span>
-<span><span class="co">#&gt; 10 16.5</span></span>
+<span><span class="co">#&gt;         1         2         3         4         5         6         7         8 </span></span>
+<span><span class="co">#&gt; 17.970775  9.147974  7.850224 14.234395 15.627218  7.446162  9.765950 12.746498 </span></span>
+<span><span class="co">#&gt;         9        10 </span></span>
+<span><span class="co">#&gt;  7.441409 16.530414</span></span>
 <span></span>
 <span><span class="co"># 置信区间 平均响应值       取决于方差和样本量     随样本量增加收缩</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">lm_tv</span>, new_data <span class="op">=</span> <span class="va">advertising</span>, type <span class="op">=</span> <span class="st">"conf_int"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">lm_tv</span>, new_data <span class="op">=</span> <span class="va">advertising</span>, type <span class="op">=</span> <span class="st">"terms"</span><span class="op">)</span> <span class="op">|&gt;</span>  </span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 10 × 2</span></span>
-<span><span class="co">#&gt;    .pred_lower .pred_upper</span></span>
-<span><span class="co">#&gt;          &lt;dbl&gt;       &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt;  1       17.3        18.6 </span></span>
-<span><span class="co">#&gt;  2        8.44        9.86</span></span>
-<span><span class="co">#&gt;  3        7.02        8.68</span></span>
-<span><span class="co">#&gt;  4       13.8        14.7 </span></span>
-<span><span class="co">#&gt;  5       15.1        16.1 </span></span>
-<span><span class="co">#&gt;  6        6.58        8.31</span></span>
-<span><span class="co">#&gt;  7        9.11       10.4 </span></span>
-<span><span class="co">#&gt;  8       12.3        13.2 </span></span>
-<span><span class="co">#&gt;  9        6.58        8.31</span></span>
-<span><span class="co">#&gt; 10       16.0        17.1</span></span>
+<span><span class="co">#&gt;            TV</span></span>
+<span><span class="co">#&gt; 1   3.9482745</span></span>
+<span><span class="co">#&gt; 2  -4.8745260</span></span>
+<span><span class="co">#&gt; 3  -6.1722762</span></span>
+<span><span class="co">#&gt; 4   0.2118946</span></span>
+<span><span class="co">#&gt; 5   1.6047181</span></span>
+<span><span class="co">#&gt; 6  -6.5763377</span></span>
+<span><span class="co">#&gt; 7  -4.2565496</span></span>
+<span><span class="co">#&gt; 8  -1.2760023</span></span>
+<span><span class="co">#&gt; 9  -6.5810913</span></span>
+<span><span class="co">#&gt; 10  2.5079143</span></span>
 <span></span>
 <span><span class="co"># 单个新观测值         主要取决于方差</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">lm_tv</span>, new_data <span class="op">=</span> <span class="va">advertising</span>, type <span class="op">=</span> <span class="st">"pred_int"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">lm_tv</span>, new_data <span class="op">=</span> <span class="va">advertising</span>, type <span class="op">=</span> <span class="st">"terms"</span><span class="op">)</span> <span class="op">|&gt;</span>  </span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 10 × 2</span></span>
-<span><span class="co">#&gt;    .pred_lower .pred_upper</span></span>
-<span><span class="co">#&gt;          &lt;dbl&gt;       &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt;  1      11.5          24.4</span></span>
-<span><span class="co">#&gt;  2       2.68         15.6</span></span>
-<span><span class="co">#&gt;  3       1.37         14.3</span></span>
-<span><span class="co">#&gt;  4       7.79         20.7</span></span>
-<span><span class="co">#&gt;  5       9.18         22.1</span></span>
-<span><span class="co">#&gt;  6       0.962        13.9</span></span>
-<span><span class="co">#&gt;  7       3.31         16.2</span></span>
-<span><span class="co">#&gt;  8       6.30         19.2</span></span>
-<span><span class="co">#&gt;  9       0.957        13.9</span></span>
-<span><span class="co">#&gt; 10      10.1          23.0</span></span>
+<span><span class="co">#&gt;            TV</span></span>
+<span><span class="co">#&gt; 1   3.9482745</span></span>
+<span><span class="co">#&gt; 2  -4.8745260</span></span>
+<span><span class="co">#&gt; 3  -6.1722762</span></span>
+<span><span class="co">#&gt; 4   0.2118946</span></span>
+<span><span class="co">#&gt; 5   1.6047181</span></span>
+<span><span class="co">#&gt; 6  -6.5763377</span></span>
+<span><span class="co">#&gt; 7  -4.2565496</span></span>
+<span><span class="co">#&gt; 8  -1.2760023</span></span>
+<span><span class="co">#&gt; 9  -6.5810913</span></span>
+<span><span class="co">#&gt; 10  2.5079143</span></span>
 <span></span>
 <span></span>
 <span><span class="co"># 比较观测值与预测值</span></span>
-<span><span class="fu">augment</span><span class="op">(</span><span class="va">lm_tv</span>, new_data <span class="op">=</span> <span class="va">advertising</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>    <span class="fu">select</span><span class="op">(</span><span class="va">sales</span>, <span class="va">.pred</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html">augment</a></span><span class="op">(</span><span class="va">lm_tv</span>, new_data <span class="op">=</span> <span class="va">advertising</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 10 × 2</span></span>
-<span><span class="co">#&gt;    sales .pred</span></span>
-<span><span class="co">#&gt;    &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt;  1  22.1 18.0 </span></span>
-<span><span class="co">#&gt;  2  10.4  9.15</span></span>
-<span><span class="co">#&gt;  3   9.3  7.85</span></span>
-<span><span class="co">#&gt;  4  18.5 14.2 </span></span>
-<span><span class="co">#&gt;  5  12.9 15.6 </span></span>
-<span><span class="co">#&gt;  6   7.2  7.45</span></span>
-<span><span class="co">#&gt;  7  11.8  9.77</span></span>
-<span><span class="co">#&gt;  8  13.2 12.7 </span></span>
-<span><span class="co">#&gt;  9   4.8  7.44</span></span>
-<span><span class="co">#&gt; 10  10.6 16.5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="co">#&gt; # A tibble: 10 × 8</span></span>
+<span><span class="co">#&gt;    sales    TV .fitted .resid    .hat .sigma   .cooksd .std.resid</span></span>
+<span><span class="co">#&gt;    &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt;  1  22.1 230.    18.0   4.13  0.00970   3.25 0.00794       1.27  </span></span>
+<span><span class="co">#&gt;  2  10.4  44.5    9.15  1.25  0.0122    3.27 0.000920      0.387 </span></span>
+<span><span class="co">#&gt;  3   9.3  17.2    7.85  1.45  0.0165    3.27 0.00169       0.449 </span></span>
+<span><span class="co">#&gt;  4  18.5 152.    14.2   4.27  0.00501   3.25 0.00434       1.31  </span></span>
+<span><span class="co">#&gt;  5  12.9 181.    15.6  -2.73  0.00578   3.26 0.00205      -0.839 </span></span>
+<span><span class="co">#&gt;  6   7.2   8.7    7.45 -0.246 0.0180    3.27 0.0000534    -0.0762</span></span>
+<span><span class="co">#&gt;  7  11.8  57.5    9.77  2.03  0.0105    3.26 0.00208       0.627 </span></span>
+<span><span class="co">#&gt;  8  13.2 120.    12.7   0.454 0.00549   3.27 0.0000538     0.140 </span></span>
+<span><span class="co">#&gt;  9   4.8   8.6    7.44 -2.64  0.0181    3.26 0.00616      -0.818 </span></span>
+<span><span class="co">#&gt; 10  10.6 200.    16.5  -5.93  0.00690   3.24 0.0116       -1.83</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<pre><code>predict(lm_tv$fit, new_data = advertising, interval = "confidence") %&gt;% 
+<pre><code>predict(lm_tv, new_data = advertising, interval = "confidence") |&gt;  
     head(n = 10)
-predict(lm_tv$fit, new_data = advertising, interval = "prediction") %&gt;% 
+predict(lm_tv, new_data = advertising, interval = "prediction") |&gt;  
     head(n = 10)</code></pre>
 </section></section><section id="模型假设" class="level2" data-number="12.2"><h2 data-number="12.2" class="anchored" data-anchor-id="模型假设">
 <span class="header-section-number">12.2</span> 模型假设</h2>
@@ -759,20 +735,20 @@ predict(lm_tv$fit, new_data = advertising, interval = "prediction") %&gt;%
 Q=\sum (Y-\hat Y)^2
 \]</span></p>
 <div class="cell">
-<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 可视化</span></span>
-<span><span class="fu">augment</span><span class="op">(</span><span class="va">lm_tv</span>, new_data <span class="op">=</span> <span class="va">advertising</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">TV</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html">geom_linerange</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>ymin <span class="op">=</span> <span class="va">sales</span>, ymax <span class="op">=</span> <span class="va">.pred</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">sales</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span> <span class="op">+</span></span>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 可视化</span></span>
+<span><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html">augment</a></span><span class="op">(</span><span class="va">lm_tv</span>, new_data <span class="op">=</span> <span class="va">advertising</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">TV</span>,y <span class="op">=</span> <span class="va">sales</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html">geom_linerange</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>ymin <span class="op">=</span> <span class="va">sales</span>, ymax <span class="op">=</span> <span class="va">.fitted</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>, color <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_abline</a></span><span class="op">(</span></span>
-<span>        intercept <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">lm_tv</span><span class="op">$</span><span class="va">fit</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,</span>
-<span>        slope <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">lm_tv</span><span class="op">$</span><span class="va">fit</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>,</span>
+<span>        intercept <span class="op">=</span><span class="fl">7.03259</span>,</span>
+<span>        slope <span class="op">=</span>  <span class="fl">0.04754</span>,</span>
 <span>        color <span class="op">=</span> <span class="st">"blue"</span>,</span>
 <span>        linewidth <span class="op">=</span> <span class="fl">1</span></span>
 <span>    <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="simple_linear_regression_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="simple_linear_regression_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -784,10 +760,10 @@ Q=\sum (Y-\hat Y)^2
 </ol></section><section id="模型诊断" class="level2" data-number="12.3"><h2 data-number="12.3" class="anchored" data-anchor-id="模型诊断">
 <span class="header-section-number">12.3</span> 模型诊断</h2>
 <div class="cell">
-<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="va">lm_tv</span>, which <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">6</span>, ncol <span class="op">=</span> <span class="fl">2</span>, label.size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="va">lm_tv</span>, which <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">6</span>, ncol <span class="op">=</span> <span class="fl">2</span>, label.size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="simple_linear_regression_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="simple_linear_regression_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -796,19 +772,19 @@ Q=\sum (Y-\hat Y)^2
 <span class="header-section-number">12.3.1</span> 残差图</h3>
 <p>预测值与残差的关系，线性度，同方差</p>
 <div class="cell">
-<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 检查线性回归模型的残差是否与预测值无关，即残差的分布是否随机。</span></span>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 检查线性回归模型的残差是否与预测值无关，即残差的分布是否随机。</span></span>
 <span><span class="co"># 残差应该随机分布在0附近</span></span>
-<span><span class="fu">tibble</span><span class="op">(</span></span>
-<span>    `Fitted values`<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/fitted.values.html">fitted</a></span><span class="op">(</span><span class="va">lm_tv</span><span class="op">$</span><span class="va">fit</span><span class="op">)</span>,</span>
-<span>    Residuals <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">residuals</a></span><span class="op">(</span><span class="va">lm_tv</span><span class="op">$</span><span class="va">fit</span><span class="op">)</span></span>
-<span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">`Fitted values`</span> , y <span class="op">=</span> <span class="va">Residuals</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
+<span>    `Fitted values`<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/fitted.values.html">fitted</a></span><span class="op">(</span><span class="va">lm_tv</span><span class="op">)</span>,</span>
+<span>    Residuals <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">residuals</a></span><span class="op">(</span><span class="va">lm_tv</span><span class="op">)</span></span>
+<span><span class="op">)</span> <span class="op">|&gt;</span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">`Fitted values`</span> , y <span class="op">=</span> <span class="va">Residuals</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>pch<span class="op">=</span><span class="fl">21</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="st">"y~x"</span>,color<span class="op">=</span><span class="st">"red"</span>,lwd<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">0</span>,lty<span class="op">=</span><span class="fl">2</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Fitted Values"</span>, y <span class="op">=</span> <span class="st">"Residuals"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="simple_linear_regression_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="simple_linear_regression_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -817,15 +793,15 @@ Q=\sum (Y-\hat Y)^2
 <span class="header-section-number">12.3.2</span> Q-Q图</h3>
 <p>标准化残差正态性</p>
 <div class="cell">
-<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">tibble</span><span class="op">(</span></span>
-<span>       StandardizedResiduals <span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html">rstandard</a></span><span class="op">(</span><span class="va">lm_tv</span><span class="op">$</span><span class="va">fit</span><span class="op">)</span> <span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
+<span>       StandardizedResiduals <span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html">rstandard</a></span><span class="op">(</span><span class="va">lm_tv</span><span class="op">)</span> <span class="op">)</span> <span class="op">|&gt;</span>  </span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>sample<span class="op">=</span><span class="va">StandardizedResiduals</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_qq.html">stat_qq</a></span><span class="op">(</span>pch<span class="op">=</span><span class="fl">21</span><span class="op">)</span><span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_qq.html">stat_qq_line</a></span><span class="op">(</span>color<span class="op">=</span><span class="st">"red"</span>,lty<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Theoretical Quantiles"</span>, y <span class="op">=</span> <span class="st">"Sample quantiles"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="simple_linear_regression_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="simple_linear_regression_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -836,27 +812,27 @@ Q=\sum (Y-\hat Y)^2
 <p>标准化残差平方根图</p>
 <p>检查残差的正态性，如果看到残差的分布围绕 0 随机散布，没有明显的模式，模型拟合是理想的。</p>
 <div class="cell">
-<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">lm_tv</span><span class="op">$</span><span class="va">fit</span>, which <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">lm_tv</span>, which <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="simple_linear_regression_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="simple_linear_regression_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <div class="cell">
-<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 绘制 Scale-Location 图</span></span>
-<span><span class="fu">tibble</span><span class="op">(</span></span>
-<span>    fitted_values<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/fitted.values.html">fitted</a></span><span class="op">(</span><span class="va">lm_tv</span><span class="op">$</span><span class="va">fit</span><span class="op">)</span>,</span>
-<span>    StandardizedResiduals <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html">rstudent</a></span><span class="op">(</span><span class="va">lm_tv</span><span class="op">$</span><span class="va">fit</span><span class="op">)</span> ,</span>
-<span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 绘制 Scale-Location 图</span></span>
+<span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
+<span>    fitted_values<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/fitted.values.html">fitted</a></span><span class="op">(</span><span class="va">lm_tv</span><span class="op">)</span>,</span>
+<span>    StandardizedResiduals <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html">rstudent</a></span><span class="op">(</span><span class="va">lm_tv</span><span class="op">)</span> ,</span>
+<span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">fitted_values</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">StandardizedResiduals</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>pch<span class="op">=</span><span class="fl">21</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>color<span class="op">=</span><span class="st">"red"</span>,lwd<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span><span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Scale-Location Plot"</span>,x <span class="op">=</span> <span class="st">"Fitted Values"</span>, y <span class="op">=</span> <span class="st">"√|Standardized residuals|"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="simple_linear_regression_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="simple_linear_regression_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -865,7 +841,7 @@ Q=\sum (Y-\hat Y)^2
 <span class="header-section-number">12.3.4</span> Cook’s距离</h3>
 <p><img src="images/clipboard-3518341286.png" class="img-fluid"></p>
 <div class="cell">
-<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1011</span><span class="op">)</span></span>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1011</span><span class="op">)</span></span>
 <span><span class="va">x</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">9</span><span class="op">)</span>               <span class="co">#random 9 values</span></span>
 <span><span class="va">x</span><span class="op">[</span><span class="fl">10</span><span class="op">]</span><span class="op">&lt;-</span><span class="fl">5</span>                  <span class="co">#value far from the others</span></span>
 <span><span class="va">y</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">0.5</span><span class="op">+</span><span class="fl">2</span><span class="op">*</span><span class="va">x</span>,<span class="fl">1</span><span class="op">)</span>   <span class="co">#generate y</span></span>
@@ -876,11 +852,11 @@ Q=\sum (Y-\hat Y)^2
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/line.html">line</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span><span class="op">)</span><span class="op">)</span>        <span class="co"># add the regression line</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="simple_linear_regression_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="simple_linear_regression_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html">influence.measures</a></span><span class="op">(</span><span class="va">lmodel</span><span class="op">)</span>   </span>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html">influence.measures</a></span><span class="op">(</span><span class="va">lmodel</span><span class="op">)</span>   </span>
 <span><span class="co">#&gt; Influence measures of</span></span>
 <span><span class="co">#&gt;   lm(formula = y ~ x) :</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -898,23 +874,23 @@ Q=\sum (Y-\hat Y)^2
 </details>
 </div>
 <div class="cell">
-<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">lm_tv</span><span class="op">$</span><span class="va">fit</span>,<span class="fl">4</span><span class="op">)</span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">lm_tv</span>,<span class="fl">4</span><span class="op">)</span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="simple_linear_regression_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="simple_linear_regression_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <div class="cell">
-<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">threshold</span> <span class="op">&lt;-</span> <span class="fl">4</span> <span class="op">/</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">advertising</span><span class="op">)</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">lm_tv</span><span class="op">$</span><span class="va">fit</span><span class="op">$</span><span class="va">coefficients</span><span class="op">)</span><span class="op">-</span><span class="fl">2</span><span class="op">)</span></span>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">threshold</span> <span class="op">&lt;-</span> <span class="fl">4</span> <span class="op">/</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">advertising</span><span class="op">)</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">lm_tv</span><span class="op">$</span><span class="va">coefficients</span><span class="op">)</span><span class="op">-</span><span class="fl">2</span><span class="op">)</span></span>
 <span>                  </span>
 <span>                 </span>
-<span><span class="fu">tibble</span><span class="op">(</span></span>
+<span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
 <span>    x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">advertising</span><span class="op">)</span>,</span>
-<span>    cooks_distance <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html">cooks.distance</a></span><span class="op">(</span><span class="va">lm_tv</span><span class="op">$</span><span class="va">fit</span><span class="op">)</span>,</span>
-<span>    label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu">if_else</span><span class="op">(</span><span class="va">cooks_distance</span><span class="op">&gt;</span><span class="va">threshold</span>,<span class="va">x</span>,<span class="cn">NA</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>    cooks_distance <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html">cooks.distance</a></span><span class="op">(</span><span class="va">lm_tv</span><span class="op">)</span>,</span>
+<span>    label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">cooks_distance</span><span class="op">&gt;</span><span class="va">threshold</span>,<span class="va">x</span>,<span class="cn">NA</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">)</span> <span class="op">|&gt;</span>  </span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_segment.html">geom_segment</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span></span>
 <span>        x <span class="op">=</span> <span class="va">x</span>,</span>
@@ -930,7 +906,7 @@ Q=\sum (Y-\hat Y)^2
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Observation Index"</span>, y <span class="op">=</span> <span class="st">"Cook's Distance"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="simple_linear_regression_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="simple_linear_regression_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -939,7 +915,7 @@ Q=\sum (Y-\hat Y)^2
 <span class="header-section-number">12.3.5</span> 残差-杠杆值图</h3>
 <p><img src="images/clipboard-4075353060.png" class="img-fluid"></p>
 <div class="cell">
-<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/lm.influence.html">influence</a></span><span class="op">(</span><span class="va">lmodel</span><span class="op">)</span><span class="op">$</span><span class="va">hat</span>     <span class="co">#leverage</span></span>
 <span><span class="co">#&gt;         1         2         3         4         5         6         7         8 </span></span>
 <span><span class="co">#&gt; 0.1027407 0.1570337 0.1686229 0.1003533 0.1156210 0.1044403 0.1135604 0.1391403 </span></span>
@@ -954,7 +930,7 @@ Q=\sum (Y-\hat Y)^2
 </div>
 <p><img src="images/clipboard-2970344240.png" class="img-fluid"></p>
 <div class="cell">
-<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/lm.influence.html">influence</a></span><span class="op">(</span><span class="va">lmodel</span><span class="op">)</span><span class="op">$</span><span class="va">coefficients</span>     <span class="co">#DFBETA</span></span>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/lm.influence.html">influence</a></span><span class="op">(</span><span class="va">lmodel</span><span class="op">)</span><span class="op">$</span><span class="va">coefficients</span>     <span class="co">#DFBETA</span></span>
 <span><span class="co">#&gt;     (Intercept)            x</span></span>
 <span><span class="co">#&gt; 1  -0.015131790 -0.001678535</span></span>
 <span><span class="co">#&gt; 2  -0.053246101  0.019647712</span></span>
@@ -986,23 +962,23 @@ Q=\sum (Y-\hat Y)^2
 </details>
 </div>
 <div class="cell">
-<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">lm_tv</span><span class="op">$</span><span class="va">fit</span>,<span class="fl">5</span><span class="op">)</span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">lm_tv</span>,<span class="fl">5</span><span class="op">)</span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="simple_linear_regression_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="simple_linear_regression_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>hat 统计量</p>
 <div class="cell">
-<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">tibble</span><span class="op">(</span></span>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
 <span>    x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">advertising</span><span class="op">)</span>,</span>
-<span>    leverage <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html">hatvalues</a></span><span class="op">(</span><span class="va">lm_tv</span><span class="op">$</span><span class="va">fit</span><span class="op">)</span>,</span>
-<span>    StandardizedResiduals <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html">rstandard</a></span><span class="op">(</span><span class="va">lm_tv</span><span class="op">$</span><span class="va">fit</span><span class="op">)</span> ,</span>
-<span>    cooks_distance <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html">cooks.distance</a></span><span class="op">(</span><span class="va">lm_tv</span><span class="op">$</span><span class="va">fit</span><span class="op">)</span>,</span>
-<span>    label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu">if_else</span><span class="op">(</span><span class="va">cooks_distance</span><span class="op">&gt;</span><span class="va">threshold</span>,<span class="va">x</span>,<span class="cn">NA</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>    leverage <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html">hatvalues</a></span><span class="op">(</span><span class="va">lm_tv</span><span class="op">)</span>,</span>
+<span>    StandardizedResiduals <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html">rstandard</a></span><span class="op">(</span><span class="va">lm_tv</span><span class="op">)</span> ,</span>
+<span>    cooks_distance <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html">cooks.distance</a></span><span class="op">(</span><span class="va">lm_tv</span><span class="op">)</span>,</span>
+<span>    label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">cooks_distance</span><span class="op">&gt;</span><span class="va">threshold</span>,<span class="va">x</span>,<span class="cn">NA</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">leverage</span>, y <span class="op">=</span> <span class="va">StandardizedResiduals</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>pch<span class="op">=</span><span class="fl">21</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>color<span class="op">=</span><span class="st">"red"</span>,lwd<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span><span class="op">+</span></span>
@@ -1013,7 +989,7 @@ Q=\sum (Y-\hat Y)^2
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Leverage Values"</span>, y <span class="op">=</span> <span class="st">"Standardized residuals"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="simple_linear_regression_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="simple_linear_regression_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1021,10 +997,10 @@ Q=\sum (Y-\hat Y)^2
 </section><section id="cooks距离和杠杆值" class="level3" data-number="12.3.6"><h3 data-number="12.3.6" class="anchored" data-anchor-id="cooks距离和杠杆值">
 <span class="header-section-number">12.3.6</span> Cook‘s距离和杠杆值</h3>
 <div class="cell">
-<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">lm_tv</span><span class="op">$</span><span class="va">fit</span>,<span class="fl">6</span><span class="op">)</span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details open="" class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">lm_tv</span>,<span class="fl">6</span><span class="op">)</span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="simple_linear_regression_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="simple_linear_regression_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>

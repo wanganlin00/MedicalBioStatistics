@@ -47,7 +47,7 @@ book:
         - SurvivalAnalysis.qmd
         - CoxProportionalHazardsModel.qmd
         - CompetingRiskModel.qmd
-    # - part: Causal_Inference.qmd
+
     - part: "临床研究设计"
       chapters: 
         - diagnostic_test.qmd
